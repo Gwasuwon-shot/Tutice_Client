@@ -1,21 +1,58 @@
 import { DefaultTheme } from "styled-components";
 
 const colors = {
-  main: "#5200FF",
-  sub1: "#43FF8E",
-  sub2: "#E965FF",
-  sub3: "#0D0E11",
-  gray1: "#D9D9D9",
-  gray2: "#9EA1AB",
-  gray3: "#535559",
+  // 메인컬러
+  green1: "#DFF3EF",
+  green2: "#B0E0D6",
+  green3: "#7DCDBD",
+  green4: "#45B9A2",
+  green5: "#0DA98F",
+  green6: "#00997D",
+  green7: "#038F7E",
+  green8: "#007C61",
+  green9: "#006C52",
+  green10: "#005037",
 
-  gray4: "#313338",
-  gray5: "#1E2025",
-  gray6: "#141517",
+  // 서브컬러
+  red1: "#FEE8E7",
+  red2: "#FFCABA",
+  red3: "#FFA78E",
+  red4: "#FF8260",
+  red5: "#FF623D",
+  red6: "#FF3F18",
+  red7: "#FF3914",
+  red8: "#F9300D",
+  red9: "#EB2706",
+  red10: "#D30B00",
 
-  white: "#FFFFFF",
-  black: "#0D0E11",
-  red: "#FF4F4F",
+  //회색
+  grey0: "#FFFFFF",
+  grey20: "#F8F9FA",
+  grey50: "#F1F3F5",
+  grey70: "#E9ECEF",
+  grey100: "#DEE2E6",
+  grey150: "#CED4DA",
+  grey200: "#C1C6CC",
+  grey300: "#A9AEB2",
+  grey400: "#899199",
+  grey500: "#727980",
+  grey600: "#5B6166",
+  grey700: "#5A5F64",
+  grey800: "#343A40",
+  grey900: "#212529",
+
+  //캘린더
+  yellow: "#FFF5A8",
+  lgreen: "#EAF0A4",
+  mint: "#CCF5ED",
+  red: "#FFCCCC",
+  orange: "#FFDBBA",
+  blue: "#CCDDFF",
+  greyblue: "#CFDEE5",
+  purple: "#E3D2FA",
+  ygreen: "#D3F1C1",
+  brown: "#EBDDD5",
+  pink: "#FFD9F2",
 };
 
 export type ColorsTypes = typeof colors;
@@ -36,22 +73,14 @@ function FONT({ weight, size, lineHeight }: Font): string {
 }
 
 const fonts = {
-  hashtag: FONT({ weight: 300, size: 1.5, lineHeight: 1.9 }),
-  cations: FONT({ weight: 400, size: 1.6, lineHeight: 1.9 }),
-  body1: FONT({ weight: 300, size: 1.8, lineHeight: 2.3 }),
-  comment: FONT({ weight: 400, size: 1.8, lineHeight: 3.5 }),
-  description: FONT({ weight: 400, size: 1.6, lineHeight: 2.8 }),
-  player_title: FONT({ weight: 700, size: 2, lineHeight: 2.6 }),
-  id: FONT({ weight: 300, size: 2, lineHeight: 2.6 }),
-  caption_large: FONT({ weight: 300, size: 3, lineHeight: 3.9 }),
-  title: FONT({ weight: 300, size: 5, lineHeight: 6.5 }),
-  input: FONT({ weight: 400, size: 2, lineHeight: 3.4 }),
+  title1: FONT({ weight: 700, size: 2.0, lineHeight: 2.4 }),
+  title2: FONT({ weight: 700, size: 1.6, lineHeight: 1.9 }),
 
-  message: FONT({ weight: 400, size: 1.6, lineHeight: 1.9 }),
-  typography_title: FONT({ weight: 700, size: 2, lineHeight: 2 }),
-  typography_intro: FONT({ weight: 600, size: 1.5, lineHeight: 2.4 }),
-  typography_content: FONT({ weight: 500, size: 1.5, lineHeight: 2.4 }),
-  checkbox: FONT({ weight: 400, size: 1.6, lineHeight: 1.6 }),
+  body1: FONT({ weight: 700, size: 1.4, lineHeight: 1.6 }),
+  body2: FONT({ weight: 500, size: 1.4, lineHeight: 1.6 }),
+  body3: FONT({ weight: 700, size: 1.2, lineHeight: 1.4 }),
+
+  caption1: FONT({ weight: 500, size: 1.0, lineHeight: 1.2 }),
 };
 
 export type FontsTypes = typeof fonts;

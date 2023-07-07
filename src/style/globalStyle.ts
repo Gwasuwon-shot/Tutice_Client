@@ -35,6 +35,11 @@ export const GlobalStyle = createGlobalStyle`
   body {
     touch-action: manipulation;
     line-height: 1;
+
+    width:32rem;
+    height: 56.8rem;
+    //임시구현 선
+    border:1px solid black;
   }
   menu, ol, ul {
     list-style: none;
@@ -64,8 +69,15 @@ export const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
 
     font-family: sans-serif;
-    font-size: 62.5%;
+
     user-select: none;
+
+    display: flex;
+    justify-content: center;
+
+    /* 미디어쿼리 적용 예정 */
+    font-size: 62.5%;
+    
   }
   ul, li {
     padding-left: 0rem;

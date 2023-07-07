@@ -16,9 +16,6 @@ const MainWrapper = styled.div`
   position: absolute;
 
   width: 20rem;
-  margin-left: 3rem;
-
-  border: 1px solid black;
 
   ${({ theme }) => theme.fonts.title1}
 `;

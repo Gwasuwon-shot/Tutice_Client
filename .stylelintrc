@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-styled-components"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-config-styled-components"],
   "plugins": ["stylelint-order"],
   "customSyntax": "postcss-styled-syntax",
   "overrides": [
@@ -15,12 +12,7 @@
     "declaration-empty-line-before": [
       "always",
       {
-        "ignore": [
-          "first-nested",
-          "after-comment",
-          "after-declaration",
-          "inside-single-line-block"
-        ]
+        "ignore": ["first-nested", "after-comment", "after-declaration", "inside-single-line-block"]
       }
     ],
     "order/order": ["custom-properties", "declarations"],

@@ -65,7 +65,7 @@ interface Font {
 
 function FONT({ weight, size, lineHeight }: Font): string {
   return `
-    font-family: "Pretendard"
+    font-family: "Pretendard";
     font-weight : ${weight};
     font-size : ${size}rem;
     line-height : ${lineHeight}rem;

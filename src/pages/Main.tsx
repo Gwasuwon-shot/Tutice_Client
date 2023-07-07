@@ -19,6 +19,8 @@ const MainWrapper = styled.div`
   margin-left: 3rem;
 
   border: 1px solid black;
+
+  ${({ theme }) => theme.fonts.title1}
 `;
 
 const MainIcon = styled(MainIc)`

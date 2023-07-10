@@ -5,5 +5,10 @@ interface WelcomeTeacherProp {
 export default function WelcomeTeacher(props: WelcomeTeacherProp) {
   const { teacherName } = props;
 
-  return <div>WelcomeTeacher</div>;
+  return (
+    <>
+      <>{teacherName} 선생님</>
+      <>수고하셨어요!</>
+    </>
+  );
 }

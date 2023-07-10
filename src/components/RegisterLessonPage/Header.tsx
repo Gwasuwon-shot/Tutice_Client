@@ -22,8 +22,7 @@ const HeaderWrapper = styled.header`
 
 const InputHeader = styled.div`
     display: flex;
-    display:
-    margin-top: 0.9rem;
+    margin-top: 2.2rem;
     margin-left: 1.6rem;
     ${({ theme }) => theme.fonts.title01};
     color: ${({ theme }) => theme.colors.grey900};

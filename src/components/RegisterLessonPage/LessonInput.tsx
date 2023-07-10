@@ -29,6 +29,10 @@ const InputWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    gap: 2rem;
+
+    margin-top: 3.3rem;
 `
 
 const InputSection = styled.section`
@@ -36,6 +40,8 @@ const InputSection = styled.section`
     flex-direction: column;
     width: 29.2rem;
     height: 5.6rem;
+    
+    border-bottom-color : ${({ theme }) => theme.colors.grey70};
 `
 
 const InputName = styled.h1` 

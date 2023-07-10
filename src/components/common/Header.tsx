@@ -1,10 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { TuticeWithTextCommonIc } from "../../assets";
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  function handleMoveToHome() {
+    navigate("/");
+  }
+
   return (
     <HeaderWrapper>
-      <TuticeWithTextCommonIcon />
+      <TuticeWithTextCommonIcon onClick={handleMoveToHome} />
     </HeaderWrapper>
   );
 }

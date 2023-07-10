@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import {
@@ -16,6 +17,7 @@ import { TeacherFooterType } from "../../type/teacherFooterType";
 
 export default function TeacherFooter() {
   const [teacherFooterList, setTeacherFooterList] = useRecoilState<TeacherFooterType[]>(teacherFooterCategory);
+  const navigate = useNavigate();
 
   function showTeacherFooterIcon(category: string, isMoved: boolean) {
     switch (category) {
@@ -32,16 +34,34 @@ export default function TeacherFooter() {
     }
   }
 
-  function handleMoveToPage(id: number) {
+  function handleMoveToPage(category: string) {
     setTeacherFooterList(
-      teacherFooterList.map((list) => (list.id === id ? { ...list, isMoved: true } : { ...list, isMoved: false })),
+      teacherFooterList.map((list) =>
+        list.category === category ? { ...list, isMoved: true } : { ...list, isMoved: false },
+      ),
     );
+    switch (category) {
+      case TEACHER_FOOTER_CATEGORY.home:
+        navigate("/");
+        break;
+      case TEACHER_FOOTER_CATEGORY.calendar:
+        navigate("/schedule");
+        break;
+      case TEACHER_FOOTER_CATEGORY.classManaging:
+        navigate("/check-lesson");
+        break;
+      case TEACHER_FOOTER_CATEGORY.my:
+        navigate("/mypage");
+        break;
+      default:
+        break;
+    }
   }
 
   return (
     <TeacherFooterWrapper>
       {teacherFooterList.map(({ id, category, isMoved }) => (
-        <Icon key={id} onClick={() => handleMoveToPage(id)}>
+        <Icon key={id} onClick={() => handleMoveToPage(category)}>
           {showTeacherFooterIcon(category, isMoved)}
         </Icon>
       ))}

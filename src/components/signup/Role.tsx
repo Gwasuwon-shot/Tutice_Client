@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
-import BottomButton from "../common/BottomButton";
+// import BottomButton from "../common/BottomButton";
 
 export default function Role() {
   return (

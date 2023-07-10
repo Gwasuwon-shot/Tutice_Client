@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
-import { TEACHER_FOOTER } from "../core/teacherFooter";
+import { TEACHER_FOOTER } from "../core/teacherHome/teacherFooter";
 import { TeacherFooterType } from "../type/teacherFooterType";
 
 const { persistAtom } = recoilPersist();

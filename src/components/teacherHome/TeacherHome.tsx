@@ -3,8 +3,8 @@ import { styled } from "styled-components";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
 import AlarmBanner from "./AlarmBanner";
-import Banner from "./Banner";
 import UpcomingClassBoard from "./UpcomingClassBoard";
+import WelcomeNUpcomingBanner from "./WelcomeNUpcomingBanner";
 
 export default function TeacherHome() {
   // 수업이 존재는 하는지에 대한 데이터 패칭
@@ -16,7 +16,7 @@ export default function TeacherHome() {
       {/* 수업이 존재할 때 */}
       {isClassExist ? (
         <>
-          <Banner />
+          <WelcomeNUpcomingBanner />
           <AlarmBanner />
           <UpcomingClassBoard />
         </>

@@ -1,4 +1,4 @@
-import { YES_TODAY_CLASS_BEFORE_CLASS_BANNER } from "../../core/teacherHome";
+import { YES_TODAY_CLASS_BEFORE_CLASS_BANNER } from "../../core/teacherHome/teacherHome";
 import Banner from "./Banner";
 import WelcomeTeacher from "./WelcomeTeacher";
 

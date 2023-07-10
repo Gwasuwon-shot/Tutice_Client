@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import {
   CalendarActiveTeacherFooterIc,
@@ -10,11 +10,12 @@ import {
   MyActiveTeacherFooterIc,
   MyTeacherFooterIc,
 } from "../../assets";
-import { TEACHER_FOOTER, TEACHER_FOOTER_CATEGORY } from "../../core/teacherFooter";
+import { teacherFooterCategory } from "../../atom/teacherFooterCategory";
+import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherFooter";
 import { TeacherFooterType } from "../../type/teacherFooterType";
 
 export default function TeacherFooter() {
-  const [teacherFooterList, setTeacherFooterList] = useState<TeacherFooterType[]>(TEACHER_FOOTER);
+  const [teacherFooterList, setTeacherFooterList] = useRecoilState<TeacherFooterType[]>(teacherFooterCategory);
 
   function showTeacherFooterIcon(category: string, isMoved: boolean) {
     switch (category) {

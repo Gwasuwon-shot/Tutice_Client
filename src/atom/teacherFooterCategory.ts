@@ -1,10 +1,12 @@
-// import { atom } from "recoil";
-// import { recoilPersist } from "recoil-persist";
+import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+import { TEACHER_FOOTER } from "../core/teacherFooter";
+import { TeacherFooterType } from "../type/teacherFooterType";
 
-// const { persistAtom } = recoilPersist();
+const { persistAtom } = recoilPersist();
 
-// export const teacherFooterCategory = atom<string>({
-//   key: "teacherFooterCategory",
-//   default: "",
-//   effects_UNSTABLE: [persistAtom],
-// });
+export const teacherFooterCategory = atom<TeacherFooterType[]>({
+  key: "teacherFooterCategory",
+  default: TEACHER_FOOTER,
+  effects_UNSTABLE: [persistAtom],
+});

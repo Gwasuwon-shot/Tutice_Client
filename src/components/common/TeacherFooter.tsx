@@ -1,6 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 export default function TeacherFooter() {
+  const [teacherFooterList, setTeacherFooterList] = useState();
+
   return <TeacherFooterWrapper>TeacherFooter</TeacherFooterWrapper>;
 }
 

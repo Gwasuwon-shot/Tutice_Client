@@ -2,32 +2,36 @@ import React from "react";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
+import BottomButton from "../common/BottomButton";
 
 export default function Role() {
   return (
-    <Container>
-      <RoleText>어떤 회원으로 가입할까요?</RoleText>
-      <RoleRapper>
-        <RadioButton type="radio" name="role" value="teacher" id="teacher" />
-        <TextWrapper>
-          <RadioNameWrapper>
-            <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
-            <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
-          </RadioNameWrapper>
-          <RadioSubName htmlFor="teacher"> 과외 진행에 있어서 수업에만 더 집중하고 싶다면! </RadioSubName>
-        </TextWrapper>
-      </RoleRapper>
-      <RoleRapper>
-        <RadioButton type="radio" name="role" value="teacher" id="teacher" />
-        <TextWrapper>
-          <RadioNameWrapper>
-            <RadioBoldName htmlFor="teacher">학부모님 </RadioBoldName>
-            <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
-          </RadioNameWrapper>
-          <RadioSubName htmlFor="teacher"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
-        </TextWrapper>
-      </RoleRapper>
-    </Container>
+    <>
+      <Container>
+        <RoleText>어떤 회원으로 가입할까요?</RoleText>
+        <RoleRapper>
+          <RadioButton type="radio" name="role" value="teacher" id="teacher" />
+          <TextWrapper>
+            <RadioNameWrapper>
+              <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
+              <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+            </RadioNameWrapper>
+            <RadioSubName htmlFor="teacher"> 과외 진행에 있어서 수업에만 더 집중하고 싶다면! </RadioSubName>
+          </TextWrapper>
+        </RoleRapper>
+        <RoleRapper>
+          <RadioButton type="radio" name="role" value="teacher" id="teacher" />
+          <TextWrapper>
+            <RadioNameWrapper>
+              <RadioBoldName htmlFor="teacher">학부모님 </RadioBoldName>
+              <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+            </RadioNameWrapper>
+            <RadioSubName htmlFor="teacher"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
+          </TextWrapper>
+        </RoleRapper>
+        <BottomButton children="완료" />
+      </Container>
+    </>
   );
 }
 

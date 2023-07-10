@@ -21,11 +21,11 @@ const FirstSwiper = () => {
 };
 
 const FirstSwiperWrapper = styled.article`
-  width: 100%;
-  margin-left: 1.4rem;
-
   display: flex;
   flex-direction: column;
+
+  width: 100%;
+  margin-left: 1.4rem;
 `;
 
 const TitleWrapper = styled.div`
@@ -34,6 +34,7 @@ const TitleWrapper = styled.div`
 
 const FirstSwiperTitle = styled.h1`
   display: inline-block;
+
   font-size: ${({ theme }) => theme.fonts.title01};
 `;
 
@@ -42,10 +43,10 @@ const FirstSwiperTitleKeyword = styled(FirstSwiperTitle)`
 `;
 
 const IconWrapper = styled.div`
-  margin-top: 1.008rem;
-
   display: flex;
   align-items: center;
+
+  margin-top: 1.008rem;
   gap: 0.663rem;
 `;
 

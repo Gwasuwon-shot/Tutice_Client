@@ -40,9 +40,9 @@ export default function TeacherFooter() {
   return (
     <TeacherFooterWrapper>
       {teacherFooterList.map(({ id, category, isMoved }) => (
-        <i key={id} onClick={() => handleMoveToPage(id)}>
+        <Icon key={id} onClick={() => handleMoveToPage(id)}>
           {showTeacherFooterIcon(category, isMoved)}
-        </i>
+        </Icon>
       ))}
     </TeacherFooterWrapper>
   );
@@ -50,7 +50,7 @@ export default function TeacherFooter() {
 
 const TeacherFooterWrapper = styled.footer`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: absolute;
   bottom: 0;
@@ -69,4 +69,8 @@ const TeacherFooterWrapper = styled.footer`
   border-top: 1px solid ${({ theme }) => theme.colors.grey50};
 
   box-shadow: 0 0 0.5rem 0 rgb(56 62 68 / 8%);
+`;
+
+const Icon = styled.i`
+  cursor: pointer;
 `;

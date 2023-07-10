@@ -6,8 +6,6 @@ export { ReactComponent as ClassManagingTeacherFooterIc } from "./icon/classMana
 export { ReactComponent as HomeActiveTeacherFooterIc } from "./icon/homeActiveTeacherFooterIc.svg";
 export { ReactComponent as HomeTeacherFooterIc } from "./icon/homeTeacherFooterIc.svg";
 export { ReactComponent as MainIc } from "./icon/mainIc.svg";
-export { ReactComponent as RegisterLessonHeaderIc } from './icon/registerLessonHeaderIc.svg'
-export { ReactComponent as MyActiveTeacherFooterIc } from "./icon/myActiveTeacherFooterIc.svg";
-export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.svg";
-export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
-export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
+export { ReactComponent as MainLogo } from "./icon/MainLogoOnBoardingIcon.svg";
+export { ReactComponent as TuticeTitleLogo } from "./icon/TuticeTitleLogoOnBoardingIcon.svg";
+export { ReactComponent as MainLogoGradation } from "./icon/MainLogoGradationOnBoardingIcon.svg";

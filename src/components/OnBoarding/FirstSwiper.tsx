@@ -22,6 +22,7 @@ const FirstSwiper = () => {
 
 const FirstSwiperWrapper = styled.article`
   width: 100%;
+  margin-left: 1.4rem;
 
   display: flex;
   flex-direction: column;

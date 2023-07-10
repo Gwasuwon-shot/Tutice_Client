@@ -17,13 +17,16 @@ export default function Header() {
 const HeaderWrapper = styled.header`
     display: flex;
     flex-direction: column;
+    
     height: 15.8rem;
 `
 
 const InputHeader = styled.div`
     display: flex;
+    
     margin-top: 2.2rem;
     margin-left: 1.6rem;
+    
     ${({ theme }) => theme.fonts.title01};
     color: ${({ theme }) => theme.colors.grey900};
 `
@@ -31,6 +34,7 @@ const InputHeader = styled.div`
 const Emphasis = styled.span`
     display: flex;
     align-items: flex-end;
+    
     ${({ theme }) => theme.fonts.title01};
     color: ${({ theme }) => theme.colors.green5};
 `

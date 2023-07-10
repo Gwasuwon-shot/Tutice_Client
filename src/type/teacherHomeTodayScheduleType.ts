@@ -2,7 +2,7 @@ interface LessonType {
   idx: number;
   studentName: string;
   subject: string;
-  count: number;
+  count: string;
 }
 
 interface ScheduleType {
@@ -11,7 +11,7 @@ interface ScheduleType {
 }
 
 export interface TeacherHomeTodayScheduleType {
-  lesson: LessonType[];
+  lesson: LessonType;
   timeStatus: number;
   schedule: ScheduleType;
 }

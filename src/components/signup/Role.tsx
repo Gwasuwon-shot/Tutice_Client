@@ -29,7 +29,7 @@ export default function Role() {
             <RadioSubName htmlFor="teacher"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
           </TextWrapper>
         </RoleRapper>
-        <BottomButton children="완료" />
+        {/* <BottomButton children="완료" /> */}
       </Container>
     </>
   );

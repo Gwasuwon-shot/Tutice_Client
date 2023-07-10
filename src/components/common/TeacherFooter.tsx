@@ -6,7 +6,13 @@ import { TeacherFooterType } from "../../type/teacherFooterType";
 export default function TeacherFooter() {
   const [teacherFooterList, setTeacherFooterList] = useState<TeacherFooterType[]>(TEACHER_FOOTER);
 
-  return <TeacherFooterWrapper>TeacherFooter</TeacherFooterWrapper>;
+  return (
+    <TeacherFooterWrapper>
+      {teacherFooterList.map(({ id, category, isMoved }) => (
+        <i key={id}>{}</i>
+      ))}
+    </TeacherFooterWrapper>
+  );
 }
 
 const TeacherFooterWrapper = styled.footer`

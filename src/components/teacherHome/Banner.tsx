@@ -14,6 +14,7 @@ export default function Banner(props: BannerProps) {
     <>
       <NoclassBanner bannerTitle={NO_CLASS_BANNER_TITLE.noTodayClass} />
       <NoclassBanner bannerTitle={NO_CLASS_BANNER_TITLE.endTodayClass} />
+      <UpcomingClassBanner 
     </>
   );
 }

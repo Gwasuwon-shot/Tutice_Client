@@ -8,3 +8,4 @@ export { ReactComponent as MainIc } from "./icon/mainIc.svg";
 export { ReactComponent as MyActiveTeacherFooterIc } from "./icon/myActiveTeacherFooterIc.svg";
 export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.svg";
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
+export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";

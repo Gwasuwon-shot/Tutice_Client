@@ -1,3 +1,5 @@
+import { styled } from "styled-components";
+
 interface NoclassBannerProp {
   bannerTitle: string;
 }
@@ -5,5 +7,21 @@ interface NoclassBannerProp {
 export default function NoclassBanner(props: NoclassBannerProp) {
   const { bannerTitle } = props;
 
-  return <div>NoclassBanner</div>;
+  return <NoclassBannerWrapper>{bannerTitle}</NoclassBannerWrapper>;
 }
+
+const NoclassBannerWrapper = styled.header`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 29.2rem;
+  height: 8rem;
+  padding: 1.6rem 1rem 1.6rem 1.4rem;
+
+  color: ${({ theme }) => theme.colors.green5};
+  ${({ theme }) => theme.fonts.body02};
+  border: 1px solid ${({ theme }) => theme.colors.green2};
+
+  border-radius: 8px;
+`;

@@ -62,5 +62,5 @@ const RadioName = styled.label`
 `;
 
 const RadioSubName = styled.label`
-  ${({ theme }) => theme.fonts.body7};
+  ${({ theme }) => theme.fonts.body07};
 `;

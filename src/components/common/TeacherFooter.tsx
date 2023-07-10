@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { TEACHER_FOOTER } from "../../core/teacherFooter";
+import { TeacherFooterType } from "../../type/teacherFooterType";
 
 export default function TeacherFooter() {
-  const [teacherFooterList, setTeacherFooterList] = useState();
+  const [teacherFooterList, setTeacherFooterList] = useState<TeacherFooterType[]>(TEACHER_FOOTER);
 
   return <TeacherFooterWrapper>TeacherFooter</TeacherFooterWrapper>;
 }

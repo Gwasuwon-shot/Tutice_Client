@@ -26,6 +26,6 @@ const BottomText = styled.div`
   /* top- 정확한 값으로 수정 필요 */
   top: -1rem;
 
-  color: ${({ theme }) => theme.colors.grey0};
+  color: ${({ theme }) => theme.colors.grey0};ç
   ${({ theme }) => theme.fonts.body01};
 `;

@@ -10,16 +10,20 @@ export default function Role() {
       <RoleRapper>
         <RadioButton type="radio" name="role" value="teacher" id="teacher" />
         <TextWrapper>
-          <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
-          <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+          <RadioNameWrapper>
+            <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
+            <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+          </RadioNameWrapper>
           <RadioSubName htmlFor="teacher"> 과외 진행에 있어서 수업에만 더 집중하고 싶다면! </RadioSubName>
         </TextWrapper>
       </RoleRapper>
       <RoleRapper>
         <RadioButton type="radio" name="role" value="teacher" id="teacher" />
         <TextWrapper>
-          <RadioBoldName htmlFor="teacher">학부모님 </RadioBoldName>
-          <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+          <RadioNameWrapper>
+            <RadioBoldName htmlFor="teacher">학부모님 </RadioBoldName>
+            <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+          </RadioNameWrapper>
           <RadioSubName htmlFor="teacher"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
         </TextWrapper>
       </RoleRapper>
@@ -68,12 +72,19 @@ const TextWrapper = styled.div`
   gap: 0.5rem;
 `;
 
+const RadioNameWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  color: ${({ theme }) => theme.colors.grey900};
+`;
+
 const RadioBoldName = styled.label`
   ${({ theme }) => theme.fonts.title02};
 `;
 
 const RadioPlainName = styled.label`
-  ${({ theme }) => theme.fonts.title02};
+  ${({ theme }) => theme.fonts.title03};
 `;
 
 const RadioSubName = styled.label`

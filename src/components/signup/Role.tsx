@@ -1,54 +1,65 @@
 import React from "react";
 import { styled } from "styled-components";
-import RoleCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
+import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
+import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 
 export default function Role() {
   return (
-    <>
-      <Header> header </Header>
+    <Container>
       <RoleText>어떤 회원으로 가입할까요?</RoleText>
       <RoleRapper>
         <RadioButton type="radio" name="role" value="teacher" id="teacher" />
         <TextWrapper>
-          <RadioName htmlFor="teacher">선생님으로 가입하기 </RadioName>
+          <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
+          <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
           <RadioSubName htmlFor="teacher"> 과외 진행에 있어서 수업에만 더 집중하고 싶다면! </RadioSubName>
         </TextWrapper>
       </RoleRapper>
       <RoleRapper>
         <RadioButton type="radio" name="role" value="teacher" id="teacher" />
         <TextWrapper>
-          <RadioName htmlFor="teacher">학부모님으로 가입하기 </RadioName>
+          <RadioBoldName htmlFor="teacher">학부모님 </RadioBoldName>
+          <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
           <RadioSubName htmlFor="teacher"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
         </TextWrapper>
       </RoleRapper>
-    </>
+    </Container>
   );
 }
 
-const Header = styled.header`
+const Container = styled.section`
   display: flex;
+  flex-direction: column;
+
+  padding-left: 1.6rem;
 `;
 
 const RoleText = styled.span`
-  ${({ theme }) => theme.fonts.title1};
+  margin-top: 5rem;
+  margin-bottom: 5.1rem;
+  ${({ theme }) => theme.fonts.title01};
 `;
 
 const RoleRapper = styled.div`
   display: flex;
   align-items: center;
 
-  margin-left: 2.5rem;
+  margin-bottom: 3.6rem;
+  margin-left: 0.9em;
 `;
 
 const RadioButton = styled.input`
-  display: block;
-  background-image: url("${RoleCheckSignupIc}");
+  background-image: url("${RoleNoneCheckSignupIc}");
 
   width: 4rem;
   height: 4rem;
   flex-shrink: 0;
 
   margin-right: 2rem;
+
+  &:checked {
+    background-image: url("${RoleCheckSignupIc}");
+  }
 `;
 
 const TextWrapper = styled.div`
@@ -57,10 +68,16 @@ const TextWrapper = styled.div`
   gap: 0.5rem;
 `;
 
-const RadioName = styled.label`
-  /* ${({ theme }) => theme.fonts.body3}; */
+const RadioBoldName = styled.label`
+  ${({ theme }) => theme.fonts.title02};
+`;
+
+const RadioPlainName = styled.label`
+  ${({ theme }) => theme.fonts.title02};
 `;
 
 const RadioSubName = styled.label`
   ${({ theme }) => theme.fonts.body07};
+
+  color: ${({ theme }) => theme.colors.grey500};
 `;

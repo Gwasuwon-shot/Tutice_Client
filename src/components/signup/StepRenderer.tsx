@@ -3,10 +3,10 @@ import Role from "./Role";
 import NameEmail from "./NameEmail";
 import PwTos from "./PwTos";
 
-interface StepRendererProps = {
+interface StepRendererProps {
   step: Number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
-};
+}
 
 export default function StepRenderer(props: StepRendererProps) {
   const { step, setStep } = props;

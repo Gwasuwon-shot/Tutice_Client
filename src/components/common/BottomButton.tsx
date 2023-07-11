@@ -1,13 +1,14 @@
 import React, { ReactNode, useState } from "react";
 import { styled } from "styled-components";
 
-type BottomButtonProps = {
+interface BottomButtonProps = {
   children: ReactNode;
   isactive: Boolean;
-  onClick(): void;
+  onClick(): Void;
 };
 
-export default function BottomButton({ children, isactive, onClick }: BottomButtonProps) {
+export default function BottomButton(props: BottomButtonProps) {
+  const { children, isactive, onClick } = props;
   return (
     <BottomContainer isactive={isactive}>
       <BottomText> {children} </BottomText>

@@ -1,3 +1,13 @@
-export default function AlarmBanner() {
-  return <div>AlarmBanner</div>;
+interface AlarmBannerProps {
+  isMissingAttendance: boolean;
+  isMissingMaintenance: boolean;
+}
+
+export default function AlarmBanner(props: AlarmBannerProps) {
+  const { isMissingAttendance, isMissingMaintenance } = props;
+
+  return <>
+  {isMissingAttendance&&}
+  {isMissingMaintenance&&}
+  </>;
 }

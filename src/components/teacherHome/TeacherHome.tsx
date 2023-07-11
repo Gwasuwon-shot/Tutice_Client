@@ -2,8 +2,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
-import AlarmBanner from "./AlarmBanner";
-import UpcomingClassBoard from "./UpcomingClassBoard";
+import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
 import WelcomeNUpPreviewBanner from "./WelcomeNUpPreviewBanner";
 
 export default function TeacherHome() {
@@ -17,8 +16,7 @@ export default function TeacherHome() {
       {isClassExist ? (
         <>
           <WelcomeNUpPreviewBanner />
-          <AlarmBanner />
-          <UpcomingClassBoard />
+          <AlarmNUpcomingClass />
         </>
       ) : (
         <></>

@@ -1,5 +1,5 @@
 import { YES_TODAY_CLASS_BEFORE_CLASS_BANNER } from "../../core/teacherHome/teacherHome";
-import Banner from "./Banner";
+import PreviewBanner from "./PreviewBanner";
 import WelcomeTeacher from "./WelcomeTeacher";
 
 export default function WelcomeNUpcomingBanner() {
@@ -8,7 +8,7 @@ export default function WelcomeNUpcomingBanner() {
   return (
     <>
       <WelcomeTeacher teacherName={teacherName} isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
-      <Banner isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
+      <PreviewBanner isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
     </>
   );
 }

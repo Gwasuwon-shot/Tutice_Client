@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
 import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
+import NoClassHome from "./NoClassHome";
 import WelcomeNUpPreviewBanner from "./WelcomeNUpPreviewBanner";
 
 export default function TeacherHome() {
@@ -13,14 +14,13 @@ export default function TeacherHome() {
     <>
       <TeacherHomeWrapper>
         <Header />
-        {/* 수업이 존재할 때 */}
         {isClassExist ? (
           <>
             <WelcomeNUpPreviewBanner />
             <AlarmNUpcomingClass />
           </>
         ) : (
-          <></>
+          <NoClassHome />
         )}
       </TeacherHomeWrapper>
       <TeacherFooter />

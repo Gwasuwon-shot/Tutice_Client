@@ -15,15 +15,36 @@ export default function UpcomingClassBoard(props: UpcomingClassBoardProps) {
   );
 
   return (
-    <>
+    <UpcomingClassBoardWrapper>
       <UpcomingClassDate>
         {upcomingClassDate}({dayOfWeek}) 수업
+        <UpcomingClassWrapper></UpcomingClassWrapper>
       </UpcomingClassDate>
-    </>
+    </UpcomingClassBoardWrapper>
   );
 }
+
+const UpcomingClassBoardWrapper = styled.aside`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  width: 29.2rem;
+  padding: 1.4rem 1rem 1.5rem;
+  margin-top: 1.6rem;
+
+  border: 1px solid ${({ theme }) => theme.colors.grey150};
+
+  border-radius: 8px;
+`;
 
 const UpcomingClassDate = styled.h1`
   color: ${({ theme }) => theme.colors.grey600};
   ${({ theme }) => theme.fonts.body07};
+`;
+
+const UpcomingClassWrapper = styled.section`
+  overflow: scroll;
+
+  height: 14.5rem;
 `;

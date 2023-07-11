@@ -20,7 +20,14 @@ export default function Role(setStep: React.Dispatch<React.SetStateAction<number
       <Container>
         <RoleText>어떤 회원으로 가입할까요?</RoleText>
         <RoleRapper>
-          <RadioButton type="radio" name="role" value="teacher" id="teacher" onClick={handleRadioClick} />
+          <RadioButton
+            type="radio"
+            name="role"
+            value="teacher"
+            id="teacher"
+            onClick={handleRadioClick}
+            $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
+          />
           <TextWrapper>
             <RadioNameWrapper>
               <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
@@ -30,7 +37,14 @@ export default function Role(setStep: React.Dispatch<React.SetStateAction<number
           </TextWrapper>
         </RoleRapper>
         <RoleRapper>
-          <RadioButton type="radio" name="role" value="parent" id="parent" onClick={handleRadioClick} />
+          <RadioButton
+            type="radio"
+            name="role"
+            value="parent"
+            id="parent"
+            onClick={handleRadioClick}
+            $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
+          />
           <TextWrapper>
             <RadioNameWrapper>
               <RadioBoldName htmlFor="parent">학부모님 </RadioBoldName>
@@ -66,8 +80,8 @@ const RoleRapper = styled.div`
   margin-left: 0.9em;
 `;
 
-const RadioButton = styled.input`
-  background-image: url("${RoleNoneCheckSignupIc}");
+const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string }>`
+  background-image: url(${({ $RoleNoneCheckSignupIc }) => $RoleNoneCheckSignupIc});
 
   width: 4rem;
   height: 4rem;
@@ -102,7 +116,6 @@ const RadioPlainName = styled.label`
 `;
 
 const RadioSubName = styled.label`
-  ${({ theme }) => theme.fonts.body07};
-
   color: ${({ theme }) => theme.colors.grey500};
+  ${({ theme }) => theme.fonts.body07};
 `;

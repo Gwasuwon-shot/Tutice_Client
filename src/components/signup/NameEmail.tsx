@@ -31,9 +31,8 @@ const Container = styled.div`
 `;
 
 const NameEmailText = styled.header`
-  ${({ theme }) => theme.fonts.title01};
-
   color: ${({ theme }) => theme.colors.grey900};
+  ${({ theme }) => theme.fonts.title01};
 `;
 
 const InputWrapper = styled.div`
@@ -45,17 +44,15 @@ const InputWrapper = styled.div`
 `;
 
 const InputLabel = styled.span`
-  ${({ theme }) => theme.fonts.body04};
-
   color: ${({ theme }) => theme.colors.grey300};
+  ${({ theme }) => theme.fonts.body04};
 `;
 
 const Inputfield = styled.input`
   margin: 1rem 0.2rem;
 
   &::placeholder {
-    ${({ theme }) => theme.fonts.title03};
-
     color: ${({ theme }) => theme.colors.grey400};
+    ${({ theme }) => theme.fonts.title03};
   }
 `;

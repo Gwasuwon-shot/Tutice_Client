@@ -39,7 +39,7 @@ const colors = {
   grey500: "#757A80",
   grey600: "#5B6166",
   grey700: "#45494D",
-  grey900: "#12529",
+  grey900: "#212529",
 
   //캘린더
   yellowGreen: "#D3F1C1",

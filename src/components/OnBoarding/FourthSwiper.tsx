@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { FourthSwiperFirstTree, FourthSwiperSecondTree, FourthSwiperThirdTree } from "../../assets";
 import SwiperTitleLayout from "./SwiperTitleLayout";
 
-const FourthSwiper = () => {
+export default function FourthSwiper() {
   const MAIN_TITLE_MESSAGE = "Reliable";
   const SUB_TITLE_MESSAGE = "믿을 수 있는 알림 서비스로 \n 수업의 결실을 안전하게 수확하세요";
 
@@ -24,7 +24,7 @@ const FourthSwiper = () => {
       </FourthSwiperWrapper>
     </>
   );
-};
+}
 
 const FourthSwiperWrapper = styled.div`
   display: flex;
@@ -49,5 +49,3 @@ const FirstTreeWrapper = styled.div`
 const ThirdTreeWrapper = styled.div`
   margin-left: 1.156rem;
 `;
-
-export default FourthSwiper;

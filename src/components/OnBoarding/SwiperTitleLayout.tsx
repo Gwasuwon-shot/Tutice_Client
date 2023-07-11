@@ -5,7 +5,7 @@ interface SwiperTitleLayoutProps {
   subTitleContent: string;
 }
 
-const SwiperTitleLayout = (props: SwiperTitleLayoutProps) => {
+export default function SwiperTitleLayout(props: SwiperTitleLayoutProps) {
   const { mainTitleContent, subTitleContent } = props;
   return (
     <>
@@ -15,9 +15,9 @@ const SwiperTitleLayout = (props: SwiperTitleLayoutProps) => {
       </TitleWrapper>
     </>
   );
-};
+}
 
-const TitleWrapper = styled.div`
+const TitleWrapper = styled.header`
   display: flex;
   flex-direction: column;
 
@@ -28,15 +28,11 @@ const TitleWrapper = styled.div`
 
 const MainTitle = styled.h1`
   ${({ theme }) => theme.fonts.title01};
-
   color: ${({ theme }) => theme.colors.green5};
 `;
 const SubTitle = styled.h1`
   ${({ theme }) => theme.fonts.title02};
-
   color: ${({ theme }) => theme.colors.grey900};
 
   white-space: pre-line;
 `;
-
-export default SwiperTitleLayout;

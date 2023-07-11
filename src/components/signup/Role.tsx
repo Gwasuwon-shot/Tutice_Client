@@ -20,13 +20,13 @@ export default function Role() {
           </TextWrapper>
         </RoleRapper>
         <RoleRapper>
-          <RadioButton type="radio" name="role" value="teacher" id="teacher" />
+          <RadioButton type="radio" name="role" value="parent" id="parent" />
           <TextWrapper>
             <RadioNameWrapper>
-              <RadioBoldName htmlFor="teacher">학부모님 </RadioBoldName>
-              <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+              <RadioBoldName htmlFor="parent">학부모님 </RadioBoldName>
+              <RadioPlainName htmlFor="parent">으로 가입하기 </RadioPlainName>
             </RadioNameWrapper>
-            <RadioSubName htmlFor="teacher"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
+            <RadioSubName htmlFor="parent"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
           </TextWrapper>
         </RoleRapper>
         {/* <BottomButton children="완료" /> */}

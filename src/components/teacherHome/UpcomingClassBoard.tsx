@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 import { LatestScheduleDayType, UpcomingClassScheduleType } from "../../type/teacherHome/upcomingClassScheduleType";
 
 interface UpcomingClassBoardProps {
@@ -14,8 +15,13 @@ export default function UpcomingClassBoard(props: UpcomingClassBoardProps) {
   );
 
   return (
-    <>
+    <UpcomingClassDate>
       {upcomingClassDate}({dayOfWeek}) 수업
-    </>
+    </UpcomingClassDate>
   );
 }
+
+const UpcomingClassDate = styled.h1`
+  color: ${({ theme }) => theme.colors.grey600};
+  ${({ theme }) => theme.fonts.body07};
+`;

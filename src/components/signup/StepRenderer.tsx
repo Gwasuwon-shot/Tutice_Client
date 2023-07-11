@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import Role from "./Role";
 import NameEmail from "./NameEmail";
 import PwTos from "./PwTos";
+import { isRecoilValue, useRecoilValue } from "recoil";
+import { stepNum } from "../../atom/signup/signup";
 
-interface StepRendererProps {
-  step: Number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-}
-
-export default function StepRenderer(props: StepRendererProps) {
-  const { step, setStep } = props;
+export default function StepRenderer() {
+  const step = useRecoilValue(stepNum);
   switch (step) {
     case 1:
       return <Role />;

@@ -3,9 +3,12 @@ import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 import BottomButton from "../common/BottomButton";
+import { useSetRecoilState } from "recoil";
+import { stepNum } from "../../atom/signup/signup";
 
-export default function Role(setStep: React.Dispatch<React.SetStateAction<number>>) {
+export default function Role() {
   const [isActive, setIsActive] = useState(false);
+  const setStep = useSetRecoilState(stepNum);
   function handleRadioClick() {
     setIsActive(true);
   }

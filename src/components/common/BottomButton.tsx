@@ -3,20 +3,21 @@ import { styled } from "styled-components";
 
 interface BottomButtonProps {
   children: ReactNode;
-  isactive: Boolean;
+  isActive: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function BottomButton(props: BottomButtonProps) {
-  const { children, isactive, onClick } = props;
+  const { children, isActive, onClick } = props;
+  console.log(isActive);
   return (
-    <BottomContainer isactive={isactive} onClick={onClick}>
+    <BottomContainer $isActive={isActive} onClick={onClick}>
       <BottomText> {children} </BottomText>
     </BottomContainer>
   );
 }
 
-const BottomContainer = styled.button<{ isactive: Boolean }>`
+const BottomContainer = styled.button<{ $isActive: boolean }>`
   position: fixed;
   bottom: 0;
 
@@ -24,8 +25,8 @@ const BottomContainer = styled.button<{ isactive: Boolean }>`
   height: 6.3rem;
   margin-left: -1.6rem;
 
-  background-color: ${({ theme, isactive }) => (isactive ? theme.colors.green5 : theme.colors.grey50)};
-  color: ${({ theme, isactive }) => (isactive ? theme.colors.grey0 : theme.colors.grey200)};
+  background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
+  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};
 `;
 
 const BottomText = styled.div`

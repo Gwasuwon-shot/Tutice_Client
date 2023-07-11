@@ -8,8 +8,8 @@ type StepRendererProps = {
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function StepRenderer({ step, setStep }: StepRendererProps) {
-  useState;
+export default function StepRenderer(props: StepRendererProps) {
+  const { step, setStep } = props;
   switch (step) {
     case 1:
       return <Role setStep={setStep} />;

@@ -52,5 +52,4 @@ const UpcomingClassWrapper = styled.section`
   overflow: scroll;
 
   width: 27.2rem;
-  height: 14.5rem;
 `;

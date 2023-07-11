@@ -207,42 +207,42 @@ export const YES_TODAY_CLASS_ING_CLASS_MAIN = {
           endTime: "17:00",
         },
       },
-      // {
-      //   lesson: {
-      //     idx: 2,
-      //     studentName: "김유나",
-      //     subject: "국어",
-      //   },
-      //   schedule: {
-      //     idx: 3,
-      //     startTime: "18:00",
-      //     endTime: "20:00",
-      //   },
-      // },
-      // {
-      //   lesson: {
-      //     idx: 3,
-      //     studentName: "조판다",
-      //     subject: "영어",
-      //   },
-      //   schedule: {
-      //     idx: 1,
-      //     startTime: "21:00",
-      //     endTime: "22:00",
-      //   },
-      // },
-      // {
-      //   lesson: {
-      //     idx: 4,
-      //     studentName: "조판다",
-      //     subject: "영어",
-      //   },
-      //   schedule: {
-      //     idx: 1,
-      //     startTime: "21:00",
-      //     endTime: "22:00",
-      //   },
-      // },
+      {
+        lesson: {
+          idx: 2,
+          studentName: "김유나",
+          subject: "국어",
+        },
+        schedule: {
+          idx: 3,
+          startTime: "18:00",
+          endTime: "20:00",
+        },
+      },
+      {
+        lesson: {
+          idx: 3,
+          studentName: "조판다",
+          subject: "영어",
+        },
+        schedule: {
+          idx: 1,
+          startTime: "21:00",
+          endTime: "22:00",
+        },
+      },
+      {
+        lesson: {
+          idx: 4,
+          studentName: "조판다",
+          subject: "영어",
+        },
+        schedule: {
+          idx: 1,
+          startTime: "21:00",
+          endTime: "22:00",
+        },
+      },
     ],
   },
 };

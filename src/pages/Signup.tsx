@@ -1,9 +1,11 @@
-import Role from "../components/signup/Role";
+import { useState } from "react";
+import StepRenderer from "../components/signup/StepRenderer";
 
 export default function Signup() {
+  const [step, setStep] = useState(1);
   return (
     <div>
-      <Role />
+      <StepRenderer step={step} setStep={setStep} />
     </div>
   );
 }

@@ -22,8 +22,9 @@ const BottomContainer = styled.button<{ isactive: Boolean }>`
   height: 6.3rem;
   margin-left: -1.6rem;
 
-  background-color: ${({ theme, isactive }) => (isactive ? theme.colors.green5 : theme.colors.grey50)};
-  color: ${({ theme, isactive }) => (isactive ? theme.colors.grey0 : theme.colors.grey200)};
+  background-color: ${({ theme, isactive }) => (isactive ? theme.colors.green5 : theme.colors.grey50)};background-color
+
+  color: ${({ theme, isactive }) => (isactive ? theme.colors.grey0 : theme.colors.grey200)};color
 `;
 
 const BottomText = styled.div`

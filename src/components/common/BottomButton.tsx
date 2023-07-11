@@ -1,7 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { styled } from "styled-components";
 
-export default function BottomButton({ children }) {
+type BottomButtonProps = {
+  children: ReactNode;
+};
+
+export default function BottomButton({ children }: BottomButtonProps) {
   return (
     <BottomContainer>
       <BottomText> {children} </BottomText>
@@ -26,6 +30,6 @@ const BottomText = styled.div`
   /* top- 정확한 값으로 수정 필요 */
   top: -1rem;
 
-  color: ${({ theme }) => theme.colors.grey0};ç
+  color: ${({ theme }) => theme.colors.grey0};
   ${({ theme }) => theme.fonts.body01};
 `;

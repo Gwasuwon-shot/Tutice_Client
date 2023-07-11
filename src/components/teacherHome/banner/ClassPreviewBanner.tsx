@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { CLASS_PREVIEW_BANNER_COMMENTS } from "../../../core/teacherHome/classPreviewBannerComments";
 import { TeacherHomeTodayScheduleType } from "../../../type/teacherHomeTodayScheduleType";
+import AttendanceCheckButton from "../../common/AttendanceCheckButton";
 import SubjectLabel from "../../common/SubjectLabel";
 
 interface ClassPreviewBannerProps {
@@ -27,23 +28,25 @@ export default function ClassPreviewBanner(props: ClassPreviewBannerProps) {
 
   return (
     <ClassPreviewBannerWrapper>
-      <StudentNameWrapper>
-        <b>{studentName}</b> 학생
-        <SubjectLabel subject={subject} backgroundColor="#B0E0D6" color="#00997D" />
-      </StudentNameWrapper>
-      <ClassStatusWrapper>
-        <ClassCountMentWrapper>{count} 회차 수업이</ClassCountMentWrapper>
-        {showClassPreviewComment(timeStatus)}
-      </ClassStatusWrapper>
+      <article>
+        <StudentNameWrapper>
+          <b>{studentName}</b> 학생
+          <SubjectLabel subject={subject} backgroundColor="#B0E0D6" color="#00997D" />
+        </StudentNameWrapper>
+        <ClassStatusWrapper>
+          <ClassCountMentWrapper>{count} 회차 수업이</ClassCountMentWrapper>
+          {showClassPreviewComment(2)}
+        </ClassStatusWrapper>
+      </article>
+      <AttendanceCheckButton />
     </ClassPreviewBannerWrapper>
   );
 }
 
 const ClassPreviewBannerWrapper = styled.section`
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
   width: 29.2rem;
   height: 8rem;

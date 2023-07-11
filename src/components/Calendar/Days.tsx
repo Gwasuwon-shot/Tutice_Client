@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { isToday, format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSunday } from "date-fns";
 
-export default function Days({ currentMonth }) {
+interface DaysProp {
+  currentMonth: Date;
+}
+
+export default function Days(props: DaysProp) {
+  const { currentMonth } = props;
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
@@ -28,11 +33,20 @@ export default function Days({ currentMonth }) {
       );
       day = addDays(day, 1);
     }
-    rows.push(<DaysWrapper key={day.toString()}>{days}</DaysWrapper>);
+    rows.push(
+      <WeekWrapper key={day.toString()}>
+        <DivideLine />
+        <DayWrapper>{days}</DayWrapper>
+      </WeekWrapper>,
+    );
     days = [];
   }
 
-  return <Wrapper>{rows}</Wrapper>;
+  return (
+    <>
+      <Wrapper>{rows}</Wrapper>
+    </>
+  );
 }
 
 const Wrapper = styled.section`
@@ -44,7 +58,16 @@ const Wrapper = styled.section`
   width: auto;
 `;
 
-const DaysWrapper = styled.article`
+const WeekWrapper = styled.article`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  width: 28.3rem;
+`;
+
+const DayWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,6 +93,7 @@ const Day = styled.article<DayProp>`
 
 interface DayTextProps {
   $isnotvalid: boolean;
+  $istoday: boolean;
 }
 
 const DayText = styled.p<DayTextProps>`
@@ -84,4 +108,13 @@ const DayText = styled.p<DayTextProps>`
     ${$isnotvalid ? "color: #CED4DA" : ""}
     ${$istoday ? "color: white; background-color: #0DA98E; border-radius: 50%; " : ""}
   `};
+
+  ${({ theme }) => theme.fonts.caption01};
+`;
+
+const DivideLine = styled.span`
+  border-top: 1px solid ${({ theme }) => theme.colors.grey50};
+
+  width: 32rem;
+  margin-bottom: 0.6rem;
 `;

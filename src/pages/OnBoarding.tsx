@@ -9,19 +9,19 @@ import Slider from "react-slick";
 import { SLIDER_SETTINGS } from "../core/OnBoarding";
 import { styled } from "styled-components";
 
-const OnBoarding = () => {
+export default function OnBoarding() {
   const SwiperPages = [<FirstSwiper />, <SecondSwiper />, <ThirdSwiper />, <FourthSwiper />];
 
   return (
     <SliderWrapper>
       <Slider {...SLIDER_SETTINGS}>
         {SwiperPages.map((page, idx) => {
-          return <div key={idx}>{page}</div>;
+          return <article key={idx}>{page}</article>;
         })}
       </Slider>
     </SliderWrapper>
   );
-};
+}
 
 const SliderWrapper = styled.section`
   & > .slick-slider > .slick-dots {
@@ -31,15 +31,15 @@ const SliderWrapper = styled.section`
   & > .slick-slider > .slick-dots > li {
     width: 0.8rem;
     height: 0.8rem;
-
     margin-right: 0.7rem;
   }
+
   & > .slick-slider > .slick-dots > li > button {
     width: 0.8rem;
     height: 0.8rem;
   }
 
-  & > .slick-slider > .slick-dots > li > button:before {
+  & > .slick-slider > .slick-dots > li > button::before {
     width: 0.8rem;
     height: 0.8rem;
 
@@ -48,10 +48,9 @@ const SliderWrapper = styled.section`
     color: ${({ theme }) => theme.colors.grey200};
   }
 
-  & > .slick-slider > .slick-dots > .slick-active > button:before {
+  & > .slick-slider > .slick-dots > .slick-active > button::before {
     opacity: 1;
+
     color: ${({ theme }) => theme.colors.green5};
   }
 `;
-
-export default OnBoarding;

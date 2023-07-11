@@ -19,20 +19,42 @@ export default function UpcomingClass(props: UpcomingClassProps) {
   return (
     <UpcomingClassWrapper>
       <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
-      <p>
+      <ClassTimeWrapper>
         {startTime} ~ {endTime}
-      </p>
-      <p>{studentName}</p>
+      </ClassTimeWrapper>
+      <StudentName>{studentName}</StudentName>
       <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
-      <RightArrowTeacherHomeIc />
+      <RightArrowTeacherHomeIcon />
     </UpcomingClassWrapper>
   );
 }
 
 const UpcomingClassWrapper = styled.article`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 
   margin-top: 1.4rem;
+`;
+
+const ClassTimeWrapper = styled.p`
+  width: 7.5rem;
+  margin-left: 1.5rem;
+
+  color: ${({ theme }) => theme.colors.grey600};
+  ${({ theme }) => theme.fonts.body05};
+`;
+
+const StudentName = styled.p`
+  width: 3.7rem;
+  margin: 0 0.6rem 0 1.5rem;
+
+  color: ${({ theme }) => theme.colors.grey900};
+  ${({ theme }) => theme.fonts.body01};
+`;
+
+const RightArrowTeacherHomeIcon = styled(RightArrowTeacherHomeIc)`
+  margin-left: 6rem;
+
+  cursor: pointer;
 `;

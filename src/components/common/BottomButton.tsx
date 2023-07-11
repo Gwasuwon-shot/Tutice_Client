@@ -1,16 +1,16 @@
 import React, { ReactNode, useState } from "react";
 import { styled } from "styled-components";
 
-interface BottomButtonProps = {
+interface BottomButtonProps {
   children: ReactNode;
   isactive: Boolean;
-  onClick(): Void;
-};
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
 
 export default function BottomButton(props: BottomButtonProps) {
   const { children, isactive, onClick } = props;
   return (
-    <BottomContainer isactive={isactive}>
+    <BottomContainer isactive={isactive} onClick={onClick}>
       <BottomText> {children} </BottomText>
     </BottomContainer>
   );

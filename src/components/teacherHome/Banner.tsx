@@ -1,5 +1,6 @@
 import { NO_CLASS_BANNER_TITLE } from "../../core/teacherHome/noClassBannerTitle";
 import { TeacherHomeTodayScheduleType } from "../../type/teacherHomeTodayScheduleType";
+import ClassPreviewBanner from "./banner/ClassPreviewBanner";
 import NoclassBanner from "./banner/NoclassBanner";
 
 interface BannerProps {
@@ -14,7 +15,7 @@ export default function Banner(props: BannerProps) {
     <>
       <NoclassBanner bannerTitle={NO_CLASS_BANNER_TITLE.noTodayClass} />
       <NoclassBanner bannerTitle={NO_CLASS_BANNER_TITLE.endTodayClass} />
-      <UpcomingClassBanner 
+      <ClassPreviewBanner todaySchedule={todaySchedule} />
     </>
   );
 }

@@ -14,18 +14,21 @@ export default function Dayofweek() {
 
 const WeekWrapper = styled.section`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 3.2rem;
 
+  width: 28.3rem;
   margin-top: 1.8rem;
+
+  gap: 3.2rem;
 `;
 
 const DayWrapper = styled.span`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
+  width: 28.3rem;
   height: auto;
 
   ${({ $issunday }) => `

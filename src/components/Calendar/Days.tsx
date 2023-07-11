@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { parse, format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSunday } from "date-fns";
+import { isToday, format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSunday } from "date-fns";
 
 export default function Days({ currentMonth }) {
   const monthStart = startOfMonth(currentMonth);
@@ -17,10 +17,11 @@ export default function Days({ currentMonth }) {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, "d");
       const sunDay = isSunday(day);
+      const isTodayDate = isToday(day);
 
       days.push(
         <Day key={day.toString()} $issunday={sunDay}>
-          <DayText $istoday={format(currentMonth, "d")} $isnotvalid={format(currentMonth, "M") !== format(day, "M")}>
+          <DayText $istoday={isTodayDate} $isnotvalid={format(currentMonth, "M") !== format(day, "M")}>
             {formattedDate}
           </DayText>
         </Day>,
@@ -76,21 +77,11 @@ const DayText = styled.p<DayTextProps>`
   align-items: center;
   justify-content: center;
 
-  width: 3rem;
-  height: 1.2rem;
+  width: 1.6rem;
+  height: 1.6rem;
 
   ${({ $isnotvalid, $istoday }) => `
-    ${$isnotvalid ? "color: #CED4DA" : ""},
-    ${$istoday ? "color: #0DA98E" : ""}
+    ${$isnotvalid ? "color: #CED4DA" : ""}
+    ${$istoday ? "color: white; background-color: #0DA98E; border-radius: 50%; " : ""}
   `};
-`;
-
-const ScheduleWrapper = styled.p`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  padding: 0.2rem 0;
-  margin-top: 0.5rem;
 `;

@@ -17,6 +17,7 @@ export default function ToastModal(props: ToastModalProps) {
 
 const ModalBackground = styled.div`
   position: absolute;
+  z-index: 2;
 
   width: 32rem;
   height: 100vh;

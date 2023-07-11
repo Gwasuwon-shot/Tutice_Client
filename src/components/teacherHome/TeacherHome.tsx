@@ -8,7 +8,7 @@ import WelcomeNUpPreviewBanner from "./WelcomeNUpPreviewBanner";
 
 export default function TeacherHome() {
   // 수업이 존재는 하는지에 대한 데이터 패칭
-  const [isClassExist, setIsClassExist] = useState(true);
+  const [isClassExist, setIsClassExist] = useState(false);
 
   return (
     <>

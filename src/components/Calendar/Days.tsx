@@ -1,16 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  parse,
-  format,
-  endOfMonth,
-  endOfWeek,
-  startOfMonth,
-  startOfWeek,
-  addDays,
-  isSameDay,
-  isSunday,
-} from "date-fns";
+import { parse, format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSunday } from "date-fns";
 
 export default function Days({ currentMonth }) {
   const monthStart = startOfMonth(currentMonth);

@@ -43,7 +43,7 @@ export default function ClassPreviewBanner(props: ClassPreviewBannerProps) {
           {showClassPreviewComment(timeStatus)}
         </ClassStatusWrapper>
       </article>
-      {checkClassNotYet(timeStatus) ? <UpcomingClassLogoTeacherHomeIcon /> : <AttendanceCheckButton />}
+      {checkClassNotYet(timeStatus) ? <UpcomingClassLogoTeacherHomeIc /> : <AttendanceCheckButton />}
     </ClassPreviewBannerWrapper>
   );
 }
@@ -83,8 +83,5 @@ const ClassStatusWrapper = styled.p`
 
 const ClassCountMentWrapper = styled.p`
   margin-right: 0.5rem;
-`;
-
-const UpcomingClassLogoTeacherHomeIcon = styled(UpcomingClassLogoTeacherHomeIc)`
-  margin-top: 3rem;
+  margin-bottom: -0.5rem;
 `;

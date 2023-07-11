@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { format } from "date-fns";
 
-export default function CalendarHeader({ currentMonth, prevMonth, nextMonth }) {
+export default function YearandMonth({ currentMonth, prevMonth, nextMonth }) {
   return (
     <HeaderWrapper>
       <PrevMonthButton onClick={prevMonth}>{"<"}</PrevMonthButton>

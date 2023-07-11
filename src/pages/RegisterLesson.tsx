@@ -4,7 +4,7 @@ import React from "react";
 export default function RegisterLesson() {
   return (
   <>
-    <ProgressBar progress = {25} />
+    <ProgressBar progress = {50} />
   </>
   );
 }

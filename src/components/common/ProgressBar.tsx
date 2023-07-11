@@ -5,7 +5,6 @@ interface ProgressBarProps {
     progress : number;
 }
 
-
 export default function ProgressBar({ progress }: ProgressBarProps) {    
     const getColor = (progress:number) : string => {
         if (progress === 25) return 'green';
@@ -28,7 +27,7 @@ export default function ProgressBar({ progress }: ProgressBarProps) {
 
 const ProgressBarWrapper = styled.div`
     width: 100%;
-    height: 2rem;
+    height: 0.4rem;
     background-color: lightgray;
 `
 

@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { MissingAttendaceTeacherHomeIc, MissingMaintenanceTeacherHomeIc } from "../../assets";
 
 interface AlarmBannerProps {
@@ -10,8 +11,18 @@ export default function AlarmBanner(props: AlarmBannerProps) {
 
   return (
     <>
-      {isMissingMaintenance && <MissingMaintenanceTeacherHomeIc />}
-      {isMissingAttendance && <MissingAttendaceTeacherHomeIc />}
+      {isMissingMaintenance && <MissingMaintenanceTeacherHomeIcon />}
+      {isMissingAttendance && <MissingAttendaceTeacherHomeIcon />}
     </>
   );
 }
+
+const MissingMaintenanceTeacherHomeIcon = styled(MissingMaintenanceTeacherHomeIc)`
+  width: 29.2rem;
+  margin-top: 1.6rem;
+`;
+
+const MissingAttendaceTeacherHomeIcon = styled(MissingAttendaceTeacherHomeIc)`
+  width: 29.2rem;
+  margin-top: 1rem;
+`;

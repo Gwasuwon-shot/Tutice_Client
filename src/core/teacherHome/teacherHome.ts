@@ -187,8 +187,8 @@ export const YES_TODAY_CLASS_ING_CLASS_MAIN = {
   code: 200,
   message: "선생님 메인 뷰 오늘의 수업/다가오는 수업 조회 성공",
   data: {
-    isMissingAttendance: false,
-    isMissingMaintenance: false,
+    isMissingAttendance: true,
+    isMissingMaintenance: true,
     isTodaySchedule: true,
     latestScheduleDay: {
       date: "2023-07-12",

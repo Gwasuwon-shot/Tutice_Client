@@ -7,6 +7,8 @@ interface SubjectLabelProps {
 }
 
 export default function SubjectLabel(props: SubjectLabelProps) {
+  const { subject, backgroundColor, color } = props;
+
   return (
     <SubjectBox $backgroundColor={backgroundColor} $color={color}>
       {subject}
@@ -17,7 +19,9 @@ export default function SubjectLabel(props: SubjectLabelProps) {
 const SubjectBox = styled.span<{ $backgroundColor: string; $color: string }>`
   padding: 0.2rem 0.6rem;
 
-  color: ${({ $color }) => $color};
+  ${({ theme }) => theme.fonts.caption01};
   background-color: ${({ $backgroundColor }) => $backgroundColor};
-  ${({ theme }) => theme.fonts.caption01}
+  color: ${({ $color }) => $color};
+
+  border-radius: 8px;
 `;

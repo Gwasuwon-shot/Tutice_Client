@@ -12,10 +12,10 @@ export default function StepRenderer(props: StepRendererProps) {
   const { step, setStep } = props;
   switch (step) {
     case 1:
-      return <Role setStep={setStep} />;
+      return <Role />;
     case 2:
-      return <NameEmail setStep={setStep} />;
+      return <NameEmail />;
     case 3:
-      return <PwTos setStep={setStep} />;
+      return <PwTos />;
   }
 }

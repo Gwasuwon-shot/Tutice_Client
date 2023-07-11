@@ -10,19 +10,21 @@ export default function TeacherHome() {
   const [isClassExist, setIsClassExist] = useState(true);
 
   return (
-    <TeacherHomeWrapper>
-      <Header />
-      {/* 수업이 존재할 때 */}
-      {isClassExist ? (
-        <>
-          <WelcomeNUpPreviewBanner />
-          <AlarmNUpcomingClass />
-        </>
-      ) : (
-        <></>
-      )}
+    <>
+      <TeacherHomeWrapper>
+        <Header />
+        {/* 수업이 존재할 때 */}
+        {isClassExist ? (
+          <>
+            <WelcomeNUpPreviewBanner />
+            <AlarmNUpcomingClass />
+          </>
+        ) : (
+          <></>
+        )}
+      </TeacherHomeWrapper>
       <TeacherFooter />
-    </TeacherHomeWrapper>
+    </>
   );
 }
 

@@ -16,6 +16,7 @@ const FourthSwiper = () => {
           </FirstTreeWrapper>
 
           <FourthSwiperSecondTree />
+
           <ThirdTreeWrapper>
             <FourthSwiperThirdTree />
           </ThirdTreeWrapper>
@@ -25,17 +26,20 @@ const FourthSwiper = () => {
   );
 };
 
-const FourthSwiperWrapper = styled.article`
+const FourthSwiperWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  position: absolute;
+  bottom: 0;
 `;
 
 const LogoWrapper = styled.div`
   display: flex;
-  align-self: center;
+  align-items: flex-end;
 
   width: 100%;
-  margin-top: 6.363rem;
+  margin-top: 6.021rem;
 `;
 
 const FirstTreeWrapper = styled.div`

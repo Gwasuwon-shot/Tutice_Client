@@ -9,35 +9,48 @@ const ThirdSwiper = () => {
   return (
     <>
       <ThirdSwiperWrapper>
-        <ThirdSwiperGradation />
-        <ContentWrapper>
-          <SwiperTitleLayout mainTitleContent={MAIN_TITLE_MESSAGE} subTitleContent={SUB_TITLE_MESSAGE} />
-          <LogoWrapper>
-            <ThirdSwiperFirstTree />
+        <SwiperTitleLayout mainTitleContent={MAIN_TITLE_MESSAGE} subTitleContent={SUB_TITLE_MESSAGE} />
+        <LogoWrapper>
+          <ThirdSwiperFirstTree />
+
+          <SecondTreeWrapper>
             <ThirdSwiperSecondTree />
+          </SecondTreeWrapper>
+
+          <ThirdTreeWrapper>
             <ThirdSwiperThirdTree />
-          </LogoWrapper>
-        </ContentWrapper>
+          </ThirdTreeWrapper>
+        </LogoWrapper>
       </ThirdSwiperWrapper>
     </>
   );
 };
 
-const ThirdSwiperWrapper = styled.article`
+const ThirdSwiperWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
 
-const ContentWrapper = styled.div`
   position: absolute;
+  bottom: 0;
 `;
 
 const LogoWrapper = styled.div`
   display: flex;
-  align-self: center;
+  align-items: flex-end;
 
   width: 100%;
   margin-top: 6.4rem;
+
+  overflow: hidden;
+`;
+
+const SecondTreeWrapper = styled.div`
+  margin-right: 1.571rem;
+  margin-left: 1.816rem;
+`;
+
+const ThirdTreeWrapper = styled.div`
+  margin-left: 1.1rem;
 `;
 
 export default ThirdSwiper;

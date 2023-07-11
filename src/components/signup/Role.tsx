@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
-// import BottomButton from "../common/BottomButton";
+import BottomButton from "../common/BottomButton";
 
 export default function Role() {
   return (
@@ -29,7 +29,7 @@ export default function Role() {
             <RadioSubName htmlFor="parent"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
           </TextWrapper>
         </RoleRapper>
-        {/* <BottomButton children="완료" /> */}
+        <BottomButton children="완료" />
       </Container>
     </>
   );

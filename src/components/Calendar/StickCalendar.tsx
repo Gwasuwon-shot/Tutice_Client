@@ -17,12 +17,14 @@ export default function StickCalendar() {
     setCurrentMonth(addMonths(currentMonth, 1));
   }
   return (
-    <CalendarWrapper>
-      <CalendarHeader />
-      <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
-      <Dayofweek />
-      <Days currentMonth={currentMonth} />
-    </CalendarWrapper>
+    <>
+      <CalendarWrapper>
+        <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
+        <Dayofweek />
+        <Days currentMonth={currentMonth} />
+        <DivideLine />
+      </CalendarWrapper>
+    </>
   );
 }
 
@@ -31,4 +33,11 @@ const CalendarWrapper = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const DivideLine = styled.div`
+  border-top: 1px solid ${({ theme }) => theme.colors.grey50};
+
+  width: 32rem;
+  margin-bottom: 0.6rem;
 `;

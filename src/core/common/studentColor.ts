@@ -1,4 +1,4 @@
-export const STUDENTCOLOR = [
+export const STUDENT_COLOR = [
   "#45B9A2",
   "#D3F1C1",
   "#EAF0A4",

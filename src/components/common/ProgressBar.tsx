@@ -25,7 +25,7 @@ export default function ProgressBar({ progress }: ProgressBarProps) {
     )
 }
 
-const ProgressBarWrapper = styled.div`
+const ProgressBarWrapper = styled.section`
     width: 100%;
     height: 0.4rem;
     background-color: lightgray;

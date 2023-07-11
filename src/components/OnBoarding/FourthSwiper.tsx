@@ -35,7 +35,7 @@ const LogoWrapper = styled.div`
   align-self: center;
 
   width: 100%;
-  margin-top: 6.021rem;
+  margin-top: 6.363rem;
 `;
 
 const FirstTreeWrapper = styled.div`

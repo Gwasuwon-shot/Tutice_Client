@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { WELCOME_TEACHER_COMMENTS } from "../../core/teacherHome/welcomeTeacherComments";
-import { TeacherHomeTodayScheduleType } from "../../type/teacherHomeTodayScheduleType";
+import { TeacherHomeTodayScheduleType } from "../../type/teacherHome/previewBannerScheduleType";
 
 interface WelcomeTeacherProps {
   teacherName: string;

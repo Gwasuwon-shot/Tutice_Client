@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { UpcomingClassLogoTeacherHomeIc } from "../../../assets";
 import { CLASS_PREVIEW_BANNER_COMMENTS } from "../../../core/teacherHome/classPreviewBannerComments";
-import { TeacherHomeTodayScheduleType } from "../../../type/teacherHomeTodayScheduleType";
+import { TeacherHomeTodayScheduleType } from "../../../type/teacherHome/previewBannerScheduleType";
 import AttendanceCheckButton from "../../common/AttendanceCheckButton";
 import SubjectLabel from "../../common/SubjectLabel";
 

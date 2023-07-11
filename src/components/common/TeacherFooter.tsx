@@ -13,7 +13,7 @@ import {
 } from "../../assets";
 import { teacherFooterCategory } from "../../atom/teacherFooterCategory";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
-import { TeacherFooterType } from "../../type/teacherFooterType";
+import { TeacherFooterType } from "../../type/teacherHome/teacherFooterType";
 
 export default function TeacherFooter() {
   const [teacherFooterList, setTeacherFooterList] = useRecoilState<TeacherFooterType[]>(teacherFooterCategory);

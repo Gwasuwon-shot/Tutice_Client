@@ -9,7 +9,7 @@ export default function AlarmNUpcomingClass() {
   return (
     <>
       <AlarmBanner isMissingAttendance={isMissingAttendance} isMissingMaintenance={isMissingMaintenance} />
-      <UpcomingClassBoard />
+      <UpcomingClassBoard latestScheduleDay={latestScheduleDay} latestScheduleList={latestScheduleList} />
     </>
   );
 }

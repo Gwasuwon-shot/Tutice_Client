@@ -1,0 +1,96 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-styled-components"],
+  "plugins": ["stylelint-order"],
+  "customSyntax": "postcss-styled-syntax",
+  "overrides": [
+    {
+      "customSyntax": "@stylelint/postcss-css-in-js",
+      "files": ["**/*.ts"]
+    }
+  ],
+  "rules": {
+    "declaration-empty-line-before": [
+      "always",
+      {
+        "ignore": ["first-nested", "after-comment", "after-declaration", "inside-single-line-block"]
+      }
+    ],
+    "order/order": ["custom-properties", "declarations"],
+
+    "order/properties-order": [
+      {
+        "groupName": "Layout",
+        "emptyLineBefore": "always",
+        "noEmptyLineBetween": true,
+        "properties": [
+          "display",
+          "justify-content",
+          "align-items",
+          "flex-direction",
+          "flex-wrap",
+          "flex-flow",
+          "position",
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "float",
+          "clear",
+          "visibility",
+          "overflow",
+          "z-index"
+        ]
+      },
+      {
+        "groupName": "Box",
+        "emptyLineBefore": "always",
+        "noEmptyLineBetween": true,
+        "properties": [
+          "width",
+          "height",
+          "margin",
+          "padding",
+          "padding-top",
+          "padding-right",
+          "padding-bottom",
+          "padding-left",
+          "margin-top",
+          "margin-right",
+          "margin-bottom",
+          "margin-left"
+        ]
+      },
+      {
+        "groupName": "Background",
+        "emptyLineBefore": "always",
+        "noEmptyLineBetween": true,
+        "properties": [
+          "border",
+          "background",
+          "background-color",
+          "color",
+          "font-style",
+          "font-weight",
+          "font-size",
+          "line-height",
+          "letter-spacing",
+          "text-align",
+          "text-indent",
+          "vertical-align"
+        ]
+      },
+      {
+        "groupName": "Text",
+        "emptyLineBefore": "always",
+        "noEmptyLineBetween": true,
+        "properties": ["text-decoration", "text-align", "vertical-align"]
+      },
+      {
+        "groupName": "ETC",
+        "emptyLineBefore": "always",
+        "noEmptyLineBetween": true,
+        "properties": ["white-space"]
+      }
+    ]
+  }
+}

@@ -12,7 +12,7 @@ import {
   MyTeacherFooterIc,
 } from "../../assets";
 import { teacherFooterCategory } from "../../atom/teacherFooterCategory";
-import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherFooter";
+import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
 import { TeacherFooterType } from "../../type/teacherFooterType";
 
 export default function TeacherFooter() {

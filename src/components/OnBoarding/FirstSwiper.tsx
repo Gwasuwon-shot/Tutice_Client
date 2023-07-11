@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { MainLogo, TuticeTitleLogo } from "../../assets";
 
-const FirstSwiper = () => {
+export default function FirstSwiper() {
   return (
     <>
       <FirstSwiperWrapper>
@@ -18,7 +18,7 @@ const FirstSwiper = () => {
       </FirstSwiperWrapper>
     </>
   );
-};
+}
 
 const FirstSwiperWrapper = styled.article`
   display: flex;
@@ -49,5 +49,3 @@ const IconWrapper = styled.div`
   margin-top: 1.008rem;
   gap: 0.663rem;
 `;
-
-export default FirstSwiper;

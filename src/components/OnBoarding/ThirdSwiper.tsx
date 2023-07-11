@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import SwiperTitleLayout from "./SwiperTitleLayout";
 import { ThirdSwiperFirstTree, ThirdSwiperGradation, ThirdSwiperSecondTree, ThirdSwiperThirdTree } from "../../assets";
 
-const ThirdSwiper = () => {
+export default function ThirdSwiper() {
   const MAIN_TITLE_MESSAGE = "Simple";
   const SUB_TITLE_MESSAGE = "과외를 위한 모든 과정을 한 번에 \n 쉽고, 간편하게";
 
@@ -24,7 +24,7 @@ const ThirdSwiper = () => {
       </ThirdSwiperWrapper>
     </>
   );
-};
+}
 
 const ThirdSwiperWrapper = styled.div`
   display: flex;
@@ -52,5 +52,3 @@ const SecondTreeWrapper = styled.div`
 const ThirdTreeWrapper = styled.div`
   margin-left: 1.1rem;
 `;
-
-export default ThirdSwiper;

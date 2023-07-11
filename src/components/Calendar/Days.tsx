@@ -38,8 +38,7 @@ const Wrapper = styled.section`
   align-items: center;
   flex-direction: column;
 
-  margin-top: 5rem;
-  gap: 2rem;
+  width: auto;
 `;
 
 const DaysWrapper = styled.article`
@@ -47,9 +46,9 @@ const DaysWrapper = styled.article`
   justify-content: space-between;
   align-items: center;
 
-  width: 48rem;
-  gap: 2rem;
-  cursor: pointer;
+  width: 28.3rem;
+
+  /* gap: 3.2rem; */
 `;
 
 interface DayProp {
@@ -57,16 +56,19 @@ interface DayProp {
 }
 
 const Day = styled.article<DayProp>`
+  /* display: grid; */
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-
-  height: 5rem;
-  width: 30rem;
 
   ${({ $issunday }) => `
     ${$issunday ? "color: #FCB3A6" : undefined}
   `};
+
+  height: 6rem;
+
+  /* grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(7, 1fr); */
 `;
 
 interface DayTextProps {
@@ -78,7 +80,7 @@ const DayText = styled.p<DayTextProps>`
   align-items: center;
   justify-content: center;
 
-  width: 1.2rem;
+  width: 3rem;
   height: 1.2rem;
 
   ${({ $isnotvalid }) => `

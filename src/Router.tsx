@@ -8,12 +8,14 @@ import ParentCalendar from "./pages/ParentCalendar";
 import RegisterLesson from "./pages/RegisterLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
+import OnBoarding from "./pages/OnBoarding";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/onBoarding" element={<OnBoarding />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/check-attendance" element={<CheckAttendance />} />

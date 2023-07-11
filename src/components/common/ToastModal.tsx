@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { styled } from "styled-components";
+import useModal from "../../hooks/useModal";
 
 interface ToastModalProps {
   children: ReactNode;
@@ -7,9 +8,10 @@ interface ToastModalProps {
 
 export default function ToastModal(props: ToastModalProps) {
   const { children } = props;
+  const { modalRef, closeModal } = useModal();
 
   return (
-    <ModalBackground>
+    <ModalBackground ref={modalRef}>
       <Modal>{children}</Modal>
     </ModalBackground>
   );

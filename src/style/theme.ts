@@ -26,6 +26,7 @@ const colors = {
   red10: "#D30B00",
 
   //회색
+  grey0: "#FFFFFF",
   white: "#FFFFFF",
   grey20: "#F8F9FA",
   grey50: "#F1F3F5",

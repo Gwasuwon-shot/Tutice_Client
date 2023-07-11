@@ -2,6 +2,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
+import ToastModal from "../common/ToastModal";
 import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
 import NoClassHome from "./NoClassHome";
 import WelcomeNUpPreviewBanner from "./WelcomeNUpPreviewBanner";
@@ -12,6 +13,7 @@ export default function TeacherHome() {
 
   return (
     <>
+      <ToastModal>dfjdkfjdkfjdk</ToastModal>
       <TeacherHomeWrapper>
         <Header />
         {isClassExist ? (

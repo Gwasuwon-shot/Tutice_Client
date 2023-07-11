@@ -15,9 +15,11 @@ export default function UpcomingClassBoard(props: UpcomingClassBoardProps) {
   );
 
   return (
-    <UpcomingClassDate>
-      {upcomingClassDate}({dayOfWeek}) 수업
-    </UpcomingClassDate>
+    <>
+      <UpcomingClassDate>
+        {upcomingClassDate}({dayOfWeek}) 수업
+      </UpcomingClassDate>
+    </>
   );
 }
 

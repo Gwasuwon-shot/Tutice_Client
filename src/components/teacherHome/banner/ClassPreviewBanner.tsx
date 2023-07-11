@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { UpcomingClassLogoTeacherHomeIc } from "../../../assets";
 import { CLASS_PREVIEW_BANNER_COMMENTS } from "../../../core/teacherHome/classPreviewBannerComments";
 import { TeacherHomeTodayScheduleType } from "../../../type/teacherHomeTodayScheduleType";
 import AttendanceCheckButton from "../../common/AttendanceCheckButton";
@@ -26,6 +27,10 @@ export default function ClassPreviewBanner(props: ClassPreviewBannerProps) {
     }
   }
 
+  function checkClassNotYet(timeStatus: number) {
+    return timeStatus === 1;
+  }
+
   return (
     <ClassPreviewBannerWrapper>
       <article>
@@ -35,10 +40,10 @@ export default function ClassPreviewBanner(props: ClassPreviewBannerProps) {
         </StudentNameWrapper>
         <ClassStatusWrapper>
           <ClassCountMentWrapper>{count} 회차 수업이</ClassCountMentWrapper>
-          {showClassPreviewComment(2)}
+          {showClassPreviewComment(timeStatus)}
         </ClassStatusWrapper>
       </article>
-      <AttendanceCheckButton />
+      {checkClassNotYet(timeStatus) ? <UpcomingClassLogoTeacherHomeIcon /> : <AttendanceCheckButton />}
     </ClassPreviewBannerWrapper>
   );
 }
@@ -47,6 +52,7 @@ const ClassPreviewBannerWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 
   width: 29.2rem;
   height: 8rem;
@@ -77,4 +83,8 @@ const ClassStatusWrapper = styled.p`
 
 const ClassCountMentWrapper = styled.p`
   margin-right: 0.5rem;
+`;
+
+const UpcomingClassLogoTeacherHomeIcon = styled(UpcomingClassLogoTeacherHomeIc)`
+  margin-top: 3rem;
 `;

@@ -11,11 +11,24 @@ interface BannerProps {
 export default function Banner(props: BannerProps) {
   const { isTodaySchedule, todaySchedule } = props;
 
+  function checkClassStatus() {
+    if (isTodaySchedule) {
+      todaySchedule ? (
+        <NoclassBanner bannerTitle={NO_CLASS_BANNER_TITLE.endTodayClass} />
+      ) : (
+        <NoclassBanner bannerTitle={NO_CLASS_BANNER_TITLE.noTodayClass} />
+      );
+    } else {
+      <ClassPreviewBanner todaySchedule={todaySchedule} />;
+    }
+  }
+
   return (
     <>
-      <NoclassBanner bannerTitle={NO_CLASS_BANNER_TITLE.noTodayClass} />
+      {/*    
       <NoclassBanner bannerTitle={NO_CLASS_BANNER_TITLE.endTodayClass} />
-      <ClassPreviewBanner todaySchedule={todaySchedule} />
+      <ClassPreviewBanner todaySchedule={todaySchedule} /> */}
+      {checkClassStatus()}
     </>
   );
 }

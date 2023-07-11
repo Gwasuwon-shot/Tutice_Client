@@ -1,16 +1,26 @@
 import { styled } from "styled-components";
+import { WELCOME_TEACHER_COMMENTS } from "../../core/teacherHome/welcomeTeacherComments";
+import { TeacherHomeTodayScheduleType } from "../../type/teacherHomeTodayScheduleType";
 
-interface WelcomeTeacherProp {
+interface WelcomeTeacherProps {
   teacherName: string;
+  isTodaySchedule: boolean;
+  todaySchedule: TeacherHomeTodayScheduleType;
 }
 
-export default function WelcomeTeacher(props: WelcomeTeacherProp) {
-  const { teacherName } = props;
+export default function WelcomeTeacher(props: WelcomeTeacherProps) {
+  const { teacherName, isTodaySchedule, todaySchedule } = props;
+
+  function checkTodayClassEnd() {
+    return isTodaySchedule && todaySchedule === null;
+  }
 
   return (
     <WelcomeTeacherWrapper>
       <WelcomeText>{teacherName} 선생님</WelcomeText>
-      <WelcomeText>수고하셨어요!</WelcomeText>
+      <WelcomeText>
+        {checkTodayClassEnd() ? WELCOME_TEACHER_COMMENTS.goodJob : WELCOME_TEACHER_COMMENTS.hello}
+      </WelcomeText>
     </WelcomeTeacherWrapper>
   );
 }

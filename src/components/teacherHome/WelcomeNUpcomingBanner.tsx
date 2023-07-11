@@ -7,7 +7,7 @@ export default function WelcomeNUpcomingBanner() {
 
   return (
     <>
-      <WelcomeTeacher teacherName={teacherName} />
+      <WelcomeTeacher teacherName={teacherName} isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
       <Banner isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
     </>
   );

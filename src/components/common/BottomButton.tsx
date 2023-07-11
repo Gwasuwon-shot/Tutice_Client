@@ -4,9 +4,10 @@ import { styled } from "styled-components";
 type BottomButtonProps = {
   children: ReactNode;
   isactive: Boolean;
+  onClick(): Void;
 };
 
-export default function BottomButton({ children, isactive }: BottomButtonProps) {
+export default function BottomButton({ children, isactive, onClick }: BottomButtonProps) {
   return (
     <BottomContainer isactive={isactive}>
       <BottomText> {children} </BottomText>
@@ -24,7 +25,7 @@ const BottomContainer = styled.button<{ isactive: Boolean }>`
 
   background-color: ${({ theme, isactive }) => (isactive ? theme.colors.green5 : theme.colors.grey50)};background-color
 
-  color: ${({ theme, isactive }) => (isactive ? theme.colors.grey0 : theme.colors.grey200)};color
+  color: ${({ theme, isactive }) => (isactive ? theme.colors.grey0 : theme.colors.grey200)};colorcolorcolorcolorcolor
 `;
 
 const BottomText = styled.div`

@@ -4,13 +4,16 @@ import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 import BottomButton from "../common/BottomButton";
 
-export default function Role() {
+export default function Role(setStep: React.Dispatch<React.SetStateAction<number>>) {
   const [isactive, setIsactive] = useState(false);
   function handleRadioClick() {
     setIsactive(true);
   }
 
-  function handleDoneClick() {}
+  function handleDoneClick() {
+    console.log("isClicked");
+    setStep(2);
+  }
 
   return (
     <>
@@ -36,7 +39,7 @@ export default function Role() {
             <RadioSubName htmlFor="parent"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
           </TextWrapper>
         </RoleRapper>
-        <BottomButton children="완료" isactive={isactive} />
+        <BottomButton children="완료" isactive={isactive} onClick={handleDoneClick} />
       </Container>
     </>
   );

@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function PwTos() {
-  return <div></div>;
+  return <div>PwTos</div>;
 }

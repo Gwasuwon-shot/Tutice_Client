@@ -20,7 +20,9 @@ export default function Days({ currentMonth }) {
 
       days.push(
         <Day key={day.toString()} $issunday={sunDay}>
-          <DayText $isnotvalid={format(currentMonth, "M") !== format(day, "M")}>{formattedDate}</DayText>
+          <DayText $istoday={format(currentMonth, "d")} $isnotvalid={format(currentMonth, "M") !== format(day, "M")}>
+            {formattedDate}
+          </DayText>
         </Day>,
       );
       day = addDays(day, 1);
@@ -47,8 +49,6 @@ const DaysWrapper = styled.article`
   align-items: center;
 
   width: 28.3rem;
-
-  /* gap: 3.2rem; */
 `;
 
 interface DayProp {
@@ -56,7 +56,6 @@ interface DayProp {
 }
 
 const Day = styled.article<DayProp>`
-  /* display: grid; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -66,9 +65,6 @@ const Day = styled.article<DayProp>`
   `};
 
   height: 6rem;
-
-  /* grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(7, 1fr); */
 `;
 
 interface DayTextProps {
@@ -83,8 +79,9 @@ const DayText = styled.p<DayTextProps>`
   width: 3rem;
   height: 1.2rem;
 
-  ${({ $isnotvalid }) => `
-    ${$isnotvalid ? "color: #CED4DA" : ""}
+  ${({ $isnotvalid, $istoday }) => `
+    ${$isnotvalid ? "color: #CED4DA" : ""},
+    ${$istoday ? "color: #0DA98E" : ""}
   `};
 `;
 

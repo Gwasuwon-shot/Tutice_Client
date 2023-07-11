@@ -6,7 +6,7 @@ const colors = {
   green2: "#B0E0D6",
   green3: "#7DCDBD",
   green4: "#45B9A2",
-  green5: "#0DA98F",
+  green5: "#0DA98E",
   green6: "#00997D",
   green7: "#038F7E",
   green8: "#007C61",
@@ -61,26 +61,34 @@ interface Font {
   weight: number;
   size: number;
   lineHeight: number;
+  letterSpacing: number;
 }
 
-function FONT({ weight, size, lineHeight }: Font): string {
+function FONT({ weight, size, lineHeight, letterSpacing }: Font): string {
   return `
-    font-family: "Pretendard";
+    font-family: "Pretendard-Regular";
     font-weight : ${weight};
     font-size : ${size}rem;
     line-height : ${lineHeight}rem;
+    letter-spacing : ${letterSpacing}rem;
     `;
 }
 
 const fonts = {
-  title1: FONT({ weight: 700, size: 2.0, lineHeight: 2.4 }),
-  title2: FONT({ weight: 400, size: 1.6, lineHeight: 1.9 }),
+  title01: FONT({ weight: 700, size: 2.0, lineHeight: 2.6, letterSpacing: 0 }),
+  title02: FONT({ weight: 700, size: 1.6, lineHeight: 2.0, letterSpacing: 0 }),
+  title03: FONT({ weight: 500, size: 1.6, lineHeight: 2.0, letterSpacing: 0 }),
 
-  body1: FONT({ weight: 700, size: 1.4, lineHeight: 1.6 }),
-  body2: FONT({ weight: 500, size: 1.4, lineHeight: 1.6 }),
-  body3: FONT({ weight: 700, size: 1.2, lineHeight: 1.4 }),
+  body01: FONT({ weight: 700, size: 1.4, lineHeight: 1.6, letterSpacing: 0 }),
+  body02: FONT({ weight: 500, size: 1.4, lineHeight: 2.0, letterSpacing: 0 }),
+  body03: FONT({ weight: 700, size: 1.2, lineHeight: 1.6, letterSpacing: 0 }),
+  body04: FONT({ weight: 500, size: 1.2, lineHeight: 1.6, letterSpacing: 0 }),
+  body05: FONT({ weight: 400, size: 1.2, lineHeight: 1.6, letterSpacing: 0 }),
+  body06: FONT({ weight: 500, size: 1.1, lineHeight: 1.4, letterSpacing: 0 }),
+  body07: FONT({ weight: 400, size: 1.1, lineHeight: 1.4, letterSpacing: 0 }),
 
-  caption1: FONT({ weight: 500, size: 1.0, lineHeight: 1.2 }),
+  caption01: FONT({ weight: 500, size: 1.0, lineHeight: 1.2, letterSpacing: 0 }),
+  caption02: FONT({ weight: 600, size: 0.9, lineHeight: 1.0, letterSpacing: -0.3 }),
 };
 
 export type FontsTypes = typeof fonts;

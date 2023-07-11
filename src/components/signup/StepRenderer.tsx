@@ -3,7 +3,7 @@ import Role from "./Role";
 import NameEmail from "./NameEmail";
 import PwTos from "./PwTos";
 
-type StepRendererProps = {
+interface StepRendererProps = {
   step: Number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
 };

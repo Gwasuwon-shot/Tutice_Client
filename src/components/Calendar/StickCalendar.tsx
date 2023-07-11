@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { format, subMonths, addMonths } from "date-fns";
-import CalendarHeader from "./CalendarHeader";
+import YearandMonth from "./YearandMonth";
 import Dayofweek from "./Dayofweek";
+import Days from "./Days";
 
 export default function StickCalendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -16,8 +17,9 @@ export default function StickCalendar() {
   }
   return (
     <div>
-      <CalendarHeader prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
+      <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
       <Dayofweek />
+      <Days currentMonth={currentMonth} />
     </div>
   );
 }

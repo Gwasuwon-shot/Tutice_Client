@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 import BottomButton from "../common/BottomButton";
 
 export default function Role() {
+  const [isactive, setIsactive] = useState(false);
+  function handleRadioClick() {
+    setIsactive(true);
+  }
+
+  function handleDoneClick() {}
+
   return (
     <>
       <Container>
         <RoleText>어떤 회원으로 가입할까요?</RoleText>
         <RoleRapper>
-          <RadioButton type="radio" name="role" value="teacher" id="teacher" />
+          <RadioButton type="radio" name="role" value="teacher" id="teacher" onClick={handleRadioClick} />
           <TextWrapper>
             <RadioNameWrapper>
               <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
@@ -20,7 +27,7 @@ export default function Role() {
           </TextWrapper>
         </RoleRapper>
         <RoleRapper>
-          <RadioButton type="radio" name="role" value="parent" id="parent" />
+          <RadioButton type="radio" name="role" value="parent" id="parent" onClick={handleRadioClick} />
           <TextWrapper>
             <RadioNameWrapper>
               <RadioBoldName htmlFor="parent">학부모님 </RadioBoldName>
@@ -29,7 +36,7 @@ export default function Role() {
             <RadioSubName htmlFor="parent"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
           </TextWrapper>
         </RoleRapper>
-        <BottomButton children="완료" />
+        <BottomButton children="완료" isactive={isactive} />
       </Container>
     </>
   );

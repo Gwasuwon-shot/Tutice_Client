@@ -1,5 +1,4 @@
 export const STUDENT_COLOR = [
-  "#45B9A2",
   "#D3F1C1",
   "#EAF0A4",
   "#FFF5A8",
@@ -11,3 +10,5 @@ export const STUDENT_COLOR = [
   "#CCDDFF",
   "#CFDEE5",
 ];
+
+export const DEEFAULT_STUDENT_COLOR = "#45B9A2";

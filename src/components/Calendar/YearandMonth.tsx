@@ -1,15 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { format } from "date-fns";
+import { NextMonthArrowButton } from "../../assets";
+import { PrevMonthArrowButton } from "../../assets";
 
-export default function YearandMonth({ currentMonth, prevMonth, nextMonth }) {
+interface YearandMonthProps {
+  currentMonth: Date;
+  prevMonth: Date;
+  nextMonth: Date;
+}
+
+export default function YearandMonth(props: YearandMonthProps) {
+  const { currentMonth, prevMonth, nextMonth } = props;
   return (
     <HeaderWrapper>
-      <PrevMonthButton onClick={prevMonth}>{"<"}</PrevMonthButton>
+      <PrevMonthButton onClick={prevMonth} />
       <YearMonthWrapper>
         {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
       </YearMonthWrapper>
-      <NextMonthButton onClick={nextMonth}> {">"}</NextMonthButton>
+      <NextMonthButton onClick={nextMonth} />
     </HeaderWrapper>
   );
 }
@@ -17,6 +26,8 @@ const HeaderWrapper = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin-bottom: 1.1rem;
 
   font-size: 1.1rem;
   gap: 1.6rem;
@@ -28,16 +39,18 @@ const YearMonthWrapper = styled.span`
   align-items: center;
 
   font-size: 1.1rem;
+
+  ${({ theme }) => theme.fonts.body06};
 `;
 
-const PrevMonthButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const PrevMonthButton = styled(PrevMonthArrowButton)`
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
 `;
 
-const NextMonthButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const NextMonthButton = styled(NextMonthArrowButton)`
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
 `;

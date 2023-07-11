@@ -6,27 +6,27 @@ const colors = {
   green2: "#B0E0D6",
   green3: "#7DCDBD",
   green4: "#45B9A2",
-  green5: "#0DA98F",
+  green5: "#0DA98E",
   green6: "#00997D",
   green7: "#038F7E",
   green8: "#007C61",
-  green9: "#006654",
-  green10: "#005042",
+  green9: "#006C52",
+  green10: "#005037",
 
   // 서브컬러
   red1: "#FEE8E7",
   red2: "#FFCABA",
   red3: "#FFA78E",
   red4: "#FF8260",
-  red5: "#FF5D53",
-  red6: "#FF5348",
+  red5: "#FF623D",
+  red6: "#FF3F18",
   red7: "#FF3914",
   red8: "#F9300D",
   red9: "#EB2706",
   red10: "#D30B00",
 
-  //회색,흰색
-  white: "#FFFFFF",
+  //회색
+  grey0: "#FFFFFF",
   grey20: "#F8F9FA",
   grey50: "#F1F3F5",
   grey70: "#E9ECEF",
@@ -35,25 +35,24 @@ const colors = {
   grey200: "#C1C6CC",
   grey300: "#A9AEB2",
   grey400: "#899199",
-  grey500: "#757A80",
+  grey500: "#727980",
   grey600: "#5B6166",
-  grey700: "#45494D",
+  grey700: "#5A5F64",
+  grey800: "#343A40",
   grey900: "#212529",
 
-  //시멘틱 컬러
-  sementicred: "#EC583E",
-
-  //캘린더 & 라벨
-  yellowgreen: "#D3F1C1",
-  lightgreen: "#EAF0A4",
+  //캘린더
   yellow: "#FFF5A8",
-  orange: "#FFDBBA",
+  lgreen: "#EAF0A4",
+  mint: "#CCF5ED",
   red: "#FFCCCC",
-  pink: "#FFD9F2",
-  purple: "#E3D2FA",
-  skyblue: "#BEECFF",
+  orange: "#FFDBBA",
   blue: "#CCDDFF",
-  bluegrey: "#CFDEE5",
+  greyblue: "#CFDEE5",
+  purple: "#E3D2FA",
+  ygreen: "#D3F1C1",
+  brown: "#EBDDD5",
+  pink: "#FFD9F2",
 };
 
 export type ColorsTypes = typeof colors;

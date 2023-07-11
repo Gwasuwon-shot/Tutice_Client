@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { LatestScheduleDayType, UpcomingClassScheduleType } from "../../type/teacherHome/upcomingClassScheduleType";
+import UpcomingClass from "./UpcomingClass";
 
 interface UpcomingClassBoardProps {
   latestScheduleDay: LatestScheduleDayType;
@@ -18,7 +19,11 @@ export default function UpcomingClassBoard(props: UpcomingClassBoardProps) {
     <UpcomingClassBoardWrapper>
       <UpcomingClassDate>
         {upcomingClassDate}({dayOfWeek}) 수업
-        <UpcomingClassWrapper></UpcomingClassWrapper>
+        <UpcomingClassWrapper>
+          {latestScheduleList.map(({ lesson, schedule }, idx) => (
+            <UpcomingClass key={idx} lesson={lesson} schedule={schedule} />
+          ))}
+        </UpcomingClassWrapper>
       </UpcomingClassDate>
     </UpcomingClassBoardWrapper>
   );
@@ -46,5 +51,6 @@ const UpcomingClassDate = styled.h1`
 const UpcomingClassWrapper = styled.section`
   overflow: scroll;
 
+  width: 27.2rem;
   height: 14.5rem;
 `;

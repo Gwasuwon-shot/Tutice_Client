@@ -10,9 +10,11 @@ export default function StudentColorBox(props: StudentColorBoxProp) {
 }
 
 const ColorBox = styled.label<{ $backgroundColor: string }>`
+  display: flex;
+
   width: 1.3rem;
   height: 3.6rem;
-  border-radius: 2px;
 
   background-color: ${({ $backgroundColor }) => $backgroundColor};
+  border-radius: 2px;
 `;

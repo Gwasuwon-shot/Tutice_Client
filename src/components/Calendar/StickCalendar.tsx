@@ -3,6 +3,7 @@ import { format, subMonths, addMonths } from "date-fns";
 import YearandMonth from "./YearandMonth";
 import Dayofweek from "./Dayofweek";
 import Days from "./Days";
+import CalendarHeader from "./CalendarHeader";
 
 export default function StickCalendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -17,6 +18,7 @@ export default function StickCalendar() {
   }
   return (
     <div>
+      <CalendarHeader />
       <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
       <Dayofweek />
       <Days currentMonth={currentMonth} />

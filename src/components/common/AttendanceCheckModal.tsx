@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import AttendanceStatusButton from "./AttendanceStatusButton";
 import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
@@ -20,8 +21,10 @@ export default function AttendanceCheckModal() {
         <Sub $isTitle={false}>수업 출결 체크를 진행해 주세요</Sub>
       </TextWrapper>
       <AttendanceStatusButton status={ATTENDANCE_STATUS.attend} />
-      <AttendanceStatusButton status={ATTENDANCE_STATUS.cancel} />
-      <AttendanceStatusButton status={ATTENDANCE_STATUS.absent} />
+      <AttdenceStatusButtonWrapper>
+        <AttendanceStatusButton status={ATTENDANCE_STATUS.cancel} />
+        <AttendanceStatusButton status={ATTENDANCE_STATUS.absent} />
+      </AttdenceStatusButtonWrapper>
     </ToastModal>
   );
 }
@@ -62,4 +65,11 @@ const Main = styled.h1<{ $isTitle: boolean }>`
 const Sub = styled.p<{ $isTitle: boolean }>`
   margin-right: 0.5rem;
   ${({ theme, $isTitle }) => ($isTitle ? theme.fonts.title03 : theme.fonts.body02)}
+`;
+
+const AttdenceStatusButtonWrapper = styled.section`
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
 `;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AbsentAttendanceModalIc, AttendaceAttendanceModalIc, CancelAttendanceModalIc } from "../../assets";
+import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 
 interface AttendanceStatusButtonProp {
   status: string;
@@ -10,18 +11,33 @@ export default function AttendanceStatusButton(props: AttendanceStatusButtonProp
 
   function showAttendanceStatusButton() {
     switch (status) {
-      case "결석":
-        return <AbsentAttendanceModalIcon />;
-      case "출석":
+      case ATTENDANCE_STATUS.attend:
         return <AttendaceAttendanceModalIcon />;
-      case "취소":
+      case ATTENDANCE_STATUS.cancel:
         return <CancelAttendanceModalIcon />;
+      case ATTENDANCE_STATUS.absent:
+        return <AbsentAttendanceModalIcon />;
       default:
         return;
     }
   }
-  return <>{showAttendanceStatusButton()}</>;
+  return <ButtonWrapper $status={status}>{showAttendanceStatusButton()}</ButtonWrapper>;
 }
+
+const ButtonWrapper = styled.button<{ $status: string }>`
+  width: ${({ $status }) => ($status === ATTENDANCE_STATUS.attend ? 29.2 : 13.7)}rem;
+  height: ${({ $status }) => ($status === ATTENDANCE_STATUS.attend ? 14.4 : 7.4)}rem;
+  margin-top: 1.7rem;
+
+  background-color: ${({ theme, $status }) =>
+    $status === ATTENDANCE_STATUS.attend
+      ? theme.colors.green1
+      : $status === ATTENDANCE_STATUS.cancel
+      ? theme.colors.grey70
+      : theme.colors.red1};
+
+  border-radius: 8px;
+`;
 
 const AbsentAttendanceModalIcon = styled(AbsentAttendanceModalIc)`
   width: 7.8rem;

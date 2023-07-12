@@ -38,8 +38,6 @@ export default function OnBoarding() {
 }
 
 const OnBoardingWrapper = styled.main`
-  position: relative;
-
   width: 100%;
 `;
 

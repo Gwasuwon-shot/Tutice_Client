@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
 import { WELCOME_TEACHER_COMMENTS } from "../../core/teacherHome/welcomeTeacherComments";
-import { TeacherHomeTodayScheduleType } from "../../type/teacherHomeTodayScheduleType";
+import { PreviewBannerScheduleType } from "../../type/teacherHome/previewBannerScheduleType";
 
 interface WelcomeTeacherProps {
   teacherName: string;
   isTodaySchedule: boolean;
-  todaySchedule: TeacherHomeTodayScheduleType;
+  todaySchedule: PreviewBannerScheduleType | null;
 }
 
 export default function WelcomeTeacher(props: WelcomeTeacherProps) {

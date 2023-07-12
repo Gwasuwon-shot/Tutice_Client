@@ -1,4 +1,4 @@
-import { TeacherFooterType } from "../../type/teacherFooterType";
+import { TeacherFooterType } from "../../type/teacherHome/teacherFooterType";
 
 export const TEACHER_FOOTER_CATEGORY = { home: "홈", calendar: "캘린더", classManaging: "수업 관리", my: "마이" };
 

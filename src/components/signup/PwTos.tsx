@@ -3,6 +3,7 @@ import BackButton from "../common/BackButton";
 import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
+import { TosNoneSignupIc } from "../../assets";
 
 export default function PwTos() {
   const PWTPOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
@@ -31,7 +32,9 @@ export default function PwTos() {
         </InputWrapper>
 
         {/* Tos */}
-        <TosWrapper></TosWrapper>
+        <TosWrapper>
+          <TosNoneSignupIcon />
+        </TosWrapper>
       </Container>
     </>
   );
@@ -69,12 +72,16 @@ const Inputfield = styled.input`
 const TosWrapper = styled.div`
   padding-top: 1.6rem;
   padding-left: 1.4rem;
+  margin-top: 2rem;
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
   background-color: ${({ theme }) => theme.colors.grey0};
   border-radius: 80px;
 `;
 
-const TosNoneSignupIcon = styled(TosNoneSignupIC);
+const TosNoneSignupIcon = styled(TosNoneSignupIc)`
+  width: 2rem;
+  height: 2rem;
+`;
 
 const CheckWrapper = styled.div``;

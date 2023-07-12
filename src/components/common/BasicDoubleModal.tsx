@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import useModal from "../../hooks/useModal";
 import styled from "styled-components";
+import useModal from "../../hooks/useModal";
 
 interface BasicDoubleModalProps {
   children: ReactNode;
@@ -18,9 +18,14 @@ export default function BasicDoubleModal(props: BasicDoubleModalProps) {
     <ModalWrapper ref={modalRef}>
       <Modal>
         <ModalContents>{children}</ModalContents>
-        <Button type="button" onClick={handleClickLeftButton}>
-          {buttonName}
-        </Button>
+        <ButtonWrapper>
+          <Button type="button" onClick={handleClickLeftButton}>
+            {leftButtonName}
+          </Button>
+          <Button type="button" onClick={handleClickRightButton}>
+            {rightButtonName}
+          </Button>
+        </ButtonWrapper>
       </Modal>
     </ModalWrapper>
   );
@@ -77,3 +82,5 @@ const Button = styled.button`
 
   ${({ theme }) => theme.fonts.title02};
 `;
+
+const ButtonWrapper = styled.section``;

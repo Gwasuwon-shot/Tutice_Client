@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import BasicSingleModal from "../common/BasicSingleModal";
+import BasicDoubleModal from "../common/BasicDoubleModal";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
 import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
@@ -15,17 +16,26 @@ export default function TeacherHome() {
 
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
+  const navigate = useNavigate();
+
   function handleModalClose() {
     setOpenModal(false);
+  }
+
+  function handleMoveToSchedule() {
+    navigate("/schedule");
   }
 
   return (
     <>
       {openModal && (
-        <BasicSingleModal buttonName="확인" handleClickSingleButton={handleModalClose}>
-          <h1>출결 누락 알림</h1>
-          <p>어쩌구저쩌구</p>
-        </BasicSingleModal>
+        <BasicDoubleModal
+          leftButtonName="취소"
+          rightButtonName="확인"
+          handleClickLeftButton={handleModalClose}
+          handleClickRightButton={handleMoveToSchedule}>
+          <p>출석으로 체크하시겠어요?</p>
+        </BasicDoubleModal>
       )}
       <TeacherHomeWrapper>
         <Header />

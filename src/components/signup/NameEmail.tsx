@@ -7,8 +7,9 @@ export default function NameEmail() {
 
   return (
     <Container>
-      <NameEmailText> 가입을 위해 </NameEmailText>
-      <NameEmailText> 이름과 이메일이 필요해요 </NameEmailText>
+      <NameEmailText>
+        가입을 위해 <br /> 이름과 이메일이 필요해요
+      </NameEmailText>
       <InputWrapper>
         <InputLabel>이름</InputLabel>
         <Inputfield type="text" placeholder="이름을 입력하세요"></Inputfield>

@@ -34,7 +34,5 @@ export default function WelcomeNUpcomingBanner() {
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
   position: absolute;
 
-  /* z-index: ${({ $isCheckingModalOpen }) => ($isCheckingModalOpen ? 5 : 2)}; */
-
   margin: -4rem 0 0 -1.5em;
 `;

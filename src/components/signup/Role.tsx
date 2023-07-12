@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 import BottomButton from "../common/BottomButton";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { stepNum } from "../../atom/signup/signup";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
@@ -11,7 +11,8 @@ import BackButton from "../common/BackButton";
 export default function Role() {
   const [isActive, setIsActive] = useState(false);
   const ROLE_TEXT = "어떤 회원으로 가입할까요?";
-  const setStep = useSetRecoilState(stepNum);
+  // const setStep = useSetRecoilState(stepNum);
+  const [step, setStep] = useRecoilState(stepNum);
 
   function handleRadioClick() {
     setIsActive(true);
@@ -20,6 +21,7 @@ export default function Role() {
   function handleDoneClick() {
     console.log("isClicked");
     setStep(2);
+    console.log(step);
   }
 
   return (

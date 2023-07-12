@@ -62,6 +62,7 @@ const TosWrapper = styled.div`
   padding-top: 1.6rem;
   padding-left: 1.4rem;
   margin-top: 2rem;
+  margin-bottom: 7rem;
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
   background-color: ${({ theme }) => theme.colors.grey0};

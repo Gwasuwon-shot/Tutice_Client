@@ -17,7 +17,11 @@ export default function TeacherHome() {
 
   return (
     <>
-      {openModal && <ToastModal>dfjdkfjdkfjdk</ToastModal>}
+      {openModal && (
+        <ToastModal>
+          안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요{" "}
+        </ToastModal>
+      )}
       <TeacherHomeWrapper>
         <Header />
         {isClassExist ? (

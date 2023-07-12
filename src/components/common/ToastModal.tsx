@@ -11,21 +11,22 @@ export default function ToastModal(props: ToastModalProps) {
   const { modalRef, closeModal } = useModal();
 
   return (
-    <ModalBackground ref={modalRef}>
+    <ModalWrapper ref={modalRef}>
       <Modal>{children}</Modal>
-    </ModalBackground>
+    </ModalWrapper>
   );
 }
 
-const ModalBackground = styled.div`
+const ModalWrapper = styled.div`
   position: absolute;
   z-index: 2;
 
   width: 32rem;
   height: 100vh;
 
-  background-color: ${({ theme }) => theme.colors.grey900};
-  opacity: 0.6;
+  background-color: rgb(33 37 41 / 60%);
+
+  cursor: pointer;
 `;
 
 const Modal = styled.aside`
@@ -35,10 +36,9 @@ const Modal = styled.aside`
   bottom: 0;
 
   width: 32rem;
-  padding: 1.6rem 1.4rem 0;
+  padding: 1.6rem 1.4rem 4.5rem;
   border-radius: 20px 20px 0 0;
 
   background-color: ${({ theme }) => theme.colors.white};
-
-  cursor: pointer;
+  opacity: 1;
 `;

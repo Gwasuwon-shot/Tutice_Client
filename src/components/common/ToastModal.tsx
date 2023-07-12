@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import useModal from "../../hooks/useModal";
 
 interface ToastModalProps {
@@ -16,6 +16,15 @@ export default function ToastModal(props: ToastModalProps) {
     </ModalWrapper>
   );
 }
+
+const Slide = keyframes`
+ from {
+		transform: translate(0, 50rem);
+    }
+    to {
+        transform: translate(0, 0rem);
+    }
+`;
 
 const ModalWrapper = styled.div`
   position: absolute;
@@ -41,4 +50,6 @@ const Modal = styled.aside`
 
   background-color: ${({ theme }) => theme.colors.white};
   opacity: 1;
+
+  animation: ${Slide} 1s linear forwards;
 `;

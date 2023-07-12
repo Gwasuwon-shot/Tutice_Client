@@ -1,9 +1,10 @@
-import Role from "../components/signup/Role";
+import { useState } from "react";
+import StepRenderer from "../components/signup/StepRenderer";
 
 export default function Signup() {
   return (
     <div>
-      <Role />
+      <StepRenderer />
     </div>
   );
 }

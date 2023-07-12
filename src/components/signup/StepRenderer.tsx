@@ -7,7 +7,8 @@ import { stepNum } from "../../atom/signup/signup";
 import { useNavigate } from "react-router-dom";
 
 export default function StepRenderer() {
-  const step = useRecoilValue(stepNum);
+  // const step = useRecoilValue(stepNum);
+  const [step, setStep] = useState(3);
   const navigate = useNavigate();
   switch (step) {
     case 0:

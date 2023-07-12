@@ -18,6 +18,7 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
   }
 
   function handleMoveToSuccessCheckingAttendance() {
+    // 서버에 출결 정보 post 하는 로직 추가
     navigate("/");
   }
 

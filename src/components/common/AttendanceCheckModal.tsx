@@ -19,9 +19,9 @@ export default function AttendanceCheckModal() {
         <Main $isTitle={false}>3회차</Main>
         <Sub $isTitle={false}>수업 출결 체크를 진행해 주세요</Sub>
       </TextWrapper>
-      <AttendanceStatusButton status="출석" />
-      <AttendanceStatusButton status="취소" />
-      <AttendanceStatusButton status="결석" />
+      <AttendanceStatusButton status={ATTENDANCE_STATUS.attend} />
+      <AttendanceStatusButton status={ATTENDANCE_STATUS.cancel} />
+      <AttendanceStatusButton status={ATTENDANCE_STATUS.absent} />
     </ToastModal>
   );
 }

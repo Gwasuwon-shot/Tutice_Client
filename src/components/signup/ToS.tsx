@@ -36,6 +36,7 @@ export default function ToS() {
 }
 
 const TosWrapper = styled.div`
+  width: 29.2rem;
   padding-top: 1.6rem;
   padding-left: 1.4rem;
   margin-top: 2rem;
@@ -46,17 +47,21 @@ const TosWrapper = styled.div`
 `;
 const CheckWrapper = styled.div`
   display: flex;
+  align-items: center;
 
-  margin: 1rem;
+  margin-bottom: 1.6rem;
 `;
 
 const CheckBox = styled.input<{ $TosNoneSignupIc: string }>`
   width: 2rem;
   height: 2rem;
+
+  background-color: red;
   background-image: url(${($TosNoneSignupIc) => $TosNoneSignupIc});
 `;
 
 const CheckText = styled.p`
+  height: fit-content;
   margin-right: 1rem;
 
   color: ${({ theme }) => theme.colors.grey500};
@@ -70,6 +75,8 @@ const CheckSubText = styled.p`
 
 const Horizon = styled.div`
   width: 26.4rem;
+  margin-top: -0.4rem;
+  margin-bottom: 1.2rem;
   border-top: 1px solid ${({ theme }) => theme.colors.grey100};
 `;
 

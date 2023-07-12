@@ -1,14 +1,22 @@
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { isModalOpen } from "../../atom/common/isModalOpen";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import AttendanceStatusButton from "./AttendanceStatusButton";
 import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
 
 export default function AttendanceCheckModal() {
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+
+  function handleCancelAttendanceCheck() {
+    setOpenModal(false);
+  }
+
   return (
     <ToastModal>
       <ModalHeader>
-        <CancelButton>취소</CancelButton>
+        <CancelButton onClick={handleCancelAttendanceCheck}>취소</CancelButton>
         <AttendanceModalHeader>출결 체크</AttendanceModalHeader>
       </ModalHeader>
       <TextWrapper>

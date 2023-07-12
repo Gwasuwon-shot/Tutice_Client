@@ -49,7 +49,5 @@ const UpcomingClassDate = styled.h1`
 `;
 
 const UpcomingClassWrapper = styled.section`
-  overflow: scroll;
-
   width: 27.2rem;
 `;

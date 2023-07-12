@@ -19,10 +19,10 @@ export default function BasicDoubleModal(props: BasicDoubleModalProps) {
       <Modal>
         <ModalContents>{children}</ModalContents>
         <ButtonWrapper>
-          <Button type="button" onClick={handleClickLeftButton}>
+          <Button type="button" onClick={handleClickLeftButton} $isLeft={true}>
             {leftButtonName}
           </Button>
-          <Button type="button" onClick={handleClickRightButton}>
+          <Button type="button" onClick={handleClickRightButton} $isLeft={false}>
             {rightButtonName}
           </Button>
         </ButtonWrapper>
@@ -70,17 +70,21 @@ const Modal = styled.aside`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-const Button = styled.button`
-  width: 100%;
-  height: 4.6rem;
-  padding: 1.4rem 3.2rem 1.4rem 3.3rem;
+const Button = styled.button<{ $isLeft: boolean }>`
+  width: 50%;
+  height: 100%;
 
-  border-radius: 0 0 8px 8px;
-
-  background-color: ${({ theme }) => theme.colors.green5};
-  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme, $isLeft }) => ($isLeft ? theme.colors.green1 : theme.colors.green5)};
+  color: ${({ theme, $isLeft }) => ($isLeft ? theme.colors.green5 : theme.colors.white)};
 
   ${({ theme }) => theme.fonts.title02};
 `;
 
-const ButtonWrapper = styled.section``;
+const ButtonWrapper = styled.section`
+  overflow: hidden;
+
+  width: 100%;
+  height: 4.6rem;
+
+  border-radius: 0 0 8px 8px;
+`;

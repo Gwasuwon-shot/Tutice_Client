@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ParentCalendar from "./pages/ParentCalendar";
 import RegisterLesson from "./pages/RegisterLesson";
+import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 
@@ -20,6 +21,7 @@ export default function Router() {
         <Route path="/check-lesson" element={<CheckLesson />} />
         <Route path="/parent-calendar" element={<ParentCalendar />} />
         <Route path="/register-lesson" element={<RegisterLesson />} />
+        <Route path="/regular-lesson" element={<RegularLesson />} />
         <Route path="/schedule" element={<Schedule />} />
       </Routes>
     </BrowserRouter>

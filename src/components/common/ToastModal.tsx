@@ -1,6 +1,8 @@
 import { ReactNode, useState } from "react";
 import { useDrag } from "react-use-gesture";
+import { useRecoilState } from "recoil";
 import { keyframes, styled } from "styled-components";
+import { isModalOpen } from "../../atom/common/isModalOpen";
 import useModal from "../../hooks/useModal";
 
 interface ToastModalProps {
@@ -11,11 +13,16 @@ export default function ToastModal(props: ToastModalProps) {
   const { children } = props;
   const { modalRef, closeModal } = useModal();
   const [logoPos, setLogoPos] = useState({ y: 0 });
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   const bindLogoPos = useDrag((params) => {
+    console.log(typeof params.offset[1]);
     setLogoPos({
       y: params.offset[1],
     });
+    if (params.offset[1] > 270) {
+      setOpenModal(false);
+    }
   });
 
   return (

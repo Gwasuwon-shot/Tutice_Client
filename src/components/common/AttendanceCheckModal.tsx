@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { AbsentAttendanceModalIc, AttendaceAttendanceModalIc, CancelAttendanceModalIc } from "../../assets";
+import AttendanceStatusButton from "./AttendanceStatusButton";
 import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
 
@@ -19,9 +19,9 @@ export default function AttendanceCheckModal() {
         <Main $isTitle={false}>3회차</Main>
         <Sub $isTitle={false}>수업 출결 체크를 진행해 주세요</Sub>
       </TextWrapper>
-      <AbsentAttendanceModalIcon />
-      <AttendaceAttendanceModalIcon />
-      <CancelAttendanceModalIcon />
+      <AttendanceStatusButton status="출석" />
+      <AttendanceStatusButton status="취소" />
+      <AttendanceStatusButton status="결석" />
     </ToastModal>
   );
 }
@@ -62,16 +62,4 @@ const Main = styled.h1<{ $isTitle: boolean }>`
 const Sub = styled.p<{ $isTitle: boolean }>`
   margin-right: 0.5rem;
   ${({ theme, $isTitle }) => ($isTitle ? theme.fonts.title03 : theme.fonts.body02)}
-`;
-
-const AbsentAttendanceModalIcon = styled(AbsentAttendanceModalIc)`
-  width: 7.8rem;
-`;
-
-const AttendaceAttendanceModalIcon = styled(AttendaceAttendanceModalIc)`
-  width: 6.9rem;
-`;
-
-const CancelAttendanceModalIcon = styled(CancelAttendanceModalIc)`
-  width: 6.9rem;
 `;

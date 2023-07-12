@@ -5,11 +5,11 @@ import SignupTitleLayout from "./SignupTitleLayout";
 
 export default function NameEmail() {
   const [isactive, setIsactive] = useState(false);
-  const MAIN_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
+  const NAME_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
 
   return (
     <Container>
-      <SignupTitleLayout MainText={MAIN_TEXT} />
+      <SignupTitleLayout MainText={NAME_TEXT} />
       <InputWrapper>
         <InputLabel>이름</InputLabel>
         <Inputfield type="text" placeholder="이름을 입력하세요"></Inputfield>

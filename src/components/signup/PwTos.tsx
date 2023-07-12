@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
 import Tos from "./Tos";
+import BottomButton from "../common/BottomButton";
 
 export default function PwTos() {
   const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
@@ -30,6 +31,7 @@ export default function PwTos() {
           <Inputfield type="text" placeholder="비밀번호를 한 번 더 입력하세요" />
         </InputWrapper>
         <Tos />
+        <BottomButton children="회원가입 완료" />
       </Container>
     </>
   );

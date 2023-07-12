@@ -1,8 +1,11 @@
+export { ReactComponent as AbsentAttendanceModalIc } from "./icon/absentAttendanceModalIc.svg";
 export { ReactComponent as PrevMonthArrowButton } from "./icon/arrow_cal_left.svg";
 export { ReactComponent as NextMonthArrowButton } from "./icon/arrow_cal_right.svg";
 export { ReactComponent as AttenceCheckCommonIc } from "./icon/attenceCheckCommonIc.svg";
+export { ReactComponent as AttendaceAttendanceModalIc } from "./icon/attendaceAttendanceModalIc.svg";
 export { ReactComponent as CalendarActiveTeacherFooterIc } from "./icon/calendarActiveTeacherFooterIc.svg";
 export { ReactComponent as CalendarTeacherFooterIc } from "./icon/calendarTeacherFooterIc.svg";
+export { ReactComponent as CancelAttendanceModalIc } from "./icon/cancelAttendanceModalIc.svg";
 export { ReactComponent as ClassManagingActiveTeacherFooterIc } from "./icon/classManagingActiveTeacherFooterIc.svg";
 export { ReactComponent as ClassManagingTeacherFooterIc } from "./icon/classManagingTeacherFooterIc.svg";
 export { ReactComponent as HomeActiveTeacherFooterIc } from "./icon/homeActiveTeacherFooterIc.svg";

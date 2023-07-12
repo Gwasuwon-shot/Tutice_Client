@@ -14,13 +14,21 @@ export default function BasicSingleModal(props: BasicSingleModalProps) {
 
   return (
     <ModalWrapper ref={modalRef}>
-      <Modal>{children}</Modal>
-      <button onClick={handleClickSingleButton}>{buttonName}</button>
+      <Modal>
+        <ModalContents>{children}</ModalContents>
+        <Button type="button" onClick={handleClickSingleButton}>
+          {buttonName}
+        </Button>
+      </Modal>
     </ModalWrapper>
   );
 }
 
 const ModalWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: absolute;
   z-index: 2;
 
@@ -32,4 +40,38 @@ const ModalWrapper = styled.div`
   cursor: pointer;
 `;
 
-const Modal = styled.aside``;
+const ModalContents = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: 11.8rem;
+`;
+
+const Modal = styled.aside`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 26.4rem;
+  height: 16.4rem;
+  border-radius: 8px;
+
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const Button = styled.button`
+  width: 100%;
+  height: 4.6rem;
+  padding: 1.4rem 3.2rem 1.4rem 3.3rem;
+
+  border-radius: 0 0 8px 8px;
+
+  background-color: ${({ theme }) => theme.colors.green5};
+  color: ${({ theme }) => theme.colors.white};
+
+  ${({ theme }) => theme.fonts.title02};
+`;

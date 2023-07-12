@@ -1,11 +1,11 @@
 import { NO_CLASS_BANNER_TITLE } from "../../core/teacherHome/noClassBannerTitle";
-import { TeacherHomeTodayScheduleType } from "../../type/teacherHomeTodayScheduleType";
+import { PreviewBannerScheduleType } from "../../type/teacherHome/previewBannerScheduleType";
 import ClassPreviewBanner from "./banner/ClassPreviewBanner";
 import NoclassBanner from "./banner/NoclassBanner";
 
 interface BannerProps {
   isTodaySchedule: boolean;
-  todaySchedule: TeacherHomeTodayScheduleType;
+  todaySchedule: PreviewBannerScheduleType;
 }
 
 export default function Banner(props: BannerProps) {

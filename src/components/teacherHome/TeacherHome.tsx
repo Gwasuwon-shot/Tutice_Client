@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import BasicSingleModal from "../common/BasicSingleModal";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
 import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
@@ -15,18 +15,8 @@ export default function TeacherHome() {
 
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
-  function handleModalClose() {
-    setOpenModal(false);
-  }
-
   return (
     <>
-      {openModal && (
-        <BasicSingleModal buttonName="확인" handleClickSingleButton={handleModalClose}>
-          <h1>출결 누락 알림</h1>
-          <p>어쩌구저쩌구</p>
-        </BasicSingleModal>
-      )}
       <TeacherHomeWrapper>
         <Header />
         {isClassExist ? (

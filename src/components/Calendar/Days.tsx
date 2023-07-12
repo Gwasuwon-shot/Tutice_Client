@@ -109,6 +109,7 @@ const Day = styled.article<DayProp>`
   ${({ $issunday }) => `
     ${$issunday ? "color: #FCB3A6" : undefined}
   `};
+  width: auto;
   height: 6rem;
 `;
 
@@ -139,8 +140,6 @@ const DivideLine = styled.span`
 `;
 
 const ScheduleWrapper = styled.p`
-  display: flex;
-
   ${({ theme }) => theme.fonts.caption02};
   color: ${({ theme }) => theme.colors.grey600};
 `;

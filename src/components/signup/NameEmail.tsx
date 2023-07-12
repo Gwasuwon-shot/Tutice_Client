@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import BottomButton from "../common/BottomButton";
 import SignupTitleLayout from "./SignupTitleLayout";
@@ -8,22 +8,32 @@ import { useSetRecoilState } from "recoil";
 import { stepNum } from "../../atom/signup/signup";
 
 export default function NameEmail() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [isActive, setIsActive] = useState(false);
   const NAME_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
   const setStep = useSetRecoilState(stepNum);
-
-  const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
 
   function handleDoneClick() {
     setStep(3);
   }
 
+  function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    setName(e.target.value);
+    // console.log(e.target.value);
+  }
+
+  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    setEmail(e.target.value);
+    // console.log(e.target.value);
+  }
+
   useEffect(() => {
-    nameRef.current?.value && emailRef.current?.value ? setIsActive(true) : setIsActive(false);
-    console.log("Test");
-    console.log(nameRef.current?.value && emailRef.current?.value);
-  }, [emailRef.current?.value, nameRef.current?.value]);
+    name && email ? setIsActive(true) : setIsActive(false);
+    console.log("t/f", name && email);
+  }, [name, email]);
 
   return (
     <>
@@ -32,11 +42,14 @@ export default function NameEmail() {
         <SignupTitleLayout MainText={NAME_TEXT} />
         <InputWrapper>
           <TextLabelLayout labelText={"이름"} />
-          <Inputfield ref={nameRef} type="text" placeholder="이름을 입력하세요"></Inputfield>
+          <Inputfield onChange={(e) => handleNameChange(e)} type="text" placeholder="이름을 입력하세요"></Inputfield>
         </InputWrapper>
         <InputWrapper>
           <TextLabelLayout labelText={"이메일"} />
-          <Inputfield ref={emailRef} type="text" placeholder="사용하실 이메일을 입력하세요"></Inputfield>
+          <Inputfield
+            onChange={(e) => handleEmailChange(e)}
+            type="text"
+            placeholder="사용하실 이메일을 입력하세요"></Inputfield>
         </InputWrapper>
         <BottomButton children="완료" isActive={isActive} onClick={handleDoneClick} />
       </Container>

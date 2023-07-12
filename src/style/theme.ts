@@ -72,7 +72,7 @@ function FONT({ weight, size, lineHeight, letterSpacing }: Font): string {
     font-weight : ${weight};
     font-size : ${size}rem;
     line-height : ${lineHeight}rem;
-    letter-spacing : ${letterSpacing}rem;
+    letter-spacing : ${letterSpacing}%;
     `;
 }
 
@@ -90,7 +90,7 @@ const fonts = {
   body07: FONT({ weight: 400, size: 1.1, lineHeight: 1.4, letterSpacing: 0 }),
 
   caption01: FONT({ weight: 500, size: 1.0, lineHeight: 1.2, letterSpacing: 0 }),
-  caption02: FONT({ weight: 600, size: 0.9, lineHeight: 1.0, letterSpacing: -0.3 }),
+  caption02: FONT({ weight: 600, size: 0.9, lineHeight: 1.0, letterSpacing: -3 }),
 };
 
 export type FontsTypes = typeof fonts;

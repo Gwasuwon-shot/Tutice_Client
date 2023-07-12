@@ -12,4 +12,6 @@ export default function SignupTitleLayout(props: SignupTitleLayoutProps) {
 const Title = styled.header`
   color: ${({ theme }) => theme.colors.grey900};
   ${({ theme }) => theme.fonts.title01};
+
+  white-space: pre-line;
 `;

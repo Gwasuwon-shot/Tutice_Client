@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import BottomButton from "../common/BottomButton";
+import SignupTitleLayout from "./SignupTitleLayout";
 
 export default function NameEmail() {
   const [isactive, setIsactive] = useState(false);
+  const MAIN_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
 
   return (
     <Container>
-      <NameEmailText>
-        가입을 위해 <br /> 이름과 이메일이 필요해요
-      </NameEmailText>
+      <SignupTitleLayout MainText={MAIN_TEXT} />
       <InputWrapper>
         <InputLabel>이름</InputLabel>
         <Inputfield type="text" placeholder="이름을 입력하세요"></Inputfield>
@@ -29,11 +29,6 @@ const Container = styled.div`
 
   margin-top: 5rem;
   margin-left: 1.4rem;
-`;
-
-const NameEmailText = styled.header`
-  color: ${({ theme }) => theme.colors.grey900};
-  ${({ theme }) => theme.fonts.title01};
 `;
 
 const InputWrapper = styled.div`

@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
-import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
 import NoClassHome from "./NoClassHome";
-import WelcomeNUpPreviewBanner from "./WelcomeNUpPreviewBanner";
+import YesClassHome from "./YesClassHome";
 
 export default function TeacherHome() {
   // 수업이 존재는 하는지에 대한 데이터 패칭
-  const [isClassExist, setIsClassExist] = useState(false);
+  const [isClassExist, setIsClassExist] = useState(true);
 
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
@@ -19,14 +17,7 @@ export default function TeacherHome() {
     <>
       <TeacherHomeWrapper>
         <Header />
-        {isClassExist ? (
-          <>
-            <WelcomeNUpPreviewBanner />
-            <AlarmNUpcomingClass />
-          </>
-        ) : (
-          <NoClassHome />
-        )}
+        {isClassExist ? <YesClassHome /> : <NoClassHome />}
       </TeacherHomeWrapper>
       <TeacherFooter />
     </>

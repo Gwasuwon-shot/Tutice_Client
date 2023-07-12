@@ -18,3 +18,4 @@ export { ReactComponent as RightArrowTeacherHomeIc } from "./icon/rightArrowTeac
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as NoClassLogoParentsHomeIc } from "./icon/noClassLogoParentsHomeIc.svg";

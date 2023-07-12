@@ -1,11 +1,18 @@
 import React from "react";
 import { backButtonSignupIc } from "../../assets";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function BackButton() {
+  const navigate = useNavigate();
+
+  function handleMoveToBack() {
+    navigate(-1);
+  }
+
   return (
     <>
-      <BackButtonSignupIcon />
+      <BackButtonSignupIcon onClick={handleMoveToBack} />
     </>
   );
 }

@@ -2,24 +2,28 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import BottomButton from "../common/BottomButton";
 import SignupTitleLayout from "./SignupTitleLayout";
+import BackButton from "../common/BackButton";
 
 export default function NameEmail() {
   const [isactive, setIsactive] = useState(false);
   const NAME_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
 
   return (
-    <Container>
-      <SignupTitleLayout MainText={NAME_TEXT} />
-      <InputWrapper>
-        <InputLabel>이름</InputLabel>
-        <Inputfield type="text" placeholder="이름을 입력하세요"></Inputfield>
-      </InputWrapper>
-      <InputWrapper>
-        <InputLabel>이메일</InputLabel>
-        <Inputfield type="text" placeholder="사용하실 이메일을 입력하세요"></Inputfield>
-      </InputWrapper>
-      <BottomButton children="완료" />
-    </Container>
+    <>
+      <BackButton />
+      <Container>
+        <SignupTitleLayout MainText={NAME_TEXT} />
+        <InputWrapper>
+          <InputLabel>이름</InputLabel>
+          <Inputfield type="text" placeholder="이름을 입력하세요"></Inputfield>
+        </InputWrapper>
+        <InputWrapper>
+          <InputLabel>이메일</InputLabel>
+          <Inputfield type="text" placeholder="사용하실 이메일을 입력하세요"></Inputfield>
+        </InputWrapper>
+        <BottomButton children="완료" />
+      </Container>
+    </>
   );
 }
 

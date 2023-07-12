@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
@@ -18,6 +19,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   const { lesson } = todaySchedule;
   const { idx, studentName, subject, count } = lesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
   function handleCancelAttendanceCheck() {
     setOpenModal(false);
@@ -25,6 +27,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
 
   function handleCheckAttlendanceStatus(status: string) {
     setIsCheckingModalOpen(true);
+    setAttendanceData({ idx: todaySchedule?.schedule?.idx, status: status });
   }
 
   return (

@@ -59,12 +59,12 @@ export default function NameEmail() {
   );
 }
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
 
+  padding-left: 1.6rem;
   margin-top: 5rem;
-  margin-left: 1.4rem;
 `;
 
 const InputWrapper = styled.div`

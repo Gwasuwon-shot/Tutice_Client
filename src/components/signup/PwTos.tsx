@@ -1,12 +1,19 @@
 import BackButton from "../common/BackButton";
+import Tos from "./Tos";
 import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
-import Tos from "./Tos";
 import BottomButton from "../common/BottomButton";
+import { useState } from "react";
 
 export default function PwTos() {
+  const [isActive, setIsActive] = useState(false);
   const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
+
+  function handleToSignUp() {
+    console.log("회원가입이요");
+  }
+
   return (
     <>
       <BackButton />
@@ -31,14 +38,18 @@ export default function PwTos() {
           <Inputfield type="text" placeholder="비밀번호를 한 번 더 입력하세요" />
         </InputWrapper>
         <Tos />
-        <BottomButton children="회원가입 완료" />
+        <BottomButton isActive={isActive} children="회원가입 완료" onClick={handleToSignUp} />
       </Container>
     </>
   );
 }
 
-const Container = styled.div`
-  margin-left: 1.4rem;
+const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 1.6rem;
+  margin-top: 5rem;
 `;
 
 const TitleWrapper = styled.div`

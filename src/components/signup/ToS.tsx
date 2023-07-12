@@ -68,9 +68,9 @@ const TosWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.grey0};
   border-radius: 8px;
 `;
+
 const CheckWrapper = styled.div`
   display: flex;
-  align-items: bottom;
 
   margin-bottom: 1.6rem;
 `;
@@ -124,7 +124,8 @@ const Optional = styled.p`
 `;
 
 const HyperLink = styled.p`
-  margin-right: 1px;
+  margin-right: 0.1rem;
+  margin-bottom: 1rem;
 
   color: ${({ theme }) => theme.colors.grey500};
 

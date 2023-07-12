@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { YES_TODAY_CLASS_BEFORE_CLASS_BANNER } from "../../core/teacherHome/teacherHome";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
-import BasicDoubleModal from "../common/BasicDoubleModal";
+import AttendanceDoubleCheckingModal from "./AttendanceDoubleCheckingModal";
 import PreviewBanner from "./PreviewBanner";
 import WelcomeTeacher from "./WelcomeTeacher";
 
@@ -13,31 +12,18 @@ export default function WelcomeNUpcomingBanner() {
   const { teacherName, isTodaySchedule, todaySchedule } = YES_TODAY_CLASS_BEFORE_CLASS_BANNER.data;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
-  const navigate = useNavigate();
-
-  function handleBackToCheckAttendance() {
-    setIsCheckingModalOpen(false);
-  }
-
-  function handleMoveToSuccessCheckingAttendance() {
-    navigate("/");
-  }
 
   return (
     <>
       {openModal && isCheckingModalOpen && (
-        <BasicDoubleModal
-          leftButtonName="취소"
-          rightButtonName="확인"
-          handleClickLeftButton={handleBackToCheckAttendance}
-          handleClickRightButton={handleMoveToSuccessCheckingAttendance}>
-          <p>출석으로 체크하시겠어요?</p>
-        </BasicDoubleModal>
+        <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+          <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+        </ModalSection>
       )}
       {openModal && (
-        <ModalSectivon>
+        <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
           <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} todaySchedule={todaySchedule} />
-        </ModalSectivon>
+        </ModalSection>
       )}
       <WelcomeTeacher teacherName={teacherName} isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
       <PreviewBanner isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
@@ -45,10 +31,10 @@ export default function WelcomeNUpcomingBanner() {
   );
 }
 
-const ModalSection = styled.section`
+const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
   position: absolute;
 
-  /* z-index: 5; */
+  /* z-index: ${({ $isCheckingModalOpen }) => ($isCheckingModalOpen ? 5 : 2)}; */
 
   margin: -4rem 0 0 -1.5em;
 `;

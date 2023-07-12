@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { styled } from "styled-components";
 import BottomButton from "../common/BottomButton";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
 import TextLabelLayout from "./TextLabelLayout";
+import { useSetRecoilState } from "recoil";
+import { stepNum } from "../../atom/signup/signup";
 
 export default function NameEmail() {
-  const [isactive, setIsactive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const NAME_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
+  const setStep = useSetRecoilState(stepNum);
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  function handleDoneClick() {
+    setStep(3);
+  }
+
+  useEffect(() => {
+    nameRef.current?.value && emailRef.current?.value ? setIsActive(true) : setIsActive(false);
+    console.log("Test");
+    console.log(nameRef.current?.value && emailRef.current?.value);
+  }, [emailRef.current?.value, nameRef.current?.value]);
 
   return (
     <>
@@ -16,13 +32,13 @@ export default function NameEmail() {
         <SignupTitleLayout MainText={NAME_TEXT} />
         <InputWrapper>
           <TextLabelLayout labelText={"이름"} />
-          <Inputfield type="text" placeholder="이름을 입력하세요"></Inputfield>
+          <Inputfield ref={nameRef} type="text" placeholder="이름을 입력하세요"></Inputfield>
         </InputWrapper>
         <InputWrapper>
           <TextLabelLayout labelText={"이메일"} />
-          <Inputfield type="text" placeholder="사용하실 이메일을 입력하세요"></Inputfield>
+          <Inputfield ref={emailRef} type="text" placeholder="사용하실 이메일을 입력하세요"></Inputfield>
         </InputWrapper>
-        <BottomButton children="완료" />
+        <BottomButton children="완료" isActive={isActive} onClick={handleDoneClick} />
       </Container>
     </>
   );

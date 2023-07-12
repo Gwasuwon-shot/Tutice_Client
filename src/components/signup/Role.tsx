@@ -11,8 +11,8 @@ import BackButton from "../common/BackButton";
 export default function Role() {
   const [isActive, setIsActive] = useState(false);
   const ROLE_TEXT = "어떤 회원으로 가입할까요?";
-
   const setStep = useSetRecoilState(stepNum);
+
   function handleRadioClick() {
     setIsActive(true);
   }

@@ -1,9 +1,8 @@
-import React from "react";
 import BackButton from "../common/BackButton";
 import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
-import { TosNoneSignupIc } from "../../assets";
+import Tos from "./Tos";
 
 export default function PwTos() {
   const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
@@ -30,12 +29,7 @@ export default function PwTos() {
           <TextLabelLayout labelText="비밀번호 확인" />
           <Inputfield type="text" placeholder="비밀번호를 한 번 더 입력하세요" />
         </InputWrapper>
-
-        {/* Tos */}
-        <TosWrapper>
-          <CheckBox type="check" $TosNoneSignupIc={TosNoneSignupIc} />
-          <CheckText> 약관 전체 동의 </CheckText>
-        </TosWrapper>
+        <Tos />
       </Container>
     </>
   );
@@ -68,31 +62,4 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
-`;
-
-const TosWrapper = styled.div`
-  padding-top: 1.6rem;
-  padding-left: 1.4rem;
-  margin-top: 2rem;
-
-  border: 1px solid ${({ theme }) => theme.colors.grey70};
-  background-color: ${({ theme }) => theme.colors.grey0};
-  border-radius: 80px;
-`;
-
-const TosNoneSignupIcon = styled(TosNoneSignupIc)`
-  width: 2rem;
-  height: 2rem;
-`;
-const CheckWrapper = styled.div``;
-
-const CheckBox = styled.input<{ $TosNoneSignupIc: string }>`
-  width: 2rem;
-  height: 2rem;
-  background-image: url(${({ $TosNoneSignupIc }) => $TosNoneSignupIc});
-`;
-
-const CheckText = styled.p`
-  color: ${({ theme }) => theme.colors.grey500};
-  ${({ theme }) => theme.fonts.body04};
 `;

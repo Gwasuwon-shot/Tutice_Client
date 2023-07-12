@@ -40,7 +40,7 @@ export const PARENTS_CALENDAR = {
           {
             idx: 4,
             date: "2023-07-04",
-            startTime: "19:00",
+            startTime: "15:00",
             endTime: "21:00",
           },
           {

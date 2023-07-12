@@ -51,7 +51,7 @@ export default function Days(props: DaysProp) {
           </DayText>
           {myChildSchedule.map((event) => (
             <ScheduleWrapper key={event.idx}>
-              {event.startTime} {event.studentName}
+              {event.startTime} {event.studentName.slice(0, 2)}
             </ScheduleWrapper>
           ))}
         </Day>,
@@ -104,12 +104,11 @@ interface DayProp {
 
 const Day = styled.article<DayProp>`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 
   ${({ $issunday }) => `
     ${$issunday ? "color: #FCB3A6" : undefined}
   `};
-
   height: 6rem;
 `;
 
@@ -125,12 +124,10 @@ const DayText = styled.p<DayTextProps>`
 
   width: 1.6rem;
   height: 1.6rem;
-
   ${({ $isnotvalid, $istoday }) => `
     ${$istoday ? "color: white; background-color: #0DA98E; border-radius: 50%; " : ""}
     ${$isnotvalid ? "color: #899199" : "#CED4DA"}
   `};
-
   ${({ theme }) => theme.fonts.caption01};
 `;
 
@@ -141,12 +138,9 @@ const DivideLine = styled.span`
   margin-bottom: 0.6rem;
 `;
 
-const ScheduleWrapper = styled.p<ScheduleWrapper>`
+const ScheduleWrapper = styled.p`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 
-  padding: 0.2rem 0;
-  margin-top: 0.5rem;
+  ${({ theme }) => theme.fonts.caption02};
+  color: ${({ theme }) => theme.colors.grey600};
 `;

@@ -31,9 +31,7 @@ interface DayWrapperProps {
 const DayWrapper = styled.span<DayWrapperProps>`
   display: flex;
   justify-content: space-between;
-  align-items: center;
 
-  width: 28.3rem;
   height: auto;
 
   ${({ theme }) => theme.fonts.caption01};

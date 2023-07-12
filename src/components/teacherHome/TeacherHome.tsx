@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
-import ToastModal from "../common/ToastModal";
 import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
 import NoClassHome from "./NoClassHome";
 import WelcomeNUpPreviewBanner from "./WelcomeNUpPreviewBanner";
@@ -17,46 +17,6 @@ export default function TeacherHome() {
 
   return (
     <>
-      {openModal && (
-        <ToastModal>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-          <h1>안녕하세요</h1>
-        </ToastModal>
-      )}
       <TeacherHomeWrapper>
         <Header />
         {isClassExist ? (

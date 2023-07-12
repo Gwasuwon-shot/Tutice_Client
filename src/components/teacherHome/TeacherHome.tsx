@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
+import BasicSingleModal from "../common/BasicSingleModal";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
-import ToastModal from "../common/ToastModal";
 import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
 import NoClassHome from "./NoClassHome";
 import WelcomeNUpPreviewBanner from "./WelcomeNUpPreviewBanner";
@@ -15,12 +15,17 @@ export default function TeacherHome() {
 
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
+  function handleModalClose() {
+    setOpenModal(false);
+  }
+
   return (
     <>
       {openModal && (
-        <ToastModal>
-          안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요{" "}
-        </ToastModal>
+        <BasicSingleModal buttonName="확인" handleClickSingleButton={handleModalClose}>
+          <h1>출결 누락 알림</h1>
+          <p>어쩌구저쩌구</p>
+        </BasicSingleModal>
       )}
       <TeacherHomeWrapper>
         <Header />

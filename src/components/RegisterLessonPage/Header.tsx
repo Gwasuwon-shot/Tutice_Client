@@ -19,6 +19,7 @@ const HeaderWrapper = styled.header`
     flex-direction: column;
     
     height: 15.8rem;
+    margin-top: 2rem;
 `
 
 const InputHeader = styled.div`

@@ -33,4 +33,6 @@ const CalendarWrapper = styled.section`
   flex-direction: column;
 
   margin-top: 4rem;
+  margin-right: 0.4rem;
+  margin-left: 0.4rem;
 `;

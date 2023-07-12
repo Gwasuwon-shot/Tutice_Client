@@ -76,18 +76,18 @@ export default function Days(props: DaysProp) {
 
 const Wrapper = styled.section`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
 
-  width: auto;
+  width: 31.2rem;
+  margin-right: 0.4rem;
+  margin-left: 0.4rem;
 `;
 
 const WeekWrapper = styled.article`
   display: flex;
   flex-direction: column;
 
-  width: 28.3rem;
+  width: auto;
 `;
 
 const DayWrapper = styled.div`
@@ -95,7 +95,7 @@ const DayWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 28.3rem;
+  gap: 0.3rem;
 `;
 
 interface DayProp {
@@ -104,12 +104,13 @@ interface DayProp {
 
 const Day = styled.article<DayProp>`
   display: flex;
-  flex-direction: column;
-
+  align-items: center;
   ${({ $issunday }) => `
     ${$issunday ? "color: #FCB3A6" : undefined}
   `};
-  width: auto;
+  flex-direction: column;
+
+  width: 4.2rem;
   height: 6rem;
 `;
 
@@ -125,11 +126,12 @@ const DayText = styled.p<DayTextProps>`
 
   width: 1.6rem;
   height: 1.6rem;
+
   ${({ $isnotvalid, $istoday }) => `
     ${$istoday ? "color: white; background-color: #0DA98E; border-radius: 50%; " : ""}
     ${$isnotvalid ? "color: #899199" : "#CED4DA"}
   `};
-  ${({ theme }) => theme.fonts.caption01};
+  ${({ theme }) => theme.fonts.caption03};
 `;
 
 const DivideLine = styled.span`
@@ -142,4 +144,7 @@ const DivideLine = styled.span`
 const ScheduleWrapper = styled.p`
   ${({ theme }) => theme.fonts.caption02};
   color: ${({ theme }) => theme.colors.grey600};
+  background-color: yellow;
+
+  width: 4.2rem;
 `;

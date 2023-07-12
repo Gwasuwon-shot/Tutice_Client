@@ -34,7 +34,7 @@ const DayWrapper = styled.span<DayWrapperProps>`
 
   height: auto;
 
-  ${({ theme }) => theme.fonts.caption01};
+  ${({ theme }) => theme.fonts.caption03};
 
   ${({ $issunday }) => `
     ${$issunday ? "color: #FCB3A6" : undefined}

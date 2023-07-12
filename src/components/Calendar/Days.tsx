@@ -60,8 +60,6 @@ const Wrapper = styled.section`
 
 const WeekWrapper = styled.article`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-direction: column;
 
   width: 28.3rem;
@@ -82,7 +80,6 @@ interface DayProp {
 const Day = styled.article<DayProp>`
   display: flex;
   justify-content: space-between;
-  align-items: center;
 
   ${({ $issunday }) => `
     ${$issunday ? "color: #FCB3A6" : undefined}
@@ -105,8 +102,8 @@ const DayText = styled.p<DayTextProps>`
   height: 1.6rem;
 
   ${({ $isnotvalid, $istoday }) => `
-    ${$isnotvalid ? "color: #CED4DA" : ""}
     ${$istoday ? "color: white; background-color: #0DA98E; border-radius: 50%; " : ""}
+    ${$isnotvalid ? "color: #899199" : "#CED4DA"}
   `};
 
   ${({ theme }) => theme.fonts.caption01};

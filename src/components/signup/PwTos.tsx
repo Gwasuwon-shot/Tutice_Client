@@ -7,6 +7,7 @@ import BottomButton from "../common/BottomButton";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { newUserData } from "../../atom/signup/signup";
+import { PW_REGEX } from "../../core/signup/regex";
 
 export default function PwTos() {
   const [pw, setPw] = useState("");
@@ -16,8 +17,15 @@ export default function PwTos() {
   const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
 
   function handleToSignUp() {
-    setNewUser((prev) => ({ ...prev, password: pw }));
-    console.log("회원가입이요");
+    console.log("회원가입요~");
+  }
+
+  function checkPassword(pw: string) {
+    if (pw.match(PW_REGEX) === null) {
+      console.log("비밀번호 형식 틀림~");
+    } else {
+      console.log("비밀번호 형식 맞음~");
+    }
   }
 
   function handlePWChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -53,7 +61,8 @@ export default function PwTos() {
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호" />
           <Inputfield
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePWChange(e)}
+            // onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePWChange(e)}
+            onClick={(e) => checkPassword(e.target.value)}
             type="text"
             placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "
           />

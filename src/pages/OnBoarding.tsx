@@ -38,9 +38,9 @@ export default function OnBoarding() {
 }
 
 const OnBoardingWrapper = styled.main`
-  width: 100%;
-
   position: relative;
+
+  width: 100%;
 `;
 
 const SliderWrapper = styled.section`
@@ -83,10 +83,10 @@ const ButtonWrapper = styled.div`
 `;
 
 const GoToLoginMessage = styled.p`
-  margin-top: 2rem;
-
   display: flex;
   justify-content: center;
+
+  margin-top: 2rem;
 
   ${({ theme }) => theme.fonts.body02};
 

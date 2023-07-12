@@ -6,13 +6,13 @@ import SignupTitleLayout from "./SignupTitleLayout";
 import { TosNoneSignupIc } from "../../assets";
 
 export default function PwTos() {
-  const PWTPOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
+  const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
   return (
     <>
       <BackButton />
       <Container>
         <TitleWrapper>
-          <SignupTitleLayout MainText={PWTPOS_TITLE} />
+          <SignupTitleLayout MainText={PWTOS_TITLE} />
         </TitleWrapper>
         <InputWrapper>
           <TextLabelLayout labelText="이름" />
@@ -33,7 +33,8 @@ export default function PwTos() {
 
         {/* Tos */}
         <TosWrapper>
-          <TosNoneSignupIcon />
+          <CheckBox type="check" $TosNoneSignupIc={TosNoneSignupIc} />
+          <CheckText> 약관 전체 동의 </CheckText>
         </TosWrapper>
       </Container>
     </>
@@ -83,5 +84,15 @@ const TosNoneSignupIcon = styled(TosNoneSignupIc)`
   width: 2rem;
   height: 2rem;
 `;
-
 const CheckWrapper = styled.div``;
+
+const CheckBox = styled.input<{ $TosNoneSignupIc: string }>`
+  width: 2rem;
+  height: 2rem;
+  background-image: url(${({ $TosNoneSignupIc }) => $TosNoneSignupIc});
+`;
+
+const CheckText = styled.p`
+  color: ${({ theme }) => theme.colors.grey500};
+  ${({ theme }) => theme.fonts.body04};
+`;

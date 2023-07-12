@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
@@ -9,12 +10,13 @@ import WelcomeTeacher from "./WelcomeTeacher";
 export default function WelcomeNUpcomingBanner() {
   const { teacherName, isTodaySchedule, todaySchedule } = YES_TODAY_CLASS_BEFORE_CLASS_BANNER.data;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
 
   return (
     <>
       {openModal && (
         <ModalSection>
-          <AttendanceCheckModal />
+          <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} todaySchedule={todaySchedule} />
         </ModalSection>
       )}
       <WelcomeTeacher teacherName={teacherName} isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
@@ -25,7 +27,8 @@ export default function WelcomeNUpcomingBanner() {
 
 const ModalSection = styled.section`
   position: absolute;
-  z-index: 5;
+
+  /* z-index: 5; */
 
   margin: -4rem 0 0 -1.5em;
 `;

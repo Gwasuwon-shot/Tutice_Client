@@ -4,10 +4,11 @@ import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 
 interface AttendanceStatusButtonProp {
   status: string;
+  onClick: () => void;
 }
 
 export default function AttendanceStatusButton(props: AttendanceStatusButtonProp) {
-  const { status } = props;
+  const { status, onClick } = props;
 
   function showAttendanceStatusButton() {
     switch (status) {
@@ -21,7 +22,11 @@ export default function AttendanceStatusButton(props: AttendanceStatusButtonProp
         return;
     }
   }
-  return <ButtonWrapper $status={status}>{showAttendanceStatusButton()}</ButtonWrapper>;
+  return (
+    <ButtonWrapper $status={status} onClick={onClick}>
+      {showAttendanceStatusButton()}
+    </ButtonWrapper>
+  );
 }
 
 const ButtonWrapper = styled.button<{ $status: string }>`

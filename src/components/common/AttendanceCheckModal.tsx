@@ -2,15 +2,29 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { PreviewBannerScheduleType } from "../../type/teacherHome/previewBannerScheduleType";
 import AttendanceStatusButton from "./AttendanceStatusButton";
 import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
 
-export default function AttendanceCheckModal() {
+interface AttendanceCheckModalProp {
+  todaySchedule: PreviewBannerScheduleType;
+  setIsCheckingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
+  const { todaySchedule, setIsCheckingModalOpen } = props;
+  const { lesson } = todaySchedule;
+  const { idx, studentName, subject, count } = lesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   function handleCancelAttendanceCheck() {
     setOpenModal(false);
+  }
+
+  function handleCheckAttlendanceStatus(status: string) {
+    setIsCheckingModalOpen(true);
   }
 
   return (
@@ -20,18 +34,27 @@ export default function AttendanceCheckModal() {
         <AttendanceModalHeader>출결 체크</AttendanceModalHeader>
       </ModalHeader>
       <TextWrapper>
-        <Main $isTitle={true}>박송현</Main>
+        <Main $isTitle={true}>{studentName}</Main>
         <Sub $isTitle={true}>학생</Sub>
-        <SubjectLabel subject="수학" backgroundColor="red" color="blue" />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
       </TextWrapper>
       <TextWrapper>
-        <Main $isTitle={false}>3회차</Main>
+        <Main $isTitle={false}>{count}회차</Main>
         <Sub $isTitle={false}>수업 출결 체크를 진행해 주세요</Sub>
       </TextWrapper>
-      <AttendanceStatusButton status={ATTENDANCE_STATUS.attend} />
+      <AttendanceStatusButton
+        status={ATTENDANCE_STATUS.attend}
+        onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.attend)}
+      />
       <AttdenceStatusButtonWrapper>
-        <AttendanceStatusButton status={ATTENDANCE_STATUS.cancel} />
-        <AttendanceStatusButton status={ATTENDANCE_STATUS.absent} />
+        <AttendanceStatusButton
+          status={ATTENDANCE_STATUS.cancel}
+          onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.cancel)}
+        />
+        <AttendanceStatusButton
+          status={ATTENDANCE_STATUS.absent}
+          onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.absent)}
+        />
       </AttdenceStatusButtonWrapper>
     </ToastModal>
   );

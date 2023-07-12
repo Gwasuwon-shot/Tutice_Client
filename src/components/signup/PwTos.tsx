@@ -4,15 +4,36 @@ import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BottomButton from "../common/BottomButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { newUserData } from "../../atom/signup/signup";
 
 export default function PwTos() {
+  const [pw, setPw] = useState("");
+  const [confirmPw, setConfirmPw] = useState("");
   const [isActive, setIsActive] = useState(false);
+  const newUser = useRecoilValue(newUserData);
   const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
 
   function handleToSignUp() {
+    setNewUser((prev) => ({ ...prev, password: pw }));
     console.log("회원가입이요");
   }
+
+  function handlePWChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    setPw(e.target.value);
+  }
+
+  function handleConfirmChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    setConfirmPw(e.target.value);
+  }
+
+  useEffect(() => {
+    console.log(pw, confirmPw);
+    // pw === confirmPw ? setIsActive(true) : setIsActive(false);
+  }, [pw, confirmPw]);
 
   return (
     <>
@@ -23,19 +44,27 @@ export default function PwTos() {
         </TitleWrapper>
         <InputWrapper>
           <TextLabelLayout labelText="이름" />
-          <Inputfield disabled type="text" value="이은수" />
+          <Inputfield disabled type="text" value={newUser.name} />
         </InputWrapper>
         <InputWrapper>
           <TextLabelLayout labelText="이메일" />
-          <Inputfield disabled type="text" value="youna429@naver.com" />
+          <Inputfield disabled type="text" value={newUser.email} />
         </InputWrapper>
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호" />
-          <Inputfield type="text" placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 " />
+          <Inputfield
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePWChange(e)}
+            type="text"
+            placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "
+          />
         </InputWrapper>
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호 확인" />
-          <Inputfield type="text" placeholder="비밀번호를 한 번 더 입력하세요" />
+          <Inputfield
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
+            type="text"
+            placeholder="비밀번호를 한 번 더 입력하세요"
+          />
         </InputWrapper>
         <Tos />
         <BottomButton isActive={isActive} children="회원가입 완료" onClick={handleToSignUp} />

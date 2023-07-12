@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
@@ -9,22 +9,26 @@ import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
 
 export default function Role() {
+  const [role, setRole] = useState("");
   const [isActive, setIsActive] = useState(false);
   const ROLE_TEXT = "어떤 회원으로 가입할까요?";
   const setStep = useSetRecoilState(stepNum);
   const [newUser, setNewUser] = useRecoilState(newUserData);
 
-  function handleRadioClick() {
+  function handleRadioClick(e: React.ChangeEvent<HTMLInputElement>) {
     console.log();
     setIsActive(true);
+    setRole(e.target.value);
   }
 
   function handleDoneClick() {
-    console.log("isClicked");
-    // setNewUser((prev)=>({...prev, role:}))
+    setNewUser((prev) => ({ ...prev, role: role }));
     setStep(2);
   }
 
+  useEffect(() => {
+    console.log(newUser);
+  }, []);
   return (
     <>
       <BackButton />
@@ -37,7 +41,7 @@ export default function Role() {
               name="role"
               value="TEACHER"
               id="TEACHER"
-              onClick={handleRadioClick}
+              onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
             />
             <TextWrapper>

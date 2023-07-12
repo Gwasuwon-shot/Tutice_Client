@@ -4,19 +4,16 @@ import BottomButton from "../common/BottomButton";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
 import TextLabelLayout from "./TextLabelLayout";
-import { useSetRecoilState } from "recoil";
-import { stepNum } from "../../atom/signup/signup";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 
 export default function NameEmail() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [newUser, setNewUser] = useRecoilState(newUserData);
   const [isActive, setIsActive] = useState(false);
   const NAME_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
   const setStep = useSetRecoilState(stepNum);
-
-  function handleDoneClick() {
-    setStep(3);
-  }
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -28,8 +25,14 @@ export default function NameEmail() {
     setEmail(e.target.value);
   }
 
+  function handleDoneClick() {
+    setNewUser((prev) => ({ ...prev, name: name, email: email }));
+    setStep(3);
+  }
+
   useEffect(() => {
     name && email ? setIsActive(true) : setIsActive(false);
+    console.log(newUser);
   }, [name, email]);
 
   return (

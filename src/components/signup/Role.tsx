@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 import BottomButton from "../common/BottomButton";
-import { useSetRecoilState } from "recoil";
-import { stepNum } from "../../atom/signup/signup";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
 
@@ -12,13 +12,16 @@ export default function Role() {
   const [isActive, setIsActive] = useState(false);
   const ROLE_TEXT = "어떤 회원으로 가입할까요?";
   const setStep = useSetRecoilState(stepNum);
+  const [newUser, setNewUser] = useRecoilState(newUserData);
 
   function handleRadioClick() {
+    console.log();
     setIsActive(true);
   }
 
   function handleDoneClick() {
     console.log("isClicked");
+    // setNewUser((prev)=>({...prev, role:}))
     setStep(2);
   }
 
@@ -32,34 +35,34 @@ export default function Role() {
             <RadioButton
               type="radio"
               name="role"
-              value="teacher"
-              id="teacher"
+              value="TEACHER"
+              id="TEACHER"
               onClick={handleRadioClick}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
             />
             <TextWrapper>
               <RadioNameWrapper>
-                <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
-                <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+                <RadioBoldName htmlFor="TEACHER">선생님 </RadioBoldName>
+                <RadioPlainName htmlFor="TEACHER">으로 가입하기 </RadioPlainName>
               </RadioNameWrapper>
-              <RadioSubName htmlFor="teacher"> 과외 진행에 있어서 수업에만 더 집중하고 싶다면! </RadioSubName>
+              <RadioSubName htmlFor="TEACHER"> 과외 진행에 있어서 수업에만 더 집중하고 싶다면! </RadioSubName>
             </TextWrapper>
           </RoleRapper>
           <RoleRapper>
             <RadioButton
               type="radio"
               name="role"
-              value="parent"
-              id="parent"
+              value="PARENTS"
+              id="PARENTS"
               onClick={handleRadioClick}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
             />
             <TextWrapper>
               <RadioNameWrapper>
-                <RadioBoldName htmlFor="parent">학부모님 </RadioBoldName>
-                <RadioPlainName htmlFor="parent">으로 가입하기 </RadioPlainName>
+                <RadioBoldName htmlFor="PARENTS">학부모님 </RadioBoldName>
+                <RadioPlainName htmlFor="PARENTS">으로 가입하기 </RadioPlainName>
               </RadioNameWrapper>
-              <RadioSubName htmlFor="parent"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
+              <RadioSubName htmlFor="PARENTS"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
             </TextWrapper>
           </RoleRapper>
         </RadioWrapper>

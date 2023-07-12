@@ -26,6 +26,7 @@ const colors = {
   red10: "#D30B00",
 
   //회색
+  grey0: "#FFFFFF",
   white: "#FFFFFF",
   grey20: "#F8F9FA",
   grey50: "#F1F3F5",
@@ -38,7 +39,7 @@ const colors = {
   grey500: "#757A80",
   grey600: "#5B6166",
   grey700: "#45494D",
-  grey900: "#12529",
+  grey900: "#212529",
 
   //캘린더
   yellowGreen: "#D3F1C1",

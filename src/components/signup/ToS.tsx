@@ -1,8 +1,12 @@
 import React from "react";
 import { TosNoneSignupIc } from "../../assets";
 import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function ToS() {
+  function handleMoveToUseService() {
+    window.open("https://www.naver.com", "_blank");
+  }
   return (
     <TosWrapper>
       <CheckWrapper>
@@ -20,17 +24,27 @@ export default function ToS() {
       <CheckWrapper>
         <CheckBox type="checkbox" />
         <Essential>(필수) </Essential>
-        <CheckText> 서비스 이용 약관 동의 </CheckText>
+        <HyperLink onClick={handleMoveToUseService}>
+          <p>서비스 이용 약관</p>
+        </HyperLink>
+        <CheckText> 동의 </CheckText>
       </CheckWrapper>
       <CheckWrapper>
         <CheckBox type="checkbox" />
         <Essential>(필수) </Essential>
-        <CheckText> 개인정보 수집 및 이용 동의 </CheckText>
+        <HyperLink>
+          <p>개인정보 수집 및 이용</p>
+        </HyperLink>
+        <CheckText> 동의 </CheckText>
       </CheckWrapper>
       <CheckWrapper>
         <CheckBox type="checkbox" />
         <Optional>(선택) </Optional>
-        <CheckText> 개인 정보 마케팅 활용 동의 </CheckText>
+
+        <HyperLink>
+          <p>개인 정보 마케팅 활용</p>
+        </HyperLink>
+        <CheckText> 동의 </CheckText>
       </CheckWrapper>
     </TosWrapper>
   );
@@ -106,6 +120,11 @@ const Optional = styled.p`
   margin-right: 0.1rem;
 `;
 
-const HyperLink = styled.link`
+const HyperLink = styled.p`
+  margin-right: 1px;
+
   color: ${({ theme }) => theme.colors.grey500};
+
+  ${({ theme }) => theme.fonts.body05};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey500};
 `;

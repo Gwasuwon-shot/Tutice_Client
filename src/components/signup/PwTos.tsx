@@ -47,9 +47,10 @@ const TitleWrapper = styled.div`
 const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 
+  width: 29.2rem;
   margin-top: 3.2rem;
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 `;
 
 const Inputfield = styled.input`

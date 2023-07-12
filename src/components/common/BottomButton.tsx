@@ -9,7 +9,6 @@ interface BottomButtonProps {
 
 export default function BottomButton(props: BottomButtonProps) {
   const { children, isActive, onClick } = props;
-  console.log(isActive);
   return (
     <BottomContainer $isActive={isActive} onClick={onClick}>
       <BottomText> {children} </BottomText>

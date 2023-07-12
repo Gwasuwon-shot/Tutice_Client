@@ -6,6 +6,10 @@ export { ReactComponent as ClassManagingTeacherFooterIc } from "./icon/classMana
 export { ReactComponent as HomeActiveTeacherFooterIc } from "./icon/homeActiveTeacherFooterIc.svg";
 export { ReactComponent as HomeTeacherFooterIc } from "./icon/homeTeacherFooterIc.svg";
 export { ReactComponent as MainIc } from "./icon/mainIc.svg";
+export { ReactComponent as NextMonthArrowButton } from "./icon/arrow_cal_right.svg";
+export { ReactComponent as PrevMonthArrowButton } from "./icon/arrow_cal_left.svg";
+export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as RegisterLessonHeaderIc } from './icon/registerLessonHeaderIc.svg'
 export { ReactComponent as MissingAttendaceTeacherHomeIc } from "./icon/missingAttendaceTeacherHomeIc.svg";
 export { ReactComponent as MissingMaintenanceTeacherHomeIc } from "./icon/missingMaintenanceTeacherHomeIc.svg";
 export { ReactComponent as MyActiveTeacherFooterIc } from "./icon/myActiveTeacherFooterIc.svg";

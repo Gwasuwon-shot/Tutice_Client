@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import BottomButton from "../common/BottomButton";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
+import TextLabelLayout from "./TextLabelLayout";
 
 export default function NameEmail() {
   const [isactive, setIsactive] = useState(false);
@@ -14,11 +15,11 @@ export default function NameEmail() {
       <Container>
         <SignupTitleLayout MainText={NAME_TEXT} />
         <InputWrapper>
-          <InputLabel>이름</InputLabel>
+          <TextLabelLayout labelText={"이름"} />
           <Inputfield type="text" placeholder="이름을 입력하세요"></Inputfield>
         </InputWrapper>
         <InputWrapper>
-          <InputLabel>이메일</InputLabel>
+          <TextLabelLayout labelText={"이메일"} />
           <Inputfield type="text" placeholder="사용하실 이메일을 입력하세요"></Inputfield>
         </InputWrapper>
         <BottomButton children="완료" />
@@ -41,11 +42,6 @@ const InputWrapper = styled.div`
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 
   margin-top: 3.2rem;
-`;
-
-const InputLabel = styled.span`
-  color: ${({ theme }) => theme.colors.grey300};
-  ${({ theme }) => theme.fonts.body04};
 `;
 
 const Inputfield = styled.input`

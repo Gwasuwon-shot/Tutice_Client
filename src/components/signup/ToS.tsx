@@ -1,28 +1,35 @@
-import React from "react";
-import { TosNoneSignupIc } from "../../assets";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
+import { TosNoneSignupIc } from "../../assets";
+import { TosCheckedSignupIc } from "../../assets";
 
 export default function ToS() {
+  const [checked, setChecked] = useState(false);
   function handleMoveToUseService() {
     window.open("https://www.naver.com", "_blank");
   }
+
+  function isChecked() {
+    console.log("Checked");
+    setChecked(!checked);
+  }
+
   return (
     <TosWrapper>
       <CheckWrapper>
-        {/* <CheckBox type="checkbox" $TosNoneSignupIc={TosNoneSignupIc} /> */}
-        <CheckBox type="checkbox" />
+        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         <CheckText> 약관 전체 동의 </CheckText>
         <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
       </CheckWrapper>
       <Horizon />
       <CheckWrapper>
-        <CheckBox type="checkbox" />
+        <TosNoneSignupIcon />
         <Essential>(필수) </Essential>
         <CheckText> 만 14세 이상입니다 </CheckText>
       </CheckWrapper>
       <CheckWrapper>
-        <CheckBox type="checkbox" />
+        <TosNoneSignupIcon />
         <Essential>(필수) </Essential>
         <HyperLink onClick={handleMoveToUseService}>
           <p>서비스 이용 약관</p>
@@ -30,7 +37,7 @@ export default function ToS() {
         <CheckText> 동의 </CheckText>
       </CheckWrapper>
       <CheckWrapper>
-        <CheckBox type="checkbox" />
+        <TosNoneSignupIcon />
         <Essential>(필수) </Essential>
         <HyperLink>
           <p>개인정보 수집 및 이용</p>
@@ -38,7 +45,7 @@ export default function ToS() {
         <CheckText> 동의 </CheckText>
       </CheckWrapper>
       <CheckWrapper>
-        <CheckBox type="checkbox" />
+        <TosNoneSignupIcon />
         <Optional>(선택) </Optional>
 
         <HyperLink>
@@ -62,28 +69,21 @@ const TosWrapper = styled.div`
 `;
 const CheckWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: bottom;
 
   margin-bottom: 1.6rem;
 `;
 
-// const CheckBox = styled.input<{ $TosNoneSignupIc: string }>`
-//   width: 2rem;
-//   height: 2rem;
-
-//   background-color: red;
-//   background-image: url(${($TosNoneSignupIc) => $TosNoneSignupIc});
-// `;
-const CheckBox = styled.input`
+const TosNoneSignupIcon = styled(TosNoneSignupIc)`
   width: 2rem;
   height: 2rem;
+  margin-right: 1rem;
+`;
 
-  background-color: red;
-  background-image: url("$TosNoneSignupIc}");
-
-  &:checked {
-    background-color: blue;
-  }
+const TosCheckSignupIcon = styled(TosCheckedSignupIc)`
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
 `;
 
 const CheckText = styled.p`
@@ -107,17 +107,19 @@ const Horizon = styled.div`
 `;
 
 const Essential = styled.p`
+  margin-right: 0.1rem;
+
   color: ${({ theme }) => theme.colors.green5};
 
   ${({ theme }) => theme.fonts.body04};
-  margin-right: 0.1rem;
 `;
 
 const Optional = styled.p`
+  margin-right: 0.1rem;
+
   color: ${({ theme }) => theme.colors.grey300};
 
   ${({ theme }) => theme.fonts.body04};
-  margin-right: 0.1rem;
 `;
 
 const HyperLink = styled.p`
@@ -126,5 +128,6 @@ const HyperLink = styled.p`
   color: ${({ theme }) => theme.colors.grey500};
 
   ${({ theme }) => theme.fonts.body05};
+
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey500};
 `;

@@ -27,3 +27,4 @@ export { ReactComponent as RegularLessonStudentIc } from "./icon/regularLessonSt
 export { ReactComponent as RegularLessonNotebookIc } from "./icon/regularLessonNotebookIc.svg";
 export { ReactComponent as RegularLessonPencilIc } from "./icon/regularLessonPencilIc.svg";
 export { ReactComponent as RegularLessonClockIc } from "./icon/regularLessonClockIc.svg";
+export { ReactComponent as RegularLessonCalenderIc } from "./icon/regularLessonCalenderIc.svg";

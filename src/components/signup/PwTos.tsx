@@ -18,29 +18,35 @@ export default function PwTos() {
   const [isPassword, setIsPassword] = useState(false);
   const [doubleCheck, setDoubleCheck] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [pwFocus, setPwFocus] = useState(false);
+  const [confirmFocus, setConfirmFocus] = useState(false);
   const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
 
   function handleToSignUp() {
     console.log("회원가입요~");
   }
 
-  function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
+  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
     setPw(e.target.value);
-    if (pw.match(PW_REGEX) === null) {
-      setIsPassword(false);
-    } else {
-      setIsPassword(true);
-    }
   }
 
-  function handlePWMatched(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleConfirmChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setConfirmPw(e.target.value);
-    console.log(pw === confirmPw);
-    pw === confirmPw ? setDoubleCheck(true) : setDoubleCheck(false);
   }
 
-  useEffect(() => {}, [pw, confirmPw, idPassWord, doubleCheck]);
+  useEffect(() => {
+    console.log(pw, confirmPw);
+    // 비밀번호 정규식 체크
+    pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
+
+    // 비밀번호 일치 체크
+    pw === confirmPw ? setDoubleCheck(true) : setDoubleCheck(false);
+
+    // 비밀번호 중복 및 정규식 확인 : 버튼 활성화
+    pw && confirmPw && isPassword && doubleCheck ? setIsActive(true) : setIsActive(false);
+  }, [pw, confirmPw, isPassword, doubleCheck]);
 
   return (
     <>
@@ -61,24 +67,30 @@ export default function PwTos() {
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호" />
           <Inputfield
-            onClick={(e: React.ChangeEvent<HTMLInputElement>) => checkPassword(e)}
+            onFocus={() => setPwFocus(true)}
+            onBlur={() => setPwFocus(false)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
             type="text"
             placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "
           />
         </InputWrapper>
-        {isPassword ? null : <RegexField unMatchText="8~16자의 영문, 숫자, 특수문자를 모두 포함해주세요." />}
+        {!isPassword && pwFocus ? (
+          <RegexField unMatchText="8~16자의 영문, 숫자, 특수문자를 모두 포함해주세요." />
+        ) : null}
 
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호 확인" />
           <Inputfield
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePWMatched(e)}
+            onFocus={() => setConfirmFocus(true)}
+            onBlur={() => setConfirmFocus(false)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
             type="text"
             placeholder="비밀번호를 한 번 더 입력하세요"
           />
         </InputWrapper>
-        {doubleCheck ? null : <RegexField unMatchText="비밀번호가 일치하지 않아요." />}
+        {!doubleCheck && confirmFocus ? <RegexField unMatchText="비밀번호가 일치하지 않아요." /> : null}
         <Tos />
-        <BottomButton isActive={isActive} children="회원가입 완료" onClick={handleToSignUp} />
+        <BottomButton disabled={!isActive} isActive={isActive} children="회원가입 완료" onClick={handleToSignUp} />
       </Container>
     </>
   );

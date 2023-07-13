@@ -64,7 +64,7 @@ export default function PwTos() {
           <TextLabelLayout labelText="이메일" />
           <Inputfield disabled type="text" value={newUser.email} />
         </InputWrapper>
-        <InputWrapper>
+        <InputPwWrapper $isPassword={isPassword} $pwFocus={setPwFocus}>
           <TextLabelLayout labelText="비밀번호" />
           <Inputfield
             onFocus={() => setPwFocus(true)}
@@ -73,12 +73,12 @@ export default function PwTos() {
             type="text"
             placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "
           />
-        </InputWrapper>
+        </InputPwWrapper>
         {!isPassword && pwFocus ? (
           <RegexField unMatchText="8~16자의 영문, 숫자, 특수문자를 모두 포함해주세요." />
         ) : null}
 
-        <InputWrapper>
+        <InputConfirmWrapper $confirmFocus={confirmFocus} $doubleCheck={doubleCheck}>
           <TextLabelLayout labelText="비밀번호 확인" />
           <Inputfield
             onFocus={() => setConfirmFocus(true)}
@@ -87,7 +87,7 @@ export default function PwTos() {
             type="text"
             placeholder="비밀번호를 한 번 더 입력하세요"
           />
-        </InputWrapper>
+        </InputConfirmWrapper>
         {!doubleCheck && confirmFocus ? <RegexField unMatchText="비밀번호가 일치하지 않아요." /> : null}
         <Tos />
         <BottomButton disabled={!isActive} isActive={isActive} children="회원가입 완료" onClick={handleToSignUp} />
@@ -116,6 +116,27 @@ const InputWrapper = styled.div`
   width: 29.2rem;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
+`;
+
+const InputPwWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 29.2rem;
+  margin-top: 3.2rem;
+  border-bottom: 0.1rem solid
+    ${({ theme, $pwFocus, $isPassword }) => ($pwFocus || $isPassword ? theme.colors.green5 : theme.colors.grey70)};
+`;
+
+const InputConfirmWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 29.2rem;
+  margin-top: 3.2rem;
+  border-bottom: 0.1rem solid
+    ${({ theme, $confirmFocus, $doubleCheck }) =>
+      $confirmFocus || $doubleCheck ? theme.colors.green5 : theme.colors.grey70};
 `;
 
 const Inputfield = styled.input`

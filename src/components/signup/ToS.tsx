@@ -123,7 +123,7 @@ const Optional = styled.p`
   ${({ theme }) => theme.fonts.body04};
 `;
 
-const HyperLink = styled.p`
+const HyperLink = styled.div`
   margin-right: 0.1rem;
   margin-bottom: 1rem;
 

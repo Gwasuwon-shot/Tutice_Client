@@ -12,6 +12,7 @@ import RegexField from "./RegexField";
 
 export default function PwTos() {
   const [pwRegex, setPwRegex] = useState(false);
+  const [doubleCheck, setDoubleCheck] = useState(false);
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -22,28 +23,37 @@ export default function PwTos() {
     console.log("회원가입요~");
   }
 
-  function checkPassword(pw: string) {
+  function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
+    setPw(e.target.value);
     if (pw.match(PW_REGEX) === null) {
       setPwRegex(false);
-      console.log("비밀번호 형식 틀림~");
     } else {
       setPwRegex(true);
-      console.log("비밀번호 형식 맞음~");
     }
   }
 
-  function handlePWChange(e: React.ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setPw(e.target.value);
-  }
+  // function handlePWChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   e.preventDefault();
+  //   setPw(e.target.value);
+  // }
 
-  function handleConfirmChange(e: React.ChangeEvent<HTMLInputElement>) {
+  // function handleConfirmChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   e.preventDefault();
+  //   setConfirmPw(e.target.value);
+  // }
+
+  function handlePWMatched(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setConfirmPw(e.target.value);
+    console.log(pw === confirmPw);
+    pw === confirmPw ? setDoubleCheck(true) : setDoubleCheck(false);
   }
 
   useEffect(() => {
-    console.log(pw, confirmPw);
+    console.log(newUser);
+
+    console.log("pw", pw);
+    console.log("confirmPw", confirmPw);
     // pw === confirmPw ? setIsActive(true) : setIsActive(false);
   }, [pw, confirmPw]);
 
@@ -66,7 +76,7 @@ export default function PwTos() {
           <TextLabelLayout labelText="비밀번호" />
           <Inputfield
             // onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePWChange(e)}
-            onClick={(e: React.ChangeEvent<HTMLInputElement>) => checkPassword(e.target.value)}
+            onClick={(e: React.ChangeEvent<HTMLInputElement>) => checkPassword(e)}
             type="text"
             placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "
           />
@@ -76,11 +86,12 @@ export default function PwTos() {
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호 확인" />
           <Inputfield
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePWMatched(e)}
             type="text"
             placeholder="비밀번호를 한 번 더 입력하세요"
           />
         </InputWrapper>
+        {doubleCheck ? null : <RegexField unMatchText="비밀번호가 일치하지 않아요." />}
         <Tos />
         <BottomButton isActive={isActive} children="회원가입 완료" onClick={handleToSignUp} />
       </Container>

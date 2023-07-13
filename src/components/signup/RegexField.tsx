@@ -13,7 +13,7 @@ const RegexText = styled.p`
   margin-top: 0.5rem;
 
   /* 임시 컬러 ㅠㅠ */
-  color: #ec583e;
+  color: ${({ theme }) => theme.colors.semantic_red};
 
   ${({ theme }) => theme.fonts.body06};
 `;

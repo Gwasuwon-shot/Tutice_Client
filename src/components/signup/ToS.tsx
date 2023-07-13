@@ -7,8 +7,18 @@ import ProgressBar from "../common/ProgressBar";
 
 export default function ToS() {
   const [checked, setChecked] = useState(false);
-  function handleMoveToUseService() {
-    window.open("https://www.naver.com", "_blank");
+  function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
+    switch (e.target.innerText) {
+      case "서비스 이용 약관":
+        window.open("https://www.naver.com", "_blank");
+        break;
+      case "개인정보 수집 및 이용":
+        window.open("https://www.naver.com", "_blank");
+        break;
+      case "개인 정보 마케팅 활용":
+        window.open("https://www.naver.com", "_blank");
+        break;
+    }
   }
 
   function isChecked() {
@@ -32,7 +42,7 @@ export default function ToS() {
       <CheckWrapper>
         <TosNoneSignupIcon />
         <Essential>(필수) </Essential>
-        <HyperLink onClick={handleMoveToUseService}>
+        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>서비스 이용 약관</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
@@ -40,7 +50,7 @@ export default function ToS() {
       <CheckWrapper>
         <TosNoneSignupIcon />
         <Essential>(필수) </Essential>
-        <HyperLink>
+        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인정보 수집 및 이용</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
@@ -49,7 +59,7 @@ export default function ToS() {
         <TosNoneSignupIcon />
         <Optional>(선택) </Optional>
 
-        <HyperLink>
+        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인 정보 마케팅 활용</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>

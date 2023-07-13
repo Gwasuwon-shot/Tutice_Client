@@ -16,6 +16,13 @@ export default function LessonDate() {
                 <Day key={index}>{day}</Day>
                 ))}
             </DayWrapper>
+            <TimeWrapper>
+                <TimeChoose> 시작 </TimeChoose>
+                <TimeButton> 시간을 선택하세요 </TimeButton>
+                <TimeChoose> 종료 </TimeChoose>
+                <TimeButton> 시간을 선택하세요 </TimeButton>
+            </TimeWrapper>
+
         </LessonDateWrapper>
     );
 }
@@ -65,4 +72,30 @@ const Day = styled.button`
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey300};  
     background-color: ${({ theme }) => theme.colors.grey50}; 
+`
+
+const TimeWrapper = styled.section`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.6rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+`
+
+const TimeChoose = styled.h3`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.8rem;
+    ${({ theme }) => theme.fonts.body04};
+    color: ${({ theme }) => theme.colors.grey400};  
+`
+
+const TimeButton = styled.button`
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    ${({ theme }) => theme.fonts.body04};
+    color: ${({ theme }) => theme.colors.grey100};  
 `

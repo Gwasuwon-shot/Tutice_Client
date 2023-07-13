@@ -20,7 +20,7 @@ export default function LessonInformation() {
                     <TurnButton type = "submit"> 회차를 선택하세요 </TurnButton>
                 </Turn>
                 <StartDate>
-                    <StartDateName> 수업시작일 </StartDateName>
+                    <StartDateName> 첫 수업일 </StartDateName>
                     <StartDateButton type = "submit"> 2023년 7월 3일 </StartDateButton>
                     <RegularLessonPencilIcon />
                 </StartDate>

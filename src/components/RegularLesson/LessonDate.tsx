@@ -1,21 +1,28 @@
 import React from 'react';
 import {RegularLessonClockIc} from '../../assets';
+import RoundBottomButton from '../common/RoundBottomButton';
 import styled from 'styled-components';
 
 export default function LessonDate() {
+
     const days = ['월', '화', '수', '목', '금', '토', '일'];
+    const messages = "수업일시 추가";
+
     return (
         <LessonDateWrapper>
+
             <IconWrapper>
                 <RegularLessonClockIcon />
                 <SectionName> 수업일시 </SectionName>
                 <Explain> 수업종료 5분 뒤에 출결알람을 드릴게요. </Explain>
             </IconWrapper>
+
             <DayWrapper>
                 {days.map((day, index) => (
                 <Day key={index}>{day}</Day>
                 ))}
             </DayWrapper>
+
             <TimeWrapper>
                 <TimeChoose> 시작 </TimeChoose>
                 <TimeButton> 시간을 선택하세요 </TimeButton>
@@ -23,6 +30,13 @@ export default function LessonDate() {
                 <TimeButton> 시간을 선택하세요 </TimeButton>
             </TimeWrapper>
 
+            <ButtonWrapper>
+                <RoundBottomButton buttonMessage = {messages} />
+            </ButtonWrapper>
+
+            <ModalWrapper>
+            </ModalWrapper>
+                    
         </LessonDateWrapper>
     );
 }
@@ -98,4 +112,18 @@ const TimeButton = styled.button`
     align-items: center;
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey100};  
+`
+
+const ButtonWrapper = styled.section`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin : 1.6rem 0.8rem 0 0.8rem;
+    margin-top: 1.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.grey50};
+`
+
+const ModalWrapper = styled.section`
+    display: flex;
 `

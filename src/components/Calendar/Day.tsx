@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import { isSameDay, isToday, format, isSunday } from "date-fns";
-import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { CalendarMoreLessonsIc } from "../../assets/index";
 import React from "react";
-import { myChildLessonsType } from "../../type/parentCalendar";
+import { calendarLessonsType } from "../../type/calendarLessonsType";
 
 interface DayProps {
   date: Date;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
-  myChildLessons: MyChildLessonsType;
+  myChildLessons: calendarLessonsType;
 }
 
 export default function Day(props: DayProps) {
@@ -19,8 +18,6 @@ export default function Day(props: DayProps) {
   const formattedDate = format(date, "d");
   const isSundayDate = isSunday(date);
   const isTodayDate: boolean = isToday(date);
-  // const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
-  // const myChildLessons = myChildLessonList.find((item) => isSameDay(new Date(item.date), date));
   const myChildLength: number | undefined = myChildLessons?.dailyScheduleList.length;
 
   function handleOpenModal() {

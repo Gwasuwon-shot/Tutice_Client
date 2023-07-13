@@ -63,21 +63,24 @@ export default function Days(props: DaysProp) {
         {openModal && selectedDate && (
           <ModalWrapper>
             <ToastModal>
-              <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
-              {myChildLessonList
-                .find((item) => isSameDay(new Date(item.date), selectedDate))
-                ?.dailyScheduleList.map((lesson) => (
-                  <ScheduleWrapper key={lesson.schedule.idx}>
-                    <StudentColorBox backgroundColor={STUDENT_COLOR[lesson.schedule.idx % 11]} />
-                    <ModalTime>
-                      {lesson.schedule.startTime} - {lesson.schedule.endTime}
-                    </ModalTime>
-                    <ModalName>{lesson.schedule.studentName}</ModalName>
-                    <ModalSubject $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]}>
-                      {lesson.schedule.subject}
-                    </ModalSubject>
-                  </ScheduleWrapper>
-                ))}
+              <ModalContentWrapper>
+                <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+
+                {myChildLessonList
+                  .find((item) => isSameDay(new Date(item.date), selectedDate))
+                  ?.dailyScheduleList.map((lesson) => (
+                    <ScheduleWrapper key={lesson.schedule.idx}>
+                      <StudentColorBox backgroundColor={STUDENT_COLOR[lesson.schedule.idx % 11]} />
+                      <ModalTime>
+                        {lesson.schedule.startTime} - {lesson.schedule.endTime}
+                      </ModalTime>
+                      <ModalName>{lesson.schedule.studentName}</ModalName>
+                      <ModalSubject $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]}>
+                        {lesson.schedule.subject}
+                      </ModalSubject>
+                    </ScheduleWrapper>
+                  ))}
+              </ModalContentWrapper>
             </ToastModal>
           </ModalWrapper>
         )}
@@ -122,6 +125,14 @@ const ModalWrapper = styled.section`
 
   margin-top: -55rem;
   margin-left: -0.3rem;
+`;
+
+const ModalContentWrapper = styled.article`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+
+  width: 29.2rem;
 `;
 
 const ModalDate = styled.p`

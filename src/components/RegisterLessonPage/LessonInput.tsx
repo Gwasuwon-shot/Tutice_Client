@@ -1,13 +1,28 @@
 import styled from 'styled-components';
 import { useEffect, useState } from "react";
 import React, { ChangeEvent, FocusEvent } from 'react';
+
+interface NameInputSectionProp {
+    nameFocused : boolean;
+};
+
+interface SubjectInputSectionProp {
+    subjectFocused : boolean;
+};
+
 export default function LessonInput() {
 
     const [isNameInputFocused, setNameInputFocused] = useState(false);
+    const [isSubjectInputFocused, setSubjectInputFocused] = useState(false);
+
     const [studentName, setStudentName] = useState('');
   
     const handleNameInputFocus = () => {
         setNameInputFocused(true);
+    };
+
+    const handleSubjectInputFocus = () => {
+        setSubjectInputFocused(true);
     };
 
     const handleNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +33,7 @@ export default function LessonInput() {
         
     <InputWrapper>
 
-        <InputSection focused={isNameInputFocused}>
+        <NameInputSection nameFocused={isNameInputFocused}>
             <InputName> 학생이름 </InputName> 
             <StudentInput 
                 type = 'text' 
@@ -27,12 +42,15 @@ export default function LessonInput() {
                 onChange={handleNameInputChange}
                 onFocus={handleNameInputFocus}
             />
-        </InputSection>
+        </NameInputSection>
 
-        <InputSection>
+        <SubjectInputSection subjectFocused={isSubjectInputFocused}>
             <InputName> 과목 </InputName>
-            <SubjectInput type = 'text' placeholder = '수업과목을 입력하세요' />
-        </InputSection>
+            <SubjectInput type = 'text' 
+                placeholder = '수업과목을 입력하세요' 
+                onFocus = {handleSubjectInputFocus}
+            />
+        </SubjectInputSection>
 
     </InputWrapper>
     );
@@ -49,7 +67,7 @@ const InputWrapper = styled.div`
     margin-top: 3.3rem;
 `
 
-const InputSection = styled.section`
+const NameInputSection = styled.section<NameInputSectionProp>`
     display: flex;
     flex-direction: column;
     
@@ -57,7 +75,18 @@ const InputSection = styled.section`
     height: 5.6rem;
     
     border-bottom: 1px solid
-    ${({ theme, focused }) => (focused ? theme.colors.green5 : theme.colors.grey70)};
+    ${({ theme, nameFocused }) => (nameFocused ? theme.colors.green5 : theme.colors.grey70)};
+`
+
+const SubjectInputSection = styled.section<SubjectInputSectionProp>`
+    display: flex;
+    flex-direction: column;
+    
+    width: 29.2rem;
+    height: 5.6rem;
+    
+    border-bottom: 1px solid
+    ${({ theme, subjectFocused }) => (subjectFocused ? theme.colors.green5 : theme.colors.grey70)};
 `
 
 const InputName = styled.h1` 

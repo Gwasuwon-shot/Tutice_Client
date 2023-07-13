@@ -1,3 +1,10 @@
+import { useState } from "react";
+import StepRenderer from "../components/signup/StepRenderer";
+
 export default function Signup() {
-  return <div>Signup</div>;
+  return (
+    <div>
+      <StepRenderer />
+    </div>
+  );
 }

@@ -10,11 +10,13 @@ import RegisterLesson from "./pages/RegisterLesson";
 import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
+import OnBoarding from "./pages/OnBoarding";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/onBoarding" element={<OnBoarding />} />
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />

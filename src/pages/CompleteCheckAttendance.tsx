@@ -25,24 +25,27 @@ export default function CompleteCheckAttendance() {
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
   return (
-    <>
-      {isLastCount ? (
-        <Lottie loop={false} animationData={checkCircle} style={{ width: "50%", height: "50%" }} />
-      ) : (
-        <Lottie loop={false} animationData={check} style={{ width: "50%", height: "50%" }} />
-      )}
-      <p>
+    <CompleteCheckAttendanceWrapper>
+      <LottieImage>
+        {isLastCount ? (
+          <Lottie loop={false} animationData={checkCircle} style={{ width: "50%", height: "50%" }} />
+        ) : (
+          <Lottie loop={false} animationData={check} style={{ width: "50%", height: "50%" }} />
+        )}
+      </LottieImage>
+      <ClassDate>
         {attendanceDate} ({dayOfWeek}) {count}회차 수업
-      </p>
+      </ClassDate>
       <TextWrapper>
         <Main>{studentName}</Main>
         <Sub>학생</Sub>
         <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
       </TextWrapper>
-      <article>
-        수업이 <p>{attendanceData?.status}</p> 처리 되었습니다.
-      </article>
-    </>
+      <StatusMentionWrapper>
+        <StatusMention>수업이</StatusMention> <Status>{attendanceData?.status}</Status>{" "}
+        <StatusMention>처리 되었습니다.</StatusMention>
+      </StatusMentionWrapper>
+    </CompleteCheckAttendanceWrapper>
   );
 }
 
@@ -63,4 +66,38 @@ const Main = styled.h1`
 const Sub = styled.p`
   margin-right: 0.5rem;
   ${({ theme }) => theme.fonts.title03}
+`;
+
+const ClassDate = styled.p`
+  color: ${({ theme }) => theme.colors.grey600};
+  ${({ theme }) => theme.fonts.body07};
+`;
+
+const Status = styled.p`
+  margin: 0 0.5rem;
+
+  color: ${({ theme }) => theme.colors.green5};
+  ${({ theme }) => theme.fonts.title02};
+`;
+
+const StatusMention = styled.p`
+  color: ${({ theme }) => theme.colors.grey900};
+  ${({ theme }) => theme.fonts.title03};
+`;
+
+const StatusMentionWrapper = styled.article`
+  display: flex;
+`;
+
+const CompleteCheckAttendanceWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const LottieImage = styled.section`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 8.19rem;
 `;

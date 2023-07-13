@@ -26,3 +26,4 @@ export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
 export { ReactComponent as RegularLessonStudentIc } from "./icon/regularLessonStudentIc.svg";
 export { ReactComponent as RegularLessonNotebookIc } from "./icon/regularLessonNotebookIc.svg";
 export { ReactComponent as RegularLessonPencilIc } from "./icon/regularLessonPencilIc.svg";
+export { ReactComponent as RegularLessonClockIc } from "./icon/regularLessonClockIc.svg";

@@ -18,6 +18,22 @@ export { ReactComponent as HomeTeacherFooterIc } from "./icon/homeTeacherFooterI
 export { ReactComponent as MainIc } from "./icon/mainIc.svg";
 export { ReactComponent as ManagingLessonClassIc } from "./icon/managingLessonClassIc.svg";
 export { ReactComponent as ManagingLessonMoneyIc } from "./icon/managingLessonMoneyIc.svg";
+export { ReactComponent as MainLogo } from "./icon/MainLogoOnBoardingIc.svg";
+export { ReactComponent as TuticeTitleLogo } from "./icon/TuticeTitleLogoOnBoardingIc.svg";
+export { ReactComponent as MainLogoGradation } from "./icon/MainLogoGradationOnBoardingIc.svg";
+export { ReactComponent as ThirdSwiperFirstTree } from "./icon/ThirdSwiperFirstTreeOnBoardingIc.svg";
+export { ReactComponent as ThirdSwiperSecondTree } from "./icon/ThirdSwiperSecondTreeOnBoardingIc.svg";
+export { ReactComponent as ThirdSwiperThirdTree } from "./icon/ThirdSwiperThirdTreeOnBoardingIc.svg";
+export { ReactComponent as FourthSwiperFirstTree } from "./icon/FourthSwiperFirstTreeOnBoardingIc.svg";
+export { ReactComponent as FourthSwiperSecondTree } from "./icon/FourthSwiperSecondTreeOnBoardingIc.svg";
+export { ReactComponent as FourthSwiperThirdTree } from "./icon/FourthSwiperThirdTreeOnBoardingIc.svg";
+export { ReactComponent as ThirdSwiperGradation } from "./icon/ThirdSwiperGradationOnBoardingIc.svg";
+export { ReactComponent as RegisterLessonHeaderIc } from "./icon/registerLessonHeaderIc.svg";
+export { ReactComponent as backButtonSignupIc } from "./icon//backButtonSignupIc.svg";
+export { ReactComponent as RoleCheckSignupIc } from "./icon//RoleCheckSignupIc.svg";
+export { ReactComponent as RoleNoneCheckSignupIc } from "./icon//RoleNoneCheckSignupIc.svg";
+export { ReactComponent as TosCheckedSignupIc } from "./icon/TosCheckedSignupIc.svg";
+export { ReactComponent as TosNoneSignupIc } from "./icon/TosNoneSignupIc.svg";
 export { ReactComponent as MissingAttendaceTeacherHomeIc } from "./icon/missingAttendaceTeacherHomeIc.svg";
 export { ReactComponent as MissingMaintenanceTeacherHomeIc } from "./icon/missingMaintenanceTeacherHomeIc.svg";
 export { ReactComponent as MyActiveTeacherFooterIc } from "./icon/myActiveTeacherFooterIc.svg";
@@ -34,3 +50,4 @@ export { ReactComponent as RegularLessonPencilIc } from "./icon/regularLessonPen
 export { ReactComponent as RegularLessonClockIc } from "./icon/regularLessonClockIc.svg";
 export { ReactComponent as RegularLessonCalenderIc } from "./icon/regularLessonCalenderIc.svg";
 export { ReactComponent as CalendarMoreLessonsIc } from "./icon/calendarMoreLessonIc.svg";
+

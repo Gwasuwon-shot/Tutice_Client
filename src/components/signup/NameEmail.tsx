@@ -9,8 +9,10 @@ import { newUserData, stepNum } from "../../atom/signup/signup";
 import RegexField from "./RegexField";
 import { EMAIL_REGEX } from "../../core/signup/regex";
 import ProgressBar from "../common/ProgressBar";
-import { SIGNUP_TITLE } from "../../core/signup/signupTitle";
-import { BUTTON_TEXT } from "./buttonText";
+import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
+import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -63,33 +65,28 @@ export default function NameEmail() {
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
-          <TextLabelLayout labelText={"이름"} />
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
           <Inputfield
             onFocus={() => setNameFocus(true)}
             onBlur={() => setNameFocus(false)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleNameChange(e)}
             type="text"
-            placeholder="이름을 입력하세요"
+            placeholder={PLACEHOLDER_TEXT.nameHolder}
           />
         </InputNameWrapper>
-        {!isName && nameFocus ? (
-          <RegexField
-            unMatchText="
-        이름은 최소 2자 이상 입력해주세요."
-          />
-        ) : null}
+        {!isName && nameFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.nameError} /> : null}
         <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
-          <TextLabelLayout labelText={"이메일"} />
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
           <Inputfield
             onFocus={() => setEmailFocus(true)}
             onBlur={() => setEmailFocus(false)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
             type="text"
-            placeholder="사용하실 이메일을 입력하세요"
+            placeholder={PLACEHOLDER_TEXT.emailHolder}
           />
         </InputEmailWrapper>
 
-        {!isEmail && emailFocus ? <RegexField unMatchText="올바른 이메일 형식으로 입력해 주세요." /> : null}
+        {!isEmail && emailFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.emailError} /> : null}
         <BottomButton children={BUTTON_TEXT.done} isActive={isActive} onClick={handleDoneClick} disabled={!isActive} />
       </Container>
     </>

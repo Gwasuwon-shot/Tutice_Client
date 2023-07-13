@@ -9,7 +9,7 @@ import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
 import ProgressBar from "../common/ProgressBar";
 import { ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
-import { BUTTON_TEXT } from "./buttonText";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
 
 export default function Role() {
   const [role, setRole] = useState("");

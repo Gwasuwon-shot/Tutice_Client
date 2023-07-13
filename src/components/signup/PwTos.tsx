@@ -11,7 +11,7 @@ import { PW_REGEX } from "../../core/signup/regex";
 import RegexField from "./RegexField";
 import ProgressBar from "../common/ProgressBar";
 import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
-import { BUTTON_TEXT } from "./buttonText";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 

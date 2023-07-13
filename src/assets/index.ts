@@ -26,4 +26,9 @@ export { ReactComponent as RightArrowTeacherHomeIc } from "./icon/rightArrowTeac
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as RegularLessonStudentIc } from "./icon/regularLessonStudentIc.svg";
+export { ReactComponent as RegularLessonNotebookIc } from "./icon/regularLessonNotebookIc.svg";
+export { ReactComponent as RegularLessonPencilIc } from "./icon/regularLessonPencilIc.svg";
+export { ReactComponent as RegularLessonClockIc } from "./icon/regularLessonClockIc.svg";
+export { ReactComponent as RegularLessonCalenderIc } from "./icon/regularLessonCalenderIc.svg";
 export { ReactComponent as CalendarMoreLessonsIc } from "./icon/calendarMoreLessonIc.svg";

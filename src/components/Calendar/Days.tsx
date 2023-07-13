@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import { format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSunday } from "date-fns";
+import { format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
+import { ko } from "date-fns/locale";
 import ToastModal from "../common/ToastModal";
 import Day from "./Day";
+import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 
 interface DaysProp {
   currentMonth: Date;
@@ -18,6 +20,7 @@ export default function Days(props: DaysProp) {
   const endDate: Date = endOfWeek(monthEnd);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
@@ -25,17 +28,28 @@ export default function Days(props: DaysProp) {
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
+      const myChildLessons = myChildLessonList.find((item) => isSameDay(new Date(item.date), day));
       days.push(
-        <Day setOpenModal={setOpenModal} setSelectedDate={setSelectedDate} date={day} key={day.toString()}></Day>,
+        <Day
+          setOpenModal={setOpenModal}
+          setSelectedDate={setSelectedDate}
+          date={day}
+          key={day.toString()}
+          myChildLessons={myChildLessons}
+        />,
       );
       day = addDays(day, 1);
+
+      if (days.length === 7) {
+        rows.push(
+          <WeekWrapper key={day.toString()}>
+            <DivideLine />
+            <DayWrapper>{days}</DayWrapper>
+          </WeekWrapper>,
+        );
+      }
     }
-    rows.push(
-      <WeekWrapper key={day.toString()}>
-        <DivideLine />
-        <DayWrapper>{days}</DayWrapper>
-      </WeekWrapper>,
-    );
+
     days = [];
   }
 
@@ -45,7 +59,11 @@ export default function Days(props: DaysProp) {
         {rows}
         {openModal && selectedDate && (
           <ModalWrapper>
-            <ToastModal>{format(selectedDate, "yyyy-MM-dd")}</ToastModal>
+            <ToastModal>
+              <ModalContentWrapper>
+                <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+              </ModalContentWrapper>
+            </ToastModal>
           </ModalWrapper>
         )}
       </Wrapper>
@@ -77,26 +95,6 @@ const DayWrapper = styled.div`
   gap: 0.3rem;
 `;
 
-interface DayTextProps {
-  $isnotvalid: boolean;
-  $istoday: boolean;
-}
-
-const DayText = styled.p<DayTextProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 1.6rem;
-  height: 1.6rem;
-
-  ${({ $isnotvalid, $istoday }) => `
-    ${$istoday ? "color: white; background-color: #0DA98E; border-radius: 50%; " : ""}
-    ${$isnotvalid ? "color: #899199" : "#CED4DA"}
-  `};
-  ${({ theme }) => theme.fonts.caption03};
-`;
-
 const DivideLine = styled.span`
   border-top: 1px solid ${({ theme }) => theme.colors.grey50};
 
@@ -104,21 +102,20 @@ const DivideLine = styled.span`
   margin-bottom: 0.6rem;
 `;
 
-const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
-  display: flex;
-  align-items: center;
-
-  height: 1.4rem;
-
-  ${({ theme }) => theme.fonts.caption02};
-  color: ${({ theme }) => theme.colors.grey600};
-  background-color: ${(props) => props.$backgroundcolor};
-  border-radius: 2px;
-`;
-
 const ModalWrapper = styled.article`
   display: flex;
 
   margin-top: -55rem;
   margin-left: -0.3rem;
+`;
+
+const ModalContentWrapper = styled.div`
+  display: flex;
+
+  width: 29.3rem;
+`;
+
+const ModalDate = styled.p`
+  ${({ theme }) => theme.fonts.body02};
+  color: ${({ theme }) => theme.colors.grey700};
 `;

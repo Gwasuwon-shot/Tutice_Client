@@ -34,6 +34,16 @@ export const PARENTS_CALENDAR = {
               studentName: "조판다",
               subject: "국어",
               startTime: "21:00",
+              endTime: "22:00",
+            },
+          },
+          {
+            lessonIdx: 4,
+            schedule: {
+              idx: 4,
+              studentName: "권혠찡",
+              subject: "피아노",
+              startTime: "22:30",
               endTime: "23:00",
             },
           },

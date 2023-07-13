@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../atom/common/isModalOpen";
@@ -16,6 +16,7 @@ import {
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import ToastModal from "../common/ToastModal";
+import Day from "./Day";
 
 interface DaysProp {
   currentMonth: Date;
@@ -27,38 +28,17 @@ export default function Days(props: DaysProp) {
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
   const endDate: Date = endOfWeek(monthEnd);
-  const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
   let day: Date = startDate;
-  let formattedDate = "";
-  function handleOpenModal() {
-    setOpenModal(true);
-  }
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formattedDate = format(day, "d");
-      const sunDay = isSunday(day);
-      const isTodayDate = isToday(day);
-
-      const myChildLessons = myChildLessonList.find((item) => isSameDay(new Date(item.date), day));
-
       days.push(
-        <Day onClick={handleOpenModal} key={day.toString()} $issunday={sunDay}>
-          <DayText $istoday={isTodayDate} $isnotvalid={format(currentMonth, "M") !== format(day, "M")}>
-            {formattedDate}
-          </DayText>
-
-          {myChildLessons &&
-            myChildLessons.dailyScheduleList.map((lesson) => (
-              <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
-                {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
-              </ScheduleWrapper>
-            ))}
-        </Day>,
+        <Day setOpenModal={setOpenModal} setSelectedDate={setSelectedDate} date={day} key={day.toString()}></Day>,
       );
       day = addDays(day, 1);
     }
@@ -75,11 +55,9 @@ export default function Days(props: DaysProp) {
     <>
       <Wrapper>
         {rows}
-        {openModal && (
+        {openModal && selectedDate && (
           <ModalWrapper>
-            <ToastModal>
-              하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비
-            </ToastModal>
+            <ToastModal>{format(selectedDate, "yyyy-MM-dd")}</ToastModal>
           </ModalWrapper>
         )}
       </Wrapper>
@@ -114,22 +92,6 @@ const DayWrapper = styled.div`
 interface DayProp {
   $issunday: boolean;
 }
-
-const Day = styled.article<DayProp>`
-  display: flex;
-  align-items: center;
-  ${({ $issunday }) => `
-    ${$issunday ? "color: #FCB3A6" : undefined}
-  `};
-  flex-direction: column;
-  cursor: pointer;
-
-  width: 4.5rem;
-  height: 6rem;
-  gap: 0.2rem;
-
-  padding-bottom: 0.3rem;
-`;
 
 interface DayTextProps {
   $isnotvalid: boolean;

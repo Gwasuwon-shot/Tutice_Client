@@ -36,7 +36,7 @@ export default function CompleteCheckAttendance() {
     navigate("/");
   }
 
-  function handleSendAlarm() {
+  function handleOpenSendAlarmModal() {
     // 서버에 포스트 보내기 attendanceData?.idx
     // 포스트 성공하면 navigate("/");
   }
@@ -67,7 +67,7 @@ export default function CompleteCheckAttendance() {
           <RoundBottomMiniButton isGreen={false} onClick={handleMoveToHome}>
             확인
           </RoundBottomMiniButton>
-          <RoundBottomMiniButton isGreen={true} onClick={handleSendAlarm}>
+          <RoundBottomMiniButton isGreen={true} onClick={handleOpenSendAlarmModal}>
             학부모 알림 전송
           </RoundBottomMiniButton>
         </ButtonWrapper>

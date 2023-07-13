@@ -25,6 +25,14 @@ export default function LessonInput() {
         setSubjectInputFocused(true);
     };
 
+    const handleNameInputBlur = () => {
+        setNameInputFocused(false);
+    };
+    
+    const handleSubjectInputBlur = () => {
+        setSubjectInputFocused(false);
+    };
+
     const handleNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setStudentName(event.target.value);
     };
@@ -41,6 +49,7 @@ export default function LessonInput() {
                 value={studentName}
                 onChange={handleNameInputChange}
                 onFocus={handleNameInputFocus}
+                onBlur={handleNameInputBlur} 
             />
         </NameInputSection>
 
@@ -49,6 +58,7 @@ export default function LessonInput() {
             <SubjectInput type = 'text' 
                 placeholder = '수업과목을 입력하세요' 
                 onFocus = {handleSubjectInputFocus}
+                onBlur={handleSubjectInputBlur}
             />
         </SubjectInputSection>
 

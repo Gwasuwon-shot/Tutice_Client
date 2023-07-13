@@ -1,6 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { isToday, format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSunday } from "date-fns";
+import {
+  parse,
+  isSameDay,
+  isToday,
+  format,
+  endOfMonth,
+  endOfWeek,
+  startOfMonth,
+  startOfWeek,
+  addDays,
+  isSunday,
+} from "date-fns";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 
 interface DaysProp {
@@ -19,7 +30,7 @@ export default function Days(props: DaysProp) {
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
   const endDate: Date = endOfWeek(monthEnd);
-  const myChildLessonList = PARENTS_CALENDAR.data.lessonList;
+  const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
@@ -32,28 +43,20 @@ export default function Days(props: DaysProp) {
       const sunDay = isSunday(day);
       const isTodayDate = isToday(day);
 
-      const myChildSchedule = myChildLessonList.reduce((acc: Schedule[], lesson) => {
-        const lessonSchedule = lesson.scheduleList.find((schedule) => schedule.date === format(day, "yyyy-MM-dd"));
-        if (lessonSchedule) {
-          acc.push({
-            idx: lesson.lesson.idx,
-            studentName: lesson.lesson.studentName,
-            startTime: lessonSchedule.startTime,
-          });
-        }
-        return acc;
-      }, []);
+      const myChildLessons = myChildLessonList.find((item) => isSameDay(new Date(item.date), day));
 
       days.push(
         <Day key={day.toString()} $issunday={sunDay}>
           <DayText $istoday={isTodayDate} $isnotvalid={format(currentMonth, "M") !== format(day, "M")}>
             {formattedDate}
           </DayText>
-          {myChildSchedule.map((event) => (
-            <ScheduleWrapper key={event.idx}>
-              {event.startTime} {event.studentName.slice(0, 2)}
-            </ScheduleWrapper>
-          ))}
+
+          {myChildLessons &&
+            myChildLessons.dailyScheduleList.map((lesson) => (
+              <ScheduleWrapper key={lesson.schedule.idx}>
+                {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
+              </ScheduleWrapper>
+            ))}
         </Day>,
       );
       day = addDays(day, 1);
@@ -144,7 +147,6 @@ const DivideLine = styled.span`
 const ScheduleWrapper = styled.p`
   ${({ theme }) => theme.fonts.caption02};
   color: ${({ theme }) => theme.colors.grey600};
-  background-color: yellow;
 
   width: 4.2rem;
 `;

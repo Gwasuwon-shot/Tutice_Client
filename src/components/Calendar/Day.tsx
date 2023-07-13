@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { isSameDay, isToday, format, isSunday } from "date-fns";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import ToastModal from "../common/ToastModal";
 
 export default function Day(props) {
   const { date, setOpenModal, setSelectedDate } = props;
@@ -11,7 +10,8 @@ export default function Day(props) {
   const isSundayDate = isSunday(date);
   const isTodayDate = isToday(date);
   const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
-  const myChildLessons = myChildLessonList.find((item) => isSameDay(new Date(item.date), date));
+  const myChildLessons: Date | undefined = myChildLessonList.find((item) => isSameDay(new Date(item.date), date));
+  const myChildLength: number | undefined = myChildLessons?.dailyScheduleList.length;
 
   function handleOpenModal() {
     setSelectedDate(date);
@@ -24,12 +24,17 @@ export default function Day(props) {
           {formattedDate}
         </DayText>
 
-        {myChildLessons &&
-          myChildLessons.dailyScheduleList.map((lesson) => (
-            <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
-              {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
-            </ScheduleWrapper>
-          ))}
+        {myChildLessons && myChildLength >= 4
+          ? myChildLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => (
+              <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
+                {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
+              </ScheduleWrapper>
+            ))
+          : myChildLessons?.dailyScheduleList.map((lesson) => (
+              <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
+                {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
+              </ScheduleWrapper>
+            ))}
       </Dayitem>
     </>
   );

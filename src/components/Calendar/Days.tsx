@@ -77,10 +77,6 @@ const DayWrapper = styled.div`
   gap: 0.3rem;
 `;
 
-interface DayProp {
-  $issunday: boolean;
-}
-
 interface DayTextProps {
   $isnotvalid: boolean;
   $istoday: boolean;

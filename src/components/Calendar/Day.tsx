@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { isSameDay, isToday, format, isSunday } from "date-fns";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { CalendarMoreLessonsIc } from "../../assets/index";
 
 export default function Day(props) {
   const { date, setOpenModal, setSelectedDate } = props;
@@ -23,18 +24,20 @@ export default function Day(props) {
         <DayText $istoday={isTodayDate} $isnotvalid={format(date, "M") !== format(date, "M")}>
           {formattedDate}
         </DayText>
-
-        {myChildLessons && myChildLength >= 4
-          ? myChildLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => (
-              <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
-                {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
-              </ScheduleWrapper>
-            ))
-          : myChildLessons?.dailyScheduleList.map((lesson) => (
-              <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
-                {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
-              </ScheduleWrapper>
-            ))}
+        <LessonWrapper>
+          {myChildLessons && myChildLength >= 4
+            ? myChildLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => (
+                <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
+                  {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
+                </ScheduleWrapper>
+              ))
+            : myChildLessons?.dailyScheduleList.map((lesson) => (
+                <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
+                  {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
+                </ScheduleWrapper>
+              ))}
+          {myChildLessons && myChildLength >= 4 && <MoreLessonIcon />}
+        </LessonWrapper>
       </Dayitem>
     </>
   );
@@ -80,6 +83,14 @@ const DayText = styled.p<DayTextProps>`
   ${({ theme }) => theme.fonts.caption03};
 `;
 
+const LessonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.2rem;
+`;
+
 const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   display: flex;
   align-items: center;
@@ -90,4 +101,10 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   color: ${({ theme }) => theme.colors.grey600};
   background-color: ${(props) => props.$backgroundcolor};
   border-radius: 2px;
+`;
+
+const MoreLessonIcon = styled(CalendarMoreLessonsIc)`
+  width: 2rem;
+  height: 0.2rem;
+  padding-right: 1rem;
 `;

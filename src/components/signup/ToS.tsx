@@ -50,7 +50,9 @@ export default function ToS() {
   return (
     <TosWrapper>
       <CheckWrapper>
-        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        <ICWrapper>
+          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        </ICWrapper>
         <CheckText> 약관 전체 동의 </CheckText>
         <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
       </CheckWrapper>
@@ -58,15 +60,17 @@ export default function ToS() {
       <Horizon />
 
       <CheckWrapper>
-        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        <ICWrapper>
+          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        </ICWrapper>
         <Essential>(필수) </Essential>
         <CheckText> 만 14세 이상입니다 </CheckText>
       </CheckWrapper>
 
       <CheckWrapper>
-        <CheckedICWrapper>
+        <ICWrapper>
           {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
-        </CheckedICWrapper>
+        </ICWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>서비스 이용 약관</p>
@@ -75,7 +79,9 @@ export default function ToS() {
       </CheckWrapper>
 
       <CheckWrapper>
-        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        <ICWrapper>
+          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        </ICWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인정보 수집 및 이용</p>
@@ -84,7 +90,9 @@ export default function ToS() {
       </CheckWrapper>
 
       <CheckWrapper>
-        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        <ICWrapper>
+          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        </ICWrapper>
         <Optional>(선택) </Optional>
 
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
@@ -114,7 +122,7 @@ const CheckWrapper = styled.div`
   margin-bottom: 1.6rem;
 `;
 
-const CheckedICWrapper = styled.div`
+const ICWrapper = styled.div`
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
@@ -151,7 +159,7 @@ const Horizon = styled.div`
 `;
 
 const Essential = styled.p`
-  margin-right: 0.1rem;
+  margin-right: 0.2rem;
 
   color: ${({ theme }) => theme.colors.green5};
 
@@ -159,7 +167,7 @@ const Essential = styled.p`
 `;
 
 const Optional = styled.p`
-  margin-right: 0.1rem;
+  margin-right: 0.2rem;
 
   color: ${({ theme }) => theme.colors.grey300};
 

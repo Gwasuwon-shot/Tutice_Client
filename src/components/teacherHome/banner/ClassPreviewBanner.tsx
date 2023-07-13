@@ -12,7 +12,8 @@ interface ClassPreviewBannerProps {
 export default function ClassPreviewBanner(props: ClassPreviewBannerProps) {
   const { todaySchedule } = props;
   const { lesson, timeStatus, schedule } = todaySchedule;
-  const { studentName, subject, count } = lesson;
+  const { studentName, subject } = lesson;
+  const { count } = schedule;
 
   function showClassPreviewComment(timeStatus: number) {
     switch (timeStatus) {

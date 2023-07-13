@@ -16,8 +16,9 @@ interface AttendanceCheckModalProp {
 
 export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   const { todaySchedule, setIsCheckingModalOpen } = props;
-  const { lesson } = todaySchedule;
-  const { idx, studentName, subject, count } = lesson;
+  const { lesson, schedule } = todaySchedule;
+  const { idx, studentName, subject } = lesson;
+  const { count, isLastCount } = schedule;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 

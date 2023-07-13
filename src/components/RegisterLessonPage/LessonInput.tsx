@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from "react";
 import React, { ChangeEvent, FocusEvent } from 'react';
+import { RegisterLessonInputIc } from '../../assets';
 
 interface NameInputSectionProp {
     nameFocused : boolean;
@@ -38,7 +39,6 @@ export default function LessonInput() {
     };
 
     const isNameValid = studentName.length >= 3; 
-    // 학생 이름이 세 글자 이상인지 확인
 
 
     return (
@@ -56,6 +56,7 @@ export default function LessonInput() {
                 onBlur={handleNameInputBlur} 
             />
             {!isNameValid && studentName.length > 0 && <WarningMessage> 이름은 최소 2자 이상 입력해주세요 </WarningMessage>}
+            {isNameInputFocused && <RegisterLessonInputIcon/>}
         </NameInputSection>
 
         <SubjectInputSection subjectFocused={isSubjectInputFocused}>
@@ -65,6 +66,7 @@ export default function LessonInput() {
                 onFocus = {handleSubjectInputFocus}
                 onBlur={handleSubjectInputBlur}
             />
+            {isSubjectInputFocused && <RegisterLessonInputIcon/>}
         </SubjectInputSection>
 
     </InputWrapper>
@@ -83,7 +85,9 @@ const InputWrapper = styled.div`
 const NameInputSection = styled.section<NameInputSectionProp>`
     display: flex;
     flex-direction: column;
-    
+
+    position: relative;
+
     width: 29.2rem;
     height: 5.6rem;
     margin-bottom: 1.3rem;
@@ -96,6 +100,8 @@ const SubjectInputSection = styled.section<SubjectInputSectionProp>`
     display: flex;
     flex-direction: column;
     
+    position: relative;
+
     width: 29.2rem;
     height: 5.6rem;
     
@@ -133,4 +139,10 @@ const SubjectInput = styled.input`
 const WarningMessage = styled.h3`
     ${({ theme }) => theme.fonts.body06};
     color: ${({ theme }) => theme.colors.sementic_red};
+`
+
+const RegisterLessonInputIcon = styled(RegisterLessonInputIc)`
+    position: absolute;    
+    bottom: 0.7rem;
+    right: 1.1rem;
 `

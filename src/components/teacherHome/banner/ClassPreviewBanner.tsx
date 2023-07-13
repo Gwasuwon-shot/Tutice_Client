@@ -1,18 +1,19 @@
 import { styled } from "styled-components";
 import { UpcomingClassLogoTeacherHomeIc } from "../../../assets";
 import { CLASS_PREVIEW_BANNER_COMMENTS } from "../../../core/teacherHome/classPreviewBannerComments";
-import { TeacherHomeTodayScheduleType } from "../../../type/teacherHomeTodayScheduleType";
+import { PreviewBannerScheduleType } from "../../../type/teacherHome/previewBannerScheduleType";
 import AttendanceCheckButton from "../../common/AttendanceCheckButton";
 import SubjectLabel from "../../common/SubjectLabel";
 
 interface ClassPreviewBannerProps {
-  todaySchedule: TeacherHomeTodayScheduleType;
+  todaySchedule: PreviewBannerScheduleType;
 }
 
 export default function ClassPreviewBanner(props: ClassPreviewBannerProps) {
   const { todaySchedule } = props;
   const { lesson, timeStatus, schedule } = todaySchedule;
-  const { studentName, subject, count } = lesson;
+  const { studentName, subject } = lesson;
+  const { count } = schedule;
 
   function showClassPreviewComment(timeStatus: number) {
     switch (timeStatus) {
@@ -83,8 +84,10 @@ const ClassStatusWrapper = styled.p`
 
 const ClassCountMentWrapper = styled.p`
   margin-right: 0.5rem;
+  margin-bottom: -0.5rem;
 `;
 
 const UpcomingClassLogoTeacherHomeIcon = styled(UpcomingClassLogoTeacherHomeIc)`
-  margin-top: 3rem;
+  width: 7.6rem;
+  margin-top: 1rem;
 `;

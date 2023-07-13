@@ -1,15 +1,11 @@
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { upcomingClassData } from "../../atom/attendanceCheck/upcomingClassData";
 import { WELCOME_TEACHER_COMMENTS } from "../../core/teacherHome/welcomeTeacherComments";
-import { TeacherHomeTodayScheduleType } from "../../type/teacherHomeTodayScheduleType";
 
-interface WelcomeTeacherProps {
-  teacherName: string;
-  isTodaySchedule: boolean;
-  todaySchedule: TeacherHomeTodayScheduleType;
-}
-
-export default function WelcomeTeacher(props: WelcomeTeacherProps) {
-  const { teacherName, isTodaySchedule, todaySchedule } = props;
+export default function WelcomeTeacher() {
+  const [classData, setclassData] = useRecoilState(upcomingClassData);
+  const { teacherName, isTodaySchedule, todaySchedule } = classData;
 
   function checkTodayClassEnd() {
     return isTodaySchedule && todaySchedule === null;

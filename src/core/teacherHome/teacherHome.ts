@@ -169,15 +169,16 @@ export const YES_TODAY_CLASS_ING_CLASS_BANNER = {
     isTodaySchedule: true,
     todaySchedule: {
       lesson: {
-        idx: 1,
+        idx: "1",
         studentName: "박송현",
         subject: "수학",
-        count: "3",
       },
-      timeStatus: 2,
+      timeStatus: 1,
       schedule: {
-        idx: 1,
+        idx: "1",
         status: "상태없음",
+        count: "3",
+        isLastCount: false,
       },
     },
   },
@@ -187,8 +188,8 @@ export const YES_TODAY_CLASS_ING_CLASS_MAIN = {
   code: 200,
   message: "선생님 메인 뷰 오늘의 수업/다가오는 수업 조회 성공",
   data: {
-    isMissingAttendance: false,
-    isMissingMaintenance: false,
+    isMissingAttendance: true,
+    isMissingMaintenance: true,
     isTodaySchedule: true,
     latestScheduleDay: {
       date: "2023-07-12",
@@ -222,6 +223,18 @@ export const YES_TODAY_CLASS_ING_CLASS_MAIN = {
       {
         lesson: {
           idx: 3,
+          studentName: "조판다",
+          subject: "영어",
+        },
+        schedule: {
+          idx: 1,
+          startTime: "21:00",
+          endTime: "22:00",
+        },
+      },
+      {
+        lesson: {
+          idx: 4,
           studentName: "조판다",
           subject: "영어",
         },

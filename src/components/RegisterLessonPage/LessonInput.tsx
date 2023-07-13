@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export default function LessonInput() {
 
-    
     return (
         
     <InputWrapper>
@@ -17,7 +16,6 @@ export default function LessonInput() {
             <SubjectInput type = 'text' placeholder = '수업과목을 입력하세요' />
         </InputSection>
 
-    
     </InputWrapper>
     );
 }

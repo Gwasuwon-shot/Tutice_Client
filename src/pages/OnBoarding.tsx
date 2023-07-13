@@ -8,8 +8,10 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { SLIDER_SETTINGS } from "../core/OnBoarding";
 import { styled } from "styled-components";
+
 import RoundBottomButton from "../components/common/RoundBottomButton";
 import { Link } from "react-router-dom";
+
 
 export default function OnBoarding() {
   const SwiperPages = [<FirstSwiper />, <SecondSwiper />, <ThirdSwiper />, <FourthSwiper />];
@@ -94,3 +96,4 @@ const GoToLoginMessage = styled.p`
     color: ${({ theme }) => theme.colors.green5};
   }
 `;
+

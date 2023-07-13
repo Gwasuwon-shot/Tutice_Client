@@ -1,16 +1,17 @@
-interface LessonType {
+export interface LessonType {
   idx: number;
   studentName: string;
   subject: string;
-  count: string;
 }
 
-interface ScheduleType {
+export interface ScheduleType {
   idx: number;
   status: string;
+  count: string;
+  isLastCount: boolean;
 }
 
-export interface TeacherHomeTodayScheduleType {
+export interface PreviewBannerScheduleType {
   lesson: LessonType;
   timeStatus: number;
   schedule: ScheduleType;

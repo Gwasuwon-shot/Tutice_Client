@@ -23,4 +23,9 @@ const RoundBottomButtonWrapper = styled.button`
   ${({ theme }) => theme.fonts.title02};
 
   border-radius: 0.8rem;
+
+  &:active {
+    background-color: ${({ theme }) => theme.colors.green7};
+    color: ${({ theme }) => theme.colors.green4};
+  }
 `;

@@ -42,6 +42,15 @@ const ButtonWrapper = styled.button<{ $status: string }>`
       : theme.colors.red1};
 
   border-radius: 8px;
+
+  &:active {
+    background-color: ${({ theme, $status }) =>
+      $status === ATTENDANCE_STATUS.attend
+        ? theme.colors.green6
+        : $status === ATTENDANCE_STATUS.cancel
+        ? theme.colors.grey400
+        : theme.colors.red3};
+  }
 `;
 
 const AbsentAttendanceModalIcon = styled(AbsentAttendanceModalIc)`

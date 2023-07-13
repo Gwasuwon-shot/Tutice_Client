@@ -69,7 +69,8 @@ export default function CompleteCheckAttendance() {
           <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
         </TextWrapper>
         <StatusMentionWrapper>
-          <StatusMention>수업이</StatusMention> <Status>{attendanceData?.status}</Status>{" "}
+          <StatusMention>수업이</StatusMention>
+          <Status $status={attendanceData?.status}>{attendanceData?.status}</Status>
           <StatusMention>처리 되었습니다.</StatusMention>
         </StatusMentionWrapper>
         {checkIsAttendance() ? (
@@ -115,10 +116,15 @@ const ClassDate = styled.p`
   ${({ theme }) => theme.fonts.body07};
 `;
 
-const Status = styled.p`
+const Status = styled.p<{ $status: string }>`
   margin: 0 0.5rem;
 
-  color: ${({ theme }) => theme.colors.green5};
+  color: ${({ theme, $status }) =>
+    $status === ATTENDANCE_STATUS.attend
+      ? theme.colors.green5
+      : $status === ATTENDANCE_STATUS.absent
+      ? theme.colors.red5
+      : theme.colors.grey900};
   ${({ theme }) => theme.fonts.title02};
 `;
 

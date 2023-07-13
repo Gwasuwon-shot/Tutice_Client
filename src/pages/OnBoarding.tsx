@@ -1,17 +1,16 @@
 import FirstSwiper from "../components/OnBoarding/FirstSwiper";
+import FourthSwiper from "../components/OnBoarding/FourthSwiper";
 import SecondSwiper from "../components/OnBoarding/SecondSwiper";
 import ThirdSwiper from "../components/OnBoarding/ThirdSwiper";
-import FourthSwiper from "../components/OnBoarding/FourthSwiper";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { SLIDER_SETTINGS } from "../core/OnBoarding";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import { styled } from "styled-components";
+import { SLIDER_SETTINGS } from "../core/OnBoarding";
 
-import RoundBottomButton from "../components/common/RoundBottomButton";
 import { Link } from "react-router-dom";
-
+import RoundBottomButton from "../components/common/RoundBottomButton";
 
 export default function OnBoarding() {
   const SwiperPages = [<FirstSwiper />, <SecondSwiper />, <ThirdSwiper />, <FourthSwiper />];
@@ -96,4 +95,3 @@ const GoToLoginMessage = styled.p`
     color: ${({ theme }) => theme.colors.green5};
   }
 `;
-

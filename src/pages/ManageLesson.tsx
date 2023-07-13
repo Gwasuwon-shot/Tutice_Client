@@ -37,9 +37,9 @@ export default function ManagfeLesson() {
         </LabelWrapper>
         <CategoryWrapper>
           {checkIsLesson() ? (
-            <ManagingLessonClassIcon onClick={() => handleChangeStatus(MANAGE_LESSON_STATUS.lesson)} />
+            <ManagingLessonClassIcon onClick={() => handleChangeStatus(MANAGE_LESSON_STATUS.money)} />
           ) : (
-            <ManagingLessonMoneyIcon onClick={() => handleChangeStatus(MANAGE_LESSON_STATUS.money)} />
+            <ManagingLessonMoneyIcon onClick={() => handleChangeStatus(MANAGE_LESSON_STATUS.lesson)} />
           )}
         </CategoryWrapper>
       </ManageLessonWrapper>
@@ -54,6 +54,8 @@ const ManageLessonWrapper = styled.div`
 
 const CategoryWrapper = styled.section`
   margin-top: 1.8rem;
+
+  cursor: pointer;
 `;
 
 const ManagingLessonClassIcon = styled(ManagingLessonClassIc)`

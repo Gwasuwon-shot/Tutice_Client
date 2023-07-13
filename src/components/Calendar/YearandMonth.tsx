@@ -29,7 +29,9 @@ const HeaderWrapper = styled.header`
   align-items: center;
 
   width: 29rem;
+  margin-right: 0.4rem;
   margin-bottom: 1.1rem;
+  margin-left: 0.4rem;
 
   font-size: 1.1rem;
 `;

@@ -2,12 +2,13 @@ export interface LessonType {
   idx: number;
   studentName: string;
   subject: string;
-  count?: string;
 }
 
 export interface ScheduleType {
   idx: number;
   status: string;
+  count: string;
+  isLastCount: boolean;
 }
 
 export interface PreviewBannerScheduleType {

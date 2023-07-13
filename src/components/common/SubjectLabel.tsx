@@ -6,7 +6,7 @@ interface SubjectLabelProps {
   color: string;
 }
 
-export default function SubjectLabel(props: SubjectLabelProps) {
+export default function sSubjectLabel(props: SubjectLabelProps) {
   const { subject, backgroundColor, color } = props;
 
   return (

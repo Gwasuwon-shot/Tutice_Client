@@ -9,6 +9,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
 import RegexField from "./RegexField";
+import ProgressBar from "../common/ProgressBar";
 
 export default function PwTos() {
   const [pwRegex, setPwRegex] = useState(false);
@@ -32,16 +33,6 @@ export default function PwTos() {
     }
   }
 
-  // function handlePWChange(e: React.ChangeEvent<HTMLInputElement>) {
-  //   e.preventDefault();
-  //   setPw(e.target.value);
-  // }
-
-  // function handleConfirmChange(e: React.ChangeEvent<HTMLInputElement>) {
-  //   e.preventDefault();
-  //   setConfirmPw(e.target.value);
-  // }
-
   function handlePWMatched(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setConfirmPw(e.target.value);
@@ -53,6 +44,7 @@ export default function PwTos() {
 
   return (
     <>
+      <ProgressBar progress={75} />
       <BackButton />
       <Container>
         <TitleWrapper>

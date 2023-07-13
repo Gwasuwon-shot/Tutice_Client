@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
+import ProgressBar from "../common/ProgressBar";
 
 export default function ToS() {
   const [checked, setChecked] = useState(false);

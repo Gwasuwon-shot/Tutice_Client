@@ -7,6 +7,7 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { newUserData, stepNum } from "../../atom/signup/signup";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
+import ProgressBar from "../common/ProgressBar";
 
 export default function Role() {
   const [role, setRole] = useState("");
@@ -31,6 +32,7 @@ export default function Role() {
   }, []);
   return (
     <>
+      <ProgressBar progress={0} />
       <BackButton />
       <Container>
         <SignupTitleLayout MainText={ROLE_TEXT} />

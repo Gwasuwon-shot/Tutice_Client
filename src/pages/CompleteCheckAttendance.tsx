@@ -23,11 +23,14 @@ export default function CompleteCheckAttendance() {
     date?.split("-")[0] + "년 " + date?.split("-")[1] + "월 " + date?.split("-")[2] + "일 ",
   );
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
-  console.log(attendanceData);
+
   return (
     <>
-      <Lottie loop={false} animationData={check} style={{ width: "50%", height: "50%" }} />
-      <Lottie loop={false} animationData={checkCircle} style={{ width: "50%", height: "50%" }} />
+      {isLastCount ? (
+        <Lottie loop={false} animationData={checkCircle} style={{ width: "50%", height: "50%" }} />
+      ) : (
+        <Lottie loop={false} animationData={check} style={{ width: "50%", height: "50%" }} />
+      )}
       <p>
         {attendanceDate} ({dayOfWeek}) {count}회차 수업
       </p>

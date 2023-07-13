@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import CheckAttendance from "./pages/CheckAttendance";
 import CheckLesson from "./pages/CheckLesson";
+import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ParentCalendar from "./pages/ParentCalendar";
+import RegisterCalendar from "./pages/RegisterCalendar";
 import RegisterLesson from "./pages/RegisterLesson";
 import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
-import RegisterCalendar from "./pages/RegisterCalendar";
 
 export default function Router() {
   return (
@@ -18,7 +18,7 @@ export default function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/check-attendance" element={<CheckAttendance />} />
+        <Route path="/complete-check-attendance" element={<CompleteCheckAttendance />} />
         <Route path="/check-lesson" element={<CheckLesson />} />
         <Route path="/parent-calendar" element={<ParentCalendar />} />
         <Route path="/register-lesson" element={<RegisterLesson />} />

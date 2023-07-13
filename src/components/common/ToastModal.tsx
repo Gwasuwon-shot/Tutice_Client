@@ -16,11 +16,11 @@ export default function ToastModal(props: ToastModalProps) {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   const bindLogoPos = useDrag((params) => {
-    console.log(typeof params.offset[1]);
+    console.log(params.offset[1]);
     setLogoPos({
       y: params.offset[1],
     });
-    if (params.offset[1] > 270) {
+    if (params.offset[1] > 200) {
       setOpenModal(false);
     }
   });

@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { ManagingLessonClassIc, ManagingLessonMoneyIc } from "../assets";
 import { upcomingClassData } from "../atom/attendanceCheck/upcomingClassData";
 import BackButton from "../components/common/BackButton";
 import StudentNameLabel from "../components/common/StudentNameLabel";
@@ -24,6 +25,8 @@ export default function ManagfeLesson() {
           isBig={true}
         />
       </ManagfeLessonWrapper>
+      <ManagingLessonClassIc />
+      <ManagingLessonMoneyIc />
     </>
   );
 }

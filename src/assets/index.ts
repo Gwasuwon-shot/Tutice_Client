@@ -34,6 +34,7 @@ export { ReactComponent as MissingMaintenanceTeacherHomeIc } from "./icon/missin
 export { ReactComponent as MyActiveTeacherFooterIc } from "./icon/myActiveTeacherFooterIc.svg";
 export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.svg";
 export { ReactComponent as NoClassLogoTeacherHomeIc } from "./icon/noClassLogoTeacherHomeIc.svg";
+export { ReactComponent as RegisterLessonHeaderIc } from "./icon/registerLessonHeaderIc.svg";
 export { ReactComponent as RegularLessonCalenderIc } from "./icon/regularLessonCalenderIc.svg";
 export { ReactComponent as RegularLessonClockIc } from "./icon/regularLessonClockIc.svg";
 export { ReactComponent as RegularLessonNotebookIc } from "./icon/regularLessonNotebookIc.svg";

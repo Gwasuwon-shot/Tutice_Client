@@ -1,5 +1,6 @@
+import {RegularLessonNotebookIc, RegularLessonPencilIc} from '../../assets';
+
 import React from 'react';
-import {RegularLessonNotebookIc} from '../../assets';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import styled from 'styled-components';
 
@@ -21,6 +22,7 @@ export default function LessonInformation() {
                 <StartDate>
                     <StartDateName> 수업시작일 </StartDateName>
                     <StartDateButton type = "submit"> 2023년 7월 3일 </StartDateButton>
+                    <RegularLessonPencilIcon />
                 </StartDate>
             </LessonWrapper>
         </LessonInformationWrapper>
@@ -103,4 +105,8 @@ const StartDateButton = styled.button`
 
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey700};
+`
+
+const RegularLessonPencilIcon = styled(RegularLessonPencilIc)`
+    margin-left: 1.6rem;
 `

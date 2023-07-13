@@ -2,13 +2,30 @@ import styled from 'styled-components';
 
 export default function LessonInput() {
 
+    const [isNameInputFocused, setNameInputFocused] = useState(false);
+    const [studentName, setStudentName] = useState('');
+  
+    const handleNameInputFocus = () => {
+        setNameInputFocused(true);
+    };
+
+    const handleNameInputChange = (event) => {
+        setStudentName(event.target.value);
+    };
+
     return (
         
     <InputWrapper>
 
-        <InputSection>
+        <InputSection focused={isNameInputFocused}>
             <InputName> 학생이름 </InputName> 
-            <StudentInput type = 'text' placeholder = '이름을 입력하세요'/>
+            <StudentInput 
+                type = 'text' 
+                placeholder = '이름을 입력하세요'
+                value={studentName}
+                onChange={handleNameInputChange}
+                onFocus={handleNameInputFocus}
+            />
         </InputSection>
 
         <InputSection>
@@ -38,7 +55,8 @@ const InputSection = styled.section`
     width: 29.2rem;
     height: 5.6rem;
     
-    border-bottom : 1px solid ${({ theme }) => theme.colors.grey70};
+    border-bottom: 1px solid
+    ${({ theme, focused }) => (focused ? theme.colors.green5 : theme.colors.grey70)};
 `
 
 const InputName = styled.h1` 

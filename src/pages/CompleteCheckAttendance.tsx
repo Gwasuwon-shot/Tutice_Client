@@ -1,17 +1,20 @@
 import Lottie from "lottie-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { upcomingClassData } from "../atom/attendanceCheck/upcomingClassData";
+import { isModalOpen } from "../atom/common/isModalOpen";
 import RoundBottomButton from "../components/common/RoundBottomButton";
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
+import SendAlarmCheckModal from "../components/common/SendAlarmCheckModal";
 import SubjectLabel from "../components/common/SubjectLabel";
 import check from "../core/checkAttendance/check.json";
 import checkCircle from "../core/checkAttendance/check_circle.json";
 import { ATTENDANCE_STATUS } from "../core/common/attendanceStatus";
 import { STUDENT_COLOR } from "../core/common/studentColor";
+import useModal from "../hooks/useModal";
 
 export default function CompleteCheckAttendance() {
   const [classData, setclassData] = useRecoilState(upcomingClassData);
@@ -27,6 +30,12 @@ export default function CompleteCheckAttendance() {
   );
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
   const navigate = useNavigate();
+  const { modalRef, closeModal, unShowModal, showModal } = useModal();
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+
+  useEffect(() => {
+    setOpenModal(false);
+  }, []);
 
   function checkIsAttendance() {
     return attendanceData?.status === ATTENDANCE_STATUS.attend;
@@ -37,46 +46,48 @@ export default function CompleteCheckAttendance() {
   }
 
   function handleOpenSendAlarmModal() {
-    // 서버에 포스트 보내기 attendanceData?.idx
-    // 포스트 성공하면 navigate("/");
+    showModal();
   }
 
   return (
-    <CompleteCheckAttendanceWrapper>
-      <LottieImage>
-        {isLastCount ? (
-          <Lottie loop={false} animationData={checkCircle} style={{ width: "50%", height: "50%" }} />
+    <>
+      {openModal && <SendAlarmCheckModal idx={idx} studentName={studentName} subject={subject} count={count} />}
+      <CompleteCheckAttendanceWrapper>
+        <LottieImage>
+          {isLastCount ? (
+            <Lottie loop={false} animationData={checkCircle} style={{ width: "50%", height: "50%" }} />
+          ) : (
+            <Lottie loop={false} animationData={check} style={{ width: "50%", height: "50%" }} />
+          )}
+        </LottieImage>
+        <ClassDate>
+          {attendanceDate} ({dayOfWeek}) {count}회차 수업
+        </ClassDate>
+        <TextWrapper>
+          <Main>{studentName}</Main>
+          <Sub>학생</Sub>
+          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
+        </TextWrapper>
+        <StatusMentionWrapper>
+          <StatusMention>수업이</StatusMention> <Status>{attendanceData?.status}</Status>{" "}
+          <StatusMention>처리 되었습니다.</StatusMention>
+        </StatusMentionWrapper>
+        {checkIsAttendance() ? (
+          <ButtonWrapper>
+            <RoundBottomMiniButton isGreen={false} onClick={handleMoveToHome}>
+              확인
+            </RoundBottomMiniButton>
+            <RoundBottomMiniButton isGreen={true} onClick={handleOpenSendAlarmModal}>
+              학부모 알림 전송
+            </RoundBottomMiniButton>
+          </ButtonWrapper>
         ) : (
-          <Lottie loop={false} animationData={check} style={{ width: "50%", height: "50%" }} />
+          <ButtonWrapper onClick={handleMoveToHome}>
+            <RoundBottomButton buttonMessage="확인" />
+          </ButtonWrapper>
         )}
-      </LottieImage>
-      <ClassDate>
-        {attendanceDate} ({dayOfWeek}) {count}회차 수업
-      </ClassDate>
-      <TextWrapper>
-        <Main>{studentName}</Main>
-        <Sub>학생</Sub>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
-      </TextWrapper>
-      <StatusMentionWrapper>
-        <StatusMention>수업이</StatusMention> <Status>{attendanceData?.status}</Status>{" "}
-        <StatusMention>처리 되었습니다.</StatusMention>
-      </StatusMentionWrapper>
-      {checkIsAttendance() ? (
-        <ButtonWrapper>
-          <RoundBottomMiniButton isGreen={false} onClick={handleMoveToHome}>
-            확인
-          </RoundBottomMiniButton>
-          <RoundBottomMiniButton isGreen={true} onClick={handleOpenSendAlarmModal}>
-            학부모 알림 전송
-          </RoundBottomMiniButton>
-        </ButtonWrapper>
-      ) : (
-        <ButtonWrapper onClick={handleMoveToHome}>
-          <RoundBottomButton buttonMessage="확인" />
-        </ButtonWrapper>
-      )}
-    </CompleteCheckAttendanceWrapper>
+      </CompleteCheckAttendanceWrapper>
+    </>
   );
 }
 

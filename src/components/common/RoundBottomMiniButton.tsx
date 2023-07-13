@@ -28,4 +28,6 @@ const Button = styled.button<{ $isGreen: boolean }>`
 
   background-color: ${({ theme, $isGreen }) => ($isGreen ? theme.colors.green5 : theme.colors.green1)};
   color: ${({ theme, $isGreen }) => ($isGreen ? theme.colors.white : theme.colors.green5)};
+
+  ${({ theme }) => theme.fonts.body01}
 `;

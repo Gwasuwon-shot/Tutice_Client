@@ -13,7 +13,7 @@ export default function StudentNameLabel(props: StudentNameLabelProps) {
   const { studentName, subject, backgroundColor, color, isBig } = props;
 
   return (
-    <StudentNameWrapper>
+    <StudentNameWrapper $isBig={isBig}>
       <StudentName $isBig={isBig}>{studentName}</StudentName>
       <Student>학생</Student>
       <SubjectLabel subject={subject} backgroundColor={backgroundColor} color={color} />
@@ -25,7 +25,7 @@ const StudentName = styled.h1<{ $isBig: boolean }>`
   ${({ theme, $isBig }) => ($isBig ? theme.fonts.title01 : theme.fonts.title02)};
 `;
 
-const StudentNameWrapper = styled.header`
+const StudentNameWrapper = styled.header<{ $isBig: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;

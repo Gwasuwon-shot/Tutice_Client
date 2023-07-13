@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-
+import { useEffect, useState } from "react";
+import React, { ChangeEvent, FocusEvent } from 'react';
 export default function LessonInput() {
 
     const [isNameInputFocused, setNameInputFocused] = useState(false);
@@ -9,7 +10,7 @@ export default function LessonInput() {
         setNameInputFocused(true);
     };
 
-    const handleNameInputChange = (event) => {
+    const handleNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setStudentName(event.target.value);
     };
 

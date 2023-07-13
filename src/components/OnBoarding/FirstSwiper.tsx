@@ -38,7 +38,11 @@ const FirstSwiperTitle = styled.h1`
   font-size: ${({ theme }) => theme.fonts.title01};
 `;
 
-const FirstSwiperTitleKeyword = styled(FirstSwiperTitle)`
+const FirstSwiperTitleKeyword = styled.p`
+  display: inline-block;
+
+  font-size: ${({ theme }) => theme.fonts.title01};
+
   color: ${({ theme }) => theme.colors.green5};
 `;
 

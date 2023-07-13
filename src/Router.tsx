@@ -18,6 +18,7 @@ export default function Router() {
       <Routes>
         <Route path="/onBoarding" element={<OnBoarding />} />
         <Route path="/" element={<Home />} />
+        <Route path="/onBoarding" element={<OnBoarding />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/complete-check-attendance" element={<CompleteCheckAttendance />} />

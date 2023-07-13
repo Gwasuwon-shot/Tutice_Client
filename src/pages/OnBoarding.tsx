@@ -9,21 +9,43 @@ import Slider from "react-slick";
 import { SLIDER_SETTINGS } from "../core/OnBoarding";
 import { styled } from "styled-components";
 
+import RoundBottomButton from "../components/common/RoundBottomButton";
+import { Link } from "react-router-dom";
+
+
 export default function OnBoarding() {
   const SwiperPages = [<FirstSwiper />, <SecondSwiper />, <ThirdSwiper />, <FourthSwiper />];
 
   return (
-    <SliderWrapper>
-      <Slider {...SLIDER_SETTINGS}>
-        {SwiperPages.map((page, idx) => {
-          return <article key={idx}>{page}</article>;
-        })}
-      </Slider>
-    </SliderWrapper>
+    <>
+      <OnBoardingWrapper>
+        <SliderWrapper>
+          <Slider {...SLIDER_SETTINGS}>
+            {SwiperPages.map((page, idx) => {
+              return <article key={idx}>{page}</article>;
+            })}
+          </Slider>
+        </SliderWrapper>
+
+        <ButtonWrapper>
+          <RoundBottomButton buttonMessage="시작하기" />
+        </ButtonWrapper>
+
+        <GoToLoginMessage>
+          이미 계정이 있으신가요? 바로&nbsp;<Link to="/login">로그인 하기</Link>
+        </GoToLoginMessage>
+      </OnBoardingWrapper>
+    </>
   );
 }
 
+const OnBoardingWrapper = styled.main`
+  width: 100%;
+`;
+
 const SliderWrapper = styled.section`
+  margin-bottom: 5.863rem;
+
   & > .slick-slider > .slick-dots {
     bottom: -2.863rem;
   }
@@ -54,3 +76,24 @@ const SliderWrapper = styled.section`
     color: ${({ theme }) => theme.colors.green5};
   }
 `;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const GoToLoginMessage = styled.p`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 2rem;
+
+  ${({ theme }) => theme.fonts.body02};
+
+  color: #7c7e7e;
+
+  > a {
+    color: ${({ theme }) => theme.colors.green5};
+  }
+`;
+

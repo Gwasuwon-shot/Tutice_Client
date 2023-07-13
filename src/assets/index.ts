@@ -21,6 +21,7 @@ export { ReactComponent as FourthSwiperFirstTree } from "./icon/FourthSwiperFirs
 export { ReactComponent as FourthSwiperSecondTree } from "./icon/FourthSwiperSecondTreeOnBoardingIc.svg";
 export { ReactComponent as FourthSwiperThirdTree } from "./icon/FourthSwiperThirdTreeOnBoardingIc.svg";
 export { ReactComponent as ThirdSwiperGradation } from "./icon/ThirdSwiperGradationOnBoardingIc.svg";
+export { ReactComponent as RegisterLessonHeaderIc } from "./icon/registerLessonHeaderIc.svg";
 export { ReactComponent as backButtonSignupIc } from "./icon//backButtonSignupIc.svg";
 export { ReactComponent as RoleCheckSignupIc } from "./icon//RoleCheckSignupIc.svg";
 export { ReactComponent as RoleNoneCheckSignupIc } from "./icon//RoleNoneCheckSignupIc.svg";

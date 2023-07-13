@@ -2,8 +2,8 @@ import { styled } from "styled-components";
 import useManageLesson from "../../hooks/useManageLesson";
 
 export default function WelcomeTreeLevel() {
-  const { lesson, scheduleList } = useManageLesson();
-  const { idx, studentName, subject, count, nowCount } = lesson;
+  const { lesson } = useManageLesson();
+  const { count, nowCount } = lesson;
 
   function checkIsLastLesson() {
     return count === nowCount;

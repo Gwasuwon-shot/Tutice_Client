@@ -69,7 +69,7 @@ export default function Role() {
                 <RadioBoldName htmlFor="PARENTS">{ROLE_NAME.parent} </RadioBoldName>
                 <RadioPlainName htmlFor="PARENTS">{ROLE_SUB_TEXT.signupBy} </RadioPlainName>
               </RadioNameWrapper>
-              <RadioSubName htmlFor="PARENTS"> {ROLE_SUB_TEXT.teacherText}</RadioSubName>
+              <RadioSubName htmlFor="PARENTS"> {ROLE_SUB_TEXT.parentsText}</RadioSubName>
             </TextWrapper>
           </RoleRapper>
         </RadioWrapper>

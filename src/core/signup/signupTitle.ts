@@ -18,6 +18,6 @@ export const ROLE_SUB_TEXT = {
 export const PLACEHOLDER_TEXT = {
   nameHolder: "이름을 입력하세요",
   emailHolder: "사용하실 이메일을 입력하세요",
-  passwordHolder: "이름을 8~16자의 영문, 숫자, 특수문자를 사용하세요 ",
+  passwordHolder: "8~16자의 영문, 숫자, 특수문자를 사용하세요 ",
   confirmHolder: "비밀번호를 한 번 더 입력하세요 ",
 };

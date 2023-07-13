@@ -73,7 +73,7 @@ export default function PwTos() {
             onFocus={() => setPwFocus(true)}
             onBlur={() => setPwFocus(false)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
-            type="text"
+            type="password"
             placeholder={PLACEHOLDER_TEXT.passwordHolder}
           />
         </InputPwWrapper>
@@ -85,7 +85,7 @@ export default function PwTos() {
             onFocus={() => setConfirmFocus(true)}
             onBlur={() => setConfirmFocus(false)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
-            type="text"
+            type="password"
             placeholder={PLACEHOLDER_TEXT.confirmHolder}
           />
         </InputConfirmWrapper>

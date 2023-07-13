@@ -10,6 +10,10 @@ import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
 import RegexField from "./RegexField";
 import ProgressBar from "../common/ProgressBar";
+import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import { BUTTON_TEXT } from "./buttonText";
+import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
+import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 
 export default function PwTos() {
   const newUser = useRecoilValue(newUserData);
@@ -20,7 +24,6 @@ export default function PwTos() {
   const [isActive, setIsActive] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
   const [confirmFocus, setConfirmFocus] = useState(false);
-  const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
 
   function handleToSignUp() {
     console.log("회원가입요~");
@@ -54,43 +57,46 @@ export default function PwTos() {
       <BackButton />
       <Container>
         <TitleWrapper>
-          <SignupTitleLayout MainText={PWTOS_TITLE} />
+          <SignupTitleLayout MainText={SIGNUP_TITLE.leftInfo} />
         </TitleWrapper>
         <InputWrapper>
-          <TextLabelLayout labelText="이름" />
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
           <Inputfield disabled type="text" value={newUser.name} />
         </InputWrapper>
         <InputWrapper>
-          <TextLabelLayout labelText="이메일" />
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
           <Inputfield disabled type="text" value={newUser.email} />
         </InputWrapper>
         <InputPwWrapper $isPassword={isPassword} $pwFocus={setPwFocus}>
-          <TextLabelLayout labelText="비밀번호" />
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
           <Inputfield
             onFocus={() => setPwFocus(true)}
             onBlur={() => setPwFocus(false)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
             type="text"
-            placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "
+            placeholder={PLACEHOLDER_TEXT.passwordHolder}
           />
         </InputPwWrapper>
-        {!isPassword && pwFocus ? (
-          <RegexField unMatchText="8~16자의 영문, 숫자, 특수문자를 모두 포함해주세요." />
-        ) : null}
+        {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
         <InputConfirmWrapper $confirmFocus={confirmFocus} $doubleCheck={doubleCheck}>
-          <TextLabelLayout labelText="비밀번호 확인" />
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
           <Inputfield
             onFocus={() => setConfirmFocus(true)}
             onBlur={() => setConfirmFocus(false)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
             type="text"
-            placeholder="비밀번호를 한 번 더 입력하세요"
+            placeholder={PLACEHOLDER_TEXT.confirmHolder}
           />
         </InputConfirmWrapper>
-        {!doubleCheck && confirmFocus ? <RegexField unMatchText="비밀번호가 일치하지 않아요." /> : null}
+        {!doubleCheck && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
         <Tos />
-        <BottomButton disabled={!isActive} isActive={isActive} children="회원가입 완료" onClick={handleToSignUp} />
+        <BottomButton
+          disabled={!isActive}
+          isActive={isActive}
+          children={BUTTON_TEXT.signupDone}
+          onClick={handleToSignUp}
+        />
       </Container>
     </>
   );

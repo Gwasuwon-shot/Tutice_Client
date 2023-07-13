@@ -1,22 +1,43 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
-import ProgressBar from "../common/ProgressBar";
 
 export default function ToS() {
   const [checked, setChecked] = useState(false);
+  const [isAllChecked, setAllChecked] = useState(false);
+  // 체크 상태 확인 => 초기 세팅은 전부 선택되지 않은 상태
+  const [checkedState, setCheckedState] = useState(new Array(4).fill(false));
+
+  function handleAllChecked() {
+    setAllChecked((prev) => !prev);
+    let array = new Array(4).fill(!isAllChecked);
+    setCheckedState(array);
+  }
+
+  // 개별 선택
+  function handleMonoCheck(position: number) {
+    const updatedCheckedState = checkedState.map((item, index) => (index === position ? !item : item));
+    setCheckedState(updatedCheckedState);
+    const checkedLength = updatedCheckedState.reduce((sum, currentState) => {
+      if (currentState === true) {
+        return sum + 1;
+      }
+      return sum;
+    }, 0);
+    setAllChecked(checkedLength === updatedCheckedState.length);
+  }
+
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.innerText) {
       case "서비스 이용 약관":
         window.open("https://www.naver.com", "_blank");
         break;
       case "개인정보 수집 및 이용":
-        window.open("https://www.naver.com", "_blank");
+        window.open("https://www.daum.net", "_blank");
         break;
       case "개인 정보 마케팅 활용":
-        window.open("https://www.naver.com", "_blank");
+        window.open("https://www.nate.com", "_blank");
         break;
     }
   }
@@ -35,12 +56,12 @@ export default function ToS() {
       </CheckWrapper>
       <Horizon />
       <CheckWrapper>
-        <TosNoneSignupIcon />
+        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         <Essential>(필수) </Essential>
         <CheckText> 만 14세 이상입니다 </CheckText>
       </CheckWrapper>
       <CheckWrapper>
-        <TosNoneSignupIcon />
+        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>서비스 이용 약관</p>
@@ -48,7 +69,7 @@ export default function ToS() {
         <CheckText> 동의 </CheckText>
       </CheckWrapper>
       <CheckWrapper>
-        <TosNoneSignupIcon />
+        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인정보 수집 및 이용</p>
@@ -56,7 +77,7 @@ export default function ToS() {
         <CheckText> 동의 </CheckText>
       </CheckWrapper>
       <CheckWrapper>
-        <TosNoneSignupIcon />
+        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         <Optional>(선택) </Optional>
 
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>

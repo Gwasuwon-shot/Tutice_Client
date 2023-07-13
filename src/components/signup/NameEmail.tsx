@@ -9,6 +9,8 @@ import { newUserData, stepNum } from "../../atom/signup/signup";
 import RegexField from "./RegexField";
 import { EMAIL_REGEX } from "../../core/signup/regex";
 import ProgressBar from "../common/ProgressBar";
+import { SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import { BUTTON_TEXT } from "./buttonText";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -21,7 +23,6 @@ export default function NameEmail() {
   const [isActive, setIsActive] = useState(false);
   const [nameFocus, setNameFocus] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
-  const NAME_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
 
   // setName
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -60,7 +61,7 @@ export default function NameEmail() {
       <ProgressBar progress={email === "" ? 25 : 50} />
       <BackButton />
       <Container>
-        <SignupTitleLayout MainText={NAME_TEXT} />
+        <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
           <TextLabelLayout labelText={"이름"} />
           <Inputfield
@@ -89,7 +90,7 @@ export default function NameEmail() {
         </InputEmailWrapper>
 
         {!isEmail && emailFocus ? <RegexField unMatchText="올바른 이메일 형식으로 입력해 주세요." /> : null}
-        <BottomButton children="완료" isActive={isActive} onClick={handleDoneClick} disabled={!isActive} />
+        <BottomButton children={BUTTON_TEXT.done} isActive={isActive} onClick={handleDoneClick} disabled={!isActive} />
       </Container>
     </>
   );

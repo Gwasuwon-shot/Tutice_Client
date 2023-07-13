@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
-import BasicDoubleModal from "../common/BasicDoubleModal";
+import { ATTENDANCE_CHECK_RESPONSE } from "../../core/checkAttendance/attendaceCheckResponse";
+import BasicDoubleModal from "./BasicDoubleModal";
 
 interface AttendanceDoubleCheckingModalProps {
   setIsCheckingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,7 +20,7 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
 
   function handleMoveToSuccessCheckingAttendance() {
     // 서버에 출결 정보 post 하는 로직 추가
-    navigate("/");
+    navigate("/complete-check-attendance", { state: ATTENDANCE_CHECK_RESPONSE });
   }
 
   function checkStatusText() {

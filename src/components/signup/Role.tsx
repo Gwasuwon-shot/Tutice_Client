@@ -72,7 +72,7 @@ export default function Role() {
             </TextWrapper>
           </RoleRapper>
         </RadioWrapper>
-        <BottomButton isActive={isActive} children="완료" onClick={handleDoneClick} />
+        <BottomButton disabled={!isActive} isActive={isActive} children="완료" onClick={handleDoneClick} />
       </Container>
     </>
   );

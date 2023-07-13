@@ -89,7 +89,7 @@ export default function NameEmail() {
         </InputEmailWrapper>
 
         {!isEmail && emailFocus ? <RegexField unMatchText="올바른 이메일 형식으로 입력해 주세요." /> : null}
-        <BottomButton children="완료" isActive={isActive} onClick={handleDoneClick} />
+        <BottomButton children="완료" isActive={isActive} onClick={handleDoneClick} disabled={!isActive} />
       </Container>
     </>
   );

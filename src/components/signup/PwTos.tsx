@@ -12,12 +12,12 @@ import RegexField from "./RegexField";
 import ProgressBar from "../common/ProgressBar";
 
 export default function PwTos() {
-  const [pwRegex, setPwRegex] = useState(false);
-  const [doubleCheck, setDoubleCheck] = useState(false);
+  const newUser = useRecoilValue(newUserData);
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
+  const [isPassword, setIsPassword] = useState(false);
+  const [doubleCheck, setDoubleCheck] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const newUser = useRecoilValue(newUserData);
   const PWTOS_TITLE = "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!";
 
   function handleToSignUp() {
@@ -27,9 +27,9 @@ export default function PwTos() {
   function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
     setPw(e.target.value);
     if (pw.match(PW_REGEX) === null) {
-      setPwRegex(false);
+      setIsPassword(false);
     } else {
-      setPwRegex(true);
+      setIsPassword(true);
     }
   }
 
@@ -40,7 +40,7 @@ export default function PwTos() {
     pw === confirmPw ? setDoubleCheck(true) : setDoubleCheck(false);
   }
 
-  useEffect(() => {}, [pw, confirmPw, pwRegex, doubleCheck]);
+  useEffect(() => {}, [pw, confirmPw, idPassWord, doubleCheck]);
 
   return (
     <>
@@ -66,7 +66,7 @@ export default function PwTos() {
             placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "
           />
         </InputWrapper>
-        {pwRegex ? null : <RegexField unMatchText="8~16자의 영문, 숫자, 특수문자를 모두 포함해주세요." />}
+        {isPassword ? null : <RegexField unMatchText="8~16자의 영문, 숫자, 특수문자를 모두 포함해주세요." />}
 
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호 확인" />

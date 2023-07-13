@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-
+import { isModalOpen } from "../../atom/common/isModalOpen";
 import {
   isSameDay,
   isToday,
@@ -15,6 +15,7 @@ import {
 } from "date-fns";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import ToastModal from "../common/ToastModal";
 
 interface DaysProp {
   currentMonth: Date;
@@ -27,13 +28,14 @@ export default function Days(props: DaysProp) {
   const startDate = startOfWeek(monthStart);
   const endDate: Date = endOfWeek(monthEnd);
   const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
   let day: Date = startDate;
   let formattedDate = "";
   function handleOpenModal() {
-    console.log("here");
+    setOpenModal(true);
   }
 
   while (day <= endDate) {
@@ -71,7 +73,16 @@ export default function Days(props: DaysProp) {
 
   return (
     <>
-      <Wrapper>{rows}</Wrapper>
+      <Wrapper>
+        {rows}
+        {openModal && (
+          <ModalWrapper>
+            <ToastModal>
+              하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비하이티비
+            </ToastModal>
+          </ModalWrapper>
+        )}
+      </Wrapper>
     </>
   );
 }
@@ -157,4 +168,11 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   color: ${({ theme }) => theme.colors.grey600};
   background-color: ${(props) => props.$backgroundcolor};
   border-radius: 2px;
+`;
+
+const ModalWrapper = styled.article`
+  display: flex;
+
+  margin-top: -55rem;
+  margin-left: -0.3rem;
 `;

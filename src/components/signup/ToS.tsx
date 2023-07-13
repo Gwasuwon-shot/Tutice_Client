@@ -54,20 +54,26 @@ export default function ToS() {
         <CheckText> 약관 전체 동의 </CheckText>
         <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
       </CheckWrapper>
+
       <Horizon />
+
       <CheckWrapper>
         {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         <Essential>(필수) </Essential>
         <CheckText> 만 14세 이상입니다 </CheckText>
       </CheckWrapper>
+
       <CheckWrapper>
-        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        <CheckedICWrapper>
+          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        </CheckedICWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>서비스 이용 약관</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
       </CheckWrapper>
+
       <CheckWrapper>
         {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         <Essential>(필수) </Essential>
@@ -76,6 +82,7 @@ export default function ToS() {
         </HyperLink>
         <CheckText> 동의 </CheckText>
       </CheckWrapper>
+
       <CheckWrapper>
         {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         <Optional>(선택) </Optional>
@@ -107,16 +114,20 @@ const CheckWrapper = styled.div`
   margin-bottom: 1.6rem;
 `;
 
-const TosNoneSignupIcon = styled(TosNoneSignupIc)`
+const CheckedICWrapper = styled.div`
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
 `;
 
+const TosNoneSignupIcon = styled(TosNoneSignupIc)`
+  width: 2rem;
+  height: 2rem;
+`;
+
 const TosCheckSignupIcon = styled(TosCheckedSignupIc)`
   width: 2rem;
   height: 2rem;
-  margin-right: 1rem;
 `;
 
 const CheckText = styled.p`

@@ -7,6 +7,9 @@ import { ko } from "date-fns/locale";
 import ToastModal from "../common/ToastModal";
 import Day from "./Day";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
+
+import StudentColorBox from "../common/StudentColorBox";
 
 interface DaysProp {
   currentMonth: Date;
@@ -60,9 +63,21 @@ export default function Days(props: DaysProp) {
         {openModal && selectedDate && (
           <ModalWrapper>
             <ToastModal>
-              <ModalContentWrapper>
-                <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
-              </ModalContentWrapper>
+              <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+              {myChildLessonList
+                .find((item) => isSameDay(new Date(item.date), selectedDate))
+                ?.dailyScheduleList.map((lesson) => (
+                  <ScheduleWrapper key={lesson.schedule.idx}>
+                    <StudentColorBox backgroundColor={STUDENT_COLOR[lesson.schedule.idx % 11]} />
+                    <ModalTime>
+                      {lesson.schedule.startTime} - {lesson.schedule.endTime}
+                    </ModalTime>
+                    <ModalName>{lesson.schedule.studentName}</ModalName>
+                    <ModalSubject $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]}>
+                      {lesson.schedule.subject}
+                    </ModalSubject>
+                  </ScheduleWrapper>
+                ))}
             </ToastModal>
           </ModalWrapper>
         )}
@@ -102,20 +117,43 @@ const DivideLine = styled.span`
   margin-bottom: 0.6rem;
 `;
 
-const ModalWrapper = styled.article`
+const ModalWrapper = styled.section`
   display: flex;
 
   margin-top: -55rem;
   margin-left: -0.3rem;
 `;
 
-const ModalContentWrapper = styled.div`
-  display: flex;
-
-  width: 29.3rem;
-`;
-
 const ModalDate = styled.p`
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey700};
+`;
+
+const ScheduleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ModalTime = styled.p`
+  ${({ theme }) => theme.fonts.body04};
+  color: ${({ theme }) => theme.colors.grey300};
+`;
+
+const ModalName = styled.p`
+  ${({ theme }) => theme.fonts.body01};
+  color: ${({ theme }) => theme.colors.grey700};
+`;
+
+const ModalSubject = styled.span<{ $backgroundcolor: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 1.6rem;
+  padding: 0.2rem 0.6rem;
+
+  background-color: ${(props) => props.$backgroundcolor};
+  ${({ theme }) => theme.fonts.caption01};
+  color: ${({ theme }) => theme.colors.grey500};
+  border-radius: 8px;
 `;

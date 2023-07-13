@@ -13,7 +13,7 @@ import {
 } from "../../assets";
 import { teacherFooterCategory } from "../../atom/teacherFooterCategory";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
-import { TeacherFooterType } from "../../type/teacherFooterType";
+import { TeacherFooterType } from "../../type/teacherHome/teacherFooterType";
 
 export default function TeacherFooter() {
   const [teacherFooterList, setTeacherFooterList] = useRecoilState<TeacherFooterType[]>(teacherFooterCategory);
@@ -73,9 +73,8 @@ const TeacherFooterWrapper = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  z-index: 10;
 
   width: 32rem;
   height: 7.2rem;

@@ -1,18 +1,5 @@
-import React, { useState } from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
-import { isModalOpen } from "../../atom/common/isModalOpen";
-import {
-  isSameDay,
-  isToday,
-  format,
-  endOfMonth,
-  endOfWeek,
-  startOfMonth,
-  startOfWeek,
-  addDays,
-  isSunday,
-} from "date-fns";
+import { isSameDay, isToday, format, isSunday } from "date-fns";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import ToastModal from "../common/ToastModal";

@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import BackButton from "../components/common/BackButton";
 import StudentNameLabel from "../components/common/StudentNameLabel";
 import ManageLessonCategory from "../components/manageLesson/ManageLessonCategory";
+import TreeLevel from "../components/manageLesson/TreeLevel";
 import { LESSON_SCHEDULE } from "../core/checkAttendance/lessonSchedule";
 import { STUDENT_COLOR } from "../core/common/studentColor";
 
@@ -24,6 +25,7 @@ export default function ManagfeLesson() {
           />
         </LabelWrapper>
         <ManageLessonCategory />
+        <TreeLevel />
       </ManageLessonWrapper>
     </>
   );

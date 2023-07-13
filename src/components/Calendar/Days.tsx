@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+
 import {
-  parse,
   isSameDay,
   isToday,
   format,
@@ -13,15 +14,10 @@ import {
   isSunday,
 } from "date-fns";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 
 interface DaysProp {
   currentMonth: Date;
-}
-
-interface Schedule {
-  idx: number;
-  studentName: string;
-  startTime: string;
 }
 
 export default function Days(props: DaysProp) {
@@ -36,6 +32,9 @@ export default function Days(props: DaysProp) {
   let days: React.ReactNode[] = [];
   let day: Date = startDate;
   let formattedDate = "";
+  function handleOpenModal() {
+    console.log("here");
+  }
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
@@ -46,14 +45,14 @@ export default function Days(props: DaysProp) {
       const myChildLessons = myChildLessonList.find((item) => isSameDay(new Date(item.date), day));
 
       days.push(
-        <Day key={day.toString()} $issunday={sunDay}>
+        <Day onClick={handleOpenModal} key={day.toString()} $issunday={sunDay}>
           <DayText $istoday={isTodayDate} $isnotvalid={format(currentMonth, "M") !== format(day, "M")}>
             {formattedDate}
           </DayText>
 
           {myChildLessons &&
             myChildLessons.dailyScheduleList.map((lesson) => (
-              <ScheduleWrapper key={lesson.schedule.idx}>
+              <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
                 {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
               </ScheduleWrapper>
             ))}
@@ -112,9 +111,13 @@ const Day = styled.article<DayProp>`
     ${$issunday ? "color: #FCB3A6" : undefined}
   `};
   flex-direction: column;
+  cursor: pointer;
 
-  width: 4.2rem;
+  width: 4.5rem;
   height: 6rem;
+  gap: 0.2rem;
+
+  padding-bottom: 0.3rem;
 `;
 
 interface DayTextProps {
@@ -124,8 +127,8 @@ interface DayTextProps {
 
 const DayText = styled.p<DayTextProps>`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   width: 1.6rem;
   height: 1.6rem;
@@ -144,9 +147,14 @@ const DivideLine = styled.span`
   margin-bottom: 0.6rem;
 `;
 
-const ScheduleWrapper = styled.p`
+const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
+  display: flex;
+  align-items: center;
+
+  height: 1.4rem;
+
   ${({ theme }) => theme.fonts.caption02};
   color: ${({ theme }) => theme.colors.grey600};
-
-  width: 4.2rem;
+  background-color: ${(props) => props.$backgroundcolor};
+  border-radius: 2px;
 `;

@@ -20,6 +20,8 @@ const Button = styled.button<{ $isGreen: boolean }>`
   justify-content: center;
   align-items: center;
 
+  width: 13.8rem;
+  height: 5rem;
   padding: 1.5rem 2.4rem;
   border-radius: 8px;
 

@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { upcomingClassData } from "../atom/attendanceCheck/upcomingClassData";
+import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
 import SubjectLabel from "../components/common/SubjectLabel";
 import check from "../core/checkAttendance/check.json";
 import checkCircle from "../core/checkAttendance/check_circle.json";
@@ -45,6 +46,10 @@ export default function CompleteCheckAttendance() {
         <StatusMention>수업이</StatusMention> <Status>{attendanceData?.status}</Status>{" "}
         <StatusMention>처리 되었습니다.</StatusMention>
       </StatusMentionWrapper>
+      <ButtonWrapper>
+        <RoundBottomMiniButton isGreen={false}>확인</RoundBottomMiniButton>
+        <RoundBottomMiniButton isGreen={true}>학부모 알림 전송</RoundBottomMiniButton>
+      </ButtonWrapper>
     </CompleteCheckAttendanceWrapper>
   );
 }
@@ -100,4 +105,13 @@ const LottieImage = styled.section`
   justify-content: center;
 
   margin-top: 8.19rem;
+`;
+
+const ButtonWrapper = styled.section`
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 2.2rem;
+
+  width: 29.5rem;
 `;

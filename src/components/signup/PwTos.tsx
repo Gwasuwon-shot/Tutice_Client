@@ -5,7 +5,7 @@ import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BottomButton from "../common/BottomButton";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
 import RegexField from "./RegexField";

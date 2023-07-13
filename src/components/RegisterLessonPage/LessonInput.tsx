@@ -37,6 +37,10 @@ export default function LessonInput() {
         setStudentName(event.target.value);
     };
 
+    const isNameValid = studentName.length >= 3; 
+    // 학생 이름이 세 글자 이상인지 확인
+
+
     return (
         
     <InputWrapper>
@@ -51,6 +55,7 @@ export default function LessonInput() {
                 onFocus={handleNameInputFocus}
                 onBlur={handleNameInputBlur} 
             />
+            {!isNameValid && studentName.length > 0 && <WarningMessage> 이름은 최소 2자 이상 입력해주세요 </WarningMessage>}
         </NameInputSection>
 
         <SubjectInputSection subjectFocused={isSubjectInputFocused}>
@@ -72,9 +77,7 @@ const InputWrapper = styled.div`
     justify-content: center;
     align-items: center;
 
-    gap: 2rem;
-
-    margin-top: 3.3rem;
+    margin-top: 2rem;
 `
 
 const NameInputSection = styled.section<NameInputSectionProp>`
@@ -83,7 +86,8 @@ const NameInputSection = styled.section<NameInputSectionProp>`
     
     width: 29.2rem;
     height: 5.6rem;
-    
+    margin-bottom: 1.3rem;
+
     border-bottom: 1px solid
     ${({ theme, nameFocused }) => (nameFocused ? theme.colors.green5 : theme.colors.grey70)};
 `
@@ -124,4 +128,9 @@ const SubjectInput = styled.input`
     
     ${({ theme }) => theme.fonts.title03};
     color: ${({ theme }) => theme.colors.grey400};
+`
+
+const WarningMessage = styled.h3`
+    ${({ theme }) => theme.fonts.body06};
+    color: ${({ theme }) => theme.colors.sementic_red};
 `

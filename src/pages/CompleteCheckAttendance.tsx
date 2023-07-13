@@ -1,14 +1,16 @@
 import Lottie from "lottie-react";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { upcomingClassData } from "../atom/attendanceCheck/upcomingClassData";
+import RoundBottomButton from "../components/common/RoundBottomButton";
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
 import SubjectLabel from "../components/common/SubjectLabel";
 import check from "../core/checkAttendance/check.json";
 import checkCircle from "../core/checkAttendance/check_circle.json";
+import { ATTENDANCE_STATUS } from "../core/common/attendanceStatus";
 import { STUDENT_COLOR } from "../core/common/studentColor";
 
 export default function CompleteCheckAttendance() {
@@ -24,6 +26,20 @@ export default function CompleteCheckAttendance() {
     date?.split("-")[0] + "년 " + date?.split("-")[1] + "월 " + date?.split("-")[2] + "일 ",
   );
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const navigate = useNavigate();
+
+  function checkIsAttendance() {
+    return attendanceData?.status === ATTENDANCE_STATUS.attend;
+  }
+
+  function handleMoveToHome() {
+    navigate("/");
+  }
+
+  function handleSendAlarm() {
+    // 서버에 포스트 보내기 attendanceData?.idx
+    // 포스트 성공하면 navigate("/");
+  }
 
   return (
     <CompleteCheckAttendanceWrapper>
@@ -46,10 +62,20 @@ export default function CompleteCheckAttendance() {
         <StatusMention>수업이</StatusMention> <Status>{attendanceData?.status}</Status>{" "}
         <StatusMention>처리 되었습니다.</StatusMention>
       </StatusMentionWrapper>
-      <ButtonWrapper>
-        <RoundBottomMiniButton isGreen={false}>확인</RoundBottomMiniButton>
-        <RoundBottomMiniButton isGreen={true}>학부모 알림 전송</RoundBottomMiniButton>
-      </ButtonWrapper>
+      {checkIsAttendance() ? (
+        <ButtonWrapper>
+          <RoundBottomMiniButton isGreen={false} onClick={handleMoveToHome}>
+            확인
+          </RoundBottomMiniButton>
+          <RoundBottomMiniButton isGreen={true} onClick={handleSendAlarm}>
+            학부모 알림 전송
+          </RoundBottomMiniButton>
+        </ButtonWrapper>
+      ) : (
+        <ButtonWrapper onClick={handleMoveToHome}>
+          <RoundBottomButton buttonMessage="확인" />
+        </ButtonWrapper>
+      )}
     </CompleteCheckAttendanceWrapper>
   );
 }

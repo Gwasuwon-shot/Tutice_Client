@@ -3,13 +3,14 @@ import { styled } from "styled-components";
 interface RoundBottomMiniButtonProps {
   isGreen: boolean;
   children: ReactNode;
+  onClick: () => void;
 }
 
 export default function RoundBottomMiniButton(props: RoundBottomMiniButtonProps) {
-  const { isGreen, children } = props;
+  const { isGreen, children, onClick } = props;
 
   return (
-    <Button type="button" $isGreen={isGreen}>
+    <Button type="button" $isGreen={isGreen} onClick={onClick}>
       {children}
     </Button>
   );

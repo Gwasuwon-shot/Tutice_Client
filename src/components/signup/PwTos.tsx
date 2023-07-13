@@ -10,6 +10,7 @@ import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
 
 export default function PwTos() {
+  const [pwRegex, setPwRegex] = useState(false);
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -22,8 +23,10 @@ export default function PwTos() {
 
   function checkPassword(pw: string) {
     if (pw.match(PW_REGEX) === null) {
+      setPwRegex(false);
       console.log("비밀번호 형식 틀림~");
     } else {
+      setPwRegex(true);
       console.log("비밀번호 형식 맞음~");
     }
   }

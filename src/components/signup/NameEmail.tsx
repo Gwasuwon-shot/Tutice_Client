@@ -17,7 +17,8 @@ export default function NameEmail() {
   const [isName, setIsName] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
+  const [nameFocus, setNameFocus] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
   const NAME_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -41,8 +42,6 @@ export default function NameEmail() {
     setStep(3);
   }
 
-  function handNameFocus() {}
-
   useEffect(() => {
     name && email ? setIsActive(true) : setIsActive(false);
     console.log(name, email, isEmail, isName);
@@ -53,28 +52,32 @@ export default function NameEmail() {
       <BackButton />
       <Container>
         <SignupTitleLayout MainText={NAME_TEXT} />
-        <InputWrapper>
+        <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
           <TextLabelLayout labelText={"이름"} />
           <Inputfield
+            onFocus={() => setNameFocus(true)}
+            onBlur={() => setNameFocus(false)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleNameChange(e)}
             type="text"
             placeholder="이름을 입력하세요"
           />
-        </InputWrapper>
+        </InputNameWrapper>
         {isName ? null : (
           <RegexField
             unMatchText="
         이름은 최소 2자 이상 입력해주세요."
           />
         )}
-        <InputWrapper>
+        <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
           <TextLabelLayout labelText={"이메일"} />
           <Inputfield
+            onFocus={() => setEmailFocus(true)}
+            onBlur={() => setEmailFocus(false)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
             type="text"
             placeholder="사용하실 이메일을 입력하세요"
           />
-        </InputWrapper>
+        </InputEmailWrapper>
 
         {isEmail ? null : <RegexField unMatchText="올바른 이메일 형식으로 입력해 주세요." />}
         <BottomButton children="완료" isActive={isActive} onClick={handleDoneClick} />
@@ -91,13 +94,26 @@ const Container = styled.section`
   margin-top: 5rem;
 `;
 
-const InputWrapper = styled.div`
+const InputNameWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
   width: 29.2rem;
   margin-top: 3.2rem;
-  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
+
+  border-bottom: 0.1rem solid
+    ${({ theme, $nameFocus, $isName }) => ($nameFocus || $isName ? theme.colors.green5 : theme.colors.grey70)};
+`;
+
+const InputEmailWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 29.2rem;
+  margin-top: 3.2rem;
+
+  border-bottom: 0.1rem solid
+    ${({ theme, $emailFocus, $isEmail }) => ($emailFocus || $isEmail ? theme.colors.green5 : theme.colors.grey70)};
 `;
 
 const Inputfield = styled.input`

@@ -10,7 +10,7 @@ export default function SendAlarmCheckModal() {
         <p>박송현</p> 학생
         <subject></subject>의 학부모님께 3회차 수업 출결 알림을 보낼까요?
       </article>
-      <RoundBottomMiniButton isGreen={false} onClick={}>
+      <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
         괜찮아요
       </RoundBottomMiniButton>
       <RoundBottomMiniButton isGreen={false} onClick={}>

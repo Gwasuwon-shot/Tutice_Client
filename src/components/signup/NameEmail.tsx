@@ -6,23 +6,34 @@ import BackButton from "../common/BackButton";
 import TextLabelLayout from "./TextLabelLayout";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { newUserData, stepNum } from "../../atom/signup/signup";
+import RegexField from "./RegexField";
+import { EMAIL_REGEX } from "../../core/signup/regex";
 
 export default function NameEmail() {
+  const [newUser, setNewUser] = useRecoilState(newUserData);
+  const setStep = useSetRecoilState(stepNum);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [newUser, setNewUser] = useRecoilState(newUserData);
+  const [isName, setIsName] = useState(false);
+  const [isEmail, setIsEmail] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const NAME_TEXT = "가입을 위해 \n 이름과 이메일이 필요해요";
-  const setStep = useSetRecoilState(stepNum);
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setName(e.target.value);
+    name.length > 1 ? setIsName(true) : setIsName(false);
   }
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setEmail(e.target.value);
+    if (email.match(EMAIL_REGEX) === null) {
+      setIsEmail(false);
+    } else {
+      setIsEmail(true);
+    }
   }
 
   function handleDoneClick() {
@@ -30,10 +41,12 @@ export default function NameEmail() {
     setStep(3);
   }
 
+  function handNameFocus() {}
+
   useEffect(() => {
     name && email ? setIsActive(true) : setIsActive(false);
-    console.log(newUser);
-  }, [name, email]);
+    console.log(name, email, isEmail, isName);
+  }, [name, email, isName, isEmail]);
 
   return (
     <>
@@ -48,6 +61,12 @@ export default function NameEmail() {
             placeholder="이름을 입력하세요"
           />
         </InputWrapper>
+        {isName ? null : (
+          <RegexField
+            unMatchText="
+        이름은 최소 2자 이상 입력해주세요."
+          />
+        )}
         <InputWrapper>
           <TextLabelLayout labelText={"이메일"} />
           <Inputfield
@@ -56,6 +75,8 @@ export default function NameEmail() {
             placeholder="사용하실 이메일을 입력하세요"
           />
         </InputWrapper>
+
+        {isEmail ? null : <RegexField unMatchText="올바른 이메일 형식으로 입력해 주세요." />}
         <BottomButton children="완료" isActive={isActive} onClick={handleDoneClick} />
       </Container>
     </>

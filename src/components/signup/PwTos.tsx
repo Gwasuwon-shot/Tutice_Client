@@ -49,13 +49,7 @@ export default function PwTos() {
     pw === confirmPw ? setDoubleCheck(true) : setDoubleCheck(false);
   }
 
-  useEffect(() => {
-    console.log(newUser);
-
-    console.log("pw", pw);
-    console.log("confirmPw", confirmPw);
-    // pw === confirmPw ? setIsActive(true) : setIsActive(false);
-  }, [pw, confirmPw]);
+  useEffect(() => {}, [pw, confirmPw, pwRegex, doubleCheck]);
 
   return (
     <>
@@ -75,7 +69,6 @@ export default function PwTos() {
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호" />
           <Inputfield
-            // onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePWChange(e)}
             onClick={(e: React.ChangeEvent<HTMLInputElement>) => checkPassword(e)}
             type="text"
             placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "

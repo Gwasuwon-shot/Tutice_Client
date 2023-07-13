@@ -24,3 +24,4 @@ export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextC
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
 export { ReactComponent as RegularLessonStudentIc } from "./icon/regularLessonStudentIc.svg";
+export { ReactComponent as RegularLessonNotebookIc } from "./icon/regularLessonNotebookIc.svg";

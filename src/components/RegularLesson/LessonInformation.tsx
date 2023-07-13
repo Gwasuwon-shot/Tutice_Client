@@ -1,7 +1,6 @@
 import React from 'react';
-import {RegularLessonStudentIc} from '../../assets';
+import {RegularLessonNotebookIc} from '../../assets';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import SubjectLabel from '../common/SubjectLabel';
 import styled from 'styled-components';
 
 export default function LessonInformation() {
@@ -10,11 +9,15 @@ export default function LessonInformation() {
     
     return (
         <LessonInformationWrapper>
-            
+            <RegularLessonNotebookIcon />
         </LessonInformationWrapper>
     );
 }
 
 const LessonInformationWrapper = styled.section`
 
+`
+
+const RegularLessonNotebookIcon = styled(RegularLessonNotebookIc)`
+    
 `

@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import { upcomingClassData } from "../../atom/attendanceCheck/upcomingClassData";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
-import AttendanceDoubleCheckingModal from "./AttendanceDoubleCheckingModal";
+import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import PreviewBanner from "./PreviewBanner";
 import WelcomeTeacher from "./WelcomeTeacher";
 
@@ -17,7 +17,7 @@ export default function WelcomeNUpcomingBanner() {
   return (
     <>
       {openModal && isCheckingModalOpen && (
-        <ModalSection $isCheckingModalOpen={issCheckingModalOpen}>
+        <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
           <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
         </ModalSection>
       )}

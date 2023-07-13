@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
+import RegexField from "./RegexField";
 
 export default function PwTos() {
   const [pwRegex, setPwRegex] = useState(false);
@@ -65,11 +66,13 @@ export default function PwTos() {
           <TextLabelLayout labelText="비밀번호" />
           <Inputfield
             // onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePWChange(e)}
-            onClick={(e) => checkPassword(e.target.value)}
+            onClick={(e: React.ChangeEvent<HTMLInputElement>) => checkPassword(e.target.value)}
             type="text"
             placeholder="8~16자의 영문, 숫자, 특수문자를 사용하세요 "
           />
         </InputWrapper>
+        {pwRegex ? null : <RegexField unMatchText="8~16자의 영문, 숫자, 특수문자를 모두 포함해주세요." />}
+
         <InputWrapper>
           <TextLabelLayout labelText="비밀번호 확인" />
           <Inputfield

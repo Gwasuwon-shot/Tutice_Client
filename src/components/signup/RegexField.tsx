@@ -9,7 +9,11 @@ export default function RegexField(props: RegexFieldProps) {
 }
 
 const RegexText = styled.p`
+  margin-left: 0.2rem;
+  margin-top: 0.5rem;
+
   /* 임시 컬러 ㅠㅠ */
   color: #ec583e;
+
   ${({ theme }) => theme.fonts.body06};
 `;

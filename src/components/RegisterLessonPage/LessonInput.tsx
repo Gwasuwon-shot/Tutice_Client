@@ -13,11 +13,14 @@ interface SubjectInputSectionProp {
 
 export default function LessonInput() {
 
+    // 1. 학생이름 / 과목이름에 Focus 되었는지 여부 관리
     const [isNameInputFocused, setNameInputFocused] = useState(false);
     const [isSubjectInputFocused, setSubjectInputFocused] = useState(false);
 
+    // 2. 학생이름, 과목이름 입력값 관리
     const [studentName, setStudentName] = useState('');
-  
+    const [subjectName, setSubjectName] = useState('');
+    
     const handleNameInputFocus = () => {
         setNameInputFocused(true);
     };
@@ -38,8 +41,18 @@ export default function LessonInput() {
         setStudentName(event.target.value);
     };
 
+    const handleSubjectInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setSubjectName(event.target.value);
+    };
+
+
     const isNameValid = studentName.length >= 3; 
 
+    const isWarning = !isNameValid && studentName.length > 0
+
+    if (studentName !== "" && subjectName !== "") {
+        
+    }
 
     return (
         
@@ -55,14 +68,16 @@ export default function LessonInput() {
                 onFocus={handleNameInputFocus}
                 onBlur={handleNameInputBlur} 
             />
-            {!isNameValid && studentName.length > 0 && <WarningMessage> 이름은 최소 2자 이상 입력해주세요 </WarningMessage>}
+            {isWarning && <WarningMessage> 이름은 최소 2자 이상 입력해주세요 </WarningMessage>}
             {isNameInputFocused && <RegisterLessonInputIcon/>}
         </NameInputSection>
 
-        <SubjectInputSection subjectFocused={isSubjectInputFocused}>
+        <SubjectInputSection subjectFocused={isSubjectInputFocused} isWarning = {isWarning}>
             <InputName> 과목 </InputName>
             <SubjectInput type = 'text' 
                 placeholder = '수업과목을 입력하세요' 
+                value={subjectName}
+                onChange={handleSubjectInputChange}
                 onFocus = {handleSubjectInputFocus}
                 onBlur={handleSubjectInputBlur}
             />
@@ -96,7 +111,7 @@ const NameInputSection = styled.section<NameInputSectionProp>`
     ${({ theme, nameFocused }) => (nameFocused ? theme.colors.green5 : theme.colors.grey70)};
 `
 
-const SubjectInputSection = styled.section<SubjectInputSectionProp>`
+const SubjectInputSection = styled.section<SubjectInputSectionProp & { isWarning : boolean }>`
     display: flex;
     flex-direction: column;
     
@@ -104,7 +119,8 @@ const SubjectInputSection = styled.section<SubjectInputSectionProp>`
 
     width: 29.2rem;
     height: 5.6rem;
-    
+    margin-top: ${({ isWarning }) => (isWarning ? '1.3rem' : '0')};
+
     border-bottom: 1px solid
     ${({ theme, subjectFocused }) => (subjectFocused ? theme.colors.green5 : theme.colors.grey70)};
 `
@@ -129,7 +145,7 @@ const StudentInput = styled.input`
 
 const SubjectInput = styled.input`
     display: flex;
-
+    
     margin-bottom: 1rem;
     
     ${({ theme }) => theme.fonts.title03};

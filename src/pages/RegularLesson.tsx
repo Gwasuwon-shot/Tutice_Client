@@ -1,4 +1,5 @@
 import Header from '../components/RegularLesson/Header';
+import LessonInformation from '../components/RegularLesson/LessonInformation';
 import StudentInformation from '../components/RegularLesson/StudentInformation';
 
 export default function RegularLesson() {
@@ -6,6 +7,7 @@ export default function RegularLesson() {
   <>
     <Header />
     <StudentInformation />
+    <LessonInformation />
   </>
   );
 }

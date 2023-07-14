@@ -59,14 +59,17 @@ export default function PwTos() {
         <TitleWrapper>
           <SignupTitleLayout MainText={SIGNUP_TITLE.leftInfo} />
         </TitleWrapper>
+
         <InputWrapper>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
           <Inputfield disabled type="text" value={newUser.name} />
         </InputWrapper>
+
         <InputWrapper>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
           <Inputfield disabled type="text" value={newUser.email} />
         </InputWrapper>
+
         <InputPwWrapper $isPassword={isPassword} $pwFocus={setPwFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
           <Inputfield
@@ -77,6 +80,7 @@ export default function PwTos() {
             placeholder={PLACEHOLDER_TEXT.passwordHolder}
           />
         </InputPwWrapper>
+
         {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
         <InputConfirmWrapper $confirmFocus={confirmFocus} $doubleCheck={doubleCheck}>
@@ -89,8 +93,11 @@ export default function PwTos() {
             placeholder={PLACEHOLDER_TEXT.confirmHolder}
           />
         </InputConfirmWrapper>
+
         {!doubleCheck && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+
         <Tos />
+
         <BottomButton
           disabled={!isActive}
           isActive={isActive}
@@ -124,7 +131,7 @@ const InputWrapper = styled.div`
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 `;
 
-const InputPwWrapper = styled.div`
+const InputPwWrapper = styled.div<{ $pwFocus: boolean; $isPassword: boolean }>`
   display: flex;
   flex-direction: column;
 
@@ -134,7 +141,7 @@ const InputPwWrapper = styled.div`
     ${({ theme, $pwFocus, $isPassword }) => ($pwFocus || $isPassword ? theme.colors.green5 : theme.colors.grey70)};
 `;
 
-const InputConfirmWrapper = styled.div`
+const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $doubleCheck: boolean }>`
   display: flex;
   flex-direction: column;
 

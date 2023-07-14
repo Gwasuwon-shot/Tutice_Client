@@ -101,7 +101,7 @@ const Container = styled.section`
   margin-top: 5rem;
 `;
 
-const InputNameWrapper = styled.div`
+const InputNameWrapper = styled.div<{ $nameFocus: boolean; $isName: boolean }>`
   display: flex;
   flex-direction: column;
 
@@ -112,7 +112,7 @@ const InputNameWrapper = styled.div`
     ${({ theme, $nameFocus, $isName }) => ($nameFocus || $isName ? theme.colors.green5 : theme.colors.grey70)};
 `;
 
-const InputEmailWrapper = styled.div`
+const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }>`
   display: flex;
   flex-direction: column;
 

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function StepRenderer() {
   const step = useRecoilValue(stepNum);
-  // const [step, setStep] = useState(1);
   const navigate = useNavigate();
   switch (step) {
     case 0:

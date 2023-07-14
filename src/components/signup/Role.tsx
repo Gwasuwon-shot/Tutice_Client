@@ -18,7 +18,6 @@ export default function Role() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
 
   function handleRadioClick(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log();
     setIsActive(true);
     setRole(e.target.value);
   }
@@ -28,9 +27,6 @@ export default function Role() {
     setStep(2);
   }
 
-  useEffect(() => {
-    console.log(newUser);
-  }, []);
   return (
     <>
       <ProgressBar progress={0} />

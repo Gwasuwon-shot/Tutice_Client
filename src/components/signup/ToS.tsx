@@ -4,36 +4,6 @@ import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
 
 export default function ToS() {
-  const [checked, setChecked] = useState(false);
-  const [isAllChecked, setAllChecked] = useState(false);
-  // 체크 상태 확인 => 초기 세팅은 전부 선택되지 않은 상태
-  const [checkedState, setCheckedState] = useState([]);
-
-  const checkList = [
-    { id: 1, isChecked: false },
-    { id: 2, isChecked: false },
-    { id: 3, isChecked: false },
-    { id: 4, isChecked: false },
-  ];
-
-  function checkItemHandler(id: number, isChecked: boolean) {
-    if (isChecked) {
-      setCheckedState((prev) => [...prev, id]);
-    } else {
-      setCheckedState(checkedState.filter((item) => item !== id));
-    }
-  }
-
-  function allCheckedHandler(e) {
-    setChecked(!checked);
-    if (e.target.checked) {
-      setCheckedState(checkList.map((item) => item.id));
-    } else {
-      setCheckedState([]);
-    }
-    console.log(`allCheck =`, e.target.checked);
-  }
-
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.innerText) {
       case "서비스 이용 약관":
@@ -47,17 +17,13 @@ export default function ToS() {
         break;
     }
   }
-  function isChecked() {
-    console.log("Checked");
-  }
-  function AllChecked() {
-    setChecked(!checked);
-  }
 
   return (
     <TosWrapper>
       <CheckWrapper>
-        <ICWrapper onClick={AllChecked}>{AllChecked ? <TosNoneSignupIcon /> : <TosCheckSignupIcon />}</ICWrapper>
+        <ICWrapper>
+          <TosNoneSignupIcon />
+        </ICWrapper>
         <CheckText> 약관 전체 동의 </CheckText>
         <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
       </CheckWrapper>
@@ -65,7 +31,7 @@ export default function ToS() {
       <Horizon />
 
       <CheckWrapper>
-        <ICWrapper id="1">
+        <ICWrapper>
           {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         </ICWrapper>
         <Essential>(필수) </Essential>
@@ -73,7 +39,7 @@ export default function ToS() {
       </CheckWrapper>
 
       <CheckWrapper>
-        <ICWrapper id="2">
+        <ICWrapper>
           {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         </ICWrapper>
         <Essential>(필수) </Essential>
@@ -84,7 +50,7 @@ export default function ToS() {
       </CheckWrapper>
 
       <CheckWrapper>
-        <ICWrapper id="3">
+        <ICWrapper>
           {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         </ICWrapper>
         <Essential>(필수) </Essential>
@@ -95,7 +61,7 @@ export default function ToS() {
       </CheckWrapper>
 
       <CheckWrapper>
-        <ICWrapper id="4">
+        <ICWrapper>
           {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
         </ICWrapper>
         <Optional>(선택) </Optional>

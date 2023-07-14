@@ -1,12 +1,12 @@
 import React from "react";
 import { styled } from "styled-components";
 
-interface TextLabelLayoutProps {
+interface TextLabelLayoutProp {
   labelText: string;
 }
 
-export default function TextLabelLayout(props: TextLabelLayoutProps) {
-  const { labelText } = props;
+export default function TextLabelLayout(props: TextLabelLayoutProp) {
+  const { labelText } = prop;
   return <Label> {labelText} </Label>;
 }
 

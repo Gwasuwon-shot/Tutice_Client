@@ -10,13 +10,16 @@ import styled from 'styled-components';
 export default function TimePicker() {
     const [activeSlide, setActiveSlide] = useState(0);
 
-    const handleSlideChange = (swiper) => {
+    const handleSlideChange = (swiper: Swiper) => {
         setActiveSlide(swiper.realIndex);
-        console.log(activeSlide);
     };
 
+    useEffect(() => {
+        console.log(activeSlide);
+    }, [activeSlide]);
+
     const slides = Array.from({ length: 12 }, (_, index) => (
-        <SwiperSlide key={index} value={index + 1}>
+        <SwiperSlide key={index}>
           {index + 1}
         </SwiperSlide>
       ));
@@ -37,7 +40,6 @@ export default function TimePicker() {
                 freeModeSticky={true}
                 freeModeMomentumRatio={0.25}
                 freeModeMinimumVelocity={0.1}
-                mousewheelSensitivity={0.5}
                 loop={true}
                 loopAdditionalSlides={5}
                 slideToClickedSlide={true}

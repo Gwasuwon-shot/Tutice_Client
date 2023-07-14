@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import { ViewingLoginIc } from "../../assets";
 
 export default function LoginInput() {
-  const [pwViewing, setPwViewing] = useState("password");
+  const [pwViewing, setPwViewing] = useState(false);
+  const [pwFocus, setPwFocus] = useState(false);
+  const [password, setPassword] = useState(false);
+
+  function handlePWFocusing(e) {
+    setPassword(e.target.value);
+  }
+
+  useEffect(() => {
+    console.log(password);
+    password === "" ? setPwViewing(false) : setPwViewing(true);
+  }, []);
+
   return (
     <>
       <InputFieldWrapper>
@@ -14,8 +26,8 @@ export default function LoginInput() {
       <InputFieldWrapper>
         <TextLabelLayout labelText="비밀번호" />
         <PasswordIconWrapper>
-          <Inputfield type="password" placeholder="비밀번호를 입력하세요" />
-          <ViewingLoginIcon />
+          <Inputfield onChange={(e) => handlePWFocusing(e)} type="password" placeholder="비밀번호를 입력하세요" />
+          {pwViewing ? <ViewingLoginIcon /> : null}
         </PasswordIconWrapper>
       </InputFieldWrapper>
     </>

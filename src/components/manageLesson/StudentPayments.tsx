@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import useGetAllPayments from "../../hooks/useGetAllPayments";
+import { PaymentRecordsType } from "../../type/manageLesson/paymentRecordsType";
 import StudentPayment from "./StudentPayment";
-
-interface PaymentRecordsType {
-  idx: number;
-  date: string;
-  amount: number;
-}
 
 export default function StudentPayments() {
   const { lesson, todayDate, paymentRecord } = useGetAllPayments();
@@ -25,8 +20,6 @@ export default function StudentPayments() {
       setAllPaymentRecords(copyPaymentRecordList);
     }
   }, []);
-
-  console.log(allPaymentRecords);
 
   return (
     <>

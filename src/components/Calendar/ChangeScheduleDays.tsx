@@ -8,6 +8,8 @@ import ToastModal from "../common/ToastModal";
 import Day from "./Day";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { useNavigate } from "react-router-dom";
+import { EditPencilIc, removeTrashCan } from "../../assets";
 
 import StudentColorBox from "../common/StudentColorBox";
 
@@ -15,7 +17,7 @@ interface DaysProp {
   currentMonth: Date;
 }
 
-export default function Days(props: DaysProp) {
+export default function ChangeScheduleDays(props: DaysProp) {
   const { currentMonth } = props;
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
@@ -24,10 +26,26 @@ export default function Days(props: DaysProp) {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
+  const navigate = useNavigate();
+  const [isEdit, setIsEdit] = useState(false);
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
   let day: Date = startDate;
+
+  function handleClickEdit() {
+    setIsEdit(true);
+  }
+  function handleCloseButton() {
+    //update 로직 추가
+    setOpenModal(false);
+    setIsEdit(false);
+  }
+
+  function moveClickEditPage() {
+    //params 추가
+    navigate("/change-lessonschedule");
+  }
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
@@ -64,20 +82,39 @@ export default function Days(props: DaysProp) {
           <ModalWrapper>
             <ToastModal>
               <ModalContentWrapper>
-                <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
-
+                <ModalHeaderWrapper>
+                  <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+                  {isEdit ? (
+                    <ModalButtonWrapper style={{ justifyContent: "flex-end" }}>
+                      <ModalButton onClick={handleCloseButton}>완료</ModalButton>
+                    </ModalButtonWrapper>
+                  ) : (
+                    <ModalButtonWrapper>
+                      <ModalButton onClick={handleClickEdit}>편집</ModalButton>
+                      <ModalButton onClick={handleCloseButton}>닫기</ModalButton>
+                    </ModalButtonWrapper>
+                  )}
+                </ModalHeaderWrapper>
                 {myChildLessonList
                   .find((item) => isSameDay(new Date(item.date), selectedDate))
                   ?.dailyScheduleList.map((lesson) => (
                     <ScheduleWrapper key={lesson.schedule.idx}>
-                      <StudentColorBox backgroundColor={STUDENT_COLOR[lesson.schedule.idx % 11]} />
-                      <ModalTime>
-                        {lesson.schedule.startTime} - {lesson.schedule.endTime}
-                      </ModalTime>
-                      <ModalName>{lesson.schedule.studentName}</ModalName>
-                      <ModalSubject $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]}>
-                        {lesson.schedule.subject}
-                      </ModalSubject>
+                      <ScheduleContainer>
+                        <StudentColorBox backgroundColor={STUDENT_COLOR[lesson.schedule.idx % 11]} />
+                        <ModalTime>
+                          {lesson.schedule.startTime} - {lesson.schedule.endTime}
+                        </ModalTime>
+                        <ModalName>{lesson.schedule.studentName}</ModalName>
+                        <ModalSubject $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]}>
+                          {lesson.schedule.subject}
+                        </ModalSubject>
+                      </ScheduleContainer>
+                      {isEdit ? (
+                        <ScheduleEditWrapper>
+                          <EditScheduleButton onClick={moveClickEditPage} />
+                          <RemoveSchedule />
+                        </ScheduleEditWrapper>
+                      ) : undefined}
                     </ScheduleWrapper>
                   ))}
               </ModalContentWrapper>
@@ -127,6 +164,28 @@ const ModalWrapper = styled.section`
   margin-left: -0.4rem;
 `;
 
+const ModalHeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  width: 29.3rem;
+`;
+
+const ModalButtonWrapper = styled.div`
+  display: flex;
+
+  width: 6.2rem;
+
+  gap: 1.2rem;
+`;
+
+const ModalButton = styled.button`
+  display: felx;
+
+  ${({ theme }) => theme.fonts.body02};
+  color: ${({ theme }) => theme.colors.grey400};
+`;
+
 const ModalContentWrapper = styled.article`
   display: flex;
   align-items: flex-start;
@@ -144,8 +203,16 @@ const ModalDate = styled.p`
 
 const ScheduleWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
+  width: 29.3rem;
+`;
+
+const ScheduleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.9rem;
 `;
 
@@ -171,4 +238,18 @@ const ModalSubject = styled.span<{ $backgroundcolor: string }>`
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey500};
   border-radius: 8px;
+`;
+
+const EditScheduleButton = styled(EditPencilIc)`
+  width: 1.6rem;
+  height: 1.6rem;
+`;
+
+const RemoveSchedule = styled(removeTrashCan)`
+  width: 1.6rem;
+  height: 1.6rem;
+`;
+
+const ScheduleEditWrapper = styled.div`
+  display: felx;
 `;

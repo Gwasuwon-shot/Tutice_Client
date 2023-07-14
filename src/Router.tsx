@@ -12,6 +12,10 @@ import RegisterLesson from "./pages/RegisterLesson";
 import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
+import TimePickerPage from "./pages/TimePickerPage";
+import OnBoarding from "./pages/OnBoarding";
+import ChangeSchedule from "./pages/ChangeSchedule";
+import ChangeLessonShcedule from "./pages/ChangeLessonShcedule";
 
 export default function Router() {
   return (
@@ -30,6 +34,9 @@ export default function Router() {
         <Route path="/regular-lesson" element={<RegularLesson />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/register-calendar" element={<RegisterCalendar />} />
+        <Route path="/time-picker" element={<TimePickerPage />} />
+        <Route path="/change-schedule" element={<ChangeSchedule />} />
+        <Route path="/change-lessonschedule" element={<ChangeLessonShcedule />} />
       </Routes>
     </BrowserRouter>
   );

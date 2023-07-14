@@ -17,7 +17,7 @@ const MainLessonsWrapper = styled.section`
 const MainLessonsHeader = styled.header`
   margin: 4rem 0 1.6rem;
 
-  color: ${({ theme }) => theme.fonts.grey900};
+  color: ${({ theme }) => theme.colors.grey900};
 
   ${({ theme }) => theme.fonts.title01};
 `;

@@ -39,6 +39,7 @@ export default function ChangeScheduleDays(props: DaysProp) {
   function handleCloseButton() {
     //update 로직 추가
     setOpenModal(false);
+    setIsEdit(false);
   }
 
   function moveClickEditPage() {

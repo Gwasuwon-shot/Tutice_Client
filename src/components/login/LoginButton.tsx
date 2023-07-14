@@ -1,16 +1,22 @@
 import { styled } from "styled-components";
 
-interface LoginButtonProp {
-  handleLoginClick: (e: React.MouseEvent<HTMLElement>) => void;
+interface LoginButtonProps {
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+  isActive: boolean;
+  disabled: boolean;
 }
 
-export default function LoginButton(prop: LoginButtonProp) {
-  const { handleLoginClick } = prop;
+export default function LoginButton(props: LoginButtonProps) {
+  const { onClick, isActive, disabled } = props;
 
-  return <Button onClick={handleLoginClick}> 로그인 </Button>;
+  return (
+    <Button disabled={disabled} $isActive={isActive} onClick={onClick}>
+      로그인
+    </Button>
+  );
 }
 
-const Button = styled.button`
+const Button = styled.button<{ $isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,6 +31,6 @@ const Button = styled.button`
 
   gap: 0.8rem;
 
-  background-color: ${({ theme }) => theme.colors.grey50};
-  color: ${({ theme }) => theme.colors.grey200};
+  background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
+  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};
 `;

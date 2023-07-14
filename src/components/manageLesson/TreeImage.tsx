@@ -26,7 +26,9 @@ export default function TreeImage() {
 
   return (
     <>
-      <img src={checkTreeSrc()} alt="열매 이미지" />
+      <ImgWrapper>
+        <img src={checkTreeSrc()} alt="열매 이미지" />
+      </ImgWrapper>
       <CountBox>
         {count - nowCount}회/ 총 {count}회
       </CountBox>
@@ -36,6 +38,19 @@ export default function TreeImage() {
 }
 
 const CountBox = styled.p`
+  display: flex;
+  justify-content: flex-end;
+
+  margin-bottom: 1.5rem;
+
   color: ${({ theme }) => theme.colors.grey500};
+
   ${({ theme }) => theme.fonts.body02};
+`;
+
+const ImgWrapper = styled.section`
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: -1.5rem;
 `;

@@ -12,7 +12,7 @@ export default function TreeImage() {
       <CountBox>
         {count - nowCount}회/ 총 {count}회
       </CountBox>
-      <TreeProgress progress={percent} />
+      <TreeProgress progress={percent} width={29.2} />
     </>
   );
 }

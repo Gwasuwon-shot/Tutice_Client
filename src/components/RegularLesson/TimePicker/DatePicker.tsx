@@ -7,42 +7,48 @@ import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 
 import styled from 'styled-components';
 
+interface monthCalenderProps {
+    month: number;
+    date: number; 
+    day: string;
+}
+
 export default function DatePicker() {
     
-    const monthCalender = [];
+    const monthCalender: monthCalenderProps[] = [];
     const weekDay: { [key: number]: string } = {1: '월', 2: '화', 3: '수', 4: '목', 5: '금', 6: '토', 0: '일'};
 
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1;
-    const todayDate = currentDate.getDate();
-    const todayDay = weekDay[currentDate.getDay()];
+    const currentDate: Date = new Date();
+    const currentYear: number = currentDate.getFullYear();
+    const currentMonth: number = currentDate.getMonth() + 1;
+    const todayDate: number = currentDate.getDate();
+    const todayDay: string = weekDay[currentDate.getDay()];
 
     // 1. 이전 달
 
-    let prevMonth = currentMonth - 1;
-    let prevYear = currentYear;
+    let prevMonth: number = currentMonth - 1;
+    let prevYear: number = currentYear;
 
     if (prevMonth === 0) {
         prevMonth = 12
         prevYear = currentYear - 1;
     }
 
-    const daysInPrevMonth = new Date(prevYear, prevMonth, 0).getDate();
+    const daysInPrevMonth: number = new Date(prevYear, prevMonth, 0).getDate();
 
     for (let i = 1; i <= daysInPrevMonth; i++) {
-        const date = new Date(prevYear, prevMonth-1, i);
-        const day = weekDay[date.getDay()];
+        const date: Date = new Date(prevYear, prevMonth-1, i);
+        const day: string = weekDay[date.getDay()];
         monthCalender.push({month: prevMonth, date: i, day: day});
     }
 
     // 2. 현재 달 
 
-    const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+    const daysInMonth: number = new Date(currentYear, currentMonth, 0).getDate();
 
     for (let i = 1; i <= daysInMonth; i++) {
-        const date = new Date(currentYear, currentMonth-1, i);
-        const day = weekDay[date.getDay()];
+        const date: Date = new Date(currentYear, currentMonth-1, i);
+        const day: string = weekDay[date.getDay()];
         monthCalender.push({month: currentMonth, date: i, day: day});
     }
 
@@ -55,11 +61,11 @@ export default function DatePicker() {
         nextYear = currentYear + 1;
     }
 
-    const daysInNextMonth = new Date(nextYear, nextMonth, 0).getDate();
+    const daysInNextMonth: number = new Date(nextYear, nextMonth, 0).getDate();
 
     for (let i = 1; i <= daysInNextMonth; i++) {
-        const date = new Date(nextYear, nextMonth-1, i);
-        const day = weekDay[date.getDay()];
+        const date: Date = new Date(nextYear, nextMonth-1, i);
+        const day: string = weekDay[date.getDay()];
         monthCalender.push({month: nextMonth, date: i, day: day});
     }
 
@@ -83,7 +89,7 @@ export default function DatePicker() {
     const slides = Array.from({ length: monthCalender.length }, (_, index) => (
         <SwiperSlide key={index}>
             <Month> {monthCalender[index].month} </Month>
-            <Date> {monthCalender[index].date} </Date>
+            <Dates> {monthCalender[index].date} </Dates>
             <Day> {monthCalender[index].day} </Day>
         </SwiperSlide>
     ));
@@ -162,7 +168,24 @@ const StyledSwiper = styled(Swiper)`
     }
 `    
 
+const Month = styled.span`
+    display: flex;
+    justify-content: center;
+    width: 3rem;
+`
 
+const Dates = styled.span`
+    display: flex;
+    justify-content: center;
+    width: 3rem;
+`
+
+const Day = styled.span`
+    display: flex;
+    justify-content: center;
+    width: 3rem;
+
+`
 
 const CancleWrapper = styled.div`
     display: flex;

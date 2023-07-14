@@ -1,14 +1,25 @@
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 
 import styled from 'styled-components';
 
 export default function TimePicker() {
+    const [activeSlide, setActiveSlide] = useState(0);
 
+    const handleSlideChange = (swiper) => {
+        setActiveSlide(swiper.realIndex);
+        console.log(activeSlide);
+    };
+
+    const slides = Array.from({ length: 12 }, (_, index) => (
+        <SwiperSlide key={index} value={index + 1}>
+          {index + 1}
+        </SwiperSlide>
+      ));
     
     return (
 
@@ -25,27 +36,15 @@ export default function TimePicker() {
                 freeMode={true}
                 freeModeSticky={true}
                 freeModeMomentumRatio={0.25}
-                freeModeVelocityRatio={0.25}
                 freeModeMinimumVelocity={0.1}
-                mousewheelControl={true}
                 mousewheelSensitivity={0.5}
                 loop={true}
                 loopAdditionalSlides={5}
                 slideToClickedSlide={true}
                 centeredSlides={true}
+                onSlideChange = {handleSlideChange}
             >
-                <SwiperSlide> 1 </SwiperSlide>
-                <SwiperSlide> 2 </SwiperSlide>
-                <SwiperSlide> 3 </SwiperSlide>
-                <SwiperSlide> 4 </SwiperSlide>
-                <SwiperSlide> 5 </SwiperSlide>
-                <SwiperSlide> 6 </SwiperSlide>
-                <SwiperSlide> 7 </SwiperSlide>
-                <SwiperSlide> 8 </SwiperSlide>
-                <SwiperSlide> 9 </SwiperSlide>
-                <SwiperSlide> 10 </SwiperSlide>
-                <SwiperSlide> 11 </SwiperSlide>
-                <SwiperSlide> 12 </SwiperSlide>
+                {slides}
             </StyledSwiper>
             <Vizor />
             
@@ -88,11 +87,11 @@ const StyledSwiper = styled(Swiper)`
         opacity: 0.4;
         cursor: pointer;
         transition: opacity 0.3s ease;
-        -webkit-tap-highlight-color: transparent;
     }
     
     & .swiper-slide-active {
         opacity: 1;
+        color: ${({ theme }) => theme.colors.grey700};
     }
 `    
 

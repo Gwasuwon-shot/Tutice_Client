@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import useManageLesson from "../../hooks/useManageLesson";
 import useModal from "../../hooks/useModal";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
-import AttnedanceInform from "./AttnedanceInform";
+import AttendanceInform from "./AttendanceInform";
 
 export default function AttendanceList() {
   const { scheduleList } = useManageLesson();
@@ -20,8 +20,15 @@ export default function AttendanceList() {
         {openModal && <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />}
       </ModalWrapper>
       <GreyBox />
-      {scheduleList.map(({ idx, date, status, startTime, endTime, count }) => (
-        <AttnedanceInform key={idx} date={date} status={status} startTime={startTime} endTime={endTime} count={count} />
+      {scheduleList.map(({ idx, date, status, startTime, endTime }, index) => (
+        <AttendanceInform
+          key={idx}
+          date={date}
+          status={status}
+          startTime={startTime}
+          endTime={endTime}
+          count={Math.abs(index - scheduleList.length)}
+        />
       ))}
     </>
   );

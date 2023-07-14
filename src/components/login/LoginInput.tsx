@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import TextLabelLayout from "../signup/TextLabelLayout";
+import { ViewingLoginIc } from "../../assets";
 
 export default function LoginInput() {
   const [pwViewing, setPwViewing] = useState("password");
@@ -12,7 +13,10 @@ export default function LoginInput() {
       </InputFieldWrapper>
       <InputFieldWrapper>
         <TextLabelLayout labelText="비밀번호" />
-        <Inputfield type="password" placeholder="비밀번호를 입력하세요" />
+        <PasswordIconWrapper>
+          <Inputfield type="password" placeholder="비밀번호를 입력하세요" />
+          <ViewingLoginIcon />
+        </PasswordIconWrapper>
       </InputFieldWrapper>
     </>
   );
@@ -22,15 +26,32 @@ const InputFieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  margin-right: 1.4rem;
   margin-bottom: 2rem;
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 `;
 
 const Inputfield = styled.input`
+  width: 20rem;
   margin: 1rem 0.2rem;
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
+`;
+
+const PasswordIconWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 29rem;
+`;
+
+const ViewingLoginIcon = styled(ViewingLoginIc)`
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 0.6rem;
+  flex-shrink: 0;
 `;

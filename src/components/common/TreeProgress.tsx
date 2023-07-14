@@ -9,23 +9,23 @@ export default function TreeProgress(props: TreeProgressProps) {
 
   return (
     <ProgressBarWrapper>
-      <Progress width={`${progress}%`} />
+      <Progress $progress={progress} />
     </ProgressBarWrapper>
   );
 }
 
 const ProgressBarWrapper = styled.div`
-  width: 100%;
+  width: 29.2rem;
   height: 0.4rem;
+  border-radius: 3px;
 
-  background-color: ${({ theme }) => theme.colors.grey20};
+  background-color: ${({ theme }) => theme.colors.green1};
 `;
 
-const Progress = styled.div<{ width: string }>`
-  width: ${(props) => props.width};
+const Progress = styled.div<{ $progress: number }>`
+  width: ${({ $progress }) => $progress}%;
   height: 100%;
 
   background-color: ${({ theme }) => theme.colors.green5};
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-radius: 3px;
 `;

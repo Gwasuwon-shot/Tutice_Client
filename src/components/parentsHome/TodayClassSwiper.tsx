@@ -17,7 +17,7 @@ export default function TodayClassSwiper() {
 
   const classList = [
     {
-      idx: "1",
+      idx: 1,
       studentName: "박송현",
       subject: "수학",
       startTime: "17:00",
@@ -25,7 +25,7 @@ export default function TodayClassSwiper() {
       teacherName: "유수확학",
     },
     {
-      idx: "2",
+      idx: 2,
       studentName: "박송현",
       subject: "수학",
       startTime: "18:00",
@@ -33,7 +33,7 @@ export default function TodayClassSwiper() {
       teacherName: "유수확학",
     },
     {
-      idx: "3",
+      idx: 3,
       studentName: "박송현",
       subject: "수학",
       startTime: "19:00",
@@ -58,6 +58,7 @@ export default function TodayClassSwiper() {
               endTime={classInfo.endTime}
               teacherName={classInfo.teacherName}
               subject={classInfo.subject}
+              classCount={classInfo.idx}
             />
           );
         })}

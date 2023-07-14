@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import SubjectLabel from "../common/SubjectLabel";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 
 interface TodayClassSceduleProps {
   studentName: string;
@@ -8,19 +9,20 @@ interface TodayClassSceduleProps {
   startTime: string;
   endTime: string;
   teacherName: string;
+  classCount: number;
 }
 
 export default function TodayClassScedule(props: TodayClassSceduleProps) {
-  const { studentName, subject, startTime, endTime, teacherName } = props;
+  const { studentName, subject, startTime, endTime, teacherName, classCount } = props;
 
   return (
     <TodayClassScheduleWrapper>
-      <ClassScheduleMark $backgroundColor={"pink"} />
+      <ClassScheduleMark backgroundColor={STUDENT_COLOR[classCount % 11]} />
       <ClassTime>
         {startTime} ~ {endTime}
       </ClassTime>
       <StudentName>{studentName}</StudentName>
-      <SubjectLabel subject={subject} backgroundColor="red" color="#5B6166" />
+      <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[classCount % 11]} color="#5B6166" />
       <TeacherName>{teacherName} 선생님</TeacherName>
     </TodayClassScheduleWrapper>
   );
@@ -40,14 +42,14 @@ const TodayClassScheduleWrapper = styled.article`
   border: 1px solid ${({ theme }) => theme.colors.grey100};
 `;
 
-const ClassScheduleMark = styled.div<{ $backgroundColor: string }>`
+const ClassScheduleMark = styled.div<{ backgroundColor: string }>`
   width: 1.3rem;
   height: 3.6rem;
   margin-right: 1.8rem;
 
   border-radius: 0.2rem;
 
-  background-color: ${(props) => props.$backgroundColor};
+  background-color: ${(props) => props.backgroundColor};
   color: ${({ theme }) => theme.colors.grey900};
 `;
 

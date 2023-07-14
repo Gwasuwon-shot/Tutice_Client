@@ -48,11 +48,14 @@ export default function LessonInput() {
     };
 
 
+    // 3. 이름 2자 이하 경고메시지 관련 변수
+    
     const isNameValid = studentName.length >= 3; 
 
     const isWarning = !isNameValid && studentName.length > 0
 
-    // 3. footer의 색상 변경 여부 관리
+    // 4. footer의 색상 변경 여부 관리
+    
     const isFooterGreen = subjectName !== "" && !isWarning;
     
 

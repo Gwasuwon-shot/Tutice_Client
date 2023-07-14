@@ -46,6 +46,7 @@ export default function TimePicker() {
                 <SwiperSlide> 11 </SwiperSlide>
                 <SwiperSlide> 12 </SwiperSlide>
             </StyledSwiper>
+            <Vizor />
             
             <ConfirmWrapper>
                 <ConfirmButton> 확인 </ConfirmButton>
@@ -60,6 +61,8 @@ const TimePickerWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    position: relative;
     height: 13rem;
     background-color: ${({ theme }) => theme.colors.grey20};
 `
@@ -81,8 +84,15 @@ const StyledSwiper = styled(Swiper)`
         align-items: center;
         text-align: center;
         vertical-align: center;
+        opacity: 0.4;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        -webkit-tap-highlight-color: transparent;
     }
     
+    & .swiper-slide-active {
+        opacity: 1;
+    }
 `    
 
 const CancleWrapper = styled.div`
@@ -112,4 +122,21 @@ const ConfirmButton = styled.button`
     position: absolute;
     top: 0.7rem;
     right: 1rem;
+`
+
+const Vizor = styled.div`
+    border: 1px solid #ccc;
+
+    width: 5rem;
+    height: 2rem;
+
+    position: absolute;
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index : 100;
+    
+    opacity: 0.2;
+    background-color: ${({ theme }) => theme.colors.grey200};
 `

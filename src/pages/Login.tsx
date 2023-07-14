@@ -12,7 +12,6 @@ export default function Login() {
       </Container>
       <CenterWrapper>
         <LoginInput />
-        <LoginButton />
         <AccountManaging />
       </CenterWrapper>
     </>

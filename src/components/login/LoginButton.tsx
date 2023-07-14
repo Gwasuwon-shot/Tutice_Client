@@ -1,7 +1,13 @@
 import { styled } from "styled-components";
 
-export default function LoginButton() {
-  return <Button> 로그인 </Button>;
+interface LoginButtonProp {
+  handleLoginClick: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
+export default function LoginButton(prop: LoginButtonProp) {
+  const { handleLoginClick } = prop;
+
+  return <Button onClick={handleLoginClick}> 로그인 </Button>;
 }
 
 const Button = styled.button`

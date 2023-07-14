@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import { viewingLoginIc, canViewingLoginIc } from "../../assets";
+import LoginButton from "./LoginButton";
 
 export default function LoginInput() {
-  // 임시 recoil로 만들어라
-  const [userLogin, setUserLogin] = useState([]);
+  const [userLogin, setUserLogin] = useState({ email: "", password: "" });
   const [email, setEmail] = useState("");
   const [emailFocus, setEmailFocus] = useState(false);
   const [password, setPassword] = useState("");
@@ -22,10 +22,8 @@ export default function LoginInput() {
     setPassword(e.target.value);
   }
 
-  //데이터 전달
-  function handleLoginClick() {
-    setUserLogin((prev) => ({ ...prev, email: email, password: password }));
-  }
+  //데이터 전달 : 추후 추가
+  function handleLoginClick() {}
 
   //뷰잉 상태 전환
   function handlePasswordViewing() {
@@ -44,9 +42,8 @@ export default function LoginInput() {
   }
 
   useEffect(() => {
-    console.log(password);
-    // 버튼 활성화
-  }, []);
+    setUserLogin((prev) => ({ ...prev, email: email, password: password }));
+  }, [email, password]);
 
   return (
     <>
@@ -75,11 +72,12 @@ export default function LoginInput() {
           {viewingIcon()}
         </PasswordIconWrapper>
       </InputPasswordWrapper>
+      <LoginButton handleLoginClick={handleLoginClick} />
     </>
   );
 }
 
-const InputEmailWrapper = styled.div`
+const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $email: string }>`
   display: flex;
   flex-direction: column;
 
@@ -91,7 +89,7 @@ const InputEmailWrapper = styled.div`
     ${({ theme, $emailFocus, $email }) => ($emailFocus || $email ? theme.colors.green5 : theme.colors.grey70)};
 `;
 
-const InputPasswordWrapper = styled.div`
+const InputPasswordWrapper = styled.div<{ $pwFocus: boolean; $password: string }>`
   display: flex;
   flex-direction: column;
 

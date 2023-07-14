@@ -7,7 +7,7 @@ import TeacherFooter from "../components/common/TeacherFooter";
 import ManageLessonCategory from "../components/manageLesson/ManageLessonCategory";
 import StudentLesson from "../components/manageLesson/StudentLesson";
 import StudentNameBox from "../components/manageLesson/StudentNameBox";
-import StudentPayment from "../components/manageLesson/StudentPayment";
+import StudentPayments from "../components/manageLesson/StudentPayments";
 import { MANAGE_LESSON_STATUS } from "../core/manageLesson/manageLessonStatus";
 
 export default function ManageLessonDetail() {
@@ -25,7 +25,7 @@ export default function ManageLessonDetail() {
       <ManageLessonWrapper>
         <StudentNameBox />
         <ManageLessonCategory />
-        {checkIsStatusLesson() ? <StudentLesson /> : <StudentPayment />}
+        {checkIsStatusLesson() ? <StudentLesson /> : <StudentPayments />}
       </ManageLessonWrapper>
       <TeacherFooter />
     </>

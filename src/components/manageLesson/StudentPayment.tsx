@@ -1,7 +1,5 @@
-import useGetAllPayments from "../../hooks/useGetAllPayments";
+import React from "react";
 
 export default function StudentPayment() {
-  const { lesson, todayDate, paymentRecord } = useGetAllPayments();
-
   return <div>StudentPayment</div>;
 }

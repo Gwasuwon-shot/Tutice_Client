@@ -22,24 +22,27 @@ export default function MainLesson(props: MainLessonProps) {
 
   return (
     <MainLessonBox>
-      <MainLessonWrapper>
-        <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
-        <StudentNameWrapper>{studentName}</StudentNameWrapper>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
-        {dayOfWeekList.map((day, idx) => (
-          <>{checkIsLastDay(idx, day)}</>
-        ))}
-        <NextArrowManageLessonIc />
-      </MainLessonWrapper>
-      <TreeProgress progress={percent} width={23} />
+      <MainLessonWrapperContainer>
+        <MainLessonWrapper>
+          <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+          <StudentNameWrapper>{studentName}</StudentNameWrapper>
+          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
+          <DaysWrapper>
+            {dayOfWeekList.map((day, idx) => (
+              <>{checkIsLastDay(idx, day)}</>
+            ))}
+          </DaysWrapper>
+        </MainLessonWrapper>
+        <TreeProgress progress={percent} width={23} />
+      </MainLessonWrapperContainer>
+      <NextArrowManageLessonIcon />
     </MainLessonBox>
   );
 }
 
 const MainLessonBox = styled.article`
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center;
 
   padding: 1rem;
   margin-bottom: 1rem;
@@ -48,7 +51,7 @@ const MainLessonBox = styled.article`
   border-radius: 8px;
 `;
 
-const MainLessonWrapper = styled.section`
+const MainLessonWrapper = styled.div`
   display: flex;
   align-items: center;
 
@@ -60,4 +63,22 @@ const StudentNameWrapper = styled.h1`
 
   color: ${({ theme }) => theme.colors.grey900};
   ${({ theme }) => theme.fonts.body01};
+`;
+
+const DaysWrapper = styled.p`
+  margin-left: 1.5rem;
+
+  color: ${({ theme }) => theme.colors.grey600};
+  ${({ theme }) => theme.fonts.body05};
+`;
+
+const MainLessonWrapperContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  width: 23rem;
+`;
+
+const NextArrowManageLessonIcon = styled(NextArrowManageLessonIc)`
+  margin-left: 2rem;
 `;

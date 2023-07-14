@@ -1,3 +1,4 @@
+import { styled } from "styled-components";
 import useGetAllLessons from "../../hooks/useGetAllLessons";
 import MainLesson from "./MainLesson";
 
@@ -6,7 +7,7 @@ export default function MainLessons() {
 
   return (
     <>
-      <h1>나의 수업</h1>
+      <Title>나의 수업</Title>
       {lessonList.map(({ idx, studentName, subject, percent, dayOfWeekList }) => (
         <MainLesson
           key={idx}
@@ -20,3 +21,10 @@ export default function MainLessons() {
     </>
   );
 }
+
+const Title = styled.h1`
+  margin-bottom: 1.2rem;
+
+  color: ${({ theme }) => theme.colors.grey900};
+  ${({ theme }) => theme.fonts.title02};
+`;

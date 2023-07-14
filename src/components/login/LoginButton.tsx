@@ -12,7 +12,9 @@ const Button = styled.button`
   width: 29.2rem;
   height: 5rem;
   padding: 0.8rem;
+
   border-radius: 8px;
+
   flex-shrink: 0;
 
   gap: 0.8rem;

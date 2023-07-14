@@ -10,11 +10,11 @@ export default function Login() {
       <Container>
         <LoginHeader />
         <LoginInput />
-        <CenterWrapper>
-          <LoginButton />
-          <AccountManaging />
-        </CenterWrapper>
       </Container>
+      <CenterWrapper>
+        <LoginButton />
+        <AccountManaging />
+      </CenterWrapper>
     </>
   );
 }

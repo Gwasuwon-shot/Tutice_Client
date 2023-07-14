@@ -29,26 +29,16 @@ export default function ClassSchedule(props: ClassScheduleProps) {
     currentClassCountPercent,
     subjectLabelBackgroundColor,
   } = props;
-  let ProgressTree = <FirstTreeParentsHomeIc />;
-
-  if (currentClassCountPercent <= 20) {
-    ProgressTree = <FirstTreeParentsHomeIc />;
-  } else if (currentClassCountPercent > 20 && currentClassCountPercent <= 40) {
-    ProgressTree = <SecondTreeParentsHomeIc />;
-  } else if (currentClassCountPercent > 40 && currentClassCountPercent <= 60) {
-    ProgressTree = <ThirdTreeParentsHomeIc />;
-  } else if (currentClassCountPercent > 60 && currentClassCountPercent <= 80) {
-    ProgressTree = <FourthTreeParentsHomeIc />;
-  } else {
-    ProgressTree = <FifthTreeParentsHomeIc />;
-  }
 
   return (
     <ClassScheduleWrapper>
       <StudentInfoWrapper>
-        <ProgressTreeIconWrapper> {ProgressTree}</ProgressTreeIconWrapper>
+        <ProgressTreeIconWrapper>
+          <FirstTreeParentsHomeIc />
+        </ProgressTreeIconWrapper>
         <StudentNameWrapper>{studentName}</StudentNameWrapper>
       </StudentInfoWrapper>
+
       <ClassDetailInfoWrapper>
         <TeacherSubjectWrapper>
           <SubjectLabel subject={subjectName} backgroundColor={subjectLabelBackgroundColor} color="#5B6166" />
@@ -58,6 +48,7 @@ export default function ClassSchedule(props: ClassScheduleProps) {
           {currentClassCount}회차 <EntireCountMessage>/ {entireClassCount}회차</EntireCountMessage>
         </ClassCountMessage>
       </ClassDetailInfoWrapper>
+
       <RightArrowParentsHomeIcon />
     </ClassScheduleWrapper>
   );
@@ -95,6 +86,7 @@ const StudentNameWrapper = styled.p`
 
 const ClassDetailInfoWrapper = styled.div`
   display: flex;
+
   flex-direction: column;
 
   margin-left: 2.3rem;

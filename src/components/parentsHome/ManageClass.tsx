@@ -40,16 +40,17 @@ export default function ManageClass() {
 
       <ClassScheduleListWrapper>
         {lessonList.map((lesson) => {
+          const { idx, subject, teacherName, studentName, count, nowCount, percent } = lesson;
           return (
             <ClassSchedule
-              key={lesson.idx}
-              subjectName={lesson.subject}
-              teacherName={lesson.teacherName}
-              studentName={lesson.studentName}
-              entireClassCount={lesson.count}
-              currentClassCount={lesson.nowCount}
-              currentClassCountPercent={lesson.percent}
-              subjectLabelBackgroundColor={STUDENT_COLOR[lesson.idx % 11]}
+              key={idx}
+              subjectName={subject}
+              teacherName={teacherName}
+              studentName={studentName}
+              entireClassCount={count}
+              currentClassCount={nowCount}
+              currentClassCountPercent={percent}
+              subjectLabelBackgroundColor={STUDENT_COLOR[idx % 11]}
             />
           );
         })}

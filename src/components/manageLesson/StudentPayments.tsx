@@ -5,7 +5,7 @@ export default function StudentPayments() {
   const { lesson, todayDate, paymentRecordList } = useGetAllPayments();
 
   function checkRealDate(date: string | null) {
-    return date ? date : todayDate;
+    return date !== null ? date : todayDate;
   }
 
   return (

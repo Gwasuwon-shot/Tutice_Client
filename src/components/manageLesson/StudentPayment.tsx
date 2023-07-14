@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { RegisterPaymentManageLessonIc, SendPaymentAlarmManageLessonIc } from "../../assets";
 import { PAYMENT_STATUS_IMAGE } from "../../core/manageLesson/paymentStatusImage";
+import useModal from "../../hooks/useModal";
 
 interface StudentPaymentProps {
   idx: number;
@@ -12,6 +13,7 @@ interface StudentPaymentProps {
 
 export default function StudentPayment(props: StudentPaymentProps) {
   const { idx, date, amount, status, count } = props;
+  const { showModal } = useModal();
 
   return (
     <StudentPaymentBox>
@@ -31,7 +33,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
           <Amount>{amount.toLocaleString()}</Amount>
         ) : (
           <>
-            <SendPaymentAlarmManageLessonIcon />
+            <SendPaymentAlarmManageLessonIcon onClick={showModal} />
             <RegisterPaymentManageLessonIcon />
           </>
         )}

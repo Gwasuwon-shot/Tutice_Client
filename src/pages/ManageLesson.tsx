@@ -5,7 +5,7 @@ import ManageLessonCategory from "../components/manageLesson/ManageLessonCategor
 import StudentNameBox from "../components/manageLesson/StudentNameBox";
 import TreeLevel from "../components/manageLesson/TreeLevel";
 
-export default function ManagfeLesson() {
+export default function ManageLesson() {
   return (
     <>
       <BackButton />

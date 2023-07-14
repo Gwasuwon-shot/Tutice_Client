@@ -37,7 +37,7 @@ const ModalWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
 
   width: 32rem;
   height: 100vh;

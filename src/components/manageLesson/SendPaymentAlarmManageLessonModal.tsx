@@ -24,21 +24,26 @@ export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlar
   return (
     <ModalWrapper>
       <ToastModal>
-        <h1>입금 알림 전송</h1>
-        <StudentNameLabel
-          studentName={studentName}
-          subject={subject}
-          backgroundColor={backgroundColor}
-          color={color}
-          isBig={isBig}
-        />
-        의 학부모님께 수업비 입금 요청에 대한 알림을 보낼까요?
-        <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
-          괜찮아요
-        </RoundBottomMiniButton>
-        <RoundBottomMiniButton isGreen={true} onClick={handleSendAlarm}>
-          보낼래요
-        </RoundBottomMiniButton>
+        <ModalTitle>입금 알림 전송</ModalTitle>
+        <TextWrapper>
+          <StudentNameLabel
+            studentName={studentName}
+            subject={subject}
+            backgroundColor={backgroundColor}
+            color={color}
+            isBig={isBig}
+          />
+          &nbsp;의 학부모님께
+        </TextWrapper>
+        <TextWrapper>수업비 입금 요청에 대한 알림을 보낼까요?</TextWrapper>
+        <ButtonWrapper>
+          <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
+            괜찮아요
+          </RoundBottomMiniButton>
+          <RoundBottomMiniButton isGreen={true} onClick={handleSendAlarm}>
+            보낼래요
+          </RoundBottomMiniButton>
+        </ButtonWrapper>
       </ToastModal>
     </ModalWrapper>
   );
@@ -48,4 +53,26 @@ const ModalWrapper = styled.div`
   position: absolute;
 
   margin: -3.7rem 0 0 -1.5rem;
+`;
+
+const ModalTitle = styled.h1`
+  margin: 1rem 0 1.6rem;
+
+  color: ${({ theme }) => theme.colors.grey900};
+  ${({ theme }) => theme.fonts.title02};
+`;
+
+const TextWrapper = styled.h2`
+  display: flex;
+
+  color: ${({ theme }) => theme.colors.grey900};
+  ${({ theme }) => theme.fonts.body02};
+`;
+
+const ButtonWrapper = styled.section`
+  display: flex;
+  justify-content: space-between;
+
+  width: 29.5rem;
+  margin-top: 4.2rem;
 `;

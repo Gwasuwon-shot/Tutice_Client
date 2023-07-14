@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import ChangeLessonShcedule from "./pages/ChangeLessonShcedule";
+import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -13,9 +15,6 @@ import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
-import OnBoarding from "./pages/OnBoarding";
-import ChangeSchedule from "./pages/ChangeSchedule";
-import ChangeLessonShcedule from "./pages/ChangeLessonShcedule";
 
 export default function Router() {
   return (

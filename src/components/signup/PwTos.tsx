@@ -40,7 +40,6 @@ export default function PwTos() {
   }
 
   useEffect(() => {
-    console.log(pw, confirmPw);
     // 비밀번호 정규식 체크
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
 

@@ -1,3 +1,4 @@
+import { styled } from "styled-components";
 import useGetAllPayments from "../../hooks/useGetAllPayments";
 import StudentPayment from "./StudentPayment";
 
@@ -9,7 +10,7 @@ export default function StudentPayments() {
   }
 
   return (
-    <>
+    <StudentPaymentsWrapper>
       {paymentRecordList.map(({ idx, date, amount, status }, index) => (
         <StudentPayment
           key={idx}
@@ -20,6 +21,10 @@ export default function StudentPayments() {
           count={Math.abs(index - paymentRecordList.length)}
         />
       ))}
-    </>
+    </StudentPaymentsWrapper>
   );
 }
+
+const StudentPaymentsWrapper = styled.section`
+  margin-top: 1.6rem;
+`;

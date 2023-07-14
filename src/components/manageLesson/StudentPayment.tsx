@@ -14,29 +14,53 @@ export default function StudentPayment(props: StudentPaymentProps) {
   const { idx, date, amount, status, count } = props;
 
   return (
-    <>
+    <StudentPaymentBox>
       {status ? (
         <img src={PAYMENT_STATUS_IMAGE.done} alt="입금 완료 열매" />
       ) : (
         <img src={PAYMENT_STATUS_IMAGE.notYet} alt="입금 미완료 열매" />
       )}
-      <div>
+      <NumberWrapper>
         <FruitCount>{count}번째 열매</FruitCount>
         <Date>
           {new window.Date(date).getMonth() + 1}월 {new window.Date(date).getDate() + 1}일
         </Date>
-      </div>
-      {status ? (
-        <p>{amount}</p>
-      ) : (
-        <>
-          <SendPaymentAlarmManageLessonIcon />
-          <RegisterPaymentManageLessonIcon />
-        </>
-      )}
-    </>
+      </NumberWrapper>
+      <Payment>
+        {status ? (
+          <Amount>{amount.toLocaleString()}</Amount>
+        ) : (
+          <>
+            <SendPaymentAlarmManageLessonIcon />
+            <RegisterPaymentManageLessonIcon />
+          </>
+        )}
+      </Payment>
+    </StudentPaymentBox>
   );
 }
+
+const Payment = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  width: 15rem;
+  padding-right: 0.5rem;
+`;
+
+const NumberWrapper = styled.div`
+  margin-left: 1.6rem;
+`;
+
+const StudentPaymentBox = styled.article`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 29.2rem;
+  padding: 0.8rem 0 0.8rem 0.6rem;
+  margin-bottom: 2rem;
+`;
 
 const Date = styled.p`
   color: ${({ theme }) => theme.colors.grey600};
@@ -50,8 +74,17 @@ const FruitCount = styled.p`
 
 const SendPaymentAlarmManageLessonIcon = styled(SendPaymentAlarmManageLessonIc)`
   width: 5.5rem;
+  margin-right: 1rem;
+
+  cursor: pointer;
 `;
 
 const RegisterPaymentManageLessonIcon = styled(RegisterPaymentManageLessonIc)`
   width: 5.5rem;
+  cursor: pointer;
+`;
+
+const Amount = styled.p`
+  color: ${({ theme }) => theme.colors.grey600};
+  ${({ theme }) => theme.fonts.body01};
 `;

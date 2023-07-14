@@ -73,9 +73,9 @@ const ClassScheduleWrapper = styled.section`
 
 const StudentInfoWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 
   gap: 0.2rem;
 `;
@@ -95,7 +95,6 @@ const StudentNameWrapper = styled.p`
 
 const ClassDetailInfoWrapper = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
 
   margin-left: 2.3rem;

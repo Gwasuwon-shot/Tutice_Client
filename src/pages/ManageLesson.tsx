@@ -1,11 +1,14 @@
 import { styled } from "styled-components";
 import BackButton from "../components/common/BackButton";
 import TeacherFooter from "../components/common/TeacherFooter";
+import AttendanceList from "../components/manageLesson/AttendanceInforms";
 import ManageLessonCategory from "../components/manageLesson/ManageLessonCategory";
 import StudentNameBox from "../components/manageLesson/StudentNameBox";
 import TreeLevel from "../components/manageLesson/TreeLevel";
 
 export default function ManageLesson() {
+  // useParams 추가 예정
+
   return (
     <>
       <BackButton />
@@ -13,6 +16,7 @@ export default function ManageLesson() {
         <StudentNameBox />
         <ManageLessonCategory />
         <TreeLevel />
+        <AttendanceList />
       </ManageLessonWrapper>
       <TeacherFooter />
     </>

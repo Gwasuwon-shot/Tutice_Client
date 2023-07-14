@@ -18,6 +18,7 @@ export default function AttendanceList() {
 const GreyBox = styled.div`
   width: 32rem;
   height: 1.1rem;
+  margin: 1.5rem 0 2.65rem -1.5rem;
 
   background-color: ${({ theme }) => theme.colors.grey50};
 `;

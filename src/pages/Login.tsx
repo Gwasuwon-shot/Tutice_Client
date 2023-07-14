@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import LoginHeader from "../components/login/LoginHeader";
 import LoginInput from "../components/login/LoginInput";
 import LoginButton from "../components/login/LoginButton";
+import AccountManaging from "../components/login/AccountManaging";
 
 export default function Login() {
   return (
@@ -10,6 +11,7 @@ export default function Login() {
         <LoginHeader />
         <LoginInput />
         <LoginButton />
+        <AccountManaging />
       </Container>
     </>
   );

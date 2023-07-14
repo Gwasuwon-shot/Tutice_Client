@@ -36,16 +36,15 @@ export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.sv
 export { ReactComponent as NextArrowManageLessonIc } from "./icon/nextArrowManageLessonIc.svg";
 export { ReactComponent as NoClassLogoTeacherHomeIc } from "./icon/noClassLogoTeacherHomeIc.svg";
 export { ReactComponent as RegisterLessonHeaderIc } from "./icon/registerLessonHeaderIc.svg";
+export { ReactComponent as RegisterPaymentManageLessonIc } from "./icon/registerPaymentManageLessonIc.svg";
 export { ReactComponent as RegularLessonCalenderIc } from "./icon/regularLessonCalenderIc.svg";
 export { ReactComponent as RegularLessonClockIc } from "./icon/regularLessonClockIc.svg";
 export { ReactComponent as RegularLessonNotebookIc } from "./icon/regularLessonNotebookIc.svg";
 export { ReactComponent as RegularLessonPencilIc } from "./icon/regularLessonPencilIc.svg";
 export { ReactComponent as RegularLessonStudentIc } from "./icon/regularLessonStudentIc.svg";
 export { ReactComponent as RightArrowTeacherHomeIc } from "./icon/rightArrowTeacherHomeIc.svg";
+export { ReactComponent as SendPaymentAlarmManageLessonIc } from "./icon/sendPaymentAlarmManageLessonIc.svg";
 export { ReactComponent as SmallAttendanceCheckButtonIc } from "./icon/smallAttendanceCheckButtonIc.svg";
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
-
-export { ReactComponent as RegisterPaymentManageLessonIc } from "./icon/registerPaymentManageLessonIc.svg";
-export { ReactComponent as SendPaymentAlarmManageLessonIc } from "./icon/sendPaymentAlarmManageLessonIc.svg";

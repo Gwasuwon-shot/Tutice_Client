@@ -24,7 +24,13 @@ export default function StudentPayments() {
   return (
     <>
       {allPaymentRecords.map(({ idx, date, amount }) => (
-        <StudentPayment key={idx} idx={idx} date={date} amount={amount} />
+        <StudentPayment
+          key={idx}
+          idx={idx}
+          date={date}
+          amount={amount}
+          count={Math.abs(cycle - paymentRecordList.length)}
+        />
       ))}
     </>
   );

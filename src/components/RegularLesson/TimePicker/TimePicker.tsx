@@ -19,8 +19,19 @@ export default function TimePicker() {
             </CancleWrapper>
 
             <StyledSwiper
-                direction = "vertical"
-                slidesPerView = "6"
+                direction="vertical"
+                slidesPerView={7}
+                freeMode={true}
+                freeModeSticky={true}
+                freeModeMomentumRatio={0.25}
+                freeModeVelocityRatio={0.25}
+                freeModeMinimumVelocity={0.1}
+                mousewheelControl={true}
+                mousewheelSensitivity={0.5}
+                loop={true}
+                loopAdditionalSlides={5}
+                slideToClickedSlide={true}
+                centeredSlides={true}
             >
                 <SwiperSlide> 1 </SwiperSlide>
                 <SwiperSlide> 2 </SwiperSlide>
@@ -71,7 +82,8 @@ const StyledSwiper = styled(Swiper)`
         text-align: center;
         vertical-align: center;
     }
-`
+    
+`    
 
 const CancleWrapper = styled.div`
     display: flex;

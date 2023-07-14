@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import BackButton from "../components/common/BackButton";
 import TeacherFooter from "../components/common/TeacherFooter";
@@ -6,8 +7,9 @@ import ManageLessonCategory from "../components/manageLesson/ManageLessonCategor
 import StudentNameBox from "../components/manageLesson/StudentNameBox";
 import TreeLevel from "../components/manageLesson/TreeLevel";
 
-export default function ManageLesson() {
+export default function ManageLessonDetail() {
   // useParams 추가 예정
+  const { manageLessonId } = useParams();
 
   return (
     <>

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { NextArrowManageLessonIc } from "../../assets";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
@@ -15,13 +16,18 @@ interface MainLessonProps {
 
 export default function MainLesson(props: MainLessonProps) {
   const { idx, studentName, subject, percent, dayOfWeekList } = props;
+  const navigate = useNavigate();
+
+  function handleMoveToManageLessonDetail(idx: number) {
+    navigate(`/manage-lesson/${idx}`);
+  }
 
   function checkIsLastDay(idx: number, day: string) {
     return idx + 1 === dayOfWeekList.length ? day : day + ", ";
   }
 
   return (
-    <MainLessonBox>
+    <MainLessonBox onClick={() => handleMoveToManageLessonDetail(idx)}>
       <MainLessonWrapperContainer>
         <MainLessonWrapper>
           <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />

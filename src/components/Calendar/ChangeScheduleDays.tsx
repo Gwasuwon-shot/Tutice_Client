@@ -9,6 +9,7 @@ import Day from "./Day";
 import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { useNavigate } from "react-router-dom";
+import { EditPencilIc, removeTrashCan } from "../../assets";
 
 import StudentColorBox from "../common/StudentColorBox";
 
@@ -26,13 +27,15 @@ export default function ChangeScheduleDays(props: DaysProp) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
   const navigate = useNavigate();
+  const [isEdit, setIsEdit] = useState(false);
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
   let day: Date = startDate;
 
   function handleClickEdit() {
-    navigate("/change-lessonschedule");
+    setIsEdit(true);
+    // navigate("/change-lessonschedule");
   }
   function handleCloseButton() {
     setOpenModal(false);
@@ -84,14 +87,20 @@ export default function ChangeScheduleDays(props: DaysProp) {
                   .find((item) => isSameDay(new Date(item.date), selectedDate))
                   ?.dailyScheduleList.map((lesson) => (
                     <ScheduleWrapper key={lesson.schedule.idx}>
-                      <StudentColorBox backgroundColor={STUDENT_COLOR[lesson.schedule.idx % 11]} />
-                      <ModalTime>
-                        {lesson.schedule.startTime} - {lesson.schedule.endTime}
-                      </ModalTime>
-                      <ModalName>{lesson.schedule.studentName}</ModalName>
-                      <ModalSubject $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]}>
-                        {lesson.schedule.subject}
-                      </ModalSubject>
+                      <ScheduleContainer>
+                        <StudentColorBox backgroundColor={STUDENT_COLOR[lesson.schedule.idx % 11]} />
+                        <ModalTime>
+                          {lesson.schedule.startTime} - {lesson.schedule.endTime}
+                        </ModalTime>
+                        <ModalName>{lesson.schedule.studentName}</ModalName>
+                        <ModalSubject $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]}>
+                          {lesson.schedule.subject}
+                        </ModalSubject>
+                      </ScheduleContainer>
+                      <ScheduleEditWrapper>
+                        <EditScheduleButton />
+                        <RemoveSchedule />
+                      </ScheduleEditWrapper>
                     </ScheduleWrapper>
                   ))}
               </ModalContentWrapper>
@@ -179,8 +188,16 @@ const ModalDate = styled.p`
 
 const ScheduleWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
+  width: 29.3rem;
+`;
+
+const ScheduleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.9rem;
 `;
 
@@ -206,4 +223,18 @@ const ModalSubject = styled.span<{ $backgroundcolor: string }>`
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey500};
   border-radius: 8px;
+`;
+
+const EditScheduleButton = styled(EditPencilIc)`
+  width: 1.6rem;
+  height: 1.6rem;
+`;
+
+const RemoveSchedule = styled(removeTrashCan)`
+  width: 1.6rem;
+  height: 1.6rem;
+`;
+
+const ScheduleEditWrapper = styled.div`
+  display: felx;
 `;

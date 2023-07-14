@@ -63,14 +63,14 @@ const StyledSwiper = styled(Swiper)`
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey400};
     background-color: ${({ theme }) => theme.colors.grey20};
-`
 
-const StyledSlide = styled(SwiperSlide)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    vertical-align: center;
+    & .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        vertical-align: center;
+    }
 `
 
 const CancleWrapper = styled.div`

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import TextLabelLayout from "../signup/TextLabelLayout";
-import { ViewingLoginIc } from "../../assets";
+import { viewingLoginIc, canViewingLoginIc } from "../../assets";
 
 export default function LoginInput() {
   // 임시 recoil로 만들어라
@@ -30,6 +30,17 @@ export default function LoginInput() {
   //뷰잉 상태 전환
   function handlePasswordViewing() {
     pwViewing === "text" ? setPwViewing("password") : setPwViewing("text");
+  }
+
+  // 뷰잉 상황 정리
+  function viewingIcon() {
+    if (pwFocus || password) {
+      if (pwViewing === "text") {
+        return <CanViewingLoginIcon onClick={handlePasswordViewing} />;
+      }
+      return <ViewingLoginIcon onClick={handlePasswordViewing} />;
+    }
+    return null;
   }
 
   useEffect(() => {
@@ -61,7 +72,8 @@ export default function LoginInput() {
               placeholder="비밀번호를 입력하세요"
             />
           </form>
-          {pwFocus || password ? <ViewingLoginIcon onClick={handlePasswordViewing} /> : null}
+          {/* {pwFocus || password ? <ViewingLoginIcon onClick={handlePasswordViewing} /> : null} */}
+          {viewingIcon()}
         </PasswordIconWrapper>
       </InputPasswordWrapper>
     </>
@@ -108,7 +120,14 @@ const PasswordIconWrapper = styled.div`
   width: 29rem;
 `;
 
-const ViewingLoginIcon = styled(ViewingLoginIc)`
+const ViewingLoginIcon = styled(viewingLoginIc)`
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 0.6rem;
+  flex-shrink: 0;
+`;
+
+const CanViewingLoginIcon = styled(canViewingLoginIc)`
   width: 1.6rem;
   height: 1.6rem;
   margin-right: 0.6rem;

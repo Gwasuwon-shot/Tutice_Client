@@ -11,6 +11,10 @@ interface AttendanceInformProps {
 export default function AttnedanceInform(props: AttendanceInformProps) {
   const { date, status, startTime, endTime } = props;
 
+  function checkIsStatusExist() {
+    return status !== ATTENDANCE_STATUS.none;
+  }
+
   return (
     <AttnedanceInformBox>
       <Label $width={3.6}>

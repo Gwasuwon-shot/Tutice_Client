@@ -1,3 +1,4 @@
+import { styled } from "styled-components";
 import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
@@ -21,22 +22,30 @@ export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlar
   }
 
   return (
-    <ToastModal>
-      <h1>입금 알림 전송</h1>
-      <StudentNameLabel
-        studentName={studentName}
-        subject={subject}
-        backgroundColor={backgroundColor}
-        color={color}
-        isBig={isBig}
-      />
-      의 학부모님께 수업비 입금 요청에 대한 알림을 보낼까요?
-      <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
-        괜찮아요
-      </RoundBottomMiniButton>
-      <RoundBottomMiniButton isGreen={true} onClick={handleSendAlarm}>
-        보낼래요
-      </RoundBottomMiniButton>
-    </ToastModal>
+    <ModalWrapper>
+      <ToastModal>
+        <h1>입금 알림 전송</h1>
+        <StudentNameLabel
+          studentName={studentName}
+          subject={subject}
+          backgroundColor={backgroundColor}
+          color={color}
+          isBig={isBig}
+        />
+        의 학부모님께 수업비 입금 요청에 대한 알림을 보낼까요?
+        <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
+          괜찮아요
+        </RoundBottomMiniButton>
+        <RoundBottomMiniButton isGreen={true} onClick={handleSendAlarm}>
+          보낼래요
+        </RoundBottomMiniButton>
+      </ToastModal>
+    </ModalWrapper>
   );
 }
+
+const ModalWrapper = styled.div`
+  position: absolute;
+
+  margin: -3.7rem 0 0 -1.5rem;
+`;

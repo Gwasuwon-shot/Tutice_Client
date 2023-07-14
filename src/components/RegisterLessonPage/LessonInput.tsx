@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FocusEvent } from 'react';
 import { useEffect, useState } from "react";
 
+import Footer from './Footer';
 import { RegisterLessonInputIc } from '../../assets';
 import styled from 'styled-components';
 
@@ -51,9 +52,9 @@ export default function LessonInput() {
 
     const isWarning = !isNameValid && studentName.length > 0
 
-    if (studentName !== "" && subjectName !== "") {
-        
-    }
+    // 3. footer의 색상 변경 여부 관리
+    const isFooterGreen = subjectName !== "" && !isWarning;
+    
 
     return (
         
@@ -84,7 +85,7 @@ export default function LessonInput() {
             />
             {isSubjectInputFocused && <RegisterLessonInputIcon/>}
         </SubjectInputSection>
-
+        <Footer isGreen={isFooterGreen} />
     </InputWrapper>
     );
 }

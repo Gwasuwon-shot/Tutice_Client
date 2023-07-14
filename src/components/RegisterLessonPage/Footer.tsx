@@ -1,15 +1,20 @@
-import styled from 'styled-components';
 import React from 'react';
-export default function Footer() {
+import styled from 'styled-components';
+
+interface FooterProp {
+    isGreen: boolean;
+  }
+  
+export default function Footer({ isGreen }: FooterProp) {
 
     return (
-        <FooterWrapper>
+        <FooterWrapper isGreen={isGreen}>
             <FooterButton> 정기수업 일정 등록하기 </FooterButton>
         </FooterWrapper>
     );
 }
 
-const FooterWrapper = styled.footer`
+const FooterWrapper = styled.footer<{ isGreen: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,7 +26,7 @@ const FooterWrapper = styled.footer`
     height: 6.3rem;
     padding: 0.8rem;
     
-    background-color: ${({ theme }) => theme.colors.grey50};
+    background-color: ${({ theme, isGreen }) => isGreen ? theme.colors.green5 : theme.colors.grey50};
 `
 
 const FooterButton = styled.button`

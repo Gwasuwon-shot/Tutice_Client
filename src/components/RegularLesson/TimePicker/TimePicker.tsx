@@ -149,4 +149,5 @@ const Vizor = styled.div`
     z-index : 100;
     opacity: 0.2;
     background-color: ${({ theme }) => theme.colors.grey200};
+    border-radius: 20px;
 `

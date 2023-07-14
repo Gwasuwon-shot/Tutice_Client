@@ -124,7 +124,7 @@ const ModalWrapper = styled.section`
   display: flex;
 
   margin-top: -55rem;
-  margin-left: -0.3rem;
+  margin-left: -0.4rem;
 `;
 
 const ModalContentWrapper = styled.article`
@@ -133,6 +133,8 @@ const ModalContentWrapper = styled.article`
   flex-direction: column;
 
   width: 29.2rem;
+  height: auto;
+  gap: 1.4rem;
 `;
 
 const ModalDate = styled.p`
@@ -143,6 +145,8 @@ const ModalDate = styled.p`
 const ScheduleWrapper = styled.div`
   display: flex;
   align-items: center;
+
+  gap: 0.9rem;
 `;
 
 const ModalTime = styled.p`

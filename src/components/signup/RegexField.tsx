@@ -4,7 +4,7 @@ interface RegexFieldProp {
   unMatchText: string;
 }
 
-export default function RegexField(props: RegexFieldProp) {
+export default function RegexField(prop: RegexFieldProp) {
   const { unMatchText } = prop;
   return <RegexText>{unMatchText}</RegexText>;
 }

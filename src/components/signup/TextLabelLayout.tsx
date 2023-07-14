@@ -5,7 +5,7 @@ interface TextLabelLayoutProp {
   labelText: string;
 }
 
-export default function TextLabelLayout(props: TextLabelLayoutProp) {
+export default function TextLabelLayout(prop: TextLabelLayoutProp) {
   const { labelText } = prop;
   return <Label> {labelText} </Label>;
 }

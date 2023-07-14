@@ -4,6 +4,8 @@ import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
 
 export default function ToS() {
+  const [checked, setChecked] = useState(false);
+
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.innerText) {
       case "서비스 이용 약관":
@@ -16,6 +18,10 @@ export default function ToS() {
         window.open("https://www.nate.com", "_blank");
         break;
     }
+  }
+
+  function handleButtonChecked() {
+    setChecked(!checked);
   }
 
   return (
@@ -32,7 +38,11 @@ export default function ToS() {
 
       <CheckWrapper>
         <ICWrapper>
-          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+          {checked ? (
+            <TosNoneSignupIcon onClick={handleButtonChecked} />
+          ) : (
+            <TosCheckSignupIcon onClick={handleButtonChecked} />
+          )}
         </ICWrapper>
         <Essential>(필수) </Essential>
         <CheckText> 만 14세 이상입니다 </CheckText>
@@ -40,7 +50,11 @@ export default function ToS() {
 
       <CheckWrapper>
         <ICWrapper>
-          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+          {checked ? (
+            <TosNoneSignupIcon onClick={handleButtonChecked} />
+          ) : (
+            <TosCheckSignupIcon onClick={handleButtonChecked} />
+          )}
         </ICWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
@@ -51,7 +65,11 @@ export default function ToS() {
 
       <CheckWrapper>
         <ICWrapper>
-          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+          {checked ? (
+            <TosNoneSignupIcon onClick={handleButtonChecked} />
+          ) : (
+            <TosCheckSignupIcon onClick={handleButtonChecked} />
+          )}
         </ICWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
@@ -62,7 +80,11 @@ export default function ToS() {
 
       <CheckWrapper>
         <ICWrapper>
-          {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+          {checked ? (
+            <TosNoneSignupIcon onClick={handleButtonChecked} />
+          ) : (
+            <TosCheckSignupIcon onClick={handleButtonChecked} />
+          )}
         </ICWrapper>
         <Optional>(선택) </Optional>
 

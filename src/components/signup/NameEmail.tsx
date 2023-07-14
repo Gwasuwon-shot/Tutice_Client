@@ -66,24 +66,28 @@ export default function NameEmail() {
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
-          <Inputfield
-            onFocus={() => setNameFocus(true)}
-            onBlur={() => setNameFocus(false)}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleNameChange(e)}
-            type="text"
-            placeholder={PLACEHOLDER_TEXT.nameHolder}
-          />
+          <form>
+            <Inputfield
+              onFocus={() => setNameFocus(true)}
+              onBlur={() => setNameFocus(false)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleNameChange(e)}
+              type="text"
+              placeholder={PLACEHOLDER_TEXT.nameHolder}
+            />
+          </form>
         </InputNameWrapper>
         {!isName && nameFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.nameError} /> : null}
         <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-          <Inputfield
-            onFocus={() => setEmailFocus(true)}
-            onBlur={() => setEmailFocus(false)}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
-            type="text"
-            placeholder={PLACEHOLDER_TEXT.emailHolder}
-          />
+          <form>
+            <Inputfield
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
+              type="text"
+              placeholder={PLACEHOLDER_TEXT.emailHolder}
+            />
+          </form>
         </InputEmailWrapper>
 
         {!isEmail && emailFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.emailError} /> : null}

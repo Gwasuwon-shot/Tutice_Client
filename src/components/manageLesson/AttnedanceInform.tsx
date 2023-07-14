@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { SmallAttendanceCheckButtonIc } from "../../assets";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
+import useModal from "../../hooks/useModal";
 
 interface AttendanceInformProps {
   date: string;
@@ -12,9 +13,14 @@ interface AttendanceInformProps {
 
 export default function AttnedanceInform(props: AttendanceInformProps) {
   const { date, status, startTime, endTime, count } = props;
+  const { showModal } = useModal();
 
   function checkIsStatusExist() {
     return status !== ATTENDANCE_STATUS.none;
+  }
+
+  function handleOpenCheckAttendanceModal() {
+    showModal();
   }
 
   return (
@@ -29,11 +35,13 @@ export default function AttnedanceInform(props: AttendanceInformProps) {
             {startTime} ~ {endTime}
           </Label>
         </div>
-        {checkIsStatusExist() ? (
-          <StatusLabel $status={status}>{status}</StatusLabel>
-        ) : (
-          <SmallAttendanceCheckButtonIcon />
-        )}
+        <section onClick={handleOpenCheckAttendanceModal}>
+          {checkIsStatusExist() ? (
+            <StatusLabel $status={status}>{status}</StatusLabel>
+          ) : (
+            <SmallAttendanceCheckButtonIcon />
+          )}
+        </section>
       </AttnedanceInformBox>
     </>
   );

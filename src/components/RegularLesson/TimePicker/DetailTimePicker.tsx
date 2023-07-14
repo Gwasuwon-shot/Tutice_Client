@@ -13,8 +13,8 @@ export default function DetailTimePicker() {
     // 1) active slide 값 관리
     
     const [activeAmPmSlide, setActiveAmPmSlide] = useState(0);
-    
-    const handleAmPmSlideChange = (swiper: SwiperCore) => {
+
+    function handleAmPmSlideChange(swiper: SwiperCore) {
         setActiveAmPmSlide(swiper.realIndex);
     };
 
@@ -24,10 +24,10 @@ export default function DetailTimePicker() {
     }, [activeAmPmSlide]);
 
     // 2) swiper
-    const ampm = ['오전', '오후'];
+    const AMPM = ['오전', '오후'];
     const slidesAmPm = Array.from({ length: 2 }, (_, index) => (
         <SwiperSlide key={index}>
-          {ampm[index]}
+          {AMPM[index]}
         </SwiperSlide>
     ));
 
@@ -36,9 +36,10 @@ export default function DetailTimePicker() {
     
     const [activeHourSlide, setActiveHourSlide] = useState(0);
 
-    const handleHourSlideChange = (swiper: SwiperCore) => {
+    function handleHourSlideChange(swiper: SwiperCore) {
         setActiveHourSlide(swiper.realIndex);
     };
+
 
     // check 용
     useEffect(() => {
@@ -56,7 +57,7 @@ export default function DetailTimePicker() {
     // 1) active slide 값 관리
     const [activeMinuteSlide, setActiveMinuteSlide] = useState(0);
     
-    const handleMinuteSlideChange = (swiper: SwiperCore) => {
+    function handleMinuteSlideChange(swiper: SwiperCore) {
         setActiveMinuteSlide(swiper.realIndex);
     };
 
@@ -66,10 +67,10 @@ export default function DetailTimePicker() {
     }, [activeMinuteSlide]);
 
     // 2) swiper
-    const minutes = ["00", "30"];
+    const MINUTES = ["00", "30"];
     const slidesMinute = Array.from({ length: 2 }, (_, index) => (
         <SwiperSlide key={index}>
-          {minutes[index]}
+          {MINUTES[index]}
         </SwiperSlide>
     ));
     

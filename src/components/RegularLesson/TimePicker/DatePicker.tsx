@@ -16,13 +16,13 @@ interface monthCalenderProps {
 export default function DatePicker() {
     
     const monthCalender: monthCalenderProps[] = [];
-    const weekDay: { [key: number]: string } = {1: '월', 2: '화', 3: '수', 4: '목', 5: '금', 6: '토', 0: '일'};
+    const WEEKDAY: { [key: number]: string } = {1: '월', 2: '화', 3: '수', 4: '목', 5: '금', 6: '토', 0: '일'};
 
     const currentDate: Date = new Date();
     const currentYear: number = currentDate.getFullYear();
     const currentMonth: number = currentDate.getMonth() + 1;
     const todayDate: number = currentDate.getDate();
-    const todayDay: string = weekDay[currentDate.getDay()];
+    const todayDay: string = WEEKDAY[currentDate.getDay()];
 
     // 1. 이전 달
 
@@ -38,7 +38,7 @@ export default function DatePicker() {
 
     for (let i = 1; i <= daysInPrevMonth; i++) {
         const date: Date = new Date(prevYear, prevMonth-1, i);
-        const day: string = weekDay[date.getDay()];
+        const day: string = WEEKDAY[date.getDay()];
         monthCalender.push({month: prevMonth, date: i, day: day});
     }
 
@@ -48,7 +48,7 @@ export default function DatePicker() {
 
     for (let i = 1; i <= daysInMonth; i++) {
         const date: Date = new Date(currentYear, currentMonth-1, i);
-        const day: string = weekDay[date.getDay()];
+        const day: string = WEEKDAY[date.getDay()];
         monthCalender.push({month: currentMonth, date: i, day: day});
     }
 
@@ -65,7 +65,7 @@ export default function DatePicker() {
 
     for (let i = 1; i <= daysInNextMonth; i++) {
         const date: Date = new Date(nextYear, nextMonth-1, i);
-        const day: string = weekDay[date.getDay()];
+        const day: string = WEEKDAY[date.getDay()];
         monthCalender.push({month: nextMonth, date: i, day: day});
     }
 
@@ -77,7 +77,7 @@ export default function DatePicker() {
 
     const [activeSlide, setActiveSlide] = useState(0);
 
-    const handleSlideChange = (swiper: SwiperCore) => {
+    function handleSlideChange(swiper: SwiperCore) {
         setActiveSlide(swiper.realIndex);
     };
 
@@ -172,20 +172,22 @@ const StyledSwiper = styled(Swiper)`
 const Month = styled.span`
     display: flex;
     justify-content: center;
+    
     width: 3rem;
 `
 
 const Dates = styled.span`
     display: flex;
     justify-content: center;
+    
     width: 3rem;
 `
 
 const Day = styled.span`
     display: flex;
     justify-content: center;
-    width: 3rem;
 
+    width: 3rem;
 `
 
 const CancleWrapper = styled.div`
@@ -205,6 +207,7 @@ const ConfirmWrapper = styled.div`
     width: 6rem; 
     height: 100%;
 `
+
 const CancleButton = styled.button`
     position: absolute;
     top: 0.7rem;

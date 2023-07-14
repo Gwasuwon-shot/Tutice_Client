@@ -11,7 +11,7 @@ export default function TimePicker() {
     
     const [activeSlide, setActiveSlide] = useState(0);
 
-    const handleSlideChange = (swiper: SwiperCore) => {
+    function handleSlideChange(swiper: SwiperCore) {
         setActiveSlide(swiper.realIndex);
     };
 
@@ -24,7 +24,7 @@ export default function TimePicker() {
         <SwiperSlide key={index}>
           {index + 1}
         </SwiperSlide>
-      ));
+    ));
     
     return (
 

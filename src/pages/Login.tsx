@@ -9,9 +9,9 @@ export default function Login() {
     <>
       <Container>
         <LoginHeader />
-        <LoginInput />
       </Container>
       <CenterWrapper>
+        <LoginInput />
         <LoginButton />
         <AccountManaging />
       </CenterWrapper>

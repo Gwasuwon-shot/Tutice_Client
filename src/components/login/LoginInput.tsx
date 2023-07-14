@@ -72,7 +72,6 @@ export default function LoginInput() {
               placeholder="비밀번호를 입력하세요"
             />
           </form>
-          {/* {pwFocus || password ? <ViewingLoginIcon onClick={handlePasswordViewing} /> : null} */}
           {viewingIcon()}
         </PasswordIconWrapper>
       </InputPasswordWrapper>
@@ -84,6 +83,7 @@ const InputEmailWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  width: 80%;
   margin-right: 1.4rem;
   margin-bottom: 2rem;
 
@@ -95,6 +95,7 @@ const InputPasswordWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  width: 80%;
   margin-right: 1.4rem;
   margin-bottom: 2rem;
 
@@ -116,8 +117,6 @@ const PasswordIconWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  width: 29rem;
 `;
 
 const ViewingLoginIcon = styled(viewingLoginIc)`

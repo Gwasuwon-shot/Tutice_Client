@@ -48,6 +48,7 @@ export default function NameEmail() {
   }
 
   useEffect(() => {
+    console.log(newUser);
     // 이메일 정규식 확인
     email.match(EMAIL_REGEX) === null ? setIsEmail(false) : setIsEmail(true);
 
@@ -91,7 +92,13 @@ export default function NameEmail() {
         </InputEmailWrapper>
 
         {!isEmail && emailFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.emailError} /> : null}
-        <BottomButton children={BUTTON_TEXT.done} isActive={isActive} onClick={handleDoneClick} disabled={!isActive} />
+        <BottomButton
+          type="button"
+          children={BUTTON_TEXT.done}
+          isActive={isActive}
+          onClick={handleDoneClick}
+          disabled={!isActive}
+        />
       </Container>
     </>
   );

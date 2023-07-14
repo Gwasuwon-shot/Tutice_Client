@@ -50,6 +50,10 @@ export default function PwTos() {
     pw && confirmPw && isPassword && doubleCheck ? setIsActive(true) : setIsActive(false);
   }, [pw, confirmPw, isPassword, doubleCheck]);
 
+  useEffect(() => {
+    console.log(newUser);
+  }, []);
+
   return (
     <>
       <ProgressBar progress={75} />
@@ -108,6 +112,7 @@ export default function PwTos() {
         <Tos />
 
         <BottomButton
+          type="submit"
           disabled={!isActive}
           isActive={isActive}
           children={BUTTON_TEXT.signupDone}

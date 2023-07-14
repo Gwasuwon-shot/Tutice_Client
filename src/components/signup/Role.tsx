@@ -27,6 +27,10 @@ export default function Role() {
     setStep(2);
   }
 
+  useEffect(() => {
+    console.log(newUser);
+  }, []);
+
   return (
     <>
       <ProgressBar progress={0} />
@@ -69,7 +73,13 @@ export default function Role() {
             </TextWrapper>
           </RoleRapper>
         </RadioWrapper>
-        <BottomButton disabled={!isActive} isActive={isActive} children={BUTTON_TEXT.done} onClick={handleDoneClick} />
+        <BottomButton
+          type="button"
+          disabled={!isActive}
+          isActive={isActive}
+          children={BUTTON_TEXT.done}
+          onClick={handleDoneClick}
+        />
       </Container>
     </>
   );

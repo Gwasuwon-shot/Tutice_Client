@@ -6,27 +6,27 @@ export const GET_LESSON_PAYMENT_RECORD_BY_TEACHER = {
       idx: 34,
       studentName: "백송현",
       subject: "기하와 벡터",
-      cycle: 5,
     },
     todayDate: "2023-09-23",
-    paymentRecord: {
-      paymentRecordList: [
-        {
-          idx: 34,
-          date: "2023-09-23",
-          amount: 300000,
-        },
-        {
-          idx: 54,
-          date: "2023-08-23",
-          amount: 300000,
-        },
-        {
-          idx: 37,
-          date: "2023-07-23",
-          amount: 300000,
-        },
-      ],
-    },
+    paymentRecordList: [
+      {
+        idx: 34,
+        date: null,
+        amount: 300000,
+        status: false,
+      },
+      {
+        idx: 54,
+        date: "2023-08-23",
+        amount: 300000,
+        status: true,
+      },
+      {
+        idx: 37,
+        date: "2023-07-23",
+        amount: 300000,
+        status: true,
+      },
+    ],
   },
 };

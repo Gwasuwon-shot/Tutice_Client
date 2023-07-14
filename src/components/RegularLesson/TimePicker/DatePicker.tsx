@@ -3,7 +3,6 @@ import 'swiper/components/navigation/navigation.min.css';
 
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 
 import styled from 'styled-components';
 

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import useGetAllPayments from "../../hooks/useGetAllPayments";
+import StudentPayment from "./StudentPayment";
 
 export default function StudentPayments() {
   const { lesson, todayDate, paymentRecord } = useGetAllPayments();
@@ -16,7 +17,11 @@ export default function StudentPayments() {
     }
   }, []);
 
-  console.log(allPaymentRecords);
-
-  return <>{}</>;
+  return (
+    <>
+      {allPaymentRecords.map(({ idx, date, amount }) => (
+        <StudentPayment key={idx} idx={idx} date={date} amount={amount} />
+      ))}
+    </>
+  );
 }

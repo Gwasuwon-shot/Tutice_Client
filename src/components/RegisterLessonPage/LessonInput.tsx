@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import { useEffect, useState } from "react";
 import React, { ChangeEvent, FocusEvent } from 'react';
+import { useEffect, useState } from "react";
+
 import { RegisterLessonInputIc } from '../../assets';
+import styled from 'styled-components';
 
 interface NameInputSectionProp {
     nameFocused : boolean;
@@ -140,7 +141,10 @@ const StudentInput = styled.input`
     margin-bottom: 1rem;
     
     ${({ theme }) => theme.fonts.title03};
-    color: ${({ theme }) => theme.colors.grey400};
+    color: ${({ theme }) => theme.colors.grey700};
+    &::placeholder {
+        color: ${({ theme }) => theme.colors.grey400};
+    }
 `
 
 const SubjectInput = styled.input`
@@ -149,7 +153,10 @@ const SubjectInput = styled.input`
     margin-bottom: 1rem;
     
     ${({ theme }) => theme.fonts.title03};
-    color: ${({ theme }) => theme.colors.grey400};
+    color: ${({ theme }) => theme.colors.grey700};
+    &::placeholder {
+        color: ${({ theme }) => theme.colors.grey400};
+    }
 `
 
 const WarningMessage = styled.h3`

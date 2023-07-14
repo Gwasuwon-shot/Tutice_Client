@@ -83,9 +83,8 @@ export default function DatePicker() {
     const slides = Array.from({ length: monthCalender.length }, (_, index) => (
         <SwiperSlide key={index}>
             <Month> {monthCalender[index].month} </Month>
-            <Date> </Date>
-            <Day> </Day>
-         {`${monthCalender[index].month}  ${monthCalender[index].date}  ${monthCalender[index].day}`}
+            <Date> {monthCalender[index].date} </Date>
+            <Day> {monthCalender[index].day} </Day>
         </SwiperSlide>
     ));
     
@@ -162,6 +161,8 @@ const StyledSwiper = styled(Swiper)`
         color: ${({ theme }) => theme.colors.grey700};
     }
 `    
+
+
 
 const CancleWrapper = styled.div`
     display: flex;

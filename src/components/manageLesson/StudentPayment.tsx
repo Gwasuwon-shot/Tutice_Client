@@ -68,6 +68,8 @@ const Date = styled.p`
 `;
 
 const FruitCount = styled.p`
+  margin-bottom: 0.2rem;
+
   color: ${({ theme }) => theme.colors.grey900};
   ${({ theme }) => theme.fonts.body02};
 `;

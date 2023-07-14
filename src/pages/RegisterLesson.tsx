@@ -10,7 +10,6 @@ export default function RegisterLesson() {
     <ProgressBar progress = {25} />
     <Header />
     <LessonInput />
-    <Footer />
   </>
   );
 }

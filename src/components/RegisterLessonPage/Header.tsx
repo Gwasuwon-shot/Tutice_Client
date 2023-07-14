@@ -1,6 +1,7 @@
+import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
-import React from 'react';
+
 export default function Header() {
 
     return (

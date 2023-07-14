@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 interface FooterProp {
     isGreen: boolean;
-  }
+}
   
 export default function Footer({ isGreen }: FooterProp) {
 
     return (
         <FooterWrapper isGreen={isGreen}>
-            <FooterButton> 정기수업 일정 등록하기 </FooterButton>
+            <FooterButton isGreen={isGreen}> 정기수업 일정 등록하기 </FooterButton>
         </FooterWrapper>
     );
 }
@@ -26,12 +26,12 @@ const FooterWrapper = styled.footer<{ isGreen: boolean }>`
     height: 6.3rem;
     padding: 0.8rem;
     
-    background-color: ${({ theme, isGreen }) => isGreen ? theme.colors.green5 : theme.colors.grey50};
+    ${({ theme, isGreen }) => isGreen ? `background-color: ${theme.colors.green5};` : `background-color: ${theme.colors.grey50};`}
 `
 
-const FooterButton = styled.button`
+const FooterButton = styled.button<{ isGreen: boolean }>`
     display: flex;
     
     ${({ theme }) => theme.fonts.body02};
-    color: ${({ theme }) => theme.colors.grey200};
+    ${({ theme, isGreen }) => isGreen ? `color: ${theme.colors.grey0};` : `color: ${theme.colors.grey200};`}
 `

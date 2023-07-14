@@ -22,10 +22,10 @@ export default function DetailTimePicker() {
     }, [activeAmPmSlide]);
 
     // 2) swiper
-    const AmPm = ['오전', '오후'];
+    const ampm = ['오전', '오후'];
     const slidesAmPm = Array.from({ length: 2 }, (_, index) => (
         <SwiperSlide key={index}>
-          {AmPm[index]}
+          {ampm[index]}
         </SwiperSlide>
     ));
 
@@ -61,16 +61,17 @@ export default function DetailTimePicker() {
     }, [activeMinuteSlide]);
 
     // 2) swiper
+    const minutes = ["00", "30"];
     const slidesMinute = Array.from({ length: 2 }, (_, index) => (
         <SwiperSlide key={index}>
-          {index * 30}
+          {minutes[index]}
         </SwiperSlide>
     ));
     
     return (
-
+    
         <TimePickerWrapper>
-
+            
             <CancleWrapper>
                 <CancleButton> 취소 </CancleButton>
             </CancleWrapper>
@@ -148,13 +149,15 @@ const TimePickerWrapper = styled.div`
 
 const SwiperWrapper = styled.div`
     display: flex;
+    justify-content: space-evenly;
+    width: 13rem;
 `
 
 const StyledSwiper = styled(Swiper)`
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     width: 3rem;
     height: 9.5rem;
     
@@ -226,4 +229,5 @@ const Vizor = styled.div`
     z-index : 100;
     opacity: 0.2;
     background-color: ${({ theme }) => theme.colors.grey200};
+    border-radius: 20px;
 `

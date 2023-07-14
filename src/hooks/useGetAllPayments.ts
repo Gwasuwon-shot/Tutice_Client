@@ -2,7 +2,7 @@ import { GET_LESSON_PAYMENT_RECORD_BY_TEACHER } from "../core/manageLesson/getLe
 
 export default function useGetAllPayments() {
   //   api 패칭
-  const { lesson, todayDate, paymentRecord } = GET_LESSON_PAYMENT_RECORD_BY_TEACHER?.data;
+  const { lesson, todayDate, paymentRecordList } = GET_LESSON_PAYMENT_RECORD_BY_TEACHER?.data;
 
-  return { lesson, todayDate, paymentRecord };
+  return { lesson, todayDate, paymentRecordList };
 }

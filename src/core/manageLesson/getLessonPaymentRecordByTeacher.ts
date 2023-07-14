@@ -16,7 +16,19 @@ export const GET_LESSON_PAYMENT_RECORD_BY_TEACHER = {
         status: false,
       },
       {
+        idx: 35,
+        date: null,
+        amount: 300000,
+        status: false,
+      },
+      {
         idx: 54,
+        date: "2023-08-23",
+        amount: 300000,
+        status: true,
+      },
+      {
+        idx: 55,
         date: "2023-08-23",
         amount: 300000,
         status: true,

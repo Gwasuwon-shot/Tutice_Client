@@ -6,19 +6,16 @@ interface StudentPaymentProps {
   idx: number;
   date: string;
   amount: number;
+  status: boolean;
   count: number;
 }
 
 export default function StudentPayment(props: StudentPaymentProps) {
-  const { idx, date, amount, count } = props;
-
-  function checkPaymentDone() {
-    return amount >= 0;
-  }
+  const { idx, date, amount, status, count } = props;
 
   return (
     <>
-      {checkPaymentDone() ? (
+      {status ? (
         <img src={PAYMENT_STATUS_IMAGE.done} alt="입금 완료 열매" />
       ) : (
         <img src={PAYMENT_STATUS_IMAGE.notYet} alt="입금 미완료 열매" />
@@ -27,7 +24,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
       <p>
         {new Date(date).getMonth() + 1}월 {new Date(date).getDate() + 1}일
       </p>
-      {checkPaymentDone() ? (
+      {status ? (
         <p>{amount}</p>
       ) : (
         <>

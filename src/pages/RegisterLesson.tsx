@@ -6,11 +6,10 @@ import React from "react";
 
 export default function RegisterLesson() {
   return (
-    <>
-      <ProgressBar progress={25} />
-      <Header />
-      <LessonInput />
-      <Footer />
-    </>
+  <>
+    <ProgressBar progress = {25} />
+    <Header />
+    <LessonInput />
+  </>
   );
 }

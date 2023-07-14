@@ -1,3 +1,4 @@
+import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
 

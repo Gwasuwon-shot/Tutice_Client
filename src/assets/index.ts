@@ -61,6 +61,13 @@ export { ReactComponent as SmallAttendanceCheckButtonIc } from "./icon/smallAtte
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as RegisterLessonInputIc } from "./icon/registerLessonInputIc.svg";
+export { ReactComponent as RegularLessonStudentIc } from "./icon/regularLessonStudentIc.svg";
+export { ReactComponent as RegularLessonNotebookIc } from "./icon/regularLessonNotebookIc.svg";
+export { ReactComponent as RegularLessonPencilIc } from "./icon/regularLessonPencilIc.svg";
+export { ReactComponent as RegularLessonClockIc } from "./icon/regularLessonClockIc.svg";
+export { ReactComponent as RegularLessonCalenderIc } from "./icon/regularLessonCalenderIc.svg";
+export { ReactComponent as CalendarMoreLessonsIc } from "./icon/calendarMoreLessonIc.svg";
 export { ReactComponent as EditPencilIc } from "./icon/EditPencilIc.svg";
 export { ReactComponent as removeTrashCan } from "./icon/removeTrashCanIc.svg";
 export { ReactComponent as tuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";

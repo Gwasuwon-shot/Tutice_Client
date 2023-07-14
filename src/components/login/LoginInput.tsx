@@ -6,6 +6,7 @@ import LoginButton from "./LoginButton";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
+  const [isActive, setIsActive] = useState(false);
   const [email, setEmail] = useState("");
   const [emailFocus, setEmailFocus] = useState(false);
   const [password, setPassword] = useState("");
@@ -43,6 +44,9 @@ export default function LoginInput() {
 
   useEffect(() => {
     setUserLogin((prev) => ({ ...prev, email: email, password: password }));
+
+    // 이메일, 이름 입력 및 정규식 확인 : 버튼 활성화
+    password && email ? setIsActive(true) : setIsActive(false);
   }, [email, password]);
 
   return (
@@ -72,7 +76,7 @@ export default function LoginInput() {
           {viewingIcon()}
         </PasswordIconWrapper>
       </InputPasswordWrapper>
-      <LoginButton handleLoginClick={handleLoginClick} />
+      <LoginButton onClick={handleLoginClick} isActive={isActive} disabled={!isActive} />
     </>
   );
 }

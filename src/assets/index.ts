@@ -41,6 +41,7 @@ export { ReactComponent as RegularLessonNotebookIc } from "./icon/regularLessonN
 export { ReactComponent as RegularLessonPencilIc } from "./icon/regularLessonPencilIc.svg";
 export { ReactComponent as RegularLessonStudentIc } from "./icon/regularLessonStudentIc.svg";
 export { ReactComponent as RightArrowTeacherHomeIc } from "./icon/rightArrowTeacherHomeIc.svg";
+export { ReactComponent as SmallAttendanceCheckButtonIc } from "./icon/smallAttendanceCheckButtonIc.svg";
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";

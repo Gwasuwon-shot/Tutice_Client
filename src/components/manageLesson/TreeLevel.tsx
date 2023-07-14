@@ -1,4 +1,3 @@
-import TreeProgress from "../common/TreeProgress.tsx";
 import TreeImage from "./TreeImage.tsx";
 import WelcomeTreeLevel from "./WelcomeTreeLevel.tsx";
 

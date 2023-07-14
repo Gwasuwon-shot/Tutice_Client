@@ -46,3 +46,6 @@ export { ReactComponent as SmallAttendanceCheckButtonIc } from "./icon/smallAtte
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+
+export { ReactComponent as RegisterPaymentManageLessonIc } from "./icon/registerPaymentManageLessonIc.svg";
+export { ReactComponent as SendPaymentAlarmManageLessonIc } from "./icon/sendPaymentAlarmManageLessonIc.svg";

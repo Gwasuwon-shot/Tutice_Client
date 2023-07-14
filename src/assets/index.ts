@@ -46,3 +46,10 @@ export { ReactComponent as SmallAttendanceCheckButtonIc } from "./icon/smallAtte
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as NoClassLogoParentsHomeIc } from "./icon/noClassLogoParentsHomeIc.svg";
+export { ReactComponent as RightArrowParentsHomeIc } from "./icon/rightArrowParentsHomeIc.svg";
+export { ReactComponent as FirstTreeParentsHomeIc } from "./icon/firstTreeParentsHomeIc.svg";
+export { ReactComponent as SecondTreeParentsHomeIc } from "./icon/secondTreeParentsHomeIc.svg";
+export { ReactComponent as ThirdTreeParentsHomeIc } from "./icon/thirdTreeParentsHomeIc.svg";
+export { ReactComponent as FourthTreeParentsHomeIc } from "./icon/fourthTreeParentsHomeIc.svg";
+export { ReactComponent as FifthTreeParentsHomeIc } from "./icon/fifthTreeParentsHomeIc.svg";

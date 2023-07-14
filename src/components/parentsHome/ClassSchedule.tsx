@@ -51,11 +51,7 @@ export default function ClassSchedule(props: ClassScheduleProps) {
       </StudentInfoWrapper>
       <ClassDetailInfoWrapper>
         <TeacherSubjectWrapper>
-          <SubjectLabel
-            subject={subjectName}
-            backgroundColor={subjectLabelBackgroundColor}
-            color={({ theme }) => theme.colors.grey600}
-          />
+          <SubjectLabel subject={subjectName} backgroundColor={subjectLabelBackgroundColor} color="#5B6166" />
           <TeacherName>{teacherName} 선생님</TeacherName>
         </TeacherSubjectWrapper>
         <ClassCountMessage>
@@ -77,9 +73,9 @@ const ClassScheduleWrapper = styled.section`
 
 const StudentInfoWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   gap: 0.2rem;
 `;
@@ -99,8 +95,8 @@ const StudentNameWrapper = styled.p`
 
 const ClassDetailInfoWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 
   margin-left: 2.3rem;
 
@@ -131,6 +127,5 @@ const EntireCountMessage = styled.p`
 
 const RightArrowParentsHomeIcon = styled(RightArrowParentsHomeIc)`
   width: 2rem;
-
   margin-left: 8.4rem;
 `;

@@ -20,8 +20,8 @@ export default function NoClassParentsHome() {
 
 const NoClassParentsHomeWrapper = styled.main`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 `;
 
 const NoClassLogoParentsHomeIcon = styled(NoClassLogoParentsHomeIc)`

@@ -1,3 +1,5 @@
+import LoginHeader from "../components/login/LoginHeader";
+
 export default function Login() {
-  return <div>Login</div>;
+  return <LoginHeader />;
 }

@@ -21,6 +21,7 @@ export default function TimePicker() {
             <StyledSwiper
                 direction="vertical"
                 slidesPerView={7}
+                spaceBetween={15}
                 freeMode={true}
                 freeModeSticky={true}
                 freeModeMomentumRatio={0.25}

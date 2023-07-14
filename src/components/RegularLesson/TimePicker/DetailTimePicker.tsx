@@ -11,8 +11,10 @@ export default function DetailTimePicker() {
     
     // 1. 오전 오후 관리
     // 1) active slide 값 관리
-    const [activeAmPmSlide, setActiveAmPmSlide] = useState('오전');
-    const handleAmPmSlideChange = (swiper: Swiper) => {
+    
+    const [activeAmPmSlide, setActiveAmPmSlide] = useState(0);
+    
+    const handleAmPmSlideChange = (swiper: SwiperCore) => {
         setActiveAmPmSlide(swiper.realIndex);
     };
 
@@ -31,8 +33,10 @@ export default function DetailTimePicker() {
 
     // 2. 시간 관리
     // 1) active slide 값 관리
+    
     const [activeHourSlide, setActiveHourSlide] = useState(0);
-    const handleHourSlideChange = (swiper: Swiper) => {
+
+    const handleHourSlideChange = (swiper: SwiperCore) => {
         setActiveHourSlide(swiper.realIndex);
     };
 
@@ -51,7 +55,8 @@ export default function DetailTimePicker() {
     // 3. 분 관리
     // 1) active slide 값 관리
     const [activeMinuteSlide, setActiveMinuteSlide] = useState(0);
-    const handleMinuteSlideChange = (swiper: Swiper) => {
+    
+    const handleMinuteSlideChange = (swiper: SwiperCore) => {
         setActiveMinuteSlide(swiper.realIndex);
     };
 

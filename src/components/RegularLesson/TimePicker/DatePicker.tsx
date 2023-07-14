@@ -3,6 +3,7 @@ import 'swiper/components/navigation/navigation.min.css';
 
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation } from 'swiper';
 
 import styled from 'styled-components';
 
@@ -71,11 +72,12 @@ export default function DatePicker() {
 
     // 4. 날짜 관리
 
-    const today = { month: currentMonth, date: todayDate, day: todayDay }
+    // today 날짜 객체 (오늘 값) -> 초기값으로 설정 예정
+    // const today = { month: currentMonth, date: todayDate, day: todayDay }
 
-    const [activeSlide, setActiveSlide] = useState(today);
+    const [activeSlide, setActiveSlide] = useState(0);
 
-    const handleSlideChange = (swiper: Swiper) => {
+    const handleSlideChange = (swiper: SwiperCore) => {
         setActiveSlide(swiper.realIndex);
     };
 

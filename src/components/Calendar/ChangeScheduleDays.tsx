@@ -35,10 +35,15 @@ export default function ChangeScheduleDays(props: DaysProp) {
 
   function handleClickEdit() {
     setIsEdit(true);
-    // navigate("/change-lessonschedule");
   }
   function handleCloseButton() {
+    //update 로직 추가
     setOpenModal(false);
+  }
+
+  function moveClickEditPage() {
+    //params 추가
+    navigate("/change-lessonschedule");
   }
 
   while (day <= endDate) {
@@ -78,10 +83,16 @@ export default function ChangeScheduleDays(props: DaysProp) {
               <ModalContentWrapper>
                 <ModalHeaderWrapper>
                   <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
-                  <ModalButtonWrapper>
-                    <ModalButton onClick={handleClickEdit}>편집</ModalButton>
-                    <ModalButton onClick={handleCloseButton}>닫기</ModalButton>
-                  </ModalButtonWrapper>
+                  {isEdit ? (
+                    <ModalButtonWrapper style={{ justifyContent: "flex-end" }}>
+                      <ModalButton onClick={handleCloseButton}>완료</ModalButton>
+                    </ModalButtonWrapper>
+                  ) : (
+                    <ModalButtonWrapper>
+                      <ModalButton onClick={handleClickEdit}>편집</ModalButton>
+                      <ModalButton onClick={handleCloseButton}>닫기</ModalButton>
+                    </ModalButtonWrapper>
+                  )}
                 </ModalHeaderWrapper>
                 {myChildLessonList
                   .find((item) => isSameDay(new Date(item.date), selectedDate))
@@ -97,10 +108,12 @@ export default function ChangeScheduleDays(props: DaysProp) {
                           {lesson.schedule.subject}
                         </ModalSubject>
                       </ScheduleContainer>
-                      <ScheduleEditWrapper>
-                        <EditScheduleButton />
-                        <RemoveSchedule />
-                      </ScheduleEditWrapper>
+                      {isEdit ? (
+                        <ScheduleEditWrapper>
+                          <EditScheduleButton onClick={moveClickEditPage} />
+                          <RemoveSchedule />
+                        </ScheduleEditWrapper>
+                      ) : undefined}
                     </ScheduleWrapper>
                   ))}
               </ModalContentWrapper>
@@ -161,6 +174,7 @@ const ModalButtonWrapper = styled.div`
   display: flex;
 
   width: 6.2rem;
+
   gap: 1.2rem;
 `;
 

@@ -31,7 +31,7 @@ export default function LoginInput() {
     pwViewing === "text" ? setPwViewing("password") : setPwViewing("text");
   }
 
-  // 뷰잉 상황 정리
+  // 비밀번호 텍스트 보이게 할지 안보이게 할지 로직
   function viewingIcon() {
     if (pwFocus || password) {
       if (pwViewing === "text") {

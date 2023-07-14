@@ -4,13 +4,14 @@ import CheckLesson from "./pages/CheckLesson";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import OnBoarding from "./pages/OnBoarding";
 import ParentCalendar from "./pages/ParentCalendar";
 import RegisterCalendar from "./pages/RegisterCalendar";
 import RegisterLesson from "./pages/RegisterLesson";
 import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
-import OnBoarding from "./pages/OnBoarding";
+import TimePickerPage from "./pages/TimePickerPage";
 
 export default function Router() {
   return (
@@ -28,6 +29,7 @@ export default function Router() {
         <Route path="/regular-lesson" element={<RegularLesson />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/register-calendar" element={<RegisterCalendar />} />
+        <Route path="/time-picker" element={<TimePickerPage />} />
       </Routes>
     </BrowserRouter>
   );

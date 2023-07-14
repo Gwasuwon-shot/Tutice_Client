@@ -9,6 +9,10 @@ import styled from 'styled-components';
 
 export default function DatePicker() {
     
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+
     const [activeSlide, setActiveSlide] = useState(0);
 
     const handleSlideChange = (swiper: Swiper) => {

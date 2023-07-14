@@ -10,8 +10,10 @@ export default function Login() {
       <Container>
         <LoginHeader />
         <LoginInput />
-        <LoginButton />
-        <AccountManaging />
+        <CenterWrapper>
+          <LoginButton />
+          <AccountManaging />
+        </CenterWrapper>
       </Container>
     </>
   );
@@ -19,4 +21,10 @@ export default function Login() {
 
 const Container = styled.div`
   margin-left: 1.4rem;
+`;
+
+const CenterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;

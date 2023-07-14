@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import TextLabelLayout from "../signup/TextLabelLayout";
 
 export default function LoginInput() {
+  const [pwViewing, setPwViewing] = useState("password");
   return (
     <>
       <InputFieldWrapper>

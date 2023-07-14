@@ -8,12 +8,14 @@ import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 import styled from 'styled-components';
 
 export default function TimePicker() {
+    
     const [activeSlide, setActiveSlide] = useState(0);
 
     const handleSlideChange = (swiper: Swiper) => {
         setActiveSlide(swiper.realIndex);
     };
 
+    // check 용
     useEffect(() => {
         console.log(activeSlide);
     }, [activeSlide]);
@@ -65,7 +67,9 @@ const TimePickerWrapper = styled.div`
     align-items: center;
 
     position: relative;
+    
     height: 13rem;
+    
     background-color: ${({ theme }) => theme.colors.grey20};
 `
 
@@ -76,6 +80,7 @@ const StyledSwiper = styled(Swiper)`
     
     width: 6rem;
     height: 9.5rem;
+    
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey400};
     background-color: ${({ theme }) => theme.colors.grey20};
@@ -84,8 +89,8 @@ const StyledSwiper = styled(Swiper)`
         display: flex;
         justify-content: center;
         align-items: center;
+        
         text-align: center;
-        vertical-align: center;
         opacity: 0.4;
         cursor: pointer;
         transition: opacity 0.3s ease;
@@ -99,46 +104,49 @@ const StyledSwiper = styled(Swiper)`
 
 const CancleWrapper = styled.div`
     display: flex;
+
     position: relative;
+    
     width: 6rem; 
     height: 100%;
 `
 
 const ConfirmWrapper = styled.div`
     display: flex;
+
     position: relative;
+    
     width: 6rem; 
     height: 100%;
 `
 const CancleButton = styled.button`
-    ${({ theme }) => theme.fonts.body02};
-    color: ${({ theme }) => theme.colors.grey400};
     position: absolute;
     top: 0.7rem;
     left: 1rem;
+    
+    ${({ theme }) => theme.fonts.body02};
+    color: ${({ theme }) => theme.colors.grey400};
 `
 
 const ConfirmButton = styled.button`
-    ${({ theme }) => theme.fonts.body02};
-    color: ${({ theme }) => theme.colors.green5};
     position: absolute;
     top: 0.7rem;
     right: 1rem;
+
+    ${({ theme }) => theme.fonts.body02};
+    color: ${({ theme }) => theme.colors.green5};
 `
 
 const Vizor = styled.div`
-    border: 1px solid #ccc;
+    position: absolute;
+    top: 50%;
+    left: 50%;
 
     width: 5rem;
     height: 2rem;
-
-    position: absolute;
     
-    top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%);
     z-index : 100;
-    
     opacity: 0.2;
     background-color: ${({ theme }) => theme.colors.grey200};
 `

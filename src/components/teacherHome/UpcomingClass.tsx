@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { RightArrowTeacherHomeIc } from "../../assets";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import useMoveToLessonDetail from "../../hooks/useMoveToLessonDetail";
 import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
 import { ScheduleType } from "../../type/teacherHome/upcomingClassScheduleType";
 import StudentColorBox from "../common/StudentColorBox";
@@ -15,9 +16,10 @@ export default function UpcomingClass(props: UpcomingClassProps) {
   const { lesson, schedule } = props;
   const { idx, studentName, subject } = lesson;
   const { startTime, endTime } = schedule;
+  const { handleMoveToManageLessonDetail } = useMoveToLessonDetail();
 
   return (
-    <UpcomingClassWrapper>
+    <UpcomingClassWrapper onClick={() => handleMoveToManageLessonDetail(idx)}>
       <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
       <ClassTimeWrapper>
         {startTime} ~ {endTime}

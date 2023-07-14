@@ -20,7 +20,7 @@ export default function PwTos() {
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
   const [isPassword, setIsPassword] = useState(false);
-  const [doubleCheck, setDoubleCheck] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
   const [confirmFocus, setConfirmFocus] = useState(false);
@@ -44,15 +44,11 @@ export default function PwTos() {
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
 
     // 비밀번호 일치 체크
-    pw === confirmPw ? setDoubleCheck(true) : setDoubleCheck(false);
+    pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
 
     // 비밀번호 중복 및 정규식 확인 : 버튼 활성화
-    pw && confirmPw && isPassword && doubleCheck ? setIsActive(true) : setIsActive(false);
-  }, [pw, confirmPw, isPassword, doubleCheck]);
-
-  useEffect(() => {
-    console.log(newUser);
-  }, []);
+    pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
+  }, [pw, confirmPw, isPassword, isConfirmed]);
 
   return (
     <>
@@ -93,7 +89,7 @@ export default function PwTos() {
 
         {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
-        <InputConfirmWrapper $confirmFocus={confirmFocus} $doubleCheck={doubleCheck}>
+        <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
           <form>
             <Inputfield
@@ -107,7 +103,7 @@ export default function PwTos() {
           </form>
         </InputConfirmWrapper>
 
-        {!doubleCheck && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+        {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
         <Tos />
 
@@ -155,15 +151,15 @@ const InputPwWrapper = styled.div<{ $pwFocus: boolean; $isPassword: boolean }>`
     ${({ theme, $pwFocus, $isPassword }) => ($pwFocus || $isPassword ? theme.colors.green5 : theme.colors.grey70)};
 `;
 
-const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $doubleCheck: boolean }>`
+const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: boolean }>`
   display: flex;
   flex-direction: column;
 
   width: 29.2rem;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
-    ${({ theme, $confirmFocus, $doubleCheck }) =>
-      $confirmFocus || $doubleCheck ? theme.colors.green5 : theme.colors.grey70};
+    ${({ theme, $confirmFocus, $isConfirmed }) =>
+      $confirmFocus || $isConfirmed ? theme.colors.green5 : theme.colors.grey70};
 `;
 
 const Inputfield = styled.input`

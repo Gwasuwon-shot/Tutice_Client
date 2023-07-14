@@ -227,11 +227,12 @@ const Vizor = styled.div`
     top: 50%;
     left: 50%;
 
-    width: 5rem;
+    width: 8rem;
     height: 2rem;
     
     transform: translate(-50%, -50%);
     z-index : 100;
     opacity: 0.2;
     background-color: ${({ theme }) => theme.colors.grey200};
+    border-radius: 20px;
 `

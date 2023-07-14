@@ -1,15 +1,12 @@
+import { useRecoilState } from "recoil";
+import { upcomingClassData } from "../../atom/attendanceCheck/upcomingClassData";
 import { NO_CLASS_BANNER_TITLE } from "../../core/teacherHome/noClassBannerTitle";
-import { PreviewBannerScheduleType } from "../../type/teacherHome/previewBannerScheduleType";
 import ClassPreviewBanner from "./banner/ClassPreviewBanner";
 import NoclassBanner from "./banner/NoclassBanner";
 
-interface BannerProps {
-  isTodaySchedule: boolean;
-  todaySchedule: PreviewBannerScheduleType;
-}
-
-export default function Banner(props: BannerProps) {
-  const { isTodaySchedule, todaySchedule } = props;
+export default function Banner() {
+  const [classData, setclassData] = useRecoilState(upcomingClassData);
+  const { teacherName, isTodaySchedule, todaySchedule } = classData;
 
   function checkClassEnd() {
     return todaySchedule === null;

@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { CheckButtonSnackBarIc, XButtonSnackBarIc } from "../../assets";
+import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 
 interface SnackBarPopupProps {
   isCheck: boolean;
@@ -9,6 +11,11 @@ interface SnackBarPopupProps {
 
 export default function SnackBarPopup(props: SnackBarPopupProps) {
   const { isCheck, children } = props;
+  const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
+
+  function handleCloseSnackBarPopup() {
+    setSanckBarOpen(false);
+  }
 
   return (
     <SnackBarContainer>
@@ -17,7 +24,7 @@ export default function SnackBarPopup(props: SnackBarPopupProps) {
           {isCheck && <CheckButtonSnackBarIcon />}
           {children}
         </Contents>
-        <XButtonSnackBarIcon />
+        <XButtonSnackBarIcon onClick={handleCloseSnackBarPopup} />
       </SnackBar>
     </SnackBarContainer>
   );
@@ -32,7 +39,6 @@ const SnackBar = styled.aside`
   padding: 0.8rem 1rem;
 
   background-color: ${({ theme }) => theme.colors.grey900};
-  color: ${({ theme }) => theme.colors.white};
 
   border-radius: 8px;
 `;

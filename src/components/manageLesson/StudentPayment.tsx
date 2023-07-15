@@ -1,3 +1,4 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { RegisterPaymentManageLessonIc, SendPaymentAlarmManageLessonIc } from "../../assets";
 import { PAYMENT_STATUS_IMAGE } from "../../core/manageLesson/paymentStatusImage";
@@ -14,6 +15,12 @@ interface StudentPaymentProps {
 export default function StudentPayment(props: StudentPaymentProps) {
   const { idx, date, amount, status, count } = props;
   const { showModal } = useModal();
+  const navigate = useNavigate();
+  const { manageLessonId } = useParams();
+
+  function handleMoveToRegisterPayment() {
+    navigate(`/register-payment/${manageLessonId}`);
+  }
 
   return (
     <StudentPaymentBox>
@@ -34,7 +41,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
         ) : (
           <>
             <SendPaymentAlarmManageLessonIcon onClick={showModal} />
-            <RegisterPaymentManageLessonIcon />
+            <RegisterPaymentManageLessonIcon onClick={handleMoveToRegisterPayment} />
           </>
         )}
       </Payment>

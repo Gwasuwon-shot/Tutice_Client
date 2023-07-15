@@ -11,7 +11,7 @@ interface AttendanceInformProps {
   count: number;
 }
 
-export default function AttnedanceInform(props: AttendanceInformProps) {
+export default function AttendanceInform(props: AttendanceInformProps) {
   const { date, status, startTime, endTime, count } = props;
   const { showModal } = useModal();
 

@@ -26,9 +26,11 @@ export { ReactComponent as canViewingLoginIc } from "./icon/canViewingLoginIc.sv
 export { ReactComponent as CancelAttendanceModalIc } from "./icon/cancelAttendanceModalIc.svg";
 export { ReactComponent as ClassManagingActiveTeacherFooterIc } from "./icon/classManagingActiveTeacherFooterIc.svg";
 export { ReactComponent as ClassManagingTeacherFooterIc } from "./icon/classManagingTeacherFooterIc.svg";
+export { ReactComponent as EditPaymentIc } from "./icon/editPaymentIc.svg";
 export { ReactComponent as FifthTreeParentsHomeIc } from "./icon/fifthTreeParentsHomeIc.svg";
 export { ReactComponent as FirstTreeParentsHomeIc } from "./icon/firstTreeParentsHomeIc.svg";
 export { ReactComponent as FourthTreeParentsHomeIc } from "./icon/fourthTreeParentsHomeIc.svg";
+export { ReactComponent as FruitPaymentIc } from "./icon/fruitPaymentIc.svg";
 export { ReactComponent as HomeActiveTeacherFooterIc } from "./icon/homeActiveTeacherFooterIc.svg";
 export { ReactComponent as HomeTeacherFooterIc } from "./icon/homeTeacherFooterIc.svg";
 export { ReactComponent as MainIc } from "./icon/mainIc.svg";

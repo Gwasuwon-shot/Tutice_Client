@@ -143,6 +143,7 @@ export default function AgreeChecking() {
             ) : (
               <TosNoneSignupIcon onClick={() => handleButtonChecked(id)} />
             )}
+            {id === 0 ? <Horizon /> : null}
           </ICWrapper>
         ))}
       </CheckWrapper>
@@ -219,10 +220,9 @@ const CheckSubText = styled.p`
 
 const Horizon = styled.div`
   width: 26.4rem;
-  margin-top: -0.4rem;
-  margin-bottom: 1.2rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey100};
 
-  border-top: 1px solid ${({ theme }) => theme.colors.grey100};
+  margin-top: 0.3rem;
 `;
 
 const Essential = styled.p`

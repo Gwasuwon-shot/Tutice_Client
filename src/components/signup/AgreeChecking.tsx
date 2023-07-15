@@ -19,6 +19,7 @@ const checkList: checkListProps[] = [
 ];
 
 interface textListProps {
+  id: number;
   optional: string;
   boldText: string;
   linkText: string;
@@ -26,11 +27,11 @@ interface textListProps {
 }
 
 const textList: textListProps[] = [
-  { optional: "", boldText: "약관 전체 동의", linkText: "", lightText: "선택항목에 대한 동의 포함" },
-  { optional: "(필수)", boldText: "만 14세 이상입니다.", linkText: "", lightText: "" },
-  { optional: "(필수)", boldText: "동의", linkText: "서비스 이용 약관", lightText: "" },
-  { optional: "(필수)", boldText: "동의", linkText: "개인정보 수집 및 이용", lightText: "" },
-  { optional: "(선택)", boldText: "동의", linkText: "개인정보 마케팅 활용", lightText: "" },
+  { id: 0, optional: "", boldText: "약관 전체 동의", linkText: "", lightText: "선택항목에 대한 동의 포함" },
+  { id: 1, optional: "(필수)", boldText: "만 14세 이상입니다.", linkText: "", lightText: "" },
+  { id: 2, optional: "(필수)", boldText: "동의", linkText: "서비스 이용 약관", lightText: "" },
+  { id: 3, optional: "(필수)", boldText: "동의", linkText: "개인정보 수집 및 이용", lightText: "" },
+  { id: 4, optional: "(선택)", boldText: "동의", linkText: "개인정보 마케팅 활용", lightText: "" },
 ];
 
 export default function AgreeChecking() {
@@ -149,20 +150,18 @@ export default function AgreeChecking() {
       </CheckWrapper>
 
       <TextWrapper>
-        {textAgrees.map((textAgree, idx) => (
-          <>
-            <IndividualTextWrapper key={idx}>
-              {textAgree.optional === "(선택)" ? (
-                <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
-              ) : (
-                <Essential>{textAgree.optional}</Essential>
-              )}
+        {textAgrees.map((textAgree) => (
+          <IndividualTextWrapper key={textAgree.id}>
+            {textAgree.optional === "(선택)" ? (
+              <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
+            ) : (
+              <Essential>{textAgree.optional}</Essential>
+            )}
 
-              <HyperLink>{textAgree.linkText}</HyperLink>
-              <CheckText> {textAgree.boldText} </CheckText>
-              <CheckSubText>{textAgree.lightText}</CheckSubText>
-            </IndividualTextWrapper>
-          </>
+            <HyperLink>{textAgree.linkText}</HyperLink>
+            <CheckText> {textAgree.boldText} </CheckText>
+            <CheckSubText>{textAgree.lightText}</CheckSubText>
+          </IndividualTextWrapper>
         ))}
       </TextWrapper>
     </TosWrapper>

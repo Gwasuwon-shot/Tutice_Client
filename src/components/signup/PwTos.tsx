@@ -42,6 +42,7 @@ export default function PwTos() {
   useEffect(() => {
     // 비밀번호 정규식 체크
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
+    console.log(isPassword);
 
     // 비밀번호 일치 체크
     pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
@@ -83,7 +84,7 @@ export default function PwTos() {
           />
         </InputPwWrapper>
 
-        {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
+        {!isPassword || pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
         <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
@@ -100,14 +101,9 @@ export default function PwTos() {
         {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
         <UserCheckList />
-
-        <BottomButton
-          type="submit"
-          disabled={!isActive}
-          isActive={isActive}
-          children={BUTTON_TEXT.signupDone}
-          onClick={handleToSignUp}
-        />
+        <SubmitButton type="submit" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
+          <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
+        </SubmitButton>
       </Container>
     </>
   );
@@ -134,7 +130,7 @@ const InputWrapper = styled.div`
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 `;
-Dispatch<SetStateAction<boolean>>;
+
 const InputPwWrapper = styled.div<{ $pwFocus: boolean; $isPassword: boolean }>`
   display: flex;
   flex-direction: column;
@@ -153,7 +149,7 @@ const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: b
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $confirmFocus, $isConfirmed }) =>
-      $confirmFocus || $isConfirmed ? theme.colors.green5 : theme.colors.grey70};
+      $confirmFocus && $isConfirmed ? theme.colors.green5 : theme.colors.grey70};
 `;
 
 const Inputfield = styled.input`
@@ -166,4 +162,25 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
+`;
+
+const SubmitButton = styled.button<{ $isActive: boolean }>`
+  position: fixed;
+  bottom: 0;
+
+  width: 31.8rem;
+  height: 6.3rem;
+  margin-left: -1.6rem;
+
+  background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
+  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};
+
+  ${({ theme }) => theme.fonts.body01};
+`;
+const ButtonText = styled.p`
+  position: relative;
+
+  /* top- 정확한 값으로 수정 필요 */
+  top: -1rem;
+  ${({ theme }) => theme.fonts.body01};
 `;

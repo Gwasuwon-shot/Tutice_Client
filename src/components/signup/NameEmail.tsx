@@ -48,7 +48,6 @@ export default function NameEmail() {
   }
 
   useEffect(() => {
-    console.log(newUser);
     // 이메일 정규식 확인
     email.match(EMAIL_REGEX) === null ? setIsEmail(false) : setIsEmail(true);
 

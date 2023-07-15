@@ -37,6 +37,8 @@ export default function AgreeChecking() {
   const setNewUser = useSetRecoilState(newUserData);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
+  const [allClicked, setAllClicked] = useState(false);
+
   const [checkedCount, setCheckedCount] = useState(0);
 
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {

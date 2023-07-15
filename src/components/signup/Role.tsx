@@ -27,9 +27,7 @@ export default function Role() {
     setStep(2);
   }
 
-  useEffect(() => {
-    console.log(newUser);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>

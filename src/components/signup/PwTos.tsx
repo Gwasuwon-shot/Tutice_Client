@@ -61,46 +61,40 @@ export default function PwTos() {
 
         <InputWrapper>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
-          <form>
-            <Inputfield disabled type="text" value={newUser.name} />
-          </form>
+          <Inputfield disabled type="text" value={newUser.name} />
         </InputWrapper>
 
         <InputWrapper>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-          <form>
-            <Inputfield disabled type="text" value={newUser.email} />
-          </form>
+
+          <Inputfield disabled type="text" value={newUser.email} />
         </InputWrapper>
 
         <InputPwWrapper $isPassword={isPassword} $pwFocus={setPwFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
-          <form>
-            <Inputfield
-              onFocus={() => setPwFocus(true)}
-              onBlur={() => setPwFocus(false)}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
-              type="password"
-              autoComplete="off"
-              placeholder={PLACEHOLDER_TEXT.passwordHolder}
-            />
-          </form>
+
+          <Inputfield
+            onFocus={() => setPwFocus(true)}
+            onBlur={() => setPwFocus(false)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
+            type="password"
+            autoComplete="off"
+            placeholder={PLACEHOLDER_TEXT.passwordHolder}
+          />
         </InputPwWrapper>
 
         {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
         <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
-          <form>
-            <Inputfield
-              onFocus={() => setConfirmFocus(true)}
-              onBlur={() => setConfirmFocus(false)}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
-              type="password"
-              autoComplete="off"
-              placeholder={PLACEHOLDER_TEXT.confirmHolder}
-            />
-          </form>
+          <Inputfield
+            onFocus={() => setConfirmFocus(true)}
+            onBlur={() => setConfirmFocus(false)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
+            type="password"
+            autoComplete="off"
+            placeholder={PLACEHOLDER_TEXT.confirmHolder}
+          />
         </InputConfirmWrapper>
 
         {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}

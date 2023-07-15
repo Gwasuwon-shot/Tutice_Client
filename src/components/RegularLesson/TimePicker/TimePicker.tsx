@@ -29,7 +29,6 @@ export default function TimePicker() {
     return (
 
         <TimePickerWrapper>
-
             <CancleWrapper>
                 <CancleButton> 취소 </CancleButton>
             </CancleWrapper>

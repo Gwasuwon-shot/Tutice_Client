@@ -40,6 +40,7 @@ export default function AgreeChecking() {
   const [allClicked, setAllClicked] = useState(false);
   const [completeCheck, setCompleteCheck] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
+  const [isFirst, setIsFirst] = useState(false);
 
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.innerText) {

@@ -5,6 +5,7 @@ import { TosCheckedSignupIc } from "../../assets";
 import { useSetRecoilState } from "recoil";
 import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
+import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 export default function AgreeChecking() {
   const setNewUser = useSetRecoilState(newUserData);
@@ -74,7 +75,7 @@ export default function AgreeChecking() {
     });
     setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
 
-    setNewUser((prev) => ({
+    setNewUser((prev: newUserDataTypes) => ({
       ...prev,
       isMarketing: `${checkAgrees[4].selected}`,
     }));

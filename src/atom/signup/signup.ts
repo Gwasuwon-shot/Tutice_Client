@@ -1,12 +1,5 @@
 import { atom } from "recoil";
-
-interface newUserDataTypes {
-  role: string;
-  email: string;
-  password: string;
-  name: string;
-  isMarketing: boolean;
-}
+import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 export const stepNum = atom<number>({
   key: "stepNum",

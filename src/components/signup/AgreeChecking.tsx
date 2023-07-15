@@ -134,8 +134,9 @@ export default function AgreeChecking() {
             ) : (
               <Essential>{textAgree.optional}</Essential>
             )}
-
-            <HyperLink>{textAgree.linkText}</HyperLink>
+            <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
+              {textAgree.linkText}
+            </HyperLink>
             <CheckText> {textAgree.boldText} </CheckText>
             <CheckSubText>{textAgree.lightText}</CheckSubText>
           </IndividualTextWrapper>

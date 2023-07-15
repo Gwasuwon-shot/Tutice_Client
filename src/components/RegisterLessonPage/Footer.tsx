@@ -1,6 +1,7 @@
 import { studentNameSelector, subjectNameSelector } from "../../atom/common/datePicker";
 
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 import {useRecoilValue} from 'recoil';
 
 export default function Footer() {
@@ -11,9 +12,14 @@ export default function Footer() {
     const isNameValid = studentName.length >= 3; 
     const isWarning = !isNameValid && studentName.length > 0
     const isFooterGreen = subjectName !== "" && !isWarning;
+    const navigate = useNavigate();
+
+    function moveToRegularLesson() {
+        navigate("/regular-lesson");
+    }
     
     return (
-        <FooterWrapper isFooterGreen={isFooterGreen}>
+        <FooterWrapper isFooterGreen={isFooterGreen} onClick={moveToRegularLesson}>
             <FooterButton isFooterGreen={isFooterGreen}> 정기수업 일정 등록하기 </FooterButton>
         </FooterWrapper>
     );

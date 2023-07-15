@@ -16,9 +16,9 @@ const checkList: checkListProps[] = [
   { id: 4, selected: false },
 ];
 
-export default function UserCheckList() {
+export default function AgreeChecking() {
   const [checked, setChecked] = useState(false);
-  const [checkAgree, setCheckAgree] = useState(checkList);
+  const [checkAgrees, setCheckAgrees] = useState(checkList);
 
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.innerText) {
@@ -41,35 +41,25 @@ export default function UserCheckList() {
   return (
     <TosWrapper>
       <CheckWrapper>
-        <ICWrapper>
-          <TosNoneSignupIcon />
-        </ICWrapper>
+        {checkAgrees.map(({ id, selected }) => (
+          <ICWrapper key={id}>
+            {selected ? (
+              <TosNoneSignupIcon onClick={handleButtonChecked} />
+            ) : (
+              <TosCheckSignupIcon onClick={handleButtonChecked} />
+            )}
+          </ICWrapper>
+        ))}
         <CheckText> 약관 전체 동의 </CheckText>
         <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
       </CheckWrapper>
 
-      <Horizon />
-
       <CheckWrapper>
-        <ICWrapper>
-          {checked ? (
-            <TosNoneSignupIcon onClick={handleButtonChecked} />
-          ) : (
-            <TosCheckSignupIcon onClick={handleButtonChecked} />
-          )}
-        </ICWrapper>
         <Essential>(필수) </Essential>
         <CheckText> 만 14세 이상입니다 </CheckText>
       </CheckWrapper>
 
       <CheckWrapper>
-        <ICWrapper>
-          {checked ? (
-            <TosNoneSignupIcon onClick={handleButtonChecked} />
-          ) : (
-            <TosCheckSignupIcon onClick={handleButtonChecked} />
-          )}
-        </ICWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>서비스 이용 약관</p>
@@ -78,13 +68,6 @@ export default function UserCheckList() {
       </CheckWrapper>
 
       <CheckWrapper>
-        <ICWrapper>
-          {checked ? (
-            <TosNoneSignupIcon onClick={handleButtonChecked} />
-          ) : (
-            <TosCheckSignupIcon onClick={handleButtonChecked} />
-          )}
-        </ICWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인정보 수집 및 이용</p>
@@ -93,13 +76,6 @@ export default function UserCheckList() {
       </CheckWrapper>
 
       <CheckWrapper>
-        <ICWrapper>
-          {checked ? (
-            <TosNoneSignupIcon onClick={handleButtonChecked} />
-          ) : (
-            <TosCheckSignupIcon onClick={handleButtonChecked} />
-          )}
-        </ICWrapper>
         <Optional>(선택) </Optional>
 
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
@@ -125,14 +101,14 @@ const TosWrapper = styled.div`
 
 const CheckWrapper = styled.div`
   display: flex;
-
-  margin-bottom: 1.6rem;
+  flex-direction: column;
 `;
 
 const ICWrapper = styled.div`
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
+  margin-bottom: 1.6rem;
 `;
 
 const TosNoneSignupIcon = styled(TosNoneSignupIc)`

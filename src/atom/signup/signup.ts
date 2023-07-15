@@ -10,7 +10,7 @@ interface newUserDataTypes {
 
 export const stepNum = atom<number>({
   key: "stepNum",
-  default: 1,
+  default: 4,
 });
 
 export const newUserData = atom<newUserDataTypes>({

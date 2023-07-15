@@ -127,6 +127,7 @@ export default function AgreeChecking() {
     tempCheckAgrees[0].selected = bool;
     setCheckAgrees([...tempCheckAgrees]);
   }
+
   function checkEssentialAgreeDone(essentialCheck: number) {
     return essentialCheck === 2;
   }
@@ -137,9 +138,9 @@ export default function AgreeChecking() {
         {checkAgrees.map(({ id, selected }) => (
           <ICWrapper key={id}>
             {selected ? (
-              <TosNoneSignupIcon onClick={handleButtonChecked} />
+              <TosCheckSignupIcon onClick={() => handleButtonChecked(id)} />
             ) : (
-              <TosCheckSignupIcon onClick={handleButtonChecked} />
+              <TosNoneSignupIcon onClick={() => handleButtonChecked(id)} />
             )}
           </ICWrapper>
         ))}

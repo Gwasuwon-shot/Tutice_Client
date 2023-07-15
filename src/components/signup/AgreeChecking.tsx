@@ -15,6 +15,20 @@ const checkList: checkListProps[] = [
   { id: 3, selected: false },
   { id: 4, selected: false },
 ];
+interface textListProps {
+  optinal: string;
+  boldText: string;
+  linkText: string;
+  lightText: string;
+}
+
+const textList: textListProps[] = [
+  { optinal: "", boldText: "", linkText: "", lightText: "" },
+  { optinal: "", boldText: "", linkText: "", lightText: "" },
+  { optinal: "", boldText: "", linkText: "", lightText: "" },
+  { optinal: "", boldText: "", linkText: "", lightText: "" },
+  { optinal: "", boldText: "", linkText: "", lightText: "" },
+];
 
 export default function AgreeChecking() {
   const [checked, setChecked] = useState(false);
@@ -50,44 +64,39 @@ export default function AgreeChecking() {
             )}
           </ICWrapper>
         ))}
-        <CheckText> 약관 전체 동의 </CheckText>
-        <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
       </CheckWrapper>
 
-      <CheckWrapper>
+      <TextWrapper>
+        <IndividualTextWrppaer>
+          <CheckText> 약관 전체 동의 </CheckText>
+          <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
+        </IndividualTextWrppaer>
         <Essential>(필수) </Essential>
         <CheckText> 만 14세 이상입니다 </CheckText>
-      </CheckWrapper>
-
-      <CheckWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>서비스 이용 약관</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
-      </CheckWrapper>
-
-      <CheckWrapper>
         <Essential>(필수) </Essential>
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인정보 수집 및 이용</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
-      </CheckWrapper>
-
-      <CheckWrapper>
         <Optional>(선택) </Optional>
 
         <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인 정보 마케팅 활용</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
-      </CheckWrapper>
+      </TextWrapper>
     </TosWrapper>
   );
 }
 
 const TosWrapper = styled.div`
+  display: flex;
+
   width: 29.2rem;
   padding-top: 1.6rem;
   padding-left: 1.4rem;
@@ -166,4 +175,13 @@ const HyperLink = styled.div`
   ${({ theme }) => theme.fonts.body05};
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey500};
+`;
+
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const IndividualTextWrppaer = styled.div`
+  display: flex;
 `;

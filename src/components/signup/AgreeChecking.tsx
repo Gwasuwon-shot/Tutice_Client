@@ -38,7 +38,7 @@ export default function AgreeChecking() {
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
   const [allClicked, setAllClicked] = useState(false);
-
+  const [completeCheck, setCompleteCheck] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
 
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
@@ -102,7 +102,7 @@ export default function AgreeChecking() {
 
     setNewUser((prev) => ({
       ...prev,
-      isMarketing: `${checkedAgree[4].selected}`,
+      isMarketing: `${checkAgrees[4].selected}`,
     }));
   }, [checkAgrees]);
 
@@ -120,7 +120,7 @@ export default function AgreeChecking() {
 
   function changeTotalAgree(bool: boolean) {
     const tempCheckAgrees = checkAgrees;
-    tempCheckAgree[0].selected = bool;
+    tempCheckAgrees[0].selected = bool;
     setCheckAgrees([...tempCheckAgrees]);
   }
   function checkEssentialAgreeDone(essentialCheck: number) {
@@ -142,9 +142,9 @@ export default function AgreeChecking() {
       </CheckWrapper>
 
       <TextWrapper>
-        {textAgrees.map((textAgree) => (
+        {textAgrees.map((textAgree, idx) => (
           <>
-            <IndividualTextWrapper>
+            <IndividualTextWrapper key={idx}>
               {textAgree.optional === "(선택)" ? (
                 <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
               ) : (

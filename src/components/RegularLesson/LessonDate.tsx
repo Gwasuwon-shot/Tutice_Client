@@ -1,11 +1,12 @@
+import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
+
 import React from 'react';
-import {RegularLessonClockIc, RegularLessonCalenderIc} from '../../assets';
 import RoundBottomButton from '../common/RoundBottomButton';
 import styled from 'styled-components';
 
 export default function LessonDate() {
 
-    const days = ['월', '화', '수', '목', '금', '토', '일'];
+    const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
     const messages = "수업일시 추가";
 
     return (
@@ -18,7 +19,7 @@ export default function LessonDate() {
             </IconWrapper>
 
             <DayWrapper>
-                {days.map((day, index) => (
+                {DAYS.map((day, index) => (
                 <Day key={index}>{day}</Day>
                 ))}
             </DayWrapper>

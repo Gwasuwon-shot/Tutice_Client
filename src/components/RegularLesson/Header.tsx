@@ -7,7 +7,6 @@ export default function Header() {
     return (
 
         <HeaderWrapper>
-            
             <RegisterLessonHeaderIcon />
             <HeaderName> 정기수업 일정 등록 </HeaderName>
         </HeaderWrapper>
@@ -36,4 +35,6 @@ const RegisterLessonHeaderIcon = styled(RegisterLessonHeaderIc)`
     position: absolute;
     top: 0.8rem;
     left: 0rem;
+    width: 4rem;
+    height: 4rem;
 `;

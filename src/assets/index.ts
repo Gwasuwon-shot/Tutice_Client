@@ -20,7 +20,6 @@ export { ReactComponent as NextMonthArrowButton } from "./icon/arrow_cal_right.s
 export { ReactComponent as AttenceCheckCommonIc } from "./icon/attenceCheckCommonIc.svg";
 export { ReactComponent as AttendaceAttendanceModalIc } from "./icon/attendaceAttendanceModalIc.svg";
 export { ReactComponent as CalendarActiveTeacherFooterIc } from "./icon/calendarActiveTeacherFooterIc.svg";
-export { ReactComponent as CalendarMoreLessonsIc } from "./icon/calendarMoreLessonIc.svg";
 export { ReactComponent as CalendarTeacherFooterIc } from "./icon/calendarTeacherFooterIc.svg";
 export { ReactComponent as canViewingLoginIc } from "./icon/canViewingLoginIc.svg";
 export { ReactComponent as CancelAttendanceModalIc } from "./icon/cancelAttendanceModalIc.svg";

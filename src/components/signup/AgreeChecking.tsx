@@ -113,9 +113,13 @@ export default function AgreeChecking() {
         {checkAgrees.map(({ id, selected }) => (
           <ICWrapper key={id}>
             {selected ? (
-              <TosCheckSignupIcon onClick={() => handleButtonChecked(id)} />
+              <div onClick={() => handleButtonChecked(id)}>
+                <TosCheckSignupIcon />
+              </div>
             ) : (
-              <TosNoneSignupIcon onClick={() => handleButtonChecked(id)} />
+              <div onClick={() => handleButtonChecked(id)}>
+                <TosNoneSignupIcon />
+              </div>
             )}
             {id === 0 ? <Horizon /> : null}
           </ICWrapper>

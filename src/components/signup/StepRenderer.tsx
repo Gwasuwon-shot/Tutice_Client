@@ -20,7 +20,5 @@ export default function StepRenderer() {
       return <NameEmail />;
     case 3:
       return <PwTos />;
-    case 4:
-      return <AgreeChecking />;
   }
 }

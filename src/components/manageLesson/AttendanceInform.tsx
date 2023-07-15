@@ -11,7 +11,7 @@ interface AttendanceInformProps {
   count: number;
 }
 
-export default function AttnedanceInform(props: AttendanceInformProps) {
+export default function AttendanceInform(props: AttendanceInformProps) {
   const { date, status, startTime, endTime, count } = props;
   const { showModal } = useModal();
 
@@ -87,6 +87,7 @@ const StatusLabel = styled.label<{ $status: string }>`
 
   width: 7.4rem;
   height: 4rem;
+  padding-right: 1rem;
 
   color: ${({ theme, $status }) =>
     $status === ATTENDANCE_STATUS.attend

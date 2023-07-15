@@ -5,11 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 
+import {cycleNumberState} from '../../../atom/timePicker/timePicker';
 import styled from 'styled-components';
+import {useRecoilState} from 'recoil';
 
 export default function TimePicker() {
     
-    const [activeSlide, setActiveSlide] = useState(0);
+    const [activeSlide, setActiveSlide] = useRecoilState(cycleNumberState);
 
     function handleSlideChange(swiper: SwiperCore) {
         setActiveSlide(swiper.realIndex);

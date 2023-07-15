@@ -21,7 +21,7 @@ const FooterWrapper = styled.footer`
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    
     position: fixed;
     bottom: 0;
     

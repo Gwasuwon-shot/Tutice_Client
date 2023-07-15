@@ -6,14 +6,34 @@ import { STUDENT_COLOR } from "../../core/common/studentColor";
 import SubjectLabel from "../common/SubjectLabel";
 import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
 
+interface LessonData {
+  idx: number;
+  studentName: string;
+  subject: string;
+}
+
+interface ScheduleData {
+  idx: number;
+  startTime: string;
+  endTime: string;
+  count: number;
+}
+
+interface MissingAttendanceData {
+  date: string;
+  missingAttedanceScheduleList: Array<{
+    lesson: LessonData;
+    schedule: ScheduleData;
+  }>;
+}
+
 export default function NoCheckLesson() {
   const { missingAttendanceDateList } = NO_ATTENDNACE_CHECK.data;
 
-  console.log(missingAttendanceDateList);
   return (
     <>
       <NoAttendanceWrapper>
-        {missingAttendanceDateList.map((item) => {
+        {missingAttendanceDateList.map((item: MissingAttendanceData) => {
           const { date, missingAttedanceScheduleList } = item;
           return (
             <NoAttendanceContainer key={date}>

@@ -1,10 +1,11 @@
 import { styled } from "styled-components";
 import { NoClassLogoTeacherHomeIc } from "../../assets";
-import { NO_REGISTERED_CLASS_BANNER } from "../../core/teacherHome/teacherHome";
+import useGetTodayScheduleByTeacher from "../../hooks/useGetTodayScheduleByTeacher";
+import RoundBottomButton from "../common/RoundBottomButton";
 import WelcomeTeacher from "./WelcomeTeacher";
 
 export default function NoClassHome() {
-  const { teacherName, isTodaySchedule, todaySchedule } = NO_REGISTERED_CLASS_BANNER.data;
+  const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
 
   return (
     <>
@@ -16,8 +17,8 @@ export default function NoClassHome() {
           <p> 나무 코드 생성을 통해 학생을 추가하고 </p>
           <p>링크를 학부모님에게 공유해보세요</p>
         </SubContext>
-        {/* 성경이가 만들 공통 컴포넌트 연결하기 */}
-        <Button type="button">나무코드 생성하기</Button>
+        <
+        <RoundBottomButton buttonMessage="나무코드 생성하기"/>
       </NoClassHomeWrapper>
     </>
   );
@@ -47,21 +48,4 @@ const SubContext = styled.div`
 
   text-align: center;
   ${({ theme }) => theme.fonts.body07};
-`;
-
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 29.2rem;
-  height: 5rem;
-  padding: 0.8rem;
-
-  background-color: ${({ theme }) => theme.colors.green5};
-  color: ${({ theme }) => theme.colors.white};
-  gap: 0.8rem;
-  flex-shrink: 0;
-
-  border-radius: 8px;
 `;

@@ -15,24 +15,26 @@ const checkList: checkListProps[] = [
   { id: 3, selected: false },
   { id: 4, selected: false },
 ];
+
 interface textListProps {
-  optinal: string;
+  optional: string;
   boldText: string;
   linkText: string;
   lightText: string;
 }
 
 const textList: textListProps[] = [
-  { optinal: "", boldText: "", linkText: "", lightText: "" },
-  { optinal: "", boldText: "", linkText: "", lightText: "" },
-  { optinal: "", boldText: "", linkText: "", lightText: "" },
-  { optinal: "", boldText: "", linkText: "", lightText: "" },
-  { optinal: "", boldText: "", linkText: "", lightText: "" },
+  { optional: "", boldText: "약관 전체 동의", linkText: "", lightText: "선택항목에 대한 동의 포함" },
+  { optional: "(필수)", boldText: "만 14세 이상입니다.", linkText: "", lightText: "" },
+  { optional: "(필수)", boldText: "동의", linkText: "서비스 이용 약관", lightText: "" },
+  { optional: "(필수)", boldText: "동의", linkText: "개인정보 수집 및 이용", lightText: "" },
+  { optional: "(선택)", boldText: "동의", linkText: "개인정보 마케팅 활용", lightText: "" },
 ];
 
 export default function AgreeChecking() {
   const [checked, setChecked] = useState(false);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
+  const [textAgrees, setTextAgrees] = useState(textList);
 
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.innerText) {
@@ -67,28 +69,16 @@ export default function AgreeChecking() {
       </CheckWrapper>
 
       <TextWrapper>
-        <IndividualTextWrppaer>
-          <CheckText> 약관 전체 동의 </CheckText>
-          <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
-        </IndividualTextWrppaer>
-        <Essential>(필수) </Essential>
-        <CheckText> 만 14세 이상입니다 </CheckText>
-        <Essential>(필수) </Essential>
-        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
-          <p>서비스 이용 약관</p>
-        </HyperLink>
-        <CheckText> 동의 </CheckText>
-        <Essential>(필수) </Essential>
-        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
-          <p>개인정보 수집 및 이용</p>
-        </HyperLink>
-        <CheckText> 동의 </CheckText>
-        <Optional>(선택) </Optional>
-
-        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
-          <p>개인 정보 마케팅 활용</p>
-        </HyperLink>
-        <CheckText> 동의 </CheckText>
+        {textAgrees.map((textAgree) => (
+          <>
+            <IndividualTextWrppaer>
+              <Essential>{textAgree.optional}</Essential>
+              <HyperLink>{textAgree.linkText}</HyperLink>
+              <CheckText> {textAgree.boldText} </CheckText>
+              <CheckSubText>{textAgree.lightText}</CheckSubText>
+            </IndividualTextWrppaer>
+          </>
+        ))}
       </TextWrapper>
     </TosWrapper>
   );

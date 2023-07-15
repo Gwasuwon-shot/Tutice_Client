@@ -1,71 +1,83 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 import BottomButton from "../common/BottomButton";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { stepNum } from "../../atom/signup/signup";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
+import ProgressBar from "../common/ProgressBar";
+import { ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
 
 export default function Role() {
+  const [role, setRole] = useState("");
   const [isActive, setIsActive] = useState(false);
-  const ROLE_TEXT = "어떤 회원으로 가입할까요?";
-  // const setStep = useSetRecoilState(stepNum);
-  const [step, setStep] = useRecoilState(stepNum);
+  const setStep = useSetRecoilState(stepNum);
+  const [newUser, setNewUser] = useRecoilState(newUserData);
 
-  function handleRadioClick() {
+  function handleRadioClick(e: React.ChangeEvent<HTMLInputElement>) {
     setIsActive(true);
+    setRole(e.target.value);
   }
 
   function handleDoneClick() {
-    console.log("isClicked");
+    setNewUser((prev) => ({ ...prev, role: role }));
     setStep(2);
-    console.log(step);
   }
+
+  useEffect(() => {}, []);
 
   return (
     <>
+      <ProgressBar progress={0} />
       <BackButton />
       <Container>
-        <SignupTitleLayout MainText={ROLE_TEXT} />
+        <SignupTitleLayout MainText={SIGNUP_TITLE.whichRole} />
         <RadioWrapper>
           <RoleRapper>
             <RadioButton
               type="radio"
               name="role"
-              value="teacher"
-              id="teacher"
-              onClick={handleRadioClick}
+              value="TEACHER"
+              id="TEACHER"
+              onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
             />
             <TextWrapper>
               <RadioNameWrapper>
-                <RadioBoldName htmlFor="teacher">선생님 </RadioBoldName>
-                <RadioPlainName htmlFor="teacher">으로 가입하기 </RadioPlainName>
+                <RadioBoldName htmlFor="TEACHER">{ROLE_NAME.teacher} </RadioBoldName>
+                <RadioPlainName htmlFor="TEACHER">{ROLE_SUB_TEXT.signupBy} </RadioPlainName>
               </RadioNameWrapper>
-              <RadioSubName htmlFor="teacher"> 과외 진행에 있어서 수업에만 더 집중하고 싶다면! </RadioSubName>
+              <RadioSubName htmlFor="TEACHER"> {ROLE_SUB_TEXT.teacherText} </RadioSubName>
             </TextWrapper>
           </RoleRapper>
           <RoleRapper>
             <RadioButton
               type="radio"
               name="role"
-              value="parent"
-              id="parent"
+              value="PARENTS"
+              id="PARENTS"
               onClick={handleRadioClick}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
             />
             <TextWrapper>
               <RadioNameWrapper>
-                <RadioBoldName htmlFor="parent">학부모님 </RadioBoldName>
-                <RadioPlainName htmlFor="parent">으로 가입하기 </RadioPlainName>
+                <RadioBoldName htmlFor="PARENTS">{ROLE_NAME.parent} </RadioBoldName>
+                <RadioPlainName htmlFor="PARENTS">{ROLE_SUB_TEXT.signupBy} </RadioPlainName>
               </RadioNameWrapper>
-              <RadioSubName htmlFor="parent"> 자녀의 수업 출결을 꼼꼼하게 확인 받고 싶다면! </RadioSubName>
+              <RadioSubName htmlFor="PARENTS"> {ROLE_SUB_TEXT.parentsText}</RadioSubName>
             </TextWrapper>
           </RoleRapper>
         </RadioWrapper>
-        <BottomButton isActive={isActive} children="완료" onClick={handleDoneClick} />
+        <BottomButton
+          type="button"
+          disabled={!isActive}
+          isActive={isActive}
+          children={BUTTON_TEXT.done}
+          onClick={handleDoneClick}
+        />
       </Container>
     </>
   );
@@ -91,7 +103,6 @@ const RoleRapper = styled.div`
   display: flex;
   align-items: center;
 
-  /* margin-top: 5.1rem; */
   margin-bottom: 3.6rem;
   margin-left: 0.9em;
 `;

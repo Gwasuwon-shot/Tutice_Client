@@ -25,6 +25,7 @@ export default function TimePicker() {
           {index + 1}
         </SwiperSlide>
     ));
+
     
     return (
 

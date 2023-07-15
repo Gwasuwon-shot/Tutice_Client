@@ -1,5 +1,4 @@
 import BackButton from "../common/BackButton";
-import UserCheckList from "./UserCheckList";
 import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
@@ -14,6 +13,7 @@ import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
+import AgreeChecking from "./AgreeChecking";
 
 export default function PwTos() {
   const newUser = useRecoilValue(newUserData);
@@ -100,7 +100,7 @@ export default function PwTos() {
 
         {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
-        <UserCheckList />
+        <AgreeChecking />
         <SubmitButton type="submit" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
           <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
         </SubmitButton>

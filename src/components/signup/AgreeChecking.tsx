@@ -35,7 +35,6 @@ const textList: textListProps[] = [
 
 export default function AgreeChecking() {
   const setNewUser = useSetRecoilState(newUserData);
-  const [checked, setChecked] = useState(false);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
   const [checkedCount, setCheckedCount] = useState(0);
@@ -102,7 +101,8 @@ export default function AgreeChecking() {
       ...prev,
       isMarketing: `${checkedAgree[4].selected}`,
     }));
-  }, [checkConventions]);
+  }, [checkAgrees]);
+
   function allCheckedIndex(id: number) {
     return id === 0;
   }

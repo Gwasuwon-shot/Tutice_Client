@@ -54,7 +54,7 @@ const colors = {
   bluegrey: "#CFDEE5",
 
   //sementic color
-  semantic_red: "#EC583E",
+  sementic_red: "#EC583E",
 };
 
 export type ColorsTypes = typeof colors;
@@ -68,7 +68,7 @@ interface Font {
 
 function FONT({ weight, size, lineHeight, letterSpacing }: Font): string {
   return `
-    font-family: "Pretendard-Regular";
+    font-family: "Pretendard";
     font-weight : ${weight};
     font-size : ${size}rem;
     line-height : ${lineHeight}rem;
@@ -90,7 +90,8 @@ const fonts = {
   body07: FONT({ weight: 400, size: 1.1, lineHeight: 1.4, letterSpacing: 0 }),
 
   caption01: FONT({ weight: 500, size: 1.0, lineHeight: 1.2, letterSpacing: 0 }),
-  caption02: FONT({ weight: 600, size: 0.9, lineHeight: 1.0, letterSpacing: -0.3 }),
+  caption02: FONT({ weight: 500, size: 0.9, lineHeight: 1.0, letterSpacing: -0.075 }),
+  caption03: FONT({ weight: 400, size: 0.9, lineHeight: 1.2, letterSpacing: 0 }),
 };
 
 export type FontsTypes = typeof fonts;

@@ -1,14 +1,39 @@
-import { YES_TODAY_CLASS_BEFORE_CLASS_BANNER } from "../../core/teacherHome/teacherHome";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
+import { upcomingClassData } from "../../atom/attendanceCheck/upcomingClassData";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import AttendanceCheckModal from "../common/AttendanceCheckModal";
+import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import PreviewBanner from "./PreviewBanner";
 import WelcomeTeacher from "./WelcomeTeacher";
 
 export default function WelcomeNUpcomingBanner() {
-  const { teacherName, isTodaySchedule, todaySchedule } = YES_TODAY_CLASS_BEFORE_CLASS_BANNER.data;
+  const [classData, setclassData] = useRecoilState(upcomingClassData);
+  const { teacherName, isTodaySchedule, todaySchedule } = classData;
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
 
   return (
     <>
-      <WelcomeTeacher teacherName={teacherName} isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
-      <PreviewBanner isTodaySchedule={isTodaySchedule} todaySchedule={todaySchedule} />
+      {openModal && isCheckingModalOpen && (
+        <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+          <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+        </ModalSection>
+      )}
+      {openModal && (
+        <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+          <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+        </ModalSection>
+      )}
+      <WelcomeTeacher />
+      <PreviewBanner />
     </>
   );
 }
+
+const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
+  position: absolute;
+
+  margin: -4rem 0 0 -1.5em;
+`;

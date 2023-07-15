@@ -38,7 +38,8 @@ export default function AgreeChecking() {
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
   const [checkedCount, setCheckedCount] = useState(0);
-  const setUserData = function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
+
+  function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.innerText) {
       case "서비스 이용 약관":
         window.open("https://www.naver.com", "_blank");
@@ -50,7 +51,7 @@ export default function AgreeChecking() {
         window.open("https://www.nate.com", "_blank");
         break;
     }
-  };
+  }
 
   function handleButtonChecked() {
     setCheckAgrees(

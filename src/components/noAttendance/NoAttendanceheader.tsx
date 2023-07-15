@@ -23,6 +23,7 @@ const HeaderWrapper = styled.header`
   flex-direction: column;
 
   margin-right: 1.4rem;
+  margin-bottom: 1.4rem;
   margin-left: 1.4rem;
 
   gap: 0.8rem;

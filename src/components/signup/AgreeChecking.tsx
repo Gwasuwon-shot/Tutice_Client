@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
+import { useSetRecoilState } from "recoil";
+import { newUserData } from "../../atom/signup/signup";
 
 interface checkListProps {
   id: number;
@@ -32,11 +34,12 @@ const textList: textListProps[] = [
 ];
 
 export default function AgreeChecking() {
+  const setNewUser = useSetRecoilState(newUserData);
   const [checked, setChecked] = useState(false);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
-
-  function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
+  const [checkedCount, setCheckedCount] = useState(0);
+  const setUserData = function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.innerText) {
       case "서비스 이용 약관":
         window.open("https://www.naver.com", "_blank");
@@ -48,10 +51,77 @@ export default function AgreeChecking() {
         window.open("https://www.nate.com", "_blank");
         break;
     }
-  }
+  };
 
   function handleButtonChecked() {
-    setChecked(!checked);
+    setCheckAgrees(
+      checkAgrees.map((checkAgree) =>
+        checkAgree.id === id ? { ...checkAgree, selected: !checkAgree.selected } : checkAgree,
+      ),
+    );
+
+    if (allCheckedIndex(id)) {
+      checkAgrees[id].selected
+        ? setCheckAgrees(
+            checkAgrees.map((checkAgree) =>
+              checkAgree.id === id ? { ...checkAgree, selected: false } : { ...checkAgree, selected: false },
+            ),
+          )
+        : setCheckAgrees(
+            checkAgrees.map((checkAgree) =>
+              allClicked === true ? { ...checkAgree, selected: true } : { ...checkAgree, selected: true },
+            ),
+          );
+    }
+  }
+
+  useEffect(() => {
+    checkAgrees.forEach((checkAgree) => {
+      !allCheckedIndex(checkAgree.id) && checkAgree.selected
+        ? setCheckedCount((prev) => prev + 1)
+        : setCheckedCount((prev) => prev - 1);
+    });
+
+    let count = 0;
+    checkAgrees.forEach((checkAgree) => {
+      if (!allCheckedIndex(checkAgree.id) && checkAgree.selected) {
+        count += 1;
+      }
+    });
+    setCheckedCount(count);
+
+    let essentialCheck = 0;
+    checkAgrees.forEach((checkAgree) => {
+      if (!allCheckedIndex(checkAgree.id) && !optionalIndex(checkAgree.id) && checkAgree.selected) {
+        essentialCheck += 1;
+      }
+    });
+    setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
+
+    setNewUser((prev) => ({
+      ...prev,
+      isMarketing: `${checkedAgree[4].selected}`,
+    }));
+  }, [checkConventions]);
+  function allCheckedIndex(id: number) {
+    return id === 0;
+  }
+
+  function optionalIndex(id: number) {
+    return id === 4;
+  }
+
+  function isAllChecked() {
+    return checkedCount === 4;
+  }
+
+  function changeTotalAgree(bool: boolean) {
+    const tempCheckAgrees = checkAgrees;
+    tempCheckAgree[0].selected = bool;
+    setCheckAgrees([...tempCheckAgrees]);
+  }
+  function checkEssentialAgreeDone(essentialCheck: number) {
+    return essentialCheck === 2;
   }
 
   return (
@@ -71,12 +141,17 @@ export default function AgreeChecking() {
       <TextWrapper>
         {textAgrees.map((textAgree) => (
           <>
-            <IndividualTextWrppaer>
-              <Essential>{textAgree.optional}</Essential>
+            <IndividualTextWrapper>
+              {textAgree.optional === "(선택)" ? (
+                <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
+              ) : (
+                <Essential>{textAgree.optional}</Essential>
+              )}
+
               <HyperLink>{textAgree.linkText}</HyperLink>
               <CheckText> {textAgree.boldText} </CheckText>
               <CheckSubText>{textAgree.lightText}</CheckSubText>
-            </IndividualTextWrppaer>
+            </IndividualTextWrapper>
           </>
         ))}
       </TextWrapper>
@@ -137,6 +212,7 @@ const Horizon = styled.div`
   width: 26.4rem;
   margin-top: -0.4rem;
   margin-bottom: 1.2rem;
+
   border-top: 1px solid ${({ theme }) => theme.colors.grey100};
 `;
 
@@ -148,17 +224,9 @@ const Essential = styled.p`
   ${({ theme }) => theme.fonts.body04};
 `;
 
-const Optional = styled.p`
-  margin-right: 0.2rem;
-
-  color: ${({ theme }) => theme.colors.grey300};
-
-  ${({ theme }) => theme.fonts.body04};
-`;
-
 const HyperLink = styled.div`
   margin-right: 0.1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
 
   color: ${({ theme }) => theme.colors.grey500};
 
@@ -172,6 +240,10 @@ const TextWrapper = styled.div`
   flex-direction: column;
 `;
 
-const IndividualTextWrppaer = styled.div`
+const IndividualTextWrapper = styled.div`
   display: flex;
+  align-items: baseline;
+
+  height: 2rem;
+  margin-bottom: 1.6rem;
 `;

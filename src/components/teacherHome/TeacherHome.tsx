@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
-import CancelLessonMaintenanceSnackBar from "../common/CancelLessonMaintenanceSnackBar";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
 import NoClassHome from "./NoClassHome";
@@ -17,7 +16,7 @@ export default function TeacherHome() {
     <>
       {/* 경우의 수에 따라 어떤 스낵바 보일지 로직 짜야함 */}
       {/* {snackBarOpen && <SuccessSendingAlarmSnackBar />} */}
-      {snackBarOpen && <CancelLessonMaintenanceSnackBar />}
+      {/* {snackBarOpen && <CancelLessonMaintenanceSnackBar />} */}
       <TeacherHomeWrapper>
         <Header />
         {isClassExist ? <YesClassHome /> : <NoClassHome />}

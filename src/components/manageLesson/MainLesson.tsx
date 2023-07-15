@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { NextArrowManageLessonIc } from "../../assets";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import useMoveToLessonDetail from "../../hooks/useMoveToLessonDetail";
 import StudentColorBox from "../common/StudentColorBox";
 import SubjectLabel from "../common/SubjectLabel";
 import TreeProgress from "../common/TreeProgress";
@@ -16,11 +16,7 @@ interface MainLessonProps {
 
 export default function MainLesson(props: MainLessonProps) {
   const { idx, studentName, subject, percent, dayOfWeekList } = props;
-  const navigate = useNavigate();
-
-  function handleMoveToManageLessonDetail(idx: number) {
-    navigate(`/manage-lesson/${idx}`);
-  }
+  const { handleMoveToManageLessonDetail } = useMoveToLessonDetail();
 
   function checkIsLastDay(idx: number, day: string) {
     return idx + 1 === dayOfWeekList.length ? day : day + ", ";

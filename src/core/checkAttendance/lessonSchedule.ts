@@ -17,7 +17,6 @@ export const LESSON_SCHEDULE = {
         status: "출석",
         startTime: "13:22",
         endTime: "15:22",
-        count: 4,
       },
       {
         idx: 46,
@@ -25,7 +24,6 @@ export const LESSON_SCHEDULE = {
         status: "결석",
         startTime: "13:22",
         endTime: "15:22",
-        count: 3,
       },
       {
         idx: 47,
@@ -33,7 +31,6 @@ export const LESSON_SCHEDULE = {
         status: "취소",
         startTime: "13:22",
         endTime: "15:22",
-        count: 2,
       },
       {
         idx: 48,
@@ -41,7 +38,6 @@ export const LESSON_SCHEDULE = {
         status: "상태없음",
         startTime: "13:22",
         endTime: "15:22",
-        count: 1,
       },
     ],
   },

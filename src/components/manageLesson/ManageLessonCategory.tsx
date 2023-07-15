@@ -24,9 +24,9 @@ export default function ManageLessonCategory() {
       </Category>
       <Category
         $isLesson={false}
-        $isSelected={checkCategorySelected(MANAGE_LESSON_STATUS.money)}
-        onClick={() => handleChangeStatus(MANAGE_LESSON_STATUS.money)}>
-        {MANAGE_LESSON_STATUS.money}
+        $isSelected={checkCategorySelected(MANAGE_LESSON_STATUS.payment)}
+        onClick={() => handleChangeStatus(MANAGE_LESSON_STATUS.payment)}>
+        {MANAGE_LESSON_STATUS.payment}
       </Category>
     </CategoryWrapper>
   );

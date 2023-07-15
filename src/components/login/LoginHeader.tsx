@@ -1,7 +1,5 @@
-import React from "react";
 import { styled } from "styled-components";
-import { tuticeWithTextCommonIc } from "../../assets";
-import TextLabelLayout from "../signup/TextLabelLayout";
+import { TuticeWithTextCommonIc } from "../../assets";
 
 export default function LoginHeader() {
   const LOGIN_MAIN_TITLE = "쉬운 수업 관리로 열리는 \n 정확한 나의 ";
@@ -37,7 +35,7 @@ const Title_2 = styled.span`
   ${({ theme }) => theme.fonts.body02};
 `;
 
-const TuticeWithTextCommonIcon = styled(tuticeWithTextCommonIc)`
+const TuticeWithTextCommonIcon = styled(TuticeWithTextCommonIc)`
   width: 16.6rem;
   height: 5.5rem;
   margin-bottom: 2.8rem;

@@ -16,8 +16,6 @@ import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
-import ChangeSchedule from "./pages/ChangeSchedule";
-import ChangeLessonShcedule from "./pages/ChangeLessonShcedule";
 
 export default function Router() {
   return (

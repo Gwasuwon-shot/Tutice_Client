@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 export default function AgreeChecking() {
-  const setNewUser = useSetRecoilState(newUserData);
+  // const setNewUser = useSetRecoilState(newUserData);
+  const [newUser, setNewUser] = useRecoilState(newUserData);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
   const [allClicked, setAllClicked] = useState(false);
@@ -106,6 +107,10 @@ export default function AgreeChecking() {
   function checkEssentialAgreeDone(essentialCheck: number) {
     return essentialCheck === 2;
   }
+
+  useEffect(() => {
+    console.log(newUser);
+  }, [newUser]);
 
   return (
     <TosWrapper>

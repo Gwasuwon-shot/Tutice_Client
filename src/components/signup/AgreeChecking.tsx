@@ -53,7 +53,7 @@ export default function AgreeChecking() {
     }
   }
 
-  function handleButtonChecked() {
+  function handleButtonChecked(id: number) {
     setCheckAgrees(
       checkAgrees.map((checkAgree) =>
         checkAgree.id === id ? { ...checkAgree, selected: !checkAgree.selected } : checkAgree,

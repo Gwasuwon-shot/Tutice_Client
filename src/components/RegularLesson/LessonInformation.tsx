@@ -3,19 +3,18 @@ import {RegularLessonNotebookIc, RegularLessonPencilIc} from '../../assets';
 import React from 'react';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import TimePicker from './TimePicker/TimePicker';
-import { openTimePickerSelector } from "../../atom/timePicker/timePicker";
+import { openTimePickerState } from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
-import {useRecoilValue} from 'recoil';
-import {useState} from 'react';
+import { useRecoilState } from 'recoil';
 
 export default function LessonInformation() {
     
-    const [isTimePickerOpen, setTimePickerOpen] = useRecoilValue(openTimePickerSelector);
+    const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
     
-    const handleTurnButtonClick = () => {
-        setTimePickerOpen(true);
-    };
-
+    function handleTimePicker () {
+        setIsTimePickerOpen(true);
+    }
+    
     return (
         <LessonInformationWrapper>
             <IconWrapper>
@@ -25,7 +24,7 @@ export default function LessonInformation() {
             <LessonWrapper>
                 <Turn> 
                     <TurnName> 회차 </TurnName>
-                    <TurnButton type = "button" onClick={handleTurnButtonClick}> 회차를 선택하세요 </TurnButton>
+                    <TurnButton type = "button" onClick={handleTimePicker}> 회차를 선택하세요 </TurnButton>
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
@@ -33,7 +32,6 @@ export default function LessonInformation() {
                     <RegularLessonPencilIcon />
                 </StartDate>
             </LessonWrapper>
-            {isTimePickerOpen && <TimePicker />}
         </LessonInformationWrapper>
         
     );
@@ -86,7 +84,7 @@ const TurnName = styled.h2`
     align-items: center;
     
     width: 7rem;
-
+    
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey400};
 `

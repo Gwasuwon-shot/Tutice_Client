@@ -24,6 +24,7 @@ export { ReactComponent as CalendarMoreLessonIc } from "./icon/calendarMoreLesso
 export { ReactComponent as CalendarTeacherFooterIc } from "./icon/calendarTeacherFooterIc.svg";
 export { ReactComponent as canViewingLoginIc } from "./icon/canViewingLoginIc.svg";
 export { ReactComponent as CancelAttendanceModalIc } from "./icon/cancelAttendanceModalIc.svg";
+export { ReactComponent as CheckButtonSnackBarIc } from "./icon/checkButtonSnackBarIc.svg";
 export { ReactComponent as ClassManagingActiveTeacherFooterIc } from "./icon/classManagingActiveTeacherFooterIc.svg";
 export { ReactComponent as ClassManagingTeacherFooterIc } from "./icon/classManagingTeacherFooterIc.svg";
 export { ReactComponent as EditPaymentIc } from "./icon/editPaymentIc.svg";
@@ -61,4 +62,5 @@ export { ReactComponent as ThirdTreeParentsHomeIc } from "./icon/thirdTreeParent
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as viewingLoginIc } from "./icon/viewingLoginIc.svg";
+export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";

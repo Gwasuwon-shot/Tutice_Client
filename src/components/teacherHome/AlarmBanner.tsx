@@ -1,13 +1,9 @@
 import styled from "styled-components";
 import { MissingAttendaceTeacherHomeIc, MissingMaintenanceTeacherHomeIc } from "../../assets";
+import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
 
-interface AlarmBannerProps {
-  isMissingAttendance: boolean;
-  isMissingMaintenance: boolean;
-}
-
-export default function AlarmBanner(props: AlarmBannerProps) {
-  const { isMissingAttendance, isMissingMaintenance } = props;
+export default function AlarmBanner() {
+  const { isMissingAttendance, isMissingMaintenance } = useGetLatestScheduleByTeacher();
 
   return (
     <>

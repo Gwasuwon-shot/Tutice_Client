@@ -21,6 +21,7 @@ const AttendaceCheckButtonBox = styled.button`
   background-color: ${({ theme }) => theme.colors.green5};
   color: ${({ theme }) => theme.colors.grey0};
   border-radius: 10px;
+  ${({ theme }) => theme.fonts.body03};
 
   &:hover {
     border: 1px solid ${({ theme }) => theme.colors.green6};

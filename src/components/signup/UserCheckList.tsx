@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
 
-export default function ToS() {
+export default function UserCheckList() {
   const [checked, setChecked] = useState(false);
 
   function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {

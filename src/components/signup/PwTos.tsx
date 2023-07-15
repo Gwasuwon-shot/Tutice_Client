@@ -1,5 +1,5 @@
 import BackButton from "../common/BackButton";
-import Tos from "./Tos";
+import UserCheckList from "./UserCheckList";
 import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
@@ -105,7 +105,7 @@ export default function PwTos() {
 
         {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
-        <Tos />
+        <UserCheckList />
 
         <BottomButton
           type="submit"
@@ -140,7 +140,7 @@ const InputWrapper = styled.div`
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 `;
-
+Dispatch<SetStateAction<boolean>>;
 const InputPwWrapper = styled.div<{ $pwFocus: boolean; $isPassword: boolean }>`
   display: flex;
   flex-direction: column;

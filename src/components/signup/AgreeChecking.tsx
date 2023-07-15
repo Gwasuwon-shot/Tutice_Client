@@ -106,6 +106,10 @@ export default function AgreeChecking() {
     }));
   }, [checkAgrees]);
 
+  useEffect(() => {
+    isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
+  }, [isAllChecked()]);
+
   function allCheckedIndex(id: number) {
     return id === 0;
   }

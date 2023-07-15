@@ -222,7 +222,7 @@ const Horizon = styled.div`
   width: 26.4rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey100};
 
-  margin-top: 0.3rem;
+  margin-top: 0.4rem;
 `;
 
 const Essential = styled.p`

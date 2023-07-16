@@ -1,12 +1,12 @@
 import React from "react";
 import { styled } from "styled-components";
 
-interface SignupTitleLayoutProps {
+interface SignupTitleLayoutProp {
   MainText: string;
 }
 
-export default function SignupTitleLayout(props: SignupTitleLayoutProps) {
-  const { MainText } = props;
+export default function SignupTitleLayout(prop: SignupTitleLayoutProp) {
+  const { MainText } = prop;
   return <Title>{MainText}</Title>;
 }
 const Title = styled.header`

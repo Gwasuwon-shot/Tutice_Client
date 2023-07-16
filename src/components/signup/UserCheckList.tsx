@@ -1,54 +1,94 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
 
-export default function ToS() {
+export default function UserCheckList() {
   const [checked, setChecked] = useState(false);
-  function handleMoveToUseService() {
-    window.open("https://www.naver.com", "_blank");
+
+  function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
+    switch (e.target.innerText) {
+      case "서비스 이용 약관":
+        window.open("https://www.naver.com", "_blank");
+        break;
+      case "개인정보 수집 및 이용":
+        window.open("https://www.daum.net", "_blank");
+        break;
+      case "개인 정보 마케팅 활용":
+        window.open("https://www.nate.com", "_blank");
+        break;
+    }
   }
 
-  function isChecked() {
-    console.log("Checked");
+  function handleButtonChecked() {
     setChecked(!checked);
   }
 
   return (
     <TosWrapper>
       <CheckWrapper>
-        {checked ? <TosNoneSignupIcon onClick={isChecked} /> : <TosCheckSignupIcon onClick={isChecked} />}
+        <ICWrapper>
+          <TosNoneSignupIcon />
+        </ICWrapper>
         <CheckText> 약관 전체 동의 </CheckText>
         <CheckSubText> 선택항목에 대한 동의 포함 </CheckSubText>
       </CheckWrapper>
+
       <Horizon />
+
       <CheckWrapper>
-        <TosNoneSignupIcon />
+        <ICWrapper>
+          {checked ? (
+            <TosNoneSignupIcon onClick={handleButtonChecked} />
+          ) : (
+            <TosCheckSignupIcon onClick={handleButtonChecked} />
+          )}
+        </ICWrapper>
         <Essential>(필수) </Essential>
         <CheckText> 만 14세 이상입니다 </CheckText>
       </CheckWrapper>
+
       <CheckWrapper>
-        <TosNoneSignupIcon />
+        <ICWrapper>
+          {checked ? (
+            <TosNoneSignupIcon onClick={handleButtonChecked} />
+          ) : (
+            <TosCheckSignupIcon onClick={handleButtonChecked} />
+          )}
+        </ICWrapper>
         <Essential>(필수) </Essential>
-        <HyperLink onClick={handleMoveToUseService}>
+        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>서비스 이용 약관</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
       </CheckWrapper>
+
       <CheckWrapper>
-        <TosNoneSignupIcon />
+        <ICWrapper>
+          {checked ? (
+            <TosNoneSignupIcon onClick={handleButtonChecked} />
+          ) : (
+            <TosCheckSignupIcon onClick={handleButtonChecked} />
+          )}
+        </ICWrapper>
         <Essential>(필수) </Essential>
-        <HyperLink>
+        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인정보 수집 및 이용</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
       </CheckWrapper>
+
       <CheckWrapper>
-        <TosNoneSignupIcon />
+        <ICWrapper>
+          {checked ? (
+            <TosNoneSignupIcon onClick={handleButtonChecked} />
+          ) : (
+            <TosCheckSignupIcon onClick={handleButtonChecked} />
+          )}
+        </ICWrapper>
         <Optional>(선택) </Optional>
 
-        <HyperLink>
+        <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
           <p>개인 정보 마케팅 활용</p>
         </HyperLink>
         <CheckText> 동의 </CheckText>
@@ -68,23 +108,27 @@ const TosWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.grey0};
   border-radius: 8px;
 `;
+
 const CheckWrapper = styled.div`
   display: flex;
-  align-items: bottom;
 
   margin-bottom: 1.6rem;
+`;
+
+const ICWrapper = styled.div`
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
 `;
 
 const TosNoneSignupIcon = styled(TosNoneSignupIc)`
   width: 2rem;
   height: 2rem;
-  margin-right: 1rem;
 `;
 
 const TosCheckSignupIcon = styled(TosCheckedSignupIc)`
   width: 2rem;
   height: 2rem;
-  margin-right: 1rem;
 `;
 
 const CheckText = styled.p`
@@ -108,7 +152,7 @@ const Horizon = styled.div`
 `;
 
 const Essential = styled.p`
-  margin-right: 0.1rem;
+  margin-right: 0.2rem;
 
   color: ${({ theme }) => theme.colors.green5};
 
@@ -116,15 +160,16 @@ const Essential = styled.p`
 `;
 
 const Optional = styled.p`
-  margin-right: 0.1rem;
+  margin-right: 0.2rem;
 
   color: ${({ theme }) => theme.colors.grey300};
 
   ${({ theme }) => theme.fonts.body04};
 `;
 
-const HyperLink = styled.p`
-  margin-right: 1px;
+const HyperLink = styled.div`
+  margin-right: 0.1rem;
+  margin-bottom: 1rem;
 
   color: ${({ theme }) => theme.colors.grey500};
 

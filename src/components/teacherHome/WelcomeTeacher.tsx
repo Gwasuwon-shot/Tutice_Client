@@ -1,11 +1,9 @@
-import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { upcomingClassData } from "../../atom/attendanceCheck/upcomingClassData";
 import { WELCOME_TEACHER_COMMENTS } from "../../core/teacherHome/welcomeTeacherComments";
+import useGetTodayScheduleByTeacher from "../../hooks/useGetTodayScheduleByTeacher";
 
 export default function WelcomeTeacher() {
-  const [classData, setclassData] = useRecoilState(upcomingClassData);
-  const { teacherName, isTodaySchedule, todaySchedule } = classData;
+  const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
 
   function checkTodayClassEnd() {
     return isTodaySchedule && todaySchedule === null;

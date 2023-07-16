@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { isSameDay, isToday, format, isSunday } from "date-fns";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
-import { CalendarMoreLessonsIc } from "../../assets/index";
+import { format, isSunday, isToday } from "date-fns";
 import React from "react";
+import styled from "styled-components";
+import { CalendarMoreLessonIc } from "../../assets/index";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { calendarLessonsType } from "../../type/calendarLessonsType";
 
 interface DayProps {
@@ -109,7 +109,7 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   border-radius: 2px;
 `;
 
-const MoreLessonIcon = styled(CalendarMoreLessonsIc)`
+const MoreLessonIcon = styled(CalendarMoreLessonIc)`
   width: 2rem;
   height: 0.2rem;
   padding-right: 1rem;

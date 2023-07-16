@@ -5,12 +5,14 @@ interface BottomButtonProps {
   children: ReactNode;
   isActive: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  disabled: boolean;
+  type: string;
 }
 
 export default function BottomButton(props: BottomButtonProps) {
-  const { children, isActive, onClick } = props;
+  const { children, isActive, onClick, disabled, type } = props;
   return (
-    <BottomContainer $isActive={isActive} onClick={onClick}>
+    <BottomContainer type={type} disabled={disabled} $isActive={isActive} onClick={onClick}>
       <BottomText> {children} </BottomText>
     </BottomContainer>
   );

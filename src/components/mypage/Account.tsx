@@ -30,6 +30,7 @@ const TitleWrapper = styled.header`
   display: flex;
   align-items: center;
 
+  width: 100%;
   height: 2.6rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};

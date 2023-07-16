@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import useManageLesson from "../../hooks/useManageLesson";
 import useModal from "../../hooks/useModal";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
-import AttendanceInform from "./AttendanceInform";
 
 export default function AttendanceList() {
   const { scheduleList } = useManageLesson();

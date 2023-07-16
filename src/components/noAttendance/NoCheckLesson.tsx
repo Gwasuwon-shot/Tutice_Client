@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import useNoAttendance from "../../hooks/useNoAttendance";
 import NoCheckAttendanceContanier from "./NoCheckAttendanceContanier";
+import { useRecoilState } from "recoil";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import AttendanceCheckModal from "../common/AttendanceCheckModal";
+import useModal from "../../hooks/useModal";
 
 interface LessonData {
   idx: number;
@@ -26,6 +30,9 @@ interface MissingAttendanceData {
 
 export default function NoCheckLesson() {
   const missingAttendanceDateList = useNoAttendance();
+  const [selectedLesson, setSelectedLesson] = useState();
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
 
   return (
     <>
@@ -41,23 +48,24 @@ export default function NoCheckLesson() {
 
               {missingAttedanceScheduleList.map((data) => {
                 const { lesson, schedule } = data;
-                const { idx, studentName, subject } = lesson;
-                const { startTime, endTime, count } = schedule;
 
                 return (
                   <NoCheckAttendanceContanier
-                    idx={idx}
-                    studentName={studentName}
-                    subject={subject}
-                    startTime={startTime}
-                    endTime={endTime}
-                    count={count}
+                    lesson={lesson}
+                    schedule={schedule}
+                    setSelectedLesson={setSelectedLesson}
+                    setOpenModal={setOpenModal}
                   />
                 );
               })}
             </NoAttendanceContainer>
           );
         })}
+        {openModal && selectedLesson && (
+          <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+            <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+          </ModalSection>
+        )}
       </NoAttendanceWrapper>
     </>
   );
@@ -84,4 +92,10 @@ const NoAttendanceDate = styled.div`
 
   width: 100%;
   ${({ theme }) => theme.fonts.body04};
+`;
+
+const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
+  position: absolute;
+
+  margin: -4rem 0 0 -1.5em;
 `;

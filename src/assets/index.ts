@@ -65,3 +65,4 @@ export { ReactComponent as viewingLoginIc } from "./icon/viewingLoginIc.svg";
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
 export { ReactComponent as LessonInfoLessonRecordIc } from "./icon/LessonInfoLessonRecordIc.svg";
+export { ReactComponent as EmptyDepositParentsLessonRecordIc } from "./icon/emptyDepositParentsLessonRecordIc.svg";

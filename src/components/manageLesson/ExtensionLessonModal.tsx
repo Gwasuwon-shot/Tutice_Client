@@ -25,7 +25,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
   return (
     <ModalWrapper>
       <ToastModal>
-        <ModalTitle>입금 알림 전송</ModalTitle>
+        <ModalTitle>수업 회차 연장</ModalTitle>
         <TextWrapper>
           <StudentNameLabel
             studentName={studentName}
@@ -35,7 +35,10 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
             isBig={isBig}
           />
         </TextWrapper>
-        <TextWrapper>수업 회차 연장</TextWrapper>
+        <TextWrapper>
+          <p> 수업 회차가 모두 완료됐어요 </p>
+          <p>수업을 계속해서 연장하시겠어요?</p>
+        </TextWrapper>
         <ButtonWrapper>
           <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
             아니요
@@ -62,8 +65,11 @@ const ModalTitle = styled.h1`
   ${({ theme }) => theme.fonts.title02};
 `;
 
-const TextWrapper = styled.h2`
+const TextWrapper = styled.div`
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 
   color: ${({ theme }) => theme.colors.grey900};
   ${({ theme }) => theme.fonts.body02};

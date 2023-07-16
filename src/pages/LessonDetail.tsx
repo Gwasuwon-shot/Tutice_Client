@@ -1,5 +1,5 @@
-import PastLessonRecordList from "../components/lessonRecord/PastLessonRecordList";
+import LessonRecordDetail from "../components/lessonRecord/LessonRecordDetail";
 
 export default function LessonDetail() {
-  return <PastLessonRecordList />;
+  return <LessonRecordDetail />;
 }

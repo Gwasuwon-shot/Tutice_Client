@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import useModal from "../../hooks/useModal";
+import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 
 interface LessonData {
   idx: number;
@@ -66,6 +67,18 @@ export default function NoCheckLesson() {
             <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
           </ModalSection>
         )}
+
+        {openModal && isCheckingModalOpen && (
+          <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+            <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+          </ModalSection>
+        )}
+
+        {openModal && (
+          <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+            <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+          </ModalSection>
+        )}
       </NoAttendanceWrapper>
     </>
   );
@@ -97,5 +110,5 @@ const NoAttendanceDate = styled.div`
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
   position: absolute;
 
-  margin: -4rem 0 0 -1.5em;
+  margin: -10rem 0 0 -1.5em;
 `;

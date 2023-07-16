@@ -20,18 +20,4 @@ export const dateState = atom({
   default: {year : new Date().getFullYear(), month : new Date().getMonth()+1, date: new Date().getDate()}
 });
 
-// 학생 이름 상태를 가져오기 위한 선택자
-export const openTimePickerSelector = selector({
-    key: 'openTimePickerSelector',
-    get: ({ get }) => {
-      return get(openTimePickerState);
-    },
-});
 
-// 회차 개수 가져오기 위한 선택자
-export const cycleNumberSelector = selector({
-  key: 'cycleNumberSelector',
-  get: ({ get }) => {
-    return get(cycleNumberState);
-  },
-});

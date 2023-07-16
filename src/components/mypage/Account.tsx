@@ -55,4 +55,5 @@ const ContentWrapper = styled.div`
 const ContentText = styled.h2`
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey900};
+  cursor: pointer;
 `;

@@ -22,9 +22,13 @@ export const dateState = atom({
 
 export const dayState = atom({
   key: 'dayState',
-  default: [{dayOfWeek: ['일','월','화','수','목','금','토'][new Date().getDay()], startTime: '', endTime: ''},],
+  default: [],
 });
 
+export const focusDayState = atom({
+  key: 'focusDayState',
+  default: {dayOfWeek: ['일','월','화','수','목','금','토'][new Date().getDay()], startTime: '', endTime: ''},
+})
 export const openStartDetailState = atom<boolean>({
   key: 'openStartDetailState',
   default: false,
@@ -33,4 +37,19 @@ export const openStartDetailState = atom<boolean>({
 export const openFinishDetailState = atom<boolean>({
   key: 'openFinishDetailState',
   default: false,
+})
+
+export const ampmSlide = atom<number>({
+  key: 'ampmSlide',
+  default: 0,
+})
+
+export const hourSlide = atom<number>({
+  key: 'hourSlide',
+  default: 0,
+})
+
+export const minuteSlide = atom<string>({
+  key: 'minuteSlide',
+  default: '00',
 })

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
-import {dayState, openFinishDetailState, openStartDetailState, timeState} from "../../atom/timePicker/timePicker";
+import { ampmSlide, hourSlide, minuteSlide } from "../../atom/timePicker/timePicker";
+import {dayState, focusDayState, openFinishDetailState, openStartDetailState} from "../../atom/timePicker/timePicker";
 
 import DetailTimePicker from './TimePicker/DetailTimePicker';
 import RoundBottomButton from '../common/RoundBottomButton';
@@ -19,7 +20,7 @@ export default function LessonDate() {
     const messages = "수업일시 추가";
     
     const [selectedDays, setSelectedDays] = useRecoilState(dayState);
-    
+    const [focusDay, setFocusDay] = useRecoilState(focusState);
     
     function handleDayButton(day) {
         
@@ -67,6 +68,14 @@ export default function LessonDate() {
         setIsFinishPickerOpen(true);
     }
 
+
+    // 표시 위해 ampm, minute, hour slide 가져오기
+    
+    const AMPM = ['오전', '오후'];
+    const [activeAmPmSlide, setActiveAmPmSlide] = useRecoilState(ampmSlide);
+    const [activeHourSlide, setActiveHourSlide] = useRecoilState(hourSlide);
+    const [activeMinuteSlide, setActiveMinuteSlide] = useRecoilState(minuteSlide);
+    
     return (
         <LessonDateWrapper>
 
@@ -84,9 +93,9 @@ export default function LessonDate() {
 
             <TimeWrapper>
                 <TimeChoose> 시작 </TimeChoose>
-                <TimeButton onClick = {handlStartTimePicker}> 시간을 선택하세요 </TimeButton>
+                <TimeButton onClick = {handlStartTimePicker}>  시간을 선택하세요 </TimeButton>
                 <TimeChoose> 종료 </TimeChoose>
-                <TimeButton  onClick = {handleFinishTimePicker}> 시간을 선택하세요 </TimeButton>
+                <TimeButton  onClick = {handleFinishTimePicker}> {`${AMPM[activeAmPmSlide]} ${activeHourSlide}시 ${activeMinuteSlide}분`} </TimeButton>
             </TimeWrapper>
 
             <ButtonWrapper>

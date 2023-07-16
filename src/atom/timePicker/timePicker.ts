@@ -7,7 +7,7 @@ export const openTimePickerState = atom<boolean>({
 
 export const cycleNumberState = atom<number>({
   key: 'cycleNumberState',
-  default: 0,
+  default: -1,
 })
 
 

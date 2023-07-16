@@ -3,6 +3,7 @@ import {RegularLessonNotebookIc, RegularLessonPencilIc} from '../../assets';
 import React from 'react';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import TimePicker from './TimePicker/TimePicker';
+import {cycleNumberState} from '../../atom/timePicker/timePicker';
 import { openTimePickerState } from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
@@ -15,6 +16,16 @@ export default function LessonInformation() {
         setIsTimePickerOpen(true);
     }
     
+    // 선택된 회차 표시 로직
+    const [activeSlide, setActiveSlide] = useRecoilState(cycleNumberState);
+    
+    let selectedCycleText;
+    if (activeSlide === -1) {
+        selectedCycleText = "회차를 선택하세요";
+    } else {
+        selectedCycleText = activeSlide;
+    }
+    
     return (
         <LessonInformationWrapper>
             <IconWrapper>
@@ -24,7 +35,7 @@ export default function LessonInformation() {
             <LessonWrapper>
                 <Turn> 
                     <TurnName> 회차 </TurnName>
-                    <TurnButton type = "button" onClick={handleTimePicker}> 회차를 선택하세요 </TurnButton>
+                    <TurnButton type = "button" onClick={handleTimePicker}> {selectedCycleText} </TurnButton>
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>

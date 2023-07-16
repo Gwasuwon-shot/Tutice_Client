@@ -22,13 +22,14 @@ export default function TimePicker() {
     const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
     
     // 3. 회차 타임피커 취소 시
-    function handleConfirmTimePicker () {
+    function handleCanCelTimePicker () {
         setIsTimePickerOpen(false);
         setActiveSlide(-1); // 선택이 안된 상태로 변경
     }
 
     // 4. 회차 타임피커 완료 시
-    function handleCanCelTimePicker () {
+
+    function handleConfirmTimePicker () {
         setIsTimePickerOpen(false);
     }
     

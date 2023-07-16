@@ -6,9 +6,10 @@ import {dayState} from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 
-interface dayProp {
-    day: string;
-}
+interface DayProp {
+    isSelected: boolean;
+};
+
 export default function LessonDate() {
 
     const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
@@ -16,7 +17,7 @@ export default function LessonDate() {
     
     const [selectedDays, setSelectedDays] = useRecoilState(dayState);
     
-    function handleDayButton(day : dayProp){
+    function handleDayButton(day){
         if (selectedDays.includes(day)) {
             setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
         } else {
@@ -103,7 +104,7 @@ const DayWrapper = styled.section`
     padding-top: 1.2rem;
 `
 
-const Day = styled.button`
+const Day = styled.button<DayProp>`
     width: 3.8rem;
     height: 3.8rem;
     border-radius: 50%;
@@ -111,6 +112,8 @@ const Day = styled.button`
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey300};  
     background-color: ${({ theme }) => theme.colors.grey50}; 
+    ${({ isSelected, theme }) => isSelected && `background-color: ${theme.colors.green4}`};
+    ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.white}`};
 `
 
 const TimeWrapper = styled.section`

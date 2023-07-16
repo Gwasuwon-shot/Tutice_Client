@@ -1,10 +1,10 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
-import { upcomingClassData } from "../../atom/attendanceCheck/upcomingClassData";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import useGetTodayScheduleByTeacher from "../../hooks/useGetTodayScheduleByTeacher";
 import AttendanceStatusButton from "./AttendanceStatusButton";
 import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
@@ -15,11 +15,10 @@ interface AttendanceCheckModalProp {
 
 export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   const { setIsCheckingModalOpen } = props;
-  const [classData, setclassData] = useRecoilState(upcomingClassData);
-  const { todaySchedule } = classData;
+  const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
   const { lesson, schedule } = todaySchedule;
   const { idx, studentName, subject } = lesson;
-  const { count, isLastCount } = schedule;
+  const { count } = schedule;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
@@ -29,7 +28,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
 
   function handleCheckAttlendanceStatus(status: string) {
     setIsCheckingModalOpen(true);
-    setAttendanceData({ idx: todaySchedule?.schedule?.idx, status: status });
+    setAttendanceData({ idx: schedule?.idx, status: status });
   }
 
   return (

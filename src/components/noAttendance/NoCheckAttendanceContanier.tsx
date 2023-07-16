@@ -6,15 +6,19 @@ import SubjectLabel from "../common/SubjectLabel";
 import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
 
 interface NoCheckAttendanceContanierProps {
-  idx: number;
-  studentName: string;
-  subject: string;
-  startTime: number;
-  endTime: number;
-  count: number;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedLesson: React.Dispatch<React.SetStateAction<lesson | null>>;
 }
 export default function NoCheckAttendanceContanier(props: NoCheckAttendanceContanierProps) {
-  const { idx, studentName, subject, startTime, endTime, count } = props;
+  const { lesson, schedule, setOpenModal, setSelectedLesson } = props;
+  const { idx, studentName, subject } = lesson;
+  const { startTime, endTime, count } = schedule;
+
+  function handleAttendanceCheck() {
+    setSelectedLesson(lesson);
+    setOpenModal(true);
+    console.log("here");
+  }
   return (
     <>
       <ContentContainer>
@@ -30,13 +34,12 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
           <NameSubjectWrapper>
             <Name> {studentName}</Name>
             <Subject>
-              <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]}></SubjectLabel>
+              <SubjectLabel subject={subject} color="#757A80" backgroundColor={STUDENT_COLOR[idx % 11]}></SubjectLabel>
             </Subject>
           </NameSubjectWrapper>
         </InforContainer>
-        <NoCheckPageAttendanceButton />
+        <NoCheckPageAttendanceButton onClick={handleAttendanceCheck()} />
       </ContentContainer>
-      );
     </>
   );
 }

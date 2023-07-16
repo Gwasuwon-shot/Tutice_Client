@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { subMonths, addMonths } from "date-fns";
 import YearandMonth from "../components/Calendar/YearandMonth";
 import Dayofweek from "../components/Calendar/Dayofweek";
-import ChangeScheduleDays from "../components/Calendar/ChangeScheduleDays";
+import Days from "../components/Calendar/Change/Days";
 
 export default function ChangeSchedule() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -20,7 +20,7 @@ export default function ChangeSchedule() {
       <CalendarWrapper>
         <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
         <Dayofweek />
-        <ChangeScheduleDays currentMonth={currentMonth} />
+        <Days currentMonth={currentMonth} />
       </CalendarWrapper>
     </>
   );

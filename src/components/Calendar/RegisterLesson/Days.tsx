@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { isModalOpen } from "../../atom/common/isModalOpen";
+import { isModalOpen } from "../../../atom/common/isModalOpen";
 import { format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
-import { ko } from "date-fns/locale";
-import ToastModal from "../common/ToastModal";
-import Day from "./Day";
-import { PARENTS_CALENDAR } from "../../core/Parents/ParentsCalendar";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
 
-import StudentColorBox from "../common/StudentColorBox";
+import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
+import RegisterModal from "./RegisterModal";
+import DayItem from "./DayItem";
 
 interface DaysProp {
   currentMonth: Date;
@@ -23,7 +20,7 @@ export default function Days(props: DaysProp) {
   const endDate: Date = endOfWeek(monthEnd);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const myChildLessonList = PARENTS_CALENDAR.data.scheduleList;
+  const { scheduleList } = useGetTeacherSchedule();
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
@@ -31,14 +28,14 @@ export default function Days(props: DaysProp) {
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      const myChildLessons = myChildLessonList.find((item) => isSameDay(new Date(item.date), day));
+      const myLessons = scheduleList.find((item) => isSameDay(new Date(item.date), day));
       days.push(
-        <Day
+        <DayItem
           setOpenModal={setOpenModal}
           setSelectedDate={setSelectedDate}
           date={day}
           key={day.toString()}
-          myChildLessons={myChildLessons}
+          myLessons={myLessons}
         />,
       );
       day = addDays(day, 1);
@@ -62,26 +59,7 @@ export default function Days(props: DaysProp) {
         {rows}
         {openModal && selectedDate && (
           <ModalWrapper>
-            <ToastModal>
-              <ModalContentWrapper>
-                <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
-
-                {myChildLessonList
-                  .find((item) => isSameDay(new Date(item.date), selectedDate))
-                  ?.dailyScheduleList.map((lesson) => (
-                    <ScheduleWrapper key={lesson.schedule.idx}>
-                      <StudentColorBox backgroundColor={STUDENT_COLOR[lesson.schedule.idx % 11]} />
-                      <ModalTime>
-                        {lesson.schedule.startTime} - {lesson.schedule.endTime}
-                      </ModalTime>
-                      <ModalName>{lesson.schedule.studentName}</ModalName>
-                      <ModalSubject $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]}>
-                        {lesson.schedule.subject}
-                      </ModalSubject>
-                    </ScheduleWrapper>
-                  ))}
-              </ModalContentWrapper>
-            </ToastModal>
+            <RegisterModal selectedDate={selectedDate} setOpenModal={setOpenModal} />
           </ModalWrapper>
         )}
       </Wrapper>

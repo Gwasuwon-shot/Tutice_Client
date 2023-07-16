@@ -1,9 +1,9 @@
 import { format, isSunday, isToday } from "date-fns";
 import React from "react";
 import styled from "styled-components";
-import { CalendarMoreLessonIc } from "../../assets/index";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
-import { calendarLessonsType } from "../../type/calendarLessonsType";
+import { CalendarMoreLessonIc } from "../../../assets/index";
+import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import { calendarLessonsType } from "../../../type/calendarLessonsType";
 
 interface DayProps {
   date: Date;
@@ -12,13 +12,13 @@ interface DayProps {
   myChildLessons: calendarLessonsType;
 }
 
-export default function Day(props: DayProps) {
-  const { date, setOpenModal, setSelectedDate, myChildLessons } = props;
+export default function DayItem(props: DayProps) {
+  const { date, setOpenModal, setSelectedDate, myLessons } = props;
 
   const formattedDate = format(date, "d");
   const isSundayDate = isSunday(date);
   const isTodayDate: boolean = isToday(date);
-  const myChildLength: number | undefined = myChildLessons?.dailyScheduleList.length;
+  const myLessonLength: number | undefined = myLessons?.dailyScheduleList.length;
 
   function handleOpenModal() {
     setSelectedDate(date);
@@ -31,26 +31,32 @@ export default function Day(props: DayProps) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
-          {myChildLessons && myChildLength >= 4
-            ? myChildLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => (
-                <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
-                  {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
-                </ScheduleWrapper>
-              ))
-            : myChildLessons?.dailyScheduleList.map((lesson) => (
-                <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lesson.schedule.idx % 11]} key={lesson.schedule.idx}>
-                  {lesson.schedule.startTime} {lesson.schedule.studentName.slice(0, 2)}
-                </ScheduleWrapper>
-              ))}
-          {myChildLessons && myChildLength >= 4 && <MoreLessonIcon />}
+          {myLessons && myLessonLength >= 4
+            ? myLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
+                const { schedule } = lesson;
+                const { startTime, studentName, idx } = schedule;
+
+                return (
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 11]} key={idx}>
+                    {startTime} {studentName.slice(0, 2)}
+                  </ScheduleWrapper>
+                );
+              })
+            : myLessons?.dailyScheduleList.map((lesson) => {
+                const { schedule } = lesson;
+                const { startTime, studentName, idx } = schedule;
+
+                return (
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 11]} key={idx}>
+                    {startTime} {studentName.slice(0, 2)}
+                  </ScheduleWrapper>
+                );
+              })}
+          {myLessons && myLessonLength >= 4 && <MoreLessonIcon />}
         </LessonWrapper>
       </Dayitem>
     </>
   );
-}
-
-interface DayProp {
-  $issunday: boolean;
 }
 
 const Dayitem = styled.article<DayProp>`

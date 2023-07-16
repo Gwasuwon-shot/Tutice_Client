@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
-import StudentColorBox from "../common/StudentColorBox";
 import { MISSING_MAINTEANANCE_LESSON } from "../../core/manageLesson/getMissingMaintenanceLesson";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import SubjectLabel from "../common/SubjectLabel";
-import { NextMonthArrowButton } from "../../assets";
-import useModal from "../../hooks/useModal";
 import ExtensionLessonContainer from "./ExtensionLessonContainer";
 import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import ExtensionLessonModal from "./ExtensionLessonModal";
-import LessonDate from "../RegularLesson/LessonDate";
+import useExtensionLesson from "../../hooks/useExtensionLesson";
 
 export default function ExtensionQuestion() {
-  const { missingMaintenanceLessonList } = MISSING_MAINTEANANCE_LESSON.data;
+  const { missingMaintenanceLessonList } = useExtensionLesson();
   const [selectedLesson, setSelectedLesson] = useState();
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 

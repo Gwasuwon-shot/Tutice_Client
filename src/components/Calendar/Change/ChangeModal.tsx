@@ -9,8 +9,9 @@ import ToastModal from "../../common/ToastModal";
 import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
 
 import { EditPencilIc ,removeTrashCan } from "../../../assets";
+import { modalType } from "../../../type/calendar/modalType";
 
-export default function ChangeModal(props) {
+export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal } = props;
   const { scheduleList } = useGetTeacherSchedule();
   const navigate = useNavigate();

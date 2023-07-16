@@ -3,16 +3,9 @@ import React from "react";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
-import { calendarLessonsType } from "../../../type/calendarLessonsType";
+import { DayItemProps } from "../../../type/calendar/dayItemType";
 
-interface DayProps {
-  date: Date;
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
-  myChildLessons: calendarLessonsType;
-}
-
-export default function DayItem(props: DayProps) {
+export default function DayItem(props: DayItemProps) {
   const { date, setOpenModal, setSelectedDate, myLessons } = props;
 
   const formattedDate = format(date, "d");

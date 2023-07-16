@@ -7,12 +7,10 @@ import { STUDENT_COLOR } from "../../../core/common/studentColor";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
 import useGetScheduleChild from "../../../hooks/useGetScheduleChild";
-interface ModalProps {
-  selectedDate: Date | null;
-  setOpenModal: (open: boolean) => void;
-}
+import { modalType } from "../../../type/calendar/modalType";
 
-export default function ParentModal({ selectedDate, setOpenModal }: ModalProps) {
+export default function ParentModal(props: modalType) {
+  const { selectedDate, setOpenModal } = props
   const { scheduleList } = useGetScheduleChild();
 
   return (

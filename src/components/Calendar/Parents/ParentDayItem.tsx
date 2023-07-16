@@ -3,9 +3,10 @@ import { format, isSunday, isToday } from "date-fns";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
-import { calendarLessonsType } from "../../../type/calendarLessonsType";
+import { DayItemProps } from "../../../type/calendar/dayItemType";
 
-export default function ParentDayItem(props) {
+
+export default function ParentDayItem(props: DayItemProps) {
   const { date, setOpenModal, setSelectedDate, myChildLessons } = props;
 
   const formattedDate = format(date, "d");

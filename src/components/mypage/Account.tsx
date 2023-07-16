@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import LogoutModal from "./LogoutModal";
 
 export default function Account() {
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
+
+  function handleLogout() {
+    setOpenModal(true);
+    setIsCheckingModalOpen(true);
+  }
   return (
     <>
       <Wrapper>
@@ -9,7 +19,12 @@ export default function Account() {
           <TitleText>계정</TitleText>
         </TitleWrapper>
         <ContentWrapper>
-          <ContentText>로그아웃</ContentText>
+          <ContentText onClick={handleLogout}>로그아웃</ContentText>
+          {openModal && isCheckingModalOpen && (
+            <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+              <LogoutModal setOpenModal={setOpenModal} />
+            </ModalSection>
+          )}
           <ContentText>삭제</ContentText>
         </ContentWrapper>
       </Wrapper>
@@ -57,4 +72,10 @@ const ContentText = styled.h2`
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey900};
   cursor: pointer;
+`;
+
+const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
+  position: absolute;
+
+  margin: -38rem -4rem 0 -1.5em;
 `;

@@ -8,11 +8,15 @@ import SubjectLabel from "../common/SubjectLabel";
 import { NextMonthArrowButton } from "../../assets";
 import useModal from "../../hooks/useModal";
 import ExtensionLessonContainer from "./ExtensionLessonContainer";
+import { useRecoilState } from "recoil";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import ExtensionLessonModal from "./ExtensionLessonModal";
+import LessonDate from "../RegularLesson/LessonDate";
 
 export default function ExtensionQuestion() {
   const { missingMaintenanceLessonList } = MISSING_MAINTEANANCE_LESSON.data;
-  const { openModal, setOpenModal } = useModal();
   const [selectedLesson, setSelectedLesson] = useState();
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   return (
     <>
@@ -36,6 +40,16 @@ export default function ExtensionQuestion() {
         </Content>
       </ExtensionWrapper>
       <GreyBar />
+
+      {openModal && selectedLesson && (
+        <ExtensionLessonModal
+          studentName={selectedLesson.studentName}
+          subject={selectedLesson.subject}
+          backgroundColor={STUDENT_COLOR[selectedLesson.idx % 11]}
+          color="#757A80"
+          isBig={true}
+        />
+      )}
     </>
   );
 }
@@ -74,44 +88,6 @@ const HeaderText = styled.h1`
 const Content = styled.div`
   display: flex;
   overflow: hidden;
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  gap: 1.8rem;
-  flex: 0 0 auto;
-
-  align-items: center;
-
-  width: 27rem;
-`;
-const DateandCount = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  gap: 1.8rem;
-
-  ${({ theme }) => theme.fonts.body05};
-  color: ${({ theme }) => theme.colors.grey600};
-`;
-
-const Name = styled.h3`
-  ${({ theme }) => theme.fonts.body01};
-  color: ${({ theme }) => theme.colors.grey900};
-`;
-
-const NameandSubject = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4rem;
-`;
-
-const SlideButton = styled(NextMonthArrowButton)`
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
 `;
 
 const GreyBar = styled.div`

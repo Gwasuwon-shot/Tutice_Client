@@ -1,10 +1,10 @@
 import {RegularLessonNotebookIc, RegularLessonPencilIc} from '../../assets';
-import { openDatePickerState, openTimePickerState } from "../../atom/timePicker/timePicker";
+import {cycleNumberState, dateState} from '../../atom/timePicker/timePicker';
+import {openDatePickerState, openTimePickerState} from "../../atom/timePicker/timePicker";
 
 import React from 'react';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import TimePicker from './TimePicker/TimePicker';
-import {cycleNumberState} from '../../atom/timePicker/timePicker';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 
@@ -17,23 +17,24 @@ export default function LessonInformation() {
         setIsTimePickerOpen(true);
     }
 
-    const [activeSlide, setActiveSlide] = useRecoilState(cycleNumberState);
+    const [activeCycleSlide, setActiveCycleSlide] = useRecoilState(cycleNumberState);
     
     let selectedCycleText;
-    if (activeSlide === -1) {
+    if (activeCycleSlide === -1) {
         selectedCycleText = "회차를 선택하세요";
     } else {
-        selectedCycleText = activeSlide;
+        selectedCycleText = activeCycleSlide;
     }
     
-
+    
     // 수업일 표시 로직
 
     const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
-    
+
     function handleDatePicker () {
         setIsDatePickerOpen(true);
     }
+    const [activeDateSlide, setActiveDateSlide] = useRecoilState(dateState);
     
     return (
         <LessonInformationWrapper>
@@ -48,7 +49,8 @@ export default function LessonInformation() {
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
-                    <StartDateButton type = "button" onClick={handleDatePicker}> 2023년 7월 3일 </StartDateButton>
+                    
+                    <StartDateButton type = "button" onClick={handleDatePicker}> {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 </StartDateButton>
                     <RegularLessonPencilIcon />
                 </StartDate>
             </LessonWrapper>

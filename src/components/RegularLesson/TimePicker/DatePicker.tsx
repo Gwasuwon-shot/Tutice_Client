@@ -87,7 +87,7 @@ export default function DatePicker() {
     // 2) 데이트 피커 취소시
     function handleCancelDatePicker() {
         setIsDatePickerOpen(false);
-        setActiveSlide({year: currentYear, month: currentMonth, date: currentDate});
+        setActiveSlide({year: currentYear, month: currentMonth, date: todayDate});
     }
 
     // 3) 데이트 피커 완료 시

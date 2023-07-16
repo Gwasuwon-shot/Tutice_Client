@@ -20,7 +20,13 @@ export const dateState = atom({
   default: {year : new Date().getFullYear(), month : new Date().getMonth()+1, date: new Date().getDate()}
 });
 
-export const dayState = atom({
+interface Day {
+  dayOfWeek: string;
+  startTime: string;
+  endTime: string;
+}
+
+export const dayState = atom<Day[]>({
   key: 'dayState',
   default: [],
 });

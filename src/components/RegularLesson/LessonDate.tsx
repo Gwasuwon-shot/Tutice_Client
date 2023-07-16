@@ -22,9 +22,9 @@ export default function LessonDate() {
     const [selectedDays, setSelectedDays] = useRecoilState(dayState);
     const [focusDay, setFocusDay] = useRecoilState(focusDayState);
     
-    function handleDayButton(day) {
+    function handleDayButton(day: string) {
         
-        let dayindex;
+        let dayIndex;
         if (selectedDays.length >= 1) {
             dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
         } else {

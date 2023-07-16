@@ -36,7 +36,7 @@ export default function LessonDate() {
             );
         } else {
             // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
-            const isTimeNotSelected = focusDay.startTime === "" || focusDay.endTime === "";
+            const isTimeNotSelected = (focusDay.dayOfWeek !== "") && (focusDay.startTime === "" || focusDay.endTime === "");
             
             if (isTimeNotSelected) {
                 return; 
@@ -78,7 +78,7 @@ export default function LessonDate() {
         setSelectedDays((prevSelectedDays) => [...prevSelectedDays, focusDay]);
         // 현재 focusDay의 값을 빈 값으로 초기화
         setFocusDay({
-            dayOfWeek: ['일', '월', '화', '수', '목', '금', '토'][new Date().getDay()],
+            dayOfWeek: '',
             startTime: '',
             endTime: '',
         });

@@ -4,19 +4,34 @@ import 'swiper/components/navigation/navigation.min.css';
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
+import {cycleNumberState, openTimePickerState} from '../../../atom/timePicker/timePicker';
 
-import {cycleNumberState} from '../../../atom/timePicker/timePicker';
 import styled from 'styled-components';
 import {useRecoilState} from 'recoil';
 
 export default function TimePicker() {
     
+    // 1. 회차 상태관리
     const [activeSlide, setActiveSlide] = useRecoilState(cycleNumberState);
 
     function handleSlideChange(swiper: SwiperCore) {
-        setActiveSlide(swiper.realIndex);
+        setActiveSlide(swiper.realIndex + 1);
     };
 
+    // 2. 회차 타임피커 모달 오픈여부 상태관리
+    const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
+    
+    // 3. 회차 타임피커 취소 시
+    function handleConfirmTimePicker () {
+        setIsTimePickerOpen(false);
+        setActiveSlide(-1); // 선택이 안된 상태로 변경
+    }
+
+    // 4. 회차 타임피커 완료 시
+    function handleCanCelTimePicker () {
+        setIsTimePickerOpen(false);
+    }
+    
     // check 용
     useEffect(() => {
         console.log(activeSlide);
@@ -33,7 +48,7 @@ export default function TimePicker() {
 
         <TimePickerWrapper>
             <CancleWrapper>
-                <CancleButton> 취소 </CancleButton>
+                <CancleButton onClick = {handleCanCelTimePicker}> 취소 </CancleButton>
             </CancleWrapper>
 
             <StyledSwiper
@@ -55,7 +70,7 @@ export default function TimePicker() {
             <Vizor />
             
             <ConfirmWrapper>
-                <ConfirmButton> 확인 </ConfirmButton>
+                <ConfirmButton onClick= {handleConfirmTimePicker}> 확인 </ConfirmButton>
             </ConfirmWrapper>
         </TimePickerWrapper>
 

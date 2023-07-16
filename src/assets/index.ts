@@ -64,3 +64,4 @@ export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomin
 export { ReactComponent as viewingLoginIc } from "./icon/viewingLoginIc.svg";
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIc.svg";

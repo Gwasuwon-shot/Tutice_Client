@@ -20,4 +20,8 @@ export const dateState = atom({
   default: {year : new Date().getFullYear(), month : new Date().getMonth()+1, date: new Date().getDate()}
 });
 
+export const dayState = atom({
+  key: 'dayState',
+  default: [['일','월','화','수','목','금','토'][new Date().getDay()]],
+});
 

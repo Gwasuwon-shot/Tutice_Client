@@ -1,14 +1,35 @@
+import React, { useEffect } from 'react';
 import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
 
-import React from 'react';
 import RoundBottomButton from '../common/RoundBottomButton';
+import {dayState} from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
 
+interface dayProp {
+    day: string;
+}
 export default function LessonDate() {
 
     const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
     const messages = "수업일시 추가";
+    
+    const [selectedDays, setSelectedDays] = useRecoilState(dayState);
+    
+    function handleDayButton(day : dayProp){
+        if (selectedDays.includes(day)) {
+            setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
+        } else {
+            setSelectedDays([...selectedDays, day]);
+        }
+    }
 
+    // check 용
+    useEffect(() => {
+        console.log(selectedDays);
+    }, [selectedDays]);
+    
+    
     return (
         <LessonDateWrapper>
 
@@ -20,7 +41,7 @@ export default function LessonDate() {
 
             <DayWrapper>
                 {DAYS.map((day, index) => (
-                <Day key={index}>{day}</Day>
+                <Day key={index} onClick= {()=> handleDayButton(day)} isSelected={selectedDays.includes(day)}>{day}</Day>
                 ))}
             </DayWrapper>
 

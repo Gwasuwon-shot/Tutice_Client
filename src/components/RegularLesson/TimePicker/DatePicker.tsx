@@ -4,8 +4,10 @@ import 'swiper/components/navigation/navigation.min.css';
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
+import {dateState, openDatePickerState} from '../../../atom/timePicker/timePicker';
 
 import styled from 'styled-components';
+import {useRecoilState} from 'recoil';
 
 interface monthCalenderProps {
     month: number;
@@ -70,22 +72,33 @@ export default function DatePicker() {
     }
 
 
-    // 4. 날짜 관리
+    // 4. 날짜 상태 관리
 
-    // today 날짜 객체 (오늘 값) -> 초기값으로 설정 예정
-    // const today = { month: currentMonth, date: todayDate, day: todayDay }
-
-    const [activeSlide, setActiveSlide] = useState(0);
+    const [activeSlide, setActiveSlide] = useRecoilState(dateState);
 
     function handleSlideChange(swiper: SwiperCore) {
-        setActiveSlide(swiper.realIndex);
+        setActiveSlide({year: currentYear, month:monthCalender[swiper.realIndex].month, date: monthCalender[swiper.realIndex].date});
+        // problem : year을 currentYear이 아닌 지난해, 다음해로 선택했을 시 -> 추후 변경
     };
+    
+    // 1) 데이트 피커 모달 오픈여부 상태관리
+    const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
+    
+    // 2) 데이트 피커 취소시
+    function handleCancelDatePicker() {
+        setIsDatePickerOpen(false);
+        setActiveSlide({year: currentYear, month: currentMonth, date: currentDate});
+    }
 
+    // 3) 데이트 피커 완료 시
+    function handleConfirmDatePicker() {
+        setIsDatePickerOpen(false);
+    }
+    
     // check 용
     useEffect(() => {
         console.log(activeSlide);
     }, [activeSlide]);
-
 
     const slides = Array.from({ length: monthCalender.length }, (_, index) => (
         <SwiperSlide key={index}>
@@ -100,7 +113,7 @@ export default function DatePicker() {
         <TimePickerWrapper>
 
             <CancleWrapper>
-                <CancleButton> 취소 </CancleButton>
+                <CancleButton onClick = {handleCancelDatePicker}> 취소 </CancleButton>
             </CancleWrapper>
 
             <StyledSwiper
@@ -120,7 +133,7 @@ export default function DatePicker() {
             <Vizor />
             
             <ConfirmWrapper>
-                <ConfirmButton> 확인 </ConfirmButton>
+                <ConfirmButton onClick = {handleConfirmDatePicker}> 확인 </ConfirmButton>
             </ConfirmWrapper>
         </TimePickerWrapper>
 

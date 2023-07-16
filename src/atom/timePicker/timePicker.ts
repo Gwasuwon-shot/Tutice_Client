@@ -15,6 +15,10 @@ export const cycleNumberState = atom<number>({
   default: -1,
 })
 
+export const dateState = atom({
+  key: 'dateState',
+  default: {year : new Date().getFullYear(), month : new Date().getMonth()+1, date: new Date().getDate()}
+});
 
 // 학생 이름 상태를 가져오기 위한 선택자
 export const openTimePickerSelector = selector({

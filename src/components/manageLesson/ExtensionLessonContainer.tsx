@@ -5,7 +5,19 @@ import SubjectLabel from "../common/SubjectLabel";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { NextMonthArrowButton } from "../../assets";
 
-export default function ExtensionLessonContainer(props) {
+interface ExtensionLessonContainerProps {
+  lesson: {
+    idx: number;
+    studentName: string;
+    subject: string;
+    count: number;
+  };
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedLesson: React.Dispatch<React.SetStateAction<lesson | null>>;
+  endScheduleDate: string;
+}
+
+export default function ExtensionLessonContainer(props: ExtensionLessonContainerProps) {
   const { lesson, endScheduleDate, setSelectedLesson, setOpenModal } = props;
   const { idx, studentName, subject, count } = lesson;
 

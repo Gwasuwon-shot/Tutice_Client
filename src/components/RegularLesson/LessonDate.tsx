@@ -12,7 +12,7 @@ interface DayProp {
 };
 
 export default function LessonDate() {
-
+    
     // 1. 요일 관리
 
     const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
@@ -20,15 +20,26 @@ export default function LessonDate() {
     
     const [selectedDays, setSelectedDays] = useRecoilState(dayState);
     
-
+    
     function handleDayButton(day) {
+        
         const dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
+
         if (dayIndex !== -1) {
-          setSelectedDays((prevSelectedDays) =>
-            prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day)
-          );
+            setSelectedDays((prevSelectedDays) =>
+                prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day)
+            );
         } else {
-          setSelectedDays((prevSelectedDays) => [
+            // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
+            const isTimeNotSelected = selectedDays.some(
+            (selectedDay) => (!selectedDay.startTime || !selectedDay.endTime)
+            );
+            
+            if (isTimeNotSelected) {
+                return; 
+            }
+            
+            setSelectedDays((prevSelectedDays) => [
             ...prevSelectedDays,
             { dayOfWeek: day, startTime: '', endTime: '' },
           ]);
@@ -40,6 +51,7 @@ export default function LessonDate() {
     useEffect(() => {
         console.log(selectedDays);
     }, [selectedDays]);
+    
     
     // 2. 요일 시작, 종료시간 관리
 
@@ -66,7 +78,7 @@ export default function LessonDate() {
 
             <DayWrapper>
                 {DAYS.map((day, index) => (
-                <Day key={index} onClick= {()=> handleDayButton(day)} isSelected={selectedDays.includes(day)}>{day}</Day>
+                <Day key={index} onClick= {()=> handleDayButton(day)} isSelected={selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day) !== -1}>{day}</Day>
                 ))}
             </DayWrapper>
 

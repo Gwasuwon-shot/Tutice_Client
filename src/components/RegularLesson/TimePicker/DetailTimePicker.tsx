@@ -1,47 +1,15 @@
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
-import { openStartDetailState, openFinishDetailState } from "../../../atom/timePicker/timePicker";
 
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
+import { dayState, openFinishDetailState, openStartDetailState } from "../../../atom/timePicker/timePicker";
 
-import {useRecoilState} from 'recoil';
 import styled from 'styled-components';
+import {useRecoilState} from 'recoil';
 
 export default function DetailTimePicker() {
-    
-    // 0. 시작시간 상태관리
-    const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
-
-    // 1) 시작 타임피커 완료시
-    function handleConfirmStartTimePicker(){
-        setIsStartPickerOpen(false);
-    }
-
-    // 2) 시작 타임피커 취소시
-    function handleCancleStartTimePicker(){
-        setIsStartPickerOpen(false);
-    }
-
-    // 0-2. 종료시간 상태관리
-    const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
-
-    // 1) 시작 타임피커 완료시
-    function handleConfirmFinishTimePicker(){
-        setIsFinishPickerOpen(false);
-    }
-    
-    // 2) 시작 타임피커 취소시
-    function handleCancelFinishTimePicker(){
-        setIsFinishPickerOpen(false);
-    }
-
-
-
-
-
-
 
     // 1. 오전 오후 관리
     // 1) active slide 값 관리
@@ -71,7 +39,7 @@ export default function DetailTimePicker() {
     const [activeHourSlide, setActiveHourSlide] = useState(0);
 
     function handleHourSlideChange(swiper: SwiperCore) {
-        setActiveHourSlide(swiper.realIndex);
+        setActiveHourSlide(swiper.realIndex + 1);
     };
 
 
@@ -89,10 +57,11 @@ export default function DetailTimePicker() {
     
     // 3. 분 관리
     // 1) active slide 값 관리
-    const [activeMinuteSlide, setActiveMinuteSlide] = useState(0);
+    const MINUTES = ["00", "30"];
+    const [activeMinuteSlide, setActiveMinuteSlide] = useState("00");
     
     function handleMinuteSlideChange(swiper: SwiperCore) {
-        setActiveMinuteSlide(swiper.realIndex);
+        setActiveMinuteSlide(MINUTES[swiper.realIndex]);
     };
 
     // check 용
@@ -101,13 +70,51 @@ export default function DetailTimePicker() {
     }, [activeMinuteSlide]);
 
     // 2) swiper
-    const MINUTES = ["00", "30"];
     const slidesMinute = Array.from({ length: 2 }, (_, index) => (
         <SwiperSlide key={index}>
           {MINUTES[index]}
         </SwiperSlide>
     ));
 
+    
+    // 4. 시작시간 상태관리
+    const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
+    const [selectedDays, setSelectedDays] = useRecoilState(dayState);
+
+    // 1) 시작 타임피커 완료시
+    // problem: 현재 로직에서는, 시작시간을 한번 선택한 이후 다른 시간으로 선택하고자 할때 변경 불가
+    function handleConfirmStartTimePicker(){
+        const updatedSelectedDays = selectedDays.map((selectedDay) => {
+            if (selectedDay.startTime === '') {
+              // 시작 시간이 비어있는 경우
+              const startTime =
+                activeAmPmSlide === 0 ? `${activeHourSlide}:${activeMinuteSlide}` : `${activeHourSlide+12}:${activeMinuteSlide}`;
+              return { ...selectedDay, startTime };
+            }
+            return selectedDay;
+        });
+        
+        setSelectedDays(updatedSelectedDays);
+        setIsStartPickerOpen(false);
+    }
+
+    // 2) 시작 타임피커 취소시
+    function handleCancelStartTimePicker(){
+        setIsStartPickerOpen(false);
+    }
+
+    // 5. 종료시간 상태관리
+    const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
+
+    // 1) 시작 타임피커 완료시
+    function handleConfirmFinishTimePicker(){
+        setIsFinishPickerOpen(false);
+    }
+
+    // 2) 시작 타임피커 취소시
+    function handleCancelFinishTimePicker(){
+        setIsFinishPickerOpen(false);
+    }
 
 
     
@@ -121,7 +128,6 @@ export default function DetailTimePicker() {
                 ) : (
                 <CancelButton onClick={handleCancelFinishTimePicker}>취소</CancelButton>
                 )}
-                <CancleButton> 취소 </CancleButton>
             </CancleWrapper>
 
             <SwiperWrapper>
@@ -180,7 +186,6 @@ export default function DetailTimePicker() {
                 ) : (
                 <ConfirmButton onClick={handleConfirmFinishTimePicker}>확인</ConfirmButton>
                 )}
-                <ConfirmButton> 확인 </ConfirmButton>
             </ConfirmWrapper>
         </TimePickerWrapper>
 
@@ -252,7 +257,7 @@ const ConfirmWrapper = styled.div`
     width: 6rem; 
     height: 100%;
 `
-const CancleButton = styled.button`
+const CancelButton = styled.button`
     position: absolute;
     top: 0.7rem;
     left: 1rem;

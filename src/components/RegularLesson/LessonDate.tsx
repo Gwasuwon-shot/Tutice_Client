@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
-
+import DetailTimePicker from './TimePicker/DetailTimePicker';
 import RoundBottomButton from '../common/RoundBottomButton';
-import {dayState} from "../../atom/timePicker/timePicker";
+import {dayState, timeState, openStartDetailState, openFinishDetailState} from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 
@@ -11,6 +11,8 @@ interface DayProp {
 };
 
 export default function LessonDate() {
+
+    // 1. 요일 관리
 
     const DAYS = ['월', '화', '수', '목', '금', '토', '일'];
     const messages = "수업일시 추가";
@@ -30,7 +32,20 @@ export default function LessonDate() {
         console.log(selectedDays);
     }, [selectedDays]);
     
+    // 2. 요일 시작, 종료시간 관리
+
+    const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
+
+    function handlStartTimePicker () {
+        setIsStartPickerOpen(true);
+    }
     
+    const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
+
+    function handleFinishTimePicker () {
+        setIsFinishPickerOpen(true);
+    }
+
     return (
         <LessonDateWrapper>
 
@@ -48,9 +63,9 @@ export default function LessonDate() {
 
             <TimeWrapper>
                 <TimeChoose> 시작 </TimeChoose>
-                <TimeButton> 시간을 선택하세요 </TimeButton>
+                <TimeButton onClick = {handlStartTimePicker}> 시간을 선택하세요 </TimeButton>
                 <TimeChoose> 종료 </TimeChoose>
-                <TimeButton> 시간을 선택하세요 </TimeButton>
+                <TimeButton  onClick = {handleFinishTimePicker}> 시간을 선택하세요 </TimeButton>
             </TimeWrapper>
 
             <ButtonWrapper>

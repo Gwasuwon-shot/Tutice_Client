@@ -1,8 +1,9 @@
-import { openDatePickerState, openTimePickerState } from "../../atom/timePicker/timePicker";
+import { openDatePickerState, openTimePickerState, openStartDetailState, openFinishDetailState } from "../../atom/timePicker/timePicker";
 
 import DatePicker from '../../components/RegularLesson/TimePicker/DatePicker';
 import SelectedDayAndTime from './SelectedDayAndTime';
 import TimePicker from '../../components/RegularLesson/TimePicker/TimePicker';
+import DetailTimePicker from '../../components/RegularLesson/TimePicker/DetailTimePicker';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import {useRecoilState} from 'recoil';
@@ -10,7 +11,9 @@ import {useRecoilState} from 'recoil';
 export default function Footer() {
     const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
     const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
- 
+    const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
+    const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
+
     return (
         <>
         <FooterWrapper>
@@ -19,6 +22,8 @@ export default function Footer() {
         <SelectedDayAndTime />
         {isTimePickerOpen && <TimePicker />}
         {isDatePickerOpen && <DatePicker />}
+        {isStartPickerOpen && <DetailTimePicker />}
+        {isFinishPickerOpen && <DetailTimePicker />}
         </>
     );
 }

@@ -25,3 +25,17 @@ export const dayState = atom({
   default: [['일','월','화','수','목','금','토'][new Date().getDay()]],
 });
 
+export const timeState = atom({
+  key: 'timeState',
+  default: []
+})
+
+export const openStartDetailState = atom<boolean>({
+  key: 'openStartDetailState',
+  default: false,
+})
+
+export const openFinishDetailState = atom<boolean>({
+  key: 'openFinishDetailState',
+  default: false,
+})

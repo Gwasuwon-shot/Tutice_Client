@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import BasicDoubleModal from "../common/BasicDoubleModal";
-import { useRecoilState } from "recoil";
-import { isModalOpen } from "../../atom/common/isModalOpen";
 
-export default function LogoutModal(props) {
+interface LogoutModalProps {
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function LogoutModal(props: LogoutModalProps) {
   const { setOpenModal } = props;
   function handleBacktoMypage() {
     setOpenModal(false);

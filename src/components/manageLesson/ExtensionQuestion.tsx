@@ -39,11 +39,11 @@ export default function ExtensionQuestion() {
 
       {openModal && selectedLesson && (
         <ExtensionLessonModal
-          studentName={selectedLesson.studentName}
-          subject={selectedLesson.subject}
-          backgroundColor={STUDENT_COLOR[selectedLesson.idx % 11]}
+          studentName={selectedLesson?.studentName}
+          subject={selectedLesson?.subject}
+          backgroundColor={STUDENT_COLOR[selectedLesson?.idx % 11]}
           color="#757A80"
-          isBig={true}
+          isBig={false}
         />
       )}
     </>

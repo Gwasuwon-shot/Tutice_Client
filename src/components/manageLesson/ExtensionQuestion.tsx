@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
 import StudentColorBox from "../common/StudentColorBox";
@@ -6,9 +6,13 @@ import { MISSING_MAINTEANANCE_LESSON } from "../../core/manageLesson/getMissingM
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import SubjectLabel from "../common/SubjectLabel";
 import { NextMonthArrowButton } from "../../assets";
+import useModal from "../../hooks/useModal";
+import ExtensionLessonContainer from "./ExtensionLessonContainer";
 
 export default function ExtensionQuestion() {
   const { missingMaintenanceLessonList } = MISSING_MAINTEANANCE_LESSON.data;
+  const { openModal, setOpenModal } = useModal();
+  const [selectedLesson, setSelectedLesson] = useState();
 
   return (
     <>
@@ -20,29 +24,13 @@ export default function ExtensionQuestion() {
         <Content>
           {missingMaintenanceLessonList.map((item) => {
             const { lesson, endScheduleDate } = item;
-            const { idx, studentName, subject, count } = lesson;
-
             return (
-              <ContentWrapper key={idx}>
-                <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
-                <DateandCount>
-                  {endScheduleDate.slice(5, 6) == "0" ? (
-                    <p>
-                      {endScheduleDate.slice(6, 7)} . {endScheduleDate.slice(8, 10)}
-                    </p>
-                  ) : (
-                    <p>
-                      {endScheduleDate.slice(5, 7)} .{endScheduleDate.slice(8, 10)}
-                    </p>
-                  )}
-                  <p>{count} 회차 종료 </p>
-                </DateandCount>
-                <NameandSubject>
-                  <Name>{studentName}</Name>
-                  <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
-                </NameandSubject>
-                <SlideButton />
-              </ContentWrapper>
+              <ExtensionLessonContainer
+                setOpenModal={setOpenModal}
+                setSelectedLesson={setSelectedLesson}
+                lesson={lesson}
+                endScheduleDate={endScheduleDate}
+              />
             );
           })}
         </Content>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Role from "./Role";
 import NameEmail from "./NameEmail";
-import PwTos from "./PwTos";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { stepNum } from "../../atom/signup/signup";
+import PasswordAgreeChecking from "./PasswordAgreeChecking";
 
 export default function StepRenderer() {
   const step = useRecoilValue(stepNum);
@@ -18,6 +18,6 @@ export default function StepRenderer() {
     case 2:
       return <NameEmail />;
     case 3:
-      return <PwTos />;
+      return <PasswordAgreeChecking />;
   }
 }

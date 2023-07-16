@@ -8,8 +8,7 @@ import ToastModal from "../../common/ToastModal";
 import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
 import { modalType } from "../../../type/calendar/modalType";
 
-
-export default function RegisterModal(props :modalType) {
+export default function RegisterModal(props: modalType) {
   const { selectedDate, setOpenModal } = props;
   const { scheduleList } = useGetTeacherSchedule();
 

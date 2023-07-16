@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
-import { format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
+import {  endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
 
 import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
 import RegisterModal from "./RegisterModal";

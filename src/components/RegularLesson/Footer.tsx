@@ -1,6 +1,7 @@
 import { openDatePickerState, openTimePickerState } from "../../atom/timePicker/timePicker";
 
 import DatePicker from '../../components/RegularLesson/TimePicker/DatePicker';
+import SelectedDayAndTime from './SelectedDayAndTime';
 import TimePicker from '../../components/RegularLesson/TimePicker/TimePicker';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,7 @@ export default function Footer() {
         <FooterWrapper>
             <FooterButton> 저장 </FooterButton>
         </FooterWrapper>
+        <SelectedDayAndTime />
         {isTimePickerOpen && <TimePicker />}
         {isDatePickerOpen && <DatePicker />}
         </>

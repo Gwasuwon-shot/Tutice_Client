@@ -2,15 +2,12 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import useGetTodayScheduleByTeacher from "../../hooks/useGetTodayScheduleByTeacher";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import PreviewBanner from "./PreviewBanner";
 import WelcomeTeacher from "./WelcomeTeacher";
 
 export default function WelcomeNUpcomingBanner() {
-  const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
-
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
 

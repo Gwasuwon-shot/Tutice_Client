@@ -17,6 +17,7 @@ import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
 import Mypage from "./pages/Mypage";
+import NoAttendanceCheck from "./pages/NoAttendanceCheck";
 
 export default function Router() {
   return (
@@ -40,6 +41,7 @@ export default function Router() {
         <Route path="/change-schedule" element={<ChangeSchedule />} />
         <Route path="/change-lessonschedule" element={<ChangeLessonShcedule />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
       </Routes>
     </BrowserRouter>
   );

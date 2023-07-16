@@ -54,7 +54,8 @@ export default function LessonDate() {
     // check 용
     useEffect(() => {
         console.log(selectedDays);
-    }, [selectedDays]);
+        console.log(focusDay)
+    }, [selectedDays, focusDay]);
     
     
     // 2. 요일 시작, 종료시간 관리
@@ -81,6 +82,18 @@ export default function LessonDate() {
     
 
     // 수업일시 추가하기 
+
+    function AddLesson() {
+        // 현재 focusDay의 값을 selectedDays에 추가
+        setSelectedDays((prevSelectedDays) => [...prevSelectedDays, focusDay]);
+        // 현재 focusDay의 값을 빈 값으로 초기화
+        setFocusDay({
+            dayOfWeek: ['일', '월', '화', '수', '목', '금', '토'][new Date().getDay()],
+            startTime: '',
+            endTime: '',
+        });
+    }
+    
     return (
         <LessonDateWrapper>
 
@@ -100,12 +113,40 @@ export default function LessonDate() {
 
             <TimeWrapper>
                 <TimeChoose> 시작 </TimeChoose>
-                <TimeButton onClick = {handlStartTimePicker}>  시간을 선택하세요 </TimeButton>
+                {focusDay.startTime === "" ? (
+                    <TimeButton onClick={handlStartTimePicker}>시간을 선택하세요</TimeButton>
+                    ) : (
+                    <TimeButton onClick={handlStartTimePicker}>
+                        {Number(focusDay.startTime.slice(0, 2)) <= 12 ? (
+                        <>
+                            오전 {Number(focusDay.startTime.slice(0, 2))} {focusDay.startTime.slice(2)}
+                        </>
+                        ) : (
+                        <>
+                            오후 {Number(focusDay.startTime.slice(0, 2)) - 12} {focusDay.startTime.slice(2)}
+                        </>
+                        )}
+                    </TimeButton>
+                )}
                 <TimeChoose> 종료 </TimeChoose>
-                <TimeButton  onClick = {handleFinishTimePicker}> {`${AMPM[activeAmPmSlide]} ${activeHourSlide}시 ${activeMinuteSlide}분`} </TimeButton>
+                {focusDay.endTime === "" ? (
+                    <TimeButton onClick={handleFinishTimePicker}>시간을 선택하세요</TimeButton>
+                    ) : (
+                    <TimeButton onClick={handleFinishTimePicker}>
+                        {Number(focusDay.endTime.slice(0, 2)) <= 12 ? (
+                        <>
+                            오전 {Number(focusDay.endTime.slice(0, 2))} {focusDay.endTime.slice(2)}
+                        </>
+                        ) : (
+                        <>
+                            오후 {Number(focusDay.endTime.slice(0, 2)) - 12} {focusDay.endTime.slice(2)}
+                        </>
+                        )}
+                    </TimeButton>
+                )}
             </TimeWrapper>
 
-            <ButtonWrapper>
+            <ButtonWrapper onClick = {AddLesson}>
                 <RoundBottomButton buttonMessage = {messages} />
             </ButtonWrapper>
 

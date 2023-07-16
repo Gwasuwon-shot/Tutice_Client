@@ -55,19 +55,19 @@ export default function Days(props: DaysProp) {
 
   return (
     <>
-      <Wrapper>
+      <DayWrapper>
         {rows}
         {openModal && selectedDate && (
           <ModalWrapper>
             <RegisterModal selectedDate={selectedDate} setOpenModal={setOpenModal} />
           </ModalWrapper>
         )}
-      </Wrapper>
+      </DayWrapper>
     </>
   );
 }
 
-const Wrapper = styled.section`
+const DayWrapper = styled.section`
   display: flex;
   flex-direction: column;
 

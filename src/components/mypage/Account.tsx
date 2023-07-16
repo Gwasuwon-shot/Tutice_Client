@@ -3,15 +3,23 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import LogoutModal from "./LogoutModal";
+import AccountDeleteModal from "./AccountDeleteModal";
 
 export default function Account() {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
-  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
+  const [isCheckingLogout, setIsCheckingLogout] = useState(false);
+  const [isCheckingDeleteAccount, setIsCheckingDeleteAccount] = useState(false);
 
   function handleLogout() {
     setOpenModal(true);
-    setIsCheckingModalOpen(true);
+    setIsCheckingLogout(true);
   }
+
+  function handleDeleteAccount() {
+    setOpenModal(true);
+    setIsCheckingDeleteAccount(true);
+  }
+
   return (
     <>
       <Wrapper>
@@ -20,12 +28,17 @@ export default function Account() {
         </TitleWrapper>
         <ContentWrapper>
           <ContentText onClick={handleLogout}>로그아웃</ContentText>
-          {openModal && isCheckingModalOpen && (
-            <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+          {openModal && isCheckingDeleteAccount && (
+            <LogoutModalSection $isCheckingLogout={isCheckingLogout}>
               <LogoutModal setOpenModal={setOpenModal} />
-            </ModalSection>
+            </LogoutModalSection>
           )}
-          <ContentText>삭제</ContentText>
+          <ContentText onClick={handleDeleteAccount}>삭제</ContentText>
+          {openModal && isCheckingDeleteAccount && (
+            <DeleteAccountModalSection $isCheckingDeleteAccount={isCheckingDeleteAccount}>
+              <AccountDeleteModal setOpenModal={setOpenModal} />
+            </DeleteAccountModalSection>
+          )}
         </ContentWrapper>
       </Wrapper>
     </>
@@ -74,7 +87,13 @@ const ContentText = styled.h2`
   cursor: pointer;
 `;
 
-const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
+const LogoutModalSection = styled.section<{ $isCheckingLogout: boolean }>`
+  position: absolute;
+
+  margin: -38rem -4rem 0 -1.5em;
+`;
+
+const DeleteAccountModalSection = styled.section<{ $isCheckingDeleteAccount: boolean }>`
   position: absolute;
 
   margin: -38rem -4rem 0 -1.5em;

@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
-import { format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
-import ParentModal from "./ParentModal";
-import useGetScheduleChild from "../../../hooks/useGetScheduleChild";
-import ParentDayItem from "./ParentDayItem";
+import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
+import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
 
+import ChangeModal from "./ChangeModal";
+import DayItemchange from "./DayItemchange";
 interface DaysProp {
   currentMonth: Date;
 }
 
-export default function ParentsDays(props: DaysProp) {
+export default function Days(props: DaysProp) {
   const { currentMonth } = props;
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
@@ -19,7 +19,7 @@ export default function ParentsDays(props: DaysProp) {
   const endDate: Date = endOfWeek(monthEnd);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const { scheduleList } = useGetScheduleChild();
+  const { scheduleList } = useGetTeacherSchedule();
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
@@ -27,14 +27,14 @@ export default function ParentsDays(props: DaysProp) {
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      const myChildLessons = scheduleList.find((item) => isSameDay(new Date(item.date), day));
+      const myLessons = scheduleList.find((item) => isSameDay(new Date(item.date), day));
       days.push(
-        <ParentDayItem
+        <DayItemchange
           setOpenModal={setOpenModal}
           setSelectedDate={setSelectedDate}
           date={day}
           key={day.toString()}
-          myChildLessons={myChildLessons}
+          myLessons={myLessons}
         />,
       );
       day = addDays(day, 1);
@@ -58,7 +58,7 @@ export default function ParentsDays(props: DaysProp) {
         {rows}
         {openModal && selectedDate && (
           <ModalWrapper>
-            <ParentModal selectedDate={selectedDate} setOpenModal={setOpenModal} />
+            <ChangeModal selectedDate={selectedDate} setOpenModal={setOpenModal} />
           </ModalWrapper>
         )}
       </Wrapper>

@@ -52,7 +52,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 const ModalWrapper = styled.div`
   position: absolute;
 
-  margin: -3.7rem 0 0 -1.5rem;
+  margin: -24rem 0 0 -1.5rem;
 `;
 
 const ModalTitle = styled.h1`

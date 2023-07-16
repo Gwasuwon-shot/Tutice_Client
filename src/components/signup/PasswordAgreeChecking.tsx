@@ -1,9 +1,7 @@
 import BackButton from "../common/BackButton";
-import UserCheckList from "./UserCheckList";
 import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
-import BottomButton from "../common/BottomButton";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { newUserData } from "../../atom/signup/signup";
@@ -14,8 +12,9 @@ import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
+import AgreeChecking from "./AgreeChecking";
 
-export default function PwTos() {
+export default function PasswordAgreeChecking() {
   const newUser = useRecoilValue(newUserData);
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
@@ -67,13 +66,11 @@ export default function PwTos() {
 
         <InputWrapper>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-
           <Inputfield disabled type="text" value={newUser.email} />
         </InputWrapper>
 
         <InputPwWrapper $isPassword={isPassword} $pwFocus={setPwFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
-
           <Inputfield
             onFocus={() => setPwFocus(true)}
             onBlur={() => setPwFocus(false)}
@@ -100,7 +97,8 @@ export default function PwTos() {
 
         {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
-        <UserCheckList />
+        <AgreeChecking />
+
         <SubmitButton type="submit" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
           <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
         </SubmitButton>

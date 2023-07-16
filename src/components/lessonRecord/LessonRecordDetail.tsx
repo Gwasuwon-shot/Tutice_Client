@@ -6,6 +6,7 @@ import BackButton from "../common/BackButton";
 import SubjectLabel from "../common/SubjectLabel";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import PastLessonRecordList from "./PastLessonRecordList";
+import { css } from "styled-components";
 
 export default function LessonRecordDetail() {
   const [isClassRecord, setIsClassRecord] = useState(true);
@@ -34,8 +35,12 @@ export default function LessonRecordDetail() {
       </LessonRecordHeader>
 
       <SelectMenuWrapper>
-        <SelectMenuButton>수업내역</SelectMenuButton>
-        <SelectMenuButton>입금내역</SelectMenuButton>
+        <SelectMenuButton isClassRecord={isClassRecord} onClick={() => setIsClassRecord(true)}>
+          수업내역
+        </SelectMenuButton>
+        <SelectMenuButton isClassRecord={!isClassRecord} onClick={() => setIsClassRecord(false)}>
+          입금내역
+        </SelectMenuButton>
       </SelectMenuWrapper>
 
       {isClassRecord ? (
@@ -91,13 +96,14 @@ const SelectMenuWrapper = styled.aside`
   width: 29.2rem;
   height: 4rem;
   margin: 1.8rem auto 0 auto;
+  padding: 0 0.397rem;
 
   border-radius: 0.8rem;
 
   background-color: ${({ theme }) => theme.colors.grey50};
 `;
 
-const SelectMenuButton = styled.button<{}>`
+const SelectMenuButton = styled.button<{ isClassRecord: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,7 +112,14 @@ const SelectMenuButton = styled.button<{}>`
   height: 3.2rem;
   border-radius: 0.8rem;
 
-  background-color: "#ffffff";
+  ${({ isClassRecord }) =>
+    isClassRecord
+      ? css`
+          background-color: #ffffff;
+        `
+      : css`
+          background-color: ${({ theme }) => theme.colors.grey50};
+        `};
 `;
 
 const DivisionLine = styled.div`

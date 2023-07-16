@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 import { ampmSlide, hourSlide, minuteSlide } from "../../../atom/timePicker/timePicker";
-import { dayState, openFinishDetailState, openStartDetailState } from "../../../atom/timePicker/timePicker";
+import { dayState, focusDayState, openFinishDetailState, openStartDetailState } from "../../../atom/timePicker/timePicker";
 
 import styled from 'styled-components';
 import {useRecoilState} from 'recoil';
@@ -81,21 +81,23 @@ export default function DetailTimePicker() {
     // 4. 시작시간 상태관리
     const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
     const [selectedDays, setSelectedDays] = useRecoilState(dayState);
-
+    const [focusDay, setFocusDay] = useRecoilState(focusDayState);
+    
     // 1) 시작 타임피커 완료시
     // problem: 현재 로직에서는, 시작시간을 한번 선택한 이후 다른 시간으로 선택하고자 할때 변경 불가
     function handleConfirmStartTimePicker(){
+        const startTime = activeAmPmSlide === 0 ? `${activeHourSlide}:${activeMinuteSlide}` : `${activeHourSlide+12}:${activeMinuteSlide}`;
+        setFocusDay({...focusDay, startTime})
+        /*
         const updatedSelectedDays = selectedDays.map((selectedDay) => {
             if (selectedDay.startTime === '') {
-              // 시작 시간이 비어있는 경우
               const startTime =
                 activeAmPmSlide === 0 ? `${activeHourSlide}:${activeMinuteSlide}` : `${activeHourSlide+12}:${activeMinuteSlide}`;
               return { ...selectedDay, startTime };
             }
             return selectedDay;
         });
-        
-        setSelectedDays(updatedSelectedDays);
+        */
         setIsStartPickerOpen(false);
     }
 
@@ -107,8 +109,11 @@ export default function DetailTimePicker() {
     // 5. 종료시간 상태관리
     const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
 
-    // 1) 시작 타임피커 완료시
+    // 1) 종료 타임피커 완료시
     function handleConfirmFinishTimePicker(){
+        const endTime = activeAmPmSlide === 0 ? `${activeHourSlide}:${activeMinuteSlide}` : `${activeHourSlide+12}:${activeMinuteSlide}`;
+        setFocusDay({...focusDay, endTime})
+        /*
         const updatedSelectedDays = selectedDays.map((selectedDay) => {
             if (selectedDay.endTime === '') {
               // 종료 시간이 비어있는 경우
@@ -120,10 +125,11 @@ export default function DetailTimePicker() {
         });
         
         setSelectedDays(updatedSelectedDays);
+        */
         setIsFinishPickerOpen(false);
     }
 
-    // 2) 시작 타임피커 취소시
+    // 2) 종료 타임피커 취소시
     function handleCancelFinishTimePicker(){
         setIsFinishPickerOpen(false);
     }

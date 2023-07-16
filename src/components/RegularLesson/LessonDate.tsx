@@ -20,27 +20,30 @@ export default function LessonDate() {
     const messages = "수업일시 추가";
     
     const [selectedDays, setSelectedDays] = useRecoilState(dayState);
-    const [focusDay, setFocusDay] = useRecoilState(focusState);
+    const [focusDay, setFocusDay] = useRecoilState(focusDayState);
     
     function handleDayButton(day) {
         
-        const dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
-
+        let dayindex;
+        if (selectedDays.length >= 1) {
+            dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
+        } else {
+            dayIndex = -1;
+        }
+        
         if (dayIndex !== -1) {
             setSelectedDays((prevSelectedDays) =>
                 prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day)
             );
         } else {
             // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
-            const isTimeNotSelected = selectedDays.some(
-            (selectedDay) => (!selectedDay.startTime || !selectedDay.endTime)
-            );
+            const isTimeNotSelected = focusDay.length >= 1;
             
             if (isTimeNotSelected) {
                 return; 
             }
             
-            setSelectedDays((prevSelectedDays) => [
+            setFocusDay((prevSelectedDays) => [
             ...prevSelectedDays,
             { dayOfWeek: day, startTime: '', endTime: '' },
           ]);
@@ -76,6 +79,8 @@ export default function LessonDate() {
     const [activeHourSlide, setActiveHourSlide] = useRecoilState(hourSlide);
     const [activeMinuteSlide, setActiveMinuteSlide] = useRecoilState(minuteSlide);
     
+
+    // 수업일시 추가하기 
     return (
         <LessonDateWrapper>
 
@@ -87,7 +92,9 @@ export default function LessonDate() {
 
             <DayWrapper>
                 {DAYS.map((day, index) => (
-                <Day key={index} onClick= {()=> handleDayButton(day)} isSelected={selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day) !== -1}>{day}</Day>
+                <Day key={index} 
+                onClick= {()=> handleDayButton(day)} 
+                isSelected={(selectedDays.length >= 1 && selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day) !== -1) || (focusDay.dayOfWeek === day)}>{day}</Day>
                 ))}
             </DayWrapper>
 

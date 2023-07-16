@@ -44,18 +44,3 @@ export const openFinishDetailState = atom<boolean>({
   key: 'openFinishDetailState',
   default: false,
 })
-
-export const ampmSlide = atom<number>({
-  key: 'ampmSlide',
-  default: 0,
-})
-
-export const hourSlide = atom<number>({
-  key: 'hourSlide',
-  default: 0,
-})
-
-export const minuteSlide = atom<string>({
-  key: 'minuteSlide',
-  default: '00',
-})

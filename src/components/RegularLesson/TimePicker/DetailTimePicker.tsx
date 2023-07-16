@@ -4,7 +4,6 @@ import 'swiper/components/navigation/navigation.min.css';
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
-import { ampmSlide, hourSlide, minuteSlide } from "../../../atom/timePicker/timePicker";
 import { dayState, focusDayState, openFinishDetailState, openStartDetailState } from "../../../atom/timePicker/timePicker";
 
 import styled from 'styled-components';
@@ -15,7 +14,7 @@ export default function DetailTimePicker() {
     // 1. 오전 오후 관리
     // 1) active slide 값 관리
     
-    const [activeAmPmSlide, setActiveAmPmSlide] = useRecoilState(ampmSlide);
+    const [activeAmPmSlide, setActiveAmPmSlide] = useState(0);
 
     function handleAmPmSlideChange(swiper: SwiperCore) {
         setActiveAmPmSlide(swiper.realIndex);
@@ -37,7 +36,7 @@ export default function DetailTimePicker() {
     // 2. 시간 관리
     // 1) active slide 값 관리
     
-    const [activeHourSlide, setActiveHourSlide] = useRecoilState(hourSlide);
+    const [activeHourSlide, setActiveHourSlide] = useState(0);
 
     function handleHourSlideChange(swiper: SwiperCore) {
         setActiveHourSlide(swiper.realIndex + 1);
@@ -59,7 +58,7 @@ export default function DetailTimePicker() {
     // 3. 분 관리
     // 1) active slide 값 관리
     const MINUTES = ["00", "30"];
-    const [activeMinuteSlide, setActiveMinuteSlide] = useRecoilState(minuteSlide);
+    const [activeMinuteSlide, setActiveMinuteSlide] = useState("00");
     
     function handleMinuteSlideChange(swiper: SwiperCore) {
         setActiveMinuteSlide(MINUTES[swiper.realIndex]);
@@ -90,16 +89,6 @@ export default function DetailTimePicker() {
         const startTime = activeAmPmSlide === 0 ? `${formattedHour}:${activeMinuteSlide}` : `${activeHourSlide+12}:${activeMinuteSlide}`;
         setFocusDay({...focusDay, startTime})
         console.log(focusDay);
-        /*
-        const updatedSelectedDays = selectedDays.map((selectedDay) => {
-            if (selectedDay.startTime === '') {
-              const startTime =
-                activeAmPmSlide === 0 ? `${activeHourSlide}:${activeMinuteSlide}` : `${activeHourSlide+12}:${activeMinuteSlide}`;
-              return { ...selectedDay, startTime };
-            }
-            return selectedDay;
-        });
-        */
         setIsStartPickerOpen(false);
     }
 
@@ -117,19 +106,6 @@ export default function DetailTimePicker() {
         const endTime = activeAmPmSlide === 0 ? `${formattedHour}:${activeMinuteSlide}` : `${activeHourSlide + 12}:${activeMinuteSlide}`;
         setFocusDay({ ...focusDay, endTime });
         console.log(focusDay);
-        /*
-        const updatedSelectedDays = selectedDays.map((selectedDay) => {
-            if (selectedDay.endTime === '') {
-              // 종료 시간이 비어있는 경우
-              const endTime =
-                activeAmPmSlide === 0 ? `${activeHourSlide}:${activeMinuteSlide}` : `${activeHourSlide+12}:${activeMinuteSlide}`;
-              return { ...selectedDay, endTime };
-            }
-            return selectedDay;
-        });
-        
-        setSelectedDays(updatedSelectedDays);
-        */
         setIsFinishPickerOpen(false);
     }
 

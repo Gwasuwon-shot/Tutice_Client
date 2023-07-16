@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
-import { ampmSlide, hourSlide, minuteSlide } from "../../atom/timePicker/timePicker";
 import {dayState, focusDayState, openFinishDetailState, openStartDetailState} from "../../atom/timePicker/timePicker";
 
 import DetailTimePicker from './TimePicker/DetailTimePicker';
@@ -37,16 +36,13 @@ export default function LessonDate() {
             );
         } else {
             // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
-            const isTimeNotSelected = focusDay.length >= 1;
+            const isTimeNotSelected = focusDay.startTime === "" || focusDay.endTime === "";
             
             if (isTimeNotSelected) {
                 return; 
             }
             
-            setFocusDay((prevSelectedDays) => [
-            ...prevSelectedDays,
-            { dayOfWeek: day, startTime: '', endTime: '' },
-          ]);
+            setFocusDay({dayOfWeek: day, startTime: '', endTime: ''});
         }
     }
 
@@ -73,12 +69,6 @@ export default function LessonDate() {
     }
 
 
-    // 표시 위해 ampm, minute, hour slide 가져오기
-    
-    const AMPM = ['오전', '오후'];
-    const [activeAmPmSlide, setActiveAmPmSlide] = useRecoilState(ampmSlide);
-    const [activeHourSlide, setActiveHourSlide] = useRecoilState(hourSlide);
-    const [activeMinuteSlide, setActiveMinuteSlide] = useRecoilState(minuteSlide);
     
 
     // 수업일시 추가하기 

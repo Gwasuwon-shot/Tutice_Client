@@ -82,12 +82,6 @@ export default function ChangeModal(props: modalType) {
   );
 }
 
-const ModalWrapper = styled.section`
-  display: flex;
-
-  margin-top: -55rem;
-  margin-left: -0.4rem;
-`;
 
 const ModalHeaderWrapper = styled.div`
   display: flex;

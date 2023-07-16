@@ -52,11 +52,15 @@ export default function DayItem(props: DayItemProps) {
   );
 }
 
+interface DayProp {
+  $issunday: boolean;
+}
+
 const Dayitem = styled.article<DayProp>`
   display: flex;
   align-items: center;
   ${({ $issunday }) => `
-      ${$issunday ? "color: #FCB3A6" : undefined}
+      ${$issunday && "color: #FCB3A6"}
     `};
   flex-direction: column;
   cursor: pointer;
@@ -81,10 +85,14 @@ const DayText = styled.p<DayTextProps>`
   width: 1.6rem;
   height: 1.6rem;
 
-  ${({ $isnotvalid, $istoday }) => `
-      ${$istoday ? "color: white; background-color: #0DA98E; border-radius: 50%; " : ""}
-      ${$isnotvalid ? "color: #899199" : "#CED4DA"}
-    `};
+  ${({ $istoday }) => `
+    ${$istoday && "color: white; background-color: #0DA98E; border-radius: 50%; "}
+  `};
+
+  ${({ $isnotvalid }) => `
+    ${$isnotvalid ? "color: #899199" : "#CED4DA"}
+  `};
+  
   ${({ theme }) => theme.fonts.caption03};
 `;
 

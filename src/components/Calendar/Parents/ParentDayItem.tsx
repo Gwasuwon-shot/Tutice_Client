@@ -5,7 +5,6 @@ import { CalendarMoreLessonIc } from "../../../assets/index";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
 import { DayItemProps } from "../../../type/calendar/dayItemType";
 
-
 export default function ParentDayItem(props: DayItemProps) {
   const { date, setOpenModal, setSelectedDate, myChildLessons } = props;
 
@@ -52,6 +51,9 @@ export default function ParentDayItem(props: DayItemProps) {
     </>
   );
 }
+interface DayProp {
+  $issunday: boolean;
+}
 
 const Dayitem = styled.article<DayProp>`
   display: flex;
@@ -82,10 +84,13 @@ const DayText = styled.p<DayTextProps>`
   width: 1.6rem;
   height: 1.6rem;
 
-  ${({ $isnotvalid, $istoday }) => `
-      ${$istoday ? "color: white; background-color: #0DA98E; border-radius: 50%; " : ""}
-      ${$isnotvalid ? "color: #899199" : "#CED4DA"}
-    `};
+  ${({ $istoday }) => `
+    ${$istoday && "color: white; background-color: #0DA98E; border-radius: 50%; "}
+  `};
+
+  ${({ $isnotvalid }) => `
+    ${$isnotvalid ? "color: #899199" : "#CED4DA"}
+  `};
   ${({ theme }) => theme.fonts.caption03};
 `;
 

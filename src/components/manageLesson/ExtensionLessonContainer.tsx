@@ -58,7 +58,7 @@ const ContentWrapper = styled.div`
 
   align-items: center;
 
-  width: 27rem;
+  width: 29rem;
 `;
 const DateandCount = styled.div`
   display: flex;

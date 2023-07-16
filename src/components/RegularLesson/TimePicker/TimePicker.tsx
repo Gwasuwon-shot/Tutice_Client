@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import {useRecoilState} from 'recoil';
 
 export default function TimePicker() {
-    
+    // [{'월':['12:00', '13:00']}, ]
     
     // 1. 회차 상태관리
     const [activeSlide, setActiveSlide] = useRecoilState(cycleNumberState);

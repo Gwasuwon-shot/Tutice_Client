@@ -22,7 +22,7 @@ export const dateState = atom({
 
 export const dayState = atom({
   key: 'dayState',
-  default: [['일','월','화','수','목','금','토'][new Date().getDay()]],
+  default: [{dayOfWeek: ['일','월','화','수','목','금','토'][new Date().getDay()], startTime: '', endTime: ''},],
 });
 
 export const timeState = atom({

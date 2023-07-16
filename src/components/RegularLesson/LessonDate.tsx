@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
+import {dayState, openFinishDetailState, openStartDetailState, timeState} from "../../atom/timePicker/timePicker";
+
 import DetailTimePicker from './TimePicker/DetailTimePicker';
 import RoundBottomButton from '../common/RoundBottomButton';
-import {dayState, timeState, openStartDetailState, openFinishDetailState} from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 
@@ -19,14 +20,22 @@ export default function LessonDate() {
     
     const [selectedDays, setSelectedDays] = useRecoilState(dayState);
     
-    function handleDayButton(day){
-        if (selectedDays.includes(day)) {
-            setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
+
+    function handleDayButton(day) {
+        const dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
+        if (dayIndex !== -1) {
+          setSelectedDays((prevSelectedDays) =>
+            prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day)
+          );
         } else {
-            setSelectedDays([...selectedDays, day]);
+          setSelectedDays((prevSelectedDays) => [
+            ...prevSelectedDays,
+            { dayOfWeek: day, startTime: '', endTime: '' },
+          ]);
         }
     }
 
+      
     // check 용
     useEffect(() => {
         console.log(selectedDays);

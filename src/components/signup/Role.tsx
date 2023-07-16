@@ -27,8 +27,6 @@ export default function Role() {
     setStep(2);
   }
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <ProgressBar progress={0} />

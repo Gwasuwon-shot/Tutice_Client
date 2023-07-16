@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { subMonths, addMonths } from "date-fns";
 import YearandMonth from "../components/Calendar/YearandMonth";
 import Dayofweek from "../components/Calendar/Dayofweek";
-import Days from "../components/Calendar/Days";
+import ParentsDays from "../components/Calendar/Parents/ParentsDays";
 
 export default function ParentCalenda() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -20,7 +20,7 @@ export default function ParentCalenda() {
       <CalendarWrapper>
         <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
         <Dayofweek />
-        <Days currentMonth={currentMonth} />
+        <ParentsDays currentMonth={currentMonth} />
       </CalendarWrapper>
     </>
   );

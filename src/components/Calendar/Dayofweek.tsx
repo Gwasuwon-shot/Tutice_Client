@@ -16,12 +16,11 @@ const WeekWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 3.2rem;
 
   width: 28.3rem;
   margin-top: 1.8rem;
   margin-bottom: 0.5rem;
-
-  gap: 3.2rem;
 `;
 
 interface DayWrapperProps {

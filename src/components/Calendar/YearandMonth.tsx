@@ -11,6 +11,7 @@ interface YearandMonthProps {
 
 export default function YearandMonth(props: YearandMonthProps) {
   const { currentMonth, prevMonth, nextMonth } = props;
+
   return (
     <HeaderWrapper>
       <CalendarText>캘린더</CalendarText>

@@ -1,6 +1,6 @@
 export { ReactComponent as RoleCheckSignupIc } from "./icon//RoleCheckSignupIc.svg";
-export { ReactComponent as RoleNoneCheckSignupIc } from "./icon//RoleNoneCheckSignupIc.svg";
-export { ReactComponent as backButtonSignupIc } from "./icon//backButtonSignupIc.svg";
+export { ReactComponent as RoleNoneCheckSignupIc } from "./icon/RoleNoneCheckSignupIc.svg";
+export { ReactComponent as backButtonSignupIc } from "./icon/backButtonSignupIc.svg";
 export { ReactComponent as EditPencilIc } from "./icon/EditPencilIc.svg";
 export { ReactComponent as FourthSwiperFirstTree } from "./icon/FourthSwiperFirstTreeOnBoardingIc.svg";
 export { ReactComponent as FourthSwiperSecondTree } from "./icon/FourthSwiperSecondTreeOnBoardingIc.svg";
@@ -64,3 +64,5 @@ export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomin
 export { ReactComponent as viewingLoginIc } from "./icon/viewingLoginIc.svg";
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as RegularLessonGroupIc} from "./icon/regularLessonGroupIc.svg";
+export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIc.svg";

@@ -1,14 +1,48 @@
 import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
+import { openStartDetailState, openFinishDetailState } from "../../../atom/timePicker/timePicker";
 
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
 
+import {useRecoilState} from 'recoil';
 import styled from 'styled-components';
 
 export default function DetailTimePicker() {
     
+    // 0. 시작시간 상태관리
+    const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
+
+    // 1) 시작 타임피커 완료시
+    function handleConfirmStartTimePicker(){
+        setIsStartPickerOpen(false);
+    }
+
+    // 2) 시작 타임피커 취소시
+    function handleCancleStartTimePicker(){
+        setIsStartPickerOpen(false);
+    }
+
+    // 0-2. 종료시간 상태관리
+    const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
+
+    // 1) 시작 타임피커 완료시
+    function handleConfirmFinishTimePicker(){
+        setIsFinishPickerOpen(false);
+    }
+    
+    // 2) 시작 타임피커 취소시
+    function handleCancelFinishTimePicker(){
+        setIsFinishPickerOpen(false);
+    }
+
+
+
+
+
+
+
     // 1. 오전 오후 관리
     // 1) active slide 값 관리
     
@@ -73,12 +107,20 @@ export default function DetailTimePicker() {
           {MINUTES[index]}
         </SwiperSlide>
     ));
+
+
+
     
     return (
     
         <TimePickerWrapper>
             
             <CancleWrapper>
+                {isStartPickerOpen ? (
+                <CancelButton onClick={handleCancelStartTimePicker}>취소</CancelButton>
+                ) : (
+                <CancelButton onClick={handleCancelFinishTimePicker}>취소</CancelButton>
+                )}
                 <CancleButton> 취소 </CancleButton>
             </CancleWrapper>
 
@@ -133,6 +175,11 @@ export default function DetailTimePicker() {
             </SwiperWrapper>
 
             <ConfirmWrapper>
+                {isStartPickerOpen ? (
+                <ConfirmButton onClick={handleConfirmStartTimePicker}>확인</ConfirmButton>
+                ) : (
+                <ConfirmButton onClick={handleConfirmFinishTimePicker}>확인</ConfirmButton>
+                )}
                 <ConfirmButton> 확인 </ConfirmButton>
             </ConfirmWrapper>
         </TimePickerWrapper>

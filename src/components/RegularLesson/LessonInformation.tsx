@@ -1,22 +1,22 @@
 import {RegularLessonNotebookIc, RegularLessonPencilIc} from '../../assets';
+import { openDatePickerState, openTimePickerState } from "../../atom/timePicker/timePicker";
 
 import React from 'react';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import TimePicker from './TimePicker/TimePicker';
 import {cycleNumberState} from '../../atom/timePicker/timePicker';
-import { openTimePickerState } from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 
 export default function LessonInformation() {
-    
+
+    // 회차 표시 로직
     const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
     
     function handleTimePicker () {
         setIsTimePickerOpen(true);
     }
-    
-    // 선택된 회차 표시 로직
+
     const [activeSlide, setActiveSlide] = useRecoilState(cycleNumberState);
     
     let selectedCycleText;
@@ -24,6 +24,15 @@ export default function LessonInformation() {
         selectedCycleText = "회차를 선택하세요";
     } else {
         selectedCycleText = activeSlide;
+    }
+    
+
+    // 수업일 표시 로직
+
+    const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
+    
+    function handleDatePicker () {
+        setIsDatePickerOpen(true);
     }
     
     return (
@@ -39,7 +48,7 @@ export default function LessonInformation() {
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
-                    <StartDateButton type = "button"> 2023년 7월 3일 </StartDateButton>
+                    <StartDateButton type = "button" onClick={handleDatePicker}> 2023년 7월 3일 </StartDateButton>
                     <RegularLessonPencilIcon />
                 </StartDate>
             </LessonWrapper>

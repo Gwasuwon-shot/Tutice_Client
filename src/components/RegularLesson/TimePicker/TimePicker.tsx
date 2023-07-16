@@ -11,6 +11,7 @@ import {useRecoilState} from 'recoil';
 
 export default function TimePicker() {
     
+    
     // 1. 회차 상태관리
     const [activeSlide, setActiveSlide] = useRecoilState(cycleNumberState);
 
@@ -18,16 +19,16 @@ export default function TimePicker() {
         setActiveSlide(swiper.realIndex + 1);
     };
 
-    // 2. 회차 타임피커 모달 오픈여부 상태관리
+    // 1) 회차 타임피커 모달 오픈여부 상태관리
     const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
     
-    // 3. 회차 타임피커 취소 시
+    // 2) 회차 타임피커 취소 시
     function handleCanCelTimePicker () {
         setIsTimePickerOpen(false);
         setActiveSlide(-1); // 선택이 안된 상태로 변경
     }
 
-    // 4. 회차 타임피커 완료 시
+    // 3) 회차 타임피커 완료 시
 
     function handleConfirmTimePicker () {
         setIsTimePickerOpen(false);

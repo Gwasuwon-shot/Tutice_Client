@@ -5,6 +5,11 @@ export const openTimePickerState = atom<boolean>({
     default: false,
 })
 
+export const openDatePickerState = atom<boolean>({
+    key: 'openDatePickerState',
+    default: false,
+})
+
 export const cycleNumberState = atom<number>({
   key: 'cycleNumberState',
   default: -1,

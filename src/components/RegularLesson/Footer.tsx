@@ -1,11 +1,13 @@
+import { openDatePickerState, openTimePickerState } from "../../atom/timePicker/timePicker";
+
 import TimePicker from '../../components/RegularLesson/TimePicker/TimePicker';
-import { openTimePickerState } from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import {useRecoilState} from 'recoil';
 
 export default function Footer() {
     const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
+    const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
  
     return (
         <>
@@ -13,6 +15,7 @@ export default function Footer() {
             <FooterButton> 저장 </FooterButton>
         </FooterWrapper>
         {isTimePickerOpen && <TimePicker />}
+        {isDatePickerOpen && <TimePicker />}
         </>
     );
 }

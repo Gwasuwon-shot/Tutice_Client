@@ -25,12 +25,14 @@ export default function LessonRecordDetail() {
   return (
     <>
       <BackButton />
+      <LessonInfoIcon />
+
       <LessonRecordHeader>
         <StudentName>{studentName}</StudentName>
         <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color={"#5B6166"} />
         <TeacherName>{teacherName} 선생님</TeacherName>
       </LessonRecordHeader>
-      <LessonInfoIcon />
+
       <SelectMenuWrapper>
         <SelectMenuButton>수업내역</SelectMenuButton>
         <SelectMenuButton>입금내역</SelectMenuButton>
@@ -77,8 +79,8 @@ const LessonInfoIcon = styled(LessonInfoLessonRecordIc)`
   width: 1.9rem;
 
   position: absolute;
-  top: 42.3rem;
-  right: 14.93rem;
+  top: 4.23rem;
+  right: 1.493rem;
 `;
 
 const SelectMenuWrapper = styled.aside`

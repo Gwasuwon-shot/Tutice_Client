@@ -2,6 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import ProgressBar from "../common/ProgressBar";
 import { PROGRESS_TREE_IMG_LIST } from "../../core/common/ProgressTree";
+import TreeProgress from "../common/TreeProgress";
 
 interface RestOfClassesInfoProps {
   count: number;
@@ -37,7 +38,7 @@ export default function RestOfClassesInfo(props: RestOfClassesInfoProps) {
       <ClassStatusInfo>
         {nowCount}회/ 총 {count}회
       </ClassStatusInfo>
-      <ProgressBar progress={percent} />
+      <TreeProgress progress={percent} width={29.2} />
     </RestOfClassesInfoWrapper>
   );
 }
@@ -49,13 +50,12 @@ const RestOfClassesInfoWrapper = styled.main`
   margin-left: 1.4rem;
 
   width: 100%;
+  position: relative;
 
   padding-bottom: 1.5rem;
 `;
 
 const RestOfClassesTitle = styled.h1`
-  margin-bottom: 5.2rem;
-
   ${({ theme }) => theme.fonts.title02};
   color: ${({ theme }) => theme.colors.grey900};
 `;
@@ -69,8 +69,8 @@ const ProgressTreeIcon = styled.img`
 
 const ClassStatusInfo = styled.p`
   position: absolute;
-  right: 1.3rem;
-  bottom: 1.5rem;
+  right: 2.8rem;
+  bottom: 3.2rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey500};

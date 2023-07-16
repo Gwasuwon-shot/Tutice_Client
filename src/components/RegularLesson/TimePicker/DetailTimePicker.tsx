@@ -4,6 +4,7 @@ import 'swiper/components/navigation/navigation.min.css';
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
+import { ampmSlide, hourSlide, minuteSlide } from "../../../atom/timePicker/timePicker";
 import { dayState, openFinishDetailState, openStartDetailState } from "../../../atom/timePicker/timePicker";
 
 import styled from 'styled-components';
@@ -14,7 +15,7 @@ export default function DetailTimePicker() {
     // 1. 오전 오후 관리
     // 1) active slide 값 관리
     
-    const [activeAmPmSlide, setActiveAmPmSlide] = useState(0);
+    const [activeAmPmSlide, setActiveAmPmSlide] = useRecoilState(ampmSlide);
 
     function handleAmPmSlideChange(swiper: SwiperCore) {
         setActiveAmPmSlide(swiper.realIndex);
@@ -36,7 +37,7 @@ export default function DetailTimePicker() {
     // 2. 시간 관리
     // 1) active slide 값 관리
     
-    const [activeHourSlide, setActiveHourSlide] = useState(0);
+    const [activeHourSlide, setActiveHourSlide] = useRecoilState(hourSlide);
 
     function handleHourSlideChange(swiper: SwiperCore) {
         setActiveHourSlide(swiper.realIndex + 1);
@@ -58,7 +59,7 @@ export default function DetailTimePicker() {
     // 3. 분 관리
     // 1) active slide 값 관리
     const MINUTES = ["00", "30"];
-    const [activeMinuteSlide, setActiveMinuteSlide] = useState("00");
+    const [activeMinuteSlide, setActiveMinuteSlide] = useRecoilState(minuteSlide);
     
     function handleMinuteSlideChange(swiper: SwiperCore) {
         setActiveMinuteSlide(MINUTES[swiper.realIndex]);
@@ -108,6 +109,17 @@ export default function DetailTimePicker() {
 
     // 1) 시작 타임피커 완료시
     function handleConfirmFinishTimePicker(){
+        const updatedSelectedDays = selectedDays.map((selectedDay) => {
+            if (selectedDay.endTime === '') {
+              // 종료 시간이 비어있는 경우
+              const endTime =
+                activeAmPmSlide === 0 ? `${activeHourSlide}:${activeMinuteSlide}` : `${activeHourSlide+12}:${activeMinuteSlide}`;
+              return { ...selectedDay, endTime };
+            }
+            return selectedDay;
+        });
+        
+        setSelectedDays(updatedSelectedDays);
         setIsFinishPickerOpen(false);
     }
 

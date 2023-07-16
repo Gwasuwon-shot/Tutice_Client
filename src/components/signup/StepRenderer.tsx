@@ -4,7 +4,7 @@ import NameEmail from "./NameEmail";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { stepNum } from "../../atom/signup/signup";
-import AgreeChecking from "./AgreeChecking";
+import PasswordAgreeChecking from "./PasswordAgreeChecking";
 
 export default function StepRenderer() {
   const step = useRecoilValue(stepNum);
@@ -18,6 +18,6 @@ export default function StepRenderer() {
     case 2:
       return <NameEmail />;
     case 3:
-      return <AgreeChecking />;
+      return <PasswordAgreeChecking />;
   }
 }

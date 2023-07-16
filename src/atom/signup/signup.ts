@@ -3,7 +3,7 @@ import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 export const stepNum = atom<number>({
   key: "stepNum",
-  default: 3,
+  default: 1,
 });
 
 export const newUserData = atom<newUserDataTypes>({

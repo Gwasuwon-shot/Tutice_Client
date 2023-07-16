@@ -14,7 +14,7 @@ import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import AgreeChecking from "./AgreeChecking";
 
-export default function PwTos() {
+export default function PasswordAgreeChecking() {
   const newUser = useRecoilValue(newUserData);
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");

@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { TuticeWithTextCommonIc } from "../../assets";
+import SignupTitleLayout from "../signup/SignupTitleLayout";
 
 export default function AfterSignup() {
   const MAIN_TEXT = `이은수 선생님 환영합니다! \n 수업 나무 관리를 통해 \n 과외 관리를 시작해보세요. `;
@@ -8,6 +9,7 @@ export default function AfterSignup() {
   return (
     <Container>
       <TuticeWithTextCommonIcon />
+      <SignupTitleLayout MainText={MAIN_TEXT} />
       <SubText>{SUN_TEXT}</SubText>
     </Container>
   );
@@ -26,6 +28,8 @@ const TuticeWithTextCommonIcon = styled(TuticeWithTextCommonIc)`
 `;
 
 const SubText = styled.p`
+  margin-top: 2.2rem;
+
   color: ${({ theme }) => theme.colors.grey400};
   ${({ theme }) => theme.fonts.body07};
 `;

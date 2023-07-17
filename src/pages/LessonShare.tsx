@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { CopylessonShareIc, KakaoLessonShareIc, ShareOthersLessonShareIc } from "../assets";
+import { CopylessonShareIc, ShareOthersLessonShareIc } from "../assets";
 import BottomButton from "../components/common/BottomButton";
+import { KakaoShare } from "../components/lessonShare/KakaoShare";
 
 export default function LessonShare() {
   const navgiate = useNavigate();
@@ -41,7 +42,7 @@ export default function LessonShare() {
       </LinkBox>
       <ButtonWrapper>
         <ShareOthersLessonShareIc onClick={handleShareOtherWays} />
-        <KakaoLessonShareIc />
+        <KakaoShare url="https://tuticetutice.com/kdfkdf11" />
       </ButtonWrapper>
       <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
         다음

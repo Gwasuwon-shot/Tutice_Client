@@ -69,3 +69,12 @@ export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextC
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as RegularLessonGroupIc } from "./icon/regularLessonGroupIc.svg";
+export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIc.svg";
+export { ReactComponent as nextArrowWelcomeIc } from "./icon/nextArrowWelcomeIc.svg";
+export { ReactComponent as bellWelcomeIc } from "./icon/bellWelcomeIc.svg";
+export { ReactComponent as copyAccountNumberLessonInfoIc } from "./icon/copyAccountNumberLessonInfoIc.svg";
+export { ReactComponent as LessonInfoLessonRecordIc } from "./icon/LessonInfoLessonRecordIc.svg";
+export { ReactComponent as EmptyDepositParentsLessonRecordIc } from "./icon/emptyDepositParentsLessonRecordIc.svg";
+export { ReactComponent as RegularLessonGroupIc } from "./icon/regularLessonGroupIc.svg";
+export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIC.svg";

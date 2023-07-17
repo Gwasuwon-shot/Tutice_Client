@@ -13,11 +13,14 @@ export default function DepositRecordItem(props: DepositRecordItemProps) {
   const appleImgSrc = status ? DEPOSIT_RECORD_IMG_LIST[1] : DEPOSIT_RECORD_IMG_LIST[0];
 
   const depositAmountToRender = amount.toLocaleString("ko-KR");
+  let monthToRender = 0;
+  let dayToRender = "";
 
-  const dateObject = new Date(date);
-
-  const month = dateObject.getMonth() + 1; // 월 추출 (0부터 시작하므로 +1)
-  const day = dateObject.getDate(); // 일 추출
+  if (typeof date === "string") {
+    const dateList = date.split("-");
+    monthToRender = parseInt(dateList[1]);
+    dayToRender = dateList[2];
+  }
 
   return (
     <DepositRecordWrapper>
@@ -26,7 +29,7 @@ export default function DepositRecordItem(props: DepositRecordItemProps) {
         <DepositCount>{idx}번째 열매</DepositCount>
         {date && (
           <DepositDate>
-            {month}월 {day}일
+            {monthToRender}월 {dayToRender}일
           </DepositDate>
         )}
       </DepositInfoWrapper>

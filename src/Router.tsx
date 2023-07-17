@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import EditShcedule from "./pages/EditSchedule";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
+import EditShcedule from "./pages/EditSchedule";
 import Home from "./pages/Home";
+import LessonDetail from "./pages/LessonDetail";
+import LessonInfo from "./pages/LessonInfo";
 import LessonShare from "./pages/LessonShare";
 import Login from "./pages/Login";
 import ManageLessonDetail from "./pages/ManageLessonDetail";
@@ -18,13 +20,7 @@ import RegisterPayment from "./pages/RegisterPayment";
 import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
-import OnBoarding from "./pages/OnBoarding";
-import LessonDetail from "./pages/LessonDetail";
 import TimePickerPage from "./pages/TimePickerPage";
-import LessonDetail from "./pages/LessonDetail";
-import Mypage from "./pages/Mypage";
-import NoAttendanceCheck from "./pages/NoAttendanceCheck";
-import LessonInfo from "./pages/LessonInfo";
 
 export default function Router() {
   return (
@@ -47,7 +43,7 @@ export default function Router() {
         <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/time-picker" element={<TimePickerPage />} />
         <Route path="/change-schedule" element={<ChangeSchedule />} />
-        <Route path="/change-lessonschedule" element={<ChangeLessonShcedule />} />
+        <Route path="/change-lessonschedule" element={<ChangeSchedule />} />
         <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />

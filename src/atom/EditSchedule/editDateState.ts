@@ -1,10 +1,10 @@
 import { atom } from "recoil";
 
 interface editDateStateTypes {
-  year: Date;
-  month: Date;
-  date: Date;
-  dayOfWeek: Date;
+  year: number;
+  month: number;
+  date: number;
+  dayOfWeek?: number;
 }
 
 export const editDateState = atom<editDateStateTypes>({

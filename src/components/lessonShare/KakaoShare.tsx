@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { styled } from "styled-components";
 import { KakaoLessonShareIc } from "../../assets";
 
 interface KakaoShareProp {
@@ -64,7 +65,12 @@ export function KakaoShare(props: KakaoShareProp) {
 
   return (
     <button id="kakao-link-btn" onClick={handleClickKakao}>
-      <KakaoLessonShareIc />
+      <KakaoLessonShareIcon />
     </button>
   );
 }
+
+const KakaoLessonShareIcon = styled(KakaoLessonShareIc)`
+  width: 14.2rem;
+  height: 6.4rem;
+`;

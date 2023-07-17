@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
+import { useEffect, useState } from "react";
+import { RegularLessonClockIc } from "../../assets";
 import { dayState, focusDayState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
-import DetailTimePicker from "../RegularLesson/TimePicker/DetailTimePicker";
 
-import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 import BottomButton from "../common/BottomButton";
-
 
 export default function EditPageTime() {
   const [selectedDays, setSelectedDays] = useRecoilState(dayState);
@@ -112,7 +110,7 @@ export default function EditPageTime() {
       </TimeWrapper>
 
       <ButtonWrapper>
-        <BottomButton type="button" disabled={true} $isActive={isActive} onClick={handleEditLesson}>
+        <BottomButton type="button" disabled={true} isActive={isActive} onClick={handleEditLesson}>
           저장
         </BottomButton>
       </ButtonWrapper>

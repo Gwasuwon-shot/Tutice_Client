@@ -5,8 +5,10 @@ interface KakaoShareProp {
   url: string;
 }
 
-interface Window {
-  Kakao: any;
+declare global {
+  interface Window {
+    Kakao: any;
+  }
 }
 
 export function KakaoShare(props: KakaoShareProp) {

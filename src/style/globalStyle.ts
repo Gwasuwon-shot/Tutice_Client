@@ -119,7 +119,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     //iPhone XR & Galaxy S20 Ultra & A51/71
     @media (min-width: 410px) and (max-width:450px){ 
-      font-size: 80%;
+      font-size: 83%;
     }
     //iPhone 12 Pro
     @media (min-width: 386px) and (max-width:409px){ 

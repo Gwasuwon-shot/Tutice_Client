@@ -7,28 +7,20 @@ import TimePicker from "../RegularLesson/TimePicker/TimePicker";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
-import { selectedDateAtom } from "../../atom/EditSchedule/selectedDateAtom";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 
 export default function LessonInformation() {
-  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateAtom);
-  const willEditDate = new Date(selectedDate);
+  const [selectedDate, setSelectedDate] = useRecoilState(editDateState);
+  const { year, month, dayOfWeek, date } = useRecoilValue(editDateState);
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-
-  console.log(new Date(willEditDate).getFullYear());
-  // 수업일 표시 로직
-  const year = willEditDate.getFullYear(); 
-  const month = willEditDate.getMonth() + 1; 
-  const date = willEditDate.getDate();
-  const dayOfWeek = willEditDate.getDay();
   const dayOfWeekInKorean = daysOfWeek[dayOfWeek];
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
+  const [activeDateSlide, setActiveDateSlide] = useRecoilState(editDateState);
 
   function handleDatePicker() {
     setIsDatePickerOpen(true);
   }
-  const [activeDateSlide, setActiveDateSlide] = useRecoilState(editDateState);
 
   return (
     <LessonInformationWrapper>

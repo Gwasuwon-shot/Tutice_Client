@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { CopylessonShareIc, KakaoLessonShareIc, ShareOthersLessonShareIc } from "../assets";
 import BottomButton from "../components/common/BottomButton";
 
 export default function LessonShare() {
+  const navgiate = useNavigate();
+
+  function handleMoveToHome() {
+    navgiate("/");
+  }
   return (
     <>
       <p>수업 나무 생성 완료!</p>

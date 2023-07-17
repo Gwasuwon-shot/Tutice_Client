@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { ko } from "date-fns/locale";
 import { format, isSameDay } from "date-fns";
-import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import { ko } from "date-fns/locale";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
-import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
 
 import { EditPencilIc, removeTrashCan } from "../../../assets";
 import { modalType } from "../../../type/calendar/modalType";
@@ -38,7 +38,7 @@ export default function ChangeModal(props: modalType) {
       <ToastModal>
         <ModalContentWrapper>
           <ModalHeaderWrapper>
-            <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+            {selectedDate && <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>}
             {isEdit ? (
               <ModalButtonWrapper>
                 <ModalButton onClick={handleCloseButton}>완료</ModalButton>
@@ -50,38 +50,38 @@ export default function ChangeModal(props: modalType) {
               </ModalButtonWrapper>
             )}
           </ModalHeaderWrapper>
-          {scheduleList
-            .find((item) => isSameDay(new Date(item.date), selectedDate))
-            ?.dailyScheduleList.map((lesson) => {
-              const { schedule } = lesson;
-              const { idx, subject, studentName, startTime, endTime } = schedule;
+          {selectedDate &&
+            scheduleList
+              .find((item) => isSameDay(new Date(item.date), selectedDate))
+              ?.dailyScheduleList.map((lesson) => {
+                const { schedule } = lesson;
+                const { idx, subject, studentName, startTime, endTime } = schedule;
 
-              return (
-                <ScheduleWrapper key={idx}>
-                  <ScheduleContainer>
-                    <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
-                    <ModalTime>
-                      {startTime} - {endTime}
-                    </ModalTime>
-                    <ModalName>{studentName}</ModalName>
-                    <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 11]}>{subject}</ModalSubject>
-                  </ScheduleContainer>
+                return (
+                  <ScheduleWrapper key={idx}>
+                    <ScheduleContainer>
+                      <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+                      <ModalTime>
+                        {startTime} - {endTime}
+                      </ModalTime>
+                      <ModalName>{studentName}</ModalName>
+                      <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 11]}>{subject}</ModalSubject>
+                    </ScheduleContainer>
 
-                  {isEdit ? (
-                    <ScheduleEditWrapper>
-                      <EditScheduleButton onClick={moveClickEditPage} />
-                      <RemoveSchedule />
-                    </ScheduleEditWrapper>
-                  ) : undefined}
-                </ScheduleWrapper>
-              );
-            })}
+                    {isEdit ? (
+                      <ScheduleEditWrapper>
+                        <EditScheduleButton onClick={moveClickEditPage} />
+                        <RemoveSchedule />
+                      </ScheduleEditWrapper>
+                    ) : undefined}
+                  </ScheduleWrapper>
+                );
+              })}
         </ModalContentWrapper>
       </ToastModal>
     </>
   );
 }
-
 
 const ModalHeaderWrapper = styled.div`
   display: flex;

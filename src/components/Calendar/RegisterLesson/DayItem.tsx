@@ -1,5 +1,4 @@
 import { format, isSunday, isToday } from "date-fns";
-import React from "react";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
@@ -24,7 +23,7 @@ export default function DayItem(props: DayItemProps) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
-          {myLessons && myLessonLength >= 4
+          {myLessons && myLessonLength && myLessonLength >= 4
             ? myLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
@@ -45,7 +44,7 @@ export default function DayItem(props: DayItemProps) {
                   </ScheduleWrapper>
                 );
               })}
-          {myLessons && myLessonLength >= 4 && <MoreLessonIcon />}
+          {myLessons && myLessonLength && myLessonLength >= 4 && <MoreLessonIcon />}
         </LessonWrapper>
       </Dayitem>
     </>
@@ -92,7 +91,7 @@ const DayText = styled.p<DayTextProps>`
   ${({ $isnotvalid }) => `
     ${$isnotvalid ? "color: #899199" : "#CED4DA"}
   `};
-  
+
   ${({ theme }) => theme.fonts.caption03};
 `;
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { styled } from "styled-components";
+import { NextMonthArrowButton } from "../../assets";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 import StudentColorBox from "../common/StudentColorBox";
 import SubjectLabel from "../common/SubjectLabel";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
-import { NextMonthArrowButton } from "../../assets";
 
 interface ExtensionLessonContainerProps {
   lesson: {
@@ -13,7 +13,7 @@ interface ExtensionLessonContainerProps {
     count: number;
   };
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedLesson: React.Dispatch<React.SetStateAction<lesson | null>>;
+  setSelectedLesson: React.Dispatch<React.SetStateAction<undefined>>;
   endScheduleDate: string;
 }
 

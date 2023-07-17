@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 import { styled } from "styled-components";
 
 interface BottomButtonProps {
@@ -12,7 +12,7 @@ interface BottomButtonProps {
 export default function BottomButton(props: BottomButtonProps) {
   const { children, isActive, onClick, disabled, type } = props;
   return (
-    <BottomContainer type={type} disabled={disabled} $isActive={isActive} onClick={onClick}>
+    <BottomContainer disabled={disabled} $isActive={isActive} onClick={onClick}>
       <BottomText> {children} </BottomText>
     </BottomContainer>
   );

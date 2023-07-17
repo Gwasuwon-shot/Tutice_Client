@@ -1,4 +1,3 @@
-import React from "react";
 import { format, isSunday, isToday } from "date-fns";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
@@ -24,7 +23,7 @@ export default function DayItemchange(props: DayItemProps) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
-          {myLessons && myLessonLength >= 4
+          {myLessons && myLessonLength && myLessonLength >= 4
             ? myLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
@@ -45,7 +44,7 @@ export default function DayItemchange(props: DayItemProps) {
                   </ScheduleWrapper>
                 );
               })}
-          {myLessons && myLessonLength >= 4 && <MoreLessonIcon />}
+          {myLessons && myLessonLength && myLessonLength >= 4 && <MoreLessonIcon />}
         </LessonWrapper>
       </Dayitem>
     </>

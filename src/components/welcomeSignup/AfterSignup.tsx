@@ -10,9 +10,8 @@ export default function AfterSignup() {
 }
 
 const TuticeWithTextCommonIcon = styled(TuticeWithTextCommonIc)`
-  width: 16.6rem;
-  height: 5.5rem;
-  margin-bottom: 2.8rem;
-  margin-left: -1.4rem;
+  width: 10rem;
+  height: 3.3rem;
+  margin-bottom: 1.3rem;
   flex-shrink: 0;
 `;

@@ -1,15 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { LatestScheduleDayType, UpcomingClassScheduleType } from "../../type/teacherHome/upcomingClassScheduleType";
+import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
 import UpcomingClass from "./UpcomingClass";
 
-interface UpcomingClassBoardProps {
-  latestScheduleDay: LatestScheduleDayType;
-  latestScheduleList: UpcomingClassScheduleType[];
-}
-
-export default function UpcomingClassBoard(props: UpcomingClassBoardProps) {
-  const { latestScheduleDay, latestScheduleList } = props;
+export default function UpcomingClassBoard() {
+  const { latestScheduleDay, latestScheduleList } = useGetLatestScheduleByTeacher();
   const { date, dayOfWeek } = latestScheduleDay;
   const [upcomingClassDate, setUpcomingClassDate] = useState(
     date.split("-")[0] + "년 " + date.split("-")[1] + "월 " + date.split("-")[2] + "일 ",

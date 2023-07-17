@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import TeacherFooter from "../components/common/TeacherFooter";
 import MainLessons from "../components/manageLesson/MainLessons";
+import ExtensionQuestion from "../components/manageLesson/ExtensionQuestion";
 
 export default function ManageLessonMain() {
   return (
     <>
       <MainLessonsWrapper>
         <MainLessonsHeader>수업관리</MainLessonsHeader>
+        <ExtensionQuestion />
         <MainLessons />
       </MainLessonsWrapper>
       <TeacherFooter />

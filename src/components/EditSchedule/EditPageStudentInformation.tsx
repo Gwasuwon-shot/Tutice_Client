@@ -1,29 +1,28 @@
 import { DEEFAULT_STUDENT_COLOR, STUDENT_COLOR } from "../../core/common/studentColor";
 import { studentNameSelector, subjectNameSelector } from "../../atom/common/datePicker";
 
-import React from 'react';
-import {RegularLessonStudentIc} from '../../assets';
-import SubjectLabel from '../common/SubjectLabel';
-import styled from 'styled-components';
-import {useRecoilValue} from 'recoil';
+import React from "react";
+import { RegularLessonStudentIc } from "../../assets";
+import SubjectLabel from "../common/SubjectLabel";
+import styled from "styled-components";
+import { useRecoilValue } from "recoil";
 
 export default function StudentInformation() {
+  const studentName = useRecoilValue(studentNameSelector);
+  const subjectName = useRecoilValue(subjectNameSelector);
 
-    const studentName = useRecoilValue(studentNameSelector);
-    const subjectName = useRecoilValue(subjectNameSelector);
-    
-    return (
-        <StudentInformationWrapper >
-            <IconWrapper>
-                <RegularLessonStudentIcon />
-                <SectionName> 학생정보 </SectionName>
-            </IconWrapper>
-            <StudentWrapper>
-                <StudentName> {studentName} </StudentName>
-                <SubjectLabel subject={subjectName} backgroundColor={DEEFAULT_STUDENT_COLOR} color="#5B6166" />
-            </StudentWrapper>
-        </StudentInformationWrapper>
-    );
+  return (
+    <StudentInformationWrapper>
+      <IconWrapper>
+        <RegularLessonStudentIcon />
+        <SectionName> 학생정보 </SectionName>
+      </IconWrapper>
+      <StudentWrapper>
+        <StudentName> {studentName} </StudentName>
+        <SubjectLabel subject={subjectName} backgroundColor={DEEFAULT_STUDENT_COLOR} color="#5B6166" />
+      </StudentWrapper>
+    </StudentInformationWrapper>
+  );
 }
 
 const StudentInformationWrapper = styled.section`

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import ChangeLessonShcedule from "./pages/ChangeLessonShcedule";
+import EditShcedule from "./pages/EditSchedule";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import Home from "./pages/Home";
@@ -47,6 +47,7 @@ export default function Router() {
         <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
+        <Route path="/edit-lessonschedule" element={<EditShcedule />} />
       </Routes>
     </BrowserRouter>
   );

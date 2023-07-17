@@ -35,4 +35,5 @@ const MainText = styled.p`
 
 const SubText = styled.p`
   color: ${({ theme }) => theme.colors.grey400};
+  ${({ theme }) => theme.fonts.body07};
 `;

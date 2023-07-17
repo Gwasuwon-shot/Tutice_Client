@@ -6,13 +6,22 @@ import { nextArrowWelcomeIc } from "../../assets";
 
 export default function WelcomeSignup() {
   const [isWelcome, setIsWelcome] = useState(true);
+
+  function handleToNextStep() {
+    setIsWelcome(false);
+  }
   return (
     <>
       <Container>
         {isWelcome ? <AfterSignup /> : <AlertSignup />}
         <ButtonWrapper>
-          <WelcomeButton>{isWelcome ? "수업 나무 생성" : "할래요"!}</WelcomeButton>
-          <nextArrowWelcomeIcon />
+          <WelcomeButton type="button" onClick={handleToNextStep}>
+            {isWelcome ? "수업 나무 생성" : "할래요"!}
+          </WelcomeButton>
+          <PassButton type="button">
+            건너뛰기
+            <NextArrowWelcomeIcon />
+          </PassButton>
         </ButtonWrapper>
       </Container>
     </>
@@ -20,19 +29,24 @@ export default function WelcomeSignup() {
 }
 
 const Container = styled.div`
-  margin-left: 1.8rem;
+  display: flex;
+  justify-content: center;
 
   white-space: pre-line;
 `;
 
-const ButtonWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+`;
 
 const WelcomeButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  bottom: 0;
 
   width: 29.2rem;
   height: 4.2rem;
@@ -44,7 +58,19 @@ const WelcomeButton = styled.button`
   border-radius: 8px;
 `;
 
-const nextArrowWelcomeIcon = styled(nextArrowWelcomeIc)`
-  width: 1.1rem;
+const PassButton = styled.button`
+  display: flex;
+  align-items: center;
+
+  color: ${({ theme }) => theme.colors.grey500};
+
+  ${({ theme }) => theme.fonts.body06};
+  margin-top: 1.9rem;
+  margin-bottom: 3.5rem;
+`;
+
+const NextArrowWelcomeIcon = styled(nextArrowWelcomeIc)`
+  width: 1.1em;
   height: 1.1rem;
+  margin-left: 0.8rem;
 `;

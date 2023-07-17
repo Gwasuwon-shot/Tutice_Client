@@ -52,7 +52,7 @@ export default function LessonShare() {
         <p>{URL}</p>
       </LinkBox>
       <ButtonWrapper>
-        <ShareOthersLessonShareIc onClick={handleShareOtherWays} />
+        <ShareOthersLessonShareIcon onClick={handleShareOtherWays} />
         <KakaoShare url={URL} />
       </ButtonWrapper>
       <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
@@ -115,4 +115,8 @@ const ButtonWrapper = styled.section`
 
   justify-content: space-between;
   margin-top: 6.6rem;
+`;
+
+const ShareOthersLessonShareIcon = styled(ShareOthersLessonShareIc)`
+  width: 14.2rem;
 `;

@@ -16,7 +16,7 @@ interface monthCalenderProps {
   day: string;
 }
 
-export default function DatePicker() {
+export default function EditDatePicker() {
   const monthCalender: monthCalenderProps[] = [];
   const WEEKDAY: { [key: number]: string } = { 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" };
 
@@ -97,6 +97,7 @@ export default function DatePicker() {
   function handleConfirmDatePicker() {
     setIsDatePickerOpen(false);
     console.log(activeSlide);
+    console.log("here");
   }
 
   // check 용

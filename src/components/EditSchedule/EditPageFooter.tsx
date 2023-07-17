@@ -4,12 +4,13 @@ import {
   openStartDetailState,
   openFinishDetailState,
 } from "../../atom/timePicker/timePicker";
-import DatePicker from "../../components/RegularLesson/TimePicker/DatePicker";
 import DetailTimePicker from "../../components/RegularLesson/TimePicker/DetailTimePicker";
 import TimePicker from "../../components/RegularLesson/TimePicker/TimePicker";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import EditDatePicker from "./EditDatePicker";
+import EditDetailTimePicker from "./EditTimePicker";
 
 export default function EditPageFooter() {
   const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
@@ -22,9 +23,8 @@ export default function EditPageFooter() {
       <FooterWrapper>
         <FooterButton> 저장 </FooterButton>
       </FooterWrapper>
-      {isTimePickerOpen && <TimePicker />}
-      {isDatePickerOpen && <DatePicker />}
-      {(isStartPickerOpen || isFinishPickerOpen) && <DetailTimePicker />}
+      {isDatePickerOpen && <EditDatePicker />}
+      {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && <EditDetailTimePicker />}
     </>
   );
 }

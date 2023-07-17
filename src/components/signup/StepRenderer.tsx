@@ -15,8 +15,7 @@ export default function StepRenderer() {
       navigate(-1);
       break;
     case 1:
-      return <WelcomeSignup />;
-    // return <Role />;
+      return <Role />;
     case 2:
       return <NameEmail />;
     case 3:

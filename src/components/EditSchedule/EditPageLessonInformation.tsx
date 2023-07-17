@@ -1,10 +1,39 @@
 import { RegularLessonNotebookIc, RegularLessonPencilIc } from "../../assets";
+import { cycleNumberState, dateState } from "../../atom/timePicker/timePicker";
+import { openDatePickerState, openTimePickerState } from "../../atom/timePicker/timePicker";
 
 import React from "react";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import TimePicker from "../RegularLesson/TimePicker/TimePicker";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
-export default function EidtPageLessonInformation() {
+export default function LessonInformation() {
+  // 회차 표시 로직
+  const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
+
+  function handleTimePicker() {
+    setIsTimePickerOpen(true);
+  }
+
+  const [activeCycleSlide, setActiveCycleSlide] = useRecoilState(cycleNumberState);
+
+  let selectedCycleText;
+  if (activeCycleSlide === -1) {
+    selectedCycleText = "회차를 선택하세요";
+  } else {
+    selectedCycleText = activeCycleSlide;
+  }
+
+  // 수업일 표시 로직
+
+  const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
+
+  function handleDatePicker() {
+    setIsDatePickerOpen(true);
+  }
+  const [activeDateSlide, setActiveDateSlide] = useRecoilState(dateState);
+
   return (
     <LessonInformationWrapper>
       <IconWrapper>
@@ -12,15 +41,14 @@ export default function EidtPageLessonInformation() {
         <SectionName> 수업정보 </SectionName>
       </IconWrapper>
       <LessonWrapper>
-        <Turn>
-          <TurnName> 회차 </TurnName>
-          <TurnButton type="submit"> 회차를 선택하세요 </TurnButton>
-        </Turn>
-        <StartDate>
-          <StartDateName> 첫 수업일 </StartDateName>
-          <StartDateButton type="submit"> 2023년 7월 3일 </StartDateButton>
+        <Turn></Turn>
+        <LessonDate>
+          <LessonDateName> 수업일 </LessonDateName>
+          <LessonDateEditButton type="button" onClick={handleDatePicker}>
+            {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 요일
+          </LessonDateEditButton>
           <RegularLessonPencilIcon />
-        </StartDate>
+        </LessonDate>
       </LessonWrapper>
     </LessonInformationWrapper>
   );
@@ -85,10 +113,18 @@ const TurnButton = styled.button`
   padding: 0;
 `;
 
-const StartDate = styled.div`
+const LessonDate = styled.div`
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 28.8rem;
+  height: 3.6rem;
+
+  background-color: ${({ theme }) => theme.colors.grey50};
+  border-radius: 6px;
 `;
-const StartDateName = styled.h2`
+const LessonDateName = styled.h2`
   display: flex;
   align-items: center;
 
@@ -97,7 +133,7 @@ const StartDateName = styled.h2`
   ${({ theme }) => theme.fonts.body04};
   color: ${({ theme }) => theme.colors.grey400};
 `;
-const StartDateButton = styled.button`
+const LessonDateEditButton = styled.button`
   padding: 0;
 
   ${({ theme }) => theme.fonts.body02};
@@ -105,5 +141,6 @@ const StartDateButton = styled.button`
 `;
 
 const RegularLessonPencilIcon = styled(RegularLessonPencilIc)`
-  margin-left: 1.6rem;
+  width: 1.6rem;
+  height: 1.6rem;
 `;

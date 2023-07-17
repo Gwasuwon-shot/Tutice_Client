@@ -41,7 +41,7 @@ export default function Router() {
         <Route path="/change-schedule" element={<ChangeSchedule />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
-        <Route path="/change-lessonschedule" element={<EditShcedule />} />
+        <Route path="/edit-lessonschedule" element={<EditShcedule />} />
       </Routes>
     </BrowserRouter>
   );

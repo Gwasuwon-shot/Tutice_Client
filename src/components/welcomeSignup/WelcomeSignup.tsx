@@ -8,7 +8,9 @@ export default function WelcomeSignup() {
   return (
     <Container>
       {isWelcome ? <AfterSignup /> : <AlertSignup />}
-      <WelcomeButton>{isWelcome ? "수업 나무 생성" : "할래요"!}</WelcomeButton>
+      <ButtonWrapper>
+        <WelcomeButton>{isWelcome ? "수업 나무 생성" : "할래요"!}</WelcomeButton>
+      </ButtonWrapper>
     </Container>
   );
 }
@@ -17,6 +19,11 @@ const Container = styled.div`
   margin-left: 1.8rem;
 
   white-space: pre-line;
+`;
+
+const ButtonWrapper = styled.div`
+  position: sticky;
+  bottom: 0;
 `;
 
 const WelcomeButton = styled.button`

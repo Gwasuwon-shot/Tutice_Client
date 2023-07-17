@@ -137,7 +137,7 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 70%;
     }
     @media (min-width:331px) and (max-width: 361px){
-      font-size: 65%;
+      font-size: 70%;
    
     }
      //Galaxy S9+

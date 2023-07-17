@@ -72,4 +72,5 @@ export function KakaoShare(props: KakaoShareProp) {
 
 const KakaoLessonShareIcon = styled(KakaoLessonShareIc)`
   width: 14.2rem;
+  height: 6.4rem;
 `;

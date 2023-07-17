@@ -119,4 +119,5 @@ const ButtonWrapper = styled.section`
 
 const ShareOthersLessonShareIcon = styled(ShareOthersLessonShareIc)`
   width: 14.2rem;
+  height: 6.4rem;
 `;

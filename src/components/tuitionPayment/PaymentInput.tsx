@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FocusEvent } from 'react';
-import { accountNumber, bankName, moneyAmount, payingPersonName } from "../../atom/tuitionPayment/tuitionPayment";
+import { RegisterLessonInputIc, TuitionPaymentRadioButtonCheckedIc, TuitionPaymentRadioButtonNotCheckedIc } from '../../assets';
+import { accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder } from "../../atom/tuitionPayment/tuitionPayment";
 import { useEffect, useState } from "react";
 
-import { RegisterLessonInputIc } from '../../assets';
 import styled from 'styled-components';
 import { useRecoilState } from "recoil";
 
@@ -19,7 +19,7 @@ interface BankProp {
 }
 
 interface MoneyProp {
-    moenyFocused : boolean;
+    moneyFocused : boolean;
 }
 
 export default function PaymentInput() {
@@ -90,7 +90,17 @@ export default function PaymentInput() {
         setMoney(event.target.value);
     };
 
+    // 5. checkbox
+    const [order, setOrder] = useRecoilState<string>(paymentOrder); 
 
+    const handleFirstChange = () => {
+        setOrder("선불");
+    };
+
+    const handleLastChange = () => {
+        setOrder("후불");
+    }
+    
     return (
         
     <InputWrapper>
@@ -146,6 +156,20 @@ export default function PaymentInput() {
             />
             {isMoneyFocused && <RegisterLessonInputIcon/>}
         </MoneyInputSection>
+
+        <CheckboxWrapper>
+            <CheckboxHeader> 입금 방식</CheckboxHeader>
+            <CheckboxLabel>
+                <CheckboxInput type ="checkbox" checked = {order} onChange = {handleFirstChange} />
+                {order === "선불" ? <CheckboxIcon as = {TuitionPaymentRadioButtonCheckedIc} /> : <CheckboxIcon as = {TuitionPaymentRadioButtonNotCheckedIc} /> }
+                <CheckboxP> 선불 </CheckboxP>
+            </CheckboxLabel>
+            <CheckboxLabel>
+                <CheckboxInput type ="checkbox" checked = {order} onChange = {handleLastChange} />
+                {order === "후불" ? <CheckboxIcon as = {TuitionPaymentRadioButtonCheckedIc} /> : <CheckboxIcon as = {TuitionPaymentRadioButtonNotCheckedIc} /> }
+                <CheckboxP> 후불 </CheckboxP>
+            </CheckboxLabel>
+        </CheckboxWrapper>
     </InputWrapper>
     );
 }
@@ -276,4 +300,37 @@ const RegisterLessonInputIcon = styled(RegisterLessonInputIc)`
     position: absolute;    
     bottom: 0.7rem;
     right: 1.1rem;
+`
+
+const CheckboxWrapper = styled.section`
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    
+    width: 29.2rem;
+    margin-top: 1.7rem;
+`
+
+const CheckboxHeader = styled.h1`
+    ${({ theme }) => theme.fonts.title02};
+    color: ${({ theme }) => theme.colors.grey900};
+`
+
+const CheckboxLabel = styled.label`
+    display: flex;
+    cursor: pointer;
+`
+
+const CheckboxInput = styled.input`
+    appearance: none;
+`
+const CheckboxIcon = styled.svg`
+    width: 2rem;
+    height: 2rem;                  
+    margin-right: 2rem;
+`;
+
+const CheckboxP = styled.p`
+    ${({ theme }) => theme.fonts.title03};
+    color: ${({ theme }) => theme.colors.grey900};
 `

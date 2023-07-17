@@ -12,14 +12,14 @@ import { editSchedule } from "../../../atom/EditSchedule/editSchedule";
 import { EditPencilIc, removeTrashCan } from "../../../assets";
 import { modalType } from "../../../type/calendar/modalType";
 import { useRecoilState } from "recoil";
-import { selectedDateAtom } from "../../../atom/EditSchedule/selectedDateAtom";
+import { editDateState } from "../../../atom/EditSchedule/editDateState";
 
 export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal } = props;
   const { scheduleList } = useGetTeacherSchedule();
   const navigate = useNavigate();
   const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
-  const [willEditDate, setWillEditDate] = useRecoilState(selectedDateAtom);
+  const [willEditDate, setWillEditDate] = useRecoilState(editDateState);
 
   const [isEdit, setIsEdit] = useState(false);
 

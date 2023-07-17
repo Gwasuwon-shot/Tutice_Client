@@ -280,8 +280,7 @@ const MoneyInputSection = styled.section<MoneyProp>`
     height: 5.6rem;
     margin-bottom: 1.3rem;
 
-    border-bottom: 1px solid;
-    ${({ theme, moneyFocused }) => (moneyFocused ? theme.colors.green5 : theme.colors.grey70)};
+    border-bottom: 1px solid ${({ theme, moneyFocused }) => (moneyFocused ? theme.colors.green5 : theme.colors.grey70)};
 `
 
 const MoneyInput = styled.input`

@@ -6,8 +6,8 @@ interface YearandMonthProps {
   currentMonth: Date;
   // prevMonth: MouseEventHandler<SVGSVGElement>;
   // nextMonth: MouseEventHandler<SVGSVGElement>;
-  prevMonth: any;
-  nextMonth: any;
+  // prevMonth: any;
+  // nextMonth: any;
 }
 
 export default function YearandMonth(props: YearandMonthProps) {

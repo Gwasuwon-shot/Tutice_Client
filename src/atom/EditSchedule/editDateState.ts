@@ -4,7 +4,7 @@ interface editDateStateTypes {
   year: number;
   month: number;
   date: number;
-  dayOfWeek?: number;
+  dayOfWeek: number;
 }
 
 export const editDateState = atom<editDateStateTypes>({

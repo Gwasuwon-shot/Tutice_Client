@@ -24,7 +24,7 @@ export function KakaoShare(props: KakaoShareProp) {
   function handleClickKakao() {
     if (window.Kakao) {
       const kakao = window.Kakao;
-      console.log(kakao);
+      //   console.log(kakao);
       if (!kakao.isInitialized()) {
         kakao.init(import.meta.env.VITE_APP_KAKAO_APP_KEY);
       }

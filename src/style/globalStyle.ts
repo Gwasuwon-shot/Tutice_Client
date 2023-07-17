@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
     /* height: 56.8rem; */
     height: 100vh;
     /* 임시구현 선 */
-    border:1px solid black;
+    /* border:1px solid black; */
   }
   menu, ol, ul {
     list-style: none;

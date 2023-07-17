@@ -1,22 +1,16 @@
 import { RegularLessonNotebookIc, RegularLessonPencilIc } from "../../assets";
-import { cycleNumberState, dateState } from "../../atom/timePicker/timePicker";
-import { openDatePickerState, openTimePickerState } from "../../atom/timePicker/timePicker";
+import { openDatePickerState } from "../../atom/timePicker/timePicker";
 import React from "react";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
-import TimePicker from "../RegularLesson/TimePicker/TimePicker";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { editSchedule } from "../../atom/EditSchedule/editSchedule";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 
 export default function LessonInformation() {
-  const [selectedDate, setSelectedDate] = useRecoilState(editDateState);
-  const { year, month, dayOfWeek, date } = useRecoilValue(editDateState);
-  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  const dayOfWeekInKorean = daysOfWeek[dayOfWeek];
-
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
   const [activeDateSlide, setActiveDateSlide] = useRecoilState(editDateState);
+  const { year, month, date, dayOfWeek } = useRecoilValue(editDateState);
+  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+  const dayOfWeekInKorean = daysOfWeek[dayOfWeek];
 
   function handleDatePicker() {
     setIsDatePickerOpen(true);

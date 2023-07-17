@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
 import { dayState, focusDayState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
-import DetailTimePicker from "../RegularLesson/TimePicker/DetailTimePicker";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
 
 import styled from "styled-components";
@@ -10,19 +9,13 @@ import BottomButton from "../common/BottomButton";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 
 export default function EditPageTime() {
-  const [selectedDays, setSelectedDays] = useRecoilState(dayState);
-  const [focusDay, setFocusDay] = useRecoilState(focusDayState);
-
   const [selectedTime, setSelectedTime] = useRecoilState(editSchedule);
   const { startTime, endTime } = selectedTime;
-
-  const [isActive, setIsActive] = useState(false);
 
   // check 용
   useEffect(() => {
     console.log(startTime);
-    console.log(focusDay);
-  }, [selectedDays, focusDay]);
+  }, [startTime, endTime]);
 
   // 2. 요일 시작, 종료시간 관리
 
@@ -36,19 +29,6 @@ export default function EditPageTime() {
 
   function handleFinishTimePicker() {
     setIsFinishPickerOpen(true);
-  }
-
-  // 수업일시 추가하기
-
-  function handleEditLesson() {
-    // 현재 focusDay의 값을 selectedDays에 추가
-    setSelectedDays((prevSelectedDays) => [...prevSelectedDays, focusDay]);
-    // 현재 focusDay의 값을 빈 값으로 초기화
-    setSelectedTime({
-      dayOfWeek: "",
-      startTime: "",
-      endTime: "",
-    });
   }
 
   return (
@@ -93,12 +73,6 @@ export default function EditPageTime() {
           </TimeButton>
         )}
       </TimeWrapper>
-
-      <ButtonWrapper>
-        <BottomButton type="button" disabled={true} $isActive={isActive} onClick={handleEditLesson}>
-          저장
-        </BottomButton>
-      </ButtonWrapper>
     </LessonDateWrapper>
   );
 }

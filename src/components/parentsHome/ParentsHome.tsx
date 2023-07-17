@@ -1,12 +1,13 @@
 import { styled } from "styled-components";
+import useGetLessonByUser from "../../hooks/useGetLessonByUser";
 import Header from "../common/Header";
-import NoClassParentsHome from "./NoClassParentsHome";
 import ManageClass from "./ManageClass";
-import { useState } from "react";
+import NoClassParentsHome from "./NoClassParentsHome";
 import TodayClassSwiper from "./TodayClassSwiper";
 
 export default function ParentsHome() {
-  const [isClassExists, setIsClassExists] = useState(true);
+  const { isLessonExist } = useGetLessonByUser();
+
   return (
     <>
       <Header />
@@ -15,7 +16,7 @@ export default function ParentsHome() {
         장지수님 <br /> 안녕하세요!
       </WelComeTitle>
 
-      {isClassExists ? (
+      {isLessonExist ? (
         <ClassInfoWrapper>
           <TodayClassSwiper />
           <ManageClass />

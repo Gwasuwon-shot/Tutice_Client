@@ -4,9 +4,12 @@ import EditShcedule from "./pages/EditSchedule";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import Home from "./pages/Home";
+import LessonShare from "./pages/LessonShare";
 import Login from "./pages/Login";
 import ManageLessonDetail from "./pages/ManageLessonDetail";
 import ManageLessonMain from "./pages/ManageLessonMain";
+import Mypage from "./pages/Mypage";
+import NoAttendanceCheck from "./pages/NoAttendanceCheck";
 import OnBoarding from "./pages/OnBoarding";
 import ParentCalendar from "./pages/ParentCalendar";
 import RegisterCalendar from "./pages/RegisterCalendar";
@@ -48,6 +51,7 @@ export default function Router() {
         <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
+        <Route path="/lesson-share" element={<LessonShare />} />
         <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
         <Route path="/edit-lessonschedule" element={<EditShcedule />} />
       </Routes>

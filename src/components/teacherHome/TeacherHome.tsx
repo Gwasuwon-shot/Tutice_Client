@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
+import useGetLessonByUser from "../../hooks/useGetLessonByUser";
 import Header from "../common/Header";
 import TeacherFooter from "../common/TeacherFooter";
 import NoClassHome from "./NoClassHome";
 import YesClassHome from "./YesClassHome";
 
 export default function TeacherHome() {
-  // 수업이 존재는 하는지에 대한 데이터 패칭
-  const [isClassExist, setIsClassExist] = useState(true);
+  const { isLessonExist } = useGetLessonByUser();
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
 
   return (
@@ -19,7 +18,7 @@ export default function TeacherHome() {
       {/* {snackBarOpen && <CancelLessonMaintenanceSnackBar />} */}
       <TeacherHomeWrapper>
         <Header />
-        {isClassExist ? <YesClassHome /> : <NoClassHome />}
+        {isLessonExist ? <YesClassHome /> : <NoClassHome />}
       </TeacherHomeWrapper>
       <TeacherFooter />
     </>

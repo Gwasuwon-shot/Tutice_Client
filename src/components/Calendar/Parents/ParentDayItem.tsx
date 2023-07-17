@@ -23,7 +23,7 @@ export default function ParentDayItem(props: DayItemProps) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
-          {myChildLessons && myChildLength && myChildLength >= 4
+          {myChildLessons && (myChildLength as number) >= 4
             ? myChildLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
@@ -44,7 +44,7 @@ export default function ParentDayItem(props: DayItemProps) {
                   </ScheduleWrapper>
                 );
               })}
-          {myChildLessons && myChildLength >= 4 && <MoreLessonIcon />}
+          {myChildLessons && (myChildLength as number) >= 4 && <MoreLessonIcon />}
         </LessonWrapper>
       </Dayitem>
     </>

@@ -17,9 +17,10 @@ export default function Role() {
   const setStep = useSetRecoilState(stepNum);
   const [newUser, setNewUser] = useRecoilState(newUserData);
 
-  function handleRadioClick(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleRadioClick(e: React.MouseEvent<HTMLInputElement>) {
+    const target = e.target as HTMLInputElement;
     setIsActive(true);
-    setRole(e.target.value);
+    setRole(target.value);
   }
 
   function handleDoneClick() {
@@ -40,7 +41,7 @@ export default function Role() {
               name="role"
               value="TEACHER"
               id="TEACHER"
-              onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleRadioClick(e)}
+              onClick={(e: React.MouseEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
             />
             <TextWrapper>
@@ -57,7 +58,7 @@ export default function Role() {
               name="role"
               value="PARENTS"
               id="PARENTS"
-              onClick={handleRadioClick}
+              onClick={(e: React.MouseEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
             />
             <TextWrapper>

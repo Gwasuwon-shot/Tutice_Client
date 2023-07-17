@@ -9,15 +9,15 @@ interface YearandMonthProps {
 }
 
 export default function YearandMonth(props: YearandMonthProps) {
-  const { currentMonth, prevMonth, nextMonth } = props;
+  const { currentMonth } = props;
 
   return (
     <HeaderWrapper>
       <CalendarText>캘린더</CalendarText>
       <YearMonthWrapper>
-        <PrevMonthButton onClick={prevMonth} />
+        <PrevMonthButton />
         {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
-        <NextMonthButton onClick={nextMonth} />
+        <NextMonthButton />
       </YearMonthWrapper>
       <CancelCalendarButton />
     </HeaderWrapper>

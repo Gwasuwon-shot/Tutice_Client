@@ -67,3 +67,4 @@ export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
 export { ReactComponent as RegularLessonGroupIc } from "./icon/regularLessonGroupIc.svg";
 export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIc.svg";
 export { ReactComponent as nextArrowWelcomeIc } from "./icon/nextArrowWelcomeIc.svg";
+export { ReactComponent as bellWelcomeIc } from "./icon/bellWelcomeIc.svg";

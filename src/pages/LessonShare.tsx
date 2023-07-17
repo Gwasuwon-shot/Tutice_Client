@@ -9,6 +9,19 @@ export default function LessonShare() {
   function handleMoveToHome() {
     navgiate("/");
   }
+
+  function handleShareOtherWays() {
+    if (navigator.share) {
+      navigator.share({
+        title: "나무코드 공유",
+        text: "안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. [김은수]선생님이 [박송현]학생의 Tutice 초대장을 보냈습니다. \nTutice 링크 \n https://tuticetutice.com/kdfkdf11",
+        url: "https://tuticetutice.com/kdfkdf11",
+      });
+    } else {
+      alert("공유하기가 지원되지 않는 환경 입니다.");
+    }
+  }
+
   return (
     <LessonShareWrapper>
       <LessonTreeSuccess>수업 나무 생성 완료!</LessonTreeSuccess>
@@ -27,7 +40,7 @@ export default function LessonShare() {
         <p>https://tuticetutice.com/kdfkdf11</p>
       </LinkBox>
       <ButtonWrapper>
-        <ShareOthersLessonShareIc />
+        <ShareOthersLessonShareIc onClick={handleShareOtherWays} />
         <KakaoLessonShareIc />
       </ButtonWrapper>
       <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">

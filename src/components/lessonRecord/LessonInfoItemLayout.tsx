@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import { copyAccountNumberLessonInfoIc } from "../../assets";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 interface LessonInfoItemProps {
   detailCategory: string;
@@ -14,7 +15,11 @@ export default function LessonInfoItemLayout(props: LessonInfoItemProps) {
     <LessonInfoItemLayoutWrapper>
       <LessonInfoDetailCategory>{detailCategory}</LessonInfoDetailCategory>
       <LessonInfoContent>
-        {isBankAccount && <CopyAccountNumberIcon />}
+        {isBankAccount && (
+          <CopyToClipboard text={content} onCopy={() => alert("계좌번호가 복사되었습니다.")}>
+            <CopyAccountNumberIcon />
+          </CopyToClipboard>
+        )}
         {content}
       </LessonInfoContent>
     </LessonInfoItemLayoutWrapper>

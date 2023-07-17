@@ -8,6 +8,10 @@ import TimePicker from './TimePicker/TimePicker';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 
+interface LesssonProp {
+    isSelected: boolean;
+};
+
 export default function LessonInformation() {
 
     // 회차 표시 로직
@@ -45,7 +49,7 @@ export default function LessonInformation() {
             <LessonWrapper>
                 <Turn> 
                     <TurnName> 회차 </TurnName>
-                    <TurnButton type = "button" onClick={handleTimePicker}> {selectedCycleText} </TurnButton>
+                    <TurnButton type = "button" onClick={handleTimePicker} isSelected={activeCycleSlide !== -1}> {selectedCycleText} </TurnButton>
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
@@ -111,10 +115,11 @@ const TurnName = styled.h2`
     color: ${({ theme }) => theme.colors.grey400};
 `
 
-const TurnButton = styled.button`
-    ${({ theme }) => theme.fonts.body04};
-    color: ${({ theme }) => theme.colors.grey100};
+const TurnButton = styled.button<LesssonProp>`
     padding: 0;
+    ${({ theme }) => theme.fonts.body04};
+    ${({ isSelected, theme }) => !isSelected && `color: ${theme.colors.grey100}`};
+    ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.grey700}`};
 `
 
 const StartDate = styled.div`

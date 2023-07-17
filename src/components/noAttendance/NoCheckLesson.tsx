@@ -52,10 +52,10 @@ export default function NoCheckLesson() {
 
                 return (
                   <NoCheckAttendanceContanier
-                    lesson={lesson}
-                    schedule={schedule}
-                    setSelectedLesson={setSelectedLesson}
-                    setOpenModal={setOpenModal}
+                  // lesson={lesson}
+                  // schedule={schedule}
+                  // setSelectedLesson={setSelectedLesson}
+                  // setOpenModal={setOpenModal}
                   />
                 );
               })}

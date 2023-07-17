@@ -8,10 +8,15 @@ import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import ExtensionLessonModal from "./ExtensionLessonModal";
 import useExtensionLesson from "../../hooks/useExtensionLesson";
+import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
 
 export default function ExtensionQuestion() {
   const { missingMaintenanceLessonList } = useExtensionLesson();
-  const [selectedLesson, setSelectedLesson] = useState();
+  const [selectedLesson, setSelectedLesson] = useState<LessonType>({
+    idx: 1,
+    studentName: "",
+    subject: "",
+  });
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   return (
@@ -28,7 +33,7 @@ export default function ExtensionQuestion() {
               <ExtensionLessonContainer
                 setOpenModal={setOpenModal}
                 setSelectedLesson={setSelectedLesson}
-                lesson={lesson}
+                // lesson={lesson}
                 endScheduleDate={endScheduleDate}
               />
             );

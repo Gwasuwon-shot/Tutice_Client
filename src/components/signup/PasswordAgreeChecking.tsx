@@ -69,7 +69,7 @@ export default function PasswordAgreeChecking() {
           <Inputfield disabled type="text" value={newUser.email} />
         </InputWrapper>
 
-        <InputPwWrapper $isPassword={isPassword} $pwFocus={setPwFocus}>
+        <InputPwWrapper $isPassword={isPassword} $pwFocus={pwFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
           <Inputfield
             onFocus={() => setPwFocus(true)}

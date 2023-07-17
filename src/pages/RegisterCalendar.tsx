@@ -18,7 +18,7 @@ export default function RegisterCalendar() {
   return (
     <>
       <CalendarWrapper>
-        <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
+        <YearandMonth currentMonth={currentMonth} />
         <Dayofweek />
         <Days currentMonth={currentMonth} />
       </CalendarWrapper>

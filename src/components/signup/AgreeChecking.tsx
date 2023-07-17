@@ -17,8 +17,9 @@ export default function AgreeChecking() {
   const [checkedCount, setCheckedCount] = useState(0);
   const [isFirst, setIsFirst] = useState(false);
 
-  function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
-    switch (e.target.innerText) {
+  function handleMoveToNotion(e: React.MouseEvent<HTMLDivElement>) {
+    const target = e.target as HTMLDivElement;
+    switch (target.innerText) {
       case "서비스 이용 약관":
         window.open("https://www.naver.com", "_blank");
         break;
@@ -78,7 +79,7 @@ export default function AgreeChecking() {
 
     setNewUser((prev: newUserDataTypes) => ({
       ...prev,
-      isMarketing: `${checkAgrees[4].selected}`,
+      isMarketing: checkAgrees[4].selected,
     }));
   }, [checkAgrees]);
 
@@ -139,7 +140,7 @@ export default function AgreeChecking() {
             ) : (
               <Essential>{textAgree.optional}</Essential>
             )}
-            <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
+            <HyperLink onClick={(e: React.MouseEvent<HTMLDivElement>) => handleMoveToNotion(e)}>
               {textAgree.linkText}
             </HyperLink>
             <CheckText> {textAgree.boldText} </CheckText>

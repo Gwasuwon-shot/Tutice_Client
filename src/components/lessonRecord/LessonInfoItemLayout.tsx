@@ -15,12 +15,16 @@ export default function LessonInfoItemLayout(props: LessonInfoItemProps) {
     <LessonInfoItemLayoutWrapper>
       <LessonInfoDetailCategory>{detailCategory}</LessonInfoDetailCategory>
       <LessonInfoContent>
-        {isBankAccount && (
+        {isBankAccount ? (
           <CopyToClipboard text={content} onCopy={() => alert("계좌번호가 복사되었습니다.")}>
-            <CopyAccountNumberIcon />
+            <CopyAccountNumberIconWrapper>
+              <CopyAccountNumberIcon />
+              {content}
+            </CopyAccountNumberIconWrapper>
           </CopyToClipboard>
+        ) : (
+          <span>{content}</span>
         )}
-        {content}
       </LessonInfoContent>
     </LessonInfoItemLayoutWrapper>
   );
@@ -41,12 +45,14 @@ const LessonInfoDetailCategory = styled.h2`
   color: ${({ theme }) => theme.colors.grey900};
 `;
 
-const LessonInfoContent = styled.p`
-  display: flex;
-  align-items: center;
-
+const LessonInfoContent = styled.h4`
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey500};
+`;
+
+const CopyAccountNumberIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const CopyAccountNumberIcon = styled(copyAccountNumberLessonInfoIc)`

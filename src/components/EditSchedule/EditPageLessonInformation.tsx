@@ -1,38 +1,34 @@
 import { RegularLessonNotebookIc, RegularLessonPencilIc } from "../../assets";
 import { cycleNumberState, dateState } from "../../atom/timePicker/timePicker";
 import { openDatePickerState, openTimePickerState } from "../../atom/timePicker/timePicker";
-
 import React from "react";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import TimePicker from "../RegularLesson/TimePicker/TimePicker";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { editSchedule } from "../../atom/EditSchedule/editSchedule";
+import { selectedDateAtom } from "../../atom/EditSchedule/selectedDateAtom";
+import { editDateState } from "../../atom/EditSchedule/editDateState";
 
 export default function LessonInformation() {
-  // 회차 표시 로직
-  const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
+  const [selectedDate, setSelectedDate] = useRecoilState(selectedDateAtom);
+  const willEditDate = new Date(selectedDate);
+  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
-  function handleTimePicker() {
-    setIsTimePickerOpen(true);
-  }
-
-  const [activeCycleSlide, setActiveCycleSlide] = useRecoilState(cycleNumberState);
-
-  let selectedCycleText;
-  if (activeCycleSlide === -1) {
-    selectedCycleText = "회차를 선택하세요";
-  } else {
-    selectedCycleText = activeCycleSlide;
-  }
-
+  console.log(new Date(willEditDate).getFullYear());
   // 수업일 표시 로직
+  const year = willEditDate.getFullYear(); 
+  const month = willEditDate.getMonth() + 1; 
+  const date = willEditDate.getDate();
+  const dayOfWeek = willEditDate.getDay();
+  const dayOfWeekInKorean = daysOfWeek[dayOfWeek];
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
 
   function handleDatePicker() {
     setIsDatePickerOpen(true);
   }
-  const [activeDateSlide, setActiveDateSlide] = useRecoilState(dateState);
+  const [activeDateSlide, setActiveDateSlide] = useRecoilState(editDateState);
 
   return (
     <LessonInformationWrapper>
@@ -45,11 +41,12 @@ export default function LessonInformation() {
         <LessonDate>
           <LessonDateName> 수업일 </LessonDateName>
           <LessonDateEditButton type="button" onClick={handleDatePicker}>
-            {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 요일
+            {year}년 {month}월 {date}일 {dayOfWeekInKorean}요일
           </LessonDateEditButton>
           <RegularLessonPencilIcon />
         </LessonDate>
       </LessonWrapper>
+      {}
     </LessonInformationWrapper>
   );
 }

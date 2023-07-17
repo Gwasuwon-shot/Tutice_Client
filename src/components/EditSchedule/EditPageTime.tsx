@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
 import { dayState, focusDayState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 import DetailTimePicker from "../RegularLesson/TimePicker/DetailTimePicker";
+import { editSchedule } from "../../atom/EditSchedule/editSchedule";
 
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import BottomButton from "../common/BottomButton";
-
-
 export default function EditPageTime() {
   const [selectedDays, setSelectedDays] = useRecoilState(dayState);
   const [focusDay, setFocusDay] = useRecoilState(focusDayState);
   const [isActive, setIsActive] = useState(false);
+  const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
+  const { endTime, idx, startTime, studentName, subject } = clickedSchedule;
 
   function handleDayButton(day: string) {
     let dayIndex;
@@ -79,7 +80,7 @@ export default function EditPageTime() {
       <TimeWrapper>
         <TimeChoose> 시작 </TimeChoose>
         {focusDay.startTime === "" ? (
-          <TimeButton onClick={handlStartTimePicker}>시간을 선택하세요</TimeButton>
+          <TimeButton onClick={handlStartTimePicker}></TimeButton>
         ) : (
           <TimeButton onClick={handlStartTimePicker}>
             {Number(focusDay.startTime.slice(0, 2)) <= 12 ? (

@@ -7,14 +7,19 @@ import { useNavigate } from "react-router-dom";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
 import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
+import { editSchedule } from "../../../atom/EditSchedule/editSchedule";
 
 import { EditPencilIc, removeTrashCan } from "../../../assets";
 import { modalType } from "../../../type/calendar/modalType";
+import { useRecoilState } from "recoil";
+import { selectedDateAtom } from "../../../atom/EditSchedule/selectedDateAtom";
 
 export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal } = props;
   const { scheduleList } = useGetTeacherSchedule();
   const navigate = useNavigate();
+  const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
+  const [willEditDate, setWillEditDate] = useRecoilState(selectedDateAtom);
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -24,9 +29,10 @@ export default function ChangeModal(props: modalType) {
     setIsEdit(false);
   }
 
-  function moveClickEditPage() {
-    //params 추가
-    navigate("/change-lessonschedule");
+  function moveClickEditPage(schedule, selectedDate) {
+    setClickedSchedule(schedule);
+    setWillEditDate(selectedDate);
+    navigate("/edit-lessonschedule");
   }
 
   function handleClickEdit() {
@@ -67,12 +73,12 @@ export default function ChangeModal(props: modalType) {
                     <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 11]}>{subject}</ModalSubject>
                   </ScheduleContainer>
 
-                  {isEdit ? (
+                  {isEdit && (
                     <ScheduleEditWrapper>
-                      <EditScheduleButton onClick={moveClickEditPage} />
+                      <EditScheduleButton onClick={() => moveClickEditPage(schedule, selectedDate)} />
                       <RemoveSchedule />
                     </ScheduleEditWrapper>
-                  ) : undefined}
+                  )}
                 </ScheduleWrapper>
               );
             })}
@@ -81,7 +87,6 @@ export default function ChangeModal(props: modalType) {
     </>
   );
 }
-
 
 const ModalHeaderWrapper = styled.div`
   display: flex;

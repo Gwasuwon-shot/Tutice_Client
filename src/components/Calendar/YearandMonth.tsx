@@ -4,8 +4,10 @@ import { CancelButton, NextMonthArrowButton, PrevMonthArrowButton } from "../../
 
 interface YearandMonthProps {
   currentMonth: Date;
-  prevMonth: MouseEventHandler<SVGSVGElement>;
-  nextMonth: MouseEventHandler<SVGSVGElement>;
+  // prevMonth: MouseEventHandler<SVGSVGElement>;
+  // nextMonth: MouseEventHandler<SVGSVGElement>;
+  prevMonth: any;
+  nextMonth: any;
 }
 
 export default function YearandMonth(props: YearandMonthProps) {

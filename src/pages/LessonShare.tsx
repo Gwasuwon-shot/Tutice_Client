@@ -6,6 +6,7 @@ import { KakaoShare } from "../components/lessonShare/KakaoShare";
 
 export default function LessonShare() {
   const navgiate = useNavigate();
+  const URL = "https://tuticetutice.com/kdfkdf11";
 
   function handleMoveToHome() {
     navgiate("/");
@@ -16,10 +17,20 @@ export default function LessonShare() {
       navigator.share({
         title: "나무코드 공유",
         text: "안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. [김은수]선생님이 [박송현]학생의 Tutice 초대장을 보냈습니다. \nTutice 링크 \n https://tuticetutice.com/kdfkdf11",
-        url: "https://tuticetutice.com/kdfkdf11",
+        url: URL,
       });
     } else {
       alert("공유하기가 지원되지 않는 환경 입니다.");
+    }
+  }
+
+  function handleCopyLink() {
+    try {
+      navigator.clipboard.writeText(URL).then(() => {
+        alert("클립보드에 링크가 복사되었어요.");
+      });
+    } catch (err) {
+      alert("링크 복사에 실패했습니다");
     }
   }
 
@@ -37,12 +48,12 @@ export default function LessonShare() {
 
       <TreeTitle>수업나무 링크</TreeTitle>
       <LinkBox>
-        <CopylessonShareIc />
-        <p>https://tuticetutice.com/kdfkdf11</p>
+        <CopylessonShareIc onClick={handleCopyLink} />
+        <p>{URL}</p>
       </LinkBox>
       <ButtonWrapper>
         <ShareOthersLessonShareIc onClick={handleShareOtherWays} />
-        <KakaoShare url="https://tuticetutice.com/kdfkdf11" />
+        <KakaoShare url={URL} />
       </ButtonWrapper>
       <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
         다음

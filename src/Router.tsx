@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import ChangeLessonShcedule from "./pages/ChangeLessonShcedule";
+import EditShcedule from "./pages/EditSchedule";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import Home from "./pages/Home";
@@ -37,7 +37,7 @@ export default function Router() {
         <Route path="/register-calendar" element={<RegisterCalendar />} />
         <Route path="/time-picker" element={<TimePickerPage />} />
         <Route path="/change-schedule" element={<ChangeSchedule />} />
-        <Route path="/change-lessonschedule" element={<ChangeLessonShcedule />} />
+        <Route path="/change-lessonschedule" element={<EditShcedule />} />
       </Routes>
     </BrowserRouter>
   );

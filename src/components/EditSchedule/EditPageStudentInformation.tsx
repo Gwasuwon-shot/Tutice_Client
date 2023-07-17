@@ -4,7 +4,7 @@ import { STUDENT_COLOR } from "../../core/common/studentColor";
 import SubjectLabel from "../common/SubjectLabel";
 import styled from "styled-components";
 
-export default function StudentInformation() {
+export default function EditPageStudentInformation() {
   const idx = 1; // 임시 Idx
   const subject = "수학"; // 임시 Subject
 
@@ -16,7 +16,7 @@ export default function StudentInformation() {
       </IconWrapper>
       <StudentWrapper>
         <StudentName> 박송현 </StudentName>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
+        <SubjectLabel subject={subject} backgroundColor="yellow" color="#5B6166" />
       </StudentWrapper>
     </StudentInformationWrapper>
   );

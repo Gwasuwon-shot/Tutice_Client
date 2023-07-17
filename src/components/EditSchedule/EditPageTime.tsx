@@ -7,38 +7,20 @@ import { editSchedule } from "../../atom/EditSchedule/editSchedule";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import BottomButton from "../common/BottomButton";
+import { editDateState } from "../../atom/EditSchedule/editDateState";
+
 export default function EditPageTime() {
   const [selectedDays, setSelectedDays] = useRecoilState(dayState);
   const [focusDay, setFocusDay] = useRecoilState(focusDayState);
+
+  const [selectedTime, setSelectedTime] = useRecoilState(editSchedule);
+  const { startTime, endTime } = selectedTime;
+
   const [isActive, setIsActive] = useState(false);
-  const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
-  const { endTime, idx, startTime, studentName, subject } = clickedSchedule;
-
-  function handleDayButton(day: string) {
-    let dayIndex;
-    if (selectedDays.length >= 1) {
-      dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
-    } else {
-      dayIndex = -1;
-    }
-
-    if (dayIndex !== -1) {
-      setSelectedDays((prevSelectedDays) => prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day));
-    } else {
-      // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
-      const isTimeNotSelected = focusDay.dayOfWeek !== "" && (focusDay.startTime === "" || focusDay.endTime === "");
-
-      if (isTimeNotSelected) {
-        return;
-      }
-
-      setFocusDay({ dayOfWeek: day, startTime: "", endTime: "" });
-    }
-  }
 
   // check 용
   useEffect(() => {
-    console.log(selectedDays);
+    console.log(startTime);
     console.log(focusDay);
   }, [selectedDays, focusDay]);
 
@@ -62,7 +44,7 @@ export default function EditPageTime() {
     // 현재 focusDay의 값을 selectedDays에 추가
     setSelectedDays((prevSelectedDays) => [...prevSelectedDays, focusDay]);
     // 현재 focusDay의 값을 빈 값으로 초기화
-    setFocusDay({
+    setSelectedTime({
       dayOfWeek: "",
       startTime: "",
       endTime: "",
@@ -79,33 +61,33 @@ export default function EditPageTime() {
 
       <TimeWrapper>
         <TimeChoose> 시작 </TimeChoose>
-        {focusDay.startTime === "" ? (
-          <TimeButton onClick={handlStartTimePicker}></TimeButton>
+        {selectedTime?.startTime === "" ? (
+          <TimeButton onClick={handlStartTimePicker}>시간을 선택하세요</TimeButton>
         ) : (
           <TimeButton onClick={handlStartTimePicker}>
-            {Number(focusDay.startTime.slice(0, 2)) <= 12 ? (
+            {Number(selectedTime?.startTime.slice(0, 2)) <= 12 ? (
               <>
-                오전 {Number(focusDay.startTime.slice(0, 2))} {focusDay.startTime.slice(2)}
+                오전 {Number(selectedTime?.startTime.slice(0, 2))} {selectedTime?.startTime.slice(2)}
               </>
             ) : (
               <>
-                오후 {Number(focusDay.startTime.slice(0, 2)) - 12} {focusDay.startTime.slice(2)}
+                오후 {Number(selectedTime?.startTime.slice(0, 2)) - 12} {selectedTime?.startTime.slice(2)}
               </>
             )}
           </TimeButton>
         )}
         <TimeChoose> 종료 </TimeChoose>
-        {focusDay.endTime === "" ? (
+        {selectedTime?.endTime === "" ? (
           <TimeButton onClick={handleFinishTimePicker}>시간을 선택하세요</TimeButton>
         ) : (
           <TimeButton onClick={handleFinishTimePicker}>
-            {Number(focusDay.endTime.slice(0, 2)) <= 12 ? (
+            {Number(selectedTime?.endTime.slice(0, 2)) <= 12 ? (
               <>
-                오전 {Number(focusDay.endTime.slice(0, 2))} {focusDay.endTime.slice(2)}
+                오전 {Number(selectedTime?.endTime.slice(0, 2))} {selectedTime?.endTime.slice(2)}
               </>
             ) : (
               <>
-                오후 {Number(focusDay.endTime.slice(0, 2)) - 12} {focusDay.endTime.slice(2)}
+                오후 {Number(selectedTime?.endTime.slice(0, 2)) - 12} {selectedTime?.endTime.slice(2)}
               </>
             )}
           </TimeButton>

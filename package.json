@@ -46,12 +46,6 @@
     "postcss-styled-syntax": "^0.4.0",
     "prettier": "^3.0.0",
     "slick-carousel": "^1.8.1",
-    "stylelint": "^15.10.1",
-    "stylelint-config-prettier": "^9.0.5",
-    "stylelint-config-recommended": "^13.0.0",
-    "stylelint-config-standard": "^34.0.0",
-    "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-order": "^6.0.3",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }

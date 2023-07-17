@@ -3,14 +3,11 @@ import { bellWelcomeIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 
-export default function AlertSignup(setIsWelcome) {
+export default function AlertSignup() {
   const MAIN_TEXT = `수업 나무를 통한 \n 쉬운 관리를 위해\n 알림을 활성화 해보세요 `;
 
   const SUB_TEXT = "푸시알림을 활성화를 통해 \n 출결, 수업비 관리를 도울 수 있어요";
-
-  function handleToNextStep() {
-    setIsWelcome(false);
-  }
+  function handleToSetAlert() {}
   return (
     <>
       <Container>
@@ -19,7 +16,7 @@ export default function AlertSignup(setIsWelcome) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={handleToNextStep} buttonText={"할래요!"} />
+      <ButtonLayout onClick={handleToSetAlert} buttonText={"할래요!"} />
     </>
   );
 }

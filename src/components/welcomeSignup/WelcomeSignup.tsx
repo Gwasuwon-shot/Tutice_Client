@@ -4,7 +4,7 @@ import AfterSignup from "./AfterSignup";
 import AlertSignup from "./AlertSignup";
 
 export default function WelcomeSignup() {
-  const [isWelcome, setIsWelcome] = useState(true);
+  const [isWelcome, setIsWelcome] = useState<boolean>(true);
   return (
     <>
       <Container>{isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup />}</Container>

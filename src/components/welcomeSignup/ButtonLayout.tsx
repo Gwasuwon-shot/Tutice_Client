@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { nextArrowWelcomeIc } from "../../assets";
 
 interface ButtonLayoutProps {
-  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick: () => void;
   buttonText: string;
 }
 

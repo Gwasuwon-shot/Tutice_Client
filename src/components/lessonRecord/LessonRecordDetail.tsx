@@ -7,6 +7,7 @@ import SubjectLabel from "../common/SubjectLabel";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import PastLessonRecordList from "./PastLessonRecordList";
 import { css } from "styled-components";
+
 import DepositRecordList from "./DepositRecord";
 
 export default function LessonRecordDetail() {

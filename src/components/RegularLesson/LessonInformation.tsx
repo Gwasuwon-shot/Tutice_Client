@@ -1,12 +1,40 @@
 import {RegularLessonNotebookIc, RegularLessonPencilIc} from '../../assets';
+import {cycleNumberState, dateState} from '../../atom/timePicker/timePicker';
+import {openDatePickerState, openTimePickerState} from "../../atom/timePicker/timePicker";
 
 import React from 'react';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import TimePicker from './TimePicker/TimePicker';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
 
 export default function LessonInformation() {
 
+    // 회차 표시 로직
+    const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
+    
+    function handleTimePicker () {
+        setIsTimePickerOpen(true);
+    }
 
+    const [activeCycleSlide, setActiveCycleSlide] = useRecoilState(cycleNumberState);
+    
+    let selectedCycleText;
+    if (activeCycleSlide === -1) {
+        selectedCycleText = "회차를 선택하세요";
+    } else {
+        selectedCycleText = activeCycleSlide;
+    }
+    
+    
+    // 수업일 표시 로직
+
+    const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
+
+    function handleDatePicker () {
+        setIsDatePickerOpen(true);
+    }
+    const [activeDateSlide, setActiveDateSlide] = useRecoilState(dateState);
     
     return (
         <LessonInformationWrapper>
@@ -17,11 +45,12 @@ export default function LessonInformation() {
             <LessonWrapper>
                 <Turn> 
                     <TurnName> 회차 </TurnName>
-                    <TurnButton type = "submit"> 회차를 선택하세요 </TurnButton>
+                    <TurnButton type = "button" onClick={handleTimePicker}> {selectedCycleText} </TurnButton>
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
-                    <StartDateButton type = "submit"> 2023년 7월 3일 </StartDateButton>
+                    
+                    <StartDateButton type = "button" onClick={handleDatePicker}> {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 </StartDateButton>
                     <RegularLessonPencilIcon />
                 </StartDate>
             </LessonWrapper>
@@ -77,7 +106,7 @@ const TurnName = styled.h2`
     align-items: center;
     
     width: 7rem;
-
+    
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey400};
 `

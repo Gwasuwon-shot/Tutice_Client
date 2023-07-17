@@ -1,9 +1,10 @@
 import React, { ChangeEvent, FocusEvent } from 'react';
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 import { useEffect, useState } from "react";
 
-import Footer from './Footer';
 import { RegisterLessonInputIc } from '../../assets';
 import styled from 'styled-components';
+import { useRecoilState } from "recoil";
 
 interface NameInputSectionProp {
     nameFocused : boolean;
@@ -19,9 +20,9 @@ export default function LessonInput() {
     const [isNameInputFocused, setNameInputFocused] = useState(false);
     const [isSubjectInputFocused, setSubjectInputFocused] = useState(false);
 
-    // 2. 학생이름, 과목이름 입력값 관리
-    const [studentName, setStudentName] = useState('');
-    const [subjectName, setSubjectName] = useState('');
+    // 2. 학생이름, 과목이름 입력값 관리 (recoil)
+    const [studentName, setStudentName] = useRecoilState<string>(studentNameState);
+    const [subjectName, setSubjectName] = useRecoilState<string>(subjectNameState);
     
     const handleNameInputFocus = () => {
         setNameInputFocused(true);
@@ -54,11 +55,6 @@ export default function LessonInput() {
 
     const isWarning = !isNameValid && studentName.length > 0
 
-    // 4. footer의 색상 변경 여부 관리
-    
-    const isFooterGreen = subjectName !== "" && !isWarning;
-    
-
     return (
         
     <InputWrapper>
@@ -88,7 +84,6 @@ export default function LessonInput() {
             />
             {isSubjectInputFocused && <RegisterLessonInputIcon/>}
         </SubjectInputSection>
-        <Footer isGreen={isFooterGreen} />
     </InputWrapper>
     );
 }

@@ -8,7 +8,6 @@ export default function AfterSignup() {
   return (
     <Container>
       <TuticeWithTextCommonIcon />
-      <MainText>{MAIN_TEXT}</MainText>
       <SubText>{SUN_TEXT}</SubText>
     </Container>
   );
@@ -24,13 +23,6 @@ const TuticeWithTextCommonIcon = styled(TuticeWithTextCommonIc)`
   margin-bottom: 1.3rem;
   margin-left: -1.4rem;
   flex-shrink: 0;
-`;
-
-const MainText = styled.p`
-  color: ${({ theme }) => theme.colors.grey900};
-
-  ${({ theme }) => theme.fonts.title01};
-  margin-bottom: 2.2rem;
 `;
 
 const SubText = styled.p`

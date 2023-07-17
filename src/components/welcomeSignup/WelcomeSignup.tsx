@@ -30,7 +30,8 @@ export default function WelcomeSignup() {
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+
+  margin-left: 1.8rem;
 
   white-space: pre-line;
 `;
@@ -48,7 +49,7 @@ const WelcomeButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: 29.2rem;
+  width: 28rem;
   height: 4.2rem;
 
   background-color: ${({ theme }) => theme.colors.green5};

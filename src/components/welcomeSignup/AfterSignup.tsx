@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { TuticeWithTextCommonIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
+import { SetStateAction } from "react";
 
 interface AfterSignupProp {
   setIsWelcome: Dispatch<SetStateAction<boolean>>;

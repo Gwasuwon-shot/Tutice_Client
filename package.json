@@ -11,11 +11,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-slick": "^0.23.10",
     "date-fns": "^2.30.0",
+    "firebase": "^10.0.0",
     "init": "^0.1.2",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.14.1",
@@ -45,12 +48,6 @@
     "postcss-styled-syntax": "^0.4.0",
     "prettier": "^3.0.0",
     "slick-carousel": "^1.8.1",
-    "stylelint": "^15.10.1",
-    "stylelint-config-prettier": "^9.0.5",
-    "stylelint-config-recommended": "^13.0.0",
-    "stylelint-config-standard": "^34.0.0",
-    "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-order": "^6.0.3",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }

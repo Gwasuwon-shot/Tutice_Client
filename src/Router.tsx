@@ -39,7 +39,6 @@ export default function Router() {
         <Route path="/register-calendar" element={<RegisterCalendar />} />
         <Route path="/time-picker" element={<TimePickerPage />} />
         <Route path="/change-schedule" element={<ChangeSchedule />} />
-        <Route path="/change-lessonschedule" element={<ChangeLessonShcedule />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
         <Route path="/change-lessonschedule" element={<EditShcedule />} />

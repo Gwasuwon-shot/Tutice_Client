@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ManageLessonDetail from "./pages/ManageLessonDetail";
 import ManageLessonMain from "./pages/ManageLessonMain";
+import Mypage from "./pages/Mypage";
+import NoAttendanceCheck from "./pages/NoAttendanceCheck";
 import OnBoarding from "./pages/OnBoarding";
 import ParentCalendar from "./pages/ParentCalendar";
 import RegisterCalendar from "./pages/RegisterCalendar";
@@ -16,8 +18,7 @@ import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
-import Mypage from "./pages/Mypage";
-import NoAttendanceCheck from "./pages/NoAttendanceCheck";
+import TuitionPayment from "./pages/TuitionPayment";
 
 export default function Router() {
   return (
@@ -40,6 +41,7 @@ export default function Router() {
         <Route path="/time-picker" element={<TimePickerPage />} />
         <Route path="/change-schedule" element={<ChangeSchedule />} />
         <Route path="/change-lessonschedule" element={<ChangeLessonShcedule />} />
+        <Route path="/tuition-payment" element={<TuitionPayment />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
       </Routes>

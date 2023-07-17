@@ -6,7 +6,7 @@ export default function NoDeposit() {
     <NoDepositWrapper>
       <NoDepositTitle>아직 등록된 입금이 없어요</NoDepositTitle>
       <NoDepositSubTitle>수업 출결을 등록하고 열매를 수확하세요</NoDepositSubTitle>
-      <EmptyDeposiyIcon />
+      <EmptyDepositIcon />
     </NoDepositWrapper>
   );
 }
@@ -34,6 +34,6 @@ const NoDepositSubTitle = styled.h2`
   color: ${({ theme }) => theme.colors.grey600};
 `;
 
-const EmptyDeposiyIcon = styled(EmptyDepositParentsLessonRecordIc)`
+const EmptyDepositIcon = styled(EmptyDepositParentsLessonRecordIc)`
   width: 8.4rem;
 `;

@@ -63,11 +63,12 @@ const PassButton = styled.button`
   display: flex;
   align-items: center;
 
-  color: ${({ theme }) => theme.colors.grey500};
-
-  ${({ theme }) => theme.fonts.body06};
   margin-top: 1.9rem;
   margin-bottom: 3.5rem;
+
+  ${({ theme }) => theme.fonts.body06};
+
+  color: ${({ theme }) => theme.colors.grey500};
 `;
 
 const NextArrowWelcomeIcon = styled(nextArrowWelcomeIc)`

@@ -10,16 +10,16 @@ import useGetScheduleChild from "../../../hooks/useGetScheduleChild";
 import { modalType } from "../../../type/calendar/modalType";
 
 export default function ParentModal(props: modalType) {
-  const { selectedDate, setOpenModal } = props
+  const { selectedDate, setOpenModal } = props;
   const { scheduleList } = useGetScheduleChild();
 
   return (
     <>
       <ToastModal>
         <ModalContentWrapper>
-          <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+          <ModalDate>{format(selectedDate as Date, "M월 d일 EEEE", { locale: ko })}</ModalDate>
           {scheduleList
-            .find((item) => isSameDay(new Date(item.date), selectedDate))
+            .find((item) => isSameDay(new Date(item.date), selectedDate as Date))
             ?.dailyScheduleList.map((item) => {
               const { schedule } = item;
               const { idx, studentName, subject, startTime, endTime } = schedule;

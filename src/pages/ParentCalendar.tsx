@@ -18,7 +18,7 @@ export default function ParentCalenda() {
   return (
     <>
       <CalendarWrapper>
-        <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
+        <YearandMonth currentMonth={currentMonth} />
         <Dayofweek />
         <ParentsDays currentMonth={currentMonth} />
       </CalendarWrapper>

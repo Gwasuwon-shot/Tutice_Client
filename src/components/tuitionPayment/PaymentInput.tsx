@@ -160,12 +160,12 @@ export default function PaymentInput() {
         <CheckboxWrapper>
             <CheckboxHeader> 입금 방식</CheckboxHeader>
             <CheckboxLabel>
-                <CheckboxInput type ="checkbox" checked = {order} onChange = {handleFirstChange} />
+                <CheckboxInput type ="checkbox" checked = {order === "선불"} onChange = {handleFirstChange} />
                 {order === "선불" ? <CheckboxIcon as = {TuitionPaymentRadioButtonCheckedIc} /> : <CheckboxIcon as = {TuitionPaymentRadioButtonNotCheckedIc} /> }
                 <CheckboxP> 선불 </CheckboxP>
             </CheckboxLabel>
             <CheckboxLabel>
-                <CheckboxInput type ="checkbox" checked = {order} onChange = {handleLastChange} />
+                <CheckboxInput type ="checkbox" checked = {order === "후불"} onChange = {handleLastChange} />
                 {order === "후불" ? <CheckboxIcon as = {TuitionPaymentRadioButtonCheckedIc} /> : <CheckboxIcon as = {TuitionPaymentRadioButtonNotCheckedIc} /> }
                 <CheckboxP> 후불 </CheckboxP>
             </CheckboxLabel>

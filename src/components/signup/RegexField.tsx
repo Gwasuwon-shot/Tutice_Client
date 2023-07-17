@@ -13,7 +13,7 @@ const RegexText = styled.p`
   margin-top: 0.5rem;
   margin-left: 0.2rem;
 
-  color: ${({ theme }) => theme.colors.semantic_red};
+  color: ${({ theme }) => theme.colors.sementic_red};
 
   ${({ theme }) => theme.fonts.body06};
 `;

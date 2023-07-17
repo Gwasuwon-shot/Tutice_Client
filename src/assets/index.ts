@@ -1,6 +1,6 @@
 export { ReactComponent as RoleCheckSignupIc } from "./icon//RoleCheckSignupIc.svg";
-export { ReactComponent as RoleNoneCheckSignupIc } from "./icon//RoleNoneCheckSignupIc.svg";
-export { ReactComponent as backButtonSignupIc } from "./icon//backButtonSignupIc.svg";
+export { ReactComponent as RoleNoneCheckSignupIc } from "./icon/RoleNoneCheckSignupIc.svg";
+export { ReactComponent as backButtonSignupIc } from "./icon/backButtonSignupIc.svg";
 export { ReactComponent as EditPencilIc } from "./icon/EditPencilIc.svg";
 export { ReactComponent as FourthSwiperFirstTree } from "./icon/FourthSwiperFirstTreeOnBoardingIc.svg";
 export { ReactComponent as FourthSwiperSecondTree } from "./icon/FourthSwiperSecondTreeOnBoardingIc.svg";
@@ -42,7 +42,7 @@ export { ReactComponent as MissingMaintenanceTeacherHomeIc } from "./icon/missin
 export { ReactComponent as MyActiveTeacherFooterIc } from "./icon/myActiveTeacherFooterIc.svg";
 export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.svg";
 export { ReactComponent as NextArrowManageLessonIc } from "./icon/nextArrowManageLessonIc.svg";
-export { ReactComponent as NoClassLogoParentsHomeIc } from "./icon/noClassLogoParentsHomeIc.svg";
+export { ReactComponent as NoClassLogoParentsHomeIc } from "./icon/NoClassLogoParentsHomeIc.svg";
 export { ReactComponent as NoClassLogoTeacherHomeIc } from "./icon/noClassLogoTeacherHomeIc.svg";
 export { ReactComponent as RegisterLessonHeaderIc } from "./icon/registerLessonHeaderIc.svg";
 export { ReactComponent as RegisterLessonInputIc } from "./icon/registerLessonInputIc.svg";
@@ -61,7 +61,9 @@ export { ReactComponent as SmallAttendanceCheckButtonIc } from "./icon/smallAtte
 export { ReactComponent as ThirdTreeParentsHomeIc } from "./icon/thirdTreeParentsHomeIc.svg";
 export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextCommonIc.svg";
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
-export { ReactComponent as viewingLoginIc } from "./icon/viewingLoginIc.svg";
+export { ReactComponent as viewingLoginIc } from "./icon/ViewingLoginIc.svg";
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
 export { ReactComponent as LessonInfoLessonRecordIc } from "./icon/LessonInfoLessonRecordIc.svg";
+export { ReactComponent as RegularLessonGroupIc } from "./icon/regularLessonGroupIc.svg";
+export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIC.svg";

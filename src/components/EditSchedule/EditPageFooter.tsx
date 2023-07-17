@@ -11,17 +11,25 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import EditDatePicker from "./EditDatePicker";
 import EditDetailTimePicker from "./EditTimePicker";
+import BottomButton from "../common/BottomButton";
+import { useState } from "react";
 
 export default function EditPageFooter() {
-  const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
   const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
   const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
+  const [isActive, setIsActive] = useState<boolean>(false);
+
+  function handleEditLesson() {}
 
   return (
     <>
       <FooterWrapper>
-        <FooterButton> 저장 </FooterButton>
+        <BottomWrapper>
+          <BottomButton type="button" isActive={isActive} onClick={handleEditLesson} disabled={!isActive}>
+            저장
+          </BottomButton>
+        </BottomWrapper>
       </FooterWrapper>
       {isDatePickerOpen && <EditDatePicker />}
       {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && <EditDetailTimePicker />}
@@ -43,9 +51,8 @@ const FooterWrapper = styled.footer`
   background-color: ${({ theme }) => theme.colors.grey50};
 `;
 
-const FooterButton = styled.button`
+const BottomWrapper = styled.div`
   display: flex;
-
-  ${({ theme }) => theme.fonts.body02};
-  color: ${({ theme }) => theme.colors.grey200};
+  justify-content: center;
+  align-items: center;
 `;

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
-import { MISSING_MAINTEANANCE_LESSON } from "../../core/manageLesson/getMissingMaintenanceLesson";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import ExtensionLessonContainer from "./ExtensionLessonContainer";
 import { useRecoilState } from "recoil";
@@ -33,7 +32,7 @@ export default function ExtensionQuestion() {
               <ExtensionLessonContainer
                 setOpenModal={setOpenModal}
                 setSelectedLesson={setSelectedLesson}
-                // lesson={lesson}
+                lesson={lesson}
                 endScheduleDate={endScheduleDate}
               />
             );

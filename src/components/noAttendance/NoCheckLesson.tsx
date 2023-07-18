@@ -52,27 +52,27 @@ export default function NoCheckLesson() {
 
                 return (
                   <NoCheckAttendanceContanier
-                  // lesson={lesson}
-                  // schedule={schedule}
-                  // setSelectedLesson={setSelectedLesson}
-                  // setOpenModal={setOpenModal}
+                    lesson={lesson}
+                    schedule={schedule}
+                    setSelectedLesson={setSelectedLesson}
+                    setOpenModal={setOpenModal}
                   />
                 );
               })}
             </NoAttendanceContainer>
           );
         })}
-        {openModal && selectedLesson && (
+        {/* {openModal && selectedLesson && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
             <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
           </ModalSection>
-        )}
+        )} */}
 
-        {openModal && isCheckingModalOpen && (
+        {/* {openModal && isCheckingModalOpen && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
             <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
           </ModalSection>
-        )}
+        )} */}
 
         {openModal && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>

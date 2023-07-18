@@ -27,7 +27,6 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   }
 
   function handleCheckAttlendanceStatus(status: string) {
-    console.log("djfkdjfdkjd");
     setIsCheckingModalOpen(true);
     setAttendanceData({ idx: scheduleIdx, status: status });
   }

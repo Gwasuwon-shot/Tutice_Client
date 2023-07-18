@@ -147,7 +147,7 @@ const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: b
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $confirmFocus, $isConfirmed }) =>
-      $confirmFocus && $isConfirmed ? theme.colors.green5 : theme.colors.grey70};
+      $confirmFocus || $isConfirmed ? theme.colors.green5 : theme.colors.grey70};
 `;
 
 const Inputfield = styled.input`

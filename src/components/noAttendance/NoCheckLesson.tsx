@@ -17,7 +17,7 @@ interface ScheduleData {
   idx: number;
   startTime: string;
   endTime: string;
-  count: number;
+  expectedCount: number;
 }
 
 interface MissingAttendanceData {
@@ -49,16 +49,7 @@ export default function NoCheckLesson() {
               return (
                 <NoAttendanceContainer key={idx}>
                   <NoAttendanceDate>
-                    {date[6] == "1" ? <h1>{date.slice(5, 7)}월</h1> : <h1>{date.slice(6, 7)}월</h1>}
-                    {date[8] === "0" ? (
-                      <h1>
-                        {date.slice(-1)}일 ({dayOfWeek})
-                      </h1>
-                    ) : (
-                      <h1>
-                        {date.slice(8, 10)}일 ({dayOfWeek})
-                      </h1>
-                    )}
+                    {new Date(date).getMonth() + 1}월 {new Date(date).getDate()}일 ({dayOfWeek})
                   </NoAttendanceDate>
 
                   {missingAttedanceScheduleList?.map(({ lesson, schedule }) => {

@@ -24,8 +24,6 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
   const { idx, studentName, subject } = lesson;
   const { startTime, endTime, expectedCount } = schedule;
 
-  console.log(expectedCount);
-
   function handleAttendanceCheck(): void {
     setSelectedLesson(lesson);
     setOpenModal(true);
@@ -60,6 +58,7 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
 const ContentContainer = styled.div`
   display: flex;
   gap: 1.4rem;
+  margin: 0.8rem 0;
 `;
 
 const InforContainer = styled.div`
@@ -68,6 +67,7 @@ const InforContainer = styled.div`
   gap: 0.4rem;
   width: 19rem;
 `;
+
 const Bar = styled.p`
   color: ${({ theme }) => theme.colors.grey100};
 `;
@@ -79,6 +79,7 @@ const Time = styled.h2`
 
 const TimeWrapper = styled.div`
   display: flex;
+  align-items: center;
 
   height: 1.3rem;
 

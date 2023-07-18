@@ -11,8 +11,8 @@ import { useParams } from "react-router-dom";
 import {useRecoilState} from 'recoil';
 
 export default function RegisterPayment() {
-//   const { paymentRecordView } = useGetPaymentRecord(Number(manageLessonId)); //lessonIdx 넣어주어야함
-//   const { lesson, paymentDate } = paymentRecordView?.data;
+  //   const { paymentRecordView } = useGetPaymentRecord(Number(manageLessonId)); //lessonIdx 넣어주어야함
+  //   const { lesson, paymentDate } = paymentRecordView?.data;
 
   const { lesson, paymentDate } = useGetPaymentRecord();  // 서버 해결시 위 주석으로 변경
   const { idx, studentName, subject, cycle } = lesson;
@@ -20,6 +20,8 @@ export default function RegisterPayment() {
   const { manageLessonId } = useParams();
   
   const [isOpenPicker, setIsOpenPicker] = useRecoilState(openPaymentPicker);
+  const [activeDateSlide, setActiveDateSlide] = useRecoilState(paymentDateState);
+  
   function handleGoBack() {
     // 뒤로가기
   }
@@ -52,7 +54,7 @@ export default function RegisterPayment() {
       </FruitWrapper>
       <Sub>입금일</Sub>
       <PaymentDate>
-        {new Date(paymentDate).getMonth() + 1}월 {new Date(paymentDate).getDate()}일
+        {activeDateSlide.month}월 {activeDateSlide.date}일
         <EditPaymentIcon onClick = {handleOpenPicker} />
       </PaymentDate>
       <ButtonWrapper>

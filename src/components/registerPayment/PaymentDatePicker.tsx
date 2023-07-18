@@ -100,7 +100,6 @@ export default function DatePicker() {
   // check 용
   useEffect(() => {
     console.log(activeSlide);
-    console.log("첫수업일");
   }, [activeSlide]);
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (

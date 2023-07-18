@@ -21,6 +21,7 @@ import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
+import TuitionPayment from "./pages/TuitionPayment";
 
 export default function Router() {
   return (
@@ -43,6 +44,7 @@ export default function Router() {
         <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/time-picker" element={<TimePickerPage />} />
         <Route path="/change-schedule" element={<ChangeSchedule />} />
+        <Route path="/tuition-payment" element={<TuitionPayment />} />
         <Route path="/change-lessonschedule" element={<ChangeSchedule />} />
         <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/mypage" element={<Mypage />} />

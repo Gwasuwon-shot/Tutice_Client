@@ -23,7 +23,6 @@ export { ReactComponent as AttenceCheckCommonIc } from "./icon/attenceCheckCommo
 export { ReactComponent as AttendaceAttendanceModalIc } from "./icon/attendaceAttendanceModalIc.svg";
 export { ReactComponent as backButtonSignupIc } from "./icon/backButtonSignupIc.svg";
 export { ReactComponent as bellWelcomeIc } from "./icon/bellWelcomeIc.svg";
-export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIC.svg";
 export { ReactComponent as CalendarActiveTeacherFooterIc } from "./icon/calendarActiveTeacherFooterIc.svg";
 export { ReactComponent as CalendarMoreLessonIc } from "./icon/calendarMoreLessonIc.svg";
 export { ReactComponent as CalendarTeacherFooterIc } from "./icon/calendarTeacherFooterIc.svg";
@@ -74,3 +73,6 @@ export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextC
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as TuitionPaymentRadioButtonNotCheckedIc} from "./icon/tuitionPaymentRadioButtonNotCheckedIc.svg";
+export { ReactComponent as TuitionPaymentRadioButtonCheckedIc} from "./icon/tuitionPaymentRadioButtonCheckedIc.svg";
+export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIc.svg";

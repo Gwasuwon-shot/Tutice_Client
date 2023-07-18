@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom } from 'recoil';
 
 // 모달 오픈여부 관리
 export const openTimePickerState = atom<boolean>({

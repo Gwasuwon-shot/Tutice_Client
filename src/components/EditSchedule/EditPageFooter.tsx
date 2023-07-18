@@ -55,4 +55,8 @@ const BottomWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: absolute;
+  margin-left: 2rem;
+  width: 32rem;
 `;

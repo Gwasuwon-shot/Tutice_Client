@@ -61,8 +61,8 @@ export default function AlertSignup() {
     },
   });
 
-  async function handleShowNotification() {
-    await postNotificationRequest(deviceToken.token);
+  function handleShowNotification() {
+    postNotificationRequest(deviceToken.token);
     console.log("푸시 뜨니?");
   }
 

@@ -7,12 +7,18 @@ import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import NoCheckAttendanceContanier from "./NoCheckAttendanceContanier";
 
+interface LessonNScheduleData {
+  lessonIdx: number;
+  studentName: string;
+  count: number;
+  scheduleIdx: number;
+  subject: string;
+}
 interface LessonData {
   idx: number;
   studentName: string;
   subject: string;
 }
-
 interface ScheduleData {
   idx: number;
   startTime: string;
@@ -32,7 +38,7 @@ interface MissingAttendanceData {
 export default function NoCheckLesson() {
   const { missingAttendanceSchedule } = useGetMissingAttendanceSchedule();
   console.log(missingAttendanceSchedule);
-  const [selectedLesson, setSelectedLesson] = useState<LessonData>({
+  const [selectedLesson, setSelectedLesson] = useState({
     lessonIdx: 0,
     studentName: "",
     count: 0,
@@ -71,11 +77,11 @@ export default function NoCheckLesson() {
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
             <AttendanceCheckModal
               setIsCheckingModalOpen={setIsCheckingModalOpen}
-              lessonIdx={selectedLesson?.idx}
+              lessonIdx={selectedLesson?.lessonIdx}
               studentName={selectedLesson?.studentName}
-              count={}
+              count={selectedLesson?.count}
               subject={selectedLesson?.subject}
-              scheduleIdx={}
+              scheduleIdx={selectedLesson?.scheduleIdx}
             />
           </ModalSection>
         )}

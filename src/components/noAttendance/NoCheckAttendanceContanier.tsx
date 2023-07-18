@@ -12,10 +12,25 @@ interface LessonData {
   subject: string;
 }
 
+interface LessonNScheduleData {
+  lessonIdx: number;
+  studentName: string;
+  count: number;
+  scheduleIdx: number;
+  subject: string;
+}
+
+interface ScheduleData {
+  idx: number;
+  startTime: string;
+  endTime: string;
+  expectedCount: number;
+}
+
 interface NoCheckAttendanceContanierProps {
   lesson: LessonData;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedLesson: React.Dispatch<React.SetStateAction<LessonData>>;
+  setSelectedLesson: React.Dispatch<React.SetStateAction<LessonNScheduleData>>;
   schedule: scheduleType;
 }
 
@@ -25,9 +40,16 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
   const { startTime, endTime, expectedCount } = schedule;
 
   function handleAttendanceCheck(): void {
-    setSelectedLesson(lesson);
+    setSelectedLesson({
+      lessonIdx: idx,
+      studentName: studentName,
+      count: expectedCount,
+      scheduleIdx: schedule?.idx,
+      subject: subject,
+    });
     setOpenModal(true);
   }
+
   return (
     <>
       <ContentContainer>

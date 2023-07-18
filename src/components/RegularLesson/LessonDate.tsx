@@ -106,14 +106,14 @@ export default function LessonDate() {
                 {focusDay.startTime === "" ? (
                     <TimeButton onClick={handlStartTimePicker}>시간을 선택하세요</TimeButton>
                     ) : (
-                    <TimeButton onClick={handlStartTimePicker}>
+                    <TimeButton onClick={handlStartTimePicker} selected={focusDay.startTime !== ""}>
                         {Number(focusDay.startTime.slice(0, 2)) <= 12 ? (
                         <>
-                            오전 {Number(focusDay.startTime.slice(0, 2))} {focusDay.startTime.slice(2)}
+                            오전 {Number(focusDay.startTime.slice(0, 2))}시 {focusDay.startTime.slice(3)}분
                         </>
                         ) : (
                         <>
-                            오후 {Number(focusDay.startTime.slice(0, 2)) - 12} {focusDay.startTime.slice(2)}
+                            오후 {Number(focusDay.startTime.slice(0, 2)) - 12}시 {focusDay.startTime.slice(3)}분
                         </>
                         )}
                     </TimeButton>
@@ -122,14 +122,14 @@ export default function LessonDate() {
                 {focusDay.endTime === "" ? (
                     <TimeButton onClick={handleFinishTimePicker}>시간을 선택하세요</TimeButton>
                     ) : (
-                    <TimeButton onClick={handleFinishTimePicker}>
+                    <TimeButton onClick={handleFinishTimePicker} selected={focusDay.endTime !== ""}>
                         {Number(focusDay.endTime.slice(0, 2)) <= 12 ? (
                         <>
-                            오전 {Number(focusDay.endTime.slice(0, 2))} {focusDay.endTime.slice(2)}
+                            오전 {Number(focusDay.endTime.slice(0, 2))}시 {focusDay.endTime.slice(3)}분
                         </>
                         ) : (
                         <>
-                            오후 {Number(focusDay.endTime.slice(0, 2)) - 12} {focusDay.endTime.slice(2)}
+                            오후 {Number(focusDay.endTime.slice(0, 2)) - 12}시 {focusDay.endTime.slice(3)}분
                         </>
                         )}
                     </TimeButton>
@@ -213,19 +213,20 @@ const TimeChoose = styled.h3`
     justify-content: center;
     align-items: center;
 
-    width: 2.8rem;
+    width: 2.3rem;
 
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey400};  
 `
 
-const TimeButton = styled.button`
+const TimeButton = styled.button<{ selected: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
-
+    width: 10rem;
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey100};  
+    ${({ selected, theme }) => selected && `color: ${theme.colors.grey700};`}
 `
 
 const ButtonWrapper = styled.section`

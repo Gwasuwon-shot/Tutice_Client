@@ -24,7 +24,7 @@ export default function ParentDayItem(props: DayItemProps) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
-          {myChildLessons && myChildLength >= 4
+          {myChildLessons && (myChildLength as number) >= 4
             ? myChildLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
@@ -45,7 +45,7 @@ export default function ParentDayItem(props: DayItemProps) {
                   </ScheduleWrapper>
                 );
               })}
-          {myChildLessons && myChildLength >= 4 && <MoreLessonIcon />}
+          {myChildLessons && (myChildLength as number) >= 4 && <MoreLessonIcon />}
         </LessonWrapper>
       </Dayitem>
     </>
@@ -111,7 +111,7 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   ${({ theme }) => theme.fonts.caption02};
   color: ${({ theme }) => theme.colors.grey600};
   background-color: ${(props) => props.$backgroundcolor};
-  border-radius: 2px;
+  border-radius: 0.2rem;
 `;
 
 const MoreLessonIcon = styled(CalendarMoreLessonIc)`

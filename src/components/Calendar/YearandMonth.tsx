@@ -5,20 +5,27 @@ import { NextMonthArrowButton, PrevMonthArrowButton, CancelButton } from "../../
 
 interface YearandMonthProps {
   currentMonth: Date;
-  prevMonth: Date;
-  nextMonth: Date;
+  handleToPrevMonth: () => void;
+  handleToNextMonth: () => void;
 }
 
 export default function YearandMonth(props: YearandMonthProps) {
-  const { currentMonth, prevMonth, nextMonth } = props;
+  const { currentMonth, handleToPrevMonth, handleToNextMonth } = props;
 
+  function handleGoToPrevMonth() {
+    handleToPrevMonth();
+  }
+
+  function handleGoToNextMonth() {
+    handleToNextMonth();
+  }
   return (
     <HeaderWrapper>
       <CalendarText>캘린더</CalendarText>
       <YearMonthWrapper>
-        <PrevMonthButton onClick={prevMonth} />
+        <PrevMonthButton onClick={() => handleGoToPrevMonth()} />
         {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
-        <NextMonthButton onClick={nextMonth} />
+        <NextMonthButton onClick={() => handleGoToNextMonth()} />
       </YearMonthWrapper>
       <CancelCalendarButton />
     </HeaderWrapper>

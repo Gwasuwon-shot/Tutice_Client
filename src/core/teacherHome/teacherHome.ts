@@ -95,13 +95,13 @@ export const YES_TODAY_CLASS_BEFORE_CLASS_BANNER = {
     isTodaySchedule: true,
     todaySchedule: {
       lesson: {
-        idx: "1",
+        idx: 1,
         studentName: "박송현",
         subject: "수학",
       },
       timeStatus: 1,
       schedule: {
-        idx: "1",
+        idx: 1,
         status: "상태없음",
         count: 3,
       },

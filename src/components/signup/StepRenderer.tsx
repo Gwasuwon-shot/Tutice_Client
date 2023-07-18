@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Role from "./Role";
 import NameEmail from "./NameEmail";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { stepNum } from "../../atom/signup/signup";
 import PasswordAgreeChecking from "./PasswordAgreeChecking";
 

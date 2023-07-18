@@ -4,21 +4,17 @@ import StudentColorBox from "../common/StudentColorBox";
 import SubjectLabel from "../common/SubjectLabel";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { NextMonthArrowButton } from "../../assets";
+import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
 
 interface ExtensionLessonContainerProps {
-  lesson: {
-    idx: number;
-    studentName: string;
-    subject: string;
-    count: number;
-  };
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedLesson: React.Dispatch<React.SetStateAction<lesson | null>>;
+  setSelectedLesson: React.Dispatch<React.SetStateAction<LessonType>>;
   endScheduleDate: string;
+  lesson: LessonType;
 }
 
 export default function ExtensionLessonContainer(props: ExtensionLessonContainerProps) {
-  const { lesson, endScheduleDate, setSelectedLesson, setOpenModal } = props;
+  const { endScheduleDate, setSelectedLesson, setOpenModal, lesson } = props;
   const { idx, studentName, subject, count } = lesson;
 
   function handleClickExtension() {

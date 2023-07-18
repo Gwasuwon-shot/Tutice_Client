@@ -65,7 +65,7 @@ const Modal = styled.aside`
 
   width: 26.4rem;
   height: 16.4rem;
-  border-radius: 8px;
+  border-radius: 0.8rem;
 
   background-color: ${({ theme }) => theme.colors.white};
 `;
@@ -86,5 +86,5 @@ const ButtonWrapper = styled.section`
   width: 100%;
   height: 4.6rem;
 
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 0.8rem 0.8rem;
 `;

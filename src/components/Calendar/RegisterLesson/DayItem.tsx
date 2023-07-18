@@ -24,7 +24,7 @@ export default function DayItem(props: DayItemProps) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
-          {myLessons && myLessonLength >= 4
+          {myLessons && (myLessonLength as number) >= 4
             ? myLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
@@ -45,7 +45,7 @@ export default function DayItem(props: DayItemProps) {
                   </ScheduleWrapper>
                 );
               })}
-          {myLessons && myLessonLength >= 4 && <MoreLessonIcon />}
+          {myLessons && (myLessonLength as number) >= 4 && <MoreLessonIcon />}
         </LessonWrapper>
       </Dayitem>
     </>
@@ -92,7 +92,7 @@ const DayText = styled.p<DayTextProps>`
   ${({ $isnotvalid }) => `
     ${$isnotvalid ? "color: #899199" : "#CED4DA"}
   `};
-  
+
   ${({ theme }) => theme.fonts.caption03};
 `;
 
@@ -113,7 +113,7 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   ${({ theme }) => theme.fonts.caption02};
   color: ${({ theme }) => theme.colors.grey600};
   background-color: ${(props) => props.$backgroundcolor};
-  border-radius: 2px;
+  border-radius: 0.2rem;
 `;
 
 const MoreLessonIcon = styled(CalendarMoreLessonIc)`

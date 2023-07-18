@@ -57,6 +57,7 @@ const StudentName = styled.p`
 
 const RightArrowTeacherHomeIcon = styled(RightArrowTeacherHomeIc)`
   margin-left: 6rem;
-
+  width: 2rem;
+  height: 2rem;
   cursor: pointer;
 `;

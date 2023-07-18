@@ -41,7 +41,7 @@ const ButtonWrapper = styled.button<{ $status: string }>`
       ? theme.colors.grey70
       : theme.colors.red1};
 
-  border-radius: 8px;
+  border-radius: 0.8rem;
 
   &:active {
     background-color: ${({ theme, $status }) =>

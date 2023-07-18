@@ -5,20 +5,25 @@ import YearandMonth from "../components/Calendar/YearandMonth";
 import Dayofweek from "../components/Calendar/Dayofweek";
 import Days from "../components/Calendar/Change/Days";
 
+//수정이 가능한 캘린더
 export default function ChangeSchedule() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  function prevMonth() {
+  function handleToPrevMonth() {
     setCurrentMonth(subMonths(currentMonth, 1));
   }
 
-  function nextMonth() {
+  function handleToNextMonth() {
     setCurrentMonth(addMonths(currentMonth, 1));
   }
   return (
     <>
       <CalendarWrapper>
-        <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
+        <YearandMonth
+          currentMonth={currentMonth}
+          handleToPrevMonth={handleToPrevMonth}
+          handleToNextMonth={handleToNextMonth}
+        />
         <Dayofweek />
         <Days currentMonth={currentMonth} />
       </CalendarWrapper>

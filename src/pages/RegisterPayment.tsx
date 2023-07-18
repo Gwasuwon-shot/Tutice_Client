@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import { EditPaymentIc, FruitPaymentIc } from "../assets";
+
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
-import StudentNameLabel from "../components/common/StudentNameLabel";
 import { STUDENT_COLOR } from "../core/common/studentColor";
+import StudentNameLabel from "../components/common/StudentNameLabel";
+import styled from "styled-components";
 import useGetPaymentRecord from "../hooks/useGetPaymentRecord";
+import { useParams } from "react-router-dom";
 
 export default function RegisterPayment() {
   const { lesson, paymentDate } = useGetPaymentRecord();
@@ -21,7 +22,7 @@ export default function RegisterPayment() {
   }
 
   return (
-    <RegisterPaymentWrapper>
+    <RegisterPaymentWrapper>z
       <Title>입금일 등록</Title>
       <StudentNameLabel
         studentName={studentName}

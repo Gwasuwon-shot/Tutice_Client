@@ -8,25 +8,24 @@ import { checkList, textList } from "../../core/Login/ListData";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 export default function AgreeChecking() {
-  // const setNewUser = useSetRecoilState(newUserData);
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
   const [allClicked, setAllClicked] = useState(false);
   const [completeCheck, setCompleteCheck] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
-  const [isFirst, setIsFirst] = useState(false);
 
-  function handleMoveToNotion(e: React.ChangeEvent<HTMLInputElement>) {
-    switch (e.target.innerText) {
+  function handleMoveToNotion(e: React.MouseEvent<HTMLDivElement>) {
+    const target = e.target as HTMLDivElement;
+    switch (target.innerText) {
       case "서비스 이용 약관":
-        window.open("https://www.naver.com", "_blank");
+        window.open("https://www.notion.so/9e874c3c10804274a99b0d6c9b75f1c2?pvs=4", "_blank");
         break;
       case "개인정보 수집 및 이용":
-        window.open("https://www.daum.net", "_blank");
+        window.open("https://www.notion.so/388ff5750f004bbf81554bfa14887186?pvs=4", "_blank");
         break;
       case "개인 정보 마케팅 활용":
-        window.open("https://www.nate.com", "_blank");
+        window.open("https://www.notion.so/1f3759e165504863b33506204d8c871a?pvs=4", "_blank");
         break;
     }
   }
@@ -78,7 +77,7 @@ export default function AgreeChecking() {
 
     setNewUser((prev: newUserDataTypes) => ({
       ...prev,
-      isMarketing: `${checkAgrees[4].selected}`,
+      isMarketing: checkAgrees[4].selected,
     }));
   }, [checkAgrees]);
 
@@ -139,7 +138,7 @@ export default function AgreeChecking() {
             ) : (
               <Essential>{textAgree.optional}</Essential>
             )}
-            <HyperLink onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleMoveToNotion(e)}>
+            <HyperLink onClick={(e: React.MouseEvent<HTMLDivElement>) => handleMoveToNotion(e)}>
               {textAgree.linkText}
             </HyperLink>
             <CheckText> {textAgree.boldText} </CheckText>
@@ -162,7 +161,7 @@ const TosWrapper = styled.div`
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
   background-color: ${({ theme }) => theme.colors.grey0};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const CheckWrapper = styled.div`

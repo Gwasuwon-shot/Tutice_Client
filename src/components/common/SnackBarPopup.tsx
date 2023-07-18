@@ -40,7 +40,7 @@ const SnackBar = styled.aside`
 
   background-color: ${({ theme }) => theme.colors.grey900};
 
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const SnackBarContainer = styled.div`

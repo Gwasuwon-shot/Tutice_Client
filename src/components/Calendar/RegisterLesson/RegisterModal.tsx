@@ -16,9 +16,9 @@ export default function RegisterModal(props: modalType) {
     <>
       <ToastModal>
         <ModalContentWrapper>
-          <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+          <ModalDate>{format(selectedDate as Date, "M월 d일 EEEE", { locale: ko })}</ModalDate>
           {scheduleList
-            .find((item) => isSameDay(new Date(item.date), selectedDate))
+            .find((item) => isSameDay(new Date(item.date), selectedDate as Date))
             ?.dailyScheduleList.map((item) => {
               const { schedule } = item;
               const { idx, studentName, subject, startTime, endTime } = schedule;
@@ -83,5 +83,5 @@ const ModalSubject = styled.span<{ $backgroundcolor: string }>`
   background-color: ${(props) => props.$backgroundcolor};
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey500};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;

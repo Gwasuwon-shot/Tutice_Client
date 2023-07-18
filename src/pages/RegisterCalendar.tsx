@@ -8,17 +8,21 @@ import Days from "../components/Calendar/RegisterLesson/Days";
 export default function RegisterCalendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  function prevMonth() {
+  function handleToPrevMonth() {
     setCurrentMonth(subMonths(currentMonth, 1));
   }
 
-  function nextMonth() {
+  function handleToNextMonth() {
     setCurrentMonth(addMonths(currentMonth, 1));
   }
   return (
     <>
       <CalendarWrapper>
-        <YearandMonth prevMonth={prevMonth} nextMonth={nextMonth} currentMonth={currentMonth} />
+        <YearandMonth
+          currentMonth={currentMonth}
+          handleToPrevMonth={handleToPrevMonth}
+          handleToNextMonth={handleToNextMonth}
+        />
         <Dayofweek />
         <Days currentMonth={currentMonth} />
       </CalendarWrapper>

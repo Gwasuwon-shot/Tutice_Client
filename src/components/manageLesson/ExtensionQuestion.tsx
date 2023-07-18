@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
-import { MISSING_MAINTEANANCE_LESSON } from "../../core/manageLesson/getMissingMaintenanceLesson";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import ExtensionLessonContainer from "./ExtensionLessonContainer";
 import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import ExtensionLessonModal from "./ExtensionLessonModal";
 import useExtensionLesson from "../../hooks/useExtensionLesson";
+import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
 
 export default function ExtensionQuestion() {
   const { missingMaintenanceLessonList } = useExtensionLesson();
-  const [selectedLesson, setSelectedLesson] = useState();
+  const [selectedLesson, setSelectedLesson] = useState<LessonType>({
+    idx: 1,
+    studentName: "권혠찡",
+    subject: "피아노",
+  });
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   return (
@@ -28,8 +32,8 @@ export default function ExtensionQuestion() {
               <ExtensionLessonContainer
                 setOpenModal={setOpenModal}
                 setSelectedLesson={setSelectedLesson}
-                lesson={lesson}
                 endScheduleDate={endScheduleDate}
+                lesson={lesson}
               />
             );
           })}
@@ -63,7 +67,7 @@ const ExtensionWrapper = styled.section`
 
   border: 1px solid ${({ theme }) => theme.colors.green5};
   gap: 0.3rem;
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const ExtentionHeader = styled.header`

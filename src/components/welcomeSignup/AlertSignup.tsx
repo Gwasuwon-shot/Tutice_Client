@@ -18,9 +18,9 @@ export default function AlertSignup() {
 
   const SUB_TEXT = "푸시알림을 활성화를 통해 \n 출결, 수업비 관리를 도울 수 있어요";
 
-  useEffect(() => {
-    mutate(deviceToken.token);
-  }, [deviceToken]);
+  // useEffect(() => {
+  //   mutate(deviceToken.token);
+  // }, [deviceToken]);
 
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
@@ -35,6 +35,7 @@ export default function AlertSignup() {
 
     registerServiceWorker();
     getDeviceToken();
+    patchingDeviceToken(deviceToken.token);
   }
 
   async function getDeviceToken() {
@@ -48,7 +49,7 @@ export default function AlertSignup() {
     });
   }
 
-  const { mutate } = useMutation(patchDeviceToken, {
+  const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
       console.log(res);
     },

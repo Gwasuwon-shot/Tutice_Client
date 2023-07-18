@@ -62,7 +62,7 @@ const ClassPreviewBannerWrapper = styled.section`
   background-color: ${({ theme }) => theme.colors.green5};
   color: ${({ theme }) => theme.colors.grey0};
 
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const StudentNameWrapper = styled.h1`

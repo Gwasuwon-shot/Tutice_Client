@@ -64,7 +64,7 @@ const Modal = styled.aside`
   padding: 1.6rem 1.4rem 4.5rem;
 
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 20px 20px 0 0;
+  border-radius: 2rem 2rem 0 0;
   opacity: 1;
 
   animation: ${Slide} 0.5s linear forwards;

@@ -67,7 +67,7 @@ const ExtensionWrapper = styled.section`
 
   border: 1px solid ${({ theme }) => theme.colors.green5};
   gap: 0.3rem;
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const ExtentionHeader = styled.header`

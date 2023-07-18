@@ -35,7 +35,7 @@ const UpcomingClassBoardWrapper = styled.aside`
 
   border: 1px solid ${({ theme }) => theme.colors.grey150};
 
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const UpcomingClassDate = styled.h1`

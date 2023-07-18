@@ -161,7 +161,7 @@ const TosWrapper = styled.div`
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
   background-color: ${({ theme }) => theme.colors.grey0};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const CheckWrapper = styled.div`

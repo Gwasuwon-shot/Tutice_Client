@@ -4,7 +4,6 @@ import StudentNameLabel from "../common/StudentNameLabel";
 import ToastModal from "../common/ToastModal";
 import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
-import useExtensionLesson from "../../hooks/useExtensionLesson";
 
 interface ExtensionLessonModalProps {
   studentName: string;

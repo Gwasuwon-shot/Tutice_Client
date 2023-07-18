@@ -35,6 +35,7 @@ export default function AlertSignup() {
 
     registerServiceWorker();
     getDeviceToken().then(() => {
+      console.log(deviceToken.token);
       patchingDeviceToken(deviceToken.token);
     });
   }

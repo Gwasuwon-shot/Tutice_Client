@@ -13,8 +13,8 @@ export default function ExtensionQuestion() {
   const { missingMaintenanceLessonList } = useExtensionLesson();
   const [selectedLesson, setSelectedLesson] = useState<LessonType>({
     idx: 1,
-    studentName: "",
-    subject: "",
+    studentName: "권혠찡",
+    subject: "피아노",
   });
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
@@ -32,8 +32,8 @@ export default function ExtensionQuestion() {
               <ExtensionLessonContainer
                 setOpenModal={setOpenModal}
                 setSelectedLesson={setSelectedLesson}
-                lesson={lesson}
                 endScheduleDate={endScheduleDate}
+                lesson={lesson}
               />
             );
           })}

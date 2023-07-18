@@ -20,7 +20,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   function handleExtensionLesson() {
     //서버 api 통신 (연장완)
-    unShowModal;
+    unShowModal();
   }
   return (
     <ModalWrapper>

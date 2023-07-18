@@ -10,10 +10,11 @@ interface ExtensionLessonContainerProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedLesson: React.Dispatch<React.SetStateAction<LessonType>>;
   endScheduleDate: string;
+  lesson: LessonType;
 }
 
 export default function ExtensionLessonContainer(props: ExtensionLessonContainerProps) {
-  const { endScheduleDate, setSelectedLesson, setOpenModal } = props;
+  const { endScheduleDate, setSelectedLesson, setOpenModal, lesson } = props;
   const { idx, studentName, subject, count } = lesson;
 
   function handleClickExtension() {

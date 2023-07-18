@@ -111,7 +111,7 @@ const InputNameWrapper = styled.div<{ $nameFocus: boolean; $isName: boolean }>`
   display: flex;
   flex-direction: column;
 
-  width: 29.2rem;
+  width: 28rem;
 
   margin-top: 3.2rem;
 
@@ -123,7 +123,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
   display: flex;
   flex-direction: column;
 
-  width: 29.2rem;
+  width: 28rem;
   margin-top: 3.2rem;
 
   border-bottom: 0.1rem solid

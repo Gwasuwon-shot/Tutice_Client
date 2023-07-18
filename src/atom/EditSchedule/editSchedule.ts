@@ -1,15 +1,7 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
-
+import { editScheduleType } from "../../type/editSchedule/editScheduleType";
 const { persistAtom } = recoilPersist();
-
-export interface editScheduleType {
-  idx: number;
-  studentName: string;
-  subject: string;
-  startTime: string;
-  endTime: string;
-}
 
 export const editSchedule = atom<editScheduleType>({
   key: "editSchedule",

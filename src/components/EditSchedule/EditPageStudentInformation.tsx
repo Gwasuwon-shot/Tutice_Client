@@ -1,15 +1,14 @@
-import { DEEFAULT_STUDENT_COLOR, STUDENT_COLOR } from "../../core/common/studentColor";
-import { studentNameSelector, subjectNameSelector } from "../../atom/common/datePicker";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
+import styled from "styled-components";
 
 import React from "react";
 import { RegularLessonStudentIc } from "../../assets";
 import SubjectLabel from "../common/SubjectLabel";
-import styled from "styled-components";
 import { useRecoilValue } from "recoil";
+import { editSchedule } from "../../atom/EditSchedule/editSchedule";
 
 export default function StudentInformation() {
-  const studentName = useRecoilValue(studentNameSelector);
-  const subjectName = useRecoilValue(subjectNameSelector);
+  const { studentName, subject, idx } = useRecoilValue(editSchedule);
 
   return (
     <StudentInformationWrapper>
@@ -19,7 +18,7 @@ export default function StudentInformation() {
       </IconWrapper>
       <StudentWrapper>
         <StudentName> {studentName} </StudentName>
-        <SubjectLabel subject={subjectName} backgroundColor={DEEFAULT_STUDENT_COLOR} color="#5B6166" />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
       </StudentWrapper>
     </StudentInformationWrapper>
   );

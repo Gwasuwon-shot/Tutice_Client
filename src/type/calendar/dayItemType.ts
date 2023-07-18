@@ -3,7 +3,7 @@ import { calendarLessonsType } from "./calendarLessonsType";
 export interface DayItemProps {
   date: Date;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
   myLessons?: calendarLessonsType;
   myChildLessons?: calendarLessonsType;
 }

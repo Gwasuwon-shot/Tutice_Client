@@ -38,9 +38,9 @@ export default function RegisterPayment() {
       </FruitWrapper>
       <Sub>입금일</Sub>
       <PaymentDate>
-        {new Date(paymentDate).getMonth() + 1}월 {new Date(paymentDate).getDate()}일
-        <EditPaymentIcon />
-      </PaymentDate>
+        {new Date(paymentDate).getMonth() + 1}월 {new Date(paymentDate).getDate()}일 */}
+      <EditPaymentIcon />
+      {/* </PaymentDate>
       <ButtonWrapper>
         <RoundBottomMiniButton isGreen={false} onClick={handleGoBack}>
           취소

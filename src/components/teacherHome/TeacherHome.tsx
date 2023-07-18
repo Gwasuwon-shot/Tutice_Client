@@ -8,7 +8,8 @@ import NoClassHome from "./NoClassHome";
 import YesClassHome from "./YesClassHome";
 
 export default function TeacherHome() {
-  const { isLessonExist } = useGetLessonByUser();
+  const { lessonByUser } = useGetLessonByUser();
+  const isLessonExist = lessonByUser?.data?.data?.isLesson;
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
 
   return (

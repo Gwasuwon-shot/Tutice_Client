@@ -128,5 +128,5 @@ const NoAttendanceDate = styled.div`
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
   position: absolute;
 
-  margin: -10rem 0 0 -1.5em;
+  margin: -8.8rem 0 0 -1.5em;
 `;

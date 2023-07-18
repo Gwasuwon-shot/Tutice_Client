@@ -1,4 +1,5 @@
 import { EditPaymentIc, FruitPaymentIc } from "../assets";
+import {openPaymentPicker, paymentDateState, paymentDayState, paymentFocusDayState} from '../atom/registerPayment/registerPayment';
 
 import PaymentDatePicker from '../components/registerPayment/PaymentDatePicker';
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
@@ -56,6 +57,7 @@ export default function RegisterPayment() {
           등록하기
         </RoundBottomMiniButton>
       </ButtonWrapper>
+      {openPaymentPicker && <PaymentDatePicker/>}
     </RegisterPaymentWrapper>
   );
 }

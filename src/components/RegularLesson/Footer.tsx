@@ -1,3 +1,4 @@
+import { dayState, focusDayState } from "../../atom/timePicker/timePicker";
 import { openDatePickerState, openFinishDetailState, openStartDetailState, openTimePickerState } from "../../atom/timePicker/timePicker";
 
 import DatePicker from '../../components/RegularLesson/TimePicker/DatePicker';
@@ -14,9 +15,14 @@ export default function Footer() {
     const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
     const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
 
+    
+
+    function CompleteLesson() {
+        
+    }
     return (
         <>
-        <FooterWrapper>
+        <FooterWrapper onClick = {CompleteLesson}> 
             <FooterButton> 저장 </FooterButton>
         </FooterWrapper>
         {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}

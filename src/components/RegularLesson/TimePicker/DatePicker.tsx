@@ -4,7 +4,7 @@ import 'swiper/components/navigation/navigation.min.css';
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
-import {dateState, openDatePickerState} from '../../../atom/timePicker/timePicker';
+import {dateState, firstLessonDay, openDatePickerState} from '../../../atom/timePicker/timePicker';
 
 import styled from 'styled-components';
 import {useRecoilState} from 'recoil';
@@ -75,9 +75,11 @@ export default function DatePicker() {
     // 4. 날짜 상태 관리
 
     const [activeSlide, setActiveSlide] = useRecoilState(dateState);
+    const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
 
     function handleSlideChange(swiper: SwiperCore) {
         setActiveSlide({year: currentYear, month:monthCalender[swiper.realIndex].month, date: monthCalender[swiper.realIndex].date});
+        setfirstLesson(monthCalender[swiper.realIndex].day);
         // problem : year을 currentYear이 아닌 지난해, 다음해로 선택했을 시 -> 추후 변경
     };
     
@@ -88,6 +90,7 @@ export default function DatePicker() {
     function handleCancelDatePicker() {
         setIsDatePickerOpen(false);
         setActiveSlide({year: currentYear, month: currentMonth, date: todayDate});
+        setfirstLesson(todayDay);
     }
 
     // 3) 데이트 피커 완료 시
@@ -98,6 +101,8 @@ export default function DatePicker() {
     // check 용
     useEffect(() => {
         console.log(activeSlide);
+        console.log("첫수업일");
+        console.log(firstLesson);
     }, [activeSlide]);
 
     const slides = Array.from({ length: monthCalender.length }, (_, index) => (

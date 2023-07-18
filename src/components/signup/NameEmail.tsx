@@ -130,7 +130,8 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
 `;
 
 const Inputfield = styled.input`
-  width: 70%;
+  /* width: 70%; */
+  height: 2rem;
   margin: 1rem 0.2rem;
 
   &::placeholder {

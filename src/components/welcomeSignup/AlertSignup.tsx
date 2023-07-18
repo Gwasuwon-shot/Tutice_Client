@@ -9,6 +9,7 @@ import { AppCheckTokenResult } from "firebase/app-check";
 import { getToken } from "firebase/messaging";
 import { useMutation } from "react-query";
 import { patchDeviceToken } from "../../api/patchDeviceToken";
+import { postNotificationRequest } from "../../api/postNotificationRequest";
 
 export default function AlertSignup() {
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
@@ -35,7 +36,7 @@ export default function AlertSignup() {
 
     registerServiceWorker();
     getDeviceToken().then(() => {
-      console.log(deviceToken.token);
+      console.log("디바이스 토큰 들어왔니?" + deviceToken.token);
       patchingDeviceToken(deviceToken.token);
     });
   }
@@ -60,6 +61,10 @@ export default function AlertSignup() {
     },
   });
 
+  async function handleShowNotification() {
+    await postNotificationRequest(deviceToken.token);
+  }
+
   return (
     <>
       <Container>
@@ -69,6 +74,7 @@ export default function AlertSignup() {
       </Container>
 
       <ButtonLayout onClick={() => handleAllowNotification()} buttonText={"할래요!"} />
+      <button onClick={() => handleShowNotification()}></button>
     </>
   );
 }

@@ -109,6 +109,7 @@ const RoleRapper = styled.div`
 
 const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string }>`
   background-image: url(${({ $RoleNoneCheckSignupIc }) => $RoleNoneCheckSignupIc});
+  background-size: cover;
 
   width: 4rem;
   height: 4rem;

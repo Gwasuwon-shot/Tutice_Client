@@ -1,7 +1,7 @@
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation } from "swiper";
 import { editDateState } from "../../atom/EditSchedule/editDateState";

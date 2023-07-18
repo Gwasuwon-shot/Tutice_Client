@@ -8,7 +8,6 @@ import { editDateState } from "../../atom/EditSchedule/editDateState";
 export default function LessonInformation() {
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
   const { year, month, date, dayOfWeek } = useRecoilValue(editDateState);
-  console.log(dayOfWeek);
   function handleDatePicker() {
     setIsDatePickerOpen(true);
   }

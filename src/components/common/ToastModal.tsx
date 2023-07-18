@@ -16,7 +16,6 @@ export default function ToastModal(props: ToastModalProps) {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   const bindLogoPos = useDrag((params) => {
-    console.log(params.offset[1]);
     setLogoPos({
       y: params.offset[1],
     });
@@ -44,7 +43,7 @@ const Slide = keyframes`
 `;
 
 const ModalWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 2;
 
   width: 32rem;

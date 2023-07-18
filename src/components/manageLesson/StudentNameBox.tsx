@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { styled } from "styled-components";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useManageLesson from "../../hooks/useManageLesson";
@@ -9,10 +10,11 @@ export default function StudentNameBox() {
   const { lesson, scheduleList } = useManageLesson();
   const { idx, studentName, subject, count, nowCount } = lesson;
   const { openModal } = useModal();
+  const [payMentAlarmOpen, setPayMentAlarmOpen] = useState(false);
 
   return (
     <>
-      {openModal && (
+      {openModal && payMentAlarmOpen && (
         <SendPaymentAlarmManageLessonModal
           studentName={studentName}
           subject={subject}

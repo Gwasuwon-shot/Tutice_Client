@@ -16,22 +16,3 @@ export default function EditFooterButton(props: EditFooterButtonProps) {
     </BottomButton>
   );
 }
-
-const Button = styled.button<{ $isActive: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 29.2rem;
-  height: 5rem;
-  padding: 0.8rem;
-
-  border-radius: 8px;
-
-  flex-shrink: 0;
-
-  gap: 0.8rem;
-
-  background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
-  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};
-`;

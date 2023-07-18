@@ -31,7 +31,7 @@ export default function ChangeModal(props: modalType) {
     setIsEdit(false);
   }
 
-  function moveClickEditPage(schedule: editScheduleType, selectedDate) {
+  function moveClickEditPage(schedule: editScheduleType, selectedDate): void {
     setWillEditDate((prevState: editDateStateTypes) => ({
       year: selectedDate.getFullYear(),
       month: selectedDate.getMonth() + 1,

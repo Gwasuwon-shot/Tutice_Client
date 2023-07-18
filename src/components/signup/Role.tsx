@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
-import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
+import RoleCheckSignupIc from "../../assets/icon/roleCheckSignupIc.svg";
+import RoleNoneCheckSignupIc from "../../assets/icon/roleNoneCheckSignupIc.svg";
 import BottomButton from "../common/BottomButton";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { newUserData, stepNum } from "../../atom/signup/signup";

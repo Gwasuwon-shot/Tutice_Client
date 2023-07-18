@@ -84,6 +84,7 @@ export default function LessonDate() {
             endTime: '',
         });
     }
+
     
     return (
         <LessonDateWrapper>
@@ -101,6 +102,7 @@ export default function LessonDate() {
                 disabled = {selectedDays.length >= 1 && selectedDays.findIndex((selectedDay)=> selectedDay.dayOfWeek === day) !== -1}
                 isSelected={(focusDay.dayOfWeek === day)}>{day}</Day>
                 ))}
+
             </DayWrapper>
 
             <TimeWrapper>
@@ -147,8 +149,10 @@ export default function LessonDate() {
                 <ModalButton> 캘린더로 일정 확인하기 </ModalButton>
             </ModalWrapper>
             
-            
-            <SelectedDayAndTime />
+            {selectedDays.map((day, index) => (
+                <SelectedDayAndTime key = {index} dayofweek = {day.dayOfWeek} startTime = {day.startTime} endTime = {day.endTime} /> 
+            ))}
+
         </LessonDateWrapper>
     );
 }

@@ -15,7 +15,7 @@ interface LessonData {
 interface NoCheckAttendanceContanierProps {
   lesson: LessonData;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedLesson: React.Dispatch<React.SetStateAction<lesson | null>>;
+  setSelectedLesson: React.Dispatch<React.SetStateAction<lesson>>;
   schedule: scheduleType;
 }
 
@@ -26,7 +26,6 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
 
   function handleAttendanceCheck(): void {
     setSelectedLesson(lesson);
-    console.log("here");
     setOpenModal(true);
   }
   return (

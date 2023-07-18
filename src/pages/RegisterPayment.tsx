@@ -8,7 +8,10 @@ import useGetPaymentRecord from "../hooks/useGetPaymentRecord";
 import { useParams } from "react-router-dom";
 
 export default function RegisterPayment() {
-  const { lesson, paymentDate } = useGetPaymentRecord();
+//   const { paymentRecordView } = useGetPaymentRecord(Number(manageLessonId)); //lessonIdx 넣어주어야함
+//   const { lesson, paymentDate } = paymentRecordView?.data;
+
+  const { lesson, paymentDate } = useGetPaymentRecord();  // 서버 해결시 위 주석으로 변경
   const { idx, studentName, subject, cycle } = lesson;
   const { value, startDate, endDate } = cycle;
   const { manageLessonId } = useParams();
@@ -22,7 +25,7 @@ export default function RegisterPayment() {
   }
 
   return (
-    <RegisterPaymentWrapper>z
+    <RegisterPaymentWrapper>
       <Title>입금일 등록</Title>
       <StudentNameLabel
         studentName={studentName}
@@ -42,7 +45,7 @@ export default function RegisterPayment() {
       <Sub>입금일</Sub>
       <PaymentDate>
         {new Date(paymentDate).getMonth() + 1}월 {new Date(paymentDate).getDate()}일
-        <EditPaymentIc />
+        <EditPaymentIcon />
       </PaymentDate>
       <ButtonWrapper>
         <RoundBottomMiniButton isGreen={false} onClick={handleGoBack}>
@@ -121,3 +124,9 @@ const ButtonWrapper = styled.section`
 
   width: 28.5rem;
 `;
+
+const EditPaymentIcon = styled(EditPaymentIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+

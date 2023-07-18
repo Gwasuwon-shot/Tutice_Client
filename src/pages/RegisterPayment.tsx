@@ -1,5 +1,6 @@
 import { EditPaymentIc, FruitPaymentIc } from "../assets";
 
+import PaymentDatePicker from '../components/registerPayment/PaymentDatePicker';
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
 import { STUDENT_COLOR } from "../core/common/studentColor";
 import StudentNameLabel from "../components/common/StudentNameLabel";
@@ -15,7 +16,7 @@ export default function RegisterPayment() {
   const { idx, studentName, subject, cycle } = lesson;
   const { value, startDate, endDate } = cycle;
   const { manageLessonId } = useParams();
-
+  
   function handleGoBack() {
     // 뒤로가기
   }

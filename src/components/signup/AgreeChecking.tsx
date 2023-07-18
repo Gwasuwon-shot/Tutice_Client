@@ -8,7 +8,6 @@ import { checkList, textList } from "../../core/Login/ListData";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 export default function AgreeChecking() {
-  // const setNewUser = useSetRecoilState(newUserData);
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
@@ -21,13 +20,13 @@ export default function AgreeChecking() {
     const target = e.target as HTMLDivElement;
     switch (target.innerText) {
       case "서비스 이용 약관":
-        window.open("https://www.naver.com", "_blank");
+        window.open("https://www.notion.so/9e874c3c10804274a99b0d6c9b75f1c2?pvs=4", "_blank");
         break;
       case "개인정보 수집 및 이용":
-        window.open("https://www.daum.net", "_blank");
+        window.open("https://www.notion.so/388ff5750f004bbf81554bfa14887186?pvs=4", "_blank");
         break;
       case "개인 정보 마케팅 활용":
-        window.open("https://www.nate.com", "_blank");
+        window.open("https://www.notion.so/1f3759e165504863b33506204d8c871a?pvs=4", "_blank");
         break;
     }
   }

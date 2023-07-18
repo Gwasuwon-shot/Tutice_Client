@@ -13,6 +13,8 @@ import { EditPencilIc, removeTrashCan } from "../../../assets";
 import { modalType } from "../../../type/calendar/modalType";
 import { useRecoilState } from "recoil";
 import { editDateState } from "../../../atom/EditSchedule/editDateState";
+import { editScheduleType } from "../../../type/editSchedule/editScheduleType";
+import { editDateStateTypes } from "../../../type/editSchedule/editDateType";
 
 export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal } = props;
@@ -29,9 +31,19 @@ export default function ChangeModal(props: modalType) {
     setIsEdit(false);
   }
 
-  function moveClickEditPage(schedule, selectedDate) {
-    setClickedSchedule(schedule);
-    setWillEditDate(selectedDate);
+  function moveClickEditPage(schedule: editScheduleType, selectedDate) {
+    setWillEditDate((prevState: editDateStateTypes) => ({
+      year: selectedDate.getFullYear(),
+      month: selectedDate.getMonth() + 1,
+      date: selectedDate.getDate(),
+      dayOfWeek: selectedDate.getDay(),
+    }));
+
+    setClickedSchedule((prevState: editScheduleType) => ({
+      ...prevState,
+      startTime: schedule?.startTime,
+      endTime: schedule?.endTime,
+    }));
     navigate("/edit-lessonschedule");
   }
 

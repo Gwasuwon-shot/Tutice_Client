@@ -33,7 +33,6 @@ export default function Footer() {
     }, [selectedDays, firstday]);
     
     function CompleteLesson() {
-        // 첫 수업일과 정기등록 요일은 동일해야 해요 
         // post 로직 !
     }
     

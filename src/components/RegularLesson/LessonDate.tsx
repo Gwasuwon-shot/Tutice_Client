@@ -81,7 +81,7 @@ export default function LessonDate() {
             <IconWrapper>
                 <RegularLessonClockIcon />
                 <SectionName> 수업일시 </SectionName>
-                <Explain> 수업종료 5분 뒤에 출결알람을 드릴게요. </Explain>
+                <Explain> 첫 수업일과 정기등록 요일은 동일해야 해요  </Explain>
             </IconWrapper>
 
             <DayWrapper>

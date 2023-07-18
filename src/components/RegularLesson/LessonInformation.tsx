@@ -45,6 +45,7 @@ export default function LessonInformation() {
             <IconWrapper>
                 <RegularLessonNotebookIcon />
                 <SectionName> 수업정보 </SectionName>
+                <Explain> 수업종료 5분 뒤에 출결알람을 드릴게요. </Explain>
             </IconWrapper>
             <LessonWrapper>
                 <Turn> 
@@ -53,7 +54,6 @@ export default function LessonInformation() {
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
-                    
                     <StartDateButton type = "button" onClick={handleDatePicker}> {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 </StartDateButton>
                     <RegularLessonPencilIcon />
                 </StartDate>
@@ -72,6 +72,14 @@ const IconWrapper = styled.div`
     display: flex;
     
     height: 3.1rem;
+`
+
+const Explain = styled.h3`
+    margin-top: 1.7rem;
+    margin-left: 1.8rem;
+
+    ${({ theme }) => theme.fonts.caption01};
+    color: ${({ theme }) => theme.colors.grey300};  
 `
 
 const RegularLessonNotebookIcon = styled(RegularLessonNotebookIc)`
@@ -125,6 +133,7 @@ const TurnButton = styled.button<LesssonProp>`
 const StartDate = styled.div`
     display: flex;
 `
+
 const StartDateName = styled.h2`
     display: flex;
     align-items: center;
@@ -134,6 +143,7 @@ const StartDateName = styled.h2`
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey400};
 `
+
 const StartDateButton = styled.button`
     padding: 0;
 
@@ -142,5 +152,7 @@ const StartDateButton = styled.button`
 `
 
 const RegularLessonPencilIcon = styled(RegularLessonPencilIc)`
+    width: 1.6rem;
+    margin-top: 0.3rem;
     margin-left: 1.6rem;
 `

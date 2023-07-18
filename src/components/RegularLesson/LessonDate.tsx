@@ -4,6 +4,7 @@ import {dayState, focusDayState, openFinishDetailState, openStartDetailState} fr
 
 import DetailTimePicker from './TimePicker/DetailTimePicker';
 import RoundBottomButton from '../common/RoundBottomButton';
+import SelectedDayAndTime from './SelectedDayAndTime';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 
@@ -97,7 +98,8 @@ export default function LessonDate() {
                 {DAYS.map((day, index) => (
                 <Day key={index} 
                 onClick= {()=> handleDayButton(day)} 
-                isSelected={(selectedDays.length >= 1 && selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day) !== -1) || (focusDay.dayOfWeek === day)}>{day}</Day>
+                disabled = {selectedDays.length >= 1 && selectedDays.findIndex((selectedDay)=> selectedDay.dayOfWeek === day) !== -1}
+                isSelected={(focusDay.dayOfWeek === day)}>{day}</Day>
                 ))}
             </DayWrapper>
 
@@ -144,7 +146,9 @@ export default function LessonDate() {
                 <RegularLessonCalenderIcon />
                 <ModalButton> 캘린더로 일정 확인하기 </ModalButton>
             </ModalWrapper>
-                    
+            
+            
+            <SelectedDayAndTime />
         </LessonDateWrapper>
     );
 }
@@ -197,6 +201,8 @@ const Day = styled.button<DayProp>`
     background-color: ${({ theme }) => theme.colors.grey50}; 
     ${({ isSelected, theme }) => isSelected && `background-color: ${theme.colors.green4}`};
     ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.white}`};
+    ${({ disabled, theme }) => disabled && `background-color: ${theme.colors.grey400}`};
+    ${({ disabled, theme }) => disabled && `color: ${theme.colors.white}`};
 `
 
 const TimeWrapper = styled.section`

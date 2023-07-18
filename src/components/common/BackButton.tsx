@@ -19,6 +19,5 @@ export default function BackButton() {
 const BackButtonSignupIcon = styled(backButtonSignupIc)`
   width: 4rem;
   height: 4rem;
-  margin-top: 0.77rem;
-  margin-left: 1.6rem;
+  margin-left: -1.4rem;
 `;

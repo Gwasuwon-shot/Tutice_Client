@@ -63,6 +63,7 @@ export default function AlertSignup() {
 
   async function handleShowNotification() {
     await postNotificationRequest(deviceToken.token);
+    console.log("푸시 뜨니?");
   }
 
   return (
@@ -73,14 +74,20 @@ export default function AlertSignup() {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
+      <button type="button" onClick={() => handleShowNotification()}>
+        이거 눌러봐바
+      </button>
       <ButtonLayout onClick={() => handleAllowNotification()} buttonText={"할래요!"} />
-      <button onClick={() => handleShowNotification()}>이거 눌러봐바</button>
     </>
   );
 }
 
 const Container = styled.div`
   margin-top: 3.6rem;
+
+  > button {
+    border: 1px solid black;
+  }
 `;
 const BellWelcomeIcon = styled(bellWelcomeIc)`
   width: 2.9rem;

@@ -112,6 +112,7 @@ const InputNameWrapper = styled.div<{ $nameFocus: boolean; $isName: boolean }>`
   flex-direction: column;
 
   width: 29.2rem;
+
   margin-top: 3.2rem;
 
   border-bottom: 0.1rem solid

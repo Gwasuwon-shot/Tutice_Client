@@ -45,7 +45,7 @@ export default function PasswordAgreeChecking() {
     pwViewing === "text" ? setPwViewing("password") : setPwViewing("text");
   }
   function handleConfirmViewing() {
-    pwViewing === "text" ? setPwViewing("password") : setPwViewing("text");
+    confirmViewing === "text" ? setConfirmViewing("password") : setConfirmViewing("text");
   }
 
   function viewingPwIcon() {
@@ -122,7 +122,7 @@ export default function PasswordAgreeChecking() {
               onFocus={() => setConfirmFocus(true)}
               onBlur={() => setConfirmFocus(false)}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
-              type={pwViewing}
+              type={confirmViewing}
               autoComplete="off"
               placeholder={PLACEHOLDER_TEXT.confirmHolder}
             />

@@ -133,7 +133,9 @@ const Inputfield = styled.input`
   padding: 0;
   height: 2rem;
   margin-top: 1em;
+  margin-bottom: 1.1rem;
   margin-left: 0.2rem;
+  ${({ theme }) => theme.fonts.title03};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey400};

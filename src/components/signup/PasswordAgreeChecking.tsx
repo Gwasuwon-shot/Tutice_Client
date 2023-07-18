@@ -17,7 +17,7 @@ import AgreeChecking from "./AgreeChecking";
 export default function PasswordAgreeChecking() {
   const newUser = useRecoilValue(newUserData);
   const [pw, setPw] = useState("");
-  const [confirmPw, setConfirmPw] = useState("");
+  const [confirmPw, setConfirmPw] = useState(" ");
   const [isPassword, setIsPassword] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -96,6 +96,8 @@ export default function PasswordAgreeChecking() {
         </InputConfirmWrapper>
 
         {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+
+        {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
 
         <AgreeChecking />
 
@@ -181,4 +183,13 @@ const ButtonText = styled.p`
   /* top- 정확한 값으로 수정 필요 */
   top: -1rem;
   ${({ theme }) => theme.fonts.body01};
+`;
+
+const PasswordMatched = styled.p`
+  margin-top: 0.5rem;
+  margin-left: 0.2rem;
+
+  color: ${({ theme }) => theme.colors.green5};
+
+  ${({ theme }) => theme.fonts.body06};
 `;

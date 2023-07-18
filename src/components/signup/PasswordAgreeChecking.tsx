@@ -109,7 +109,7 @@ export default function PasswordAgreeChecking() {
               autoComplete="off"
               placeholder={PLACEHOLDER_TEXT.passwordHolder}
             />
-            {viewingIcon()}
+            {viewingPwIcon()}
           </PasswordIconWrapper>
         </InputPwWrapper>
 

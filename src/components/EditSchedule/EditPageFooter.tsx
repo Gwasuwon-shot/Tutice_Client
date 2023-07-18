@@ -18,6 +18,7 @@ export default function EditPageFooter() {
 
   function handleEditLesson(): void {
     navigate("/change-schedule");
+    //post하는 로직
   }
 
   return (

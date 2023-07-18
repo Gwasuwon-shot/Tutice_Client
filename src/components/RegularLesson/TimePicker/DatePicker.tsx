@@ -107,6 +107,11 @@ export default function DatePicker() {
             <Day> {monthCalender[index].day} </Day>
         </SwiperSlide>
     ));
+
+    // 도르레 처음 클릭할 때 오늘 날짜부터 오도록 설정
+    const firstIndex = monthCalender.findIndex(date =>
+        date.month === currentMonth && date.date === todayDate && date.day === todayDay
+    );
     
     return (
 
@@ -118,6 +123,7 @@ export default function DatePicker() {
 
             <StyledSwiper
                 direction="vertical"
+                initialSlide ={firstIndex}
                 slidesPerView={7}
                 spaceBetween={19}
                 freeMode={true}

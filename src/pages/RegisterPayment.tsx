@@ -1,16 +1,14 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { EditPaymentIc, FruitPaymentIc } from "../assets";
-import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
-import StudentNameLabel from "../components/common/StudentNameLabel";
-import { STUDENT_COLOR } from "../core/common/studentColor";
 import useGetPaymentRecord from "../hooks/useGetPaymentRecord";
 
 export default function RegisterPayment() {
-  const { lesson, paymentDate } = useGetPaymentRecord();
-  const { idx, studentName, subject, cycle } = lesson;
-  const { value, startDate, endDate } = cycle;
   const { manageLessonId } = useParams();
+  const { paymentRecordView } = useGetPaymentRecord(Number(manageLessonId)); //lessonIdx 넣어주어야함
+  // const { lesson, paymentDate } = paymentRecordView?.data;
+  // const { idx, studentName, subject, cycle } = lesson;
+  // const { value, startDate, endDate } = cycle;
 
   function handleGoBack() {
     // 뒤로가기
@@ -22,7 +20,7 @@ export default function RegisterPayment() {
 
   return (
     <RegisterPaymentWrapper>
-      <Title>입금일 등록</Title>
+      {/* <Title>입금일 등록</Title>
       <StudentNameLabel
         studentName={studentName}
         subject={subject}
@@ -40,9 +38,9 @@ export default function RegisterPayment() {
       </FruitWrapper>
       <Sub>입금일</Sub>
       <PaymentDate>
-        {new Date(paymentDate).getMonth() + 1}월 {new Date(paymentDate).getDate()}일
-        <EditPaymentIc />
-      </PaymentDate>
+        {new Date(paymentDate).getMonth() + 1}월 {new Date(paymentDate).getDate()}일 */}
+      <EditPaymentIcon />
+      {/* </PaymentDate>
       <ButtonWrapper>
         <RoundBottomMiniButton isGreen={false} onClick={handleGoBack}>
           취소
@@ -50,7 +48,7 @@ export default function RegisterPayment() {
         <RoundBottomMiniButton isGreen={true} onClick={handleReadyToRegister}>
           등록하기
         </RoundBottomMiniButton>
-      </ButtonWrapper>
+      </ButtonWrapper> */}
     </RegisterPaymentWrapper>
   );
 }
@@ -71,6 +69,7 @@ const RegisterPaymentWrapper = styled.section`
 
 const FruitPaymentIcon = styled(FruitPaymentIc)`
   width: 7.4rem;
+  height: 10.4rem;
 `;
 
 const FruitWrapper = styled.article`
@@ -119,4 +118,9 @@ const ButtonWrapper = styled.section`
   bottom: 2.2rem;
 
   width: 28.5rem;
+`;
+
+const EditPaymentIcon = styled(EditPaymentIc)`
+  width: 5rem;
+  height: 5rem;
 `;

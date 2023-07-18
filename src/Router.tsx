@@ -1,12 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import ChangeLessonShcedule from "./pages/ChangeLessonShcedule";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
+import EditShcedule from "./pages/EditSchedule";
 import Home from "./pages/Home";
+import LessonDetail from "./pages/LessonDetail";
+import LessonInfo from "./pages/LessonInfo";
+import LessonShare from "./pages/LessonShare";
 import Login from "./pages/Login";
 import ManageLessonDetail from "./pages/ManageLessonDetail";
 import ManageLessonMain from "./pages/ManageLessonMain";
+import Mypage from "./pages/Mypage";
+import NoAttendanceCheck from "./pages/NoAttendanceCheck";
 import OnBoarding from "./pages/OnBoarding";
 import ParentCalendar from "./pages/ParentCalendar";
 import RegisterCalendar from "./pages/RegisterCalendar";
@@ -16,8 +21,6 @@ import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
-import Mypage from "./pages/Mypage";
-import NoAttendanceCheck from "./pages/NoAttendanceCheck";
 
 export default function Router() {
   return (
@@ -37,11 +40,16 @@ export default function Router() {
         <Route path="/regular-lesson" element={<RegularLesson />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/register-calendar" element={<RegisterCalendar />} />
+        <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/time-picker" element={<TimePickerPage />} />
         <Route path="/change-schedule" element={<ChangeSchedule />} />
-        <Route path="/change-lessonschedule" element={<ChangeLessonShcedule />} />
+        <Route path="/change-lessonschedule" element={<ChangeSchedule />} />
+        <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
+        <Route path="/lesson-share" element={<LessonShare />} />
+        <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
+        <Route path="/edit-lessonschedule" element={<EditShcedule />} />
       </Routes>
     </BrowserRouter>
   );

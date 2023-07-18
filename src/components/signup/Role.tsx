@@ -30,7 +30,7 @@ export default function Role() {
 
   return (
     <>
-      <ProgressBar progress={0} />
+      <ProgressBar progress={20} />
       <BackButton />
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.whichRole} />

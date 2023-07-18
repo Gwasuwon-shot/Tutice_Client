@@ -78,7 +78,7 @@ export default function PasswordAgreeChecking() {
 
   return (
     <>
-      <ProgressBar progress={75} />
+      <ProgressBar progress={80} />
       <BackButton />
       <Container>
         <TitleWrapper>

@@ -1,10 +1,10 @@
 import React from "react";
 import { styled } from "styled-components";
-import StudentColorBox from "../common/StudentColorBox";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import SubjectLabel from "../common/SubjectLabel";
-import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
 import { scheduleType } from "../../type/common/scheduleType";
+import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
+import StudentColorBox from "../common/StudentColorBox";
+import SubjectLabel from "../common/SubjectLabel";
 
 interface LessonData {
   idx: number;
@@ -22,7 +22,7 @@ interface NoCheckAttendanceContanierProps {
 export default function NoCheckAttendanceContanier(props: NoCheckAttendanceContanierProps) {
   const { setOpenModal, setSelectedLesson, lesson, schedule } = props;
   const { idx, studentName, subject } = lesson;
-  const { startTime, endTime, count } = schedule;
+  const { startTime, endTime, expectedCount } = schedule;
 
   function handleAttendanceCheck(): void {
     setSelectedLesson(lesson);
@@ -38,7 +38,7 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
               {startTime} ~ {endTime}
             </Time>
             <Bar> | </Bar>
-            <Time>{count}회차</Time>
+            <Time>{expectedCount}회차</Time>
           </TimeWrapper>
           <NameSubjectWrapper>
             <Name> {studentName}</Name>
@@ -58,15 +58,16 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
 const ContentContainer = styled.div`
   display: flex;
   gap: 1.4rem;
+  margin: 1rem 0;
 `;
 
 const InforContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-
-  margin-right: 6rem;
+  width: 19rem;
 `;
+
 const Bar = styled.p`
   color: ${({ theme }) => theme.colors.grey100};
 `;
@@ -78,6 +79,7 @@ const Time = styled.h2`
 
 const TimeWrapper = styled.div`
   display: flex;
+  align-items: center;
 
   height: 1.3rem;
 
@@ -109,4 +111,8 @@ const NameSubjectWrapper = styled.div`
   gap: 0.4rem;
 `;
 
-const ButtonWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

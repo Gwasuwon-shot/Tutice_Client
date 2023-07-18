@@ -8,5 +8,5 @@ export async function getLessonByUser() {
     },
   });
 
-  return data;
+  return data.data.data.isLesson;
 }

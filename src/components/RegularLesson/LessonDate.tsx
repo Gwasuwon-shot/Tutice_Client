@@ -104,7 +104,7 @@ export default function LessonDate() {
             <TimeWrapper>
                 <TimeChoose> 시작 </TimeChoose>
                 {focusDay.startTime === "" ? (
-                    <TimeButton onClick={handlStartTimePicker}>시간을 선택하세요</TimeButton>
+                    <TimeButton onClick={handlStartTimePicker} selected={false}>시간을 선택하세요</TimeButton>
                     ) : (
                     <TimeButton onClick={handlStartTimePicker} selected={focusDay.startTime !== ""}>
                         {Number(focusDay.startTime.slice(0, 2)) <= 12 ? (
@@ -120,7 +120,7 @@ export default function LessonDate() {
                 )}
                 <TimeChoose> 종료 </TimeChoose>
                 {focusDay.endTime === "" ? (
-                    <TimeButton onClick={handleFinishTimePicker}>시간을 선택하세요</TimeButton>
+                    <TimeButton onClick={handleFinishTimePicker} selected={false}>시간을 선택하세요</TimeButton>
                     ) : (
                     <TimeButton onClick={handleFinishTimePicker} selected={focusDay.endTime !== ""}>
                         {Number(focusDay.endTime.slice(0, 2)) <= 12 ? (

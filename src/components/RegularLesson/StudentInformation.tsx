@@ -27,44 +27,44 @@ export default function StudentInformation() {
 }
 
 const StudentInformationWrapper = styled.section`
-    display: flex;
-    flex-direction: column;
-`
+  display: flex;
+  flex-direction: column;
+`;
 
 const IconWrapper = styled.div`
-    display: flex;
-    
-    height: 2.8rem;
-`
+  display: flex;
 
-const  RegularLessonStudentIcon = styled(RegularLessonStudentIc)`
-    margin-left: 1.7rem;
-    margin-top: 1.2rem;
-`
+  height: 2.8rem;
+`;
+
+const RegularLessonStudentIcon = styled(RegularLessonStudentIc)`
+  margin-top: 1.2rem;
+  margin-left: 1.7rem;
+`;
 
 const SectionName = styled.h1`
-    margin-left: 0.8rem;
-    margin-top: 1.1rem;
-    
-    ${({ theme }) => theme.fonts.body04};
-    color: ${({ theme }) => theme.colors.grey600};
-`
+  margin-left: 0.8rem;
+  margin-top: 1.1rem;
+
+  ${({ theme }) => theme.fonts.body04};
+  color: ${({ theme }) => theme.colors.grey600};
+`;
 
 const StudentWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    
-    width: 28.8rem;
-    height: 5rem;
-    margin-left: 1.5rem;
+  display: flex;
+  align-items: center;
 
-    border-bottom: 1px solid ${({ theme }) => theme.colors.grey50}
-`
+  width: 28.8rem;
+  height: 5rem;
+  margin-left: 1.5rem;
+
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey50};
+`;
 
 const StudentName = styled.h2`
-    margin-left: 0.8rem;
-    margin-right: 0.4rem;
-    
-    ${({ theme }) => theme.fonts.body01};
-    color: ${({ theme }) => theme.colors.grey700};
-`
+  margin-left: 0.8rem;
+  margin-right: 0.4rem;
+
+  ${({ theme }) => theme.fonts.body01};
+  color: ${({ theme }) => theme.colors.grey700};
+`;

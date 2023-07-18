@@ -38,7 +38,7 @@ export default function ChangeModal(props: modalType) {
       <ToastModal>
         <ModalContentWrapper>
           <ModalHeaderWrapper>
-            <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+            <ModalDate>{format(selectedDate as Date, "M월 d일 EEEE", { locale: ko })}</ModalDate>
             {isEdit ? (
               <ModalButtonWrapper>
                 <ModalButton onClick={handleCloseButton}>완료</ModalButton>
@@ -51,7 +51,7 @@ export default function ChangeModal(props: modalType) {
             )}
           </ModalHeaderWrapper>
           {scheduleList
-            .find((item) => isSameDay(new Date(item.date), selectedDate))
+            .find((item) => isSameDay(new Date(item.date), selectedDate as Date))
             ?.dailyScheduleList.map((lesson) => {
               const { schedule } = lesson;
               const { idx, subject, studentName, startTime, endTime } = schedule;
@@ -81,7 +81,6 @@ export default function ChangeModal(props: modalType) {
     </>
   );
 }
-
 
 const ModalHeaderWrapper = styled.div`
   display: flex;

@@ -20,6 +20,9 @@ const SelectedWrapper = styled.article`
     width: 29.2rem;
     height: 3.6rem;
     padding: 1rem;
+    margin: 1.4rem;
+
+    border-radius: 7px;
     background-color: ${({ theme }) => theme.colors.green1}; 
     color: ${({ theme }) => theme.colors.green5}; 
 `

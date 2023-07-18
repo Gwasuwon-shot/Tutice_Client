@@ -9,7 +9,8 @@ export async function patchDeviceToken(token: string) {
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
+        Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOKEN}`,
+        accessToken: `${import.meta.env.VITE_APP_TEACHER_TOKEN}`,
       },
     },
   );

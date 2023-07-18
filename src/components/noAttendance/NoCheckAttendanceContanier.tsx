@@ -1,10 +1,10 @@
 import React from "react";
 import { styled } from "styled-components";
-import StudentColorBox from "../common/StudentColorBox";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import SubjectLabel from "../common/SubjectLabel";
-import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
 import { scheduleType } from "../../type/common/scheduleType";
+import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
+import StudentColorBox from "../common/StudentColorBox";
+import SubjectLabel from "../common/SubjectLabel";
 
 interface LessonData {
   idx: number;
@@ -22,7 +22,9 @@ interface NoCheckAttendanceContanierProps {
 export default function NoCheckAttendanceContanier(props: NoCheckAttendanceContanierProps) {
   const { setOpenModal, setSelectedLesson, lesson, schedule } = props;
   const { idx, studentName, subject } = lesson;
-  const { startTime, endTime, count } = schedule;
+  const { startTime, endTime, expectedCount } = schedule;
+
+  console.log(expectedCount);
 
   function handleAttendanceCheck(): void {
     setSelectedLesson(lesson);
@@ -38,7 +40,7 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
               {startTime} ~ {endTime}
             </Time>
             <Bar> | </Bar>
-            <Time>{count}회차</Time>
+            <Time>{expectedCount}회차</Time>
           </TimeWrapper>
           <NameSubjectWrapper>
             <Name> {studentName}</Name>
@@ -64,8 +66,7 @@ const InforContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-
-  margin-right: 6rem;
+  width: 19rem;
 `;
 const Bar = styled.p`
   color: ${({ theme }) => theme.colors.grey100};

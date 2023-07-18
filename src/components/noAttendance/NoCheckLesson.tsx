@@ -22,6 +22,7 @@ interface ScheduleData {
 
 interface MissingAttendanceData {
   date: string;
+  dayOfWeek: string;
   missingAttedanceScheduleList: Array<{
     lesson: LessonData;
     schedule: ScheduleData;
@@ -30,6 +31,7 @@ interface MissingAttendanceData {
 
 export default function NoCheckLesson() {
   const { missingAttendanceSchedule } = useGetMissingAttendanceSchedule();
+  console.log(missingAttendanceSchedule);
   const [selectedLesson, setSelectedLesson] = useState<LessonData>({
     idx: 0,
     studentName: "권혠찌",
@@ -43,12 +45,20 @@ export default function NoCheckLesson() {
       <NoAttendanceWrapper>
         {missingAttendanceSchedule &&
           missingAttendanceSchedule?.map(
-            ({ date, missingAttedanceScheduleList }: MissingAttendanceData, idx: number) => {
+            ({ date, dayOfWeek, missingAttedanceScheduleList }: MissingAttendanceData, idx: number) => {
               return (
                 <NoAttendanceContainer key={idx}>
                   <NoAttendanceDate>
                     {date[6] == "1" ? <h1>{date.slice(5, 7)}월</h1> : <h1>{date.slice(6, 7)}월</h1>}
-                    {date[8] === "0" ? <h1>{date.slice(-1)}일</h1> : <h1>{date.slice(8, 10)}일</h1>}
+                    {date[8] === "0" ? (
+                      <h1>
+                        {date.slice(-1)}일 ({dayOfWeek})
+                      </h1>
+                    ) : (
+                      <h1>
+                        {date.slice(8, 10)}일 ({dayOfWeek})
+                      </h1>
+                    )}
                   </NoAttendanceDate>
 
                   {missingAttedanceScheduleList?.map(({ lesson, schedule }) => {
@@ -95,19 +105,25 @@ const NoAttendanceWrapper = styled.section`
   margin-right: 1.4rem;
   margin-left: 1.4rem;
 `;
+
 const NoAttendanceContainer = styled.article`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
 `;
+
 const NoAttendanceDate = styled.div`
   display: flex;
-  gap: 0.5rem;
+  width: 32rem;
+  padding: 0.5rem 1.4rem;
+  align-items: center;
+  gap: 0.8rem;
 
+  color: ${({ theme }) => theme.colors.grey600};
   background-color: ${({ theme }) => theme.colors.grey20};
 
-  width: 100%;
   ${({ theme }) => theme.fonts.body04};
+  margin-left: -1.5rem;
 `;
 
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`

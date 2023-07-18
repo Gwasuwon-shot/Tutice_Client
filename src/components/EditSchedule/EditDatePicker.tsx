@@ -27,7 +27,6 @@ export default function EditDatePicker() {
   const todayDay: string = WEEKDAY[currentDate.getDay()];
 
   // 1. 이전 달
-
   let prevMonth: number = currentMonth - 1;
   let prevYear: number = currentYear;
 
@@ -98,7 +97,6 @@ export default function EditDatePicker() {
   function handleConfirmDatePicker() {
     setIsDatePickerOpen(false);
     console.log(activeSlide);
-    console.log("here");
   }
 
   // check 용

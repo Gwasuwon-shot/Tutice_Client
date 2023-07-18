@@ -18,7 +18,7 @@ export default function ParentsDays(props: DaysProp) {
   const startDate = startOfWeek(monthStart);
   const endDate: Date = endOfWeek(monthEnd);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const { scheduleList } = useGetScheduleChild();
 
   const rows: React.ReactNode[] = [];

@@ -22,6 +22,9 @@ export default function ChangeModal(props: modalType) {
   const navigate = useNavigate();
   const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
   const [willEditDate, setWillEditDate] = useRecoilState(editDateState);
+  const [dayOfWeekNumber, setDayOfWeekNumber] = useState<number>(0);
+  const [dayOfWeekToKor, setDayOfWeekToKor] = useState<string>("수");
+  const WEEKDAY: string[] = ["월", "화", "수", "목", "금", "토", "일"];
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -31,12 +34,18 @@ export default function ChangeModal(props: modalType) {
     setIsEdit(false);
   }
 
-  function moveClickEditPage(schedule: editScheduleType, selectedDate): void {
+  console.log(selectedDate);
+
+  function moveClickEditPage({ schedule, selectedDate }: { schedule: editScheduleType; selectedDate: Date }): void {
+    setDayOfWeekNumber(selectedDate.getDay());
+    setDayOfWeekToKor(WEEKDAY[dayOfWeekNumber]);
+    console.log(dayOfWeekToKor);
+
     setWillEditDate((prevState: editDateStateTypes) => ({
       year: selectedDate.getFullYear(),
       month: selectedDate.getMonth() + 1,
       date: selectedDate.getDate(),
-      dayOfWeek: selectedDate.getDay(),
+      dayOfWeek: dayOfWeekToKor,
     }));
 
     setClickedSchedule((prevState: editScheduleType) => ({
@@ -87,7 +96,7 @@ export default function ChangeModal(props: modalType) {
 
                   {isEdit && (
                     <ScheduleEditWrapper>
-                      <EditScheduleButton onClick={() => moveClickEditPage(schedule, selectedDate)} />
+                      <EditScheduleButton onClick={() => moveClickEditPage({ schedule, selectedDate })} />
                       <RemoveSchedule />
                     </ScheduleEditWrapper>
                   )}

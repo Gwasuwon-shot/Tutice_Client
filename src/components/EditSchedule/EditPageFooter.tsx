@@ -1,16 +1,12 @@
-import {
-  openTimePickerState,
-  openDatePickerState,
-  openStartDetailState,
-  openFinishDetailState,
-} from "../../atom/timePicker/timePicker";
+import { openDatePickerState, openStartDetailState, openFinishDetailState } from "../../atom/timePicker/timePicker";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import EditDatePicker from "./EditDatePicker";
 import EditDetailTimePicker from "./EditTimePicker";
 import BottomButton from "../common/BottomButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import EditFooterButton from "./EditFooterButton";
 
 export default function EditPageFooter() {
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
@@ -18,16 +14,20 @@ export default function EditPageFooter() {
   const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  function handleEditLesson() {}
+  const navigate = useNavigate();
+
+  function handleEditLesson(): void {
+    navigate("/change-schedule");
+  }
+
+  useEffect(() => {
+    setIsActive(true);
+  }, [isFinishPickerOpen]);
 
   return (
     <>
       <FooterWrapper>
-        <BottomWrapper>
-          <BottomButton type="button" isActive={isActive} onClick={handleEditLesson} disabled={!isActive}>
-            저장
-          </BottomButton>
-        </BottomWrapper>
+        <EditFooterButton onClick={() => handleEditLesson()} isActive={isActive} disabled={!isActive} />
       </FooterWrapper>
       {isDatePickerOpen && <EditDatePicker />}
       {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && <EditDetailTimePicker />}

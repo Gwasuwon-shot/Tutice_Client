@@ -35,7 +35,7 @@ const FooterWrapper = styled.footer`
     position: fixed;
     bottom: 0;
     
-    width: 32rem;
+    width: 100%;
     height: 6.3rem;
     padding: 0.8rem;
     

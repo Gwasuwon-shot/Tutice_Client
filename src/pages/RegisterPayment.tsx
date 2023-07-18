@@ -41,7 +41,7 @@ export default function RegisterPayment() {
       <Sub>입금일</Sub>
       <PaymentDate>
         {new Date(paymentDate).getMonth() + 1}월 {new Date(paymentDate).getDate()}일
-        <EditPaymentIc />
+        <EditPaymentIcon />
       </PaymentDate>
       <ButtonWrapper>
         <RoundBottomMiniButton isGreen={false} onClick={handleGoBack}>
@@ -119,4 +119,9 @@ const ButtonWrapper = styled.section`
   bottom: 2.2rem;
 
   width: 28.5rem;
+`;
+
+const EditPaymentIcon = styled(EditPaymentIc)`
+  width: 5rem;
+  height: 5rem;
 `;

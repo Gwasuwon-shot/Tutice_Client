@@ -11,7 +11,12 @@ import { useRecoilState } from "recoil";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 
-export default function EditDetailTimePicker() {
+interface EditDetailTimePickerPropType {
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function EditDetailTimePicker(props: EditDetailTimePickerPropType) {
+  const { setIsActive } = props;
   // 1. 오전 오후 관리
   // 1) active slide 값 관리
 
@@ -98,6 +103,7 @@ export default function EditDetailTimePicker() {
     setSelectedDays({ ...selectedDays, endTime });
     console.log(selectedDays);
     setIsFinishPickerOpen(false);
+    setIsActive(true);
   }
 
   // 2) 종료 타임피커 취소시

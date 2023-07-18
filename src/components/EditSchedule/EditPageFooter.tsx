@@ -20,17 +20,15 @@ export default function EditPageFooter() {
     navigate("/change-schedule");
   }
 
-  useEffect(() => {
-    setIsActive(true);
-  }, [isFinishPickerOpen]);
-
   return (
     <>
       <FooterWrapper>
         <EditFooterButton onClick={() => handleEditLesson()} isActive={isActive} disabled={!isActive} />
       </FooterWrapper>
       {isDatePickerOpen && <EditDatePicker />}
-      {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && <EditDetailTimePicker />}
+      {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && (
+        <EditDetailTimePicker setIsActive={setIsActive} />
+      )}
     </>
   );
 }

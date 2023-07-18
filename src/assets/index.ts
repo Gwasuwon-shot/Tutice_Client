@@ -1,4 +1,4 @@
-export { ReactComponent as RoleCheckSignupIc } from "./icon//RoleCheckSignupIc.svg";
+export { ReactComponent as roleCheckSignupIc } from "./icon//roleCheckSignupIc.svg";
 export { ReactComponent as EditPencilIc } from "./icon/EditPencilIc.svg";
 export { ReactComponent as FourthSwiperFirstTree } from "./icon/FourthSwiperFirstTreeOnBoardingIc.svg";
 export { ReactComponent as FourthSwiperSecondTree } from "./icon/FourthSwiperSecondTreeOnBoardingIc.svg";
@@ -7,7 +7,7 @@ export { ReactComponent as LessonInfoLessonRecordIc } from "./icon/LessonInfoLes
 export { ReactComponent as MainLogoGradation } from "./icon/MainLogoGradationOnBoardingIc.svg";
 export { ReactComponent as MainLogo } from "./icon/MainLogoOnBoardingIc.svg";
 export { ReactComponent as NoClassLogoParentsHomeIc } from "./icon/NoClassLogoParentsHomeIc.svg";
-export { ReactComponent as RoleNoneCheckSignupIc } from "./icon/RoleNoneCheckSignupIc.svg";
+export { ReactComponent as roleNoneCheckSignupIc } from "./icon/roleNoneCheckSignupIc.svg";
 export { ReactComponent as ThirdSwiperFirstTree } from "./icon/ThirdSwiperFirstTreeOnBoardingIc.svg";
 export { ReactComponent as ThirdSwiperGradation } from "./icon/ThirdSwiperGradationOnBoardingIc.svg";
 export { ReactComponent as ThirdSwiperSecondTree } from "./icon/ThirdSwiperSecondTreeOnBoardingIc.svg";

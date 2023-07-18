@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
-import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
+import RoleCheckSignupIc from "../../assets/icon/roleCheckSignupIc.svg";
+import RoleNoneCheckSignupIc from "../../assets/icon/roleNoneCheckSignupIc.svg";
 import BottomButton from "../common/BottomButton";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { newUserData, stepNum } from "../../atom/signup/signup";
@@ -30,7 +30,7 @@ export default function Role() {
 
   return (
     <>
-      <ProgressBar progress={0} />
+      <ProgressBar progress={20} />
       <BackButton />
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.whichRole} />
@@ -52,6 +52,7 @@ export default function Role() {
               <RadioSubName htmlFor="TEACHER"> {ROLE_SUB_TEXT.teacherText} </RadioSubName>
             </TextWrapper>
           </RoleRapper>
+
           <RoleRapper>
             <RadioButton
               type="radio"
@@ -108,6 +109,7 @@ const RoleRapper = styled.div`
 
 const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string }>`
   background-image: url(${({ $RoleNoneCheckSignupIc }) => $RoleNoneCheckSignupIc});
+  background-size: cover;
 
   width: 4rem;
   height: 4rem;

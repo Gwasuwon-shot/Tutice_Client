@@ -1,7 +1,6 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { backButtonSignupIc } from "../../assets/index";
-import { useNavigate } from "react-router-dom";
 
 export default function NoAttendanceheader() {
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ const HeaderWrapper = styled.header`
 `;
 
 const HeaderBackButton = styled(backButtonSignupIc)`
-  width: 4rem.;
+  width: 4rem;
   height: 4rem;
 `;
 

@@ -4,31 +4,26 @@ import StudentColorBox from "../common/StudentColorBox";
 import SubjectLabel from "../common/SubjectLabel";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { NextMonthArrowButton } from "../../assets";
+import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
 
 interface ExtensionLessonContainerProps {
-  lesson: {
-    idx: number;
-    studentName: string;
-    subject: string;
-    count: number;
-  };
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedLesson: React.Dispatch<React.SetStateAction<lesson | null>>;
+  setSelectedLesson: React.Dispatch<React.SetStateAction<LessonType>>;
   endScheduleDate: string;
 }
 
 export default function ExtensionLessonContainer(props: ExtensionLessonContainerProps) {
-  const { lesson, endScheduleDate, setSelectedLesson, setOpenModal } = props;
-  const { idx, studentName, subject, count } = lesson;
+  const { endScheduleDate, setSelectedLesson, setOpenModal } = props;
+  // const { idx, studentName, subject, count } = lesson;
 
   function handleClickExtension() {
-    setSelectedLesson(lesson);
+    // setSelectedLesson(lesson);
     setOpenModal(true);
   }
   return (
     <>
-      <ContentWrapper key={idx}>
-        <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+      {/* <ContentWrapper key={idx}> */}
+      {/* <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
         <DateandCount>
           {endScheduleDate.slice(5, 6) == "0" ? (
             <p>
@@ -45,8 +40,8 @@ export default function ExtensionLessonContainer(props: ExtensionLessonContainer
           <Name>{studentName}</Name>
           <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
         </NameandSubject>
-        <SlideButton onClick={handleClickExtension} />
-      </ContentWrapper>
+        <SlideButton onClick={handleClickExtension} /> */}
+      {/* </ContentWrapper> */}
     </>
   );
 }

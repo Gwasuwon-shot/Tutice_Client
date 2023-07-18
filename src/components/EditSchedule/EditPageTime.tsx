@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
+import { useEffect, useState } from "react";
+import { RegularLessonClockIc } from "../../assets";
 import { dayState, focusDayState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
 
-import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 import BottomButton from "../common/BottomButton";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 

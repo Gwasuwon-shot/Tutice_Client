@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
-import { MISSING_MAINTEANANCE_LESSON } from "../../core/manageLesson/getMissingMaintenanceLesson";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import ExtensionLessonContainer from "./ExtensionLessonContainer";
 import { useRecoilState } from "recoil";
@@ -14,8 +13,8 @@ export default function ExtensionQuestion() {
   const { missingMaintenanceLessonList } = useExtensionLesson();
   const [selectedLesson, setSelectedLesson] = useState<LessonType>({
     idx: 1,
-    studentName: "",
-    subject: "",
+    studentName: "권혠찡",
+    subject: "피아노",
   });
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
@@ -33,8 +32,8 @@ export default function ExtensionQuestion() {
               <ExtensionLessonContainer
                 setOpenModal={setOpenModal}
                 setSelectedLesson={setSelectedLesson}
-                // lesson={lesson}
                 endScheduleDate={endScheduleDate}
+                lesson={lesson}
               />
             );
           })}

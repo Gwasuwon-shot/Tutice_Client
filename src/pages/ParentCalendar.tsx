@@ -5,20 +5,25 @@ import YearandMonth from "../components/Calendar/YearandMonth";
 import Dayofweek from "../components/Calendar/Dayofweek";
 import ParentsDays from "../components/Calendar/Parents/ParentsDays";
 
+//수정없는 부모님 캘린더
 export default function ParentCalenda() {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
 
-  function prevMonth() {
+  function handleToPrevMonth() {
     setCurrentMonth(subMonths(currentMonth, 1));
   }
 
-  function nextMonth() {
+  function handleToNextMonth() {
     setCurrentMonth(addMonths(currentMonth, 1));
   }
   return (
     <>
       <CalendarWrapper>
-        <YearandMonth currentMonth={currentMonth} />
+        <YearandMonth
+          currentMonth={currentMonth}
+          handleToPrevMonth={handleToPrevMonth}
+          handleToNextMonth={handleToNextMonth}
+        />
         <Dayofweek />
         <ParentsDays currentMonth={currentMonth} />
       </CalendarWrapper>

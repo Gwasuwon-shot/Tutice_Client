@@ -1,13 +1,14 @@
-import "swiper/components/navigation/navigation.min.css";
 import "swiper/swiper.min.css";
+import "swiper/components/navigation/navigation.min.css";
 
-import { useEffect } from "react";
-import SwiperCore from "swiper";
+import React, { useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { dateState, firstLessonDay, openDatePickerState } from "../../../atom/timePicker/timePicker";
+import SwiperCore, { Navigation } from "swiper";
+import { editDateState } from "../../atom/EditSchedule/editDateState";
+import { openDatePickerState } from "../../atom/timePicker/timePicker";
 
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface monthCalenderProps {
   month: number;
@@ -15,7 +16,7 @@ interface monthCalenderProps {
   day: string;
 }
 
-export default function DatePicker() {
+export default function EditDatePicker() {
   const monthCalender: monthCalenderProps[] = [];
   const WEEKDAY: { [key: number]: string } = { 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" };
 
@@ -26,7 +27,6 @@ export default function DatePicker() {
   const todayDay: string = WEEKDAY[currentDate.getDay()];
 
   // 1. 이전 달
-
   let prevMonth: number = currentMonth - 1;
   let prevYear: number = currentYear;
 
@@ -72,16 +72,15 @@ export default function DatePicker() {
 
   // 4. 날짜 상태 관리
 
-  const [activeSlide, setActiveSlide] = useRecoilState(dateState);
-  const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
+  const [activeSlide, setActiveSlide] = useRecoilState(editDateState);
 
   function handleSlideChange(swiper: SwiperCore) {
     setActiveSlide({
       year: currentYear,
       month: monthCalender[swiper.realIndex].month,
       date: monthCalender[swiper.realIndex].date,
+      dayOfWeek: monthCalender[swiper.realIndex].day,
     });
-    setfirstLesson(monthCalender[swiper.realIndex].day);
     // problem : year을 currentYear이 아닌 지난해, 다음해로 선택했을 시 -> 추후 변경
   }
 
@@ -91,20 +90,18 @@ export default function DatePicker() {
   // 2) 데이트 피커 취소시
   function handleCancelDatePicker() {
     setIsDatePickerOpen(false);
-    setActiveSlide({ year: currentYear, month: currentMonth, date: todayDate });
-    setfirstLesson(todayDay);
+    setActiveSlide({ year: currentYear, month: currentMonth, date: todayDate, dayOfWeek: todayDay });
   }
 
   // 3) 데이트 피커 완료 시
   function handleConfirmDatePicker() {
     setIsDatePickerOpen(false);
+    console.log(activeSlide);
   }
 
   // check 용
   useEffect(() => {
     console.log(activeSlide);
-    console.log("첫수업일");
-    console.log(firstLesson);
   }, [activeSlide]);
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
@@ -115,11 +112,6 @@ export default function DatePicker() {
     </SwiperSlide>
   ));
 
-  // 도르레 처음 클릭할 때 오늘 날짜부터 오도록 설정
-  const firstIndex = monthCalender.findIndex(
-    (date) => date.month === currentMonth && date.date === todayDate && date.day === todayDay,
-  );
-
   return (
     <TimePickerWrapper>
       <CancleWrapper>
@@ -128,9 +120,8 @@ export default function DatePicker() {
 
       <StyledSwiper
         direction="vertical"
-        initialSlide={firstIndex}
         slidesPerView={7}
-        spaceBetween={19}
+        spaceBetween={15}
         freeMode={true}
         freeModeSticky={true}
         freeModeMomentumRatio={0.25}
@@ -153,11 +144,9 @@ const TimePickerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   position: relative;
 
-  width: 100%;
-  height: 20rem;
+  height: 13rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};
 `;
@@ -168,7 +157,7 @@ const StyledSwiper = styled(Swiper)`
   align-items: center;
 
   width: 6rem;
-  height: 14rem;
+  height: 9.5rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey400};
@@ -187,6 +176,7 @@ const StyledSwiper = styled(Swiper)`
 
   & .swiper-slide-active {
     opacity: 1;
+
     color: ${({ theme }) => theme.colors.grey700};
   }
 `;
@@ -214,7 +204,6 @@ const Day = styled.span`
 
 const CancleWrapper = styled.div`
   display: flex;
-
   position: relative;
 
   width: 6rem;
@@ -223,7 +212,6 @@ const CancleWrapper = styled.div`
 
 const ConfirmWrapper = styled.div`
   display: flex;
-
   position: relative;
 
   width: 6rem;
@@ -252,13 +240,14 @@ const Vizor = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 100;
 
   width: 8rem;
   height: 2rem;
 
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  opacity: 0.2;
   background-color: ${({ theme }) => theme.colors.grey200};
+
+  transform: translate(-50%, -50%);
+  opacity: 0.2;
   border-radius: 20px;
 `;

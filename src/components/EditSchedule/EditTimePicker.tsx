@@ -4,17 +4,19 @@ import "swiper/components/navigation/navigation.min.css";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
-import {
-  dayState,
-  focusDayState,
-  openFinishDetailState,
-  openStartDetailState,
-} from "../../../atom/timePicker/timePicker";
+import { focusDayState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import { editSchedule } from "../../atom/EditSchedule/editSchedule";
+import { editDateState } from "../../atom/EditSchedule/editDateState";
 
-export default function DetailTimePicker() {
+interface EditDetailTimePickerPropType {
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function EditDetailTimePicker(props: EditDetailTimePickerPropType) {
+  const { setIsActive } = props;
   // 1. 오전 오후 관리
   // 1) active slide 값 관리
 
@@ -69,7 +71,7 @@ export default function DetailTimePicker() {
 
   // 4. 시작시간 상태관리
   const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
-  const [selectedDays, setSelectedDays] = useRecoilState(dayState);
+  const [selectedDays, setSelectedDays] = useRecoilState(editSchedule);
   const [focusDay, setFocusDay] = useRecoilState(focusDayState);
 
   // 1) 시작 타임피커 완료시
@@ -78,9 +80,11 @@ export default function DetailTimePicker() {
     const formattedHour = String(activeHourSlide).padStart(2, "0");
     const startTime =
       activeAmPmSlide === 0 ? `${formattedHour}:${activeMinuteSlide}` : `${activeHourSlide + 12}:${activeMinuteSlide}`;
-    setFocusDay({ ...focusDay, startTime });
-    console.log(focusDay);
+    setSelectedDays({ ...selectedDays, startTime });
+    console.log(selectedDays);
     setIsStartPickerOpen(false);
+
+    console.log("here");
   }
 
   // 2) 시작 타임피커 취소시
@@ -96,9 +100,10 @@ export default function DetailTimePicker() {
     const formattedHour = String(activeHourSlide).padStart(2, "0");
     const endTime =
       activeAmPmSlide === 0 ? `${formattedHour}:${activeMinuteSlide}` : `${activeHourSlide + 12}:${activeMinuteSlide}`;
-    setFocusDay({ ...focusDay, endTime });
-    console.log(focusDay);
+    setSelectedDays({ ...selectedDays, endTime });
+    console.log(selectedDays);
     setIsFinishPickerOpen(false);
+    setIsActive(true);
   }
 
   // 2) 종료 타임피커 취소시
@@ -120,7 +125,7 @@ export default function DetailTimePicker() {
         <StyledSwiper
           direction="vertical"
           slidesPerView={7}
-          spaceBetween={19}
+          spaceBetween={15}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -134,7 +139,7 @@ export default function DetailTimePicker() {
         <StyledSwiper
           direction="vertical"
           slidesPerView={7}
-          spaceBetween={19}
+          spaceBetween={15}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -150,7 +155,7 @@ export default function DetailTimePicker() {
         <StyledSwiper
           direction="vertical"
           slidesPerView={7}
-          spaceBetween={19}
+          spaceBetween={15}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -178,11 +183,9 @@ const TimePickerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   position: relative;
 
-  width: 100%;
-  height: 20rem;
+  height: 13rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};
 `;
@@ -190,6 +193,7 @@ const TimePickerWrapper = styled.div`
 const SwiperWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
+
   width: 13rem;
 `;
 
@@ -199,7 +203,7 @@ const StyledSwiper = styled(Swiper)`
   align-items: center;
 
   width: 3rem;
-  height: 14rem;
+  height: 9.5rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey400};
@@ -218,13 +222,13 @@ const StyledSwiper = styled(Swiper)`
 
   & .swiper-slide-active {
     opacity: 1;
+
     color: ${({ theme }) => theme.colors.grey700};
   }
 `;
 
 const CancleWrapper = styled.div`
   display: flex;
-
   position: relative;
 
   width: 6rem;
@@ -233,7 +237,6 @@ const CancleWrapper = styled.div`
 
 const ConfirmWrapper = styled.div`
   display: flex;
-
   position: relative;
 
   width: 6rem;
@@ -261,13 +264,14 @@ const Vizor = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 100;
 
   width: 13.6rem;
   height: 2rem;
 
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  opacity: 0.2;
   background-color: ${({ theme }) => theme.colors.grey200};
+
+  transform: translate(-50%, -50%);
+  opacity: 0.2;
   border-radius: 20px;
 `;

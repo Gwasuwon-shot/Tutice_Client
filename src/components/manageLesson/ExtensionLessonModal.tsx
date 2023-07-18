@@ -4,7 +4,6 @@ import StudentNameLabel from "../common/StudentNameLabel";
 import ToastModal from "../common/ToastModal";
 import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
-import useExtensionLesson from "../../hooks/useExtensionLesson";
 
 interface ExtensionLessonModalProps {
   studentName: string;
@@ -20,7 +19,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   function handleExtensionLesson() {
     //서버 api 통신 (연장완)
-    unShowModal;
+    unShowModal();
   }
   return (
     <ModalWrapper>

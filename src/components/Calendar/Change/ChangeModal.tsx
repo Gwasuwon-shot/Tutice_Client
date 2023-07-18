@@ -7,14 +7,22 @@ import { useNavigate } from "react-router-dom";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
 import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
+import { editSchedule } from "../../../atom/EditSchedule/editSchedule";
 
 import { EditPencilIc, removeTrashCan } from "../../../assets";
 import { modalType } from "../../../type/calendar/modalType";
+import { useRecoilState } from "recoil";
+import { editDateState } from "../../../atom/EditSchedule/editDateState";
+import { editScheduleType } from "../../../type/editSchedule/editScheduleType";
+import { editDateStateTypes } from "../../../type/editSchedule/editDateType";
 
 export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal } = props;
   const { scheduleList } = useGetTeacherSchedule();
   const navigate = useNavigate();
+  const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
+  const [willEditDate, setWillEditDate] = useRecoilState(editDateState);
+  const WEEKDAY: string[] = ["일", "월", "화", "수", "목", "금", "토"];
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -24,9 +32,26 @@ export default function ChangeModal(props: modalType) {
     setIsEdit(false);
   }
 
-  function moveClickEditPage() {
-    //params 추가
-    navigate("/change-lessonschedule");
+  console.log(selectedDate);
+
+  function moveClickEditPage({ schedule, selectedDate }: { schedule: editScheduleType; selectedDate: Date }): void {
+    console.log(selectedDate.getDay());
+    const dayOfWeekNumber = selectedDate.getDay();
+    const dayOfWeekKor = WEEKDAY[dayOfWeekNumber];
+
+    setWillEditDate((prevState: editDateStateTypes) => ({
+      year: selectedDate.getFullYear(),
+      month: selectedDate.getMonth() + 1,
+      date: selectedDate.getDate(),
+      dayOfWeek: dayOfWeekKor,
+    }));
+
+    setClickedSchedule((prevState: editScheduleType) => ({
+      ...prevState,
+      startTime: schedule?.startTime,
+      endTime: schedule?.endTime,
+    }));
+    navigate("/edit-lessonschedule");
   }
 
   function handleClickEdit() {
@@ -67,12 +92,12 @@ export default function ChangeModal(props: modalType) {
                     <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 11]}>{subject}</ModalSubject>
                   </ScheduleContainer>
 
-                  {isEdit ? (
+                  {isEdit && (
                     <ScheduleEditWrapper>
-                      <EditScheduleButton onClick={moveClickEditPage} />
+                      <EditScheduleButton onClick={() => moveClickEditPage({ schedule, selectedDate })} />
                       <RemoveSchedule />
                     </ScheduleEditWrapper>
-                  ) : undefined}
+                  )}
                 </ScheduleWrapper>
               );
             })}

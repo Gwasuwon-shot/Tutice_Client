@@ -39,7 +39,7 @@ export default function Footer() {
     return (
         <>
         <FooterWrapper onClick = {CompleteLesson} selected = {isSame}> 
-            <FooterButton selected = {isSame}> 저장 </FooterButton>
+            <FooterButton disabled = {isSame}> 저장 </FooterButton>
         </FooterWrapper>
         {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}
         {isDatePickerOpen && <ModalWrapper> <DatePicker /> </ModalWrapper>}
@@ -64,12 +64,12 @@ const FooterWrapper = styled.footer<{selected: boolean}>`
     ${({ selected, theme }) => selected && `background-color: ${theme.colors.green5};`}
 `
 
-const FooterButton = styled.button<{selected: boolean}>`
+const FooterButton = styled.button<{disabled: boolean}>`
     display: flex;
     
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey200}; 
-    ${({ selected, theme }) => selected && `color: ${theme.colors.white};`}
+    ${({ disabled, theme }) => disabled && `color: ${theme.colors.white};`}
 `
 
 const ModalWrapper = styled.div`

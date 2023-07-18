@@ -20,9 +20,9 @@ export default function Footer() {
             <FooterButton> 저장 </FooterButton>
         </FooterWrapper>
         <SelectedDayAndTime />
-        {isTimePickerOpen && <TimePicker />}
-        {isDatePickerOpen && <DatePicker />}
-        {(isStartPickerOpen || isFinishPickerOpen) && <DetailTimePicker />}
+        {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}
+        {isDatePickerOpen && <ModalWrapper> <DatePicker /> </ModalWrapper>}
+        {(isStartPickerOpen || isFinishPickerOpen) && <ModalWrapper> <DetailTimePicker /> </ModalWrapper>}
         </>
     );
 }
@@ -47,4 +47,13 @@ const FooterButton = styled.button`
     
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey200}; 
+`
+
+const ModalWrapper = styled.div`
+    display: flex;
+
+    position: fixed;
+    bottom: 0;
+    
+    width: 100%;
 `

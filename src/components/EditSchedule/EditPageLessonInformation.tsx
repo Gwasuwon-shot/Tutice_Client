@@ -7,10 +7,10 @@ import { editDateState } from "../../atom/EditSchedule/editDateState";
 
 export default function LessonInformation() {
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
-  const [activeDateSlide, setActiveDateSlide] = useRecoilState(editDateState);
   const { year, month, date, dayOfWeek } = useRecoilValue(editDateState);
-  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  const dayOfWeekInKorean = daysOfWeek[dayOfWeek];
+  const daysOfWeek: string[] = ["일", "월", "화", "수", "목", "금", "토"];
+  const day = Number(dayOfWeek);
+  const dayOfWeekInKorean = daysOfWeek[day];
 
   function handleDatePicker() {
     setIsDatePickerOpen(true);

@@ -4,8 +4,6 @@ import {
   openStartDetailState,
   openFinishDetailState,
 } from "../../atom/timePicker/timePicker";
-import DetailTimePicker from "../../components/RegularLesson/TimePicker/DetailTimePicker";
-import TimePicker from "../../components/RegularLesson/TimePicker/TimePicker";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";

@@ -72,11 +72,11 @@ export default function AlertSignup() {
         <BellWelcomeIcon />
         <SignupTitleLayout MainText={MAIN_TEXT} />
         <SubText>{SUB_TEXT}</SubText>
+        <button type="button" onClick={() => handleShowNotification()}>
+          이거 눌러봐바
+        </button>
       </Container>
 
-      <button type="button" onClick={() => handleShowNotification()}>
-        이거 눌러봐바
-      </button>
       <ButtonLayout onClick={() => handleAllowNotification()} buttonText={"할래요!"} />
     </>
   );
@@ -86,7 +86,14 @@ const Container = styled.div`
   margin-top: 3.6rem;
 
   > button {
+    width: 20rem;
+    height: 5rem;
+    background-color: red;
     border: 1px solid black;
+
+    &:active {
+      background-color: black;
+    }
   }
 `;
 const BellWelcomeIcon = styled(bellWelcomeIc)`

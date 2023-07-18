@@ -58,7 +58,7 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
 const ContentContainer = styled.div`
   display: flex;
   gap: 1.4rem;
-  margin: 0.8rem 0;
+  margin: 1rem 0;
 `;
 
 const InforContainer = styled.div`

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import useGetMissingAttendanceSchedule from "../../hooks/useGetMissingAttendanceSchedule";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
@@ -37,14 +38,7 @@ interface MissingAttendanceData {
 
 export default function NoCheckLesson() {
   const { missingAttendanceSchedule } = useGetMissingAttendanceSchedule();
-  console.log(missingAttendanceSchedule);
-  const [selectedLesson, setSelectedLesson] = useState({
-    lessonIdx: 0,
-    studentName: "",
-    count: 0,
-    scheduleIdx: 0,
-    subject: "",
-  });
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState<boolean>(false);
 
@@ -61,12 +55,7 @@ export default function NoCheckLesson() {
                   </NoAttendanceDate>
                   {missingAttedanceScheduleList?.map(({ lesson, schedule }) => {
                     return (
-                      <NoCheckAttendanceContanier
-                        lesson={lesson}
-                        schedule={schedule}
-                        setSelectedLesson={setSelectedLesson}
-                        setOpenModal={setOpenModal}
-                      />
+                      <NoCheckAttendanceContanier lesson={lesson} schedule={schedule} setOpenModal={setOpenModal} />
                     );
                   })}
                 </NoAttendanceContainer>

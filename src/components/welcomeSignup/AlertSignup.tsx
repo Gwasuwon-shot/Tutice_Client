@@ -7,7 +7,19 @@ export default function AlertSignup() {
   const MAIN_TEXT = `수업 나무를 통한 \n 쉬운 관리를 위해\n 알림을 활성화 해보세요 `;
 
   const SUB_TEXT = "푸시알림을 활성화를 통해 \n 출결, 수업비 관리를 도울 수 있어요";
-  function handleToSetAlert() {}
+
+  async function handleAllowNotification() {
+    const permission = await Notification.requestPermission();
+
+    if (permission === "denied") {
+      console.log("알림 권한 허용 안됨");
+    } else if (permission === "granted") {
+      console.log("알림 권한 허용됨");
+    } else {
+      console.log(permission);
+    }
+  }
+
   return (
     <>
       <Container>
@@ -16,7 +28,7 @@ export default function AlertSignup() {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={handleToSetAlert} buttonText={"할래요!"} />
+      <ButtonLayout onClick={handleAllowNotification} buttonText={"할래요!"} />
     </>
   );
 }

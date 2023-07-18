@@ -21,6 +21,7 @@ import RegularLesson from "./pages/RegularLesson";
 import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
+import AlertSignup from "./components/welcomeSignup/AlertSignup";
 
 export default function Router() {
   return (
@@ -50,6 +51,7 @@ export default function Router() {
         <Route path="/lesson-share" element={<LessonShare />} />
         <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
         <Route path="/edit-lessonschedule" element={<EditShcedule />} />
+        <Route path="/notification" element={<AlertSignup />} />
       </Routes>
     </BrowserRouter>
   );

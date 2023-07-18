@@ -3,11 +3,24 @@ import { bellWelcomeIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 import { registerServiceWorker } from "../../utils/common/notification";
+import { useEffect, useState } from "react";
+import { messaging } from "../../core/notification/settingFCM";
+import { AppCheckTokenResult } from "firebase/app-check";
+import { getToken } from "firebase/messaging";
+import { useMutation } from "react-query";
+import { patchDeviceToken } from "../../api/patchDeviceToken";
 
 export default function AlertSignup() {
+  const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
+    token: "",
+  });
   const MAIN_TEXT = `수업 나무를 통한 \n 쉬운 관리를 위해\n 알림을 활성화 해보세요 `;
 
   const SUB_TEXT = "푸시알림을 활성화를 통해 \n 출결, 수업비 관리를 도울 수 있어요";
+
+  useEffect(() => {
+    mutate(deviceToken.token);
+  }, [deviceToken]);
 
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
@@ -19,9 +32,30 @@ export default function AlertSignup() {
     } else {
       console.log(permission);
     }
+
+    registerServiceWorker();
+    getDeviceToken();
   }
 
-  registerServiceWorker();
+  async function getDeviceToken() {
+    const token = await getToken(messaging, {
+      vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
+    });
+
+    console.log(token);
+    setDeviceToken({
+      token: token,
+    });
+  }
+
+  const { mutate } = useMutation(patchDeviceToken, {
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
 
   return (
     <>

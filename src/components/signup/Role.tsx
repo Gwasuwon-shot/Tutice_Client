@@ -52,6 +52,7 @@ export default function Role() {
               <RadioSubName htmlFor="TEACHER"> {ROLE_SUB_TEXT.teacherText} </RadioSubName>
             </TextWrapper>
           </RoleRapper>
+
           <RoleRapper>
             <RadioButton
               type="radio"

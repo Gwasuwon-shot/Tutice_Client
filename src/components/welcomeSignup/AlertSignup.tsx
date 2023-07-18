@@ -74,7 +74,7 @@ export default function AlertSignup() {
       </Container>
 
       <ButtonLayout onClick={() => handleAllowNotification()} buttonText={"할래요!"} />
-      <button onClick={() => handleShowNotification()}></button>
+      <button onClick={() => handleShowNotification()}>이거 눌러봐바</button>
     </>
   );
 }

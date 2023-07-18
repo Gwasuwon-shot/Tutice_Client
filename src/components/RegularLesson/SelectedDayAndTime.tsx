@@ -10,7 +10,6 @@ interface selectedProps {
 }
 
 export default function SelectedDayAndTime(props : selectedProps) {
-    // dayofweek = {'월'} startTime = {'1시'} endTime = {'2시'} 
 
     const { dayofweek, startTime, endTime } = props;
 
@@ -18,7 +17,18 @@ export default function SelectedDayAndTime(props : selectedProps) {
         <SelectedWrapper>
             <RegularLessonGroupIcon />
             <DayWrapper> {dayofweek} </DayWrapper>
-            <TimeWrapper> {startTime} - {endTime} </TimeWrapper>
+            <TimeWrapper> 
+                {Number(startTime.slice(0, 2)) <= 12 ? (
+                    <> 오전 {Number(startTime.slice(0, 2))}시 {startTime.slice(3)}분 </>
+                    ) : (
+                    <> 오후 {Number(startTime.slice(0, 2)) - 12}시 {startTime.slice(3)}분 </>
+                )}  - 
+                {Number(endTime.slice(0, 2)) <= 12 ? (
+                    <> 오전 {Number(endTime.slice(0, 2))}시 {endTime.slice(3)}분 </>
+                    ) : (
+                    <> 오후 {Number(endTime.slice(0, 2)) - 12}시 {endTime.slice(3)}분 </>
+                )}
+            </TimeWrapper>
         </SelectedWrapper>
     );
 }
@@ -30,7 +40,9 @@ const SelectedWrapper = styled.article`
     width: 29.2rem;
     height: 3.6rem;
     padding: 1rem;
-    margin: 1.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-bottom: 0.4rem;
 
     border-radius: 7px;
     background-color: ${({ theme }) => theme.colors.green1}; 
@@ -44,8 +56,8 @@ const RegularLessonGroupIcon = styled(RegularLessonGroupIc)`
 
 const DayWrapper = styled.div`
     display: flex;
-    width: 12rem;
     margin-left: 1.8rem;
+    width: 8rem;
     ${({ theme }) => theme.fonts.body03}; 
     color: ${({ theme }) => theme.colors.green5}; 
 `
@@ -53,7 +65,6 @@ const DayWrapper = styled.div`
 const TimeWrapper = styled.div`
     display: flex;
     justfiy-content: flex-end;
-    width: 12rem;
     ${({ theme }) => theme.fonts.body04}; 
     color: ${({ theme }) => theme.colors.green5}; 
 `

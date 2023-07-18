@@ -252,6 +252,7 @@ const ButtonWrapper = styled.section`
 const ModalWrapper = styled.section`
     display: flex;
     padding-top: 0.8rem;
+    margin-bottom: 1rem;
 `
 
 const RegularLessonCalenderIcon = styled(RegularLessonCalenderIc)`

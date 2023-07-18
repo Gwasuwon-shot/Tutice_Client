@@ -19,7 +19,6 @@ export default function Footer() {
         <FooterWrapper>
             <FooterButton> 저장 </FooterButton>
         </FooterWrapper>
-        <SelectedDayAndTime />
         {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}
         {isDatePickerOpen && <ModalWrapper> <DatePicker /> </ModalWrapper>}
         {(isStartPickerOpen || isFinishPickerOpen) && <ModalWrapper> <DetailTimePicker /> </ModalWrapper>}

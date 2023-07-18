@@ -31,9 +31,13 @@ interface MissingAttendanceData {
 
 export default function NoCheckLesson() {
   const missingAttendanceDateList = useNoAttendance();
-  const [selectedLesson, setSelectedLesson] = useState();
+  const [selectedLesson, setSelectedLesson] = useState<LessonData>({
+    idx: 0,
+    studentName: "권혠찌",
+    subject: "피아노",
+  });
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
-  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
+  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState<boolean>(false);
 
   return (
     <>
@@ -62,17 +66,17 @@ export default function NoCheckLesson() {
             </NoAttendanceContainer>
           );
         })}
-        {/* {openModal && selectedLesson && (
+        {openModal && selectedLesson && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
             <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
           </ModalSection>
-        )} */}
+        )}
 
-        {/* {openModal && isCheckingModalOpen && (
+        {openModal && isCheckingModalOpen && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
             <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
           </ModalSection>
-        )} */}
+        )}
 
         {openModal && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>

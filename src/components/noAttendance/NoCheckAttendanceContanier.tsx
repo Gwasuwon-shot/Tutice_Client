@@ -4,20 +4,30 @@ import StudentColorBox from "../common/StudentColorBox";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import SubjectLabel from "../common/SubjectLabel";
 import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
+import { scheduleType } from "../../type/common/scheduleType";
+
+interface LessonData {
+  idx: number;
+  studentName: string;
+  subject: string;
+}
 
 interface NoCheckAttendanceContanierProps {
+  lesson: LessonData;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedLesson: React.Dispatch<React.SetStateAction<lesson | null>>;
+  schedule: scheduleType;
 }
-export default function NoCheckAttendanceContanier(props) {
+
+export default function NoCheckAttendanceContanier(props: NoCheckAttendanceContanierProps) {
   const { setOpenModal, setSelectedLesson, lesson, schedule } = props;
   const { idx, studentName, subject } = lesson;
   const { startTime, endTime, count } = schedule;
 
-  function handleAttendanceCheck() {
+  function handleAttendanceCheck(): void {
     setSelectedLesson(lesson);
-    setOpenModal(true);
     console.log("here");
+    setOpenModal(true);
   }
   return (
     <>
@@ -38,7 +48,9 @@ export default function NoCheckAttendanceContanier(props) {
             </Subject>
           </NameSubjectWrapper>
         </InforContainer>
-        <NoCheckPageAttendanceButton onClick={handleAttendanceCheck()} />
+        <ButtonWrapper onClick={() => handleAttendanceCheck()}>
+          <NoCheckPageAttendanceButton />
+        </ButtonWrapper>
       </ContentContainer>
     </>
   );
@@ -97,3 +109,5 @@ const NameSubjectWrapper = styled.div`
   height: 1.6rem;
   gap: 0.4rem;
 `;
+
+const ButtonWrapper = styled.div``;

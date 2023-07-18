@@ -1,5 +1,5 @@
 import { EditPaymentIc, FruitPaymentIc } from "../assets";
-import {openPaymentPicker, paymentDateState, paymentDayState, paymentFocusDayState} from '../atom/registerPayment/registerPayment';
+import {openPaymentPicker, paymentDateState} from '../atom/registerPayment/registerPayment';
 
 import PaymentDatePicker from '../components/registerPayment/PaymentDatePicker';
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
@@ -8,6 +8,7 @@ import StudentNameLabel from "../components/common/StudentNameLabel";
 import styled from "styled-components";
 import useGetPaymentRecord from "../hooks/useGetPaymentRecord";
 import { useParams } from "react-router-dom";
+import {useRecoilState} from 'recoil';
 
 export default function RegisterPayment() {
 //   const { paymentRecordView } = useGetPaymentRecord(Number(manageLessonId)); //lessonIdx 넣어주어야함
@@ -18,12 +19,17 @@ export default function RegisterPayment() {
   const { value, startDate, endDate } = cycle;
   const { manageLessonId } = useParams();
   
+  const [isOpenPicker, setIsOpenPicker] = useRecoilState(openPaymentPicker);
   function handleGoBack() {
     // 뒤로가기
   }
 
   function handleReadyToRegister() {
     // 등록하기 모달 띄우기
+  }
+
+  function handleOpenPicker() {
+    setIsOpenPicker(true);
   }
 
   return (
@@ -47,7 +53,7 @@ export default function RegisterPayment() {
       <Sub>입금일</Sub>
       <PaymentDate>
         {new Date(paymentDate).getMonth() + 1}월 {new Date(paymentDate).getDate()}일
-        <EditPaymentIcon />
+        <EditPaymentIcon onClick = {handleOpenPicker} />
       </PaymentDate>
       <ButtonWrapper>
         <RoundBottomMiniButton isGreen={false} onClick={handleGoBack}>
@@ -57,7 +63,7 @@ export default function RegisterPayment() {
           등록하기
         </RoundBottomMiniButton>
       </ButtonWrapper>
-      {openPaymentPicker && <PaymentDatePicker/>}
+      {isOpenPicker && <ModalWrapper> <PaymentDatePicker/> </ModalWrapper>}
     </RegisterPaymentWrapper>
   );
 }
@@ -133,3 +139,12 @@ const EditPaymentIcon = styled(EditPaymentIc)`
   height: 5rem;
 `;
 
+const ModalWrapper = styled.div`
+  display: flex;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+    
+  width: 100%;
+`

@@ -68,14 +68,11 @@ export default function PasswordAgreeChecking() {
     return null;
   }
   useEffect(() => {
-    // 비밀번호 정규식 체크
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
     console.log(isPassword);
 
-    // 비밀번호 일치 체크
     pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
 
-    // 비밀번호 중복 및 정규식 확인 : 버튼 활성화
     pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
   }, [pw, confirmPw, isPassword, isConfirmed]);
 

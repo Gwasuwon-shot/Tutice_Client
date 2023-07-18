@@ -44,7 +44,7 @@ const WelcomeButton = styled.button`
   color: ${({ theme }) => theme.colors.grey0};
   flex-shrink: 0;
 
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const PassButton = styled.button`

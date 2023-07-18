@@ -102,7 +102,7 @@ const LinkBox = styled.label`
   align-items: center;
   gap: 0.8rem;
 
-  border-radius: 8px;
+  border-radius: 0.8rem;
 
   background-color: ${({ theme }) => theme.colors.green1};
 

@@ -50,7 +50,7 @@ const MainLessonBox = styled.article`
   margin-bottom: 1rem;
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const MainLessonWrapper = styled.div`

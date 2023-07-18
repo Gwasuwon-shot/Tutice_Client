@@ -55,7 +55,7 @@ const AttnedanceInformBox = styled.article`
   margin-bottom: 1rem;
 
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 
   &:active {
     background-color: ${({ theme }) => theme.colors.grey50};

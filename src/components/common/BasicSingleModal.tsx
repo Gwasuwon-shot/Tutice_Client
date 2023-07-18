@@ -58,7 +58,7 @@ const Modal = styled.aside`
 
   width: 26.4rem;
   height: 16.4rem;
-  border-radius: 8px;
+  border-radius: 0.8rem;
 
   background-color: ${({ theme }) => theme.colors.white};
 `;
@@ -68,7 +68,7 @@ const Button = styled.button`
   height: 4.6rem;
   padding: 1.4rem 3.2rem 1.4rem 3.3rem;
 
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 8px 0.8rem;
 
   background-color: ${({ theme }) => theme.colors.green5};
   color: ${({ theme }) => theme.colors.white};

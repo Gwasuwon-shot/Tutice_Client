@@ -156,7 +156,7 @@ const ModalSubject = styled.span<{ $backgroundcolor: string }>`
   background-color: ${(props) => props.$backgroundcolor};
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey500};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const EditScheduleButton = styled(EditPencilIc)`

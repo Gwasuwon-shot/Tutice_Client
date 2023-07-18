@@ -84,7 +84,7 @@ const TeacherFooterWrapper = styled.footer`
 
   flex-shrink: 0;
 
-  border-radius: 18px 18px 0 0;
+  border-radius: 1.8rem 1.8rem 0 0;
 
   border-top: 1px solid ${({ theme }) => theme.colors.grey50};
 

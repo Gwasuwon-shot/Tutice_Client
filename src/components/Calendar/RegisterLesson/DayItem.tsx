@@ -113,7 +113,7 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   ${({ theme }) => theme.fonts.caption02};
   color: ${({ theme }) => theme.colors.grey600};
   background-color: ${(props) => props.$backgroundcolor};
-  border-radius: 2px;
+  border-radius: 0.2rem;
 `;
 
 const MoreLessonIcon = styled(CalendarMoreLessonIc)`

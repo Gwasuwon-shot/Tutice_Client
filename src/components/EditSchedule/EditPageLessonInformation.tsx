@@ -122,7 +122,7 @@ const LessonDate = styled.div`
   height: 3.6rem;
 
   background-color: ${({ theme }) => theme.colors.grey50};
-  border-radius: 6px;
+  border-radius: 0.6rem;
 `;
 const LessonDateName = styled.h2`
   display: flex;

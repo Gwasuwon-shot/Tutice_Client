@@ -24,27 +24,33 @@ export default function LessonDate() {
     
     function handleDayButton(day: string) {
         
-        let dayIndex;
-        if (selectedDays.length >= 1) {
-            dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
+        if (focusDay.dayOfWeek === day) {
+            setFocusDay({dayOfWeek: '', startTime: '', endTime: ''});
         } else {
-            dayIndex = -1;
-        }
-        
-        if (dayIndex !== -1) {
-            setSelectedDays((prevSelectedDays) =>
-                prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day)
-            );
-        } else {
-            // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
-            const isTimeNotSelected = (focusDay.dayOfWeek !== "") && (focusDay.startTime === "" || focusDay.endTime === "");
-            
-            if (isTimeNotSelected) {
-                return; 
-            }
-            
             setFocusDay({dayOfWeek: day, startTime: '', endTime: ''});
         }
+         
+        // let dayIndex;
+        // if (selectedDays.length >= 1) {
+        //     dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
+        // } else {
+        //     dayIndex = -1;
+        // }
+        
+        // if (dayIndex !== -1) {
+        //     setSelectedDays((prevSelectedDays) =>
+        //         prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day)
+        //     );
+        // } else {
+        //     // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
+        //     // const isTimeNotSelected = (focusDay.dayOfWeek !== "") && (focusDay.startTime === "" || focusDay.endTime === "");
+            
+        //     // if (isTimeNotSelected) {
+        //     //     return; 
+        //     // }
+            
+        //     setFocusDay({dayOfWeek: day, startTime: '', endTime: ''});
+        // }
     }
 
       
@@ -70,11 +76,16 @@ export default function LessonDate() {
     }
 
 
-    
-
     // 수업일시 추가하기 
 
     function AddLesson() {
+        // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
+        const isTimeNotSelected = (focusDay.dayOfWeek !== "") && (focusDay.startTime === "" || focusDay.endTime === "");
+        const isDayNotSelected = (focusDay.dayOfWeek == "");
+        if (isDayNotSelected || isTimeNotSelected) {
+            return; 
+        }
+        
         // 현재 focusDay의 값을 selectedDays에 추가
         setSelectedDays((prevSelectedDays) => [...prevSelectedDays, focusDay]);
         // 현재 focusDay의 값을 빈 값으로 초기화

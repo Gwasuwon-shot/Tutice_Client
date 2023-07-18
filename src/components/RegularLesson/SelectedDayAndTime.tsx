@@ -1,7 +1,9 @@
+import {useRecoilState, useRecoilValue} from 'recoil';
+
 import React from 'react';
 import {RegularLessonGroupIc} from "../../assets";
+import {dayState} from '../../atom/timePicker/timePicker';
 import styled from 'styled-components';
-import {useRecoilValue} from 'recoil';
 
 interface selectedProps {
     dayofweek : string;
@@ -12,10 +14,17 @@ interface selectedProps {
 export default function SelectedDayAndTime(props : selectedProps) {
 
     const { dayofweek, startTime, endTime } = props;
+    const [selectedDays, setSelectedDays] = useRecoilState(dayState);
+
+    function handleDeleteDay() {
+        const newList = selectedDays.filter(param => param.dayOfWeek !== dayofweek)
+        setSelectedDays(newList);
+    };
+
 
     return (
         <SelectedWrapper>
-            <RegularLessonGroupIcon />
+            <RegularLessonGroupIcon onClick = {handleDeleteDay}/>
             <DayWrapper> {dayofweek} </DayWrapper>
             <TimeWrapper> 
                 {Number(startTime.slice(0, 2)) <= 12 ? (

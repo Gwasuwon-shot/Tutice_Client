@@ -59,7 +59,7 @@ export default function PasswordAgreeChecking() {
   }
 
   function viewingConfirmIcon() {
-    if (confirmFocus || confirmPw) {
+    if (confirmFocus || !confirmPw === " ") {
       if (confirmViewing === "text") {
         return <CanViewingLoginIcon onClick={handleConfirmViewing} />;
       }

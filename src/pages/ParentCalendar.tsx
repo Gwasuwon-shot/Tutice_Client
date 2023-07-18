@@ -5,6 +5,7 @@ import YearandMonth from "../components/Calendar/YearandMonth";
 import Dayofweek from "../components/Calendar/Dayofweek";
 import ParentsDays from "../components/Calendar/Parents/ParentsDays";
 
+//수정없는 부모님 캘린더
 export default function ParentCalenda() {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
 

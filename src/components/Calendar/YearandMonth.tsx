@@ -23,9 +23,9 @@ export default function YearandMonth(props: YearandMonthProps) {
     <HeaderWrapper>
       <CalendarText>캘린더</CalendarText>
       <YearMonthWrapper>
-        <PrevMonthButton onClick={() => handleGoToPrevMonth} />
+        <PrevMonthButton onClick={() => handleGoToPrevMonth()} />
         {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
-        <NextMonthButton onClick={() => handleGoToNextMonth} />
+        <NextMonthButton onClick={() => handleGoToNextMonth()} />
       </YearMonthWrapper>
       <CancelCalendarButton />
     </HeaderWrapper>

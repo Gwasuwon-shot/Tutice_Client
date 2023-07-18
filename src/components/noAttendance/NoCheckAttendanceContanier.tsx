@@ -111,4 +111,8 @@ const NameSubjectWrapper = styled.div`
   gap: 0.4rem;
 `;
 
-const ButtonWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

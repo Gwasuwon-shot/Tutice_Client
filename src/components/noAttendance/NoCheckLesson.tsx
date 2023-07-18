@@ -34,8 +34,8 @@ export default function NoCheckLesson() {
   console.log(missingAttendanceSchedule);
   const [selectedLesson, setSelectedLesson] = useState<LessonData>({
     idx: 0,
-    studentName: "권혠찌",
-    subject: "피아노",
+    studentName: "",
+    subject: "",
   });
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState<boolean>(false);
@@ -51,7 +51,6 @@ export default function NoCheckLesson() {
                   <NoAttendanceDate>
                     {new Date(date).getMonth() + 1}월 {new Date(date).getDate()}일 ({dayOfWeek})
                   </NoAttendanceDate>
-
                   {missingAttedanceScheduleList?.map(({ lesson, schedule }) => {
                     return (
                       <NoCheckAttendanceContanier

@@ -4,21 +4,25 @@ import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import useGetTodayScheduleByTeacher from "../../hooks/useGetTodayScheduleByTeacher";
 import AttendanceStatusButton from "./AttendanceStatusButton";
 import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
 
 interface AttendanceCheckModalProp {
   setIsCheckingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  lessonIdx: number;
+  studentName: string;
+  count: number;
+  scheduleIdx: number;
+  subject: string;
 }
 
 export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
-  const { setIsCheckingModalOpen } = props;
-  const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
-  const { lesson, schedule } = todaySchedule;
-  const { idx, studentName, subject } = lesson;
-  const { count } = schedule;
+  const { setIsCheckingModalOpen, lessonIdx, studentName, count, subject, scheduleIdx } = props;
+  // const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
+  // const { lesson, schedule } = todaySchedule;
+  // const { idx, studentName, subject } = lesson;
+  // const { count } = schedule;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
@@ -28,7 +32,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
 
   function handleCheckAttlendanceStatus(status: string) {
     setIsCheckingModalOpen(true);
-    setAttendanceData({ idx: schedule?.idx, status: status });
+    setAttendanceData({ idx: scheduleIdx, status: status });
   }
 
   return (
@@ -40,7 +44,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
       <TextWrapper>
         <Main $isTitle={true}>{studentName}</Main>
         <Sub $isTitle={true}>학생</Sub>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[lessonIdx % 11]} color="#5B6166" />
       </TextWrapper>
       <TextWrapper>
         <Main $isTitle={false}>{count}회차</Main>

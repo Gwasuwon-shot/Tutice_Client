@@ -33,8 +33,10 @@ export default function NoCheckLesson() {
   const { missingAttendanceSchedule } = useGetMissingAttendanceSchedule();
   console.log(missingAttendanceSchedule);
   const [selectedLesson, setSelectedLesson] = useState<LessonData>({
-    idx: 0,
+    lessonIdx: 0,
     studentName: "",
+    count: 0,
+    scheduleIdx: 0,
     subject: "",
   });
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
@@ -67,19 +69,20 @@ export default function NoCheckLesson() {
           )}
         {openModal && selectedLesson && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
-            <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+            <AttendanceCheckModal
+              setIsCheckingModalOpen={setIsCheckingModalOpen}
+              lessonIdx={selectedLesson?.idx}
+              studentName={selectedLesson?.studentName}
+              count={}
+              subject={selectedLesson?.subject}
+              scheduleIdx={}
+            />
           </ModalSection>
         )}
 
         {openModal && isCheckingModalOpen && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
             <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
-          </ModalSection>
-        )}
-
-        {openModal && (
-          <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
-            <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
           </ModalSection>
         )}
       </NoAttendanceWrapper>

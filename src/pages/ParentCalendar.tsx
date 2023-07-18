@@ -6,19 +6,23 @@ import Dayofweek from "../components/Calendar/Dayofweek";
 import ParentsDays from "../components/Calendar/Parents/ParentsDays";
 
 export default function ParentCalenda() {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
 
-  function prevMonth() {
+  function handleToPrevMonth() {
     setCurrentMonth(subMonths(currentMonth, 1));
   }
 
-  function nextMonth() {
+  function handleToNextMonth() {
     setCurrentMonth(addMonths(currentMonth, 1));
   }
   return (
     <>
       <CalendarWrapper>
-        <YearandMonth currentMonth={currentMonth} />
+        <YearandMonth
+          currentMonth={currentMonth}
+          handleToPrevMonth={handleToPrevMonth}
+          handleToNextMonth={handleToNextMonth}
+        />
         <Dayofweek />
         <ParentsDays currentMonth={currentMonth} />
       </CalendarWrapper>

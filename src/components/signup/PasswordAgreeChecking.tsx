@@ -170,7 +170,7 @@ const InputPwWrapper = styled.div<{ $pwFocus: boolean; $isPassword: boolean }>`
   display: flex;
   flex-direction: column;
 
-  width: 29.2rem;
+  width: 28rem;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $pwFocus, $isPassword }) => ($pwFocus || $isPassword ? theme.colors.green5 : theme.colors.grey70)};
@@ -180,7 +180,7 @@ const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: b
   display: flex;
   flex-direction: column;
 
-  width: 29.2rem;
+  width: 28rem;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $confirmFocus, $isConfirmed }) =>

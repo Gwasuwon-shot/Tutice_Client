@@ -80,6 +80,7 @@ export default function EditDatePicker() {
       year: currentYear,
       month: monthCalender[swiper.realIndex].month,
       date: monthCalender[swiper.realIndex].date,
+      dayOfWeek: monthCalender[swiper.realIndex].day,
     });
     // problem : year을 currentYear이 아닌 지난해, 다음해로 선택했을 시 -> 추후 변경
   }
@@ -90,7 +91,7 @@ export default function EditDatePicker() {
   // 2) 데이트 피커 취소시
   function handleCancelDatePicker() {
     setIsDatePickerOpen(false);
-    setActiveSlide({ year: currentYear, month: currentMonth, date: todayDate });
+    setActiveSlide({ year: currentYear, month: currentMonth, date: todayDate, dayOfWeek: todayDay });
   }
 
   // 3) 데이트 피커 완료 시

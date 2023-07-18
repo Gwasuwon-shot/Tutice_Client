@@ -29,28 +29,6 @@ export default function LessonDate() {
         } else {
             setFocusDay({dayOfWeek: day, startTime: '', endTime: ''});
         }
-         
-        // let dayIndex;
-        // if (selectedDays.length >= 1) {
-        //     dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
-        // } else {
-        //     dayIndex = -1;
-        // }
-        
-        // if (dayIndex !== -1) {
-        //     setSelectedDays((prevSelectedDays) =>
-        //         prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day)
-        //     );
-        // } else {
-        //     // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
-        //     // const isTimeNotSelected = (focusDay.dayOfWeek !== "") && (focusDay.startTime === "" || focusDay.endTime === "");
-            
-        //     // if (isTimeNotSelected) {
-        //     //     return; 
-        //     // }
-            
-        //     setFocusDay({dayOfWeek: day, startTime: '', endTime: ''});
-        // }
     }
 
       

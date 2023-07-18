@@ -56,7 +56,7 @@ export default function TimePicker() {
             <StyledSwiper
                 direction="vertical"
                 slidesPerView={7}
-                spaceBetween={15}
+                spaceBetween={19}
                 freeMode={true}
                 freeModeSticky={true}
                 freeModeMomentumRatio={0.25}
@@ -87,7 +87,8 @@ const TimePickerWrapper = styled.div`
 
     position: relative;
     
-    height: 13rem;
+    width: 100%;
+    height: 20rem;
     
     background-color: ${({ theme }) => theme.colors.grey20};
 `
@@ -98,7 +99,7 @@ const StyledSwiper = styled(Swiper)`
     align-items: center;
     
     width: 6rem;
-    height: 9.5rem;
+    height: 14rem;
     
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey400};

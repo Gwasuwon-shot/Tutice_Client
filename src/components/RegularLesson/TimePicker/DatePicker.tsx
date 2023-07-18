@@ -4,7 +4,7 @@ import 'swiper/components/navigation/navigation.min.css';
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
-import {dateState, openDatePickerState} from '../../../atom/timePicker/timePicker';
+import {dateState, firstLessonDay, openDatePickerState} from '../../../atom/timePicker/timePicker';
 
 import styled from 'styled-components';
 import {useRecoilState} from 'recoil';
@@ -75,9 +75,11 @@ export default function DatePicker() {
     // 4. 날짜 상태 관리
 
     const [activeSlide, setActiveSlide] = useRecoilState(dateState);
+    const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
 
     function handleSlideChange(swiper: SwiperCore) {
         setActiveSlide({year: currentYear, month:monthCalender[swiper.realIndex].month, date: monthCalender[swiper.realIndex].date});
+        setfirstLesson(monthCalender[swiper.realIndex].day);
         // problem : year을 currentYear이 아닌 지난해, 다음해로 선택했을 시 -> 추후 변경
     };
     
@@ -88,6 +90,7 @@ export default function DatePicker() {
     function handleCancelDatePicker() {
         setIsDatePickerOpen(false);
         setActiveSlide({year: currentYear, month: currentMonth, date: todayDate});
+        setfirstLesson(todayDay);
     }
 
     // 3) 데이트 피커 완료 시
@@ -98,6 +101,8 @@ export default function DatePicker() {
     // check 용
     useEffect(() => {
         console.log(activeSlide);
+        console.log("첫수업일");
+        console.log(firstLesson);
     }, [activeSlide]);
 
     const slides = Array.from({ length: monthCalender.length }, (_, index) => (
@@ -107,6 +112,11 @@ export default function DatePicker() {
             <Day> {monthCalender[index].day} </Day>
         </SwiperSlide>
     ));
+
+    // 도르레 처음 클릭할 때 오늘 날짜부터 오도록 설정
+    const firstIndex = monthCalender.findIndex(date =>
+        date.month === currentMonth && date.date === todayDate && date.day === todayDay
+    );
     
     return (
 
@@ -118,8 +128,9 @@ export default function DatePicker() {
 
             <StyledSwiper
                 direction="vertical"
+                initialSlide ={firstIndex}
                 slidesPerView={7}
-                spaceBetween={15}
+                spaceBetween={19}
                 freeMode={true}
                 freeModeSticky={true}
                 freeModeMomentumRatio={0.25}
@@ -148,7 +159,8 @@ const TimePickerWrapper = styled.div`
 
     position: relative;
     
-    height: 13rem;
+    width: 100%;
+    height: 20rem;
     
     background-color: ${({ theme }) => theme.colors.grey20};
 `
@@ -159,7 +171,7 @@ const StyledSwiper = styled(Swiper)`
     align-items: center;
     
     width: 6rem;
-    height: 9.5rem;
+    height: 14rem;
     
     ${({ theme }) => theme.fonts.body02};
     color: ${({ theme }) => theme.colors.grey400};

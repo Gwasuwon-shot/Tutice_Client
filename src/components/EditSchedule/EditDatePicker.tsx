@@ -102,6 +102,7 @@ export default function EditDatePicker(props: EditDetailDatePickerPropType) {
   function handleConfirmDatePicker() {
     setIsDatePickerOpen(false);
     console.log(activeSlide);
+    setIsActive(true);
   }
 
   // check 용
@@ -139,7 +140,7 @@ export default function EditDatePicker(props: EditDetailDatePickerPropType) {
       <Vizor />
 
       <ConfirmWrapper>
-        <ConfirmButton onClick={handleConfirmDatePicker}> 확인 </ConfirmButton>
+        <ConfirmButton onClick={handleConfirmDatePicker}>확인</ConfirmButton>
       </ConfirmWrapper>
     </TimePickerWrapper>
   );

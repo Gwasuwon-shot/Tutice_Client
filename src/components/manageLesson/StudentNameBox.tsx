@@ -12,8 +12,6 @@ export default function StudentNameBox() {
   const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
     Number(manageLessonId),
   );
-  // const { lesson, scheduleList } = lessonScheduleByTeacher;
-  // const { idx, studentName, subject, count, nowCount } = lesson;
   const { openModal } = useModal();
   const [payMentAlarmOpen, setPayMentAlarmOpen] = useState(false);
 

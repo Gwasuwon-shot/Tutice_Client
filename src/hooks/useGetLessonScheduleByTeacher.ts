@@ -2,9 +2,6 @@ import { useQuery } from "react-query";
 import { getLessonScheduleByTeacher } from "../api/getLessonScheduleByTeacher";
 
 export default function useGetLessonScheduleByTeacher(manageLessonId: number) {
-  // const [lesson, setLesson] = useState([]);
-  // const [scheduleList, setScheduleList] = useState([]);
-
   const { data: lessonScheduleByTeacher } = useQuery(
     ["lessonScheduleByTeacher"],
     () => getLessonScheduleByTeacher(manageLessonId),

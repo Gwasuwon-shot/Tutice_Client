@@ -17,8 +17,6 @@ export default function AttendanceInforms() {
   const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
     Number(manageLessonId),
   );
-  // const { lesson, scheduleList } = lessonScheduleByTeacher;
-  // const { idx, studentName, subject, count, nowCount, percent } = lesson;
   const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);

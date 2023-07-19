@@ -9,9 +9,5 @@ export async function getLessonScheduleByTeacher(lessonIdx: number) {
     },
   });
 
-  console.log(data.data.data);
-
-  const { lesson, scheduleList } = data && data?.data?.data;
-
-  return { lesson, scheduleList };
+  return data?.data?.data;
 }

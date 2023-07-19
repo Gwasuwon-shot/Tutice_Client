@@ -1,9 +1,10 @@
-import React from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import StudentNameLabel from "../common/StudentNameLabel";
-import ToastModal from "../common/ToastModal";
+import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
+import StudentNameLabel from "../common/StudentNameLabel";
+import ToastModal from "../common/ToastModal";
 
 interface ExtensionLessonModalProps {
   studentName: string;
@@ -11,16 +12,28 @@ interface ExtensionLessonModalProps {
   backgroundColor: string;
   color: string;
   isBig: boolean;
+  setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
   const { studentName, subject, backgroundColor, color, isBig } = props;
   const { unShowModal } = useModal();
+  const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
 
   function handleExtensionLesson() {
-    //서버 api 통신 (연장완)
+    //서버 api 통신 onSucess
     unShowModal();
+    setSanckBarOpen(true);
+    setIsSuccess(true);
   }
+
+  function handleNotExtensionLesson() {
+    //서버 api 통신 onSucess
+    unShowModal();
+    setSanckBarOpen(true);
+    setIsSuccess(false);
+  }
+
   return (
     <ModalWrapper>
       <ToastModal>
@@ -39,7 +52,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
           <p>수업을 계속해서 연장하시겠어요?</p>
         </TextWrapper>
         <ButtonWrapper>
-          <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
+          <RoundBottomMiniButton isGreen={false} onClick={handleNotExtensionLesson}>
             아니요
           </RoundBottomMiniButton>
           <RoundBottomMiniButton isGreen={true} onClick={handleExtensionLesson}>

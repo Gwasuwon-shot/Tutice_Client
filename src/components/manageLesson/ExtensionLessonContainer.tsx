@@ -4,6 +4,7 @@ import { styled } from "styled-components";
 import { NextMonthArrowButton } from "../../assets";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
 import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
 import StudentColorBox from "../common/StudentColorBox";
 import SubjectLabel from "../common/SubjectLabel";
@@ -15,7 +16,7 @@ interface ExtensionLessonContainerProps {
 }
 
 export default function ExtensionLessonContainer(props: ExtensionLessonContainerProps) {
-  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
   const { endScheduleDate, setOpenModal, lesson } = props;
   const { idx, studentName, subject, count } = lesson;
 

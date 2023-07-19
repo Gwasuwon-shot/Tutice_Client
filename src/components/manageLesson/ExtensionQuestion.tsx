@@ -8,7 +8,12 @@ import useExtensionLesson from "../../hooks/useExtensionLesson";
 import ExtensionLessonContainer from "./ExtensionLessonContainer";
 import ExtensionLessonModal from "./ExtensionLessonModal";
 
-export default function ExtensionQuestion() {
+interface ExtensionQuestionProp {
+  setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ExtensionQuestion(props: ExtensionQuestionProp) {
+  const { setIsSuccess } = props;
   const { missingMaintenanceLessonList } = useExtensionLesson();
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
@@ -39,6 +44,7 @@ export default function ExtensionQuestion() {
           backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
           color="#757A80"
           isBig={false}
+          setIsSuccess={setIsSuccess}
         />
       )}
     </>

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { CheckButtonSnackBarIc, XButtonSnackBarIc } from "../../assets";
@@ -12,6 +12,12 @@ interface SnackBarPopupProps {
 export default function SnackBarPopup(props: SnackBarPopupProps) {
   const { isCheck, children } = props;
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSanckBarOpen(false);
+    }, 3000);
+  }, []);
 
   function handleCloseSnackBarPopup() {
     setSanckBarOpen(false);

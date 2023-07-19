@@ -1,30 +1,34 @@
 import React from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { NextMonthArrowButton } from "../../assets";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
 import StudentColorBox from "../common/StudentColorBox";
 import SubjectLabel from "../common/SubjectLabel";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
-import { NextMonthArrowButton } from "../../assets";
-import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
 
 interface ExtensionLessonContainerProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setSelectedLesson: React.Dispatch<React.SetStateAction<LessonType>>;
   endScheduleDate: string;
   lesson: LessonType;
 }
 
 export default function ExtensionLessonContainer(props: ExtensionLessonContainerProps) {
-  const { endScheduleDate, setSelectedLesson, setOpenModal, lesson } = props;
-  const { idx, studentName, subject, count } = lesson;
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
+  // const { endScheduleDate, setOpenModal, lesson } = props;
+  // const { idx, studentName, subject, count } = lesson;
 
   function handleClickExtension() {
     setSelectedLesson(lesson);
     setOpenModal(true);
   }
+
   return (
     <>
       <ContentWrapper key={idx}>
-        <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+        <StudentColorBox backgroundColor={STUDENT_COLOR[lessonIdx % 11]} />
         <DateandCount>
           {endScheduleDate.slice(5, 6) == "0" ? (
             <p>

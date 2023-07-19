@@ -76,7 +76,6 @@ export default function PasswordAgreeChecking() {
   }
   useEffect(() => {
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
-    console.log(isPassword);
 
     pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
 

@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import TextLabelLayout from "./TextLabelLayout";
 import SignupTitleLayout from "./SignupTitleLayout";
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
 import RegexField from "./RegexField";
@@ -14,9 +14,12 @@ import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import AgreeChecking from "./AgreeChecking";
 import { viewingLoginIc, canViewingLoginIc } from "../../assets";
+import { newUserPost } from "../../api/localSignup";
+import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import { useMutation } from "react-query";
 
 export default function PasswordAgreeChecking() {
-  const newUser = useRecoilValue(newUserData);
+  const [newUser, setNewUser] = useRecoilState(newUserData);
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState(" ");
   const [isPassword, setIsPassword] = useState(false);
@@ -26,10 +29,14 @@ export default function PasswordAgreeChecking() {
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
-
-  function handleToSignUp() {
-    console.log("회원가입요~");
-  }
+  const { mutate: postNewUser } = useMutation(newUserPost, {
+    onSuccess: () => {
+      console.log("성공");
+    },
+    onError: () => {
+      console.log("실패");
+    },
+  });
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -67,15 +74,23 @@ export default function PasswordAgreeChecking() {
     }
     return null;
   }
+
   useEffect(() => {
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
-    console.log(isPassword);
 
     pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
 
     pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
-  }, [pw, confirmPw, isPassword, isConfirmed]);
+  }, [pw, confirmPw, isPassword, isConfirmed, newUser, setPw]);
 
+  function handleToSignUp() {
+    postNewUser(newUser);
+  }
+
+  function handleConfirmBlur() {
+    setConfirmFocus(false);
+    setNewUser((prev) => ({ ...prev, password: pw }));
+  }
   return (
     <>
       <ProgressBar progress={80} />
@@ -90,52 +105,54 @@ export default function PasswordAgreeChecking() {
           <Inputfield disabled type="text" value={newUser.name} />
         </InputWrapper>
 
-        <InputWrapper>
-          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-          <Inputfield disabled type="text" value={newUser.email} />
-        </InputWrapper>
+        <form>
+          <InputWrapper>
+            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
+            <Inputfield disabled type="text" value={newUser.email} />
+          </InputWrapper>
 
-        <InputPwWrapper $isPassword={isPassword} $pwFocus={pwFocus}>
-          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
-          <PasswordIconWrapper>
-            <Inputfield
-              onFocus={() => setPwFocus(true)}
-              onBlur={() => setPwFocus(false)}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
-              type={pwViewing}
-              autoComplete="off"
-              placeholder={PLACEHOLDER_TEXT.passwordHolder}
-            />
-            {viewingPwIcon()}
-          </PasswordIconWrapper>
-        </InputPwWrapper>
+          <InputPwWrapper $isPassword={isPassword} $pwFocus={pwFocus}>
+            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
+            <PasswordIconWrapper>
+              <Inputfield
+                onFocus={() => setPwFocus(true)}
+                onBlur={() => setPwFocus(false)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
+                type={pwViewing}
+                autoComplete="off"
+                placeholder={PLACEHOLDER_TEXT.passwordHolder}
+              />
+              {viewingPwIcon()}
+            </PasswordIconWrapper>
+          </InputPwWrapper>
 
-        {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
+          {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
-        <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
-          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
-          <PasswordIconWrapper>
-            <Inputfield
-              onFocus={() => setConfirmFocus(true)}
-              onBlur={() => setConfirmFocus(false)}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
-              type={confirmViewing}
-              autoComplete="off"
-              placeholder={PLACEHOLDER_TEXT.confirmHolder}
-            />
-            {viewingConfirmIcon()}
-          </PasswordIconWrapper>
-        </InputConfirmWrapper>
+          <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
+            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
+            <PasswordIconWrapper>
+              <Inputfield
+                onFocus={() => setConfirmFocus(true)}
+                onBlur={() => handleConfirmBlur()}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
+                type={confirmViewing}
+                autoComplete="off"
+                placeholder={PLACEHOLDER_TEXT.confirmHolder}
+              />
+              {viewingConfirmIcon()}
+            </PasswordIconWrapper>
+          </InputConfirmWrapper>
 
-        {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+          {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
-        {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
+          {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
 
-        <AgreeChecking />
+          <AgreeChecking />
 
-        <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
-          <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
-        </SubmitButton>
+          <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
+            <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
+          </SubmitButton>
+        </form>
       </Container>
     </>
   );

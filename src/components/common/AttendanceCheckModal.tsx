@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
@@ -10,17 +11,14 @@ import ToastModal from "./ToastModal";
 
 interface AttendanceCheckModalProp {
   setIsCheckingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  lessonIdx: number;
-  studentName: string;
-  count: number;
-  scheduleIdx: number;
-  subject: string;
 }
 
 export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
-  const { setIsCheckingModalOpen, lessonIdx, studentName, count, subject, scheduleIdx } = props;
+  const { setIsCheckingModalOpen } = props;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
 
   function handleCancelAttendanceCheck() {
     setOpenModal(false);

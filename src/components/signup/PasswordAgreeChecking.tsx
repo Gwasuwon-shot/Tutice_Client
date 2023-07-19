@@ -16,6 +16,7 @@ import AgreeChecking from "./AgreeChecking";
 import { viewingLoginIc, canViewingLoginIc } from "../../assets";
 import { newUserPost } from "../../api/localSignup";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import { useMutation } from "react-query";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -28,13 +29,19 @@ export default function PasswordAgreeChecking() {
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
+  const { mutate: postNewUser } = useMutation(newUserPost, {
+    onSuccess: () => {
+      console.log("성공");
+    },
+    onError: () => {
+      console.log("실패");
+    },
+  });
 
   function handleToSignUp() {
     setNewUser((prev: newUserDataTypes) => ({ ...prev, password: pw }));
 
-    newUserPost(newUser);
-    // JSON.parse(JSON.stringify(newUser));
-    console.log(newUser);
+    postNewUser(newUser);
   }
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {

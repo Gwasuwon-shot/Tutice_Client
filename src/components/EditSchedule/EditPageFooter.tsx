@@ -25,6 +25,7 @@ export default function EditPageFooter() {
 
   const { mutate: patchSchdule } = useMutation(updateSchedule, {
     onSuccess: () => {
+      navigate("/change-schedule");
       console.log("성공");
     },
     onError: (error) => {
@@ -33,7 +34,6 @@ export default function EditPageFooter() {
   });
 
   function handleEditLesson(): void {
-    // navigate("/change-schedule");
     console.log("dfdf");
     patchSchdule({
       idx: idx,

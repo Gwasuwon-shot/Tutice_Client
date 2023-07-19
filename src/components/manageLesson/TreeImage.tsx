@@ -20,7 +20,7 @@ export default function TreeImage() {
         return LESSON_STATUS_IMAGE.level3;
       case percent > 20:
         return LESSON_STATUS_IMAGE.level2;
-      case percent > 0:
+      case percent >= 0:
         return LESSON_STATUS_IMAGE.level1;
       default:
         return;
@@ -33,7 +33,7 @@ export default function TreeImage() {
         <img src={checkTreeSrc()} alt="열매 이미지" />
       </ImgWrapper>
       <CountBox>
-        {count - nowCount}회/ 총 {count}회
+        {nowCount}회/ 총 {count}회
       </CountBox>
       <TreeProgress progress={percent} width={29.2} />
     </>

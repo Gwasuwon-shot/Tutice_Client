@@ -23,7 +23,7 @@ export { ReactComponent as AttendaceAttendanceModalIc } from "./icon/attendaceAt
 export { ReactComponent as AttendanceDisabledAttendanceIc } from "./icon/attendanceDisabledAttendanceIc.svg";
 export { ReactComponent as BackButtonSignupIc } from "./icon/backButtonSignupIc.svg";
 export { ReactComponent as BellWelcomeIc } from "./icon/bellWelcomeIc.svg";
-export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIc.svg";
+export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIC.svg";
 export { ReactComponent as CalendarActiveTeacherFooterIc } from "./icon/calendarActiveTeacherFooterIc.svg";
 export { ReactComponent as CalendarMoreLessonIc } from "./icon/calendarMoreLessonIc.svg";
 export { ReactComponent as CalendarTeacherFooterIc } from "./icon/calendarTeacherFooterIc.svg";

@@ -1,9 +1,10 @@
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { SmallAttendanceCheckButtonIc } from "../../assets";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import useModal from "../../hooks/useModal";
+import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
 
 interface AttendanceInformProps {
   date: string;
@@ -12,36 +13,35 @@ interface AttendanceInformProps {
   endTime: string;
   count: number;
   lessonIdx: number;
-  studentName: string;
   scheduleIdx: number;
-  subject: string;
+  setIsCancelImpossibleModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AttendanceInform(props: AttendanceInformProps) {
-  const { date, status, startTime, endTime, count, lessonIdx, studentName, scheduleIdx, subject } = props;
+  const { date, status, startTime, endTime, count, lessonIdx, scheduleIdx, setIsCancelImpossibleModalOpen } = props;
   const { showModal } = useModal();
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
   function checkIsStatusExist() {
     return status !== ATTENDANCE_STATUS.none;
   }
 
+  function checkIsCanel() {
+    return status === ATTENDANCE_STATUS.cancel;
+  }
+
   function handleOpenCheckAttendanceModal() {
-    setSelectedLesson({
-      lessonIdx: lessonIdx,
-      studentName: studentName,
-      count: count,
-      scheduleIdx: scheduleIdx,
-      subject: subject,
-    });
-    showModal();
+    setAttendanceData({ ...attendanceData, status: status });
+    setSelectedLesson({ ...selectedLesson, lessonIdx: lessonIdx, count: count, scheduleIdx: scheduleIdx });
+    checkIsCanel() ? setIsCancelImpossibleModalOpen(true) : showModal();
   }
 
   return (
     <>
       <AttnedanceInformBox>
         <Label $isDate={true}>
-          {date.split("-")[1]}.{date.split("-")[2]}
+          {new Date(date).getMonth() + 1}.{new Date(date).getDate()}
         </Label>
         <div>
           <LessonCount>{count}회차 수업</LessonCount>
@@ -53,7 +53,7 @@ export default function AttendanceInform(props: AttendanceInformProps) {
           {checkIsStatusExist() ? (
             <StatusLabel $status={status}>{status}</StatusLabel>
           ) : (
-            <SmallAttendanceCheckButtonIcon />
+            <NoCheckPageAttendanceButton />
           )}
         </section>
       </AttnedanceInformBox>
@@ -110,8 +110,4 @@ const StatusLabel = styled.label<{ $status: string }>`
       ? theme.colors.red6
       : theme.colors.grey900};
   ${({ theme }) => theme.fonts.body01};
-`;
-
-const SmallAttendanceCheckButtonIcon = styled(SmallAttendanceCheckButtonIc)`
-  width: 7.4rem;
 `;

@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import useManageLesson from "../../hooks/useManageLesson";
 import useModal from "../../hooks/useModal";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
+import CancelImpossibleModal from "../modal/CanceImpossibleModal";
 import AttendanceInform from "./AttendanceInform";
 
 export default function AttendanceInforms() {
@@ -16,23 +17,21 @@ export default function AttendanceInforms() {
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { studentName, subject, count, nowCount } = lesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [isCancelImpossibleModalOpen, setIsCancelImpossibleModalOpen] = useState(false);
 
-  function handleMoveToAttendanceCheck() {
-    showModal();
+  useEffect(() => {
+    setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
+  }, []);
+
+  function handleCloseCancelImpossibleModal() {
+    setIsCancelImpossibleModalOpen(false);
   }
 
   return (
     <>
       {openModal && selectedLesson && (
         <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
-          <AttendanceCheckModal
-            setIsCheckingModalOpen={setIsCheckingModalOpen}
-            lessonIdx={selectedLesson?.lessonIdx}
-            studentName={selectedLesson?.studentName}
-            count={selectedLesson?.count}
-            subject={selectedLesson?.subject}
-            scheduleIdx={selectedLesson?.scheduleIdx}
-          />
+          <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
         </ModalSection>
       )}
 
@@ -40,6 +39,11 @@ export default function AttendanceInforms() {
         <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
           <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
         </ModalSection>
+      )}
+      {isCancelImpossibleModalOpen && (
+        <CancelImpossibleModalWrapper>
+          <CancelImpossibleModal handleCloseCancelImpossibleModal={handleCloseCancelImpossibleModal} />
+        </CancelImpossibleModalWrapper>
       )}
 
       <GreyBox />
@@ -53,9 +57,8 @@ export default function AttendanceInforms() {
             endTime={endTime}
             count={Math.abs(index - scheduleList.length)}
             lessonIdx={lesson?.idx}
-            studentName={studentName}
             scheduleIdx={idx}
-            subject={subject}
+            setIsCancelImpossibleModalOpen={setIsCancelImpossibleModalOpen}
           />
         ))}
       </ScheduleWrapper>
@@ -87,4 +90,9 @@ const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
   position: absolute;
 
   margin: -37.9rem 0 0 -1.5em;
+`;
+
+const CancelImpossibleModalWrapper = styled.aside`
+  position: absolute;
+  margin: -37.9rem 0 0 -1.5rem;
 `;

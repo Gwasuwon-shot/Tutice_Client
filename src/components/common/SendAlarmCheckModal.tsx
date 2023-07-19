@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import { requestAttendanceNotification } from "../../api/requestAttendanceNotification";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "./RoundBottomMiniButton";
@@ -11,11 +13,12 @@ interface SendAlarmCheckModalProps {
   idx: number;
   studentName: string;
   subject: string;
-  count: string;
+  count: number;
+  scheduleIdx: number;
 }
 
 export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
-  const { idx, studentName, subject, count } = props;
+  const { idx, studentName, subject, count, scheduleIdx } = props;
   const [isClassExist, setIsClassExist] = useState(true);
   const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const navigate = useNavigate();
@@ -26,9 +29,21 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
   }
 
   function handleSendAlarm() {
-    // 서버에 알람 포스트
-    showModal();
+    //  쿼리 키로 불러오기
   }
+
+  const { data: sendAlarm } = useQuery(
+    ["requestAttendanceNotification"],
+    () => requestAttendanceNotification(scheduleIdx),
+    {
+      onSuccess: () => {
+        unShowModal();
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    },
+  );
 
   return (
     <ToastModal>

@@ -11,8 +11,10 @@ export default function EditFooterButton(props: EditFooterButtonProps) {
   const { onClick, isActive, disabled } = props;
 
   return (
-    <BottomButton disabled={disabled} isActive={isActive} onClick={onClick}>
-      저장
-    </BottomButton>
+    <>
+      <BottomButton disabled={disabled} isActive={isActive} onClick={onClick}>
+        저장
+      </BottomButton>
+    </>
   );
 }

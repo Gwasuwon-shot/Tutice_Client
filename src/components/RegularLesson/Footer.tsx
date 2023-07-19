@@ -37,29 +37,33 @@ export default function Footer() {
     }
     
     return (
-        <>
-        <FooterWrapper onClick = {CompleteLesson} selected = {isSame}> 
-            <FooterButton disabled = {isSame}> 저장 </FooterButton>
+        <FooterWrapper>
+            <FooterButtonWrapper onClick = {CompleteLesson} selected = {isSame}> 
+                <FooterButton disabled = {isSame}> 저장 </FooterButton>
+            </FooterButtonWrapper>
+            {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}
+            {isDatePickerOpen && <ModalWrapper> <DatePicker /> </ModalWrapper>}
+            {(isStartPickerOpen || isFinishPickerOpen) && <ModalWrapper> <DetailTimePicker /> </ModalWrapper>}
         </FooterWrapper>
-        {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}
-        {isDatePickerOpen && <ModalWrapper> <DatePicker /> </ModalWrapper>}
-        {(isStartPickerOpen || isFinishPickerOpen) && <ModalWrapper> <DetailTimePicker /> </ModalWrapper>}
-        </>
     );
 }
 
-const FooterWrapper = styled.footer<{selected: boolean}>`
+const FooterWrapper = styled.div`
+    height: 7rem;
+`
+
+const FooterButtonWrapper = styled.footer<{selected: boolean}>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
     position: fixed;
     bottom: 0;
-    
+
     width: 100%;
     height: 6.3rem;
     padding: 0.8rem;
-    
+
     background-color: ${({ theme }) => theme.colors.grey50}; 
     ${({ selected, theme }) => selected && `background-color: ${theme.colors.green5};`}
 `

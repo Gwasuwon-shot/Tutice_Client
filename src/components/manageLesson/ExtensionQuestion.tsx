@@ -10,12 +10,6 @@ import ExtensionLessonModal from "./ExtensionLessonModal";
 
 export default function ExtensionQuestion() {
   const { missingMaintenanceLessonList } = useExtensionLesson();
-  // const [selectedLesson, setSelectedLesson] = useState<LessonType>({
-  //   idx: 1,
-  //   studentName: "권혠찡",
-  //   subject: "피아노",
-  // });
-
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);

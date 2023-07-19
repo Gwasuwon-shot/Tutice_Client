@@ -20,7 +20,7 @@ export default function ExtensionLessonContainer(props: ExtensionLessonContainer
   const { idx, studentName, subject, count } = lesson;
 
   function handleClickExtension() {
-    setSelectedLesson({ ...selectedLesson, lessonIdx: idx, studentName: studentName, subject: subject, count: count });
+    setSelectedLesson({ ...selectedLesson, lessonIdx: idx, studentName: studentName, count: count, subject: subject });
     setOpenModal(true);
   }
 

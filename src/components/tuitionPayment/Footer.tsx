@@ -14,24 +14,30 @@ export default function Footer() {
 
     
     return (
-        <FooterWrapper isFooterGreen={isFooterGreen}>
-            <FooterButton isFooterGreen={isFooterGreen}> 다음 </FooterButton>
+        <FooterWrapper>
+            <FooterButtonWrapper isFooterGreen={isFooterGreen}>
+                <FooterButton isFooterGreen={isFooterGreen}> 다음 </FooterButton>
+            </FooterButtonWrapper>
         </FooterWrapper>
     );
 }
 
-const FooterWrapper = styled.footer<{ isFooterGreen: boolean }>`
+const FooterWrapper = styled.div`
+    height: 9rem;
+`
+
+const FooterButtonWrapper = styled.footer<{ isFooterGreen: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
 
     position: fixed;
     bottom: 0;
-    
+
     width: 32rem;
     height: 6.3rem;
     padding: 0.8rem;
-    
+
     ${({ theme, isFooterGreen }) => isFooterGreen ? `background-color: ${theme.colors.green5};` : `background-color: ${theme.colors.grey50};`}
 `
 

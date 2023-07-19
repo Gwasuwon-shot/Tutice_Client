@@ -33,7 +33,8 @@ export default function PasswordAgreeChecking() {
     setNewUser((prev: newUserDataTypes) => ({ ...prev, password: pw }));
 
     newUserPost(newUser);
-    console.log(newUser);
+    // JSON.parse(JSON.stringify(newUser));
+    console.log({ newUser });
     console.log("회원가입요~");
   }
 
@@ -140,7 +141,7 @@ export default function PasswordAgreeChecking() {
 
           <AgreeChecking />
 
-          <SubmitButton type="submit" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
+          <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
             <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
           </SubmitButton>
         </form>

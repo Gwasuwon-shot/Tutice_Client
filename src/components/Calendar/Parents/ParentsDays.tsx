@@ -4,7 +4,6 @@ import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
 import { format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
 import ParentModal from "./ParentModal";
-import useGetScheduleChild from "../../../hooks/useGetScheduleChild";
 import ParentDayItem from "./ParentDayItem";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
@@ -21,7 +20,7 @@ export default function ParentsDays(props: DaysProp) {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const formattedMonth = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}`;
-  
+
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
 
   const rows: React.ReactNode[] = [];

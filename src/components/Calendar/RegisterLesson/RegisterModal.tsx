@@ -5,20 +5,20 @@ import { ko } from "date-fns/locale";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
-import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
 import { modalType } from "../../../type/calendar/modalType";
+import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 export default function RegisterModal(props: modalType) {
-  const { selectedDate, setOpenModal } = props;
-  const { scheduleList } = useGetTeacherSchedule();
+  const { selectedDate, setOpenModal, formattedMonth } = props;
+  const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
 
   return (
     <>
       <ToastModal>
         <ModalContentWrapper>
           <ModalDate>{format(selectedDate as Date, "M월 d일 EEEE", { locale: ko })}</ModalDate>
-          {scheduleList
-            .find((item) => isSameDay(new Date(item.date), selectedDate as Date))
+          {isUserSchedule
+            ?.find((item) => isSameDay(new Date(item.date), selectedDate as Date))
             ?.dailyScheduleList.map((item) => {
               const { schedule } = item;
               const { idx, studentName, subject, startTime, endTime } = schedule;

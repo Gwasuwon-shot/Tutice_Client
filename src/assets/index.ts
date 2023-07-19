@@ -21,8 +21,8 @@ export { ReactComponent as NextMonthArrowButton } from "./icon/arrow_cal_right.s
 export { ReactComponent as AttenceCheckCommonIc } from "./icon/attenceCheckCommonIc.svg";
 export { ReactComponent as AttendaceAttendanceModalIc } from "./icon/attendaceAttendanceModalIc.svg";
 export { ReactComponent as AttendanceDisabledAttendanceIc } from "./icon/attendanceDisabledAttendanceIc.svg";
-export { ReactComponent as backButtonSignupIc } from "./icon/backButtonSignupIc.svg";
-export { ReactComponent as bellWelcomeIc } from "./icon/bellWelcomeIc.svg";
+export { ReactComponent as BackButtonSignupIc } from "./icon/backButtonSignupIc.svg";
+export { ReactComponent as BellWelcomeIc } from "./icon/bellWelcomeIc.svg";
 export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIc.svg";
 export { ReactComponent as CalendarActiveTeacherFooterIc } from "./icon/calendarActiveTeacherFooterIc.svg";
 export { ReactComponent as CalendarMoreLessonIc } from "./icon/calendarMoreLessonIc.svg";

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { backButtonSignupIc } from "../../assets";
+import { BackButtonSignupIc } from "../../assets";
 import { stepNum } from "../../atom/signup/signup";
 
 export default function BackButton() {
@@ -19,7 +19,7 @@ export default function BackButton() {
     </>
   );
 }
-const BackButtonSignupIcon = styled(backButtonSignupIc)`
+const BackButtonSignupIcon = styled(BackButtonSignupIc)`
   width: 4rem;
   height: 4rem;
   margin-left: -1.4rem;

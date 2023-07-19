@@ -64,14 +64,7 @@ export default function NoCheckLesson() {
           )}
         {openModal && selectedLesson && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
-            <AttendanceCheckModal
-              setIsCheckingModalOpen={setIsCheckingModalOpen}
-              lessonIdx={selectedLesson?.lessonIdx}
-              studentName={selectedLesson?.studentName}
-              count={selectedLesson?.count}
-              subject={selectedLesson?.subject}
-              scheduleIdx={selectedLesson?.scheduleIdx}
-            />
+            <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
           </ModalSection>
         )}
 

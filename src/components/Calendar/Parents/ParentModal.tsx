@@ -6,7 +6,6 @@ import { isSameDay } from "date-fns";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
-import useGetScheduleChild from "../../../hooks/useGetScheduleChild";
 import { modalType } from "../../../type/calendar/modalType";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 

@@ -85,7 +85,8 @@ export default function Footer() {
         createLesson,
         {
             onSuccess: (response) => {
-                // setStartDate(response.)
+                console.log('성공');
+                // setStartDate(response.) -> 지수에 전달한 data recoil 저장
                 // navigate ~ 
             },
             onError: (error) => console.log(error),

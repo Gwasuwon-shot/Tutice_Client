@@ -53,7 +53,15 @@ export default function CompleteCheckAttendance() {
 
   return (
     <>
-      {openModal && <SendAlarmCheckModal idx={scheduleIdx} studentName={studentName} subject={subject} count={count} />}
+      {openModal && (
+        <SendAlarmCheckModal
+          idx={lessonIdx}
+          studentName={studentName}
+          subject={subject}
+          count={count}
+          scheduleIdx={scheduleIdx}
+        />
+      )}
       <CompleteCheckAttendanceWrapper>
         <LottieImage>
           {isLastCount ? (

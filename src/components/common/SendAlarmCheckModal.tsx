@@ -11,11 +11,12 @@ interface SendAlarmCheckModalProps {
   idx: number;
   studentName: string;
   subject: string;
-  count: string;
+  count: number;
+  scheduleIdx: number;
 }
 
 export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
-  const { idx, studentName, subject, count } = props;
+  const { idx, studentName, subject, count, scheduleIdx } = props;
   const [isClassExist, setIsClassExist] = useState(true);
   const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const navigate = useNavigate();

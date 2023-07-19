@@ -12,13 +12,11 @@ interface AttendanceInformProps {
   endTime: string;
   count: number;
   lessonIdx: number;
-  studentName: string;
   scheduleIdx: number;
-  subject: string;
 }
 
 export default function AttendanceInform(props: AttendanceInformProps) {
-  const { date, status, startTime, endTime, count, lessonIdx, studentName, scheduleIdx, subject } = props;
+  const { date, status, startTime, endTime, count, lessonIdx, scheduleIdx } = props;
   const { showModal } = useModal();
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
 
@@ -27,15 +25,11 @@ export default function AttendanceInform(props: AttendanceInformProps) {
   }
 
   function handleOpenCheckAttendanceModal() {
-    setSelectedLesson({
-      lessonIdx: lessonIdx,
-      studentName: studentName,
-      count: count,
-      scheduleIdx: scheduleIdx,
-      subject: subject,
-    });
+    setSelectedLesson({ ...selectedLesson, lessonIdx: lessonIdx, count: count, scheduleIdx: scheduleIdx });
     showModal();
   }
+
+  console.log(selectedLesson);
 
   return (
     <>

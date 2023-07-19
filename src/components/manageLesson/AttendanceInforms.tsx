@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
@@ -17,9 +17,9 @@ export default function AttendanceInforms() {
   const { studentName, subject, count, nowCount } = lesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
-  function handleMoveToAttendanceCheck() {
-    showModal();
-  }
+  useEffect(() => {
+    setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
+  }, []);
 
   return (
     <>
@@ -53,9 +53,7 @@ export default function AttendanceInforms() {
             endTime={endTime}
             count={Math.abs(index - scheduleList.length)}
             lessonIdx={lesson?.idx}
-            studentName={studentName}
             scheduleIdx={idx}
-            subject={subject}
           />
         ))}
       </ScheduleWrapper>

@@ -12,6 +12,7 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
+  const;
 
   // setEmail
   function handelEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -66,6 +67,7 @@ export default function LoginInput() {
           <Inputfield
             onFocus={() => setPwFocus(true)}
             onBlur={() => setPwFocus(false)}
+            autoComplete="off"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
             type={pwViewing}
             placeholder="비밀번호를 입력하세요"

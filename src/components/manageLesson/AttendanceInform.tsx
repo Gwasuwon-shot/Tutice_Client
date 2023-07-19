@@ -14,10 +14,11 @@ interface AttendanceInformProps {
   count: number;
   lessonIdx: number;
   scheduleIdx: number;
+  setIsCancelImpossibleModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AttendanceInform(props: AttendanceInformProps) {
-  const { date, status, startTime, endTime, count, lessonIdx, scheduleIdx } = props;
+  const { date, status, startTime, endTime, count, lessonIdx, scheduleIdx, setIsCancelImpossibleModalOpen } = props;
   const { showModal } = useModal();
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
@@ -26,10 +27,14 @@ export default function AttendanceInform(props: AttendanceInformProps) {
     return status !== ATTENDANCE_STATUS.none;
   }
 
+  function checkIsCanel() {
+    return status === ATTENDANCE_STATUS.cancel;
+  }
+
   function handleOpenCheckAttendanceModal() {
     setAttendanceData({ ...attendanceData, status: status });
     setSelectedLesson({ ...selectedLesson, lessonIdx: lessonIdx, count: count, scheduleIdx: scheduleIdx });
-    showModal();
+    checkIsCanel() ? setIsCancelImpossibleModalOpen(true) : showModal();
   }
 
   return (

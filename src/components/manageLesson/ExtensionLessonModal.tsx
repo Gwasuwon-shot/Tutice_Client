@@ -16,7 +16,7 @@ interface ExtensionLessonModalProps {
 }
 
 export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
-  const { studentName, subject, backgroundColor, color, isBig } = props;
+  const { studentName, subject, backgroundColor, color, isBig, setIsSuccess } = props;
   const { unShowModal } = useModal();
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
 

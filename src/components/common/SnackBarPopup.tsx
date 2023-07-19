@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import { CheckButtonSnackBarIc, XButtonSnackBarIc } from "../../assets";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 
@@ -16,7 +16,7 @@ export default function SnackBarPopup(props: SnackBarPopupProps) {
   useEffect(() => {
     setTimeout(() => {
       setSanckBarOpen(false);
-    }, 3000);
+    }, 2500);
   }, []);
 
   function handleCloseSnackBarPopup() {
@@ -35,6 +35,15 @@ export default function SnackBarPopup(props: SnackBarPopupProps) {
     </SnackBarContainer>
   );
 }
+
+const Slide = keyframes`
+ from {
+		transform: translate(0,15rem);
+    }
+    to {
+        transform: translate(0, 0rem);
+    }
+`;
 
 const SnackBar = styled.aside`
   display: flex;
@@ -56,6 +65,8 @@ const SnackBarContainer = styled.div`
   bottom: 9.4rem;
 
   width: 32rem;
+
+  animation: ${Slide} 0.5s linear forwards;
 `;
 
 const XButtonSnackBarIcon = styled(XButtonSnackBarIc)`

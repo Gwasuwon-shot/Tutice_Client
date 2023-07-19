@@ -35,7 +35,7 @@ export default function AttendanceInform(props: AttendanceInformProps) {
     <>
       <AttnedanceInformBox>
         <Label $isDate={true}>
-          {date.split("-")[1]}.{date.split("-")[2]}
+          {new Date(date).getMonth() + 1}.{new Date(date).getDate()}
         </Label>
         <div>
           <LessonCount>{count}회차 수업</LessonCount>

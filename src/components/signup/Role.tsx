@@ -62,6 +62,7 @@ export default function Role() {
               id="PARENTS"
               onClick={(e: React.MouseEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
+              $RoleCheckSignupIc={RoleCheckSignupIc}
             />
             <TextWrapper>
               <RadioNameWrapper>

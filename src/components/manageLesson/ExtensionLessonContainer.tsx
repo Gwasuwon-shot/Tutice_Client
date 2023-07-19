@@ -16,30 +16,21 @@ interface ExtensionLessonContainerProps {
 
 export default function ExtensionLessonContainer(props: ExtensionLessonContainerProps) {
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
-  const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
-  // const { endScheduleDate, setOpenModal, lesson } = props;
-  // const { idx, studentName, subject, count } = lesson;
+  const { endScheduleDate, setOpenModal, lesson } = props;
+  const { idx, studentName, subject, count } = lesson;
 
   function handleClickExtension() {
-    setSelectedLesson(lesson);
+    setSelectedLesson({ ...selectedLesson, lessonIdx: idx, studentName: studentName, subject: subject, count: count });
     setOpenModal(true);
   }
 
   return (
     <>
       <ContentWrapper key={idx}>
-        <StudentColorBox backgroundColor={STUDENT_COLOR[lessonIdx % 11]} />
+        <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
         <DateandCount>
-          {endScheduleDate.slice(5, 6) == "0" ? (
-            <p>
-              {endScheduleDate.slice(6, 7)} . {endScheduleDate.slice(8, 10)}
-            </p>
-          ) : (
-            <p>
-              {endScheduleDate.slice(5, 7)} .{endScheduleDate.slice(8, 10)}
-            </p>
-          )}
-          <p>{count} 회차 종료 </p>
+          {new Date(endScheduleDate).getMonth() + 1}.{new Date(endScheduleDate).getDate()}
+          <p>{count}회차 종료 </p>
         </DateandCount>
         <NameandSubject>
           <Name>{studentName}</Name>
@@ -60,6 +51,7 @@ const ContentWrapper = styled.div`
 
   width: 29rem;
 `;
+
 const DateandCount = styled.div`
   display: flex;
   justify-content: center;

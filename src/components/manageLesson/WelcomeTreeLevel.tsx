@@ -4,8 +4,8 @@ import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTea
 
 export default function WelcomeTreeLevel() {
   const { manageLessonId } = useParams();
-  const { lessonScheduleByTeacher } = useGetLessonScheduleByTeacher(Number(manageLessonId));
-  const { lesson, scheduleList } = lessonScheduleByTeacher;
+  const { lesson, scheduleList } = useGetLessonScheduleByTeacher(Number(manageLessonId));
+  // const { lesson, scheduleList } = lessonScheduleByTeacher;
   const { idx, studentName, subject, count, nowCount } = lesson;
 
   function checkIsLastLesson() {

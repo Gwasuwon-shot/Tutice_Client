@@ -6,8 +6,8 @@ import TreeProgress from "../common/TreeProgress";
 
 export default function TreeImage() {
   const { manageLessonId } = useParams();
-  const { lessonScheduleByTeacher } = useGetLessonScheduleByTeacher(Number(manageLessonId));
-  const { lesson, scheduleList } = lessonScheduleByTeacher;
+  const { lesson, scheduleList } = useGetLessonScheduleByTeacher(Number(manageLessonId));
+  // const { lesson, scheduleList } = lessonScheduleByTeacher;
   const { idx, studentName, subject, count, nowCount, percent } = lesson;
 
   function checkTreeSrc() {

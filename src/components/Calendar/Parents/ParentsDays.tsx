@@ -24,6 +24,7 @@ export default function ParentsDays(props: DaysProp) {
   const formattedMonth = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}`;
 
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
+  console.log(isUserSchedule);
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
@@ -31,7 +32,7 @@ export default function ParentsDays(props: DaysProp) {
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      const myChildLessons = isUserSchedule.find((item) => isSameDay(new Date(item.date), day));
+      const myChildLessons = isUserSchedule?.find((item) => isSameDay(new Date(item.date), day));
       days.push(
         <ParentDayItem
           setOpenModal={setOpenModal}

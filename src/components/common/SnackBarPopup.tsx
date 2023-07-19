@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { styled } from "styled-components";
+import { keyframes, styled } from "styled-components";
 import { CheckButtonSnackBarIc, XButtonSnackBarIc } from "../../assets";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 
@@ -11,10 +11,16 @@ interface SnackBarPopupProps {
 
 export default function SnackBarPopup(props: SnackBarPopupProps) {
   const { isCheck, children } = props;
-  const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
+  const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSnackBarOpen(false);
+    }, 2500);
+  }, []);
 
   function handleCloseSnackBarPopup() {
-    setSanckBarOpen(false);
+    setSnackBarOpen(false);
   }
 
   return (
@@ -30,7 +36,18 @@ export default function SnackBarPopup(props: SnackBarPopupProps) {
   );
 }
 
+const Slide = keyframes`
+ from {
+		transform: translate(0,12rem)
+    }
+    to {
+        transform: translate(0, 0rem);
+    }
+`;
+
 const SnackBar = styled.aside`
+  position: absolute;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,9 +64,13 @@ const SnackBarContainer = styled.div`
   display: flex;
   justify-content: center;
   position: fixed;
-  bottom: 9.4rem;
+  bottom: 12rem;
+  position: absolute;
+  z-index: 5;
 
   width: 32rem;
+
+  animation: ${Slide} 0.3s linear forwards;
 `;
 
 const XButtonSnackBarIcon = styled(XButtonSnackBarIc)`

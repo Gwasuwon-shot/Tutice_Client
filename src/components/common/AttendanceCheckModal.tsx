@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
@@ -10,24 +11,26 @@ import ToastModal from "./ToastModal";
 
 interface AttendanceCheckModalProp {
   setIsCheckingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  lessonIdx: number;
-  studentName: string;
-  count: number;
-  scheduleIdx: number;
-  subject: string;
 }
 
 export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
-  const { setIsCheckingModalOpen, lessonIdx, studentName, count, subject, scheduleIdx } = props;
+  const { setIsCheckingModalOpen } = props;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
 
   function handleCancelAttendanceCheck() {
     setOpenModal(false);
   }
 
+  function checkSameSelectedStatus(status: string) {
+    return attendanceData?.status === status;
+  }
+
   function handleCheckAttlendanceStatus(status: string) {
-    setIsCheckingModalOpen(true);
+    !checkSameSelectedStatus(status) && setIsCheckingModalOpen(true);
+
     setAttendanceData({ idx: scheduleIdx, status: status });
   }
 
@@ -49,15 +52,18 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
       <AttendanceStatusButton
         status={ATTENDANCE_STATUS.attend}
         onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.attend)}
+        selectedStatus={attendanceData?.status}
       />
       <AttdenceStatusButtonWrapper>
         <AttendanceStatusButton
           status={ATTENDANCE_STATUS.cancel}
           onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.cancel)}
+          selectedStatus={attendanceData?.status}
         />
         <AttendanceStatusButton
           status={ATTENDANCE_STATUS.absent}
           onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.absent)}
+          selectedStatus={attendanceData?.status}
         />
       </AttdenceStatusButtonWrapper>
     </ToastModal>

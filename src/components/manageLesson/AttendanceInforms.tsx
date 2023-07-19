@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import useManageLesson from "../../hooks/useGetLessonScheduleByTeacher";
+import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
 import useModal from "../../hooks/useModal";
+import { ScheduleListType } from "../../type/manageLesson/scheduleListType";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import CancelImpossibleModal from "../modal/CanceImpossibleModal";
 import AttendanceInform from "./AttendanceInform";
 
 export default function AttendanceInforms() {
-  const { lesson, scheduleList } = useManageLesson();
+  const { manageLessonId } = useParams();
+  const { lessonScheduleByTeacher } = useGetLessonScheduleByTeacher(Number(manageLessonId));
+  const { lesson, scheduleList } = lessonScheduleByTeacher;
+  const { idx, studentName, subject, count, nowCount, percent } = lesson;
   const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
-  const { studentName, subject, count, nowCount } = lesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCancelImpossibleModalOpen, setIsCancelImpossibleModalOpen] = useState(false);
 
@@ -48,7 +52,7 @@ export default function AttendanceInforms() {
 
       <GreyBox />
       <ScheduleWrapper>
-        {scheduleList.map(({ idx, date, status, startTime, endTime }, index) => (
+        {scheduleList.map(({ idx, date, status, startTime, endTime }: ScheduleListType, index: number) => (
           <AttendanceInform
             key={idx}
             date={date}

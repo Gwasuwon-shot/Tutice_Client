@@ -17,11 +17,6 @@ import { STUDENT_COLOR } from "../core/common/studentColor";
 import useModal from "../hooks/useModal";
 
 export default function CompleteCheckAttendance() {
-  // const [classData, setclassData] = useRecoilState(upcomingClassData);
-  // const { teacherName, isTodaySchedule, todaySchedule } = classData;
-  // const { lesson, schedule } = todaySchedule;
-  // const { idx, studentName, subject } = lesson;
-  // const { count } = schedule;
   const { state } = useLocation();
   const { isLastCount, attendanceSchedule } = state;
   const { date, dayOfWeek } = attendanceSchedule;

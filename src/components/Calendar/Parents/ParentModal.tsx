@@ -12,10 +12,8 @@ import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 export default function ParentModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;
-  const { scheduleList } = useGetScheduleChild();
-
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
-  console.log(isUserSchedule);
+
   return (
     <>
       <ToastModal>

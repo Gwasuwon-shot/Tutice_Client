@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 import {useRecoilState} from 'recoil';
 
 export default function Footer() {
+    
+    const navigate = useNavigate();
+    
     const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
     const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
     const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
@@ -31,14 +34,14 @@ export default function Footer() {
             }
         }
     }, [selectedDays, firstday]);
-    
-    function CompleteLesson() {
-        // post 로직 !
+
+    function moveToTuitionPayment() {
+        navigate("/tuition-payment");
     }
     
     return (
         <FooterWrapper>
-            <FooterButtonWrapper onClick = {CompleteLesson} selected = {isSame}> 
+            <FooterButtonWrapper selected = {isSame} onClick = {moveToTuitionPayment}> 
                 <FooterButton disabled = {isSame}> 저장 </FooterButton>
             </FooterButtonWrapper>
             {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}

@@ -21,18 +21,24 @@ export default function ManageLessonDetail() {
 
   return (
     <>
-      <BackButton />
-      <ManageLessonWrapper>
-        <StudentNameBox />
-        <ManageLessonCategory />
-        {checkIsStatusLesson() ? <StudentLesson /> : <StudentPayments />}
-      </ManageLessonWrapper>
+      <ManageLessonDetailContainer>
+        {/* <SnackBarPopup isCheck={false}>4회차 결석으로 수정 완료했어요.</SnackBarPopup> */}
+        <BackButton />
+        <ManageLessonWrapper>
+          <StudentNameBox />
+          <ManageLessonCategory />
+          {checkIsStatusLesson() ? <StudentLesson /> : <StudentPayments />}
+        </ManageLessonWrapper>
+      </ManageLessonDetailContainer>
       <TeacherFooter />
     </>
   );
 }
 
 const ManageLessonWrapper = styled.div`
-  padding: 0 1.4rem;
   margin-top: 1rem;
+`;
+
+const ManageLessonDetailContainer = styled.section`
+  padding: 0 1.4rem;
 `;

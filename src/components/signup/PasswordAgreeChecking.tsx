@@ -73,6 +73,7 @@ export default function PasswordAgreeChecking() {
     }
     return null;
   }
+
   useEffect(() => {
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
 

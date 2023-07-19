@@ -7,9 +7,5 @@ export async function newUserPost(newUser: newUserDataTypes) {
       "Content-Type": "application/json",
     },
   });
-  if (data) {
-    console.log(data);
-  } else {
-    console.log("error");
-  }
+  return data;
 }

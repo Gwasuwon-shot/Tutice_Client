@@ -12,7 +12,7 @@ interface createLessonProps {
         subject: string,
         payment: string,
         amount: number,
-        count: string,
+        count: number,
         startDate: string,
         regularScheduleList: scheduleListProps[],
     },
@@ -44,5 +44,11 @@ export async function createLesson(props: createLessonProps) {
             "bank": bank,
             "number": number,
         }
-    });
+    },  
+    {
+        headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
+    }}
+    );
 }

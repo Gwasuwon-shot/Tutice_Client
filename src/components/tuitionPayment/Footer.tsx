@@ -2,23 +2,49 @@ import { accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder } 
 import {cycleNumberState, dateState, dayState} from '../../atom/timePicker/timePicker';
 import {studentNameState, subjectNameState} from '../../atom/common/datePicker';
 
+import {createLesson} from '../../api/createLesson';
 import styled from 'styled-components';
+import {useMutation} from 'react-query';
 import { useNavigate } from "react-router-dom";
 import {useRecoilState} from 'recoil';
+
+interface scheduleListProps {
+    dayOfWeek: string,
+    startTime: string,
+    endTime: string,
+}
+
+interface createLessonProps {
+    lesson : {
+        studentName: string,
+        subject: string,
+        payment: string,
+        amount: number,
+        count: number,
+        startDate: string,
+        regularScheduleList: scheduleListProps[],
+    },
+    account: {
+        name: string,
+        bank: string,
+        number: string,
+    }
+}
+
 
 export default function Footer() {
     const [studentName, setStudentName] = useRecoilState<string>(studentNameState);
     const [subject, setSubject] = useRecoilState<string>(subjectNameState);
     const [payment, setPayment] = useRecoilState<string>(paymentOrder);
-    const [amount, setAmount] = useRecoilState<string>(moneyAmount);
-    const [count, setCount] = useRecoilState(cycleNumberState);
+    const [amount, setAmount] = useRecoilState<number>(moneyAmount);
+    const [count, setCount] = useRecoilState<number>(cycleNumberState);
     const [startDate, setStartDate] = useRecoilState(dateState);
     const [regularScheduleList, setRegularScheduleList] = useRecoilState(dayState);
     const [name, setName] = useRecoilState(payingPersonName);
     const [bank, setBank] = useRecoilState(bankName);
     const [number, setNumber] = useRecoilState(accountNumber);
 
-    const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== "";
+    const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== 0;
 
     const postStartDate = String(startDate.year) + "-" + String(startDate.month).padStart(2, "0") + "-" + String(startDate.date).padStart(2, "0");
     
@@ -53,13 +79,26 @@ export default function Footer() {
         - number -> accountNumber : 계좌번호
         
     */
-    function PostLessonInformation(){
-        // 레슨 정보 post
+   
+
+    const {mutate: createNewLesson} = useMutation( 
+        createLesson,
+        {
+            onSuccess: (response) => {
+                // setStartDate(response.)
+                // navigate ~ 
+            },
+            onError: (error) => console.log(error),
+        },
+    )
+
+    function PostLessonInformation (info : createLessonProps) { 
+        createNewLesson(info);
     }
     
     return (
         <FooterWrapper>
-            <FooterButtonWrapper isFooterGreen={isFooterGreen} onClick = {PostLessonInformation}>
+            <FooterButtonWrapper isFooterGreen={isFooterGreen} onClick = { () => PostLessonInformation(postInformation)}>
                 <FooterButton isFooterGreen={isFooterGreen}> 다음 </FooterButton>
             </FooterButtonWrapper>
         </FooterWrapper>

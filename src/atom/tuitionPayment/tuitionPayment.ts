@@ -15,9 +15,9 @@ export const bankName = atom<string>({
     default: "",
 })
 
-export const moneyAmount = atom<string>({
+export const moneyAmount = atom<number>({
     key: "moneyAmount",
-    default: "",
+    default: 0,
 })
 
 export const paymentOrder = atom<string>({

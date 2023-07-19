@@ -6,7 +6,8 @@ import { STUDENT_COLOR } from "../../../core/common/studentColor";
 import { useNavigate } from "react-router-dom";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
-import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
+import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
+
 import { editSchedule } from "../../../atom/EditSchedule/editSchedule";
 
 import { EditPencilIc, removeTrashCan } from "../../../assets";
@@ -17,14 +18,15 @@ import { editScheduleType } from "../../../type/editSchedule/editScheduleType";
 import { editDateStateTypes } from "../../../type/editSchedule/editDateType";
 
 export default function ChangeModal(props: modalType) {
-  const { selectedDate, setOpenModal } = props;
-  const { scheduleList } = useGetTeacherSchedule();
+  const { selectedDate, setOpenModal, formattedMonth } = props;
   const navigate = useNavigate();
   const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
   const [willEditDate, setWillEditDate] = useRecoilState(editDateState);
   const WEEKDAY: string[] = ["일", "월", "화", "수", "목", "금", "토"];
 
   const [isEdit, setIsEdit] = useState(false);
+  const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
+  console.log(formattedMonth);
 
   function handleCloseButton() {
     //update 로직 추가
@@ -75,8 +77,8 @@ export default function ChangeModal(props: modalType) {
               </ModalButtonWrapper>
             )}
           </ModalHeaderWrapper>
-          {scheduleList
-            .find((item) => isSameDay(new Date(item.date), selectedDate as Date))
+          {isUserSchedule
+            ?.find((item) => isSameDay(new Date(item.date), selectedDate as Date))
             ?.dailyScheduleList.map((lesson) => {
               const { schedule } = lesson;
               const { idx, subject, studentName, startTime, endTime } = schedule;

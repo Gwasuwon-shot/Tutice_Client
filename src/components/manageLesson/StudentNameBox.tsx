@@ -9,9 +9,11 @@ import SendPaymentAlarmManageLessonModal from "./SendPaymentAlarmManageLessonMod
 
 export default function StudentNameBox() {
   const { manageLessonId } = useParams();
-  const { lesson, scheduleList } = useGetLessonScheduleByTeacher(Number(manageLessonId));
+  const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
+    Number(manageLessonId),
+  );
   // const { lesson, scheduleList } = lessonScheduleByTeacher;
-  const { idx, studentName, subject, count, nowCount } = lesson;
+  // const { idx, studentName, subject, count, nowCount } = lesson;
   const { openModal } = useModal();
   const [payMentAlarmOpen, setPayMentAlarmOpen] = useState(false);
 
@@ -21,7 +23,7 @@ export default function StudentNameBox() {
         <SendPaymentAlarmManageLessonModal
           studentName={studentName}
           subject={subject}
-          backgroundColor={STUDENT_COLOR[idx % 11]}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
           color="#757A80"
           isBig={false}
         />
@@ -30,7 +32,7 @@ export default function StudentNameBox() {
         <StudentNameLabel
           studentName={studentName}
           subject={subject}
-          backgroundColor={STUDENT_COLOR[idx % 11]}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
           color="#757A80"
           isBig={true}
         />

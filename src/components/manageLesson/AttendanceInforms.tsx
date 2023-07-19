@@ -24,8 +24,8 @@ export default function AttendanceInforms() {
   const [isCancelImpossibleModalOpen, setIsCancelImpossibleModalOpen] = useState(false);
 
   useEffect(() => {
-    setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
-  }, []);
+    studentName && subject && setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
+  }, [studentName, subject]);
 
   function handleCloseCancelImpossibleModal() {
     setIsCancelImpossibleModalOpen(false);
@@ -60,7 +60,7 @@ export default function AttendanceInforms() {
             startTime={startTime}
             endTime={endTime}
             count={Math.abs(index - scheduleList?.length)}
-            lessonIdx={lesson?.idx}
+            lessonIdx={lesson && lesson?.idx}
             scheduleIdx={idx}
             setIsCancelImpossibleModalOpen={setIsCancelImpossibleModalOpen}
           />

@@ -27,14 +27,14 @@ export default function AttendanceInform(props: AttendanceInformProps) {
     return status !== ATTENDANCE_STATUS.none;
   }
 
-  function checkIsCanel() {
+  function checkIsCancel() {
     return status === ATTENDANCE_STATUS.cancel;
   }
 
   function handleOpenCheckAttendanceModal() {
     setAttendanceData({ ...attendanceData, status: status });
     setSelectedLesson({ ...selectedLesson, lessonIdx: lessonIdx, count: count, scheduleIdx: scheduleIdx });
-    checkIsCanel() ? setIsCancelImpossibleModalOpen(true) : showModal();
+    checkIsCancel() ? setIsCancelImpossibleModalOpen(true) : showModal();
   }
 
   return (

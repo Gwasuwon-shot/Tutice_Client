@@ -24,8 +24,13 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
     setOpenModal(false);
   }
 
+  function checkSameSelectedStatus(status: string) {
+    return attendanceData?.status === status;
+  }
+
   function handleCheckAttlendanceStatus(status: string) {
-    setIsCheckingModalOpen(true);
+    !checkSameSelectedStatus(status) && setIsCheckingModalOpen(true);
+
     setAttendanceData({ idx: scheduleIdx, status: status });
   }
 
@@ -47,15 +52,18 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
       <AttendanceStatusButton
         status={ATTENDANCE_STATUS.attend}
         onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.attend)}
+        selectedStatus={attendanceData?.status}
       />
       <AttdenceStatusButtonWrapper>
         <AttendanceStatusButton
           status={ATTENDANCE_STATUS.cancel}
           onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.cancel)}
+          selectedStatus={attendanceData?.status}
         />
         <AttendanceStatusButton
           status={ATTENDANCE_STATUS.absent}
           onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.absent)}
+          selectedStatus={attendanceData?.status}
         />
       </AttdenceStatusButtonWrapper>
     </ToastModal>

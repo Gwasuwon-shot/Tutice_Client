@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import useModal from "../../hooks/useModal";
 import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
@@ -19,12 +20,14 @@ export default function AttendanceInform(props: AttendanceInformProps) {
   const { date, status, startTime, endTime, count, lessonIdx, scheduleIdx } = props;
   const { showModal } = useModal();
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
   function checkIsStatusExist() {
     return status !== ATTENDANCE_STATUS.none;
   }
 
   function handleOpenCheckAttendanceModal() {
+    setAttendanceData({ ...attendanceData, status: status });
     setSelectedLesson({ ...selectedLesson, lessonIdx: lessonIdx, count: count, scheduleIdx: scheduleIdx });
     showModal();
   }

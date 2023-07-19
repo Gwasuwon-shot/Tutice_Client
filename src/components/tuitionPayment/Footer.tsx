@@ -12,10 +12,13 @@ export default function Footer() {
 
     const isFooterGreen = personName !== "" && accountNum !== "" && bank !== "" && money !== "";
 
+    function PostLessonInformation(){
+        // 레슨 정보 post
+    }
     
     return (
         <FooterWrapper>
-            <FooterButtonWrapper isFooterGreen={isFooterGreen}>
+            <FooterButtonWrapper isFooterGreen={isFooterGreen} onClick = {PostLessonInformation}>
                 <FooterButton isFooterGreen={isFooterGreen}> 다음 </FooterButton>
             </FooterButtonWrapper>
         </FooterWrapper>

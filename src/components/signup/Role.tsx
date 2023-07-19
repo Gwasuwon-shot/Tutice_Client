@@ -39,7 +39,7 @@ export default function Role() {
             <RadioButton
               type="radio"
               name="role"
-              value="TEACHER"
+              value="선생님"
               id="TEACHER"
               onClick={(e: React.MouseEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
@@ -57,7 +57,7 @@ export default function Role() {
             <RadioButton
               type="radio"
               name="role"
-              value="PARENTS"
+              value="부모님"
               id="PARENTS"
               onClick={(e: React.MouseEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}

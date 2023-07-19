@@ -35,6 +35,7 @@ export default function LoginInput() {
 
   //데이터 전달 : 추후 추가
   function handleLoginClick() {
+    console.log("클릭은 됏지?");
     postLoginData(userLogin);
   }
 
@@ -86,7 +87,7 @@ export default function LoginInput() {
           {viewingIcon()}
         </PasswordIconWrapper>
       </InputPasswordWrapper>
-      <LoginButton onClick={handleLoginClick} isActive={isActive} disabled={!isActive} />
+      <LoginButton onClick={() => handleLoginClick()} isActive={isActive} disabled={!isActive} />
     </form>
   );
 }

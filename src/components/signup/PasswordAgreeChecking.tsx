@@ -133,7 +133,7 @@ export default function PasswordAgreeChecking() {
 
         <AgreeChecking />
 
-        <SubmitButton type="submit" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
+        <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
           <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
         </SubmitButton>
       </Container>

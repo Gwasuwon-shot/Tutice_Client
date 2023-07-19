@@ -34,7 +34,7 @@ export default function PasswordAgreeChecking() {
 
     newUserPost(newUser);
     // JSON.parse(JSON.stringify(newUser));
-    console.log({ newUser });
+    console.log(newUser);
   }
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {

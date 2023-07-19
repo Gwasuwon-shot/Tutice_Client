@@ -107,10 +107,6 @@ export default function AgreeChecking() {
     return essentialCheck === 2;
   }
 
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
-
   return (
     <TosWrapper>
       <CheckWrapper>

@@ -20,8 +20,25 @@ export default function Footer() {
 
     const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== "";
 
-    // post 할 데이터 구조로 만들기
+    const postStartDate = String(startDate.year) + "-" + String(startDate.month).padStart(2, "0") + "-" + String(startDate.date).padStart(2, "0");
     
+    // post 할 데이터 구조로 만들기
+    const postInformation = {
+        "lesson": {
+            "studentName": studentName,
+            "subject": subject,
+                "payment": payment,
+                "amount" : Number(amount),
+                "count": count,
+                "startDate": postStartDate, 
+                "regularScheduleList": regularScheduleList,
+                },
+            "account": {
+                "name": name,
+                "bank": bank,
+                "number": number,
+            }
+    }
     /*
         studentName -> studentNameState : 학생 이름
         subject -> subjectNameState : 괌고 이름

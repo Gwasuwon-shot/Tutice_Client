@@ -45,12 +45,11 @@ export default function LoginInput() {
   useEffect(() => {
     setUserLogin((prev) => ({ ...prev, email: email, password: password }));
 
-    // 이메일, 이름 입력 및 정규식 확인 : 버튼 활성화
     password && email ? setIsActive(true) : setIsActive(false);
   }, [email, password]);
 
   return (
-    <>
+    <form>
       <InputEmailWrapper $email={email} $emailFocus={emailFocus}>
         <TextLabelLayout labelText="이메일" />
         <Inputfield
@@ -64,20 +63,18 @@ export default function LoginInput() {
       <InputPasswordWrapper $password={password} $pwFocus={pwFocus}>
         <TextLabelLayout labelText="비밀번호" />
         <PasswordIconWrapper>
-          <form>
-            <Inputfield
-              onFocus={() => setPwFocus(true)}
-              onBlur={() => setPwFocus(false)}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
-              type={pwViewing}
-              placeholder="비밀번호를 입력하세요"
-            />
-          </form>
+          <Inputfield
+            onFocus={() => setPwFocus(true)}
+            onBlur={() => setPwFocus(false)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
+            type={pwViewing}
+            placeholder="비밀번호를 입력하세요"
+          />
           {viewingIcon()}
         </PasswordIconWrapper>
       </InputPasswordWrapper>
       <LoginButton onClick={handleLoginClick} isActive={isActive} disabled={!isActive} />
-    </>
+    </form>
   );
 }
 

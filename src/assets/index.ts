@@ -16,6 +16,7 @@ export { ReactComponent as TuticeTitleLogo } from "./icon/TuticeTitleLogoOnBoard
 export { ReactComponent as viewingLoginIc } from "./icon/ViewingLoginIc.svg";
 export { ReactComponent as AbsentAttendanceModalIc } from "./icon/absentAttendanceModalIc.svg";
 export { ReactComponent as AbsentDisabledAttendanceIc } from "./icon/absentDisabledAttendanceIc.svg";
+export { ReactComponent as BellwithAlarmIc } from "./icon/alarmBarManageLessonIc.svg";
 export { ReactComponent as PrevMonthArrowButton } from "./icon/arrow_cal_left.svg";
 export { ReactComponent as NextMonthArrowButton } from "./icon/arrow_cal_right.svg";
 export { ReactComponent as AttenceCheckCommonIc } from "./icon/attenceCheckCommonIc.svg";
@@ -23,7 +24,6 @@ export { ReactComponent as AttendaceAttendanceModalIc } from "./icon/attendaceAt
 export { ReactComponent as AttendanceDisabledAttendanceIc } from "./icon/attendanceDisabledAttendanceIc.svg";
 export { ReactComponent as BackButtonSignupIc } from "./icon/backButtonSignupIc.svg";
 export { ReactComponent as BellWelcomeIc } from "./icon/bellWelcomeIc.svg";
-export { ReactComponent as BellwithAlarmIc } from "./icon/bellwithAlamIC.svg";
 export { ReactComponent as CalendarActiveTeacherFooterIc } from "./icon/calendarActiveTeacherFooterIc.svg";
 export { ReactComponent as CalendarMoreLessonIc } from "./icon/calendarMoreLessonIc.svg";
 export { ReactComponent as CalendarTeacherFooterIc } from "./icon/calendarTeacherFooterIc.svg";

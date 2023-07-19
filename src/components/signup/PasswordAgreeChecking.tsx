@@ -14,9 +14,10 @@ import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import AgreeChecking from "./AgreeChecking";
 import { viewingLoginIc, canViewingLoginIc } from "../../assets";
+import { newUserPost } from "../../api/localSignup";
 
 export default function PasswordAgreeChecking() {
-  const newUser = useRecoilValue(newUserData);
+  const [newUser, setNewUser] = useRecoilState(newUserData);
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState(" ");
   const [isPassword, setIsPassword] = useState(false);
@@ -28,6 +29,9 @@ export default function PasswordAgreeChecking() {
   const [confirmViewing, setConfirmViewing] = useState("password");
 
   function handleToSignUp() {
+    setNewUser((prev: newUserDataTypes) => ({ ...prev, password: pw }));
+
+    newUserPost(newUser);
     console.log("회원가입요~");
   }
 

@@ -5,10 +5,10 @@
   "theme_color": "#0DA98F",
   "background_color": "#ffffff",
   "dir": "ltr",
-  "display": "fullscreen",
+  "start_url": ".",
+  "display": "standalone",
   "orientation": "any",
   "scope": "/",
-  "start_url": ".",
   "icons": [
     {
       "src": "/tutice.png",

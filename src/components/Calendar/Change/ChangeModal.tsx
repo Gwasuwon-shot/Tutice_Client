@@ -26,7 +26,6 @@ export default function ChangeModal(props: modalType) {
 
   const [isEdit, setIsEdit] = useState(false);
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
-  console.log(formattedMonth);
 
   function handleCloseButton() {
     //update 로직 추가
@@ -49,7 +48,9 @@ export default function ChangeModal(props: modalType) {
     }));
 
     setClickedSchedule((prevState: editScheduleType) => ({
-      ...prevState,
+      idx: schedule?.idx,
+      studentName: schedule?.studentName,
+      subject: schedule?.subject,
       startTime: schedule?.startTime,
       endTime: schedule?.endTime,
     }));

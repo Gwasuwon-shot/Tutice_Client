@@ -10,7 +10,7 @@ export default function LoginButton(props: LoginButtonProps) {
   const { onClick, isActive, disabled } = props;
 
   return (
-    <Button disabled={disabled} $isActive={isActive} onClick={onClick}>
+    <Button type="button" disabled={disabled} $isActive={isActive} onClick={onClick}>
       로그인
     </Button>
   );

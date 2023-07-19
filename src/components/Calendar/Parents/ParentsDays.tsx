@@ -6,6 +6,7 @@ import { format, endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSa
 import ParentModal from "./ParentModal";
 import useGetScheduleChild from "../../../hooks/useGetScheduleChild";
 import ParentDayItem from "./ParentDayItem";
+import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 interface DaysProp {
   currentMonth: Date;
@@ -20,6 +21,9 @@ export default function ParentsDays(props: DaysProp) {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const { scheduleList } = useGetScheduleChild();
+  const formattedMonth = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}`;
+
+  const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
@@ -27,7 +31,7 @@ export default function ParentsDays(props: DaysProp) {
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      const myChildLessons = scheduleList.find((item) => isSameDay(new Date(item.date), day));
+      const myChildLessons = isUserSchedule.find((item) => isSameDay(new Date(item.date), day));
       days.push(
         <ParentDayItem
           setOpenModal={setOpenModal}

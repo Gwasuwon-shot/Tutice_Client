@@ -1,22 +1,21 @@
-import BackButton from "../common/BackButton";
-import { styled } from "styled-components";
-import TextLabelLayout from "./TextLabelLayout";
-import SignupTitleLayout from "./SignupTitleLayout";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { newUserData } from "../../atom/signup/signup";
-import { PW_REGEX } from "../../core/signup/regex";
-import RegexField from "./RegexField";
-import ProgressBar from "../common/ProgressBar";
-import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
-import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
-import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
-import AgreeChecking from "./AgreeChecking";
-import { viewingLoginIc, canViewingLoginIc } from "../../assets";
-import { newUserPost } from "../../api/localSignup";
-import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 import { useMutation } from "react-query";
+import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
+import { newUserPost } from "../../api/localSignUp";
+import { canViewingLoginIc, viewingLoginIc } from "../../assets";
+import { newUserData } from "../../atom/signup/signup";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { PW_REGEX } from "../../core/signup/regex";
+import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
+import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
+import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import BackButton from "../common/BackButton";
+import ProgressBar from "../common/ProgressBar";
+import AgreeChecking from "./AgreeChecking";
+import RegexField from "./RegexField";
+import SignupTitleLayout from "./SignupTitleLayout";
+import TextLabelLayout from "./TextLabelLayout";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);

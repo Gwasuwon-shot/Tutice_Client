@@ -19,7 +19,7 @@ interface scheduleListType {
 export default function useGetScheduleByUser(date: string): { isUserSchedule: scheduleListType[] } {
   const [isUserSchedule, setIsUserSchedule] = useState<scheduleListType[]>([]);
 
-  const { data } = useQuery(["getScheduleByUser"], () => getScheduleByUser(date), {
+  const { data } = useQuery(["getScheduleByUser", date], () => getScheduleByUser(date), {
     onSuccess: (response) => {
       // setIsUserSchedule(response.data.scheduleList);
       console.log(response);

@@ -2,38 +2,37 @@ import { format, isSameDay } from "date-fns";
 import { ko } from "date-fns/locale";
 import styled from "styled-components";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
-import useGetScheduleChild from "../../../hooks/useGetScheduleChild";
+import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 import { modalType } from "../../../type/calendar/modalType";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
 
 export default function ParentModal(props: modalType) {
-  const { selectedDate, setOpenModal } = props;
-  const { scheduleList } = useGetScheduleChild();
+  const { selectedDate, setOpenModal, formattedMonth } = props;
+  const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
 
   return (
     <>
       <ToastModal>
         <ModalContentWrapper>
-          {selectedDate && <ModalDate>{format(selectedDate, "M월 d일 EEEE", { locale: ko })}</ModalDate>}
-          {selectedDate &&
-            scheduleList
-              .find((item) => isSameDay(new Date(item.date), selectedDate))
-              ?.dailyScheduleList.map((item) => {
-                const { schedule } = item;
-                const { idx, studentName, subject, startTime, endTime } = schedule;
+          <ModalDate>{format(selectedDate as Date, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+          {isUserSchedule
+            ?.find((item) => isSameDay(new Date(item.date), selectedDate as Date))
+            ?.dailyScheduleList.map((item) => {
+              const { schedule } = item;
+              const { idx, studentName, subject, startTime, endTime } = schedule;
 
-                return (
-                  <ScheduleWrapper key={idx}>
-                    <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
-                    <ModalTime>
-                      {startTime} - {endTime}
-                    </ModalTime>
-                    <ModalName>{studentName}</ModalName>
-                    <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 11]}>{subject}</ModalSubject>
-                  </ScheduleWrapper>
-                );
-              })}
+              return (
+                <ScheduleWrapper key={idx}>
+                  <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+                  <ModalTime>
+                    {startTime} - {endTime}
+                  </ModalTime>
+                  <ModalName>{studentName}</ModalName>
+                  <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 11]}>{subject}</ModalSubject>
+                </ScheduleWrapper>
+              );
+            })}
         </ModalContentWrapper>
       </ToastModal>
     </>
@@ -83,5 +82,5 @@ const ModalSubject = styled.span<{ $backgroundcolor: string }>`
   background-color: ${(props) => props.$backgroundcolor};
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey500};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;

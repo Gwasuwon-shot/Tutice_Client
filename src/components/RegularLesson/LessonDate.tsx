@@ -4,6 +4,7 @@ import {dayState, focusDayState, openFinishDetailState, openStartDetailState} fr
 
 import DetailTimePicker from './TimePicker/DetailTimePicker';
 import RoundBottomButton from '../common/RoundBottomButton';
+import SelectedDayAndTime from './SelectedDayAndTime';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 
@@ -23,25 +24,9 @@ export default function LessonDate() {
     
     function handleDayButton(day: string) {
         
-        let dayIndex;
-        if (selectedDays.length >= 1) {
-            dayIndex = selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
+        if (focusDay.dayOfWeek === day) {
+            setFocusDay({dayOfWeek: '', startTime: '', endTime: ''});
         } else {
-            dayIndex = -1;
-        }
-        
-        if (dayIndex !== -1) {
-            setSelectedDays((prevSelectedDays) =>
-                prevSelectedDays.filter((selectedDay) => selectedDay.dayOfWeek !== day)
-            );
-        } else {
-            // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
-            const isTimeNotSelected = (focusDay.dayOfWeek !== "") && (focusDay.startTime === "" || focusDay.endTime === "");
-            
-            if (isTimeNotSelected) {
-                return; 
-            }
-            
             setFocusDay({dayOfWeek: day, startTime: '', endTime: ''});
         }
     }
@@ -69,11 +54,16 @@ export default function LessonDate() {
     }
 
 
-    
-
     // 수업일시 추가하기 
 
     function AddLesson() {
+        // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
+        const isTimeNotSelected = (focusDay.dayOfWeek !== "") && (focusDay.startTime === "" || focusDay.endTime === "");
+        const isDayNotSelected = (focusDay.dayOfWeek == "");
+        if (isDayNotSelected || isTimeNotSelected) {
+            return; 
+        }
+        
         // 현재 focusDay의 값을 selectedDays에 추가
         setSelectedDays((prevSelectedDays) => [...prevSelectedDays, focusDay]);
         // 현재 focusDay의 값을 빈 값으로 초기화
@@ -83,6 +73,7 @@ export default function LessonDate() {
             endTime: '',
         });
     }
+
     
     return (
         <LessonDateWrapper>
@@ -90,46 +81,48 @@ export default function LessonDate() {
             <IconWrapper>
                 <RegularLessonClockIcon />
                 <SectionName> 수업일시 </SectionName>
-                <Explain> 수업종료 5분 뒤에 출결알람을 드릴게요. </Explain>
+                <Explain> 첫 수업일과 정기등록 요일은 동일해야 해요  </Explain>
             </IconWrapper>
 
             <DayWrapper>
                 {DAYS.map((day, index) => (
                 <Day key={index} 
                 onClick= {()=> handleDayButton(day)} 
-                isSelected={(selectedDays.length >= 1 && selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day) !== -1) || (focusDay.dayOfWeek === day)}>{day}</Day>
+                disabled = {selectedDays.length >= 1 && selectedDays.findIndex((selectedDay)=> selectedDay.dayOfWeek === day) !== -1}
+                isSelected={(focusDay.dayOfWeek === day)}>{day}</Day>
                 ))}
+
             </DayWrapper>
 
             <TimeWrapper>
                 <TimeChoose> 시작 </TimeChoose>
                 {focusDay.startTime === "" ? (
-                    <TimeButton onClick={handlStartTimePicker}>시간을 선택하세요</TimeButton>
+                    <TimeButton onClick={handlStartTimePicker} selected={false}>시간을 선택하세요</TimeButton>
                     ) : (
-                    <TimeButton onClick={handlStartTimePicker}>
+                    <TimeButton onClick={handlStartTimePicker} selected={focusDay.startTime !== ""}>
                         {Number(focusDay.startTime.slice(0, 2)) <= 12 ? (
                         <>
-                            오전 {Number(focusDay.startTime.slice(0, 2))} {focusDay.startTime.slice(2)}
+                            오전 {Number(focusDay.startTime.slice(0, 2))}시 {focusDay.startTime.slice(3)}분
                         </>
                         ) : (
                         <>
-                            오후 {Number(focusDay.startTime.slice(0, 2)) - 12} {focusDay.startTime.slice(2)}
+                            오후 {Number(focusDay.startTime.slice(0, 2)) - 12}시 {focusDay.startTime.slice(3)}분
                         </>
                         )}
                     </TimeButton>
                 )}
                 <TimeChoose> 종료 </TimeChoose>
                 {focusDay.endTime === "" ? (
-                    <TimeButton onClick={handleFinishTimePicker}>시간을 선택하세요</TimeButton>
+                    <TimeButton onClick={handleFinishTimePicker} selected={false}>시간을 선택하세요</TimeButton>
                     ) : (
-                    <TimeButton onClick={handleFinishTimePicker}>
+                    <TimeButton onClick={handleFinishTimePicker} selected={focusDay.endTime !== ""}>
                         {Number(focusDay.endTime.slice(0, 2)) <= 12 ? (
                         <>
-                            오전 {Number(focusDay.endTime.slice(0, 2))} {focusDay.endTime.slice(2)}
+                            오전 {Number(focusDay.endTime.slice(0, 2))}시 {focusDay.endTime.slice(3)}분
                         </>
                         ) : (
                         <>
-                            오후 {Number(focusDay.endTime.slice(0, 2)) - 12} {focusDay.endTime.slice(2)}
+                            오후 {Number(focusDay.endTime.slice(0, 2)) - 12}시 {focusDay.endTime.slice(3)}분
                         </>
                         )}
                     </TimeButton>
@@ -144,7 +137,11 @@ export default function LessonDate() {
                 <RegularLessonCalenderIcon />
                 <ModalButton> 캘린더로 일정 확인하기 </ModalButton>
             </ModalWrapper>
-                    
+            
+            {selectedDays.map((day, index) => (
+                <SelectedDayAndTime key = {index} dayofweek = {day.dayOfWeek} startTime = {day.startTime} endTime = {day.endTime} /> 
+            ))}
+
         </LessonDateWrapper>
     );
 }
@@ -197,6 +194,8 @@ const Day = styled.button<DayProp>`
     background-color: ${({ theme }) => theme.colors.grey50}; 
     ${({ isSelected, theme }) => isSelected && `background-color: ${theme.colors.green4}`};
     ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.white}`};
+    ${({ disabled, theme }) => disabled && `background-color: ${theme.colors.grey400}`};
+    ${({ disabled, theme }) => disabled && `color: ${theme.colors.white}`};
 `
 
 const TimeWrapper = styled.section`
@@ -213,19 +212,20 @@ const TimeChoose = styled.h3`
     justify-content: center;
     align-items: center;
 
-    width: 2.8rem;
+    width: 2.3rem;
 
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey400};  
 `
 
-const TimeButton = styled.button`
+const TimeButton = styled.button<{ selected: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
-
+    width: 10rem;
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey100};  
+    ${({ selected, theme }) => selected && `color: ${theme.colors.grey700};`}
 `
 
 const ButtonWrapper = styled.section`
@@ -241,6 +241,7 @@ const ButtonWrapper = styled.section`
 const ModalWrapper = styled.section`
     display: flex;
     padding-top: 0.8rem;
+    margin-bottom: 1rem;
 `
 
 const RegularLessonCalenderIcon = styled(RegularLessonCalenderIc)`

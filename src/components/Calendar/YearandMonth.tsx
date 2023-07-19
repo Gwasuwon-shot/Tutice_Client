@@ -4,22 +4,27 @@ import { CancelButton, NextMonthArrowButton, PrevMonthArrowButton } from "../../
 
 interface YearandMonthProps {
   currentMonth: Date;
-  // prevMonth: MouseEventHandler<SVGSVGElement>;
-  // nextMonth: MouseEventHandler<SVGSVGElement>;
-  // prevMonth: any;
-  // nextMonth: any;
+  handleToPrevMonth: () => void;
+  handleToNextMonth: () => void;
 }
 
 export default function YearandMonth(props: YearandMonthProps) {
-  const { currentMonth } = props;
+  const { currentMonth, handleToPrevMonth, handleToNextMonth } = props;
 
+  function handleGoToPrevMonth() {
+    handleToPrevMonth();
+  }
+
+  function handleGoToNextMonth() {
+    handleToNextMonth();
+  }
   return (
     <HeaderWrapper>
       <CalendarText>캘린더</CalendarText>
       <YearMonthWrapper>
-        <PrevMonthButton />
+        <PrevMonthButton onClick={() => handleGoToPrevMonth()} />
         {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
-        <NextMonthButton />
+        <NextMonthButton onClick={() => handleGoToNextMonth()} />
       </YearMonthWrapper>
       <CancelCalendarButton />
     </HeaderWrapper>

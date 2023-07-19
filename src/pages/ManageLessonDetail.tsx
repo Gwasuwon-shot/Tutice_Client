@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { managingStatus } from "../atom/mangeLesson/managingStatus";
@@ -11,8 +10,6 @@ import StudentPayments from "../components/manageLesson/StudentPayments";
 import { MANAGE_LESSON_STATUS } from "../core/manageLesson/manageLessonStatus";
 
 export default function ManageLessonDetail() {
-  // useParams 추가 예정
-  const { manageLessonId } = useParams();
   const status = useRecoilValue(managingStatus);
 
   function checkIsStatusLesson() {
@@ -21,18 +18,24 @@ export default function ManageLessonDetail() {
 
   return (
     <>
-      <BackButton />
-      <ManageLessonWrapper>
-        <StudentNameBox />
-        <ManageLessonCategory />
-        {checkIsStatusLesson() ? <StudentLesson /> : <StudentPayments />}
-      </ManageLessonWrapper>
+      <ManageLessonDetailContainer>
+        {/* <SnackBarPopup isCheck={false}>4회차 결석으로 수정 완료했어요.</SnackBarPopup> */}
+        <BackButton />
+        <ManageLessonWrapper>
+          <StudentNameBox />
+          <ManageLessonCategory />
+          {checkIsStatusLesson() ? <StudentLesson /> : <StudentPayments />}
+        </ManageLessonWrapper>
+      </ManageLessonDetailContainer>
       <TeacherFooter />
     </>
   );
 }
 
 const ManageLessonWrapper = styled.div`
-  padding: 0 1.4rem;
   margin-top: 1rem;
+`;
+
+const ManageLessonDetailContainer = styled.section`
+  padding: 0 1.4rem;
 `;

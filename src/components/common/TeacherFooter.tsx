@@ -22,13 +22,13 @@ export default function TeacherFooter() {
   function showTeacherFooterIcon(category: string, isMoved: boolean) {
     switch (category) {
       case TEACHER_FOOTER_CATEGORY.home:
-        return isMoved ? <HomeActiveTeacherFooterIc /> : <HomeTeacherFooterIc />;
+        return isMoved ? <HomeActiveTeacherFooterIcon /> : <HomeTeacherFooterIcon />;
       case TEACHER_FOOTER_CATEGORY.calendar:
-        return isMoved ? <CalendarActiveTeacherFooterIc /> : <CalendarTeacherFooterIc />;
+        return isMoved ? <CalendarActiveTeacherFooterIcon /> : <CalendarTeacherFooterIcon />;
       case TEACHER_FOOTER_CATEGORY.classManaging:
-        return isMoved ? <ClassManagingActiveTeacherFooterIc /> : <ClassManagingTeacherFooterIc />;
+        return isMoved ? <ClassManagingActiveTeacherFooterIcon /> : <ClassManagingTeacherFooterIcon />;
       case TEACHER_FOOTER_CATEGORY.my:
-        return isMoved ? <MyActiveTeacherFooterIc /> : <MyTeacherFooterIc />;
+        return isMoved ? <MyActiveTeacherFooterIcon /> : <MyTeacherFooterIcon />;
       default:
         return;
     }
@@ -84,7 +84,7 @@ const TeacherFooterWrapper = styled.footer`
 
   flex-shrink: 0;
 
-  border-radius: 18px 18px 0 0;
+  border-radius: 1.8rem 1.8rem 0 0;
 
   border-top: 1px solid ${({ theme }) => theme.colors.grey50};
 
@@ -93,4 +93,38 @@ const TeacherFooterWrapper = styled.footer`
 
 const Icon = styled.i`
   cursor: pointer;
+`;
+
+const HomeActiveTeacherFooterIcon = styled(HomeActiveTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+
+const HomeTeacherFooterIcon = styled(HomeTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+const CalendarActiveTeacherFooterIcon = styled(CalendarActiveTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+const CalendarTeacherFooterIcon = styled(CalendarTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+const ClassManagingActiveTeacherFooterIcon = styled(ClassManagingActiveTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+const ClassManagingTeacherFooterIcon = styled(ClassManagingTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+const MyActiveTeacherFooterIcon = styled(MyActiveTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+const MyTeacherFooterIcon = styled(MyTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
 `;

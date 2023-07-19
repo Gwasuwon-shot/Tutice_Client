@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
-import BottomButton from "../common/BottomButton";
-import { useRecoilState, useSetRecoilState } from "recoil";
 import { newUserData, stepNum } from "../../atom/signup/signup";
-import SignupTitleLayout from "./SignupTitleLayout";
-import BackButton from "../common/BackButton";
-import ProgressBar from "../common/ProgressBar";
-import { ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import BackButton from "../common/BackButton";
+import BottomButton from "../common/BottomButton";
+import ProgressBar from "../common/ProgressBar";
+import SignupTitleLayout from "./SignupTitleLayout";
 
 export default function Role() {
   const [role, setRole] = useState("");
@@ -30,7 +30,7 @@ export default function Role() {
 
   return (
     <>
-      <ProgressBar progress={0} />
+      <ProgressBar progress={20} />
       <BackButton />
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.whichRole} />
@@ -39,10 +39,11 @@ export default function Role() {
             <RadioButton
               type="radio"
               name="role"
-              value="TEACHER"
+              value="선생님"
               id="TEACHER"
               onClick={(e: React.MouseEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
+              $RoleCheckSignupIc={RoleCheckSignupIc}
             />
             <TextWrapper>
               <RadioNameWrapper>
@@ -52,14 +53,16 @@ export default function Role() {
               <RadioSubName htmlFor="TEACHER"> {ROLE_SUB_TEXT.teacherText} </RadioSubName>
             </TextWrapper>
           </RoleRapper>
+
           <RoleRapper>
             <RadioButton
               type="radio"
               name="role"
-              value="PARENTS"
+              value="부모님"
               id="PARENTS"
               onClick={(e: React.MouseEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
+              $RoleCheckSignupIc={RoleCheckSignupIc}
             />
             <TextWrapper>
               <RadioNameWrapper>
@@ -106,8 +109,9 @@ const RoleRapper = styled.div`
   margin-left: 0.9em;
 `;
 
-const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string }>`
+const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string; $RoleCheckSignupIc: string }>`
   background-image: url(${({ $RoleNoneCheckSignupIc }) => $RoleNoneCheckSignupIc});
+  background-size: cover;
 
   width: 4rem;
   height: 4rem;
@@ -116,7 +120,7 @@ const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string }>`
   margin-right: 2rem;
 
   &:checked {
-    background-image: url("${RoleCheckSignupIc}");
+    background-image: url(${({ $RoleCheckSignupIc }) => $RoleCheckSignupIc});
   }
 `;
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
-import RoleNoneCheckSignupIc from "../../assets/icon/roleNoneCheckSignupIc.svg";
+import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 import { newUserData, stepNum } from "../../atom/signup/signup";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";

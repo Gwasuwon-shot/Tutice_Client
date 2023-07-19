@@ -49,7 +49,7 @@ export default function EditPageFooter() {
       <FooterWrapper>
         <EditFooterButton onClick={() => handleEditLesson()} isActive={isActive} disabled={!isActive} />
       </FooterWrapper>
-      {isDatePickerOpen && <EditDatePicker  />}
+      {isDatePickerOpen && <EditDatePicker setIsActive={setIsActive} />}
       {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && (
         <EditDetailTimePicker setIsActive={setIsActive} />
       )}

@@ -16,7 +16,12 @@ interface monthCalenderProps {
   day: string;
 }
 
-export default function EditDatePicker() {
+interface EditDetailDatePickerPropType {
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function EditDatePicker(props: EditDetailDatePickerPropType) {
+  const { setIsActive } = props;
   const monthCalender: monthCalenderProps[] = [];
   const WEEKDAY: { [key: number]: string } = { 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" };
 

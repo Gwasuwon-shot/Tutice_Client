@@ -38,12 +38,6 @@ export default function PasswordAgreeChecking() {
     },
   });
 
-  function handleToSignUp() {
-    setNewUser((prev: newUserDataTypes) => ({ ...prev, password: pw }));
-
-    postNewUser(newUser);
-  }
-
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     setPw(e.target.value);
@@ -87,8 +81,16 @@ export default function PasswordAgreeChecking() {
     pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
 
     pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
-  }, [pw, confirmPw, isPassword, isConfirmed]);
+  }, [pw, confirmPw, isPassword, isConfirmed, newUser, setPw]);
 
+  function handleToSignUp() {
+    postNewUser(newUser);
+  }
+
+  function handleConfirmBlur() {
+    setConfirmFocus(false);
+    setNewUser((prev) => ({ ...prev, password: pw }));
+  }
   return (
     <>
       <ProgressBar progress={80} />
@@ -131,7 +133,7 @@ export default function PasswordAgreeChecking() {
             <PasswordIconWrapper>
               <Inputfield
                 onFocus={() => setConfirmFocus(true)}
-                onBlur={() => setConfirmFocus(false)}
+                onBlur={() => handleConfirmBlur()}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
                 type={confirmViewing}
                 autoComplete="off"

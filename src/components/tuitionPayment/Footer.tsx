@@ -1,17 +1,41 @@
-import { accountNumber, bankName, moneyAmount, payingPersonName } from "../../atom/tuitionPayment/tuitionPayment";
+import { accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder } from "../../atom/tuitionPayment/tuitionPayment";
+import {cycleNumberState, dateState, dayState} from '../../atom/timePicker/timePicker';
+import {studentNameState, subjectNameState} from '../../atom/common/datePicker';
 
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import {useRecoilState} from 'recoil';
 
 export default function Footer() {
-    const [personName, setPersonName] = useRecoilState<string>(payingPersonName); 
-    const [accountNum, setAccountNum] = useRecoilState<string>(accountNumber);
-    const [bank, setBank] = useRecoilState<string>(bankName);
-    const [money, setMoney] = useRecoilState<string>(moneyAmount);
+    const [studentName, setStudentName] = useRecoilState<string>(studentNameState);
+    const [subject, setSubject] = useRecoilState<string>(subjectNameState);
+    const [payment, setPayment] = useRecoilState<string>(paymentOrder);
+    const [amount, setAmount] = useRecoilState<string>(moneyAmount);
+    const [count, setCount] = useRecoilState(cycleNumberState);
+    const [startDate, setStartDate] = useRecoilState(dateState);
+    const [regularScheduleList, setRegularScheduleList] = useRecoilState(dayState);
+    const [name, setName] = useRecoilState(payingPersonName);
+    const [bank, setBank] = useRecoilState(bankName);
+    const [number, setNumber] = useRecoilState(accountNumber);
 
-    const isFooterGreen = personName !== "" && accountNum !== "" && bank !== "" && money !== "";
+    const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== "";
 
+    // post 할 데이터 구조로 만들기
+    
+    /*
+        studentName -> studentNameState : 학생 이름
+        subject -> subjectNameState : 괌고 이름
+        payment -> paymentOrder : 선불/후불 여부
+        amount -> moneyAmount: 과외비 (string 으로 받아서, number로 넘겨줌)
+        count -> cycleNumberState : 회차 수
+        startDate -> dateState : 첫 수업일
+        regularScheduleList -> dayState : 확정날짜들
+        account
+        - name -> payingPersonName : 이름 
+        - bank -> bankName : 은행명
+        - number -> accountNumber : 계좌번호
+        
+    */
     function PostLessonInformation(){
         // 레슨 정보 post
     }

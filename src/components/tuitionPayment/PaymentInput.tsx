@@ -86,9 +86,10 @@ export default function PaymentInput() {
         setMoneyFocused(false);
     };
 
-    function handleMoneyChange (event: ChangeEvent<HTMLInputElement>) {
+    function handleMoneyChange(event: ChangeEvent<HTMLInputElement>) {
         setMoney(event.target.value);
-    };
+    }
+      
 
     // 5. checkbox
     const [order, setOrder] = useRecoilState<string>(paymentOrder); 

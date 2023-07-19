@@ -22,5 +22,5 @@ export const moneyAmount = atom<string>({
 
 export const paymentOrder = atom<string>({
     key: "paymentOrder",
-    default: "",
+    default: "선불",
 })

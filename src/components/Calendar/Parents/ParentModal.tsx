@@ -10,14 +10,8 @@ import useGetScheduleChild from "../../../hooks/useGetScheduleChild";
 import { modalType } from "../../../type/calendar/modalType";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
- interface modalTypes {
-  selectedDate: Date;
-  setOpenModal: (open: boolean) => void;
-  formattedMonth: string;
-}
 
-
-export default function ParentModal(props: modalTypes) {
+export default function ParentModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
 

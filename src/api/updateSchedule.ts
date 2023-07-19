@@ -8,8 +8,10 @@ interface updateScheduleType {
   endTime: string;
 }
 
-export async function updateSchedule(props: updateScheduleType) {
-  const { idx, date, startTime, endTime } = props;
+export async function updateSchedule(scheduleData: updateScheduleType) {
+  console.log("dfdfdf");
+  const { idx, date, startTime, endTime } = scheduleData;
+  console.log(scheduleData);
   const data = await axios.patch(
     `${import.meta.env.VITE_APP_BASE_URL}/api/schedule`,
     {

@@ -27,20 +27,19 @@ export default function EditPageFooter() {
     onSuccess: () => {
       console.log("성공");
     },
-    onError: () => {
-      console.log("실패");
+    onError: (error) => {
+      console.log("실패", error);
     },
   });
 
   function handleEditLesson(): void {
     // navigate("/change-schedule");
+    console.log("dfdf");
     patchSchdule({
-      schedule: {
-        idx: idx,
-        date: patchEditDate,
-        startTime: startTime,
-        endTime: endTime,
-      },
+      idx: idx,
+      date: patchEditDate,
+      startTime: startTime,
+      endTime: endTime,
     });
   }
 

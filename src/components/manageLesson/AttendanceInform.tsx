@@ -1,9 +1,9 @@
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { SmallAttendanceCheckButtonIc } from "../../assets";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import useModal from "../../hooks/useModal";
+import NoCheckPageAttendanceButton from "../common/NoCheckPageAttendanceButton";
 
 interface AttendanceInformProps {
   date: string;
@@ -29,8 +29,6 @@ export default function AttendanceInform(props: AttendanceInformProps) {
     showModal();
   }
 
-  console.log(selectedLesson);
-
   return (
     <>
       <AttnedanceInformBox>
@@ -47,7 +45,7 @@ export default function AttendanceInform(props: AttendanceInformProps) {
           {checkIsStatusExist() ? (
             <StatusLabel $status={status}>{status}</StatusLabel>
           ) : (
-            <SmallAttendanceCheckButtonIcon />
+            <NoCheckPageAttendanceButton />
           )}
         </section>
       </AttnedanceInformBox>
@@ -104,8 +102,4 @@ const StatusLabel = styled.label<{ $status: string }>`
       ? theme.colors.red6
       : theme.colors.grey900};
   ${({ theme }) => theme.fonts.body01};
-`;
-
-const SmallAttendanceCheckButtonIcon = styled(SmallAttendanceCheckButtonIc)`
-  width: 7.4rem;
 `;

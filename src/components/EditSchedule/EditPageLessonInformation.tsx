@@ -1,6 +1,7 @@
 import { RegularLessonNotebookIc, RegularLessonPencilIc } from "../../assets";
 import { openDatePickerState } from "../../atom/timePicker/timePicker";
 import React from "react";
+import { useMutation } from "react-query";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
@@ -28,7 +29,6 @@ export default function LessonInformation() {
           <RegularLessonPencilIcon />
         </LessonDate>
       </LessonWrapper>
-      {}
     </LessonInformationWrapper>
   );
 }

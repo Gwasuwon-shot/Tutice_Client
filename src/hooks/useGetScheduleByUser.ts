@@ -23,7 +23,6 @@ export default function useGetScheduleByUser(date: string): { isUserSchedule: sc
     },
     staleTime: 300000,
   });
-  console.log(isUserSchedule);
 
   return { isUserSchedule };
 }

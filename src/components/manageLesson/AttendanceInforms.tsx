@@ -91,7 +91,8 @@ const ScheduleWrapper = styled.section`
 `;
 
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
-  position: absolute;
+  position: fixed;
+  z-index: 3;
 
   margin: -37.9rem 0 0 -1.5em;
 `;

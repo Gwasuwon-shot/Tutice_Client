@@ -8,6 +8,6 @@ export async function getLessonScheduleByTeacher(lessonIdx: number) {
       Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
     },
   });
-  console.log(data.data);
-  return data.data.data;
+
+  return data?.data?.data;
 }

@@ -1,19 +1,11 @@
-import { useState } from "react";
 import { useQuery } from "react-query";
 import { getLessonScheduleByTeacher } from "../api/getLessonScheduleByTeacher";
 
 export default function useGetLessonScheduleByTeacher(manageLessonId: number) {
-  const [lesson, setLesson] = useState([]);
-  const [scheduleList, setScheduleList] = useState([]);
-
   const { data: lessonScheduleByTeacher } = useQuery(
     ["lessonScheduleByTeacher"],
     () => getLessonScheduleByTeacher(manageLessonId),
     {
-      onSuccess: (res) => {
-        setLesson(res?.lesson);
-        setScheduleList(res?.scheduleList);
-      },
       onError: (err) => {
         console.log(err);
       },
@@ -21,7 +13,14 @@ export default function useGetLessonScheduleByTeacher(manageLessonId: number) {
     },
   );
 
-  // const { lesson, scheduleList } = lessonScheduleByTeacher;
+  const lesson = lessonScheduleByTeacher?.lesson;
+  const scheduleList = lessonScheduleByTeacher?.scheduleList;
+  const count = lesson?.count;
+  const lessonIdx = lesson?.idx;
+  const nowCount = lesson?.nowCount;
+  const percent = lesson?.percent;
+  const studentName = lesson?.studentName;
+  const subject = lesson?.subject;
 
-  return { lesson, scheduleList };
+  return { lesson, lessonIdx, count, nowCount, percent, studentName, subject, scheduleList };
 }

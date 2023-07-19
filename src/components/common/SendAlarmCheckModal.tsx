@@ -14,7 +14,7 @@ interface SendAlarmCheckModalProps {
   idx: number;
   studentName: string;
   subject: string;
-  count: number;
+  count: number | undefined;
   scheduleIdx: number;
 }
 

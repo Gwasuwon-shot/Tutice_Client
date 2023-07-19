@@ -14,9 +14,9 @@ import AttendanceInform from "./AttendanceInform";
 
 export default function AttendanceInforms() {
   const { manageLessonId } = useParams();
-  const { lesson, scheduleList } = useGetLessonScheduleByTeacher(Number(manageLessonId));
-  // const { lesson, scheduleList } = lessonScheduleByTeacher;
-  const { idx, studentName, subject, count, nowCount, percent } = lesson;
+  const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
+    Number(manageLessonId),
+  );
   const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
@@ -60,7 +60,7 @@ export default function AttendanceInforms() {
             startTime={startTime}
             endTime={endTime}
             count={Math.abs(index - scheduleList?.length)}
-            lessonIdx={lesson && lesson?.idx}
+            lessonIdx={lessonIdx}
             scheduleIdx={idx}
             setIsCancelImpossibleModalOpen={setIsCancelImpossibleModalOpen}
           />

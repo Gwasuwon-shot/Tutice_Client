@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import { viewingLoginIc, canViewingLoginIc } from "../../assets";
 import LoginButton from "./LoginButton";
+import { postLocalLogin } from "../../api/localLogin";
+import { useMutation } from "react-query";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -12,7 +14,14 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
-  const;
+  const { mutate: postLoginData } = useMutation(postLocalLogin, {
+    onSuccess: () => {
+      console.log("성공");
+    },
+    onError: () => {
+      console.log("실패 ㅠㅠ");
+    },
+  });
 
   // setEmail
   function handelEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -25,7 +34,9 @@ export default function LoginInput() {
   }
 
   //데이터 전달 : 추후 추가
-  function handleLoginClick() {}
+  function handleLoginClick() {
+    postLoginData(userLogin);
+  }
 
   //뷰잉 상태 전환
   function handlePasswordViewing() {

@@ -33,6 +33,10 @@ export default function LessonDate() {
     }
   }
 
+  function handleGoToCalendar() {
+    navigate("/register-calendar");
+  }
+
   // check 용
   useEffect(() => {
     console.log(selectedDays);
@@ -140,7 +144,7 @@ export default function LessonDate() {
 
       <ModalWrapper>
         <RegularLessonCalenderIcon />
-        <ModalButton> 캘린더로 일정 확인하기 </ModalButton>
+        <ModalButton onClick={() => handleGoToCalendar()}> 캘린더로 일정 확인하기 </ModalButton>
       </ModalWrapper>
 
       {selectedDays.map((day, index) => (

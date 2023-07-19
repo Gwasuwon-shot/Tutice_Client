@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { format } from "date-fns";
 import { NextMonthArrowButton, PrevMonthArrowButton, CancelButton } from "../../assets";
+import { useNavigate } from "react-router-dom";
 
 interface YearandMonthProps {
   currentMonth: Date;
@@ -11,6 +12,7 @@ interface YearandMonthProps {
 
 export default function YearandMonth(props: YearandMonthProps) {
   const { currentMonth, handleToPrevMonth, handleToNextMonth } = props;
+  const navigate = useNavigate();
 
   function handleGoToPrevMonth() {
     handleToPrevMonth();
@@ -18,6 +20,10 @@ export default function YearandMonth(props: YearandMonthProps) {
 
   function handleGoToNextMonth() {
     handleToNextMonth();
+  }
+
+  function handleGoToBack() {
+    navigate(-1);
   }
   return (
     <HeaderWrapper>
@@ -27,7 +33,7 @@ export default function YearandMonth(props: YearandMonthProps) {
         {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
         <NextMonthButton onClick={() => handleGoToNextMonth()} />
       </YearMonthWrapper>
-      <CancelCalendarButton />
+      <CancelCalendarButton onClick={() => handleGoToBack()} />
     </HeaderWrapper>
   );
 }

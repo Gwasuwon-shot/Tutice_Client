@@ -11,6 +11,5 @@ export async function postNotificationRequest(token: string) {
     },
   );
 
-  console.log("postNotificationRequest" + data);
   return data;
 }

@@ -26,17 +26,8 @@ export default function AlertSignup() {
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
 
-    if (permission === "denied") {
-      console.log("알림 권한 허용 안됨");
-    } else if (permission === "granted") {
-      console.log("알림 권한 허용됨");
-    } else {
-      console.log(permission);
-    }
-
     registerServiceWorker();
     getDeviceToken().then(() => {
-      console.log("디바이스 토큰 들어왔니?" + deviceToken.token);
       patchingDeviceToken(deviceToken.token);
     });
   }
@@ -46,7 +37,6 @@ export default function AlertSignup() {
       vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
     });
 
-    console.log(token);
     setDeviceToken({
       token: token,
     });
@@ -63,7 +53,6 @@ export default function AlertSignup() {
 
   function handleShowNotification() {
     postNotificationRequest(deviceToken.token);
-    console.log("푸시 뜨니?");
   }
 
   return (

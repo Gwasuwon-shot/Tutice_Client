@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import useManageLesson from "../../hooks/useManageLesson";
+import useManageLesson from "../../hooks/useGetLessonScheduleByTeacher";
 
 export default function WelcomeTreeLevel() {
   const { lesson } = useManageLesson();

@@ -23,13 +23,26 @@ interface createLessonProps {
     }
 }
 
-export async function createLesson(props) {
-    const data = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/api/lesson`, {
-        headers : {
-            "Content-Type": "application/json",
-            Authorization : `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
-        },
-    });
+export async function createLesson(props: createLessonProps) {
 
-    return data.data.data.
+    const {lesson, account} = props;
+    const {studentName, subject, payment, amount, count, startDate, regularScheduleList} = lesson;
+    const {name, bank, number} = account;
+
+    const data = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/api/lesson`, {
+        "lesson" : {
+            "studentName" : studentName, 
+            "subject": subject,
+            "payment": payment,
+            "amount": amount,
+            "count": count,
+            "startDate": startDate,
+            "regularScheduleList": regularScheduleList,
+        },
+        "account" : {
+            "name": name,
+            "bank": bank,
+            "number": number,
+        }
+    });
 }

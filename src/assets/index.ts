@@ -66,8 +66,8 @@ export { ReactComponent as RegularLessonStudentIc } from "./icon/regularLessonSt
 export { ReactComponent as removeTrashCan } from "./icon/removeTrashCanIc.svg";
 export { ReactComponent as RightArrowParentsHomeIc } from "./icon/rightArrowParentsHomeIc.svg";
 export { ReactComponent as RightArrowTeacherHomeIc } from "./icon/rightArrowTeacherHomeIc.svg";
-export { ReactComponent as roleCheckSignupIc } from "./icon/roleCheckSignupIc.svg";
-export { ReactComponent as roleNoneCheckSignupIc } from "./icon/roleNoneCheckSignupIc.svg";
+export { ReactComponent as RoleCheckSignupIc } from "./icon/RoleCheckSignupIc.svg";
+export { ReactComponent as RoleNoneCheckSignupIc } from "./icon/RoleNoneCheckSignupIc.svg";
 export { ReactComponent as SecondTreeParentsHomeIc } from "./icon/secondTreeParentsHomeIc.svg";
 export { ReactComponent as SendPaymentAlarmManageLessonIc } from "./icon/sendPaymentAlarmManageLessonIc.svg";
 export { ReactComponent as ShareOthersLessonShareIc } from "./icon/shareOthersLessonShareIc.svg";

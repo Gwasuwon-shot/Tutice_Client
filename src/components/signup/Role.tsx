@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import RoleCheckSignupIc from "../../assets/icon/roleCheckSignupIc.svg";
-import RoleNoneCheckSignupIc from "../../assets/icon/roleNoneCheckSignupIc.svg";
-import BottomButton from "../common/BottomButton";
+import { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { styled } from "styled-components";
+import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
+import RoleNoneCheckSignupIc from "../../assets/icon/roleNoneCheckSignupIc.svg";
 import { newUserData, stepNum } from "../../atom/signup/signup";
-import SignupTitleLayout from "./SignupTitleLayout";
-import BackButton from "../common/BackButton";
-import ProgressBar from "../common/ProgressBar";
-import { ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import BackButton from "../common/BackButton";
+import BottomButton from "../common/BottomButton";
+import ProgressBar from "../common/ProgressBar";
+import SignupTitleLayout from "./SignupTitleLayout";
 
 export default function Role() {
   const [role, setRole] = useState("");
@@ -43,6 +43,7 @@ export default function Role() {
               id="TEACHER"
               onClick={(e: React.MouseEvent<HTMLInputElement>) => handleRadioClick(e)}
               $RoleNoneCheckSignupIc={RoleNoneCheckSignupIc}
+              $RoleCheckSignupIc={RoleCheckSignupIc}
             />
             <TextWrapper>
               <RadioNameWrapper>
@@ -107,7 +108,7 @@ const RoleRapper = styled.div`
   margin-left: 0.9em;
 `;
 
-const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string }>`
+const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string; $RoleCheckSignupIc: string }>`
   background-image: url(${({ $RoleNoneCheckSignupIc }) => $RoleNoneCheckSignupIc});
   background-size: cover;
 
@@ -118,7 +119,7 @@ const RadioButton = styled.input<{ $RoleNoneCheckSignupIc: string }>`
   margin-right: 2rem;
 
   &:checked {
-    background-image: url("${RoleCheckSignupIc}");
+    background-image: url(${({ $RoleCheckSignupIc }) => $RoleCheckSignupIc});
   }
 `;
 

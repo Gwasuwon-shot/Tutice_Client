@@ -1,14 +1,21 @@
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { isModalOpen } from "../../atom/common/isModalOpen";
 import useManageLesson from "../../hooks/useManageLesson";
 import useModal from "../../hooks/useModal";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
+import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import AttendanceInform from "./AttendanceInform";
 
-export default function AttendanceList() {
-  const { scheduleList } = useManageLesson();
-  const { modalRef, closeModal, unShowModal, showModal, openModal } = useModal();
-  const [issCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
+export default function AttendanceInforms() {
+  const { lesson, scheduleList } = useManageLesson();
+  const { modalRef, closeModal, unShowModal, showModal } = useModal();
+  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { studentName, subject, count, nowCount } = lesson;
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   function handleMoveToAttendanceCheck() {
     showModal();
@@ -16,9 +23,25 @@ export default function AttendanceList() {
 
   return (
     <>
-      <ModalWrapper>
-        {openModal && <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />}
-      </ModalWrapper>
+      {openModal && selectedLesson && (
+        <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+          <AttendanceCheckModal
+            setIsCheckingModalOpen={setIsCheckingModalOpen}
+            lessonIdx={selectedLesson?.lessonIdx}
+            studentName={selectedLesson?.studentName}
+            count={selectedLesson?.count}
+            subject={selectedLesson?.subject}
+            scheduleIdx={selectedLesson?.scheduleIdx}
+          />
+        </ModalSection>
+      )}
+
+      {openModal && isCheckingModalOpen && (
+        <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
+          <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+        </ModalSection>
+      )}
+
       <GreyBox />
       <ScheduleWrapper>
         {scheduleList.map(({ idx, date, status, startTime, endTime }, index) => (
@@ -29,6 +52,10 @@ export default function AttendanceList() {
             startTime={startTime}
             endTime={endTime}
             count={Math.abs(index - scheduleList.length)}
+            lessonIdx={lesson?.idx}
+            studentName={studentName}
+            scheduleIdx={idx}
+            subject={subject}
           />
         ))}
       </ScheduleWrapper>
@@ -47,11 +74,17 @@ const GreyBox = styled.div`
 const ModalWrapper = styled.section`
   position: absolute;
 
-  margin: -20.1rem 0 0 -1.5rem;
+  margin: -37.9rem 0 0 -1.5rem;
 `;
 
 const ScheduleWrapper = styled.section`
   overflow: scroll;
 
   padding-bottom: 7.2rem;
+`;
+
+const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
+  position: absolute;
+
+  margin: -37.9rem 0 0 -1.5em;
 `;

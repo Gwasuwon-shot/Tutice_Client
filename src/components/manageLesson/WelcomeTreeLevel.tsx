@@ -1,9 +1,12 @@
+import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
-import useManageLesson from "../../hooks/useManageLesson";
+import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
 
 export default function WelcomeTreeLevel() {
-  const { lesson } = useManageLesson();
-  const { count, nowCount } = lesson;
+  const { manageLessonId } = useParams();
+  const { lesson, scheduleList } = useGetLessonScheduleByTeacher(Number(manageLessonId));
+  // const { lesson, scheduleList } = lessonScheduleByTeacher;
+  const { idx, studentName, subject, count, nowCount } = lesson;
 
   function checkIsLastLesson() {
     return count === nowCount;

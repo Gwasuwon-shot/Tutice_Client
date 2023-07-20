@@ -1,10 +1,14 @@
-import { useRecoilState } from "recoil";
-import { styled } from "styled-components";
-import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
-import useModal from "../../hooks/useModal";
+import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
 import ToastModal from "../common/ToastModal";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { createLessonMaintenance } from "../../api/createLessonMaintenance";
+import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
+import { styled } from "styled-components";
+import useModal from "../../hooks/useModal";
+import {useMutation} from 'react-query';
+import { useRecoilState } from "recoil";
 
 interface ExtensionLessonModalProps {
   studentName: string;
@@ -15,13 +19,50 @@ interface ExtensionLessonModalProps {
   setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface createLessonMaintenanceProps {
+  "lessonIdx" : number,
+"isLessonMaintenance": boolean,
+}
+
 export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
   const { studentName, subject, backgroundColor, color, isBig, setIsSuccess } = props;
   const { unShowModal } = useModal();
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
+  
+  /**
+   * 
+   const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
+   setSelectedLesson({ ...selectedLesson, lessonIdx: idx, studentName: studentName, count: count, subject: subject });
+   attendanceLesson 의 lessonIdx -> 
+  */
 
+  const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
+  
+  const postInformationTrue = {
+    "lessonIdx" : selectedLesson.lessonIdx,
+    "isLessonMaintenance": true,
+  }
+
+  const postInformationFalse = {
+    "lessonIdx" : selectedLesson.lessonIdx,
+    "isLessonMaintenance": false,
+  }
+  
+  const {mutate: createNewLessonMaintenance} = useMutation(
+    createLessonMaintenance,
+    {
+      onSuccess: (response) => {
+        console.log('성공');
+      },
+      onError: (error) => console.log(error),
+    }
+  )
+  
   function handleExtensionLesson() {
     //서버 api 통신 onSucess
+    createNewLessonMaintenance(postInformationTrue);
+    
+    // 지수 코드
     unShowModal();
     setSanckBarOpen(true);
     setIsSuccess(true);
@@ -29,6 +70,9 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   function handleNotExtensionLesson() {
     //서버 api 통신 onSucess
+    createNewLessonMaintenance(postInformationFalse);
+
+    // 지수 코드
     unShowModal();
     setSanckBarOpen(true);
     setIsSuccess(false);

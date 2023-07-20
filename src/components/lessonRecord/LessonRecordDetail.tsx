@@ -10,20 +10,23 @@ import { css } from "styled-components";
 
 import DepositRecordList from "./DepositRecord";
 import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
-import { useParams } from "react-router-dom";
-import ManageLessonCategory from "../manageLesson/ManageLessonCategory";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();
   const [isClassRecord, setIsClassRecord] = useState<boolean>(false);
   const { lesson, idx, count, nowCount, percent, studentName, subject, scheduleList, teacherName } =
     useGetLessonScheduleByParents(Number(lessonId));
+  const navigate = useNavigate();
+
+  function handleGotoLessonInfoList() {
+    navigate(`/lesson-info/${lessonId}`);
+  }
 
   return (
     <>
       <BackButton />
-      <LessonInfoIcon />
-
+      <LessonManageIcon onClick={() => handleGotoLessonInfoList()} />
       <LessonRecordHeader>
         <StudentName>{studentName}</StudentName>
         <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color={"#5B6166"} />
@@ -38,8 +41,6 @@ export default function LessonRecordDetail() {
           입금내역
         </SelectMenuButton>
       </SelectMenuWrapper>
-
-      <ManageLessonCategory />
 
       {isClassRecord ? (
         <MainContentWrapper>
@@ -80,12 +81,9 @@ const TeacherName = styled.p`
   color: ${({ theme }) => theme.colors.grey900};
 `;
 
-const LessonInfoIcon = styled(LessonInfoLessonRecordIc)`
-  width: 1.9rem;
-
-  position: absolute;
-  top: 4.23rem;
-  right: 1.493rem;
+const LessonManageIcon = styled(LessonInfoLessonRecordIc)`
+  width: 2rem;
+  height: 2rem;
 `;
 
 const SelectMenuWrapper = styled.aside`

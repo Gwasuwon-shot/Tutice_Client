@@ -2,6 +2,8 @@ import React from "react";
 import { styled } from "styled-components";
 import LessonInfoItemLayout from "./LessonInfoItemLayout";
 import { BANK_INFO, CLASS_INFO } from "../../core/Parents/lessonInfo";
+import useGetLessonDetailByParents from "../../hooks/useGetLessonDetailByParents";
+import { useParams } from "react-router-dom";
 
 export default function LessonInfoList() {
   const lesson = {
@@ -22,6 +24,8 @@ export default function LessonInfoList() {
   const accountInfoArray = [account.name, account.bank, account.number];
   const formattedAmount = amount / 10000 + "만원";
   const classInfoArrray = [startDate, payment, formattedAmount];
+  const { lessonId } = useParams();
+  const { parentsLesson } = useGetLessonDetailByParents(Number(lessonId));
 
   return (
     <>

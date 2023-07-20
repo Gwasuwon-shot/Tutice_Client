@@ -10,9 +10,9 @@ interface AfterSignupProp {
 }
 
 export default function AfterSignup(prop: AfterSignupProp) {
+  const { setIsWelcome } = prop;
   const location = useLocation();
   const [signUpData, setSignUpData] = useState(location.state.data.user);
-  const { setIsWelcome } = prop;
   const MAIN_TEXT = ` ${signUpData.name} 선생님 환영합니다! \n 수업 나무 관리를 통해 \n 과외 관리를 시작해보세요. `;
 
   const SUB_TEXT = "*수업나무 : 수강생을 추가하여 관리할 수 있는 서비스입니다.";

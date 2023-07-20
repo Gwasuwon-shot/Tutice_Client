@@ -8,5 +8,5 @@ export async function getMissingMaintenanceLesson() {
     },
   });
 
-  return data.data.data.getMissingMaintenanceLesson;
+  return data?.data?.data?.missingMaintenanceLessonList;
 }

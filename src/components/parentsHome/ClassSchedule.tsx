@@ -8,6 +8,7 @@ import {
   ThirdTreeParentsHomeIc,
 } from "../../assets";
 import SubjectLabel from "../common/SubjectLabel";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface ClassScheduleProps {
   subjectName: string;
@@ -29,6 +30,12 @@ export default function ClassSchedule(props: ClassScheduleProps) {
     currentClassCountPercent,
     subjectLabelBackgroundColor,
   } = props;
+  const navigate = useNavigate();
+  const { lessonIdx } = useParams();
+
+  function handleGoToLessonDetail() {
+    navigate(`/lesson-detail/${lessonIdx}`);
+  }
 
   return (
     <ClassScheduleWrapper>
@@ -49,7 +56,7 @@ export default function ClassSchedule(props: ClassScheduleProps) {
         </ClassCountMessage>
       </ClassDetailInfoWrapper>
 
-      <RightArrowParentsHomeIcon />
+      <RightArrowParentsHomeIcon onClick={() => handleGoToLessonDetail()} />
     </ClassScheduleWrapper>
   );
 }

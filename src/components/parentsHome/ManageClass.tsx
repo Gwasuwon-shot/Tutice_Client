@@ -2,44 +2,29 @@ import React from "react";
 import { styled } from "styled-components";
 import ClassSchedule from "./ClassSchedule";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import useGetLessonByUser from "../../hooks/useGetLessonByUser";
+import useGetLessonByParents from "../../hooks/useGetLessonByParents";
+
+interface lessonListType {
+  idx: number;
+  teacherName: string;
+  studentName: string;
+  subject: string;
+  count: number;
+  nowCount: number;
+  percent: number;
+}
 
 export default function ManageClass() {
-  const lessonList = [
-    {
-      idx: 1,
-      teacherName: "박송현",
-      studentName: "김수화",
-      subject: "수학",
-      count: 10,
-      nowCount: 3,
-      percent: 50,
-    },
-    {
-      idx: 2,
-      teacherName: "박송현",
-      studentName: "김수화",
-      subject: "수학",
-      count: 10,
-      nowCount: 4,
-      percent: 40,
-    },
-    {
-      idx: 3,
-      teacherName: "박송현",
-      studentName: "김수화",
-      subject: "수학",
-      count: 10,
-      nowCount: 3,
-      percent: 30,
-    },
-  ];
+  const { isLessonExist } = useGetLessonByUser();
+  const { lessonParents } = useGetLessonByParents();
 
   return (
     <>
       <ManageClassTitle>수업관리</ManageClassTitle>
 
       <ClassScheduleListWrapper>
-        {lessonList.map((lesson) => {
+        {lessonParents.map((lesson: lessonListType) => {
           const { idx, subject, teacherName, studentName, count, nowCount, percent } = lesson;
           return (
             <ClassSchedule

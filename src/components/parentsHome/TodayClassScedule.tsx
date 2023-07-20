@@ -1,7 +1,6 @@
-import React from "react";
 import { styled } from "styled-components";
-import SubjectLabel from "../common/SubjectLabel";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import SubjectLabel from "../common/SubjectLabel";
 
 interface TodayClassSceduleProps {
   studentName: string;
@@ -17,12 +16,12 @@ export default function TodayClassScedule(props: TodayClassSceduleProps) {
 
   return (
     <TodayClassScheduleWrapper>
-      <ClassScheduleMark backgroundColor={STUDENT_COLOR[classCount % 11]} />
+      <ClassScheduleMark backgroundColor={STUDENT_COLOR[classCount % 10]} />
       <ClassTime>
         {startTime} ~ {endTime}
       </ClassTime>
       <StudentName>{studentName}</StudentName>
-      <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[classCount % 11]} color="#5B6166" />
+      <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[classCount % 10]} color="#5B6166" />
       <TeacherName>{teacherName} 선생님</TeacherName>
     </TodayClassScheduleWrapper>
   );

@@ -7,7 +7,6 @@ import StudentPayment from "./StudentPayment";
 export default function StudentPayments() {
   const { manageLessonId } = useParams();
   const { lesson, todayDate, paymentRecordList } = useGetLessonPaymentRecordByTeacher(Number(manageLessonId)); //lessonIdx 넣어주어야함
-  // const { lesson, todayDate, paymentRecordList } = useGetAllPayments();
 
   function checkRealDate(date: string | null) {
     return date !== null ? date : todayDate;

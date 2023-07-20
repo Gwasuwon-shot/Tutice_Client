@@ -4,10 +4,10 @@ import "swiper/swiper.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { openPaymentPicker, paymentDateState } from "../../atom/registerPayment/registerPayment";
 
-import SwiperCore from "swiper";
-import styled from "styled-components";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
+import SwiperCore from "swiper";
 
 interface monthCalenderProps {
   month: number;
@@ -124,8 +124,8 @@ export default function DatePicker() {
       <StyledSwiper
         direction="vertical"
         initialSlide={firstIndex}
-        slidesPerView={7}
-        spaceBetween={19}
+        slidesPerView={6}
+        spaceBetween={21}
         freeMode={true}
         freeModeSticky={true}
         freeModeMomentumRatio={0.25}
@@ -149,9 +149,10 @@ const TimePickerWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  position: relative;
+  position: fixed;
+  bottom: 0;
 
-  width: 100%;
+  width: 32rem;
   height: 20rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};

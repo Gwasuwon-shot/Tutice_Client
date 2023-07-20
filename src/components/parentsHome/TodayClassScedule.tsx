@@ -1,7 +1,6 @@
-import React from "react";
 import { styled } from "styled-components";
-import SubjectLabel from "../common/SubjectLabel";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import SubjectLabel from "../common/SubjectLabel";
 import StudentColorBox from "../common/StudentColorBox";
 
 interface TodayClassSceduleProps {

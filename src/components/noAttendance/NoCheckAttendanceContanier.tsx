@@ -55,7 +55,7 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
   return (
     <>
       <ContentContainer>
-        <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+        <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
         <InforContainer>
           <TimeWrapper>
             <Time>
@@ -67,7 +67,7 @@ export default function NoCheckAttendanceContanier(props: NoCheckAttendanceConta
           <NameSubjectWrapper>
             <Name> {studentName}</Name>
             <Subject>
-              <SubjectLabel subject={subject} color="#757A80" backgroundColor={STUDENT_COLOR[idx % 11]}></SubjectLabel>
+              <SubjectLabel subject={subject} color="#757A80" backgroundColor={STUDENT_COLOR[idx % 10]}></SubjectLabel>
             </Subject>
           </NameSubjectWrapper>
         </InforContainer>

@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
+import { useState } from "react";
+import { css, styled } from "styled-components";
 import { LessonInfoLessonRecordIc } from "../../assets";
-import RestOfClassesInfo from "./RestOfClassesInfo";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 import BackButton from "../common/BackButton";
 import SubjectLabel from "../common/SubjectLabel";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
 import PastLessonRecordList from "./PastLessonRecordList";
-import { css } from "styled-components";
+import RestOfClassesInfo from "./RestOfClassesInfo";
 
 import DepositRecordList from "./DepositRecord";
 import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
@@ -29,7 +28,7 @@ export default function LessonRecordDetail() {
       <LessonManageIcon onClick={() => handleGotoLessonInfoList()} />
       <LessonRecordHeader>
         <StudentName>{studentName}</StudentName>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color={"#5B6166"} />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color={"#5B6166"} />
         <TeacherName>{teacherName} 선생님</TeacherName>
       </LessonRecordHeader>
 

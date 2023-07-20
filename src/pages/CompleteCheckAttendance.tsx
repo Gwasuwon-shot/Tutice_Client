@@ -76,7 +76,7 @@ export default function CompleteCheckAttendance() {
         <TextWrapper>
           <Main>{studentName}</Main>
           <Sub>학생</Sub>
-          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[lessonIdx % 11]} color="#5B6166" />
+          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[lessonIdx % 10]} color="#5B6166" />
         </TextWrapper>
         <StatusMentionWrapper>
           <StatusMention>수업이</StatusMention>

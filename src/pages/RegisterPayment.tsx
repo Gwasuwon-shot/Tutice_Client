@@ -1,33 +1,61 @@
-import { EditPaymentIc, FruitPaymentIc } from "../assets";
-import {openPaymentPicker, paymentDateState} from '../atom/registerPayment/registerPayment';
-
-import PaymentDatePicker from '../components/registerPayment/PaymentDatePicker';
-import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
-import { STUDENT_COLOR } from "../core/common/studentColor";
-import StudentNameLabel from "../components/common/StudentNameLabel";
+import { useMutation } from "react-query";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import useGetPaymentRecord from "../hooks/useGetPaymentRecord";
-import { useParams } from "react-router-dom";
-import {useRecoilState} from 'recoil';
+import { updatePaymentRecord } from "../api/updatePaymentRecord";
+import { EditPaymentIc, FruitPaymentIc } from "../assets";
+import { managingStatus } from "../atom/mangeLesson/managingStatus";
+import { openPaymentPicker, paymentDateState, paymentSuccessSnackBar } from "../atom/registerPayment/registerPayment";
+import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
+import StudentNameLabel from "../components/common/StudentNameLabel";
+import PaymentDatePicker from "../components/registerPayment/PaymentDatePicker";
+import { STUDENT_COLOR } from "../core/common/studentColor";
+import { MANAGE_LESSON_STATUS } from "../core/manageLesson/manageLessonStatus";
+import useGetPaymentRecordView from "../hooks/useGetPaymentRecordView";
 
 export default function RegisterPayment() {
-  //   const { paymentRecordView } = useGetPaymentRecord(Number(manageLessonId)); //lessonIdx 넣어주어야함
-  //   const { lesson, paymentDate } = paymentRecordView?.data;
-
-  const { lesson, paymentDate } = useGetPaymentRecord();  // 서버 해결시 위 주석으로 변경
-  const { idx, studentName, subject, cycle } = lesson;
-  const { value, startDate, endDate } = cycle;
-  const { manageLessonId } = useParams();
-  
+  const { state } = useLocation(); //paymentIdx
+  const { lesson, paymentDate, cycle, endDate, startDate, value, idx, studentName, subject } = useGetPaymentRecordView(
+    Number(state),
+  );
+  const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
   const [isOpenPicker, setIsOpenPicker] = useRecoilState(openPaymentPicker);
   const [activeDateSlide, setActiveDateSlide] = useRecoilState(paymentDateState);
-  
+  const navigate = useNavigate();
+  const [status, setStatus] = useRecoilState(managingStatus);
+
   function handleGoBack() {
-    // 뒤로가기
+    navigate(-1);
   }
 
+  const { mutate: registerPay } = useMutation(updatePaymentRecord, {
+    onSuccess: () => {
+      setStatus({ isOpen: true, count: value });
+      setStatus(MANAGE_LESSON_STATUS.lesson);
+      navigate(`/manage-lesson/${idx}`);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
   function handleReadyToRegister() {
-    // 등록하기 모달 띄우기
+    registerPay({
+      paymentRecordIdx: state,
+      paymentDate: checkDate(),
+    });
+  }
+
+  function checkDate(): string {
+    return `${activeDateSlide?.year}` + "-" + checkMont() + "-" + `${activeDateSlide?.date}`;
+  }
+
+  function checkMont() {
+    if (activeDateSlide?.month / 10 < 1) {
+      return "0" + `${activeDateSlide?.month}`;
+    } else {
+      return `${activeDateSlide?.month}`;
+    }
   }
 
   function handleOpenPicker() {
@@ -35,38 +63,44 @@ export default function RegisterPayment() {
   }
 
   return (
-    <RegisterPaymentWrapper>
-      <Title>입금일 등록</Title>
-      <StudentNameLabel
-        studentName={studentName}
-        subject={subject}
-        backgroundColor={STUDENT_COLOR[idx % 11]}
-        color="#757A80"
-        isBig={true}
-      />
-      <FruitWrapper>
-        <FruitPaymentIcon />
-        <Count>{value}번째 열매</Count>
-        <LessonDate>
-          {new Date(startDate).getMonth() + 1}.{new Date(startDate).getDate()}~{new Date(endDate).getMonth() + 1}.
-          {new Date(endDate).getDate()}
-        </LessonDate>
-      </FruitWrapper>
-      <Sub>입금일</Sub>
-      <PaymentDate>
-        {activeDateSlide.month}월 {activeDateSlide.date}일
-        <EditPaymentIcon onClick = {handleOpenPicker} />
-      </PaymentDate>
-      <ButtonWrapper>
-        <RoundBottomMiniButton isGreen={false} onClick={handleGoBack}>
-          취소
-        </RoundBottomMiniButton>
-        <RoundBottomMiniButton isGreen={true} onClick={handleReadyToRegister}>
-          등록하기
-        </RoundBottomMiniButton>
-      </ButtonWrapper>
-      {isOpenPicker && <ModalWrapper> <PaymentDatePicker/> </ModalWrapper>}
-    </RegisterPaymentWrapper>
+    <>
+      <RegisterPaymentWrapper>
+        <Title>입금일 등록</Title>
+        <StudentNameLabel
+          studentName={studentName}
+          subject={subject}
+          backgroundColor={STUDENT_COLOR[idx % 10]}
+          color="#757A80"
+          isBig={true}
+        />
+        <FruitWrapper>
+          <FruitPaymentIcon />
+          <Count>{value}번째 열매</Count>
+          <LessonDate>
+            {new Date(startDate).getMonth() + 1}.{new Date(startDate).getDate()}~{new Date(endDate).getMonth() + 1}.
+            {new Date(endDate).getDate()}
+          </LessonDate>
+        </FruitWrapper>
+        <Sub>입금일</Sub>
+        <PaymentDate>
+          {activeDateSlide.month}월 {activeDateSlide.date}일
+          <EditPaymentIcon onClick={handleOpenPicker} />
+        </PaymentDate>
+        <ButtonWrapper>
+          <RoundBottomMiniButton isGreen={false} onClick={handleGoBack}>
+            취소
+          </RoundBottomMiniButton>
+          <RoundBottomMiniButton isGreen={true} onClick={handleReadyToRegister}>
+            등록하기
+          </RoundBottomMiniButton>
+        </ButtonWrapper>
+        {isOpenPicker && (
+          <ModalWrapper>
+            <PaymentDatePicker />
+          </ModalWrapper>
+        )}
+      </RegisterPaymentWrapper>
+    </>
   );
 }
 
@@ -81,6 +115,8 @@ const Title = styled.h1`
 `;
 
 const RegisterPaymentWrapper = styled.section`
+  /* display: flex;
+  justify-content: center; */
   padding: 0 1.8rem;
 `;
 
@@ -142,11 +178,5 @@ const EditPaymentIcon = styled(EditPaymentIc)`
 `;
 
 const ModalWrapper = styled.div`
-  display: flex;
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-    
-  width: 100%;
-`
+  margin-left: -1.8rem;
+`;

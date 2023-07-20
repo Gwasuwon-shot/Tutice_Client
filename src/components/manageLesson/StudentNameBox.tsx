@@ -21,7 +21,7 @@ export default function StudentNameBox() {
         <SendPaymentAlarmManageLessonModal
           studentName={studentName}
           subject={subject}
-          backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 10]}
           color="#757A80"
           isBig={false}
         />
@@ -30,7 +30,7 @@ export default function StudentNameBox() {
         <StudentNameLabel
           studentName={studentName}
           subject={subject}
-          backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 10]}
           color="#757A80"
           isBig={true}
         />

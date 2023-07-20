@@ -1,9 +1,12 @@
+import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
-import useGetAllPayments from "../../hooks/useGetAllPayments";
+import useGetLessonPaymentRecordByTeacher from "../../hooks/useGetLessonPaymentRecordByTeacher";
+import { PaymentRecordType } from "../../type/manageLesson/payMentRecordType";
 import StudentPayment from "./StudentPayment";
 
 export default function StudentPayments() {
-  const { lesson, todayDate, paymentRecordList } = useGetAllPayments();
+  const { manageLessonId } = useParams();
+  const { lesson, todayDate, paymentRecordList } = useGetLessonPaymentRecordByTeacher(Number(manageLessonId)); //lessonIdx 넣어주어야함
 
   function checkRealDate(date: string | null) {
     return date !== null ? date : todayDate;
@@ -11,7 +14,7 @@ export default function StudentPayments() {
 
   return (
     <StudentPaymentsWrapper>
-      {paymentRecordList.map(({ idx, date, amount, status }, index) => (
+      {paymentRecordList?.map(({ idx, date, amount, status }: PaymentRecordType, index: number) => (
         <StudentPayment
           key={idx}
           idx={idx}

@@ -19,7 +19,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
   const { manageLessonId } = useParams();
 
   function handleMoveToRegisterPayment() {
-    navigate(`/register-payment/${manageLessonId}`);
+    navigate(`/register-payment/${manageLessonId}`, { state: idx });
   }
 
   return (
@@ -32,7 +32,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
       <NumberWrapper>
         <FruitCount>{count}번째 열매</FruitCount>
         <Date>
-          {new window.Date(date).getMonth() + 1}월 {new window.Date(date).getDate() + 1}일
+          {new window.Date(date).getMonth() + 1}월 {new window.Date(date).getDate()}일
         </Date>
       </NumberWrapper>
       <Payment>

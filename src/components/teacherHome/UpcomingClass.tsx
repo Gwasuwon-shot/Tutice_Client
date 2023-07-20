@@ -21,12 +21,12 @@ export default function UpcomingClass(props: UpcomingClassProps) {
   return (
     <UpcomingClassWrapper onClick={() => handleMoveToManageLessonDetail(idx)}>
       <UpcomingClassBox>
-        <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+        <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
         <ClassTimeWrapper>
           {startTime} ~ {endTime}
         </ClassTimeWrapper>
         <StudentName>{studentName}</StudentName>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#5B6166" />
       </UpcomingClassBox>
       <RightArrowTeacherHomeIcon />
     </UpcomingClassWrapper>

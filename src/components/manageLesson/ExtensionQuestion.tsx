@@ -12,6 +12,16 @@ interface ExtensionQuestionProp {
   setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface MissingLessonProp {
+  lesson: {
+    idx: number,
+    studentName: string,
+    subject: string,
+    count: number,
+},
+  endScheduleDate: string,
+}
+
 export default function ExtensionQuestion(props: ExtensionQuestionProp) {
   const { setIsSuccess } = props;
   const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
@@ -19,7 +29,6 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
-  /*
   return (
     <>
       <ExtensionWrapper>
@@ -28,7 +37,7 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
           <HeaderText>수업연장 여부를 알려주세요!</HeaderText>
         </ExtentionHeader>
         <Content>
-          {missingMaintenanceLessonList.map((item) => {
+          {missingMaintenanceLessonList.map((item : MissingLessonProp) => {
             const { lesson, endScheduleDate } = item;
             return (
               <ExtensionLessonContainer setOpenModal={setOpenModal} endScheduleDate={endScheduleDate} lesson={lesson} />
@@ -50,7 +59,7 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
       )}
     </>
   );
-  */
+
 }
 
 const ExtensionWrapper = styled.section`

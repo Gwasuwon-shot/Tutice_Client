@@ -25,7 +25,7 @@ export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlar
   const { mutate: sendPaymentAlarm } = useMutation(requestPaymentRecordNotification, {
     onSuccess: () => {
       setSnackBarOpen(true);
-      unShowModal;
+      unShowModal();
     },
     onError: (error) => {
       console.log(error);

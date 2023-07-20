@@ -24,7 +24,11 @@ export default function StudentPayments() {
 
   return (
     <>
-      {snackBarOpen && <SuccessSendingAlarmSnackBar />}
+      {snackBarOpen && (
+        <SnackBarWrapper>
+          <SuccessSendingAlarmSnackBar />
+        </SnackBarWrapper>
+      )}
       {openModal && payMentAlarmOpen && (
         <ModalWrapper>
           <SendPaymentAlarmManageLessonModal
@@ -53,6 +57,10 @@ export default function StudentPayments() {
     </>
   );
 }
+
+const SnackBarWrapper = styled.div`
+  margin-left: -1.4rem;
+`;
 
 const StudentPaymentsWrapper = styled.section`
   margin-top: 1.6rem;

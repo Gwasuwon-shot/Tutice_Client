@@ -28,6 +28,7 @@ export default function ManageClass() {
           return (
             <ClassSchedule
               key={idx}
+              idx={idx}
               subjectName={subject}
               teacherName={teacherName}
               studentName={studentName}

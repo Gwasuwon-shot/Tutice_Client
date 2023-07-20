@@ -22,13 +22,16 @@ export default function StudentPayments() {
   return (
     <>
       {openModal && payMentAlarmOpen && (
-        <SendPaymentAlarmManageLessonModal
-          studentName={lesson?.studentName}
-          subject={lesson?.subject}
-          backgroundColor={STUDENT_COLOR[Number(manageLessonId) % 10]}
-          color="#757A80"
-          isBig={false}
-        />
+        <ModalWrapper>
+          <SendPaymentAlarmManageLessonModal
+            studentName={lesson?.studentName}
+            subject={lesson?.subject}
+            backgroundColor={STUDENT_COLOR[Number(manageLessonId) % 10]}
+            color="#757A80"
+            isBig={false}
+            lessonIdx={Number(manageLessonId)}
+          />
+        </ModalWrapper>
       )}
       <StudentPaymentsWrapper>
         {paymentRecordList?.map(({ idx, date, amount, status }: PaymentRecordType, index: number) => (
@@ -49,4 +52,9 @@ export default function StudentPayments() {
 
 const StudentPaymentsWrapper = styled.section`
   margin-top: 1.6rem;
+`;
+
+const ModalWrapper = styled.div`
+  position: absolute;
+  margin-top: -10rem;
 `;

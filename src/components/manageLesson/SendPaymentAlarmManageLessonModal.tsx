@@ -1,4 +1,6 @@
+import { useMutation } from "react-query";
 import { styled } from "styled-components";
+import { requestPaymentRecordNotification } from "../../api/requestPaymentRecordNotification";
 import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
@@ -10,14 +12,25 @@ interface SendPaymentAlarmManageLessonModalProps {
   backgroundColor: string;
   color: string;
   isBig: boolean;
+  lessonIdx: number;
 }
 
 export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlarmManageLessonModalProps) {
-  const { studentName, subject, backgroundColor, color, isBig } = props;
+  const { studentName, subject, backgroundColor, color, isBig, lessonIdx } = props;
   const { unShowModal } = useModal();
+
+  const { mutate: sendPaymentAlarm } = useMutation(requestPaymentRecordNotification, {
+    onSuccess: () => {
+      // 스낵바 띄우기 로직
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
 
   function handleSendAlarm() {
     // 서버에 알람 api 통신
+    sendPaymentAlarm(lessonIdx);
     unShowModal;
   }
 

@@ -4,6 +4,16 @@ import Slider from "react-slick";
 import { TODAY_CLASS_SLIDER_SETTINGS } from "../../core/parentsHome/parentsHome";
 import TodayClassScedule from "./TodayClassScedule";
 import { styled } from "styled-components";
+import useGetTodayScheduleByParents from "../../hooks/useGetTodayScheduleByParents";
+
+interface calssInfoType {
+  idx: number;
+  teacherName: string;
+  studentName: string;
+  startTime: string;
+  endeTime: string;
+  subject: string;
+}
 
 export default function TodayClassSwiper() {
   const dateOfWeek = "월";
@@ -15,32 +25,8 @@ export default function TodayClassSwiper() {
   const month = date.getMonth() + 1; // 월 추출 (0부터 시작하므로 +1)
   const day = date.getDate(); // 일 추출
 
-  const classList = [
-    {
-      idx: 1,
-      studentName: "박송현",
-      subject: "수학",
-      startTime: "17:00",
-      endTime: "20:00",
-      teacherName: "유수확학",
-    },
-    {
-      idx: 2,
-      studentName: "박송현",
-      subject: "수학",
-      startTime: "18:00",
-      endTime: "20:00",
-      teacherName: "유수확학",
-    },
-    {
-      idx: 3,
-      studentName: "박송현",
-      subject: "수학",
-      startTime: "19:00",
-      endTime: "20:00",
-      teacherName: "유수확학",
-    },
-  ];
+  const { todayScheduleParents } = useGetTodayScheduleByParents();
+  console.log(todayScheduleParents);
 
   return (
     <>
@@ -49,16 +35,17 @@ export default function TodayClassSwiper() {
       </SwiperTitleDate>
 
       <Slider {...TODAY_CLASS_SLIDER_SETTINGS}>
-        {classList.map((classInfo) => {
+        {todayScheduleParents?.map((classInfo: calssInfoType) => {
+          const { idx, studentName, startTime, endTime, teacherName, subject } = classInfo;
           return (
             <TodayClassScedule
-              key={classInfo.idx}
-              studentName={classInfo.studentName}
-              startTime={classInfo.startTime}
-              endTime={classInfo.endTime}
-              teacherName={classInfo.teacherName}
-              subject={classInfo.subject}
-              classCount={classInfo.idx}
+              key={idx}
+              studentName={studentName}
+              startTime={startTime}
+              endTime={endTime}
+              teacherName={teacherName}
+              subject={subject}
+              classCount={idx}
             />
           );
         })}

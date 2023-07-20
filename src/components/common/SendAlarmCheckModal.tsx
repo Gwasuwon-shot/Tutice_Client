@@ -66,7 +66,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
         <Title>출결알림 전송</Title>
         <ContentWrapper>
           <StudentNameWrapper>{studentName}</StudentNameWrapper> <Content>학생</Content>
-          <SubjectLabel backgroundColor={STUDENT_COLOR[idx % 11]} color="#757A80" subject={subject} />
+          <SubjectLabel backgroundColor={STUDENT_COLOR[idx % 10]} color="#757A80" subject={subject} />
           <Content>의 학부모님께 </Content>
         </ContentWrapper>
         <ContentWrapper>

@@ -1,5 +1,4 @@
 import { format, isSunday, isToday } from "date-fns";
-import React from "react";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
@@ -30,7 +29,7 @@ export default function DayItem(props: DayItemProps) {
                 const { startTime, studentName, idx } = schedule;
 
                 return (
-                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 11]} key={idx}>
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 10]} key={idx}>
                     {startTime} {studentName.slice(0, 2)}
                   </ScheduleWrapper>
                 );
@@ -40,7 +39,7 @@ export default function DayItem(props: DayItemProps) {
                 const { startTime, studentName, idx } = schedule;
 
                 return (
-                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 11]} key={idx}>
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 10]} key={idx}>
                     {startTime} {studentName.slice(0, 2)}
                   </ScheduleWrapper>
                 );

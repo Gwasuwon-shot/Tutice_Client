@@ -37,7 +37,7 @@ export default function RegisterPayment() {
       <StudentNameLabel
         studentName={studentName}
         subject={subject}
-        backgroundColor={STUDENT_COLOR[idx % 11]}
+        backgroundColor={STUDENT_COLOR[idx % 10]}
         color="#757A80"
         isBig={true}
       />

@@ -1,7 +1,6 @@
-import React from "react";
 import { styled } from "styled-components";
-import ClassSchedule from "./ClassSchedule";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import ClassSchedule from "./ClassSchedule";
 
 export default function ManageClass() {
   const lessonList = [
@@ -50,7 +49,7 @@ export default function ManageClass() {
               entireClassCount={count}
               currentClassCount={nowCount}
               currentClassCountPercent={percent}
-              subjectLabelBackgroundColor={STUDENT_COLOR[idx % 11]}
+              subjectLabelBackgroundColor={STUDENT_COLOR[idx % 10]}
             />
           );
         })}

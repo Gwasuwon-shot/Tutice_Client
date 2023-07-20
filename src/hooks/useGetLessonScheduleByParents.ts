@@ -3,7 +3,7 @@ import { getLessonScheduleByParents } from "../api/getLessonScheduleByParents";
 
 export default function useGetLessonScheduleByParents(lessonIdx: number) {
   const { data: lessonScheduleByParents } = useQuery(
-    ["lessonScheduleByTeacher", lessonIdx],
+    ["lessonScheduleByParents"],
     () => getLessonScheduleByParents(lessonIdx),
     {
       onError: (err) => {
@@ -20,7 +20,8 @@ export default function useGetLessonScheduleByParents(lessonIdx: number) {
   const nowCount = lesson?.nowCount;
   const percent = lesson?.percent;
   const studentName = lesson?.studentName;
+  const teacherName = lesson?.teacherName;
   const subject = lesson?.subject;
 
-  return { idx, lesson, lessonIdx, count, nowCount, percent, studentName, subject, scheduleList };
+  return { lesson, scheduleList, idx, count, nowCount, percent, studentName, teacherName, subject };
 }

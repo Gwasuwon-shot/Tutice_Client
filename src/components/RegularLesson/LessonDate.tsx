@@ -74,6 +74,11 @@ export default function LessonDate() {
         });
     }
 
+    // post 로직 추가
+
+    function postTemporary() {
+        
+    }
     
     return (
         <LessonDateWrapper>
@@ -135,7 +140,7 @@ export default function LessonDate() {
 
             <ModalWrapper>
                 <RegularLessonCalenderIcon />
-                <ModalButton> 캘린더로 일정 확인하기 </ModalButton>
+                <ModalButton onClick = {postTemporary}> 캘린더로 일정 확인하기 </ModalButton>
             </ModalWrapper>
             
             {selectedDays.map((day, index) => (

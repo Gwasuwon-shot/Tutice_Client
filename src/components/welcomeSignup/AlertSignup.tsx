@@ -24,7 +24,8 @@ export default function AlertSignup() {
 }
 
 const Container = styled.div`
-  margin-top: 3.6rem;
+  /* margin-top: 3.63rem; */
+  margin-top: 6rem;
 `;
 const BellWelcomeIcon = styled(BellWelcomeIc)`
   width: 2.9rem;

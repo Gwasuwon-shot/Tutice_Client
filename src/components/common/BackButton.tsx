@@ -9,7 +9,6 @@ export default function BackButton() {
   const navigate = useNavigate();
 
   function handleMoveToBack() {
-    navigate(-1);
     setStep(step - 1);
   }
 

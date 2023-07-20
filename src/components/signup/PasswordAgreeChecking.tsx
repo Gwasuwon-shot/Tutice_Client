@@ -16,6 +16,7 @@ import AgreeChecking from "./AgreeChecking";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
+import { useNavigate } from "react-router-dom";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -28,9 +29,11 @@ export default function PasswordAgreeChecking() {
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
+  const navigate = useNavigate();
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: () => {
       console.log("성공");
+      navigate("/welcome");
     },
     onError: () => {
       console.log("실패");

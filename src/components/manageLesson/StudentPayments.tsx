@@ -4,10 +4,12 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
+import { paymentSuccessSnackBar } from "../../atom/registerPayment/registerPayment";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useGetLessonPaymentRecordByTeacher from "../../hooks/useGetLessonPaymentRecordByTeacher";
 import { PaymentRecordType } from "../../type/manageLesson/paymentRecordType";
 import SuccessSendingAlarmSnackBar from "../common/SuccessSendingAlarmSnackBar";
+import HarvestFruiteSnackBar from "../modal/HarvestFruiteSnackBar";
 import SendPaymentAlarmManageLessonModal from "./SendPaymentAlarmManageLessonModal";
 import StudentPayment from "./StudentPayment";
 
@@ -17,6 +19,7 @@ export default function StudentPayments() {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [payMentAlarmOpen, setPayMentAlarmOpen] = useState(false);
   const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
+  const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
 
   function checkRealDate(date: string | null) {
     return date !== null ? date : todayDate;
@@ -24,11 +27,10 @@ export default function StudentPayments() {
 
   return (
     <>
-      {snackBarOpen && (
-        <SnackBarWrapper>
-          <SuccessSendingAlarmSnackBar />
-        </SnackBarWrapper>
-      )}
+      <SnackBarWrapper>
+        {snackBarOpen && <SuccessSendingAlarmSnackBar />}
+        {snackBarOpen && successPay?.isOpen && <HarvestFruiteSnackBar count={successPay?.count} />}
+      </SnackBarWrapper>
       {openModal && payMentAlarmOpen && (
         <ModalWrapper>
           <SendPaymentAlarmManageLessonModal

@@ -15,7 +15,5 @@ export default function WelcomeLayout() {
 const Container = styled.div`
   display: flex;
 
-  margin-left: 1.8rem;
-
   white-space: pre-line;
 `;

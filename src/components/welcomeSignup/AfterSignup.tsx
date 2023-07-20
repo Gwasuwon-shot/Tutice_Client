@@ -3,6 +3,7 @@ import { TuticeWithTextCommonIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 import { Dispatch, SetStateAction } from "react";
+import BackButton from "../common/BackButton";
 
 interface AfterSignupProp {
   setIsWelcome: Dispatch<SetStateAction<boolean>>;

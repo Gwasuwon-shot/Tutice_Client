@@ -1,22 +1,27 @@
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import useManageLesson from "../../hooks/useManageLesson";
+import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
 import useModal from "../../hooks/useModal";
 import StudentNameLabel from "../common/StudentNameLabel";
 import SendPaymentAlarmManageLessonModal from "./SendPaymentAlarmManageLessonModal";
 
 export default function StudentNameBox() {
-  const { lesson, scheduleList } = useManageLesson();
-  const { idx, studentName, subject, count, nowCount } = lesson;
+  const { manageLessonId } = useParams();
+  const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
+    Number(manageLessonId),
+  );
   const { openModal } = useModal();
+  const [payMentAlarmOpen, setPayMentAlarmOpen] = useState(false);
 
   return (
     <>
-      {openModal && (
+      {openModal && payMentAlarmOpen && (
         <SendPaymentAlarmManageLessonModal
           studentName={studentName}
           subject={subject}
-          backgroundColor={STUDENT_COLOR[idx % 11]}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
           color="#757A80"
           isBig={false}
         />
@@ -25,7 +30,7 @@ export default function StudentNameBox() {
         <StudentNameLabel
           studentName={studentName}
           subject={subject}
-          backgroundColor={STUDENT_COLOR[idx % 11]}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
           color="#757A80"
           isBig={true}
         />

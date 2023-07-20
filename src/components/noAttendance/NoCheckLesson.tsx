@@ -1,18 +1,25 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import useGetMissingAttendanceSchedule from "../../hooks/useGetMissingAttendanceSchedule";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import NoCheckAttendanceContanier from "./NoCheckAttendanceContanier";
 
+interface LessonNScheduleData {
+  lessonIdx: number;
+  studentName: string;
+  count: number;
+  scheduleIdx: number;
+  subject: string;
+}
 interface LessonData {
   idx: number;
   studentName: string;
   subject: string;
 }
-
 interface ScheduleData {
   idx: number;
   startTime: string;
@@ -31,12 +38,7 @@ interface MissingAttendanceData {
 
 export default function NoCheckLesson() {
   const { missingAttendanceSchedule } = useGetMissingAttendanceSchedule();
-  console.log(missingAttendanceSchedule);
-  const [selectedLesson, setSelectedLesson] = useState<LessonData>({
-    idx: 0,
-    studentName: "",
-    subject: "",
-  });
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState<boolean>(false);
 
@@ -53,12 +55,7 @@ export default function NoCheckLesson() {
                   </NoAttendanceDate>
                   {missingAttedanceScheduleList?.map(({ lesson, schedule }) => {
                     return (
-                      <NoCheckAttendanceContanier
-                        lesson={lesson}
-                        schedule={schedule}
-                        setSelectedLesson={setSelectedLesson}
-                        setOpenModal={setOpenModal}
-                      />
+                      <NoCheckAttendanceContanier lesson={lesson} schedule={schedule} setOpenModal={setOpenModal} />
                     );
                   })}
                 </NoAttendanceContainer>
@@ -74,12 +71,6 @@ export default function NoCheckLesson() {
         {openModal && isCheckingModalOpen && (
           <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
             <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
-          </ModalSection>
-        )}
-
-        {openModal && (
-          <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
-            <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
           </ModalSection>
         )}
       </NoAttendanceWrapper>
@@ -119,5 +110,5 @@ const NoAttendanceDate = styled.div`
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
   position: absolute;
 
-  margin: -10rem 0 0 -1.5em;
+  margin: -8.8rem 0 0 -1.5em;
 `;

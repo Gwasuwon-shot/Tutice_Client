@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { subMonths, addMonths } from "date-fns";
+import { subMonths, addMonths, setYear } from "date-fns";
 import YearandMonth from "../components/Calendar/YearandMonth";
 import Dayofweek from "../components/Calendar/Dayofweek";
 import ParentsDays from "../components/Calendar/Parents/ParentsDays";
@@ -8,6 +8,7 @@ import ParentsDays from "../components/Calendar/Parents/ParentsDays";
 //수정없는 부모님 캘린더
 export default function ParentCalenda() {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const [YearMonth, setYearMonth] = useState<string>("");
 
   function handleToPrevMonth() {
     setCurrentMonth(subMonths(currentMonth, 1));

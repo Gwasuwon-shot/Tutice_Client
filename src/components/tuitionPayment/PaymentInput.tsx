@@ -76,7 +76,7 @@ export default function PaymentInput() {
     // 4. 과외비
 
     const [isMoneyFocused, setMoneyFocused] = useState(false);
-    const [money, setMoney] = useRecoilState<string>(moneyAmount);
+    const [money, setMoney] = useRecoilState<number>(moneyAmount);
     
     function handleMoneyFocus () {
         setMoneyFocused(true);
@@ -86,9 +86,10 @@ export default function PaymentInput() {
         setMoneyFocused(false);
     };
 
-    function handleMoneyChange (event: ChangeEvent<HTMLInputElement>) {
-        setMoney(event.target.value);
-    };
+    function handleMoneyChange(event: ChangeEvent<HTMLInputElement>) {
+        setMoney(Number(event.target.value));
+    }
+      
 
     // 5. checkbox
     const [order, setOrder] = useRecoilState<string>(paymentOrder); 
@@ -147,9 +148,8 @@ export default function PaymentInput() {
         <MoneyInputSection moneyFocused={isMoneyFocused}>
             <InputName> 회차당 과외비 </InputName>
             <MoneyInput 
-                type = 'text' 
                 placeholder = '금액을 입력해주세요' 
-                value={money}
+                value= {money}
                 onChange={handleMoneyChange}
                 onFocus = {handleMoneyFocus}
                 onBlur={handleMoneyBlur}

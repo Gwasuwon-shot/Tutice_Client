@@ -1,10 +1,10 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { ATTENDANCE_STATUS } from "../../core/common/attendanceStatus";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import useGetTodayScheduleByTeacher from "../../hooks/useGetTodayScheduleByTeacher";
 import AttendanceStatusButton from "./AttendanceStatusButton";
 import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
@@ -15,20 +15,23 @@ interface AttendanceCheckModalProp {
 
 export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   const { setIsCheckingModalOpen } = props;
-  const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
-  const { lesson, schedule } = todaySchedule;
-  const { idx, studentName, subject } = lesson;
-  const { count } = schedule;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
 
   function handleCancelAttendanceCheck() {
     setOpenModal(false);
   }
 
+  function checkSameSelectedStatus(status: string) {
+    return attendanceData?.status === status;
+  }
+
   function handleCheckAttlendanceStatus(status: string) {
-    setIsCheckingModalOpen(true);
-    setAttendanceData({ idx: schedule?.idx, status: status });
+    !checkSameSelectedStatus(status) && setIsCheckingModalOpen(true);
+
+    setAttendanceData({ idx: scheduleIdx, status: status });
   }
 
   return (
@@ -40,7 +43,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
       <TextWrapper>
         <Main $isTitle={true}>{studentName}</Main>
         <Sub $isTitle={true}>학생</Sub>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[lessonIdx % 11]} color="#5B6166" />
       </TextWrapper>
       <TextWrapper>
         <Main $isTitle={false}>{count}회차</Main>
@@ -49,15 +52,18 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
       <AttendanceStatusButton
         status={ATTENDANCE_STATUS.attend}
         onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.attend)}
+        selectedStatus={attendanceData?.status}
       />
       <AttdenceStatusButtonWrapper>
         <AttendanceStatusButton
           status={ATTENDANCE_STATUS.cancel}
           onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.cancel)}
+          selectedStatus={attendanceData?.status}
         />
         <AttendanceStatusButton
           status={ATTENDANCE_STATUS.absent}
           onClick={() => handleCheckAttlendanceStatus(ATTENDANCE_STATUS.absent)}
+          selectedStatus={attendanceData?.status}
         />
       </AttdenceStatusButtonWrapper>
     </ToastModal>

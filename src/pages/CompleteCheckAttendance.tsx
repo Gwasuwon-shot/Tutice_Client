@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { attendanceLesson } from "../atom/attendanceCheck/attendanceLesson";
 import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
-import { upcomingClassData } from "../atom/attendanceCheck/upcomingClassData";
 import { isModalOpen } from "../atom/common/isModalOpen";
 import RoundBottomButton from "../components/common/RoundBottomButton";
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
@@ -17,21 +17,23 @@ import { STUDENT_COLOR } from "../core/common/studentColor";
 import useModal from "../hooks/useModal";
 
 export default function CompleteCheckAttendance() {
-  const [classData, setclassData] = useRecoilState(upcomingClassData);
-  const { teacherName, isTodaySchedule, todaySchedule } = classData;
-  const { lesson, schedule } = todaySchedule;
-  const { idx, studentName, subject } = lesson;
-  const { count } = schedule;
   const { state } = useLocation();
   const { isLastCount, attendanceSchedule } = state;
   const { date, dayOfWeek } = attendanceSchedule;
   const [attendanceDate, setAttendanceDate] = useState(
-    date?.split("-")[0] + "년 " + date?.split("-")[1] + "월 " + date?.split("-")[2] + "일 ",
+    new Date(date).getFullYear() +
+      "년 " +
+      Number(new Date(date).getMonth() + 1) +
+      "월 " +
+      new Date(date).getDate() +
+      "일 ",
   );
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
   const navigate = useNavigate();
   const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
 
   useEffect(() => {
     setOpenModal(false);
@@ -51,7 +53,15 @@ export default function CompleteCheckAttendance() {
 
   return (
     <>
-      {openModal && <SendAlarmCheckModal idx={idx} studentName={studentName} subject={subject} count={count} />}
+      {openModal && (
+        <SendAlarmCheckModal
+          idx={lessonIdx}
+          studentName={studentName}
+          subject={subject}
+          count={count}
+          scheduleIdx={scheduleIdx}
+        />
+      )}
       <CompleteCheckAttendanceWrapper>
         <LottieImage>
           {isLastCount ? (
@@ -66,7 +76,7 @@ export default function CompleteCheckAttendance() {
         <TextWrapper>
           <Main>{studentName}</Main>
           <Sub>학생</Sub>
-          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
+          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[lessonIdx % 11]} color="#5B6166" />
         </TextWrapper>
         <StatusMentionWrapper>
           <StatusMention>수업이</StatusMention>

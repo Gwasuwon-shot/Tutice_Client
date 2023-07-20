@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
-import ExtensionLessonContainer from "./ExtensionLessonContainer";
-import { useRecoilState } from "recoil";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import ExtensionLessonModal from "./ExtensionLessonModal";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useExtensionLesson from "../../hooks/useExtensionLesson";
-import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
+import ExtensionLessonContainer from "./ExtensionLessonContainer";
+import ExtensionLessonModal from "./ExtensionLessonModal";
 
-export default function ExtensionQuestion() {
+interface ExtensionQuestionProp {
+  setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ExtensionQuestion(props: ExtensionQuestionProp) {
+  const { setIsSuccess } = props;
   const { missingMaintenanceLessonList } = useExtensionLesson();
-  const [selectedLesson, setSelectedLesson] = useState<LessonType>({
-    idx: 1,
-    studentName: "권혠찡",
-    subject: "피아노",
-  });
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   return (
@@ -29,12 +30,7 @@ export default function ExtensionQuestion() {
           {missingMaintenanceLessonList.map((item) => {
             const { lesson, endScheduleDate } = item;
             return (
-              <ExtensionLessonContainer
-                setOpenModal={setOpenModal}
-                setSelectedLesson={setSelectedLesson}
-                endScheduleDate={endScheduleDate}
-                lesson={lesson}
-              />
+              <ExtensionLessonContainer setOpenModal={setOpenModal} endScheduleDate={endScheduleDate} lesson={lesson} />
             );
           })}
         </Content>
@@ -43,11 +39,12 @@ export default function ExtensionQuestion() {
 
       {openModal && selectedLesson && (
         <ExtensionLessonModal
-          studentName={selectedLesson?.studentName}
-          subject={selectedLesson?.subject}
-          backgroundColor={STUDENT_COLOR[selectedLesson?.idx % 11]}
+          studentName={studentName}
+          subject={subject}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
           color="#757A80"
           isBig={false}
+          setIsSuccess={setIsSuccess}
         />
       )}
     </>
@@ -91,8 +88,9 @@ const Content = styled.div`
 `;
 
 const GreyBar = styled.div`
-  width: 100%;
+  width: 32rem;
   height: 1.1rem;
+  margin-left: -1.5rem;
   margin-bottom: 2.4rem;
 
   background-color: ${({ theme }) => theme.colors.grey50};

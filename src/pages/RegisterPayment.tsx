@@ -30,7 +30,7 @@ export default function RegisterPayment() {
 
   const { mutate: registerPay } = useMutation(updatePaymentRecord, {
     onSuccess: () => {
-      setStatus({ isOpen: true, count: value });
+      setSuccessPay({ isOpen: true, count: value });
       setStatus(MANAGE_LESSON_STATUS.lesson);
       navigate(`/manage-lesson/${idx}`);
     },

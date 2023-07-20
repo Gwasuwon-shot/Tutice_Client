@@ -13,7 +13,7 @@ export default function ClassPreviewBanner() {
   const { todaySchedule } = useGetTodayScheduleByTeacher();
   const { lesson, timeStatus, schedule } = todaySchedule;
   const { studentName, subject } = lesson;
-  const { count } = schedule;
+  const { expectedCount } = schedule;
   console.log(todaySchedule);
 
   function showClassPreviewComment(timeStatus: number) {
@@ -42,7 +42,7 @@ export default function ClassPreviewBanner() {
           <SubjectLabel subject={subject} backgroundColor="#B0E0D6" color="#00997D" />
         </StudentNameWrapper>
         <ClassStatusWrapper>
-          <ClassCountMentWrapper>{count} 회차 수업이</ClassCountMentWrapper>
+          <ClassCountMentWrapper>{expectedCount}회차 수업이</ClassCountMentWrapper>
           {showClassPreviewComment(timeStatus)}
         </ClassStatusWrapper>
       </article>

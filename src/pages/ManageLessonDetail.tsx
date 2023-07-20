@@ -1,16 +1,19 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { managingStatus } from "../atom/mangeLesson/managingStatus";
+import { paymentSuccessSnackBar } from "../atom/registerPayment/registerPayment";
 import BackButton from "../components/common/BackButton";
 import TeacherFooter from "../components/common/TeacherFooter";
 import ManageLessonCategory from "../components/manageLesson/ManageLessonCategory";
 import StudentLesson from "../components/manageLesson/StudentLesson";
 import StudentNameBox from "../components/manageLesson/StudentNameBox";
 import StudentPayments from "../components/manageLesson/StudentPayments";
+import HarvestFruiteSnackBar from "../components/modal/HarvestFruiteSnackBar";
 import { MANAGE_LESSON_STATUS } from "../core/manageLesson/manageLessonStatus";
 
 export default function ManageLessonDetail() {
   const status = useRecoilValue(managingStatus);
+  const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
 
   function checkIsStatusLesson() {
     return status === MANAGE_LESSON_STATUS.lesson;
@@ -19,6 +22,7 @@ export default function ManageLessonDetail() {
   return (
     <>
       <ManageLessonDetailContainer>
+        {successPay?.isOpen && <HarvestFruiteSnackBar count={successPay?.count} />}
         {/* <SnackBarPopup isCheck={false}>4회차 결석으로 수정 완료했어요.</SnackBarPopup> */}
         <BackButton />
         <ManageLessonWrapper>

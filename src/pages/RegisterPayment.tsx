@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { updatePaymentRecord } from "../api/updatePaymentRecord";
 import { EditPaymentIc, FruitPaymentIc } from "../assets";
 import { managingStatus } from "../atom/mangeLesson/managingStatus";
-import { openPaymentPicker, paymentDateState } from "../atom/registerPayment/registerPayment";
+import { openPaymentPicker, paymentDateState, paymentSuccessSnackBar } from "../atom/registerPayment/registerPayment";
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
 import StudentNameLabel from "../components/common/StudentNameLabel";
 import PaymentDatePicker from "../components/registerPayment/PaymentDatePicker";
@@ -18,7 +18,7 @@ export default function RegisterPayment() {
   const { lesson, paymentDate, cycle, endDate, startDate, value, idx, studentName, subject } = useGetPaymentRecordView(
     Number(state),
   );
-
+  const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
   const [isOpenPicker, setIsOpenPicker] = useRecoilState(openPaymentPicker);
   const [activeDateSlide, setActiveDateSlide] = useRecoilState(paymentDateState);
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ export default function RegisterPayment() {
 
   const { mutate: registerPay } = useMutation(updatePaymentRecord, {
     onSuccess: () => {
+      setStatus({ isOpen: true, count: value });
       setStatus(MANAGE_LESSON_STATUS.lesson);
       navigate(`/manage-lesson/${idx}`);
     },

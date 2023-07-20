@@ -7,7 +7,9 @@ export default function WelcomeLayout() {
   const [isWelcome, setIsWelcome] = useState<boolean>(true);
   return (
     <>
-      <Container>{isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup />}</Container>
+      <Container>
+        {isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup setIsWelcome={setIsWelcome} />}
+      </Container>
     </>
   );
 }

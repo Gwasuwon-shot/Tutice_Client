@@ -10,16 +10,22 @@ interface StudentPaymentProps {
   amount: number;
   status: boolean;
   count: number;
+  setPayMentAlarmOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function StudentPayment(props: StudentPaymentProps) {
-  const { idx, date, amount, status, count } = props;
+  const { idx, date, amount, status, count, setPayMentAlarmOpen } = props;
   const { showModal } = useModal();
   const navigate = useNavigate();
   const { manageLessonId } = useParams();
 
   function handleMoveToRegisterPayment() {
-    navigate(`/register-payment/${manageLessonId}`, { state: idx });
+    navigate(`/register-payment/${manageLessonId}`, { state: { paymentIdx: idx, count: count } });
+  }
+
+  function handleShowDoubleCheckModal() {
+    setPayMentAlarmOpen(true);
+    showModal();
   }
 
   return (
@@ -40,7 +46,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
           <Amount>{amount.toLocaleString()}</Amount>
         ) : (
           <>
-            <SendPaymentAlarmManageLessonIcon onClick={showModal} />
+            <SendPaymentAlarmManageLessonIcon onClick={handleShowDoubleCheckModal} />
             <RegisterPaymentManageLessonIcon onClick={handleMoveToRegisterPayment} />
           </>
         )}

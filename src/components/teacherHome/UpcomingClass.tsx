@@ -48,7 +48,7 @@ const UpcomingClassWrapper = styled.article`
 `;
 
 const ClassTimeWrapper = styled.p`
-  width: 9rem;
+  width: 9.2rem;
   padding-left: 1.4rem;
 
   color: ${({ theme }) => theme.colors.grey600};

@@ -16,7 +16,7 @@ import useGetPaymentRecordView from "../hooks/useGetPaymentRecordView";
 export default function RegisterPayment() {
   const { state } = useLocation(); //paymentIdx
   const { lesson, paymentDate, cycle, endDate, startDate, value, idx, studentName, subject } = useGetPaymentRecordView(
-    Number(state),
+    Number(state?.paymentIdx),
   );
   const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
   const [isOpenPicker, setIsOpenPicker] = useRecoilState(openPaymentPicker);
@@ -30,7 +30,7 @@ export default function RegisterPayment() {
 
   const { mutate: registerPay } = useMutation(updatePaymentRecord, {
     onSuccess: () => {
-      setStatus({ isOpen: true, count: value });
+      setSuccessPay({ isOpen: true, count: state?.count });
       setStatus(MANAGE_LESSON_STATUS.lesson);
       navigate(`/manage-lesson/${idx}`);
     },
@@ -41,7 +41,7 @@ export default function RegisterPayment() {
 
   function handleReadyToRegister() {
     registerPay({
-      paymentRecordIdx: state,
+      paymentRecordIdx: state?.paymentIdx,
       paymentDate: checkDate(),
     });
   }
@@ -75,7 +75,7 @@ export default function RegisterPayment() {
         />
         <FruitWrapper>
           <FruitPaymentIcon />
-          <Count>{value}번째 열매</Count>
+          <Count>{state?.count}번째 열매</Count>
           <LessonDate>
             {new Date(startDate).getMonth() + 1}.{new Date(startDate).getDate()}~{new Date(endDate).getMonth() + 1}.
             {new Date(endDate).getDate()}

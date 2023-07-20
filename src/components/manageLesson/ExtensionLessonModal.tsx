@@ -21,20 +21,13 @@ interface ExtensionLessonModalProps {
 
 interface createLessonMaintenanceProps {
   "lessonIdx" : number,
-"isLessonMaintenance": boolean,
+  "isLessonMaintenance": boolean,
 }
 
 export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
   const { studentName, subject, backgroundColor, color, isBig, setIsSuccess } = props;
   const { unShowModal } = useModal();
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
-  
-  /**
-   * 
-   const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
-   setSelectedLesson({ ...selectedLesson, lessonIdx: idx, studentName: studentName, count: count, subject: subject });
-   attendanceLesson 의 lessonIdx -> 
-  */
 
   const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
   
@@ -47,6 +40,8 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
     "lessonIdx" : selectedLesson.lessonIdx,
     "isLessonMaintenance": false,
   }
+
+  console.log(selectedLesson)
   
   const {mutate: createNewLessonMaintenance} = useMutation(
     createLessonMaintenance,
@@ -58,9 +53,10 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
     }
   )
   
-  function handleExtensionLesson() {
+  function handleExtensionLesson(info :createLessonMaintenanceProps) {
     //서버 api 통신 onSucess
-    createNewLessonMaintenance(postInformationTrue);
+    console.log(info);
+    createNewLessonMaintenance(info);
     
     // 지수 코드
     unShowModal();
@@ -68,9 +64,10 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
     setIsSuccess(true);
   }
 
-  function handleNotExtensionLesson() {
+  function handleNotExtensionLesson(info :createLessonMaintenanceProps) {
     //서버 api 통신 onSucess
-    createNewLessonMaintenance(postInformationFalse);
+    console.log(info);
+    createNewLessonMaintenance(info);
 
     // 지수 코드
     unShowModal();
@@ -96,10 +93,10 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
           <p>수업을 계속해서 연장하시겠어요?</p>
         </TextWrapper>
         <ButtonWrapper>
-          <RoundBottomMiniButton isGreen={false} onClick={handleNotExtensionLesson}>
+          <RoundBottomMiniButton isGreen={false} onClick={() => handleNotExtensionLesson(postInformationFalse)}>
             아니요
           </RoundBottomMiniButton>
-          <RoundBottomMiniButton isGreen={true} onClick={handleExtensionLesson}>
+          <RoundBottomMiniButton isGreen={true} onClick={() => handleExtensionLesson(postInformationTrue)} >
             연장할래요
           </RoundBottomMiniButton>
         </ButtonWrapper>

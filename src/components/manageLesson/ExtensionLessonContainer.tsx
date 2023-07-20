@@ -1,13 +1,13 @@
-import React from "react";
-import { useRecoilState } from "recoil";
-import { styled } from "styled-components";
-import { NextMonthArrowButton } from "../../assets";
-import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
 import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
+import { NextMonthArrowButton } from "../../assets";
+import React from "react";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 import StudentColorBox from "../common/StudentColorBox";
 import SubjectLabel from "../common/SubjectLabel";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { styled } from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface ExtensionLessonContainerProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;

@@ -7,9 +7,9 @@ import SubjectLabel from "../common/SubjectLabel";
 import PastLessonRecordList from "./PastLessonRecordList";
 import RestOfClassesInfo from "./RestOfClassesInfo";
 
-import DepositRecordList from "./DepositRecord";
-import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
 import { useNavigate, useParams } from "react-router-dom";
+import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
+import DepositRecordList from "./DepositRecord";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();
@@ -109,7 +109,8 @@ const SelectMenuButton = styled.button<{ isClassRecord: boolean }>`
   height: 3.2rem;
   border-radius: 0.8rem;
   ${({ theme }) => theme.fonts.body02};
-  color: ${({ theme, $isSelected }) => ($isSelected ? theme.colors.grey900 : theme.colors.grey400)};
+  /* color: ${({ theme, $isSelected }) => ($isSelected ? theme.colors.grey900 : theme.colors.grey400)}; */
+  color: ${({ theme, isClassRecord }) => (isClassRecord ? theme.colors.grey900 : theme.colors.grey400)};
 
   ${({ isClassRecord }) =>
     isClassRecord

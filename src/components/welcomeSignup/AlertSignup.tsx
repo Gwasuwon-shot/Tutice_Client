@@ -4,7 +4,7 @@ import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 
 interface AlertSignupProp {
-  setIsWelcome: Dispatch<SetStateAction<boolean>>;
+  setIsWelcome: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AlertSignup(prop: AlertSignupProp) {

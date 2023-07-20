@@ -20,7 +20,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
   const { manageLessonId } = useParams();
 
   function handleMoveToRegisterPayment() {
-    navigate(`/register-payment/${manageLessonId}`, { state: idx });
+    navigate(`/register-payment/${manageLessonId}`, { state: { paymentIdx: idx, count: count } });
   }
 
   function handleShowDoubleCheckModal() {

@@ -9,21 +9,15 @@ import PastLessonRecordList from "./PastLessonRecordList";
 import { css } from "styled-components";
 
 import DepositRecordList from "./DepositRecord";
+import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
+import { useParams } from "react-router-dom";
 
 export default function LessonRecordDetail() {
+  const { lessonId } = useParams();
   const [isClassRecord, setIsClassRecord] = useState(false);
-
-  const LESSON_INFO = {
-    idx: 34,
-    studentName: "수화",
-    teacherName: "은수김",
-    subject: "수영",
-    count: 10,
-    nowCount: 7,
-    percent: 45,
-  };
-
-  const { idx, studentName, teacherName, subject, count, nowCount, percent } = LESSON_INFO;
+  const { lesson, idx, count, nowCount, percent, studentName, subject, scheduleList, teacherName } =
+    useGetLessonScheduleByParents(Number(lessonId));
+  console.log(lessonId);
 
   return (
     <>

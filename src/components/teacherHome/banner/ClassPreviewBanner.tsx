@@ -1,19 +1,15 @@
 import { styled } from "styled-components";
 import { UpcomingClassLogoTeacherHomeIc } from "../../../assets";
 import { CLASS_PREVIEW_BANNER_COMMENTS } from "../../../core/teacherHome/classPreviewBannerComments";
-import { PreviewBannerScheduleType } from "../../../type/teacherHome/previewBannerScheduleType";
+import useGetTodayScheduleByTeacher from "../../../hooks/useGetTodayScheduleByTeacher";
 import AttendanceCheckButton from "../../common/AttendanceCheckButton";
 import SubjectLabel from "../../common/SubjectLabel";
 
-interface ClassPreviewBannerProps {
-  todaySchedule: PreviewBannerScheduleType;
-}
-
-export default function ClassPreviewBanner(props: ClassPreviewBannerProps) {
-  const { todaySchedule } = props;
+export default function ClassPreviewBanner() {
+  const { todaySchedule } = useGetTodayScheduleByTeacher();
   const { lesson, timeStatus, schedule } = todaySchedule;
   const { studentName, subject } = lesson;
-  const { count } = schedule;
+  const { expectedCount } = schedule;
 
   function showClassPreviewComment(timeStatus: number) {
     switch (timeStatus) {
@@ -36,11 +32,12 @@ export default function ClassPreviewBanner(props: ClassPreviewBannerProps) {
     <ClassPreviewBannerWrapper>
       <article>
         <StudentNameWrapper>
-          <b>{studentName}</b> 학생
+          <StudentName>{studentName}</StudentName>
+          <Student>학생</Student>
           <SubjectLabel subject={subject} backgroundColor="#B0E0D6" color="#00997D" />
         </StudentNameWrapper>
         <ClassStatusWrapper>
-          <ClassCountMentWrapper>{count} 회차 수업이</ClassCountMentWrapper>
+          <ClassCountMentWrapper>{expectedCount}회차 수업이</ClassCountMentWrapper>
           {showClassPreviewComment(timeStatus)}
         </ClassStatusWrapper>
       </article>
@@ -67,12 +64,20 @@ const ClassPreviewBannerWrapper = styled.section`
 
 const StudentNameWrapper = styled.h1`
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
-  width: 10.8rem;
+  margin-right: 1rem;
 
   ${({ theme }) => theme.fonts.title02};
+`;
+
+const StudentName = styled.p`
+  ${({ theme }) => theme.fonts.title02};
+`;
+
+const Student = styled.p`
+  margin: 0 0.5rem;
+  ${({ theme }) => theme.fonts.title03};
 `;
 
 const ClassStatusWrapper = styled.p`

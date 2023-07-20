@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import { nextArrowWelcomeIc } from "../../assets";
+import { useNavigate } from "react-router-dom";
 
 interface ButtonLayoutProps {
   onClick: () => void;
@@ -8,14 +9,19 @@ interface ButtonLayoutProps {
 }
 
 export default function ButtonLayoutProps(props: ButtonLayoutProps) {
+  const navigate = useNavigate();
   const { onClick, buttonText } = props;
+
+  function handleMoveToHome() {
+    navigate("/");
+  }
   return (
     <>
       <ButtonWrapper>
         <WelcomeButton type="button" onClick={onClick}>
           {buttonText}
         </WelcomeButton>
-        <PassButton type="button">
+        <PassButton type="button" onClick={handleMoveToHome}>
           건너뛰기
           <NextArrowWelcomeIcon />
         </PassButton>

@@ -18,6 +18,7 @@ interface ClassScheduleProps {
   currentClassCount: number;
   currentClassCountPercent: number;
   subjectLabelBackgroundColor: string;
+  idx: number;
 }
 
 export default function ClassSchedule(props: ClassScheduleProps) {
@@ -29,12 +30,12 @@ export default function ClassSchedule(props: ClassScheduleProps) {
     currentClassCount,
     currentClassCountPercent,
     subjectLabelBackgroundColor,
+    idx,
   } = props;
   const navigate = useNavigate();
-  const { lessonIdx } = useParams();
 
   function handleGoToLessonDetail() {
-    navigate(`/lesson-detail/${lessonIdx}`);
+    navigate(`/lesson-detail/${idx}`);
   }
 
   return (
@@ -129,4 +130,5 @@ const EntireCountMessage = styled.p`
 const RightArrowParentsHomeIcon = styled(RightArrowParentsHomeIc)`
   width: 2rem;
   height: 2rem;
+  cursor: pointer;
 `;

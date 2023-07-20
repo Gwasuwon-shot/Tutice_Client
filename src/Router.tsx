@@ -47,7 +47,6 @@ export default function Router() {
         <Route path="/change-schedule" element={<ChangeSchedule />} />
         <Route path="/tuition-payment" element={<TuitionPayment />} />
         <Route path="/change-lessonschedule" element={<ChangeSchedule />} />
-        <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
         <Route path="/lesson-share" element={<LessonShare />} />

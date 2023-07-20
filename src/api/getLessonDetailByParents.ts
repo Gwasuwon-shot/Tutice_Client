@@ -7,7 +7,6 @@ export async function getLessonDetailByParents(lessonIdx: number) {
       Authorization: `Bearer ${import.meta.env.VITE_APP_PARENTS_TOCKEN}`,
     },
   });
-
-  console.log(data.data);
+  console.log(data?.data);
   return data?.data;
 }

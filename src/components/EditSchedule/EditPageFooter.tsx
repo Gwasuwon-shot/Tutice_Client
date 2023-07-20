@@ -46,7 +46,11 @@ export default function EditPageFooter() {
     <>
       <FooterWrapper>
         <EditFooterButton onClick={() => handleEditLesson()} isActive={isActive} disabled={!isActive} />
-        {isDatePickerOpen && <EditDatePicker setIsActive={setIsActive} />}
+        {isDatePickerOpen && (
+          <ModalWrapper>
+            <EditDatePicker setIsActive={setIsActive} />
+          </ModalWrapper>
+        )}
         {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && (
           <EditDetailTimePicker setIsActive={setIsActive} />
         )}
@@ -57,9 +61,17 @@ export default function EditPageFooter() {
 
 const FooterWrapper = styled.footer`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  height: 5rem;
+  background-color: ${({ theme }) => theme.colors.grey50};
+`;
+
+const ModalWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   position: fixed;
   bottom: 0;
-  height: 6.3rem;
-  background-color: ${({ theme }) => theme.colors.grey50};
 `;

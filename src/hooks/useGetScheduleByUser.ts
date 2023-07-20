@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useQuery } from "react-query";
 import { getScheduleByUser } from "../api/getScheduleByUser";
 import { scheduleType } from "../type/scheduleType";
@@ -21,7 +20,7 @@ export default function useGetScheduleByUser(date: string): { isUserSchedule: sc
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 300000,
+    staleTime: 10000,
   });
 
   return { isUserSchedule };

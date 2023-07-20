@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { isModalOpen } from "../atom/common/isModalOpen";
-import PreypaymentModal from "../components/modal/PreypaymentModal";
 import ParentsHome from "../components/parentsHome/ParentsHome";
+import PreypaymentModal from "../components/modal/PreypaymentModal";
 import TeacherHome from "../components/teacherHome/TeacherHome";
+import { isModalOpen } from "../atom/common/isModalOpen";
+import { useRecoilState } from "recoil";
+import { useState } from "react";
 
 export default function Home() {
-  const [isTeacherHome, setIsTeacherHome] = useState(false);
+  const [isTeacherHome, setIsTeacherHome] = useState(true);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   return (

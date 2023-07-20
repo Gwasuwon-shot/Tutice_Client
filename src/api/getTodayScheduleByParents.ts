@@ -8,5 +8,5 @@ export async function getTodayScheduleByParents() {
       Authorization: `Bearer ${import.meta.env.VITE_APP_PARENTS_TOCKEN}`,
     },
   });
-  return data?.data?.data.scheduleList;
+  return data?.data?.data;
 }

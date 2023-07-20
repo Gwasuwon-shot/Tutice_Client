@@ -26,7 +26,7 @@ export default function TodayClassSwiper() {
   const day = date.getDate(); // 일 추출
 
   const { todayScheduleParents } = useGetTodayScheduleByParents();
-  console.log(todayScheduleParents);
+  const { scheduleList } = todayScheduleParents;
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function TodayClassSwiper() {
       </SwiperTitleDate>
 
       <Slider {...TODAY_CLASS_SLIDER_SETTINGS}>
-        {todayScheduleParents?.map((classInfo: calssInfoType) => {
+        {scheduleList?.map((classInfo: calssInfoType) => {
           const { idx, studentName, startTime, endTime, teacherName, subject } = classInfo;
           return (
             <TodayClassScedule

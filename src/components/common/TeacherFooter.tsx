@@ -45,7 +45,7 @@ export default function TeacherFooter() {
         navigate("/");
         break;
       case TEACHER_FOOTER_CATEGORY.calendar:
-        navigate("/schedule");
+        navigate("/change-schedule");
         break;
       case TEACHER_FOOTER_CATEGORY.classManaging:
         navigate("/manage-lesson");

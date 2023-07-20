@@ -6,6 +6,8 @@ export default function useGetTodayScheduleByParents() {
     staleTime: 300000,
   });
 
-  console.log(todayScheduleParents);
-  return { todayScheduleParents };
+  const scheduleList = todayScheduleParents?.scheduleList;
+  console.log(scheduleList);
+
+  return { scheduleList };
 }

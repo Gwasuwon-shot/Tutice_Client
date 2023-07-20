@@ -16,7 +16,7 @@ export default function TimePicker() {
   const [activeSlide, setActiveSlide] = useRecoilState(cycleNumberState);
 
   function handleSlideChange(swiper: SwiperCore) {
-    setActiveSlide(swiper.realIndex + 1);
+    setActiveSlide(Number(swiper.realIndex + 1));
   }
 
   // 1) 회차 타임피커 모달 오픈여부 상태관리

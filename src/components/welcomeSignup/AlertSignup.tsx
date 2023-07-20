@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { bellWelcomeIc } from "../../assets";
+import { BellWelcomeIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 
@@ -24,7 +24,7 @@ export default function AlertSignup() {
 const Container = styled.div`
   margin-top: 3.6rem;
 `;
-const BellWelcomeIcon = styled(bellWelcomeIc)`
+const BellWelcomeIcon = styled(BellWelcomeIc)`
   width: 2.9rem;
   height: 3.3rem;
   margin-bottom: 1.5rem;

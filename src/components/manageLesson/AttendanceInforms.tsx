@@ -1,27 +1,31 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import useManageLesson from "../../hooks/useManageLesson";
+import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
 import useModal from "../../hooks/useModal";
+import { ScheduleListType } from "../../type/manageLesson/scheduleListType";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import CancelImpossibleModal from "../modal/CanceImpossibleModal";
 import AttendanceInform from "./AttendanceInform";
 
 export default function AttendanceInforms() {
-  const { lesson, scheduleList } = useManageLesson();
+  const { manageLessonId } = useParams();
+  const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
+    Number(manageLessonId),
+  );
   const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
-  const { studentName, subject, count, nowCount } = lesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCancelImpossibleModalOpen, setIsCancelImpossibleModalOpen] = useState(false);
 
   useEffect(() => {
-    setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
-  }, []);
+    studentName && subject && setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
+  }, [studentName, subject]);
 
   function handleCloseCancelImpossibleModal() {
     setIsCancelImpossibleModalOpen(false);
@@ -48,15 +52,15 @@ export default function AttendanceInforms() {
 
       <GreyBox />
       <ScheduleWrapper>
-        {scheduleList.map(({ idx, date, status, startTime, endTime }, index) => (
+        {scheduleList?.map(({ idx, date, status, startTime, endTime }: ScheduleListType, index: number) => (
           <AttendanceInform
             key={idx}
             date={date}
             status={status}
             startTime={startTime}
             endTime={endTime}
-            count={Math.abs(index - scheduleList.length)}
-            lessonIdx={lesson?.idx}
+            count={Math.abs(index - scheduleList?.length)}
+            lessonIdx={lessonIdx}
             scheduleIdx={idx}
             setIsCancelImpossibleModalOpen={setIsCancelImpossibleModalOpen}
           />
@@ -87,7 +91,8 @@ const ScheduleWrapper = styled.section`
 `;
 
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
-  position: absolute;
+  position: fixed;
+  z-index: 3;
 
   margin: -37.9rem 0 0 -1.5em;
 `;

@@ -29,6 +29,10 @@ export default function AttendanceInforms() {
     setIsCancelImpossibleModalOpen(false);
   }
 
+  function checkScheduleListExist() {
+    return scheduleList?.length != 0;
+  }
+
   return (
     <>
       {openModal && selectedLesson && (
@@ -49,21 +53,25 @@ export default function AttendanceInforms() {
       )}
 
       <GreyBox />
-      <ScheduleWrapper>
-        {scheduleList?.map(({ idx, date, status, startTime, endTime }: ScheduleListType, index: number) => (
-          <AttendanceInform
-            key={idx}
-            date={date}
-            status={status}
-            startTime={startTime}
-            endTime={endTime}
-            count={Math.abs(index - scheduleList?.length)}
-            lessonIdx={lessonIdx}
-            scheduleIdx={idx}
-            setIsCancelImpossibleModalOpen={setIsCancelImpossibleModalOpen}
-          />
-        ))}
-      </ScheduleWrapper>
+      {checkScheduleListExist() ? (
+        <ScheduleWrapper>
+          {scheduleList?.map(({ idx, date, status, startTime, endTime }: ScheduleListType, index: number) => (
+            <AttendanceInform
+              key={idx}
+              date={date}
+              status={status}
+              startTime={startTime}
+              endTime={endTime}
+              count={Math.abs(index - scheduleList?.length)}
+              lessonIdx={lessonIdx}
+              scheduleIdx={idx}
+              setIsCancelImpossibleModalOpen={setIsCancelImpossibleModalOpen}
+            />
+          ))}
+        </ScheduleWrapper>
+      ) : (
+        <p>수업이 없습니다</p>
+      )}
     </>
   );
 }

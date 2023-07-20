@@ -11,7 +11,7 @@ interface calssInfoType {
   teacherName: string;
   studentName: string;
   startTime: string;
-  endeTime: string;
+  endTime: string;
   subject: string;
 }
 
@@ -25,8 +25,7 @@ export default function TodayClassSwiper() {
   const month = date.getMonth() + 1; // 월 추출 (0부터 시작하므로 +1)
   const day = date.getDate(); // 일 추출
 
-  const { todayScheduleParents } = useGetTodayScheduleByParents();
-  const { scheduleList } = todayScheduleParents;
+  const { scheduleList } = useGetTodayScheduleByParents();
 
   return (
     <>

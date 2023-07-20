@@ -3,7 +3,7 @@ import { getMissingAttendanceSchedule } from "../api/getMissingAttendanceSchedul
 
 export default function useGetMissingAttendanceSchedule() {
   const { data: missingAttendanceSchedule } = useQuery(["getMissingAttendanceSchedule"], getMissingAttendanceSchedule, {
-    staleTime: 10000,
+    staleTime: 3000,
   });
 
   return { missingAttendanceSchedule };

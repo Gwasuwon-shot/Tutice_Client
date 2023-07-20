@@ -9,7 +9,7 @@ export default function useGetLessonScheduleByTeacher(manageLessonId: number) {
       onError: (err) => {
         console.log(err);
       },
-      staleTime: 10000,
+      staleTime: 3000,
     },
   );
 

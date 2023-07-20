@@ -20,7 +20,7 @@ export default function useGetScheduleByUser(date: string): { isUserSchedule: sc
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 10000,
+    staleTime: 3000,
   });
 
   return { isUserSchedule };

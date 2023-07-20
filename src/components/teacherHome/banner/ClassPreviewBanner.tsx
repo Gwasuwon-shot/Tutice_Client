@@ -64,7 +64,6 @@ const ClassPreviewBannerWrapper = styled.section`
 
 const StudentNameWrapper = styled.h1`
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
   margin-right: 1rem;
@@ -77,6 +76,7 @@ const StudentName = styled.p`
 `;
 
 const Student = styled.p`
+  margin: 0 0.5rem;
   ${({ theme }) => theme.fonts.title03};
 `;
 

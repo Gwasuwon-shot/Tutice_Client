@@ -31,6 +31,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
   }
 
   const queryClient = useQueryClient();
+
   const { data: sendAlarm } = useQuery(
     ["requestAttendanceNotification"],
     () => requestAttendanceNotification(scheduleIdx),

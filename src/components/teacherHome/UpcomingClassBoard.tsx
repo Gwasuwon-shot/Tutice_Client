@@ -1,23 +1,30 @@
+import { useState } from "react";
 import styled from "styled-components";
 import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
+import UpcomingClass from "./UpcomingClass";
 
 export default function UpcomingClassBoard() {
   const { latestScheduleDay, latestScheduleList } = useGetLatestScheduleByTeacher();
-  // const { date, dayOfWeek } = latestScheduleDay;
-  // const [upcomingClassDate, setUpcomingClassDate] = useState(
-  //   date.split("-")[0] + "년 " + date.split("-")[1] + "월 " + date.split("-")[2] + "일 ",
-  // );
+  const { date, dayOfWeek } = latestScheduleDay;
+  const [upcomingClassDate, setUpcomingClassDate] = useState(
+    new Date(date).getFullYear() +
+      "년 " +
+      Number(new Date(date).getMonth() + 1) +
+      "월 " +
+      new Date(date).getDate() +
+      "일 ",
+  );
 
   return (
     <UpcomingClassBoardWrapper>
-      {/* <UpcomingClassDate>
+      <UpcomingClassDate>
         {upcomingClassDate}({dayOfWeek}) 수업
         <UpcomingClassWrapper>
-          {latestScheduleList.map(({ lesson, schedule }, idx) => (
+          {latestScheduleList.map(({ lesson, schedule }, idx: number) => (
             <UpcomingClass key={idx} lesson={lesson} schedule={schedule} />
           ))}
         </UpcomingClassWrapper>
-      </UpcomingClassDate> */}
+      </UpcomingClassDate>
     </UpcomingClassBoardWrapper>
   );
 }

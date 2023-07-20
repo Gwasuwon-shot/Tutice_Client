@@ -7,6 +7,6 @@ export async function getLatestScheduleByTeacher() {
       Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
     },
   });
-  console.log(data.data.data);
+
   return data.data.data;
 }

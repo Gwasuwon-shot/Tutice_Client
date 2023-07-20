@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
@@ -20,10 +19,6 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
-
-  useEffect(() => {
-    setAttendanceData({ ...attendanceData, status: "" });
-  }, []);
 
   function handleCancelAttendanceCheck() {
     setOpenModal(false);

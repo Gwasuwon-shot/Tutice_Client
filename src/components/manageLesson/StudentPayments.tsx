@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import useGetLessonPaymentRecordByTeacher from "../../hooks/useGetLessonPaymentRecordByTeacher";
-import { PaymentRecordType } from "../../type/manageLesson/payMentRecordType";
+import { PaymentRecordType } from "../../type/manageLesson/paymentRecordType";
 import StudentPayment from "./StudentPayment";
 
 export default function StudentPayments() {

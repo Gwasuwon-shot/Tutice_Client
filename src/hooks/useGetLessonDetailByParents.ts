@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { getLessonDetailByParents } from "../api/getLessonDetailByParents";
+import { ActionCodeOperation } from "firebase/auth";
 
 export default function useGetLessonDetailByParents(lessonIdx: number) {
   const { data: parentsLesson } = useQuery(
@@ -10,6 +11,6 @@ export default function useGetLessonDetailByParents(lessonIdx: number) {
     },
   );
   console.log(parentsLesson);
+
   return { parentsLesson };
-  console.log("here");
 }

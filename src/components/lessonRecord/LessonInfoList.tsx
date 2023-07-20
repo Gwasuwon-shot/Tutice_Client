@@ -26,6 +26,7 @@ export default function LessonInfoList() {
   const classInfoArrray = [startDate, payment, formattedAmount];
   const { lessonId } = useParams();
   const { parentsLesson } = useGetLessonDetailByParents(Number(lessonId));
+  console.log(parentsLesson.data);
 
   return (
     <>
@@ -43,7 +44,6 @@ export default function LessonInfoList() {
           />
         );
       })}
-
       <LessonInfoMainCategory>수업진행</LessonInfoMainCategory>
       {CLASS_INFO.map((classInfo, idx) => {
         return <LessonInfoItemLayout key={idx} detailCategory={classInfo} content={classInfoArrray[idx]} />;

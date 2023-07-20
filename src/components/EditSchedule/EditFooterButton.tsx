@@ -18,3 +18,5 @@ export default function EditFooterButton(props: EditFooterButtonProps) {
     </>
   );
 }
+
+const BottomWrapper = styled.div``;

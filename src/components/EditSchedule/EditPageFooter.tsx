@@ -34,7 +34,6 @@ export default function EditPageFooter() {
   });
 
   function handleEditLesson(): void {
-    console.log("dfdf");
     patchSchdule({
       idx: idx,
       date: patchEditDate,
@@ -46,10 +45,12 @@ export default function EditPageFooter() {
   return (
     <>
       <FooterWrapper>
-        <BottomWrapper>
-          <EditFooterButton onClick={() => handleEditLesson()} isActive={isActive} disabled={!isActive} />
-        </BottomWrapper>
-        {isDatePickerOpen && <EditDatePicker setIsActive={setIsActive} />}
+        <EditFooterButton onClick={() => handleEditLesson()} isActive={isActive} disabled={!isActive} />
+        {isDatePickerOpen && (
+          <ModalWrapper>
+            <EditDatePicker setIsActive={setIsActive} />
+          </ModalWrapper>
+        )}
         {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && (
           <EditDetailTimePicker setIsActive={setIsActive} />
         )}
@@ -60,21 +61,17 @@ export default function EditPageFooter() {
 
 const FooterWrapper = styled.footer`
   display: flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 6.3rem;
-  padding: 0.8rem;
+  position: relative;
+
+  height: 5rem;
   background-color: ${({ theme }) => theme.colors.grey50};
 `;
 
-const BottomWrapper = styled.div`
+const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  position: absolute;
+  position: fixed;
+  bottom: 0;
 `;

@@ -1,5 +1,7 @@
-import { useRecoilValue } from "recoil";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
+import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { managingStatus } from "../atom/mangeLesson/managingStatus";
 import BackButton from "../components/common/BackButton";
 import TeacherFooter from "../components/common/TeacherFooter";
@@ -11,9 +13,15 @@ import { MANAGE_LESSON_STATUS } from "../core/manageLesson/manageLessonStatus";
 
 export default function ManageLessonDetail() {
   const status = useRecoilValue(managingStatus);
+  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+
   function checkIsStatusLesson() {
     return status === MANAGE_LESSON_STATUS.lesson;
   }
+
+  useEffect(() => {
+    setAttendanceData({ ...attendanceData, status: "" });
+  }, []);
 
   return (
     <>

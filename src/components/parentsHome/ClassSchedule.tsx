@@ -90,12 +90,15 @@ const ClassDetailInfoWrapper = styled.div`
   flex-direction: column;
 
   margin-left: 2.3rem;
-
+  width: 100%;
+  height: 3.7rem;
   gap: 0.7rem;
 `;
 
 const TeacherSubjectWrapper = styled.div`
   display: flex;
+  height: 1.6rem;
+  width: 100%;
   gap: 0.6rem;
 `;
 
@@ -118,5 +121,5 @@ const EntireCountMessage = styled.p`
 
 const RightArrowParentsHomeIcon = styled(RightArrowParentsHomeIc)`
   width: 2rem;
-  margin-left: 8.4rem;
+  height: 2rem;
 `;

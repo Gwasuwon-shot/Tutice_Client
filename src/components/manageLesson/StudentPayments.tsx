@@ -3,9 +3,11 @@ import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
+import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useGetLessonPaymentRecordByTeacher from "../../hooks/useGetLessonPaymentRecordByTeacher";
 import { PaymentRecordType } from "../../type/manageLesson/paymentRecordType";
+import SuccessSendingAlarmSnackBar from "../common/SuccessSendingAlarmSnackBar";
 import SendPaymentAlarmManageLessonModal from "./SendPaymentAlarmManageLessonModal";
 import StudentPayment from "./StudentPayment";
 
@@ -14,6 +16,7 @@ export default function StudentPayments() {
   const { lesson, todayDate, paymentRecordList } = useGetLessonPaymentRecordByTeacher(Number(manageLessonId)); //lessonIdx 넣어주어야함
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [payMentAlarmOpen, setPayMentAlarmOpen] = useState(false);
+  const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
 
   function checkRealDate(date: string | null) {
     return date !== null ? date : todayDate;
@@ -21,6 +24,7 @@ export default function StudentPayments() {
 
   return (
     <>
+      {snackBarOpen && <SuccessSendingAlarmSnackBar />}
       {openModal && payMentAlarmOpen && (
         <ModalWrapper>
           <SendPaymentAlarmManageLessonModal

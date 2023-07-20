@@ -1,6 +1,8 @@
 import { useMutation } from "react-query";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { requestPaymentRecordNotification } from "../../api/requestPaymentRecordNotification";
+import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
@@ -18,10 +20,11 @@ interface SendPaymentAlarmManageLessonModalProps {
 export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlarmManageLessonModalProps) {
   const { studentName, subject, backgroundColor, color, isBig, lessonIdx } = props;
   const { unShowModal } = useModal();
+  const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
 
   const { mutate: sendPaymentAlarm } = useMutation(requestPaymentRecordNotification, {
     onSuccess: () => {
-      // 스낵바 띄우기 로직
+      setSnackBarOpen(true);
     },
     onError: (error) => {
       console.log(error);

@@ -11,13 +11,13 @@ import { css } from "styled-components";
 import DepositRecordList from "./DepositRecord";
 import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
 import { useParams } from "react-router-dom";
+import ManageLessonCategory from "../manageLesson/ManageLessonCategory";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();
-  const [isClassRecord, setIsClassRecord] = useState(false);
+  const [isClassRecord, setIsClassRecord] = useState<boolean>(false);
   const { lesson, idx, count, nowCount, percent, studentName, subject, scheduleList, teacherName } =
     useGetLessonScheduleByParents(Number(lessonId));
-  console.log(lessonId);
 
   return (
     <>
@@ -38,6 +38,8 @@ export default function LessonRecordDetail() {
           입금내역
         </SelectMenuButton>
       </SelectMenuWrapper>
+
+      <ManageLessonCategory />
 
       {isClassRecord ? (
         <MainContentWrapper>
@@ -109,6 +111,8 @@ const SelectMenuButton = styled.button<{ isClassRecord: boolean }>`
   width: 13.5075rem;
   height: 3.2rem;
   border-radius: 0.8rem;
+  ${({ theme }) => theme.fonts.body02};
+  color: ${({ theme, $isSelected }) => ($isSelected ? theme.colors.grey900 : theme.colors.grey400)};
 
   ${({ isClassRecord }) =>
     isClassRecord

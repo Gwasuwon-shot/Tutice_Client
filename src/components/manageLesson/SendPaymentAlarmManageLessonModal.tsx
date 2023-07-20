@@ -25,6 +25,7 @@ export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlar
   const { mutate: sendPaymentAlarm } = useMutation(requestPaymentRecordNotification, {
     onSuccess: () => {
       setSnackBarOpen(true);
+      unShowModal;
     },
     onError: (error) => {
       console.log(error);
@@ -32,9 +33,7 @@ export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlar
   });
 
   function handleSendAlarm() {
-    // 서버에 알람 api 통신
     sendPaymentAlarm(lessonIdx);
-    unShowModal;
   }
 
   return (

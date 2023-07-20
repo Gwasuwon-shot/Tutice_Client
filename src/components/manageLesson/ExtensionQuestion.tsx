@@ -37,10 +37,9 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
           <HeaderText>수업연장 여부를 알려주세요!</HeaderText>
         </ExtentionHeader>
         <Content>
-          {missingMaintenanceLessonList.map((item: MissingLessonProp) => {
-            const { lesson, endScheduleDate } = item;
+          {missingMaintenanceLessonList?.map((item: MissingLessonProp) => {
             return (
-              <ExtensionLessonContainer setOpenModal={setOpenModal} endScheduleDate={endScheduleDate} lesson={lesson} />
+              <ExtensionLessonContainer setOpenModal={setOpenModal} endScheduleDate={item.endScheduleDate} lesson={item.lesson} />
             );
           })}
         </Content>
@@ -59,8 +58,6 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
       )}
     </>
   );
-
-
 }
 
 const ExtensionWrapper = styled.section`

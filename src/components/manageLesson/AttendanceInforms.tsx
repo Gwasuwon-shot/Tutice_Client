@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
-import useModal from "../../hooks/useModal";
 import { ScheduleListType } from "../../type/manageLesson/scheduleListType";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
@@ -17,7 +16,6 @@ export default function AttendanceInforms() {
   const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
     Number(manageLessonId),
   );
-  const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);

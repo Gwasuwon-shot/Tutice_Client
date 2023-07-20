@@ -8,7 +8,7 @@ export async function getTodayScheduleByTeacher() {
     },
   });
 
-  console.log(data);
+  console.log(data.data.data);
 
   return data.data.data;
 }

@@ -6,7 +6,7 @@ import ParentsHome from "../components/parentsHome/ParentsHome";
 import TeacherHome from "../components/teacherHome/TeacherHome";
 
 export default function Home() {
-  const [isTeacherHome, setIsTeacherHome] = useState(true);
+  const [isTeacherHome, setIsTeacherHome] = useState(false);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   return (

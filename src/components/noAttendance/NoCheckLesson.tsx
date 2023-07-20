@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { styled } from "styled-components";
-import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
-import { isModalOpen } from "../../atom/common/isModalOpen";
-import useGetMissingAttendanceSchedule from "../../hooks/useGetMissingAttendanceSchedule";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import NoCheckAttendanceContanier from "./NoCheckAttendanceContanier";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import { styled } from "styled-components";
+import useGetMissingAttendanceSchedule from "../../hooks/useGetMissingAttendanceSchedule";
+import { useRecoilState } from "recoil";
+import { useState } from "react";
 
 interface LessonNScheduleData {
   lessonIdx: number;

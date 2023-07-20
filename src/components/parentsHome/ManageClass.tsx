@@ -16,7 +16,6 @@ interface lessonListType {
 }
 
 export default function ManageClass() {
-  const { isLessonExist } = useGetLessonByUser();
   const { lessonParents } = useGetLessonByParents();
 
   return (
@@ -24,7 +23,7 @@ export default function ManageClass() {
       <ManageClassTitle>수업관리</ManageClassTitle>
 
       <ClassScheduleListWrapper>
-        {lessonParents.map((lesson: lessonListType) => {
+        {lessonParents?.map((lesson: lessonListType) => {
           const { idx, subject, teacherName, studentName, count, nowCount, percent } = lesson;
           return (
             <ClassSchedule

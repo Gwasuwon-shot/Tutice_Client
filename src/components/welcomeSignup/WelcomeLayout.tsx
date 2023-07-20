@@ -3,19 +3,19 @@ import { styled } from "styled-components";
 import AfterSignup from "./AfterSignup";
 import AlertSignup from "./AlertSignup";
 
-export default function WelcomeSignup() {
+export default function WelcomeLayout() {
   const [isWelcome, setIsWelcome] = useState<boolean>(true);
   return (
     <>
-      <Container>{isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup />}</Container>
+      <Container>
+        {isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup setIsWelcome={setIsWelcome} />}
+      </Container>
     </>
   );
 }
 
 const Container = styled.div`
   display: flex;
-
-  margin-left: 1.8rem;
 
   white-space: pre-line;
 `;

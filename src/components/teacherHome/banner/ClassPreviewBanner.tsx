@@ -5,16 +5,11 @@ import useGetTodayScheduleByTeacher from "../../../hooks/useGetTodayScheduleByTe
 import AttendanceCheckButton from "../../common/AttendanceCheckButton";
 import SubjectLabel from "../../common/SubjectLabel";
 
-// interface ClassPreviewBannerProps {
-//   todaySchedule: PreviewBannerScheduleType;
-// }
-
 export default function ClassPreviewBanner() {
   const { todaySchedule } = useGetTodayScheduleByTeacher();
   const { lesson, timeStatus, schedule } = todaySchedule;
   const { studentName, subject } = lesson;
   const { expectedCount } = schedule;
-  console.log(todaySchedule);
 
   function showClassPreviewComment(timeStatus: number) {
     switch (timeStatus) {

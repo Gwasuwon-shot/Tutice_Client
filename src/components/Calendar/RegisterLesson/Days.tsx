@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 import RegisterModal from "./RegisterModal";
 import DayItem from "./DayItem";
+import {
+  studentNameSelector,
+  studentNameState,
+  subjectNameSelector,
+  subjectNameState,
+} from "../../../atom/common/datePicker";
+import { dayState } from "../../../atom/timePicker/timePicker";
 
 interface DaysProp {
   currentMonth: Date;
@@ -16,7 +23,7 @@ export default function Days(props: DaysProp) {
   const { currentMonth } = props;
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
-  const startDate = startOfWeek(monthStart);
+  const startDateInCalendar = startOfWeek(monthStart);
   const endDate: Date = endOfWeek(monthEnd);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -24,10 +31,16 @@ export default function Days(props: DaysProp) {
   const formattedMonth = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}`;
 
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
+  const studentName = useRecoilValue(studentNameSelector);
+  const subjectName = useRecoilValue(subjectNameSelector);
+  const { regularLessonList, startDate } = useRecoilValue(dayState);
+  console.log(studentName, subjectName, startDate);
+  console.log(regularLessonList);
+  const expectedSchedule = {};
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
-  let day: Date = startDate;
+  let day: Date = startDateInCalendar;
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {

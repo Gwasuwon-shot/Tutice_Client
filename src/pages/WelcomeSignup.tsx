@@ -1,10 +1,11 @@
 import React from "react";
 import { styled } from "styled-components";
+import WelcomeLayout from "../components/welcomeSignup/WelcomeLayout";
 
 export default function WelcomeSignup() {
   return (
     <Container>
-      <WelcomeSignup />
+      <WelcomeLayout />
     </Container>
   );
 }

@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import AfterSignup from "./AfterSignup";
 import AlertSignup from "./AlertSignup";
 
-export default function WelcomeSignup() {
+export default function WelcomeLayout() {
   const [isWelcome, setIsWelcome] = useState<boolean>(true);
   return (
     <>

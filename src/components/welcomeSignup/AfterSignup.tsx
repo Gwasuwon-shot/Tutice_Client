@@ -26,7 +26,7 @@ export default function AfterSignup(prop: AfterSignupProp) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={handleToNextStep} buttonText={"수업 나무 생성"} />
+      <ButtonLayout onClick={handleToNextStep} buttonText="수업 나무 생성" />
     </>
   );
 }

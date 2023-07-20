@@ -21,10 +21,6 @@ export default function AfterSignup(prop: AfterSignupProp) {
     setIsWelcome(false);
   }
 
-  useEffect(() => {
-    console.log(signUpData);
-  }, []);
-
   return (
     <>
       <Container>

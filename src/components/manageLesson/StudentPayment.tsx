@@ -32,7 +32,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
       <NumberWrapper>
         <FruitCount>{count}번째 열매</FruitCount>
         <Date>
-          {new window.Date(date).getMonth() + 1}월 {new window.Date(date).getDate() + 1}일
+          {new window.Date(date).getMonth() + 1}월 {new window.Date(date).getDate()}일
         </Date>
       </NumberWrapper>
       <Payment>

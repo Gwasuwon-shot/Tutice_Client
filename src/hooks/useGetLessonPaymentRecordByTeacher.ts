@@ -13,9 +13,10 @@ export default function useGetLessonPaymentRecordByTeacher(manageLessonId: numbe
       staleTime: 3000,
     },
   );
-
+  console.log(payMentByTeacher);
   const lesson = payMentByTeacher?.lesson;
-  const paymentDate = payMentByTeacher?.paymentDate;
+  const todayDate = payMentByTeacher?.todayDate;
+  const paymentRecordList = payMentByTeacher?.paymentRecordList;
 
-  return { lesson, paymentDate };
+  return { lesson, todayDate, paymentRecordList };
 }

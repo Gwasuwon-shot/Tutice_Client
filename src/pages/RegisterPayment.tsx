@@ -1,27 +1,24 @@
 import { EditPaymentIc, FruitPaymentIc } from "../assets";
-import {openPaymentPicker, paymentDateState} from '../atom/registerPayment/registerPayment';
+import { openPaymentPicker, paymentDateState } from "../atom/registerPayment/registerPayment";
 
-import PaymentDatePicker from '../components/registerPayment/PaymentDatePicker';
-import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
-import { STUDENT_COLOR } from "../core/common/studentColor";
-import StudentNameLabel from "../components/common/StudentNameLabel";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
+import StudentNameLabel from "../components/common/StudentNameLabel";
+import PaymentDatePicker from "../components/registerPayment/PaymentDatePicker";
+import { STUDENT_COLOR } from "../core/common/studentColor";
 import useGetPaymentRecord from "../hooks/useGetPaymentRecord";
-import { useParams } from "react-router-dom";
-import {useRecoilState} from 'recoil';
 
 export default function RegisterPayment() {
-  //   const { paymentRecordView } = useGetPaymentRecord(Number(manageLessonId)); //lessonIdx 넣어주어야함
-  //   const { lesson, paymentDate } = paymentRecordView?.data;
-
-  const { lesson, paymentDate } = useGetPaymentRecord();  // 서버 해결시 위 주석으로 변경
+  // const { manageLessonId } = useParams();
+  // const { lesson, paymentDate } = useGetLessonPaymentRecordByTeacher(Number(manageLessonId)); //lessonIdx 넣어주어야함
+  // const { lesson, paymentDate } = paymentRecordView?.data;
+  const { lesson, paymentDate } = useGetPaymentRecord(); // 서버 해결시 위 주석으로 변경
   const { idx, studentName, subject, cycle } = lesson;
   const { value, startDate, endDate } = cycle;
-  const { manageLessonId } = useParams();
-  
   const [isOpenPicker, setIsOpenPicker] = useRecoilState(openPaymentPicker);
   const [activeDateSlide, setActiveDateSlide] = useRecoilState(paymentDateState);
-  
+
   function handleGoBack() {
     // 뒤로가기
   }
@@ -55,7 +52,7 @@ export default function RegisterPayment() {
       <Sub>입금일</Sub>
       <PaymentDate>
         {activeDateSlide.month}월 {activeDateSlide.date}일
-        <EditPaymentIcon onClick = {handleOpenPicker} />
+        <EditPaymentIcon onClick={handleOpenPicker} />
       </PaymentDate>
       <ButtonWrapper>
         <RoundBottomMiniButton isGreen={false} onClick={handleGoBack}>
@@ -65,7 +62,11 @@ export default function RegisterPayment() {
           등록하기
         </RoundBottomMiniButton>
       </ButtonWrapper>
-      {isOpenPicker && <ModalWrapper> <PaymentDatePicker/> </ModalWrapper>}
+      {isOpenPicker && (
+        <ModalWrapper>
+          <PaymentDatePicker />
+        </ModalWrapper>
+      )}
     </RegisterPaymentWrapper>
   );
 }
@@ -147,6 +148,6 @@ const ModalWrapper = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-    
+
   width: 100%;
-`
+`;

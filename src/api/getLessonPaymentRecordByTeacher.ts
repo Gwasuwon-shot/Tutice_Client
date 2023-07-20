@@ -8,6 +8,6 @@ export async function getLessonPaymentRecordByTeacher(lessonIdx: number) {
     },
   });
 
-  console.log(data?.data);
-  return data?.data;
+  console.log(data?.data.data);
+  return data?.data.data;
 }

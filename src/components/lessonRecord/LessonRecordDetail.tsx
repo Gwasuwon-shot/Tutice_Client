@@ -109,7 +109,6 @@ const SelectMenuButton = styled.button<{ isClassRecord: boolean }>`
   height: 3.2rem;
   border-radius: 0.8rem;
   ${({ theme }) => theme.fonts.body02};
-  /* color: ${({ theme, $isSelected }) => ($isSelected ? theme.colors.grey900 : theme.colors.grey400)}; */
   color: ${({ theme, isClassRecord }) => (isClassRecord ? theme.colors.grey900 : theme.colors.grey400)};
 
   ${({ isClassRecord }) =>

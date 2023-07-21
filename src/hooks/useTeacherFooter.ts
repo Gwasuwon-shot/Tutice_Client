@@ -8,21 +8,6 @@ export default function useTeacherFooter() {
   const [teacherFooterList, setTeacherFooterList] = useRecoilState<TeacherFooterType[]>(teacherFooterCategory);
   const navigate = useNavigate();
 
-  // function showTeacherFooterIcon(category: string, isMoved: boolean) {
-  //   switch (category) {
-  //     case TEACHER_FOOTER_CATEGORY.home:
-  //       return isMoved ? <HomeActiveTeacherFooterIcon /> : <HomeTeacherFooterIcon />;
-  //     case TEACHER_FOOTER_CATEGORY.calendar:
-  //       return isMoved ? <CalendarActiveTeacherFooterIcon /> : <CalendarTeacherFooterIcon />;
-  //     case TEACHER_FOOTER_CATEGORY.classManaging:
-  //       return isMoved ? <ClassManagingActiveTeacherFooterIcon /> : <ClassManagingTeacherFooterIcon />;
-  //     case TEACHER_FOOTER_CATEGORY.my:
-  //       return isMoved ? <MyActiveTeacherFooterIcon /> : <MyTeacherFooterIcon />;
-  //     default:
-  //       return;
-  //   }
-  // }
-
   function handleMoveToPage(category: string) {
     setTeacherFooterList(
       teacherFooterList.map((list) =>

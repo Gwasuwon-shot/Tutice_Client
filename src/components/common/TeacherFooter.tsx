@@ -18,46 +18,6 @@ import TeacherFooterIcons from "./TeacherFooterIcons";
 export default function TeacherFooter() {
   const [teacherFooterList, setTeacherFooterList] = useRecoilState<TeacherFooterType[]>(teacherFooterCategory);
   const { handleMoveToPage } = useTeacherFooter();
-  // const navigate = useNavigate();
-
-  // function showTeacherFooterIcon(category: string, isMoved: boolean) {
-  //   switch (category) {
-  //     case TEACHER_FOOTER_CATEGORY.home:
-  //       return isMoved ? <HomeActiveTeacherFooterIcon /> : <HomeTeacherFooterIcon />;
-  //     case TEACHER_FOOTER_CATEGORY.calendar:
-  //       return isMoved ? <CalendarActiveTeacherFooterIcon /> : <CalendarTeacherFooterIcon />;
-  //     case TEACHER_FOOTER_CATEGORY.classManaging:
-  //       return isMoved ? <ClassManagingActiveTeacherFooterIcon /> : <ClassManagingTeacherFooterIcon />;
-  //     case TEACHER_FOOTER_CATEGORY.my:
-  //       return isMoved ? <MyActiveTeacherFooterIcon /> : <MyTeacherFooterIcon />;
-  //     default:
-  //       return;
-  //   }
-  // }
-
-  // function handleMoveToPage(category: string) {
-  //   setTeacherFooterList(
-  //     teacherFooterList.map((list) =>
-  //       list.category === category ? { ...list, isMoved: true } : { ...list, isMoved: false },
-  //     ),
-  //   );
-  //   switch (category) {
-  //     case TEACHER_FOOTER_CATEGORY.home:
-  //       navigate("/");
-  //       break;
-  //     case TEACHER_FOOTER_CATEGORY.calendar:
-  //       navigate("/schedule");
-  //       break;
-  //     case TEACHER_FOOTER_CATEGORY.classManaging:
-  //       navigate("/manage-lesson");
-  //       break;
-  //     case TEACHER_FOOTER_CATEGORY.my:
-  //       navigate("/mypage");
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
 
   return (
     <TeacherFooterWrapper>

@@ -129,6 +129,7 @@ export default function LessonDate() {
 
   function postTemporary(info: temporaryProp) {
     console.log(selectedDays);
+    console.log(temporarySchedule);
     getNewTemporarySchedule(postInformation);
     navigate("/register-calendar");
   }

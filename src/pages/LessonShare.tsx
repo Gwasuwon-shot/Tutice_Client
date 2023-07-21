@@ -1,20 +1,26 @@
-import { CopylessonShareIc, ShareOthersLessonShareIc } from "../assets";
-import {accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder} from "../atom/tuitionPayment/tuitionPayment";
-import {cycleNumberState, dateState, dayState, firstLessonDay, focusDayState} from "../atom/timePicker/timePicker";
-import {studentNameState, subjectNameState} from "../atom/common/datePicker";
 import { useEffect, useState } from "react";
+import { CopylessonShareIc, ShareOthersLessonShareIc } from "../assets";
+import { studentNameState, subjectNameState } from "../atom/common/datePicker";
+import { cycleNumberState, dateState, dayState, firstLessonDay, focusDayState } from "../atom/timePicker/timePicker";
+import {
+  accountNumber,
+  bankName,
+  moneyAmount,
+  payingPersonName,
+  paymentOrder,
+} from "../atom/tuitionPayment/tuitionPayment";
 
-import BottomButton from "../components/common/BottomButton";
-import { KakaoShare } from "../components/lessonShare/KakaoShare";
-import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
-import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
+import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
+import BottomButton from "../components/common/BottomButton";
+import { KakaoShare } from "../components/lessonShare/KakaoShare";
 
 interface dayProps {
-  year: number,
-  month: number,
-  date: number,
+  year: number;
+  month: number;
+  date: number;
 }
 
 interface Day {
@@ -36,26 +42,29 @@ export default function LessonShare() {
   const [money, setmoneyAmount] = useRecoilState(moneyAmount);
   const [payingPerson, setpayingPersonName] = useRecoilState(payingPersonName);
   const [payment, setpaymentOrder] = useRecoilState(paymentOrder);
-  
+
   function setAllSet() {
     setcycleNumberState(-1);
     setdateState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() });
     setdayState([]);
     setfirstLessonDay({ 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" }[new Date().getDay()]);
-    setfocusDayState({ dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()], startTime: "", endTime: "" });
-    setstudentNameState('');
-    setsubjectNameState('');
-    setaccountNumber('');
-    setbankName('');
+    setfocusDayState({
+      dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()],
+      startTime: "",
+      endTime: "",
+    });
+    setstudentNameState("");
+    setsubjectNameState("");
+    setaccountNumber("");
+    setbankName("");
     setmoneyAmount(0);
-    setpayingPersonName('');
-    setpaymentOrder('');
+    setpayingPersonName("");
+    setpaymentOrder("");
   }
-  
+
   const navgiate = useNavigate();
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
   const [URL, setURL] = useState(`https://tutice.com/${codeAndId?.lessonCode}`);
-
 
   useEffect(() => {
     setURL(`https://tutice.com/${codeAndId?.lessonCode}`);
@@ -71,7 +80,7 @@ export default function LessonShare() {
     if (navigator.share) {
       navigator.share({
         title: "나무코드 공유",
-        text: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. [김은수]선생님이 [박송현]학생의 Tutice 초대장을 보냈습니다. \nTutice 링크 \n ${URL}`,
+        text: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. \nTutice 링크 \n ${URL}`,
         url: URL,
       });
     } else {

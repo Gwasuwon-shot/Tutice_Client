@@ -1,6 +1,8 @@
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { updateScheduleAttendance } from "../../api/updateScheduleAttendance";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { ATTENDANCE_CHECK_RESPONSE } from "../../core/checkAttendance/attendaceCheckResponse";
 import BasicDoubleModal from "./BasicDoubleModal";
@@ -18,9 +20,17 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
     setIsCheckingModalOpen(false);
   }
 
+  const { mutate: updateAttendance } = useMutation(updateScheduleAttendance, {
+    onSuccess: () => {
+      navigate("/complete-check-attendance", { state: ATTENDANCE_CHECK_RESPONSE });
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
   function handleMoveToSuccessCheckingAttendance() {
-    // 서버에 출결 정보 post 하는 로직 추가
-    navigate("/complete-check-attendance", { state: ATTENDANCE_CHECK_RESPONSE });
+    updateAttendance(attendanceData);
   }
 
   function checkStatusText() {

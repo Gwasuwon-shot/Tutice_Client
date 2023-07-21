@@ -1,4 +1,9 @@
+import { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { requestPaymentRecordNotification } from "../../api/requestPaymentRecordNotification";
+import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
@@ -10,15 +15,33 @@ interface SendPaymentAlarmManageLessonModalProps {
   backgroundColor: string;
   color: string;
   isBig: boolean;
+  lessonIdx: number;
 }
 
 export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlarmManageLessonModalProps) {
-  const { studentName, subject, backgroundColor, color, isBig } = props;
+  const { studentName, subject, backgroundColor, color, isBig, lessonIdx } = props;
   const { unShowModal } = useModal();
+  const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
+  const [isAgreeSend, setIsAgreeSend] = useState<undefined | string>(undefined);
+
+  const queryClient = useQueryClient();
+
+  const { data: sendPaymentAlarm } = useQuery(["paymentAlarm"], () => requestPaymentRecordNotification(lessonIdx), {
+    onSuccess: () => {
+      setSnackBarOpen(true);
+      unShowModal();
+      setIsAgreeSend(undefined);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+    enabled: !!isAgreeSend,
+  });
 
   function handleSendAlarm() {
-    // 서버에 알람 api 통신
-    unShowModal;
+    // sendPaymentAlarm(lessonIdx);
+    setIsAgreeSend("true");
+    queryClient.invalidateQueries("paymentAlarm");
   }
 
   return (

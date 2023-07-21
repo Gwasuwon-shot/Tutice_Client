@@ -1,6 +1,8 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { nextArrowWelcomeIc } from "../../assets";
+import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
+import useTeacherFooter from "../../hooks/useTeacherFooter";
 
 interface ButtonLayoutProps {
   onClick: () => void;
@@ -8,14 +10,20 @@ interface ButtonLayoutProps {
 }
 
 export default function ButtonLayoutProps(props: ButtonLayoutProps) {
+  const navigate = useNavigate();
   const { onClick, buttonText } = props;
+  const { handleMoveToPage } = useTeacherFooter();
+
+  function handleMoveToHome() {
+    handleMoveToPage(TEACHER_FOOTER_CATEGORY.home);
+  }
   return (
     <>
       <ButtonWrapper>
         <WelcomeButton type="button" onClick={onClick}>
           {buttonText}
         </WelcomeButton>
-        <PassButton type="button">
+        <PassButton type="button" onClick={handleMoveToHome}>
           건너뛰기
           <NextArrowWelcomeIcon />
         </PassButton>
@@ -44,7 +52,7 @@ const WelcomeButton = styled.button`
   color: ${({ theme }) => theme.colors.grey0};
   flex-shrink: 0;
 
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const PassButton = styled.button`

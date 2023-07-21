@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 
 export default function NoCheckPageAttendanceButton() {
@@ -14,16 +13,16 @@ const AttendaceCheckButtonBox = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: 7.2rem;
+  width: 5.8rem;
   height: 3rem;
 
   border: 1px solid ${({ theme }) => theme.colors.green4};
   background-color: ${({ theme }) => theme.colors.green5};
   color: ${({ theme }) => theme.colors.grey0};
-  border-radius: 10px;
+  border-radius: 1rem;
   ${({ theme }) => theme.fonts.body03};
 
-  &:hover {
+  &:active {
     border: 1px solid ${({ theme }) => theme.colors.green6};
     background-color: ${({ theme }) => theme.colors.green10};
   }

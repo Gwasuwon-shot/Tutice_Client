@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import useGetAllLessons from "../../hooks/useGetAllLessons";
+import { lessonListType } from "../../type/manageLesson/lessonListType";
 import MainLesson from "./MainLesson";
 
 export default function MainLessons() {
@@ -8,16 +9,17 @@ export default function MainLessons() {
   return (
     <>
       <Title>나의 수업</Title>
-      {lessonList.map(({ idx, studentName, subject, percent, dayOfWeekList }) => (
-        <MainLesson
-          key={idx}
-          idx={idx}
-          studentName={studentName}
-          subject={subject}
-          percent={percent}
-          dayOfWeekList={dayOfWeekList}
-        />
-      ))}
+      {lessonList &&
+        lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType, index: number) => (
+          <MainLesson
+            key={idx}
+            idx={idx}
+            studentName={studentName}
+            subject={subject}
+            percent={percent}
+            dayOfWeekList={dayOfWeekList}
+          />
+        ))}
     </>
   );
 }

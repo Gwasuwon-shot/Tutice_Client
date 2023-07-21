@@ -18,10 +18,10 @@ import RegisterCalendar from "./pages/RegisterCalendar";
 import RegisterLesson from "./pages/RegisterLesson";
 import RegisterPayment from "./pages/RegisterPayment";
 import RegularLesson from "./pages/RegularLesson";
-import Schedule from "./pages/Schedule";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
-import AlertSignup from "./components/welcomeSignup/AlertSignup";
+import TuitionPayment from "./pages/TuitionPayment";
+import WelcomeSignup from "./pages/WelcomeSignup";
 
 export default function Router() {
   return (
@@ -29,7 +29,6 @@ export default function Router() {
       <Routes>
         <Route path="/onBoarding" element={<OnBoarding />} />
         <Route path="/" element={<Home />} />
-        <Route path="/onBoarding" element={<OnBoarding />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/complete-check-attendance" element={<CompleteCheckAttendance />} />
@@ -39,19 +38,17 @@ export default function Router() {
         <Route path="/parent-calendar" element={<ParentCalendar />} />
         <Route path="/register-lesson" element={<RegisterLesson />} />
         <Route path="/regular-lesson" element={<RegularLesson />} />
-        <Route path="/schedule" element={<Schedule />} />
         <Route path="/register-calendar" element={<RegisterCalendar />} />
         <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
         <Route path="/time-picker" element={<TimePickerPage />} />
-        <Route path="/change-schedule" element={<ChangeSchedule />} />
-        <Route path="/change-lessonschedule" element={<ChangeSchedule />} />
-        <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
+        <Route path="/schedule" element={<ChangeSchedule />} />
+        <Route path="/tuition-payment" element={<TuitionPayment />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
         <Route path="/lesson-share" element={<LessonShare />} />
         <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
         <Route path="/edit-lessonschedule" element={<EditShcedule />} />
-        <Route path="/notification" element={<AlertSignup />} />
+        <Route path="/welcome" element={<WelcomeSignup />} />
       </Routes>
     </BrowserRouter>
   );

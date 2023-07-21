@@ -1,8 +1,8 @@
-import React from "react";
 import styled from "styled-components";
+import TeacherFooter from "../components/common/TeacherFooter";
+import Account from "../components/mypage/Account";
 import Header from "../components/mypage/Header";
 import Terms from "../components/mypage/Terms";
-import Account from "../components/mypage/Account";
 
 export default function Mypage() {
   return (
@@ -12,10 +12,11 @@ export default function Mypage() {
         <Terms />
         <Account />
       </MyPageWrapper>
+      <TeacherFooter />
     </>
   );
 }
 
 const MyPageWrapper = styled.main`
-  margin-top: 8rem;
+  margin-top: 4rem;
 `;

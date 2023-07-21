@@ -26,9 +26,9 @@ export default function MainLesson(props: MainLessonProps) {
     <MainLessonBox onClick={() => handleMoveToManageLessonDetail(idx)}>
       <MainLessonWrapperContainer>
         <MainLessonWrapper>
-          <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+          <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
           <StudentNameWrapper>{studentName}</StudentNameWrapper>
-          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#5B6166" />
+          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#5B6166" />
           <DaysWrapper>
             {dayOfWeekList.map((day, idx) => (
               <>{checkIsLastDay(idx, day)}</>
@@ -50,7 +50,7 @@ const MainLessonBox = styled.article`
   margin-bottom: 1rem;
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const MainLessonWrapper = styled.div`

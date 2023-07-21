@@ -2,7 +2,8 @@ import { styled } from "styled-components";
 import { TuticeWithTextCommonIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 interface AfterSignupProp {
   setIsWelcome: Dispatch<SetStateAction<boolean>>;
@@ -10,7 +11,9 @@ interface AfterSignupProp {
 
 export default function AfterSignup(prop: AfterSignupProp) {
   const { setIsWelcome } = prop;
-  const MAIN_TEXT = `이은수 선생님 환영합니다! \n 수업 나무 관리를 통해 \n 과외 관리를 시작해보세요. `;
+  const location = useLocation();
+  const [signUpData, setSignUpData] = useState(location.state.data.user);
+  const MAIN_TEXT = ` ${signUpData.name} 선생님 환영합니다! \n 수업 나무 관리를 통해 \n 과외 관리를 시작해보세요. `;
 
   const SUB_TEXT = "*수업나무 : 수강생을 추가하여 관리할 수 있는 서비스입니다.";
 
@@ -26,7 +29,7 @@ export default function AfterSignup(prop: AfterSignupProp) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={handleToNextStep} buttonText={"수업 나무 생성"} />
+      <ButtonLayout onClick={handleToNextStep} buttonText="수업 나무 생성" />
     </>
   );
 }

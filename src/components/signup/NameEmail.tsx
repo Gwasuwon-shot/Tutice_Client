@@ -60,7 +60,7 @@ export default function NameEmail() {
 
   return (
     <>
-      <ProgressBar progress={email === "" ? 25 : 50} />
+      <ProgressBar progress={email === "" ? 40 : 60} />
       <BackButton />
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
@@ -111,7 +111,8 @@ const InputNameWrapper = styled.div<{ $nameFocus: boolean; $isName: boolean }>`
   display: flex;
   flex-direction: column;
 
-  width: 29.2rem;
+  width: 28rem;
+
   margin-top: 3.2rem;
 
   border-bottom: 0.1rem solid
@@ -122,7 +123,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
   display: flex;
   flex-direction: column;
 
-  width: 29.2rem;
+  width: 28rem;
   margin-top: 3.2rem;
 
   border-bottom: 0.1rem solid
@@ -130,8 +131,12 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
 `;
 
 const Inputfield = styled.input`
-  width: 70%;
-  margin: 1rem 0.2rem;
+  padding: 0;
+  height: 2rem;
+  margin-top: 1em;
+  margin-bottom: 1.1rem;
+  margin-left: 0.2rem;
+  ${({ theme }) => theme.fonts.title03};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.grey400};

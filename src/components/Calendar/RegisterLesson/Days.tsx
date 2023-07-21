@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
+import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
-import useGetTeacherSchedule from "../../../hooks/useGetTeacherSchedule";
 import RegisterModal from "./RegisterModal";
 import DayItem from "./DayItem";
 
@@ -19,8 +19,11 @@ export default function Days(props: DaysProp) {
   const startDate = startOfWeek(monthStart);
   const endDate: Date = endOfWeek(monthEnd);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const { scheduleList } = useGetTeacherSchedule();
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
+  const formattedMonth = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}`;
+
+  const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
@@ -28,7 +31,7 @@ export default function Days(props: DaysProp) {
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      const myLessons = scheduleList.find((item) => isSameDay(new Date(item.date), day));
+      const myLessons = isUserSchedule?.find((item) => isSameDay(new Date(item.date), day));
       days.push(
         <DayItem
           setOpenModal={setOpenModal}
@@ -59,7 +62,7 @@ export default function Days(props: DaysProp) {
         {rows}
         {openModal && selectedDate && (
           <ModalWrapper>
-            <RegisterModal selectedDate={selectedDate} setOpenModal={setOpenModal} />
+            <RegisterModal selectedDate={selectedDate} setOpenModal={setOpenModal} formattedMonth={formattedMonth} />
           </ModalWrapper>
         )}
       </DaysWrapper>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import { styled } from "styled-components";
+import { postLocalLogin } from "../../api/localLogin";
+import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import TextLabelLayout from "../signup/TextLabelLayout";
-import { viewingLoginIc, canViewingLoginIc } from "../../assets";
 import LoginButton from "./LoginButton";
 
 export default function LoginInput() {
@@ -12,6 +14,14 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
+  const { mutate: postLoginData } = useMutation(postLocalLogin, {
+    onSuccess: () => {
+      console.debug("성공");
+    },
+    onError: () => {
+      console.debug("실패 ㅠㅠ");
+    },
+  });
 
   // setEmail
   function handelEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -24,7 +34,9 @@ export default function LoginInput() {
   }
 
   //데이터 전달 : 추후 추가
-  function handleLoginClick() {}
+  function handleLoginClick() {
+    postLoginData(userLogin);
+  }
 
   //뷰잉 상태 전환
   function handlePasswordViewing() {
@@ -45,12 +57,11 @@ export default function LoginInput() {
   useEffect(() => {
     setUserLogin((prev) => ({ ...prev, email: email, password: password }));
 
-    // 이메일, 이름 입력 및 정규식 확인 : 버튼 활성화
     password && email ? setIsActive(true) : setIsActive(false);
   }, [email, password]);
 
   return (
-    <>
+    <form>
       <InputEmailWrapper $email={email} $emailFocus={emailFocus}>
         <TextLabelLayout labelText="이메일" />
         <Inputfield
@@ -64,20 +75,19 @@ export default function LoginInput() {
       <InputPasswordWrapper $password={password} $pwFocus={pwFocus}>
         <TextLabelLayout labelText="비밀번호" />
         <PasswordIconWrapper>
-          <form>
-            <Inputfield
-              onFocus={() => setPwFocus(true)}
-              onBlur={() => setPwFocus(false)}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
-              type={pwViewing}
-              placeholder="비밀번호를 입력하세요"
-            />
-          </form>
+          <Inputfield
+            onFocus={() => setPwFocus(true)}
+            onBlur={() => setPwFocus(false)}
+            autoComplete="off"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
+            type={pwViewing}
+            placeholder="비밀번호를 입력하세요"
+          />
           {viewingIcon()}
         </PasswordIconWrapper>
       </InputPasswordWrapper>
-      <LoginButton onClick={handleLoginClick} isActive={isActive} disabled={!isActive} />
-    </>
+      <LoginButton onClick={() => handleLoginClick()} isActive={isActive} disabled={!isActive} />
+    </form>
   );
 }
 

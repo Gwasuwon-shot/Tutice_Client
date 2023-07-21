@@ -34,7 +34,7 @@ export default function DepositRecordItem(props: DepositRecordItemProps) {
         )}
       </DepositInfoWrapper>
 
-      <DepositAmount>{status ? depositAmountToRender : "미입금"}</DepositAmount>
+      <DepositAmount>{status ? depositAmountToRender + "만원" : "미입금"}</DepositAmount>
     </DepositRecordWrapper>
   );
 }

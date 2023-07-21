@@ -2,6 +2,7 @@ import React from "react";
 import LessonInfoList from "../components/lessonRecord/LessonInfoList";
 import { styled } from "styled-components";
 import BackButton from "../components/common/BackButton";
+import ParentsFooter from "../components/common/ParentsFooter";
 
 export default function LessonInfo() {
   return (
@@ -9,6 +10,7 @@ export default function LessonInfo() {
       <BackButton />
       <LessonInfoHeader>수업 정보</LessonInfoHeader>
       <LessonInfoList />
+      <ParentsFooter />
     </>
   );
 }

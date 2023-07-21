@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { setCookie } from "../../api/cookie";
-import { newUserPost } from "../../api/localSignUp";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
-import { newUserData, stepNum } from "../../atom/signup/signup";
+import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
@@ -17,7 +13,6 @@ import AgreeChecking from "./AgreeChecking";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
-import { userRoleData } from "../../atom/loginUser/loginUser";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -30,26 +25,6 @@ export default function PasswordAgreeChecking() {
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
-  const [userRole, setUserRole] = useRecoilState(userRoleData);
-  const setStep = useSetRecoilState(stepNum);
-  const navigate = useNavigate();
-  const { mutate: postNewUser } = useMutation(newUserPost, {
-    onSuccess: (data) => {
-      if (data?.data.code === 201) {
-        console.log("성공", data.data);
-        const accessToken = data.data.data.accessToken;
-        setStep(0);
-        setUserRole(data.data.data.user.role);
-        setCookie("accessToken", accessToken, {
-          secure: true,
-        });
-        navigate("/");
-      }
-    },
-    onError: () => {
-      console.debug("실패 ㅠㅠ");
-    },
-  });
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -95,10 +70,6 @@ export default function PasswordAgreeChecking() {
 
     pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
   }, [pw, confirmPw, isPassword, isConfirmed, newUser, setPw]);
-
-  function handleToSignUp() {
-    postNewUser(newUser);
-  }
 
   function handleConfirmBlur() {
     setConfirmFocus(false);

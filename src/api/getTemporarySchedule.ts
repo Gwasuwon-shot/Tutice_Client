@@ -30,4 +30,6 @@ export async function getTemporarySchedule(props: temporaryProp) {
         Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
     }}
     );
+
+    return data?.data?.data;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
-import {cycleNumberState, dateState, dayState, firstLessonDay, focusDayState, openFinishDetailState, openStartDetailState} from "../../atom/timePicker/timePicker";
+import {cycleNumberState, dateState, dayState, firstLessonDay, focusDayState, openFinishDetailState, openStartDetailState, temporarySchedule} from "../../atom/timePicker/timePicker";
 import {studentNameState, subjectNameState} from '../../atom/common/datePicker';
 
 import DetailTimePicker from './TimePicker/DetailTimePicker';
@@ -98,6 +98,7 @@ export default function LessonDate() {
     const [count, setCount] = useRecoilState(cycleNumberState);
     const [scheduleDate, setscheduleDate] = useRecoilState(dateState);
     const startDate = `${scheduleDate.year}-${String(scheduleDate.month).padStart(2, "0")}-${String(scheduleDate.date).padStart(2, "0")}`;
+    const [tempSchedule, setTempSchedule] = useRecoilState(temporarySchedule);
     
     const postInformation: temporaryProp =
     {
@@ -113,6 +114,7 @@ export default function LessonDate() {
         {
             onSuccess: (response) => {
                 console.log('성공');
+                setTempSchedule(response);
             },
 
             onError: (error) => console.log(error),

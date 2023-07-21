@@ -10,12 +10,17 @@ import { messaging } from "../../core/notification/settingFCM";
 import { registerServiceWorker } from "../../utils/common/notification";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
+import { useRecoilValue } from "recoil";
+import { userRoleData } from "../../atom/loginUser/loginUser";
+import { Navigate } from "react-router-dom";
 
 interface AlertSignupProp {
   setIsWelcome: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AlertSignup(prop: AlertSignupProp) {
+  const userRole = useRecoilValue(userRoleData);
+  const navigate = Navigate();
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
@@ -35,6 +40,12 @@ export default function AlertSignup(prop: AlertSignupProp) {
       deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
     } catch (error) {
       console.error(error);
+    }
+
+    if (userRole === "부모님") {
+      navigate("/lessonCode");
+    } else {
+      navigate("/");
     }
   }
 

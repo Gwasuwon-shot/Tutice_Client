@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { setCookie } from "../../api/cookie";
 import { postLocalLogin } from "../../api/localLogin";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
+import { userRoleData } from "../../atom/loginUser/loginUser";
+import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { userRoleData } from "../../atom/loginUser/loginUser";
-import { setCookie } from "../../api/cookie";
-import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -144,7 +144,7 @@ const Inputfield = styled.input`
   width: 20rem;
   margin: 1rem 0.2rem;
 
-  &::placeholder {
+  &textarea::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }

@@ -29,12 +29,14 @@ const ParentsFooterWrapper = styled.footer`
   width: 100%;
   height: 7.2rem;
 
-  position: absolute;
+  position: fixed;
   bottom: 0;
   border-top: 1px solid ${({ theme }) => theme.colors.grey50};
   border-radius: 1.8rem 1.8rem 0rem 0rem;
-
+  background-color: white;
   padding-top: 1.2rem;
+
+  z-index: 100;
 `;
 
 const Icon = styled.i`

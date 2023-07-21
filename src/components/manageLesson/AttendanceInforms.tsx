@@ -70,7 +70,7 @@ export default function AttendanceInforms() {
           ))}
         </ScheduleWrapper>
       ) : (
-        <p>수업이 없습니다</p>
+        <EmptyLesson> 아직 등록된 출결이 없어요</EmptyLesson>
       )}
     </>
   );
@@ -106,4 +106,11 @@ const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
 const CancelImpossibleModalWrapper = styled.aside`
   position: absolute;
   margin: -37.9rem 0 0 -1.5rem;
+`;
+
+const EmptyLesson = styled.h1`
+  color: ${({ theme }) => theme.colors.green5};
+  ${({ theme }) => theme.fonts.title02};
+
+  text-align: center;
 `;

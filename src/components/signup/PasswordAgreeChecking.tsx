@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { setCookie } from "../../api/cookie";
 import { newUserPost } from "../../api/localSignUp";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
-import { userRoleData } from "../../atom/loginUser/loginUser";
-import { newUserData } from "../../atom/signup/signup";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
@@ -19,6 +17,7 @@ import AgreeChecking from "./AgreeChecking";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
+import { userRoleData } from "../../atom/loginUser/loginUser";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -32,12 +31,14 @@ export default function PasswordAgreeChecking() {
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
   const [userRole, setUserRole] = useRecoilState(userRoleData);
+  const setStep = useSetRecoilState(stepNum);
   const navigate = useNavigate();
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
       if (data?.data.code === 201) {
         console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
+        setStep(0);
         setUserRole(data.data.data.user.role);
         setCookie("accessToken", accessToken, {
           secure: true,
@@ -105,8 +106,10 @@ export default function PasswordAgreeChecking() {
   }
   return (
     <>
-      <ProgressBar progress={80} />
-      <BackButton />
+      <ProgressBar progress={isConfirmed ? 100 : 80} />
+      <BackButtonWrapper>
+        <BackButton />
+      </BackButtonWrapper>
       <Container>
         <TitleWrapper>
           <SignupTitleLayout MainText={SIGNUP_TITLE.leftInfo} />
@@ -117,54 +120,47 @@ export default function PasswordAgreeChecking() {
           <Inputfield disabled type="text" value={newUser.name} />
         </InputWrapper>
 
-        <form>
-          <InputWrapper>
-            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-            <Inputfield disabled type="text" value={newUser.email} />
-          </InputWrapper>
+        <InputWrapper>
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
+          <Inputfield disabled type="text" value={newUser.email} />
+        </InputWrapper>
 
-          <InputPwWrapper $isPassword={isPassword} $pwFocus={pwFocus}>
-            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
-            <PasswordIconWrapper>
-              <Inputfield
-                onFocus={() => setPwFocus(true)}
-                onBlur={() => setPwFocus(false)}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
-                type={pwViewing}
-                autoComplete="off"
-                placeholder={PLACEHOLDER_TEXT.passwordHolder}
-              />
-              {viewingPwIcon()}
-            </PasswordIconWrapper>
-          </InputPwWrapper>
+        <InputPwWrapper $isPassword={isPassword} $pwFocus={pwFocus}>
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
+          <PasswordIconWrapper>
+            <Inputfield
+              onFocus={() => setPwFocus(true)}
+              onBlur={() => setPwFocus(false)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
+              type={pwViewing}
+              autoComplete="off"
+              placeholder={PLACEHOLDER_TEXT.passwordHolder}
+            />
+            {viewingPwIcon()}
+          </PasswordIconWrapper>
+        </InputPwWrapper>
 
-          {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
+        {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
-          <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
-            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
-            <PasswordIconWrapper>
-              <Inputfield
-                onFocus={() => setConfirmFocus(true)}
-                onBlur={() => handleConfirmBlur()}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
-                type={confirmViewing}
-                autoComplete="off"
-                placeholder={PLACEHOLDER_TEXT.confirmHolder}
-              />
-              {viewingConfirmIcon()}
-            </PasswordIconWrapper>
-          </InputConfirmWrapper>
+        <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
+          <PasswordIconWrapper>
+            <Inputfield
+              onFocus={() => setConfirmFocus(true)}
+              onBlur={() => handleConfirmBlur()}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
+              type={confirmViewing}
+              autoComplete="off"
+              placeholder={PLACEHOLDER_TEXT.confirmHolder}
+            />
+            {viewingConfirmIcon()}
+          </PasswordIconWrapper>
+        </InputConfirmWrapper>
 
-          {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+        {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
-          {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
-
-          <AgreeChecking />
-
-          <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
-            <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
-          </SubmitButton>
-        </form>
+        {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
+        <AgreeChecking />
       </Container>
     </>
   );
@@ -187,7 +183,7 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 23.2rem;
+  width: 90%;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 `;
@@ -196,7 +192,7 @@ const InputPwWrapper = styled.div<{ $pwFocus: boolean; $isPassword: boolean }>`
   display: flex;
   flex-direction: column;
 
-  width: 28rem;
+  width: 90%;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $pwFocus, $isPassword }) => ($pwFocus || $isPassword ? theme.colors.green5 : theme.colors.grey70)};
@@ -206,7 +202,7 @@ const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: b
   display: flex;
   flex-direction: column;
 
-  width: 28rem;
+  width: 90%;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $confirmFocus, $isConfirmed }) =>
@@ -242,7 +238,6 @@ const SubmitButton = styled.button<{ $isActive: boolean }>`
 const ButtonText = styled.p`
   position: relative;
 
-  /* top- 정확한 값으로 수정 필요 */
   top: -1rem;
   ${({ theme }) => theme.fonts.body01};
 `;
@@ -273,4 +268,8 @@ const PasswordIconWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const BackButtonWrapper = styled.div`
+  margin-left: 2rem;
 `;

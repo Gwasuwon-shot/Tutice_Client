@@ -48,7 +48,7 @@ export default function DetailTimePicker() {
   }, [activeHourSlide]);
 
   // 2) swiper
-  const slidesHour = Array.from({ length: 12 }, (_, index) => <SwiperSlide key={index}>{index + 1}</SwiperSlide>);
+  const slidesHour = Array.from({ length: 12 }, (_, index) => <SwiperSlide key={index}>{index + 1}시</SwiperSlide>);
 
   // 3. 분 관리
   // 1) active slide 값 관리
@@ -65,7 +65,7 @@ export default function DetailTimePicker() {
   }, [activeMinuteSlide]);
 
   // 2) swiper
-  const slidesMinute = Array.from({ length: 2 }, (_, index) => <SwiperSlide key={index}>{MINUTES[index]}</SwiperSlide>);
+  const slidesMinute = Array.from({ length: 2 }, (_, index) => <SwiperSlide key={index}>{MINUTES[index]}분</SwiperSlide>);
 
   // 4. 시작시간 상태관리
   const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
@@ -119,8 +119,8 @@ export default function DetailTimePicker() {
       <SwiperWrapper>
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={19}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -133,8 +133,8 @@ export default function DetailTimePicker() {
 
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={19}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -149,8 +149,8 @@ export default function DetailTimePicker() {
 
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={19}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -181,7 +181,7 @@ const TimePickerWrapper = styled.div`
 
   position: relative;
 
-  width: 100%;
+  width: 32rem;
   height: 20rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};

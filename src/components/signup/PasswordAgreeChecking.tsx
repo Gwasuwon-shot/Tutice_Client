@@ -30,26 +30,6 @@ export default function PasswordAgreeChecking() {
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
-  const [userRole, setUserRole] = useRecoilState(userRoleData);
-  const setStep = useSetRecoilState(stepNum);
-  const navigate = useNavigate();
-  const { mutate: postNewUser } = useMutation(newUserPost, {
-    onSuccess: (data) => {
-      if (data?.data.code === 201) {
-        console.log("성공", data.data);
-        const accessToken = data.data.data.accessToken;
-        setStep(0);
-        setUserRole(data.data.data.user.role);
-        setCookie("accessToken", accessToken, {
-          secure: true,
-        });
-        navigate("/");
-      }
-    },
-    onError: () => {
-      console.debug("실패 ㅠㅠ");
-    },
-  });
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -95,10 +75,6 @@ export default function PasswordAgreeChecking() {
 
     pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
   }, [pw, confirmPw, isPassword, isConfirmed, newUser, setPw]);
-
-  function handleToSignUp() {
-    postNewUser(newUser);
-  }
 
   function handleConfirmBlur() {
     setConfirmFocus(false);

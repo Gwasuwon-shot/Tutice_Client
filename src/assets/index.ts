@@ -57,8 +57,8 @@ export { ReactComponent as ManagingLessonMoneyIc } from "./icon/managingLessonMo
 export { ReactComponent as MissingAttendaceTeacherHomeIc } from "./icon/missingAttendaceTeacherHomeIc.svg";
 export { ReactComponent as MissingMaintenanceTeacherHomeIc } from "./icon/missingMaintenanceTeacherHomeIc.svg";
 export { ReactComponent as MyActiveTeacherFooterIc } from "./icon/myActiveTeacherFooterIc.svg";
+export { ReactComponent as MyPageUnselectedParentsHomeIc } from "./icon/myPageUnselectedParentsHomeIc.svg";
 export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.svg";
-export { ReactComponent as MyPageUnselectedParentsHomeIc } from "./icon/mypageUnselectedParentsHomeIc.svg";
 export { ReactComponent as NextArrowManageLessonIc } from "./icon/nextArrowManageLessonIc.svg";
 export { ReactComponent as nextArrowWelcomeIc } from "./icon/nextArrowWelcomeIc.svg";
 export { ReactComponent as NoClassLogoTeacherHomeIc } from "./icon/noClassLogoTeacherHomeIc.svg";

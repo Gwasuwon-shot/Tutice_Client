@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { openDatePickerState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 import { useRecoilState, useRecoilValue } from "recoil";
-import styled from "styled-components";
-import { updateSchedule } from "../../api/updateSchedule";
+
+import EditDatePicker from "./EditDatePicker";
+import EditDetailTimePicker from "./EditTimePicker";
+import EditFooterButton from "./EditFooterButton";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
-import { openDatePickerState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
-import EditDatePicker from "./EditDatePicker";
-import EditFooterButton from "./EditFooterButton";
-import EditDetailTimePicker from "./EditTimePicker";
+import styled from "styled-components";
+import { updateSchedule } from "../../api/updateSchedule";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function EditPageFooter() {
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);

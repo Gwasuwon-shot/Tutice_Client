@@ -4,6 +4,7 @@ import { subMonths, addMonths } from "date-fns";
 import YearandMonth from "../components/Calendar/YearandMonth";
 import Dayofweek from "../components/Calendar/Dayofweek";
 import Days from "../components/Calendar/RegisterLesson/Days";
+import YearandMonthRegister from "../components/Calendar/RegisterLesson/YearandMonthRegister";
 
 export default function RegisterCalendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -18,7 +19,7 @@ export default function RegisterCalendar() {
   return (
     <>
       <CalendarWrapper>
-        <YearandMonth
+        <YearandMonthRegister
           currentMonth={currentMonth}
           handleToPrevMonth={handleToPrevMonth}
           handleToNextMonth={handleToNextMonth}

@@ -11,15 +11,11 @@ export default function ThirdSwiper() {
       <ThirdSwiperWrapper>
         <SwiperTitleLayout mainTitleContent={MAIN_TITLE_MESSAGE} subTitleContent={SUB_TITLE_MESSAGE} />
         <LogoWrapper>
-          <ThirdSwiperFirstTree />
+          <ThirdSwiperFirstTreeIcon />
 
-          <SecondTreeWrapper>
-            <ThirdSwiperSecondTree />
-          </SecondTreeWrapper>
+          <ThirdSwiperSecondTreeIcon />
 
-          <ThirdTreeWrapper>
-            <ThirdSwiperThirdTree />
-          </ThirdTreeWrapper>
+          <ThirdSwiperThirdTreeIcon />
         </LogoWrapper>
       </ThirdSwiperWrapper>
     </>
@@ -44,11 +40,17 @@ const LogoWrapper = styled.div`
   overflow: hidden;
 `;
 
-const SecondTreeWrapper = styled.div`
-  margin-right: 1.571rem;
-  margin-left: 1.816rem;
-`;
+const ThirdSwiperFirstTreeIcon = styled(ThirdSwiperFirstTree)`
+  width: 11.2445rem;
+  height: 15.4373rem;
 
-const ThirdTreeWrapper = styled.div`
-  margin-left: 1.1rem;
+  margin-left: 0.87rem;
+`;
+const ThirdSwiperSecondTreeIcon = styled(ThirdSwiperSecondTree)`
+  width: 11.2445rem;
+  height: 15.4373rem;
+`;
+const ThirdSwiperThirdTreeIcon = styled(ThirdSwiperThirdTree)`
+  width: 8.5rem;
+  height: 12rem;
 `;

@@ -4,16 +4,18 @@ import Header from "../common/Header";
 import ManageClass from "./ManageClass";
 import NoClassParentsHome from "./NoClassParentsHome";
 import TodayClassSwiper from "./TodayClassSwiper";
+import useGetTodayScheduleByParents from "../../hooks/useGetTodayScheduleByParents";
 
 export default function ParentsHome() {
   const { isLessonExist } = useGetLessonByUser();
+  const { parentsName } = useGetTodayScheduleByParents();
 
   return (
     <>
       <Header />
 
       <WelComeTitle>
-        장지수님 <br /> 안녕하세요!
+        {parentsName}님 <br /> 안녕하세요!
       </WelComeTitle>
 
       {isLessonExist ? (

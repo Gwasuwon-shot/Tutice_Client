@@ -3,8 +3,6 @@ import { getDepositRecord } from "../api/getDepositRecord";
 import { DepositInfoType } from "../type/lessonRecord/lessonRecord";
 
 export default function useGetDepositRecord(lessonId: number) {
-  // 선생님 : 메인페이지 뷰 (홈)- 오늘의 수업/곧 다가오는 수업
-  //   api 패칭
   const { data: depositRecord } = useQuery(["depositRecord"], () => getDepositRecord(lessonId), {
     onError: (error) => {
       console.error(error);

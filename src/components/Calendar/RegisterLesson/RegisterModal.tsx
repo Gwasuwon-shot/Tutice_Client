@@ -1,9 +1,9 @@
 import { format, isSameDay } from "date-fns";
 import { ko } from "date-fns/locale";
-import styled from "styled-components";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
 
-import { STUDENT_COLOR, DEEFAULT_STUDENT_COLOR } from "../../../core/common/studentColor";
+import { DEEFAULT_STUDENT_COLOR, STUDENT_COLOR } from "../../../core/common/studentColor";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 import { modalType } from "../../../type/calendar/modalType";
 import StudentColorBox from "../../common/StudentColorBox";
@@ -20,7 +20,7 @@ interface scheduleListType {
 
 interface temporaryListType {
   date: string;
-  scheduleList: scheduleListType;
+  scheduleList: any;
 }
 
 export default function RegisterModal(props: modalType) {
@@ -36,15 +36,15 @@ export default function RegisterModal(props: modalType) {
           <ModalDate>{format(selectedDate as Date, "M월 d일 EEEE", { locale: ko })}</ModalDate>
           {temporaryList
             ?.find((item) => isSameDay(new Date(item.date), selectedDate as Date))
-            ?.scheduleList?.map((item) => {
+            ?.scheduleList?.map(({ startTime, endTime, studentName, subject }: scheduleListType, idx: number) => {
               return (
-                <ScheduleWrapper key={item.date}>
+                <ScheduleWrapper key={idx}>
                   <StudentColorBox backgroundColor={DEEFAULT_STUDENT_COLOR} />
                   <ModalTime>
-                    {item.startTime} - {item.endTime}
+                    {startTime} - {endTime}
                   </ModalTime>
-                  <ModalName>{item.studentName}</ModalName>
-                  <ModalSubjectPreview $backgroundcolor={DEEFAULT_STUDENT_COLOR}>{item.subject}</ModalSubjectPreview>
+                  <ModalName>{studentName}</ModalName>
+                  <ModalSubjectPreview $backgroundcolor={DEEFAULT_STUDENT_COLOR}>{subject}</ModalSubjectPreview>
                 </ScheduleWrapper>
               );
             })}

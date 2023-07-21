@@ -1,15 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import useModal from "../../hooks/useModal";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import { lessonCodeAndPaymentId } from "../../atom/tuitionPayment/tuitionPayment";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import ToastModal from "../common/ToastModal";
 
 export default function PreypaymentModal() {
-  const { unShowModal } = useModal();
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const navigate = useNavigate();
-
+  const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
+  console.log(codeAndId);
   function handleMoveToRegisterPayment() {
-    navigate("/register-payment/manageLessonId");
+    setOpenModal(false);
+    navigate(`/register-payment/${codeAndId?.paymentRecordIdx}`, {
+      state: { paymentIdx: codeAndId?.paymentRecordIdx, count: 1 },
+    });
+  }
+
+  function handleCloseModal() {
+    setOpenModal(false);
   }
 
   return (
@@ -17,7 +27,7 @@ export default function PreypaymentModal() {
       <PrepaymentTitle>선불 수업비를 받으셨나요?</PrepaymentTitle>
       <PrepaymentSub>수업비 입금 정보를 입력해주세요! </PrepaymentSub>
       <ButtonWrapper>
-        <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
+        <RoundBottomMiniButton isGreen={false} onClick={handleCloseModal}>
           다음에 입력할게요
         </RoundBottomMiniButton>
         <RoundBottomMiniButton isGreen={true} onClick={handleMoveToRegisterPayment}>

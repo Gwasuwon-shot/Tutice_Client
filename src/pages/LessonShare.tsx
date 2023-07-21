@@ -3,18 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { CopylessonShareIc, ShareOthersLessonShareIc } from "../assets";
-import { temporarySchedule } from "../atom/timePicker/timePicker";
+import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
 
 export default function LessonShare() {
   const navgiate = useNavigate();
-  const [tempSchedule, setTempSchedule] = useRecoilState(temporarySchedule);
-  const [URL, setURL] = useState(`https://tutice.com/${tempSchedule?.lessonCode}`);
+  const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
+  const [URL, setURL] = useState(`https://tutice.com/${codeAndId?.lessonCode}`);
+
+  console.log(codeAndId);
 
   useEffect(() => {
-    setURL(`https://tutice.com/${tempSchedule?.lessonCode}`);
-  }, [tempSchedule]);
+    setURL(`https://tutice.com/${codeAndId?.lessonCode}`);
+  }, [codeAndId]);
 
   function handleMoveToHome() {
     navgiate("/");
@@ -63,12 +65,18 @@ export default function LessonShare() {
         <ShareOthersLessonShareIcon onClick={handleShareOtherWays} />
         <KakaoShare url={URL} />
       </ButtonWrapper>
-      <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
-        다음
-      </BottomButton>
+      <BottomButtonWrapper>
+        <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
+          다음
+        </BottomButton>
+      </BottomButtonWrapper>
     </LessonShareWrapper>
   );
 }
+
+const BottomButtonWrapper = styled.section`
+  margin-left: -1.4rem;
+`;
 
 const LessonTreeSuccess = styled.p`
   margin-top: 3.7rem;
@@ -105,8 +113,8 @@ const LinkBox = styled.label`
   display: flex;
   width: 29.2rem;
   height: 4.6rem;
-  padding: 0.8rem;
-  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.8rem;
 

@@ -32,7 +32,7 @@ export default function LoginInput() {
       setCookie("accessToken", accessToken, {
         secure: true,
       });
-      navigate("/welcome");
+      navigate("/welcome", { state: data.data });
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");

@@ -32,7 +32,7 @@ export default function AgreeChecking() {
       setCookie("accessToken", accessToken, {
         secure: true,
       });
-      navigate("/welcome");
+      navigate("/welcome", { state: data.data });
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");
@@ -138,7 +138,6 @@ export default function AgreeChecking() {
   }
 
   function handleToSignUp() {
-    console.log("?");
     postNewUser(newUser);
   }
 

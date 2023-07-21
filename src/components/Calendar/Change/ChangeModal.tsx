@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { ko } from "date-fns/locale";
 import { format, isSameDay } from "date-fns";
-import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import { ko } from "date-fns/locale";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
-import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 import { editSchedule } from "../../../atom/EditSchedule/editSchedule";
 
-import { EditPencilIc, removeTrashCan } from "../../../assets";
-import { modalType } from "../../../type/calendar/modalType";
 import { useRecoilState } from "recoil";
+import { EditPencilIc, removeTrashCan } from "../../../assets";
 import { editDateState } from "../../../atom/EditSchedule/editDateState";
-import { editScheduleType } from "../../../type/editSchedule/editScheduleType";
+import { modalType } from "../../../type/calendar/modalType";
 import { editDateStateTypes } from "../../../type/editSchedule/editDateType";
+import { editScheduleType } from "../../../type/editSchedule/editScheduleType";
 
 export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;
@@ -87,12 +87,12 @@ export default function ChangeModal(props: modalType) {
               return (
                 <ScheduleWrapper key={idx}>
                   <ScheduleContainer>
-                    <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+                    <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
                     <ModalTime>
                       {startTime} - {endTime}
                     </ModalTime>
                     <ModalName>{studentName}</ModalName>
-                    <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 11]}>{subject}</ModalSubject>
+                    <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 10]}>{subject}</ModalSubject>
                   </ScheduleContainer>
 
                   {isEdit && (

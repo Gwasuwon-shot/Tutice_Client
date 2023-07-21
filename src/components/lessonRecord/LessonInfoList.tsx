@@ -2,6 +2,8 @@ import React from "react";
 import { styled } from "styled-components";
 import LessonInfoItemLayout from "./LessonInfoItemLayout";
 import { BANK_INFO, CLASS_INFO } from "../../core/Parents/lessonInfo";
+import useGetLessonDetailByParents from "../../hooks/useGetLessonDetailByParents";
+import { useParams } from "react-router-dom";
 
 export default function LessonInfoList() {
   const lesson = {
@@ -22,6 +24,9 @@ export default function LessonInfoList() {
   const accountInfoArray = [account.name, account.bank, account.number];
   const formattedAmount = amount / 10000 + "만원";
   const classInfoArrray = [startDate, payment, formattedAmount];
+  const { lessonId } = useParams();
+  const { parentsLesson } = useGetLessonDetailByParents(Number(lessonId));
+  console.log(parentsLesson.data);
 
   return (
     <>
@@ -39,7 +44,6 @@ export default function LessonInfoList() {
           />
         );
       })}
-
       <LessonInfoMainCategory>수업진행</LessonInfoMainCategory>
       {CLASS_INFO.map((classInfo, idx) => {
         return <LessonInfoItemLayout key={idx} detailCategory={classInfo} content={classInfoArrray[idx]} />;

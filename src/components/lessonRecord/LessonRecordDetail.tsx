@@ -1,38 +1,34 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
+import { useState } from "react";
+import { css, styled } from "styled-components";
 import { LessonInfoLessonRecordIc } from "../../assets";
-import RestOfClassesInfo from "./RestOfClassesInfo";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 import BackButton from "../common/BackButton";
 import SubjectLabel from "../common/SubjectLabel";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
 import PastLessonRecordList from "./PastLessonRecordList";
-import { css } from "styled-components";
+import RestOfClassesInfo from "./RestOfClassesInfo";
 
+import { useNavigate, useParams } from "react-router-dom";
+import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
 import DepositRecordList from "./DepositRecord";
 
 export default function LessonRecordDetail() {
-  const [isClassRecord, setIsClassRecord] = useState(false);
+  const { lessonId } = useParams();
+  const [isClassRecord, setIsClassRecord] = useState<boolean>(false);
+  const { lesson, idx, count, nowCount, percent, studentName, subject, scheduleList, teacherName } =
+    useGetLessonScheduleByParents(Number(lessonId));
+  const navigate = useNavigate();
 
-  const LESSON_INFO = {
-    idx: 34,
-    studentName: "수화",
-    teacherName: "은수김",
-    subject: "수영",
-    count: 10,
-    nowCount: 7,
-    percent: 45,
-  };
-
-  const { idx, studentName, teacherName, subject, count, nowCount, percent } = LESSON_INFO;
+  function handleGotoLessonInfoList() {
+    navigate(`/lesson-info/${lessonId}`);
+  }
 
   return (
     <>
       <BackButton />
-      <LessonInfoIcon />
-
+      <LessonManageIcon onClick={() => handleGotoLessonInfoList()} />
       <LessonRecordHeader>
         <StudentName>{studentName}</StudentName>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color={"#5B6166"} />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color={"#5B6166"} />
         <TeacherName>{teacherName} 선생님</TeacherName>
       </LessonRecordHeader>
 
@@ -84,12 +80,9 @@ const TeacherName = styled.p`
   color: ${({ theme }) => theme.colors.grey900};
 `;
 
-const LessonInfoIcon = styled(LessonInfoLessonRecordIc)`
-  width: 1.9rem;
-
-  position: absolute;
-  top: 4.23rem;
-  right: 1.493rem;
+const LessonManageIcon = styled(LessonInfoLessonRecordIc)`
+  width: 2rem;
+  height: 2rem;
 `;
 
 const SelectMenuWrapper = styled.aside`
@@ -115,6 +108,8 @@ const SelectMenuButton = styled.button<{ isClassRecord: boolean }>`
   width: 13.5075rem;
   height: 3.2rem;
   border-radius: 0.8rem;
+  ${({ theme }) => theme.fonts.body02};
+  color: ${({ theme, isClassRecord }) => (isClassRecord ? theme.colors.grey900 : theme.colors.grey400)};
 
   ${({ isClassRecord }) =>
     isClassRecord

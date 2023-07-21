@@ -1,24 +1,34 @@
-import { useRecoilState } from "recoil";
-import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
-import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
-import { isModalOpen } from "../../atom/common/isModalOpen";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
-import useExtensionLesson from "../../hooks/useExtensionLesson";
 import ExtensionLessonContainer from "./ExtensionLessonContainer";
 import ExtensionLessonModal from "./ExtensionLessonModal";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import { styled } from "styled-components";
+import useGetMissingMaintenanceLesson from "../../hooks/useGetMissingMaintenanceLesson";
+import { useRecoilState } from "recoil";
 
 interface ExtensionQuestionProp {
   setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface MissingLessonProp {
+  lesson: {
+    idx: number,
+    studentName: string,
+    subject: string,
+    count: number,
+},
+  endScheduleDate: string,
+}
+
 export default function ExtensionQuestion(props: ExtensionQuestionProp) {
   const { setIsSuccess } = props;
-  const { missingMaintenanceLessonList } = useExtensionLesson();
+  const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
-
+  
   return (
     <>
       <ExtensionWrapper>
@@ -27,10 +37,9 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
           <HeaderText>수업연장 여부를 알려주세요!</HeaderText>
         </ExtentionHeader>
         <Content>
-          {missingMaintenanceLessonList.map((item) => {
-            const { lesson, endScheduleDate } = item;
+          {missingMaintenanceLessonList?.map((item: MissingLessonProp) => {
             return (
-              <ExtensionLessonContainer setOpenModal={setOpenModal} endScheduleDate={endScheduleDate} lesson={lesson} />
+              <ExtensionLessonContainer setOpenModal={setOpenModal} endScheduleDate={item.endScheduleDate} lesson={item.lesson} />
             );
           })}
         </Content>
@@ -41,7 +50,7 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
         <ExtensionLessonModal
           studentName={studentName}
           subject={subject}
-          backgroundColor={STUDENT_COLOR[lessonIdx % 11]}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 10]}
           color="#757A80"
           isBig={false}
           setIsSuccess={setIsSuccess}

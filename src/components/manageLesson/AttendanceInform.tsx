@@ -49,17 +49,21 @@ export default function AttendanceInform(props: AttendanceInformProps) {
             {startTime} ~ {endTime}
           </Label>
         </div>
-        <section onClick={handleOpenCheckAttendanceModal}>
+        <StatusWrapper onClick={handleOpenCheckAttendanceModal}>
           {checkIsStatusExist() ? (
             <StatusLabel $status={status}>{status}</StatusLabel>
           ) : (
             <NoCheckPageAttendanceButton />
           )}
-        </section>
+        </StatusWrapper>
       </AttnedanceInformBox>
     </>
   );
 }
+
+const StatusWrapper = styled.div`
+  width: 7.4rem;
+`;
 
 const AttnedanceInformBox = styled.article`
   display: flex;
@@ -99,9 +103,9 @@ const StatusLabel = styled.label<{ $status: string }>`
   justify-content: flex-end;
   align-items: center;
 
-  width: 7.4rem;
+  padding-right: 2.5rem;
+
   height: 4rem;
-  padding-right: 1rem;
 
   color: ${({ theme, $status }) =>
     $status === ATTENDANCE_STATUS.attend

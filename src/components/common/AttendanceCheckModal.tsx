@@ -43,7 +43,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
       <TextWrapper>
         <Main $isTitle={true}>{studentName}</Main>
         <Sub $isTitle={true}>학생</Sub>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[lessonIdx % 11]} color="#5B6166" />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[lessonIdx % 10]} color="#5B6166" />
       </TextWrapper>
       <TextWrapper>
         <Main $isTitle={false}>{count}회차</Main>

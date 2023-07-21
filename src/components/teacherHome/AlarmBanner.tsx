@@ -1,14 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MissingAttendaceTeacherHomeIc, MissingMaintenanceTeacherHomeIc } from "../../assets";
 import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
 
 export default function AlarmBanner() {
   const { isMissingAttendance, isMissingMaintenance } = useGetLatestScheduleByTeacher();
+  const navigate = useNavigate();
+
+  function handleMoveToMissingAttendaceCheck() {
+    navigate("/no-attendance-check");
+  }
 
   return (
     <>
       {isMissingMaintenance && <MissingMaintenanceTeacherHomeIcon />}
-      {isMissingAttendance && <MissingAttendaceTeacherHomeIcon />}
+      {isMissingAttendance && <MissingAttendaceTeacherHomeIcon onClick={handleMoveToMissingAttendaceCheck} />}
     </>
   );
 }

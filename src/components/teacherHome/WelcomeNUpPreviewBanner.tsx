@@ -1,19 +1,14 @@
-import { useState } from "react";
-import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { isModalOpen } from "../../atom/common/isModalOpen";
-import AttendanceCheckModal from "../common/AttendanceCheckModal";
-import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
 import PreviewBanner from "./PreviewBanner";
 import WelcomeTeacher from "./WelcomeTeacher";
 
 export default function WelcomeNUpcomingBanner() {
-  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
-  const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
+  // const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  // const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
 
   return (
     <>
-      {openModal && isCheckingModalOpen && (
+      {/* {openModal && isCheckingModalOpen && (
         <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
           <AttendanceDoubleCheckingModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
         </ModalSection>
@@ -22,7 +17,7 @@ export default function WelcomeNUpcomingBanner() {
         <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
           <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
         </ModalSection>
-      )}
+      )} */}
       <WelcomeTeacher />
       <PreviewBanner />
     </>

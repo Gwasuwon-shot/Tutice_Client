@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { isModalOpen } from "../atom/common/isModalOpen";
+import { paymentOrder } from "../atom/tuitionPayment/tuitionPayment";
 import PreypaymentModal from "../components/modal/PreypaymentModal";
 import ParentsHome from "../components/parentsHome/ParentsHome";
 import TeacherHome from "../components/teacherHome/TeacherHome";
@@ -8,12 +9,18 @@ import TeacherHome from "../components/teacherHome/TeacherHome";
 export default function Home() {
   const [isTeacherHome, setIsTeacherHome] = useState(true);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const payment = useRecoilValue(paymentOrder);
+
+  function checkIsPrepayment() {
+    if (payment === "선불") {
+      setOpenModal(true);
+      return <PreypaymentModal />;
+    }
+  }
 
   return (
     <>
-      {/* idx가 있으면 선불 띄우기 */}
-      {openModal && <PreypaymentModal />}
-
+      {checkIsPrepayment()}
       {isTeacherHome ? <TeacherHome /> : <ParentsHome />}
     </>
   );

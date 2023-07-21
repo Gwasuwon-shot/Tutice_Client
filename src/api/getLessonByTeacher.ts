@@ -7,6 +7,6 @@ export async function getLessonByTeacher() {
       Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
     },
   });
-  console.log(data?.data?.data?.lessonList);
+
   return data?.data?.data?.lessonList;
 }

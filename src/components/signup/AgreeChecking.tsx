@@ -37,7 +37,7 @@ export default function AgreeChecking() {
         setCookie("accessToken", accessToken, {
           secure: true,
         });
-        // navigate("/");
+        navigate("/");
       }
     },
     onError: () => {

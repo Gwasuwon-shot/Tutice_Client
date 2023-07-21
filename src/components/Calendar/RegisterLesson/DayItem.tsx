@@ -10,7 +10,7 @@ export default function DayItem(props: DayItemProps) {
   const isSundayDate = isSunday(date);
   const isTodayDate: boolean = isToday(date);
   const myLessonLength: number | undefined = myLessons?.dailyScheduleList.length;
-
+  console.log(temporRegularSchedule);
   function handleOpenModal() {
     setSelectedDate(date);
     setOpenModal(true);

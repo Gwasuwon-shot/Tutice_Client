@@ -3,18 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { CopylessonShareIc, ShareOthersLessonShareIc } from "../assets";
-import { temporarySchedule } from "../atom/timePicker/timePicker";
+import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
 
 export default function LessonShare() {
   const navgiate = useNavigate();
-  const [tempSchedule, setTempSchedule] = useRecoilState(temporarySchedule);
-  const [URL, setURL] = useState(`https://tutice.com/${tempSchedule?.lessonCode}`);
+  const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
+  const [URL, setURL] = useState(`https://tutice.com/${codeAndId?.lessonCode}`);
+
+  console.log(codeAndId);
 
   useEffect(() => {
-    setURL(`https://tutice.com/${tempSchedule?.lessonCode}`);
-  }, [tempSchedule]);
+    setURL(`https://tutice.com/${codeAndId?.lessonCode}`);
+  }, [codeAndId]);
 
   function handleMoveToHome() {
     navgiate("/");

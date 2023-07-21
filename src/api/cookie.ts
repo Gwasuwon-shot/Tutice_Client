@@ -3,14 +3,14 @@ import { newUserData } from "../atom/signup/signup";
 
 const cookies = new Cookies();
 
-export const setCookie = (name: string, value: string | undefined, options: object) => {
+export function setCookie(name: string, value: string | undefined, options: object) {
   return cookies.set(name, value, { ...options });
-};
+}
 
-export const getCookie = (name: string) => {
+export function getCookie(name: string) {
   return cookies.get(name);
-};
+}
 
-export const removeCookie = (name: string, options: object) => {
+export function removeCookie(name: string, options: object) {
   return cookies.remove(name);
-};
+}

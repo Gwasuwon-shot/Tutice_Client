@@ -1,4 +1,6 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+const { persistAtom } = recoilPersist();
 
 export const payingPersonName = atom<string>({
   key: "payingPersonName",
@@ -36,4 +38,5 @@ export const lessonCodeAndPaymentId = atom<lessonCodeAndPaymentIdProp>({
     lessonCode: "",
     paymentRecordIdx: -1,
   },
+  effects_UNSTABLE: [persistAtom],
 });

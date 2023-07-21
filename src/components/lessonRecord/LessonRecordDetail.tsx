@@ -88,6 +88,10 @@ const TeacherName = styled.p`
 const LessonManageIcon = styled(LessonInfoLessonRecordIc)`
   width: 2rem;
   height: 2rem;
+
+  position: absolute;
+  top: 5.3rem;
+  right: 1.493rem;
 `;
 
 const SelectMenuWrapper = styled.aside`

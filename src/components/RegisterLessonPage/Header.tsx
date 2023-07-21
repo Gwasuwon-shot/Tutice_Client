@@ -1,13 +1,19 @@
 import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+    const navigate = useNavigate();
+
+    function handleMoveToBack() {
+      navigate(-1);
+    }
 
     return (
-    
+
         <HeaderWrapper>
-            <RegisterLessonHeaderIc />
+            <RegisterLessonHeaderIc onClick={handleMoveToBack} />
             <InputHeader> 학생의 이름과 <br/> 과목을 입력해주세요. <Emphasis> * </Emphasis> </InputHeader> 
             <InputNotice> 수업관리를 도와드릴 수 있도록 몇가지 정보를 알려주세요.</InputNotice>    
         </HeaderWrapper>

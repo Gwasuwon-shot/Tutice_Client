@@ -19,8 +19,8 @@ export default function AgreeChecking() {
   const [completeCheck, setCompleteCheck] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
   const [isActive, setIsActive] = useState(false);
-
   const navigate = useNavigate();
+
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
       console.log("성공", data.data);
@@ -32,6 +32,7 @@ export default function AgreeChecking() {
       console.log("실패");
     },
   });
+
   function handleMoveToNotion(e: React.MouseEvent<HTMLDivElement>) {
     const target = e.target as HTMLDivElement;
     switch (target.innerText) {
@@ -100,8 +101,10 @@ export default function AgreeChecking() {
 
   useEffect(() => {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
+    console.log();
+    console.log(newUser);
 
-    // pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
+    newUser.hasOwnProperty(`password`) && completeCheck ? setIsActive(true) : setIsActive(false);
   }, [isAllChecked()]);
 
   function allCheckedIndex(id: number) {

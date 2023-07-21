@@ -50,7 +50,9 @@ export default function EditPageFooter() {
         </ModalWrapper>
       )}
       {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && (
-        <EditDetailTimePicker setIsActive={setIsActive} />
+        <ModalWrapper>
+          <EditDetailTimePicker setIsActive={setIsActive} />
+        </ModalWrapper>
       )}
     </>
   );

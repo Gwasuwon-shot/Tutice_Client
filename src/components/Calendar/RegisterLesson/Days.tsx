@@ -13,6 +13,18 @@ interface DaysProp {
   currentMonth: Date;
 }
 
+interface scheduleListType {
+  endTime: string;
+  startTime: string;
+  studentName: string;
+  subject: string;
+}
+
+interface temporaryListType {
+  date: string;
+  scheduleList: scheduleListType;
+}
+
 export default function Days(props: DaysProp) {
   const { currentMonth } = props;
   const monthStart = startOfMonth(currentMonth);
@@ -26,7 +38,7 @@ export default function Days(props: DaysProp) {
 
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
   const temporarySchedules = useRecoilValue(temporarySchedule);
-  const temporaryList = temporarySchedules.temporaryScheduleList;
+  const temporaryList: temporaryListType[] = temporarySchedules.temporaryScheduleList;
 
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];

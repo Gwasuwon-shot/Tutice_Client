@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { getLessonDetailByParents } from "../api/getLessonDetailByParents";
-import { ActionCodeOperation } from "firebase/auth";
 
 //teacherName , account 배열 형식, [startDate, payment, amount]
 
@@ -9,7 +8,7 @@ export default function useGetLessonDetailByParents(lessonIdx: number) {
     ["useGetLessonDetailByParents", lessonIdx],
     () => getLessonDetailByParents(lessonIdx),
     {
-      staleTime: 300000,
+      staleTime: 3000,
     },
   );
 

@@ -32,5 +32,12 @@ export default function useTeacherFooter() {
     }
   }
 
-  return { handleMoveToPage };
+  function handleChangeActive(category: string) {
+    setTeacherFooterList(
+      teacherFooterList.map((list) =>
+        list.category === category ? { ...list, isMoved: true } : { ...list, isMoved: false },
+      ),
+    );
+  }
+  return { handleMoveToPage, handleChangeActive };
 }

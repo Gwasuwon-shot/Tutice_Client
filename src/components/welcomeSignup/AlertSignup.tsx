@@ -33,6 +33,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
 
+    console.log(permission);
     registerServiceWorker();
 
     try {

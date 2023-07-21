@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { NoClassLogoTeacherHomeIc } from "../../assets";
+import CreateTreeCode from "../common/CreateTreeCode";
 import WelcomeTeacher from "./WelcomeTeacher";
 
 export default function NoClassHome() {
@@ -13,6 +14,7 @@ export default function NoClassHome() {
           <p> 나무 코드 생성을 통해 학생을 추가하고 </p>
           <p>링크를 학부모님에게 공유해보세요</p>
         </SubContext>
+        <CreateTreeCode />
       </NoClassHomeWrapper>
     </>
   );

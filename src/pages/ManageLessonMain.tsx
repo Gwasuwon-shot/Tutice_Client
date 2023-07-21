@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { isSnackBarOpen } from "../atom/common/isSnackBarOpen";
 import CancelLessonMaintenanceSnackBar from "../components/common/CancelLessonMaintenanceSnackBar";
+import CreateTreeCode from "../components/common/CreateTreeCode";
 import TeacherFooter from "../components/common/TeacherFooter";
 import ExtensionQuestion from "../components/manageLesson/ExtensionQuestion";
 import MainLessons from "../components/manageLesson/MainLessons";
@@ -26,14 +27,16 @@ export default function ManageLessonMain() {
         <MainLessonsHeader>수업관리</MainLessonsHeader>
         {checkMissingMaintenanceLessonExist() && <ExtensionQuestion setIsSuccess={setIsSuccess} />}
         <MainLessons />
+        <CreateTreeCode />
       </MainLessonsWrapper>
+
       <TeacherFooter />
     </>
   );
 }
 
 const MainLessonsWrapper = styled.section`
-  padding: 0 1.4rem;
+  padding: 0 1.4rem 10rem 1.4rem;
 `;
 
 const MainLessonsHeader = styled.header`

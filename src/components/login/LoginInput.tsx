@@ -35,11 +35,7 @@ export default function LoginInput() {
         setCookie("accessToken", accessToken, {
           secure: true,
         });
-        if (userRole === "부모님") {
-          navigate("/lessonCode");
-        } else {
-          navigate("/");
-        }
+        navigate("/welcome");
       }
     },
     onError: () => {

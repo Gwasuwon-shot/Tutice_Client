@@ -18,6 +18,7 @@ export default function LoginInput() {
   const navigate = useNavigate();
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
+      // if(data?.data.)
       console.debug("성공");
       console.log(data.data);
 

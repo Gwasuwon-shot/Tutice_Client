@@ -19,11 +19,11 @@ export default function LoginInput() {
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
       console.debug("성공");
-      console.log(data);
+      console.log(data.data);
 
-      navigate("/welcome", {
-        state: { ...data.data },
-      });
+      // navigate("/welcome", {
+      //   state: { ...data.data },
+      // });
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");

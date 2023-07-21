@@ -31,23 +31,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
   const SUB_TEXT = "푸시알림을 활성화를 통해 \n 출결, 수업비 관리를 도울 수 있어요";
 
   async function handleAllowNotification() {
-    // const permission = await Notification.requestPermission();
-
-    // registerServiceWorker();
-
-    // try {
-    //   await getDeviceToken();
-    //   // deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-
-    // if (userRole === "부모님") {
-    //   navigate("/lessonCode");
-    // } else {
-    //   navigate("/");
-    // }
-    const permission = await Notification.requestPermission().then();
+    const permission = await Notification.requestPermission();
 
     registerServiceWorker();
 

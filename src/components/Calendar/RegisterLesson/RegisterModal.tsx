@@ -8,7 +8,7 @@ import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
 
 export default function RegisterModal(props: modalType) {
-  const { selectedDate, setOpenModal, formattedMonth } = props;
+  const { selectedDate, setOpenModal, formattedMonth, temporRegularSchedule } = props;
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
 
   return (

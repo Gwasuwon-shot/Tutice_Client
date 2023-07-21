@@ -9,14 +9,14 @@ interface scheduleListType {
 
 interface temporaryListType {
   date: string;
-  scheduleList: scheduleListType;
+  scheduleList: scheduleListType[];
 }
 
 export interface DayItemProps {
   date: Date;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
-  myLessons?: calendarLessonsType;
-  myChildLessons?: calendarLessonsType;
-  temporRegularSchedule?: temporaryListType;
+  myLessons: calendarLessonsType | undefined;
+  myChildLessons: calendarLessonsType | undefined;
+  temporRegularSchedule: temporaryListType | undefined;
 }

@@ -11,7 +11,7 @@ export default function SecondSwiper() {
       <SecondSwiperWrapper>
         <SwiperTitleLayout mainTitleContent={MAIN_TITLE_MESSAGE} subTitleContent={SUB_TITLE_MESSAGE} />
         <LogoWrapper>
-          <MainLogoGradation />
+          <MainLogoGradationIcon />
         </LogoWrapper>
       </SecondSwiperWrapper>
     </>
@@ -27,4 +27,9 @@ const LogoWrapper = styled.div`
   align-self: center;
 
   margin-top: 1.35rem;
+`;
+
+const MainLogoGradationIcon = styled(MainLogoGradation)`
+  width: 21.6473rem;
+  height: 21.6473rem;
 `;

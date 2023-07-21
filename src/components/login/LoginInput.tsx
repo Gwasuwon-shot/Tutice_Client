@@ -6,6 +6,9 @@ import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { userRoleData } from "../../atom/loginUser/loginUser";
+import { setCookie } from "../../api/cookie";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -15,19 +18,29 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
+  // const setUserRole = useSetRecoilState(userRoleData);
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
       if (data?.data.code === 200) {
-        console.debug("성공");
+        console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
-        console.log(accessToken);
+        setUserRole(data.data.data.user.role);
+        setCookie("accessToken", accessToken, {
+          secure: true,
+        });
+        navigate("/");
       }
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");
     },
   });
+
+  useEffect(() => {
+    console.log(userRole);
+  }, [userRole]);
 
   // setEmail
   function handelEmailChange(e: React.ChangeEvent<HTMLInputElement>) {

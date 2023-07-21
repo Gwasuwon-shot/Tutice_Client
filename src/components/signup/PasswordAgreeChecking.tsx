@@ -117,54 +117,47 @@ export default function PasswordAgreeChecking() {
           <Inputfield disabled type="text" value={newUser.name} />
         </InputWrapper>
 
-        <form>
-          <InputWrapper>
-            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-            <Inputfield disabled type="text" value={newUser.email} />
-          </InputWrapper>
+        <InputWrapper>
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
+          <Inputfield disabled type="text" value={newUser.email} />
+        </InputWrapper>
 
-          <InputPwWrapper $isPassword={isPassword} $pwFocus={pwFocus}>
-            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
-            <PasswordIconWrapper>
-              <Inputfield
-                onFocus={() => setPwFocus(true)}
-                onBlur={() => setPwFocus(false)}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
-                type={pwViewing}
-                autoComplete="off"
-                placeholder={PLACEHOLDER_TEXT.passwordHolder}
-              />
-              {viewingPwIcon()}
-            </PasswordIconWrapper>
-          </InputPwWrapper>
+        <InputPwWrapper $isPassword={isPassword} $pwFocus={pwFocus}>
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
+          <PasswordIconWrapper>
+            <Inputfield
+              onFocus={() => setPwFocus(true)}
+              onBlur={() => setPwFocus(false)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}
+              type={pwViewing}
+              autoComplete="off"
+              placeholder={PLACEHOLDER_TEXT.passwordHolder}
+            />
+            {viewingPwIcon()}
+          </PasswordIconWrapper>
+        </InputPwWrapper>
 
-          {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
+        {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
-          <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
-            <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
-            <PasswordIconWrapper>
-              <Inputfield
-                onFocus={() => setConfirmFocus(true)}
-                onBlur={() => handleConfirmBlur()}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
-                type={confirmViewing}
-                autoComplete="off"
-                placeholder={PLACEHOLDER_TEXT.confirmHolder}
-              />
-              {viewingConfirmIcon()}
-            </PasswordIconWrapper>
-          </InputConfirmWrapper>
+        <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
+          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
+          <PasswordIconWrapper>
+            <Inputfield
+              onFocus={() => setConfirmFocus(true)}
+              onBlur={() => handleConfirmBlur()}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleConfirmChange(e)}
+              type={confirmViewing}
+              autoComplete="off"
+              placeholder={PLACEHOLDER_TEXT.confirmHolder}
+            />
+            {viewingConfirmIcon()}
+          </PasswordIconWrapper>
+        </InputConfirmWrapper>
 
-          {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+        {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
-          {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
-
-          <AgreeChecking />
-
-          <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
-            <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
-          </SubmitButton>
-        </form>
+        {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
+        <AgreeChecking />
       </Container>
     </>
   );
@@ -196,7 +189,7 @@ const InputPwWrapper = styled.div<{ $pwFocus: boolean; $isPassword: boolean }>`
   display: flex;
   flex-direction: column;
 
-  width: 28rem;
+  width: 90%;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $pwFocus, $isPassword }) => ($pwFocus || $isPassword ? theme.colors.green5 : theme.colors.grey70)};
@@ -206,7 +199,7 @@ const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: b
   display: flex;
   flex-direction: column;
 
-  width: 28rem;
+  width: 90%;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $confirmFocus, $isConfirmed }) =>
@@ -242,7 +235,6 @@ const SubmitButton = styled.button<{ $isActive: boolean }>`
 const ButtonText = styled.p`
   position: relative;
 
-  /* top- 정확한 값으로 수정 필요 */
   top: -1rem;
   ${({ theme }) => theme.fonts.body01};
 `;

@@ -63,6 +63,7 @@ export const firstLessonDay = atom({
 // 임시 날짜 저장 ('캘린더로 일정 확인')
 export const temporarySchedule = atom({
   key: "temporarySchedule",
-  default: {},
+  default: [],
+
   effects_UNSTABLE: [persistAtom],
 });

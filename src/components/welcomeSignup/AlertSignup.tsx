@@ -12,7 +12,7 @@ import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 import { useRecoilValue } from "recoil";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface AlertSignupProp {
   setIsWelcome: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,7 +20,7 @@ interface AlertSignupProp {
 
 export default function AlertSignup(prop: AlertSignupProp) {
   const userRole = useRecoilValue(userRoleData);
-  const navigate = Navigate();
+  const navigate = useNavigate();
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });

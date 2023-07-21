@@ -114,12 +114,13 @@ export default function LessonDate() {
             onSuccess: (response) => {
                 console.log('성공');
             },
-            
+
             onError: (error) => console.log(error),
         }
     )
 
     function postTemporary(info: temporaryProp) {
+        console.log(selectedDays);
         getNewTemporarySchedule(postInformation);
     };
     

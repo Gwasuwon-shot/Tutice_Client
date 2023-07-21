@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { useMutation } from "react-query";
-import { newUserData } from "../../atom/signup/signup";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 import { useNavigate } from "react-router-dom";
 import { newUserPost } from "../../api/localSignUp";
+import { setCookie } from "../../api/cookie";
+import { userRoleData } from "../../atom/loginUser/loginUser";
 
 export default function AgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -20,16 +22,26 @@ export default function AgreeChecking() {
   const [checkedCount, setCheckedCount] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
+  const setStep = useSetRecoilState(stepNum);
 
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      console.log("성공", data.data);
-      navigate("/welcome", {
-        state: { ...data.data },
-      });
+      console.log(data.data);
+      if (data?.data.code === 201) {
+        console.log("성공", data.data);
+        const accessToken = data.data.data.accessToken;
+        console.log(accessToken);
+        setStep(0);
+        setUserRole(data.data.data.user.role);
+        setCookie("accessToken", accessToken, {
+          secure: true,
+        });
+        navigate("/");
+      }
     },
     onError: () => {
-      console.log("실패");
+      console.debug("실패 ㅠㅠ");
     },
   });
 

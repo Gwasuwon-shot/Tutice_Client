@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { setCookie } from "../../api/cookie";
 import { postLocalLogin } from "../../api/localLogin";
@@ -10,6 +8,9 @@ import { userRoleData } from "../../atom/loginUser/loginUser";
 import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { stepNum } from "../../atom/signup/signup";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -19,6 +20,7 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
+  const setStep = useSetRecoilState(stepNum);
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
 
@@ -28,6 +30,7 @@ export default function LoginInput() {
       if (data?.data.code === 200) {
         console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
+        setStep(0);
         setUserRole(data.data.data.user.role);
         setCookie("accessToken", accessToken, {
           secure: true,

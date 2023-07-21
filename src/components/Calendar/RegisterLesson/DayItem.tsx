@@ -1,9 +1,8 @@
 import { format, isSunday, isToday } from "date-fns";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
-import { STUDENT_COLOR, DEEFAULT_STUDENT_COLOR } from "../../../core/common/studentColor";
+import { DEEFAULT_STUDENT_COLOR, STUDENT_COLOR } from "../../../core/common/studentColor";
 import { DayItemProps } from "../../../type/calendar/dayItemType";
-import Schedule from "../../../pages/Schedule";
 
 export default function DayItem(props: DayItemProps) {
   const { date, setOpenModal, setSelectedDate, myLessons, temporRegularSchedule } = props;

@@ -61,7 +61,9 @@ export default function NameEmail() {
   return (
     <>
       <ProgressBar progress={50} />
-      <BackButton />
+      <BackButtonWrapper>
+        <BackButton />
+      </BackButtonWrapper>
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
@@ -142,4 +144,8 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
+`;
+
+const BackButtonWrapper = styled.div`
+  margin-left: 2rem;
 `;

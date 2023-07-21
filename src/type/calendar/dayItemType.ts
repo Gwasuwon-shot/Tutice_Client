@@ -9,7 +9,7 @@ interface scheduleListType {
 
 interface temporaryListType {
   date: string;
-  scheduleList: scheduleListType;
+  scheduleList: scheduleListType[];
 }
 
 export interface DayItemProps {

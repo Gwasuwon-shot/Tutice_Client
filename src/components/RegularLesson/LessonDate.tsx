@@ -1,16 +1,33 @@
 import React, { useEffect } from 'react';
 import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
-import {dayState, focusDayState, openFinishDetailState, openStartDetailState} from "../../atom/timePicker/timePicker";
+import {cycleNumberState, dateState, dayState, firstLessonDay, focusDayState, openFinishDetailState, openStartDetailState, temporarySchedule} from "../../atom/timePicker/timePicker";
+import {studentNameState, subjectNameState} from '../../atom/common/datePicker';
 
 import DetailTimePicker from './TimePicker/DetailTimePicker';
 import RoundBottomButton from '../common/RoundBottomButton';
 import SelectedDayAndTime from './SelectedDayAndTime';
+import {getTemporarySchedule} from '../../api/getTemporarySchedule';
 import styled from 'styled-components';
+import {useMutation} from 'react-query';
 import { useRecoilState } from 'recoil';
 
 interface DayProp {
     isSelected: boolean;
 };
+
+interface Day {
+    dayOfWeek: string;
+    startTime: string;
+    endTime: string;
+}
+  
+interface temporaryProp {
+	studentName : string,
+	subject : string,
+	count : number,
+	startDate : string,
+	regularScheduleList: Day[],
+}
 
 export default function LessonDate() {
     
@@ -74,6 +91,40 @@ export default function LessonDate() {
         });
     }
 
+    // post 로직 추가
+    
+    const [studentName, setStudentName] = useRecoilState(studentNameState);
+    const [subject, setSubject] = useRecoilState(subjectNameState);
+    const [count, setCount] = useRecoilState(cycleNumberState);
+    const [scheduleDate, setscheduleDate] = useRecoilState(dateState);
+    const startDate = `${scheduleDate.year}-${String(scheduleDate.month).padStart(2, "0")}-${String(scheduleDate.date).padStart(2, "0")}`;
+    const [tempSchedule, setTempSchedule] = useRecoilState(temporarySchedule);
+    
+    const postInformation: temporaryProp =
+    {
+		"studentName" : studentName,
+		"subject" : subject,
+        "count": count,
+        "startDate": startDate,
+		"regularScheduleList" : selectedDays,
+	};
+    
+    const {mutate: getNewTemporarySchedule} = useMutation(
+        getTemporarySchedule,
+        {
+            onSuccess: (response) => {
+                console.log('성공');
+                setTempSchedule(response);
+            },
+
+            onError: (error) => console.log(error),
+        }
+    )
+
+    function postTemporary(info: temporaryProp) {
+        console.log(selectedDays);
+        getNewTemporarySchedule(postInformation);
+    };
     
     return (
         <LessonDateWrapper>
@@ -135,7 +186,7 @@ export default function LessonDate() {
 
             <ModalWrapper>
                 <RegularLessonCalenderIcon />
-                <ModalButton> 캘린더로 일정 확인하기 </ModalButton>
+                <ModalButton onClick = {() => postTemporary(postInformation)}> 캘린더로 일정 확인하기 </ModalButton>
             </ModalWrapper>
             
             {selectedDays.map((day, index) => (

@@ -18,5 +18,5 @@ export interface DayItemProps {
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
   myLessons?: calendarLessonsType;
   myChildLessons?: calendarLessonsType;
-  temporRegularSchedule?: temporaryListType;
+  temporRegularSchedule?: any;
 }

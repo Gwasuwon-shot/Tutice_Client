@@ -1,13 +1,13 @@
+import { addDays, endOfMonth, endOfWeek, isSameDay, startOfMonth, startOfWeek } from "date-fns";
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from "recoil";
+import styled from "styled-components";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
-import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
-import RegisterModal from "./RegisterModal";
-import DayItem from "./DayItem";
 import { temporarySchedule } from "../../../atom/timePicker/timePicker";
+import DayItem from "./DayItem";
+import RegisterModal from "./RegisterModal";
 
 interface DaysProp {
   currentMonth: Date;
@@ -22,7 +22,7 @@ interface scheduleListType {
 
 interface temporaryListType {
   date: string;
-  scheduleList: scheduleListType;
+  scheduleList: scheduleListType[];
 }
 
 export default function Days(props: DaysProp) {

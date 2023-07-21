@@ -41,14 +41,8 @@ export default function LoginInput() {
         }
       }
     },
-    onError: (error) => {
-      console.log(error);
-    },
+    onError: () => {},
   });
-
-  useEffect(() => {
-    console.log(userRole);
-  }, [userRole]);
 
   // setEmail
   function handelEmailChange(e: React.ChangeEvent<HTMLInputElement>) {

@@ -102,7 +102,6 @@ export default function PaymentInput() {
         setOrder("후불");
     }
 
-    // lesson-share
 
     return (
         

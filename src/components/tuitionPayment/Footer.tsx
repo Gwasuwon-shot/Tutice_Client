@@ -68,8 +68,8 @@ export default function Footer() {
    
     const navigate = useNavigate();
 
-    function handleMoveToBack() {
-      navigate(-1);
+    function handleMoveToLessonShare() {
+      navigate("/lesson-share");
     }
 
     const {mutate: createNewLesson} = useMutation( 
@@ -79,7 +79,7 @@ export default function Footer() {
                 console.log('성공');
                 setCodeAndId(response);
                 // setStartDate(response.) -> 지수에 전달한 data recoil 저장
-                handleMoveToBack();
+                handleMoveToLessonShare();
             },
             onError: (error) => console.log(error),
         },

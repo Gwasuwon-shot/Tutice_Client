@@ -35,7 +35,7 @@ export default function PasswordAgreeChecking() {
   const navigate = useNavigate();
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      if (data?.data.code === 200) {
+      if (data?.data.code === 201) {
         console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
         setUserRole(data.data.data.user.role);

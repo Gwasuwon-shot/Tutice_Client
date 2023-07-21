@@ -1,21 +1,27 @@
 import { format, isSunday, isToday } from "date-fns";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
-import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import { STUDENT_COLOR, DEEFAULT_STUDENT_COLOR } from "../../../core/common/studentColor";
 import { DayItemProps } from "../../../type/calendar/dayItemType";
+import Schedule from "../../../pages/Schedule";
 
-export default function DayItem(props: DayItemProps) {
-  const { date, setOpenModal, setSelectedDate, myLessons } = props;
 
+
+export default function DayItem(props) {
+  const { date, setOpenModal, setSelectedDate, myLessons, temporRegularSchedule, subject, studentName } = props;
+  // const { endTime, startTime } = temporRegularSchedule;
+  console.log(temporRegularSchedule?.endTime);
+  console.log(studentName);
   const formattedDate = format(date, "d");
   const isSundayDate = isSunday(date);
   const isTodayDate: boolean = isToday(date);
   const myLessonLength: number | undefined = myLessons?.dailyScheduleList.length;
-
+  console.log(temporRegularSchedule);
   function handleOpenModal() {
     setSelectedDate(date);
     setOpenModal(true);
   }
+
   return (
     <>
       <Dayitem onClick={handleOpenModal} key={date.toString()} $issunday={isSundayDate}>
@@ -23,6 +29,11 @@ export default function DayItem(props: DayItemProps) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
+          {temporRegularSchedule?.endTime && (
+            <TemporaryScheduleWrapper $backgroundcolor={DEEFAULT_STUDENT_COLOR}>
+              {temporRegularSchedule?.startTime}
+            </TemporaryScheduleWrapper>
+          )}
           {myLessons && (myLessonLength as number) >= 4
             ? myLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
                 const { schedule } = lesson;
@@ -110,6 +121,7 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   height: 1.4rem;
 
   ${({ theme }) => theme.fonts.caption02};
+
   color: ${({ theme }) => theme.colors.grey600};
   background-color: ${(props) => props.$backgroundcolor};
   border-radius: 0.2rem;
@@ -119,4 +131,16 @@ const MoreLessonIcon = styled(CalendarMoreLessonIc)`
   width: 2rem;
   height: 0.2rem;
   padding-right: 1rem;
+`;
+
+const TemporaryScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
+  display: flex;
+  align-items: center;
+
+  height: 1.4rem;
+
+  ${({ theme }) => theme.fonts.caption02};
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${(props) => props.$backgroundcolor};
+  border-radius: 0.2rem;
 `;

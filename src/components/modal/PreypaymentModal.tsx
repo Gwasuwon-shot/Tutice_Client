@@ -12,7 +12,10 @@ export default function PreypaymentModal() {
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
   console.log(codeAndId);
   function handleMoveToRegisterPayment() {
-    navigate(`/register-payment/${codeAndId?.paymentRecordIdx}`);
+    setOpenModal(false);
+    navigate(`/register-payment/${codeAndId?.paymentRecordIdx}`, {
+      state: { paymentIdx: codeAndId?.paymentRecordIdx, count: 1 },
+    });
   }
 
   function handleCloseModal() {

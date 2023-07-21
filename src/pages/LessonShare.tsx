@@ -65,12 +65,18 @@ export default function LessonShare() {
         <ShareOthersLessonShareIcon onClick={handleShareOtherWays} />
         <KakaoShare url={URL} />
       </ButtonWrapper>
-      <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
-        다음
-      </BottomButton>
+      <BottomButtonWrapper>
+        <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
+          다음
+        </BottomButton>
+      </BottomButtonWrapper>
     </LessonShareWrapper>
   );
 }
+
+const BottomButtonWrapper = styled.section`
+  margin-left: -1.4rem;
+`;
 
 const LessonTreeSuccess = styled.p`
   margin-top: 3.7rem;
@@ -107,8 +113,8 @@ const LinkBox = styled.label`
   display: flex;
   width: 29.2rem;
   height: 4.6rem;
-  padding: 0.8rem;
-  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  justify-content: flex-start;
   align-items: center;
   gap: 0.8rem;
 

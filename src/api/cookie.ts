@@ -10,3 +10,7 @@ export const setCookie = (name: string, value: string | undefined, options: obje
 export const getCookie = (name: string) => {
   return cookies.get(name);
 };
+
+export const removeCookie = (name: string, options: object) => {
+  return cookies.remove(name);
+};

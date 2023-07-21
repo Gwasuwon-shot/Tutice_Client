@@ -11,14 +11,24 @@ import ToastModal from "../../common/ToastModal";
 
 import { temporarySchedule } from "../../../atom/timePicker/timePicker";
 
+interface scheduleListType {
+  endTime: string;
+  startTime: string;
+  studentName: string;
+  subject: string;
+}
+
+interface temporaryListType {
+  date: string;
+  scheduleList: scheduleListType;
+}
+
 export default function RegisterModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
   const temporarySchedules = useRecoilValue(temporarySchedule);
-  const temporaryList = temporarySchedules.temporaryScheduleList;
+  const temporaryList: temporaryListType[] = temporarySchedules.temporaryScheduleList;
 
-  console.log(temporarySchedules);
-  console.log(temporaryList);
   return (
     <>
       <ToastModal>

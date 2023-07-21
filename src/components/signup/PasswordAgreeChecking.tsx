@@ -15,6 +15,9 @@ import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import { userRoleData } from "../../atom/loginUser/loginUser";
 import { setCookie } from "../../api/cookie";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import { newUserPost } from "../../api/localSignUp";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);

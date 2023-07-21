@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FocusEvent } from 'react';
 import { RegisterLessonInputIc, TuitionPaymentRadioButtonCheckedIc, TuitionPaymentRadioButtonNotCheckedIc } from '../../assets';
-import { accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder } from "../../atom/tuitionPayment/tuitionPayment";
+import { accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder, lessonCodeAndPaymentId } from "../../atom/tuitionPayment/tuitionPayment";
 import { useEffect, useState } from "react";
 
 import styled from 'styled-components';
@@ -101,7 +101,7 @@ export default function PaymentInput() {
     const handleLastChange = () => {
         setOrder("후불");
     }
-    
+
     // lesson-share
 
     return (

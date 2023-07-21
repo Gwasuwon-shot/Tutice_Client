@@ -21,7 +21,6 @@ export default function SelectedDayAndTime(props : selectedProps) {
         setSelectedDays(newList);
     };
 
-
     return (
         <SelectedWrapper>
             <RegularLessonGroupIcon onClick = {handleDeleteDay}/>

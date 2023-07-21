@@ -1,14 +1,14 @@
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/swiper.min.css";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import React from "react";
 import SwiperCore from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 import { openDatePickerState } from "../../atom/timePicker/timePicker";
-
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface monthCalenderProps {
   month: number;
@@ -106,11 +106,16 @@ export default function EditDatePicker(props: EditDetailDatePickerPropType) {
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
     <SwiperSlide key={index}>
-      <Month> {monthCalender[index].month} </Month>
-      <Dates> {monthCalender[index].date} </Dates>
+      <Month> {monthCalender[index].month}월 </Month>
+      <Dates> {monthCalender[index].date}일 </Dates>
       <Day> {monthCalender[index].day} </Day>
     </SwiperSlide>
   ));
+
+  // 도르레 처음 클릭시 오늘 날짜부터 오도록 함. -> 요기서 currentMonth, todayDate, todayDay바꾸면돼!
+  const firstIndex = monthCalender.findIndex(
+    (date) => date.month === currentMonth && date.date === todayDate && date.day === todayDay,
+  );
 
   return (
     <TimePickerWrapper>
@@ -120,8 +125,9 @@ export default function EditDatePicker(props: EditDetailDatePickerPropType) {
 
       <StyledSwiper
         direction="vertical"
-        slidesPerView={7}
-        spaceBetween={15}
+        initialSlide={firstIndex}
+        slidesPerView={5}
+        spaceBetween={20}
         freeMode={true}
         freeModeSticky={true}
         freeModeMomentumRatio={0.25}
@@ -145,7 +151,9 @@ const TimePickerWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  padding: 6rem;
+  position: relative;
+
+  width: 32rem;
   height: 20rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};
@@ -156,7 +164,8 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
 
-  height: 9.5rem;
+  width: 9rem;
+  height: 14rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey400};
@@ -175,7 +184,6 @@ const StyledSwiper = styled(Swiper)`
 
   & .swiper-slide-active {
     opacity: 1;
-
     color: ${({ theme }) => theme.colors.grey700};
   }
 `;
@@ -198,27 +206,31 @@ const Day = styled.span`
   display: flex;
   justify-content: center;
 
-  width: 3rem;
+  width: 2.5rem;
 `;
 
 const CancleWrapper = styled.div`
   display: flex;
+
   position: relative;
+
   width: 6rem;
   height: 100%;
 `;
 
 const ConfirmWrapper = styled.div`
   display: flex;
+
   position: relative;
-  margin-left: 3rem;
+
   width: 6rem;
   height: 100%;
 `;
 
 const CancleButton = styled.button`
   position: absolute;
-  top: 0.7rem;
+  top: 1.5rem;
+  left: 1.5rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey400};
@@ -226,7 +238,8 @@ const CancleButton = styled.button`
 
 const ConfirmButton = styled.button`
   position: absolute;
-  top: 0.7rem;
+  top: 1.5rem;
+  right: 2rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.green5};
@@ -236,14 +249,13 @@ const Vizor = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 100;
 
-  width: 8rem;
+  width: 10rem;
   height: 2rem;
 
-  background-color: ${({ theme }) => theme.colors.grey200};
-
   transform: translate(-50%, -50%);
+  z-index: 100;
   opacity: 0.2;
+  background-color: ${({ theme }) => theme.colors.grey200};
   border-radius: 20px;
 `;

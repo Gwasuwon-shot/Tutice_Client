@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { Cookies } from "react-cookie";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { connectLessonId } from "../../atom/registerLesson/registerLesson";
-import { Cookies } from "react-cookie";
 import { patchLessonParents } from "../../api/patchLessonParents";
+import { connectLessonId } from "../../atom/registerLesson/registerLesson";
+import { blockAccess } from "../../utils/common/privateRoute";
 
 export default function ConnectParentsAndTeacher() {
   const { lessonId } = useParams();
@@ -29,7 +30,7 @@ export default function ConnectParentsAndTeacher() {
       setLessonIndex(lessonId);
     }
 
-    if (cookie.length) {
+    if (!blockAccess()) {
       connectParentsAndTeacher();
       navigate("/");
     } else {

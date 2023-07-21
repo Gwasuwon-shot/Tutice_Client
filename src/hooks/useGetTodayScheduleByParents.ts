@@ -6,7 +6,8 @@ export default function useGetTodayScheduleByParents() {
     staleTime: 3000,
   });
 
+  const parentsName = todayScheduleParents?.parentsName;
   const scheduleList = todayScheduleParents?.scheduleList;
 
-  return { scheduleList };
+  return { parentsName, scheduleList };
 }

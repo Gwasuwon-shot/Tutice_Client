@@ -11,15 +11,11 @@ export default function FourthSwiper() {
       <FourthSwiperWrapper>
         <SwiperTitleLayout mainTitleContent={MAIN_TITLE_MESSAGE} subTitleContent={SUB_TITLE_MESSAGE} />
         <LogoWrapper>
-          <FirstTreeWrapper>
-            <FourthSwiperFirstTree />
-          </FirstTreeWrapper>
+          <FourthSwiperFirstTreeIcon />
 
-          <FourthSwiperSecondTree />
+          <FourthSwiperSecondTreeIcon />
 
-          <ThirdTreeWrapper>
-            <FourthSwiperThirdTree />
-          </ThirdTreeWrapper>
+          <FourthSwiperThirdTreeIcon />
         </LogoWrapper>
       </FourthSwiperWrapper>
     </>
@@ -42,10 +38,21 @@ const LogoWrapper = styled.div`
   margin-top: 6.021rem;
 `;
 
-const FirstTreeWrapper = styled.div`
-  margin-right: 2.181rem;
+const FourthSwiperFirstTreeIcon = styled(FourthSwiperFirstTree)`
+  width: 3.5rem;
+  height: 12rem;
+
+  margin-right: 2.18rem;
 `;
 
-const ThirdTreeWrapper = styled.div`
-  margin-left: 1.156rem;
+const FourthSwiperSecondTreeIcon = styled(FourthSwiperSecondTree)`
+  width: 11.2445rem;
+  height: 15.4373rem;
+`;
+
+const FourthSwiperThirdTreeIcon = styled(FourthSwiperThirdTree)`
+  width: 15.4543rem;
+  height: 15.8162rem;
+
+  margin-left: 1.16rem;
 `;

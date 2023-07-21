@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import { TosNoneSignupIc } from "../../assets";
-import { TosCheckedSignupIc } from "../../assets";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { styled } from "styled-components";
+import { setCookie } from "../../api/cookie";
+import { newUserPost } from "../../api/localSignUp";
+import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
+import { userRoleData } from "../../atom/loginUser/loginUser";
 import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
-import { useNavigate } from "react-router-dom";
-import { newUserPost } from "../../api/localSignUp";
-import { setCookie } from "../../api/cookie";
-import { userRoleData } from "../../atom/loginUser/loginUser";
 
 export default function AgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -22,23 +21,16 @@ export default function AgreeChecking() {
   const [checkedCount, setCheckedCount] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
-  const [userRole, setUserRole] = useRecoilState(userRoleData);
-  const setStep = useSetRecoilState(stepNum);
-
+  const setUserRole = useSetRecoilState(userRoleData);
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
       console.log(data.data);
-      if (data?.data.code === 201) {
-        console.log("성공", data.data);
-        const accessToken = data.data.data.accessToken;
-        console.log(accessToken);
-        setStep(0);
-        setUserRole(data.data.data.user.role);
-        setCookie("accessToken", accessToken, {
-          secure: true,
-        });
-        navigate("/");
-      }
+      const accessToken = data.data.data.accessToken;
+      setUserRole(data.data.data.user.role);
+      setCookie("accessToken", accessToken, {
+        secure: true,
+      });
+      navigate("/welcome", { state: data.data });
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");
@@ -59,6 +51,10 @@ export default function AgreeChecking() {
         break;
     }
   }
+
+  useEffect(() => {
+    console.log(newUser);
+  }, [newUser]);
 
   function handleButtonChecked(id: number) {
     setCheckAgrees(
@@ -292,7 +288,6 @@ const SubmitButton = styled.button<{ $isActive: boolean }>`
 const ButtonText = styled.p`
   position: relative;
 
-  /* top- 정확한 값으로 수정 필요 */
   top: -1rem;
   ${({ theme }) => theme.fonts.body01};
 `;

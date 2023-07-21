@@ -2,13 +2,13 @@ import "swiper/components/navigation/navigation.min.css";
 import "swiper/swiper.min.css";
 
 import React, { useState } from "react";
-import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { focusDayState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import SwiperCore from "swiper";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
+import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface EditDetailTimePickerPropType {
   setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -104,8 +104,8 @@ export default function EditDetailTimePicker(props: EditDetailTimePickerPropType
       <SwiperWrapper>
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={15}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -118,8 +118,8 @@ export default function EditDetailTimePicker(props: EditDetailTimePickerPropType
 
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={15}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -134,8 +134,8 @@ export default function EditDetailTimePicker(props: EditDetailTimePickerPropType
 
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={15}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -163,9 +163,11 @@ const TimePickerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   position: relative;
 
-  height: 13rem;
+  width: 32rem;
+  height: 20rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};
 `;
@@ -173,7 +175,6 @@ const TimePickerWrapper = styled.div`
 const SwiperWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-
   width: 13rem;
 `;
 
@@ -183,7 +184,7 @@ const StyledSwiper = styled(Swiper)`
   align-items: center;
 
   width: 3rem;
-  height: 9.5rem;
+  height: 14rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey400};
@@ -202,13 +203,13 @@ const StyledSwiper = styled(Swiper)`
 
   & .swiper-slide-active {
     opacity: 1;
-
     color: ${({ theme }) => theme.colors.grey700};
   }
 `;
 
 const CancleWrapper = styled.div`
   display: flex;
+
   position: relative;
 
   width: 6rem;
@@ -217,6 +218,7 @@ const CancleWrapper = styled.div`
 
 const ConfirmWrapper = styled.div`
   display: flex;
+
   position: relative;
 
   width: 6rem;
@@ -244,14 +246,13 @@ const Vizor = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 100;
 
   width: 13.6rem;
   height: 2rem;
 
-  background-color: ${({ theme }) => theme.colors.grey200};
-
   transform: translate(-50%, -50%);
+  z-index: 100;
   opacity: 0.2;
+  background-color: ${({ theme }) => theme.colors.grey200};
   border-radius: 20px;
 `;

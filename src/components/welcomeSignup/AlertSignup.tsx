@@ -1,11 +1,14 @@
 import { AppCheckTokenResult } from "firebase/app-check";
 import { getToken } from "firebase/messaging";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { patchDeviceToken } from "../../api/patchDeviceToken";
 import { postNotificationRequest } from "../../api/postNotificationRequest";
 import { BackButtonSignupIc, BellWelcomeIc } from "../../assets";
+import { userRoleData } from "../../atom/loginUser/loginUser";
 import { messaging } from "../../core/notification/settingFCM";
 import { registerServiceWorker } from "../../utils/common/notification";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
@@ -16,6 +19,8 @@ interface AlertSignupProp {
 }
 
 export default function AlertSignup(prop: AlertSignupProp) {
+  const userRole = useRecoilValue(userRoleData);
+  const navigate = useNavigate();
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
@@ -32,11 +37,21 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
     try {
       await getDeviceToken();
-      deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
+      // deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
     } catch (error) {
       console.error(error);
     }
+
+    if (userRole === "부모님") {
+      navigate("/lessonCode");
+    } else {
+      navigate("/");
+    }
   }
+
+  useEffect(() => {
+    deviceToken?.token !== "" && deviceToken?.token !== undefined && patchingDeviceToken(deviceToken?.token);
+  }, [deviceToken]);
 
   async function getDeviceToken() {
     const token = await getToken(messaging, {
@@ -70,7 +85,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={() => handleAllowNotification()} buttonText={"할래요!"} />
+      <ButtonLayout onClick={handleAllowNotification} buttonText="할래요!" />
     </>
   );
 }

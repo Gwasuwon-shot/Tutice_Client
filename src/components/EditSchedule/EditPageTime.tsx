@@ -100,8 +100,7 @@ const Explain = styled.h3`
 
 const TimeWrapper = styled.section`
   display: flex;
-  justify-content: space-between;
-
+  justify-content: space-around;
   padding-right: 2rem;
   padding-left: 2rem;
   margin-top: 1.6rem;

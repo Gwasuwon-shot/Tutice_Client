@@ -7,6 +7,7 @@ export default function useGetPastLessonRecord(lessonId: number) {
   });
 
   const scheduleList = pastLessonRecord?.scheduleList;
+  const lesson = pastLessonRecord?.lesson;
 
-  return { scheduleList };
+  return { scheduleList, lesson };
 }

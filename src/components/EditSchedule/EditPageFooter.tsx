@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { openDatePickerState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 import { useRecoilState, useRecoilValue } from "recoil";
-import styled from "styled-components";
-import { updateSchedule } from "../../api/updateSchedule";
+
+import EditDatePicker from "./EditDatePicker";
+import EditDetailTimePicker from "./EditTimePicker";
+import EditFooterButton from "./EditFooterButton";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
-import { openDatePickerState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
-import EditDatePicker from "./EditDatePicker";
-import EditFooterButton from "./EditFooterButton";
-import EditDetailTimePicker from "./EditTimePicker";
+import styled from "styled-components";
+import { updateSchedule } from "../../api/updateSchedule";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function EditPageFooter() {
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
@@ -42,30 +43,20 @@ export default function EditPageFooter() {
 
   return (
     <>
-      <FooterWrapper>
-        <EditFooterButton onClick={() => handleEditLesson()} isActive={isActive} disabled={!isActive} />
-        {isDatePickerOpen && (
-          <ModalWrapper>
-            <EditDatePicker setIsActive={setIsActive} />
-          </ModalWrapper>
-        )}
-        {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && (
+      <EditFooterButton onClick={() => handleEditLesson()} isActive={isActive} disabled={!isActive} />
+      {isDatePickerOpen && (
+        <ModalWrapper>
+          <EditDatePicker setIsActive={setIsActive} />
+        </ModalWrapper>
+      )}
+      {(isStartPickerOpen || isFinishPickerOpen) && !isDatePickerOpen && (
+        <ModalWrapper>
           <EditDetailTimePicker setIsActive={setIsActive} />
-        )}
-      </FooterWrapper>
+        </ModalWrapper>
+      )}
     </>
   );
 }
-
-const FooterWrapper = styled.footer`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-
-  height: 5rem;
-  background-color: ${({ theme }) => theme.colors.grey50};
-`;
 
 const ModalWrapper = styled.div`
   display: flex;

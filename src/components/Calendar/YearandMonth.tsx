@@ -1,6 +1,7 @@
+import { NextMonthArrowButton, PrevMonthArrowButton } from "../../assets";
+
 import { format } from "date-fns";
 import styled from "styled-components";
-import { NextMonthArrowButton, PrevMonthArrowButton } from "../../assets";
 
 interface YearandMonthProps {
   currentMonth: Date;
@@ -74,11 +75,5 @@ const PrevMonthButton = styled(PrevMonthArrowButton)`
 const NextMonthButton = styled(NextMonthArrowButton)`
   width: 1.6rem;
   height: 1.6rem;
-  cursor: pointer;
-`;
-
-const CancelCalendarButton = styled(CancelButton)`
-  width: 2rem;
-  height: 2rem;
   cursor: pointer;
 `;

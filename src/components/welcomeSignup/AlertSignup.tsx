@@ -3,12 +3,13 @@ import { getToken } from "firebase/messaging";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { patchDeviceToken } from "../../api/patchDeviceToken";
 import { postNotificationRequest } from "../../api/postNotificationRequest";
 import { BackButtonSignupIc, BellWelcomeIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
+import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 import { messaging } from "../../core/notification/settingFCM";
 import { registerServiceWorker } from "../../utils/common/notification";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
@@ -24,6 +25,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
+  const [lessonIndex, setLessonIndex] = useRecoilState(connectLessonId);
 
   const { setIsWelcome } = prop;
   const MAIN_TEXT = `수업 나무를 통한 \n 쉬운 관리를 위해\n 알림을 활성화 해보세요 `;
@@ -33,23 +35,34 @@ export default function AlertSignup(prop: AlertSignupProp) {
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
 
+    console.log(permission);
     registerServiceWorker();
 
-    try {
-      await getDeviceToken();
-      // deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   await getDeviceToken();
+    //   deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
+    // } catch (error) {
+    //   console.error(error);
+    // }
 
-    if (userRole === "부모님") {
-      navigate("/lessonCode");
-    } else {
-      navigate("/");
-    }
+    // if (userRole === "부모님") {
+    //   navigate("/lessonCode");
+    // } else {
+    //   navigate("/");
+    // }
+    const token = await getToken(messaging, {
+      vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
+    });
+
+    setDeviceToken({
+      token: token,
+    });
   }
 
+  console.log(deviceToken);
+
   useEffect(() => {
+    console.log(deviceToken);
     deviceToken?.token !== "" && deviceToken?.token !== undefined && patchingDeviceToken(deviceToken?.token);
   }, [deviceToken]);
 
@@ -65,7 +78,11 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
-      console.log(res);
+      if (userRole === "부모님") {
+        navigate(`/${lessonIndex}`);
+      } else {
+        navigate("/");
+      }
     },
     onError: (err) => {
       console.log(err);
@@ -84,7 +101,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
         <SignupTitleLayout MainText={MAIN_TEXT} />
         <SubText>{SUB_TEXT}</SubText>
       </Container>
-
+      {/* <p>{deviceToken?.token}</p> */}
       <ButtonLayout onClick={handleAllowNotification} buttonText="할래요!" />
     </>
   );

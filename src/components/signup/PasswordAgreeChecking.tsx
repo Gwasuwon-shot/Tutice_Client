@@ -180,7 +180,7 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 23.2rem;
+  width: 90%;
   margin-top: 3.2rem;
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
 `;

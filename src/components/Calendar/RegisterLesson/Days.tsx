@@ -67,12 +67,7 @@ export default function Days(props: DaysProp) {
         {rows}
         {openModal && selectedDate && (
           <ModalWrapper>
-            <RegisterModal
-              temporRegularSchedule={temporRegularSchedule}
-              selectedDate={selectedDate}
-              setOpenModal={setOpenModal}
-              formattedMonth={formattedMonth}
-            />
+            <RegisterModal selectedDate={selectedDate} setOpenModal={setOpenModal} formattedMonth={formattedMonth} />
           </ModalWrapper>
         )}
       </DaysWrapper>

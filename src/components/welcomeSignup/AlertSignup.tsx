@@ -52,6 +52,7 @@ export default function AlertSignup() {
   });
 
   function handleShowNotification() {
+    console.log("디바이스 토큰 잘 들어오니?", deviceToken);
     postNotificationRequest(deviceToken.token);
   }
 

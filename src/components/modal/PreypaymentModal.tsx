@@ -10,7 +10,7 @@ export default function PreypaymentModal() {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const navigate = useNavigate();
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
-  console.log(codeAndId);
+
   function handleMoveToRegisterPayment() {
     setOpenModal(false);
     navigate(`/register-payment/${codeAndId?.paymentRecordIdx}`, {

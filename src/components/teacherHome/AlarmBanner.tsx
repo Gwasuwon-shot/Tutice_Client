@@ -21,12 +21,14 @@ export default function AlarmBanner() {
 
 const MissingMaintenanceTeacherHomeIcon = styled(MissingMaintenanceTeacherHomeIc)`
   width: 29.2rem;
+  height: 2.8rem;
   margin-top: 1.6rem;
   cursor: pointer;
 `;
 
 const MissingAttendaceTeacherHomeIcon = styled(MissingAttendaceTeacherHomeIc)`
   width: 29.2rem;
+  height: 2.8rem;
   margin-top: 1rem;
   cursor: pointer;
 `;

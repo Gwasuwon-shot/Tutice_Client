@@ -1,5 +1,4 @@
 import { Cookies } from "react-cookie";
-import { newUserData } from "../atom/signup/signup";
 
 const cookies = new Cookies();
 

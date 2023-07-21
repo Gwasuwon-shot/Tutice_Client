@@ -4,7 +4,6 @@ import "swiper/swiper.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { openPaymentPicker, paymentDateState } from "../../atom/registerPayment/registerPayment";
 
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import SwiperCore from "swiper";
@@ -96,11 +95,6 @@ export default function DatePicker() {
   function handleConfirmDatePicker() {
     setIsDatePickerOpen(false);
   }
-
-  // check 용
-  useEffect(() => {
-    console.log(activeSlide);
-  }, [activeSlide]);
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
     <SwiperSlide key={index}>

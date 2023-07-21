@@ -1,21 +1,13 @@
-import { useEffect, useState } from "react";
 import { RegularLessonClockIc } from "../../assets";
-import { dayState, focusDayState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
+import { openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import BottomButton from "../common/BottomButton";
-import { editDateState } from "../../atom/EditSchedule/editDateState";
 
 export default function EditPageTime() {
   const [selectedTime, setSelectedTime] = useRecoilState(editSchedule);
   const { startTime, endTime } = selectedTime;
-
-  // check 용
-  useEffect(() => {
-    console.log(startTime);
-  }, [startTime, endTime]);
 
   // 2. 요일 시작, 종료시간 관리
 

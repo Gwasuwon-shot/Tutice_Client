@@ -1,16 +1,15 @@
-import { openDatePickerState, openStartDetailState, openFinishDetailState } from "../../atom/timePicker/timePicker";
-import styled from "styled-components";
+import { useState } from "react";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import EditDatePicker from "./EditDatePicker";
-import EditDetailTimePicker from "./EditTimePicker";
-import BottomButton from "../common/BottomButton";
-import { useEffect, useState } from "react";
-import EditFooterButton from "./EditFooterButton";
-import { useMutation } from "react-query";
+import styled from "styled-components";
 import { updateSchedule } from "../../api/updateSchedule";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
+import { openDatePickerState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
+import EditDatePicker from "./EditDatePicker";
+import EditFooterButton from "./EditFooterButton";
+import EditDetailTimePicker from "./EditTimePicker";
 
 export default function EditPageFooter() {
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
@@ -26,10 +25,9 @@ export default function EditPageFooter() {
   const { mutate: patchSchdule } = useMutation(updateSchedule, {
     onSuccess: () => {
       navigate("/change-schedule");
-      console.log("성공");
     },
     onError: (error) => {
-      console.log("실패", error);
+      console.log(error);
     },
   });
 

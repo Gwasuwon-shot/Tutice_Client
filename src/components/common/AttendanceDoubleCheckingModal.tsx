@@ -16,8 +16,6 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
   const navigate = useNavigate();
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
-  console.log(attendanceData);
-
   function handleBackToCheckAttendance() {
     setIsCheckingModalOpen(false);
   }
@@ -27,7 +25,6 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
       navigate("/complete-check-attendance", { state: ATTENDANCE_CHECK_RESPONSE });
     },
     onError: (err) => {
-      console.log("Asdf");
       console.log(err);
     },
   });

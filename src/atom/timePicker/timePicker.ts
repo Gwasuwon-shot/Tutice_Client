@@ -53,8 +53,13 @@ export const focusDayState = atom({
 })
 
 // 확정날짜 '저장' 시, 선택한 첫 수업일의 요일을 푸터에서 확인하기 위한 atom
-
 export const firstLessonDay = atom({
   key: 'firstLessonDay',
   default: {1: '월', 2: '화', 3: '수', 4: '목', 5: '금', 6: '토', 0: '일'}[new Date().getDay()],
+})
+
+// 임시 날짜 저장 ('캘린더로 일정 확인')
+export const temporarySchedule = atom({
+  key: 'temporarySchedule',
+  default: {}
 })

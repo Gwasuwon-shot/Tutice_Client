@@ -3,8 +3,8 @@ import { getLessonByParents } from "../api/getLessonByParents";
 
 export default function useGetLessonByParents() {
   const { data: lessonParents } = useQuery(["getLessonByParents"], getLessonByParents, {
-    staleTime: 300000,
+    staleTime: 3000,
   });
-  console.log(lessonParents);
+
   return { lessonParents };
 }

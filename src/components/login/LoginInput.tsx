@@ -20,27 +20,19 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
-  const setStep = useSetRecoilState(stepNum);
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
 
   const lessonCode = useRecoilState(connectLessonId);
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
-      if (data?.data.code === 200) {
-        console.log("성공", data.data);
-        const accessToken = data.data.data.accessToken;
-        setStep(0);
-        setUserRole(data.data.data.user.role);
-        setCookie("accessToken", accessToken, {
-          secure: true,
-        });
-        if (userRole === "부모님") {
-          navigate("/lessonCode");
-        } else {
-          navigate("/");
-        }
-      }
+      console.log("성공", data.data);
+      const accessToken = data.data.data.accessToken;
+      setUserRole(data.data.data.user.role);
+      setCookie("accessToken", accessToken, {
+        secure: true,
+      });
+      navigate("/welcome", { state: data.data });
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");

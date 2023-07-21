@@ -17,12 +17,6 @@ export default function ConnectParentsAndTeacher() {
     return cookies.get(name);
   };
 
-  useEffect(() => {
-    if (lessonId) {
-      setLessonIndex(lessonId);
-    }
-  }, []);
-
   async function connectParentsAndTeacher() {
     if (lessonId) {
       const data = await patchLessonParents(lessonId);
@@ -30,12 +24,18 @@ export default function ConnectParentsAndTeacher() {
     }
   }
 
-  //쿠키에 값 있는지 확인하기
-  if (cookie.length) {
-    connectParentsAndTeacher();
-  } else {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (lessonId) {
+      setLessonIndex(lessonId);
+    }
 
-  return <div>ConnectParentsAndTeacher</div>;
+    if (cookie.length) {
+      connectParentsAndTeacher();
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
+  return <div></div>;
 }

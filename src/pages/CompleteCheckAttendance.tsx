@@ -14,7 +14,6 @@ import check from "../core/checkAttendance/check.json";
 import checkCircle from "../core/checkAttendance/check_circle.json";
 import { ATTENDANCE_STATUS } from "../core/common/attendanceStatus";
 import { STUDENT_COLOR } from "../core/common/studentColor";
-import { TEACHER_FOOTER_CATEGORY } from "../core/teacherHome/teacherFooter";
 import useModal from "../hooks/useModal";
 import useTeacherFooter from "../hooks/useTeacherFooter";
 
@@ -47,7 +46,8 @@ export default function CompleteCheckAttendance() {
   }
 
   function handleMoveToHome() {
-    handleMoveToPage(TEACHER_FOOTER_CATEGORY.home);
+    // handleMoveToPage(TEACHER_FOOTER_CATEGORY.home);
+    navigate(-1);
   }
 
   function handleOpenSendAlarmModal() {

@@ -9,9 +9,9 @@ export default function WelcomeLayout() {
   const [isWelcome, setIsWelcome] = useState<boolean>(true);
   const setStep = useSetRecoilState(stepNum);
 
-  useEffect(() => {
-    setStep(1);
-  }, []);
+  // useEffect(() => {
+  //   setStep(1);
+  // }, []);
 
   return (
     <>

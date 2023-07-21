@@ -22,20 +22,17 @@ export default function AgreeChecking() {
   const [checkedCount, setCheckedCount] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
-  const [userRole, setUserRole] = useRecoilState(userRoleData);
+  const setUserRole = useSetRecoilState(userRoleData);
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
       console.log(data.data);
-      console.log("??");
-      if (data?.data.code === 201) {
-        console.log("성공", data.data);
-        const accessToken = data.data.data.accessToken;
-        setUserRole(data.data.data.user.role);
-        setCookie("accessToken", accessToken, {
-          secure: true,
-        });
-        navigate("/welcome");
-      }
+      console.log("성공", data.data);
+      const accessToken = data.data.data.accessToken;
+      setUserRole(data.data.data.user.role);
+      setCookie("accessToken", accessToken, {
+        secure: true,
+      });
+      navigate("/welcome");
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");

@@ -1,13 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { format } from "date-fns";
+import { format, isSameDay } from "date-fns";
 import { ko } from "date-fns/locale";
-import { isSameDay } from "date-fns";
+import styled from "styled-components";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
+import { modalType } from "../../../type/calendar/modalType";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
-import { modalType } from "../../../type/calendar/modalType";
-import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 export default function ParentModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;
@@ -26,12 +24,12 @@ export default function ParentModal(props: modalType) {
 
               return (
                 <ScheduleWrapper key={idx}>
-                  <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 11]} />
+                  <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
                   <ModalTime>
                     {startTime} - {endTime}
                   </ModalTime>
                   <ModalName>{studentName}</ModalName>
-                  <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 11]}>{subject}</ModalSubject>
+                  <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 10]}>{subject}</ModalSubject>
                 </ScheduleWrapper>
               );
             })}

@@ -1,9 +1,15 @@
 import { styled } from "styled-components";
 import { AttenceCheckCommonIc } from "../../assets";
 
-export default function AttendanceCheckButton() {
+interface AttendanceCheckButtonType {
+  onClick: () => void;
+}
+
+export default function AttendanceCheckButton(props: AttendanceCheckButtonType) {
+  const { onClick } = props;
+
   return (
-    <AttendaceCheckButtonBox type="button">
+    <AttendaceCheckButtonBox type="button" onClick={onClick}>
       <AttenceCheckCommonIc />
       <h1>출결 체크</h1>
     </AttendaceCheckButtonBox>

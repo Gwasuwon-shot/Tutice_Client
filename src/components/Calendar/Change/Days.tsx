@@ -1,8 +1,8 @@
+import { addDays, endOfMonth, endOfWeek, isSameDay, startOfMonth, startOfWeek } from "date-fns";
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
-import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 import ChangeModal from "./ChangeModal";
@@ -103,6 +103,6 @@ const ModalWrapper = styled.section`
   display: flex;
   position: absolute;
 
-  margin-top: -12rem;
+  margin-top: -10.6rem;
   margin-left: -0.4rem;
 `;

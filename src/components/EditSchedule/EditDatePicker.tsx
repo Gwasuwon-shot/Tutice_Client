@@ -150,9 +150,9 @@ const TimePickerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 
-  height: 13rem;
+  padding: 6rem;
+  height: 20rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};
 `;
@@ -162,7 +162,6 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
 
-  width: 6rem;
   height: 9.5rem;
 
   ${({ theme }) => theme.fonts.body02};
@@ -211,7 +210,6 @@ const Day = styled.span`
 const CancleWrapper = styled.div`
   display: flex;
   position: relative;
-
   width: 6rem;
   height: 100%;
 `;
@@ -219,7 +217,7 @@ const CancleWrapper = styled.div`
 const ConfirmWrapper = styled.div`
   display: flex;
   position: relative;
-
+  margin-left: 3rem;
   width: 6rem;
   height: 100%;
 `;
@@ -227,7 +225,6 @@ const ConfirmWrapper = styled.div`
 const CancleButton = styled.button`
   position: absolute;
   top: 0.7rem;
-  left: 1rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey400};
@@ -236,7 +233,6 @@ const CancleButton = styled.button`
 const ConfirmButton = styled.button`
   position: absolute;
   top: 0.7rem;
-  right: 1rem;
 
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.green5};

@@ -1,7 +1,6 @@
-import React from "react";
 import { styled } from "styled-components";
-import ClassSchedule from "./ClassSchedule";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import ClassSchedule from "./ClassSchedule";
 import useGetLessonByUser from "../../hooks/useGetLessonByUser";
 import useGetLessonByParents from "../../hooks/useGetLessonByParents";
 
@@ -28,13 +27,14 @@ export default function ManageClass() {
           return (
             <ClassSchedule
               key={idx}
+              idx={idx}
               subjectName={subject}
               teacherName={teacherName}
               studentName={studentName}
               entireClassCount={count}
               currentClassCount={nowCount}
               currentClassCountPercent={percent}
-              subjectLabelBackgroundColor={STUDENT_COLOR[idx % 11]}
+              subjectLabelBackgroundColor={STUDENT_COLOR[idx % 10]}
             />
           );
         })}

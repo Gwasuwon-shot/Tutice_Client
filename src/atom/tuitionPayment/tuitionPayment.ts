@@ -1,26 +1,26 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 export const payingPersonName = atom<string>({
-    key: 'payingPersonName',
-    default: "",
-})
+  key: "payingPersonName",
+  default: "",
+});
 
 export const accountNumber = atom<string>({
-  key: 'accountNumber',
+  key: "accountNumber",
   default: "",
-})
+});
 
 export const bankName = atom<string>({
-    key: "bankName",
-    default: "",
-})
+  key: "bankName",
+  default: "",
+});
 
 export const moneyAmount = atom<number>({
-    key: "moneyAmount",
-    default: 0,
-})
+  key: "moneyAmount",
+  default: 0,
+});
 
 export const paymentOrder = atom<string>({
-    key: "paymentOrder",
-    default: "선불",
-})
+  key: "paymentOrder",
+  default: "",
+});

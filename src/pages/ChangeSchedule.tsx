@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { addMonths, subMonths } from "date-fns";
+import { useState } from "react";
 import styled from "styled-components";
-import { subMonths, addMonths } from "date-fns";
-import YearandMonth from "../components/Calendar/YearandMonth";
-import Dayofweek from "../components/Calendar/Dayofweek";
 import Days from "../components/Calendar/Change/Days";
+import Dayofweek from "../components/Calendar/Dayofweek";
+import YearandMonth from "../components/Calendar/YearandMonth";
+import TeacherFooter from "../components/common/TeacherFooter";
 
 //수정이 가능한 캘린더
 export default function ChangeSchedule() {
@@ -27,6 +28,7 @@ export default function ChangeSchedule() {
         <Dayofweek />
         <Days currentMonth={currentMonth} />
       </CalendarWrapper>
+      <TeacherFooter />
     </>
   );
 }

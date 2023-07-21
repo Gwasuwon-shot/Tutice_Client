@@ -1,25 +1,25 @@
-import { styled } from "styled-components";
-import { BackButtonSignupIc, BellWelcomeIc } from "../../assets";
-import SignupTitleLayout from "../signup/SignupTitleLayout";
-import ButtonLayout from "./ButtonLayout";
-import { registerServiceWorker } from "../../utils/common/notification";
-import { useEffect, useState } from "react";
-import { messaging } from "../../core/notification/settingFCM";
 import { AppCheckTokenResult } from "firebase/app-check";
 import { getToken } from "firebase/messaging";
+import { useState } from "react";
 import { useMutation } from "react-query";
+import { styled } from "styled-components";
 import { patchDeviceToken } from "../../api/patchDeviceToken";
 import { postNotificationRequest } from "../../api/postNotificationRequest";
+import { BackButtonSignupIc, BellWelcomeIc } from "../../assets";
+import { messaging } from "../../core/notification/settingFCM";
+import { registerServiceWorker } from "../../utils/common/notification";
+import SignupTitleLayout from "../signup/SignupTitleLayout";
+import ButtonLayout from "./ButtonLayout";
 
 interface AlertSignupProp {
   setIsWelcome: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AlertSignup(prop: AlertSignupProp) {
-   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
+  const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
-  
+
   const { setIsWelcome } = prop;
   const MAIN_TEXT = `수업 나무를 통한 \n 쉬운 관리를 위해\n 알림을 활성화 해보세요 `;
 

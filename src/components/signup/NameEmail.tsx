@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import BottomButton from "../common/BottomButton";
-import SignupTitleLayout from "./SignupTitleLayout";
-import BackButton from "../common/BackButton";
-import TextLabelLayout from "./TextLabelLayout";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { styled } from "styled-components";
 import { newUserData, stepNum } from "../../atom/signup/signup";
-import RegexField from "./RegexField";
-import { EMAIL_REGEX } from "../../core/signup/regex";
-import ProgressBar from "../common/ProgressBar";
-import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { EMAIL_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
+import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import BackButton from "../common/BackButton";
+import BottomButton from "../common/BottomButton";
+import ProgressBar from "../common/ProgressBar";
+import RegexField from "./RegexField";
+import SignupTitleLayout from "./SignupTitleLayout";
+import TextLabelLayout from "./TextLabelLayout";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -138,7 +138,7 @@ const Inputfield = styled.input`
   margin-left: 0.2rem;
   ${({ theme }) => theme.fonts.title03};
 
-  &::placeholder {
+  &textarea::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }

@@ -47,8 +47,10 @@ export async function createLesson(props: createLessonProps) {
     },  
     {
         headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
     }}
     );
+
+    return data?.data?.data;
 }

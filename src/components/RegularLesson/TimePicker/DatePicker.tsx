@@ -101,9 +101,9 @@ export default function DatePicker() {
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
     <SwiperSlide key={index}>
-      <Month> {monthCalender[index].month} </Month>
-      <Dates> {monthCalender[index].date} </Dates>
-      <Day> {monthCalender[index].day} </Day>
+      <Month> {monthCalender[index].month}월 </Month>
+      <Dates> {monthCalender[index].date}일 </Dates>
+      <Day> {monthCalender[index].day}</Day>
     </SwiperSlide>
   ));
 
@@ -121,8 +121,8 @@ export default function DatePicker() {
       <StyledSwiper
         direction="vertical"
         initialSlide={firstIndex}
-        slidesPerView={7}
-        spaceBetween={19}
+        slidesPerView={5}
+        spaceBetween={20}
         freeMode={true}
         freeModeSticky={true}
         freeModeMomentumRatio={0.25}
@@ -148,7 +148,7 @@ const TimePickerWrapper = styled.div`
 
   position: relative;
 
-  width: 100%;
+  width: 32rem;
   height: 20rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};
@@ -159,7 +159,7 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
 
-  width: 6rem;
+  width: 9rem;
   height: 14rem;
 
   ${({ theme }) => theme.fonts.body02};
@@ -201,7 +201,7 @@ const Day = styled.span`
   display: flex;
   justify-content: center;
 
-  width: 3rem;
+  width: 2.5rem;
 `;
 
 const CancleWrapper = styled.div`
@@ -245,7 +245,7 @@ const Vizor = styled.div`
   top: 50%;
   left: 50%;
 
-  width: 8rem;
+  width: 10rem;
   height: 2rem;
 
   transform: translate(-50%, -50%);

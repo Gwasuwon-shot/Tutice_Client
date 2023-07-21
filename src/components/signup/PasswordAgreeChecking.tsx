@@ -13,6 +13,8 @@ import AgreeChecking from "./AgreeChecking";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
+import { userRoleData } from "../../atom/loginUser/loginUser";
+import { setCookie } from "../../api/cookie";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -24,6 +26,24 @@ export default function PasswordAgreeChecking() {
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
+  const navigate = useNavigate();
+  const { mutate: postNewUser } = useMutation(newUserPost, {
+    onSuccess: (data) => {
+      if (data?.data.code === 201) {
+        console.log("성공", data.data);
+        const accessToken = data.data.data.accessToken;
+        setUserRole(data.data.data.user.role);
+        setCookie("accessToken", accessToken, {
+          secure: true,
+        });
+        navigate("/");
+      }
+    },
+    onError: () => {
+      console.debug("실패 ㅠㅠ");
+    },
+  });
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();

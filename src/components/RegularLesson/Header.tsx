@@ -1,13 +1,19 @@
 import {RegisterLessonHeaderIc} from '../../assets';
 import { TuticeWithTextCommonIc } from "../../assets";
 import styled from 'styled-components';
-
+import { useNavigate } from "react-router-dom";
 export default function Header() {
 
+    const navigate = useNavigate();
+
+    function handleMoveToBack() {
+      navigate(-1);
+    }
+  
     return (
 
         <HeaderWrapper>
-            <RegisterLessonHeaderIcon />
+            <RegisterLessonHeaderIcon onClick={handleMoveToBack} />
             <HeaderName> 정기수업 일정 등록 </HeaderName>
         </HeaderWrapper>
 

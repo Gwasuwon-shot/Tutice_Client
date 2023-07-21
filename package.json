@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "tutice",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -19,6 +19,7 @@
     "init": "^0.1.2",
     "lottie-react": "^2.4.0",
     "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",

@@ -3,17 +3,19 @@ import styled from "styled-components";
 import { MissingAttendaceTeacherHomeIc, MissingMaintenanceTeacherHomeIc } from "../../assets";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
 import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
+import useTeacherFooter from "../../hooks/useTeacherFooter";
 
 export default function AlarmBanner() {
   const { isMissingAttendance, isMissingMaintenance } = useGetLatestScheduleByTeacher();
   const navigate = useNavigate();
+  const { handleMoveToPage } = useTeacherFooter();
 
   function handleMoveToMissingAttendaceCheck() {
-    handleMoveToPage(TEACHER_FOOTER_CATEGORY.classManaging);
+    navigate("/no-attendance-check");
   }
 
   function handleMoveToMissingMaintenanceCheck() {
-    navigate("/manage-lesson");
+    handleMoveToPage(TEACHER_FOOTER_CATEGORY.classManaging);
   }
 
   return (

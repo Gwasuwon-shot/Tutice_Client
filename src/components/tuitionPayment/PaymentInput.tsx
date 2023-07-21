@@ -147,9 +147,9 @@ export default function PaymentInput() {
         
         <MoneyInputSection moneyFocused={isMoneyFocused}>
             <InputName> 회차당 과외비 </InputName>
-            <MoneyInput 
+            <MoneyInput
                 placeholder = '금액을 입력해주세요' 
-                value= {money}
+                value={money || ""}
                 onChange={handleMoneyChange}
                 onFocus = {handleMoneyFocus}
                 onBlur={handleMoneyBlur}

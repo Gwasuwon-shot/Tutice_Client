@@ -9,6 +9,19 @@ import {
   openStartDetailState,
   temporarySchedule,
 } from "../../atom/timePicker/timePicker";
+import React, { useEffect } from "react";
+import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
+import {
+  cycleNumberState,
+  dateState,
+  dayState,
+  firstLessonDay,
+  focusDayState,
+  openFinishDetailState,
+  openStartDetailState,
+  temporarySchedule,
+} from "../../atom/timePicker/timePicker";
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
 import { useMutation } from "react-query";
 import { useRecoilState } from "recoil";

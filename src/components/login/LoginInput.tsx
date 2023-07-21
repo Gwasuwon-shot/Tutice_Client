@@ -18,7 +18,6 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
-  // const setUserRole = useSetRecoilState(userRoleData);
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
   const { mutate: postLoginData } = useMutation(postLocalLogin, {

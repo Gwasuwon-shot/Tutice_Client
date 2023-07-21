@@ -22,6 +22,7 @@ import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
+import ConnectParentsAndTeacher from "./components/RegularLesson/ConnectParentsAndTeacher";
 
 export default function Router() {
   return (
@@ -49,6 +50,7 @@ export default function Router() {
         <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
         <Route path="/edit-lessonschedule" element={<EditShcedule />} />
         <Route path="/welcome" element={<WelcomeSignup />} />
+        <Route path="/:lessonId" element={<ConnectParentsAndTeacher />} />
       </Routes>
     </BrowserRouter>
   );

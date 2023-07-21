@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { userRoleData } from "../../atom/loginUser/loginUser";
 import { setCookie } from "../../api/cookie";
+import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -20,6 +21,8 @@ export default function LoginInput() {
   const [pwViewing, setPwViewing] = useState("password");
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
+
+  const lessonCode = useRecoilState(connectLessonId);
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
       if (data?.data.code === 200) {
@@ -29,7 +32,11 @@ export default function LoginInput() {
         setCookie("accessToken", accessToken, {
           secure: true,
         });
-        navigate("/");
+        if (userRole === "부모님") {
+          navigate("/lessonCode");
+        } else {
+          navigate("/");
+        }
       }
     },
     onError: () => {

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import LogoutModal from "./LogoutModal";
 import AccountDeleteModal from "./AccountDeleteModal";
+import LogoutModal from "./LogoutModal";
 
 export default function Account() {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCheckingLogout, setIsCheckingLogout] = useState(false);
   const [isCheckingDeleteAccount, setIsCheckingDeleteAccount] = useState(false);
+  const navigate = useNavigate();
 
   function handleLogout() {
     setOpenModal(true);
@@ -20,6 +22,10 @@ export default function Account() {
     setIsCheckingDeleteAccount(true);
   }
 
+  function handleMoveToLessonShare() {
+    navigate("/lesson-share");
+  }
+
   return (
     <>
       <Wrapper>
@@ -27,6 +33,7 @@ export default function Account() {
           <TitleText>계정</TitleText>
         </TitleWrapper>
         <ContentWrapper>
+          <ContentText onClick={handleMoveToLessonShare}>초대코드 공유</ContentText>
           <ContentText onClick={handleLogout}>로그아웃</ContentText>
           {openModal && isCheckingDeleteAccount && (
             <LogoutModalSection $isCheckingLogout={isCheckingLogout}>

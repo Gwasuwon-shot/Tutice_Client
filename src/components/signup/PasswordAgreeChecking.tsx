@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { newUserPost } from "../../api/localSignUp";
@@ -16,7 +17,6 @@ import AgreeChecking from "./AgreeChecking";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
-import { useNavigate } from "react-router-dom";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -32,13 +32,12 @@ export default function PasswordAgreeChecking() {
   const navigate = useNavigate();
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      console.log("성공", data.data);
       navigate("/welcome", {
         state: { ...data.data },
       });
     },
-    onError: () => {
-      console.log("실패");
+    onError: (err) => {
+      console.log(err);
     },
   });
 

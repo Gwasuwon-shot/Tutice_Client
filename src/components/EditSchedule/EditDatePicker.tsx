@@ -1,14 +1,14 @@
-import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
+import "swiper/swiper.min.css";
 
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
+import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation } from "swiper";
 import { editDateState } from "../../atom/EditSchedule/editDateState";
 import { openDatePickerState } from "../../atom/timePicker/timePicker";
 
-import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 
 interface monthCalenderProps {
   month: number;
@@ -101,14 +101,8 @@ export default function EditDatePicker(props: EditDetailDatePickerPropType) {
   // 3) 데이트 피커 완료 시
   function handleConfirmDatePicker() {
     setIsDatePickerOpen(false);
-    console.log(activeSlide);
     setIsActive(true);
   }
-
-  // check 용
-  useEffect(() => {
-    console.log(activeSlide);
-  }, [activeSlide]);
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
     <SwiperSlide key={index}>

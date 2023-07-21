@@ -3,7 +3,7 @@ import { getPastLessonRecord } from "../api/getPastLessonRecord";
 
 export default function useGetRestOfClassesInfo(lessonId: number) {
   const { data: restOfClassesInfo } = useQuery(["getPastLessonRecord"], () => getPastLessonRecord(lessonId), {
-    staleTime: 300000,
+    staleTime: 3000,
   });
 
   const lessonInfo = restOfClassesInfo?.lesson;

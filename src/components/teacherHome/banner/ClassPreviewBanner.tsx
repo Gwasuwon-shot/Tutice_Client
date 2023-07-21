@@ -43,8 +43,6 @@ export default function ClassPreviewBanner() {
     return timeStatus === 1;
   }
 
-  console.log(isMissingAttendanceByLesson);
-
   function handleAttendance() {
     // 출결 체크 -> isMissingAttandance이 true면 놓친 출결 페이지로 이동
     // isMissingAttandance이 false면 출결 체크

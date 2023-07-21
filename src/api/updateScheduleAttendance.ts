@@ -2,9 +2,6 @@ import axios from "axios";
 import { ScheduleDataType } from "../type/manageLesson/scheduleDataType";
 
 export async function updateScheduleAttendance(scheduleData: ScheduleDataType) {
-  console.log({
-    schedule: scheduleData,
-  });
   const data = await axios.patch(
     `${import.meta.env.VITE_APP_BASE_URL}/api/schedule/attendance`,
     {

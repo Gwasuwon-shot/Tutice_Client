@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 
 interface updateScheduleType {
   idx: number;
@@ -9,9 +8,8 @@ interface updateScheduleType {
 }
 
 export async function updateSchedule(scheduleData: updateScheduleType) {
-  console.log("dfdfdf");
   const { idx, date, startTime, endTime } = scheduleData;
-  console.log(scheduleData);
+
   const data = await axios.patch(
     `${import.meta.env.VITE_APP_BASE_URL}/api/schedule`,
     {
@@ -29,6 +27,6 @@ export async function updateSchedule(scheduleData: updateScheduleType) {
       },
     },
   );
-  console.log(data);
+
   return data;
 }

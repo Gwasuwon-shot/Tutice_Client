@@ -7,6 +7,6 @@ export async function requestAttendanceNotification(scheduleIdx: number) {
       Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
     },
   });
-  console.log(data);
+
   return data;
 }

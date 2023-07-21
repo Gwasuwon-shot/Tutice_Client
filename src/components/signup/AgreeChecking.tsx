@@ -5,7 +5,7 @@ import { TosCheckedSignupIc } from "../../assets";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { useMutation } from "react-query";
-import { newUserData, stepNum } from "../../atom/signup/signup";
+import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 import { useNavigate } from "react-router-dom";
@@ -23,15 +23,13 @@ export default function AgreeChecking() {
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
   const [userRole, setUserRole] = useRecoilState(userRoleData);
-  const setStep = useSetRecoilState(stepNum);
-
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
       console.log(data.data);
+      console.log("??");
       if (data?.data.code === 201) {
         console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
-        setStep(1);
         setUserRole(data.data.data.user.role);
         setCookie("accessToken", accessToken, {
           secure: true,
@@ -58,6 +56,10 @@ export default function AgreeChecking() {
         break;
     }
   }
+
+  useEffect(() => {
+    console.log(newUser);
+  }, [newUser]);
 
   function handleButtonChecked(id: number) {
     setCheckAgrees(
@@ -139,6 +141,7 @@ export default function AgreeChecking() {
   }
 
   function handleToSignUp() {
+    console.log("?");
     postNewUser(newUser);
   }
 
@@ -291,7 +294,6 @@ const SubmitButton = styled.button<{ $isActive: boolean }>`
 const ButtonText = styled.p`
   position: relative;
 
-  /* top- 정확한 값으로 수정 필요 */
   top: -1rem;
   ${({ theme }) => theme.fonts.body01};
 `;

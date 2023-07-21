@@ -19,8 +19,6 @@ export default function LoginInput() {
   const [emailFocus, setEmailFocus] = useState(false);
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
-  const [pwViewing, setPwViewing] = useState("password");
-  const setStep = useSetRecoilState(stepNum);
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
 
@@ -30,7 +28,6 @@ export default function LoginInput() {
       if (data?.data.code === 200) {
         console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
-        setStep(1);
         setUserRole(data.data.data.user.role);
         setCookie("accessToken", accessToken, {
           secure: true,

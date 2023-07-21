@@ -6,7 +6,7 @@ import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userRoleData } from "../../atom/loginUser/loginUser";
 import { setCookie } from "../../api/cookie";
 import { connectLessonId } from "../../atom/registerLesson/registerLesson";

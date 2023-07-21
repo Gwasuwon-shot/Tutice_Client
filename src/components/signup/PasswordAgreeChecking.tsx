@@ -6,7 +6,6 @@ import { styled } from "styled-components";
 import { newUserPost } from "../../api/localSignUp";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { newUserData } from "../../atom/signup/signup";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { PW_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";

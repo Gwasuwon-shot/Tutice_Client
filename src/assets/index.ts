@@ -5,6 +5,7 @@ export { ReactComponent as FourthSwiperThirdTree } from "./icon/FourthSwiperThir
 export { ReactComponent as LessonInfoLessonRecordIc } from "./icon/LessonInfoLessonRecordIc.svg";
 export { ReactComponent as MainLogoGradation } from "./icon/MainLogoGradationOnBoardingIc.svg";
 export { ReactComponent as MainLogo } from "./icon/MainLogoOnBoardingIc.svg";
+export { ReactComponent as MyPageSelectedParentsHomeIc } from "./icon/MyPageSelectedParentsHomeIc.svg";
 export { ReactComponent as NoClassLogoParentsHomeIc } from "./icon/NoClassLogoParentsHomeIc.svg";
 export { ReactComponent as RoleCheckSignupIc } from "./icon/RoleCheckSignupIc.svg";
 export { ReactComponent as RoleNoneCheckSignupIc } from "./icon/RoleNoneCheckSignupIc.svg";
@@ -56,7 +57,6 @@ export { ReactComponent as ManagingLessonMoneyIc } from "./icon/managingLessonMo
 export { ReactComponent as MissingAttendaceTeacherHomeIc } from "./icon/missingAttendaceTeacherHomeIc.svg";
 export { ReactComponent as MissingMaintenanceTeacherHomeIc } from "./icon/missingMaintenanceTeacherHomeIc.svg";
 export { ReactComponent as MyActiveTeacherFooterIc } from "./icon/myActiveTeacherFooterIc.svg";
-export { ReactComponent as MyPageSelectedParentsHomeIc } from "./icon/myPageSelectedParentsHomeIc.svg";
 export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.svg";
 export { ReactComponent as MyPageUnselectedParentsHomeIc } from "./icon/mypageUnselectedParentsHomeIc.svg";
 export { ReactComponent as NextArrowManageLessonIc } from "./icon/nextArrowManageLessonIc.svg";

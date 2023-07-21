@@ -17,6 +17,7 @@ export default function AlarmBanner() {
   function handleMoveToMissingMaintenanceCheck() {
     handleMoveToPage(TEACHER_FOOTER_CATEGORY.classManaging);
   }
+  console.log(isMissingMaintenance);
 
   return (
     <>

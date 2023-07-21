@@ -23,13 +23,16 @@ export default function AlertSignup() {
     const permission = await Notification.requestPermission();
 
     registerServiceWorker();
-    getDeviceToken()
-      .then(() => {
-        patchingDeviceToken(deviceToken.token);
-      })
-      .then(() => {
-        console.log(deviceToken);
-      });
+
+    console.log("에러 안나니?");
+
+    try {
+      await getDeviceToken();
+      patchingDeviceToken(deviceToken.token);
+      console.log(deviceToken);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function getDeviceToken() {
@@ -52,7 +55,6 @@ export default function AlertSignup() {
   });
 
   function handleShowNotification() {
-    console.log("디바이스 토큰 잘 들어오니?", deviceToken);
     postNotificationRequest(deviceToken.token);
   }
 

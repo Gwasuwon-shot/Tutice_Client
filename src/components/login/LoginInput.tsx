@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { setCookie } from "../../api/cookie";
 import { postLocalLogin } from "../../api/localLogin";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
+import { userRoleData } from "../../atom/loginUser/loginUser";
+import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { userRoleData } from "../../atom/loginUser/loginUser";
-import { setCookie } from "../../api/cookie";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -20,6 +21,8 @@ export default function LoginInput() {
   const [pwViewing, setPwViewing] = useState("password");
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
+
+  const lessonCode = useRecoilState(connectLessonId);
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
       if (data?.data.code === 200) {
@@ -29,7 +32,11 @@ export default function LoginInput() {
         setCookie("accessToken", accessToken, {
           secure: true,
         });
-        navigate("/");
+        if (userRole === "부모님") {
+          navigate("/lessonCode");
+        } else {
+          navigate("/");
+        }
       }
     },
     onError: () => {
@@ -113,7 +120,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $email: string }>`
   display: flex;
   flex-direction: column;
 
-  width: 80%;
+  width: 95%;
   margin-right: 1.4rem;
   margin-bottom: 2rem;
 
@@ -125,7 +132,7 @@ const InputPasswordWrapper = styled.div<{ $pwFocus: boolean; $password: string }
   display: flex;
   flex-direction: column;
 
-  width: 80%;
+  width: 95%;
   margin-right: 1.4rem;
   margin-bottom: 2rem;
 
@@ -135,9 +142,10 @@ const InputPasswordWrapper = styled.div<{ $pwFocus: boolean; $password: string }
 
 const Inputfield = styled.input`
   width: 20rem;
+  height: 2rem;
   margin: 1rem 0.2rem;
 
-  &::placeholder {
+  &textarea::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }

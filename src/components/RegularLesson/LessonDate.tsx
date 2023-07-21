@@ -1,8 +1,10 @@
+import React, { useEffect } from "react";
 import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
 import {
   cycleNumberState,
   dateState,
   dayState,
+  firstLessonDay,
   focusDayState,
   openFinishDetailState,
   openStartDetailState,

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { getCookie } from "./cookie";
 interface updateScheduleType {
   idx: number;
   date: string;
@@ -23,7 +23,7 @@ export async function updateSchedule(scheduleData: updateScheduleType) {
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
+        Authorization: `Bearer ${getCookie("accessToken")}`,
       },
     },
   );

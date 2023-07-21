@@ -1,10 +1,12 @@
 import axios from "axios";
 import { getCookie } from "./cookie";
 
-export async function patchDeviceToken(token: string) {
+export async function patchLessonParents(lessonCode: string) {
   const data = await axios.patch(
-    `${import.meta.env.VITE_APP_BASE_URL}/api/user/device-token`,
-    { deviceToken: token },
+    `${import.meta.env.VITE_APP_BASE_URL}/api/lesson/parents`,
+    {
+      lessonCode: "MTA5",
+    },
     {
       headers: {
         "Content-Type": "application/json",
@@ -13,5 +15,5 @@ export async function patchDeviceToken(token: string) {
     },
   );
 
-  return data;
+  return data?.data;
 }

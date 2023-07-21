@@ -1,12 +1,12 @@
 import { format, isSunday, isToday } from "date-fns";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
-import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import { STUDENT_COLOR, DEEFAULT_STUDENT_COLOR } from "../../../core/common/studentColor";
 import { DayItemProps } from "../../../type/calendar/dayItemType";
+import Schedule from "../../../pages/Schedule";
 
 export default function DayItem(props: DayItemProps) {
-  const { date, setOpenModal, setSelectedDate, myLessons } = props;
-
+  const { date, setOpenModal, setSelectedDate, myLessons, temporRegularSchedule } = props;
   const formattedDate = format(date, "d");
   const isSundayDate = isSunday(date);
   const isTodayDate: boolean = isToday(date);
@@ -16,6 +16,7 @@ export default function DayItem(props: DayItemProps) {
     setSelectedDate(date);
     setOpenModal(true);
   }
+
   return (
     <>
       <Dayitem onClick={handleOpenModal} key={date.toString()} $issunday={isSundayDate}>
@@ -23,8 +24,14 @@ export default function DayItem(props: DayItemProps) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
-          {myLessons && (myLessonLength as number) >= 4
-            ? myLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
+          {temporRegularSchedule?.scheduleList && (
+            <TemporaryScheduleWrapper $backgroundcolor={DEEFAULT_STUDENT_COLOR}>
+              {temporRegularSchedule?.scheduleList[0]?.startTime}
+              {temporRegularSchedule?.scheduleList[0]?.studentName?.slice(0, 2)}
+            </TemporaryScheduleWrapper>
+          )}
+          {temporRegularSchedule?.scheduleList && myLessons && (myLessonLength as number) >= 3
+            ? myLessons?.dailyScheduleList.map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
 
@@ -34,7 +41,7 @@ export default function DayItem(props: DayItemProps) {
                   </ScheduleWrapper>
                 );
               })
-            : myLessons?.dailyScheduleList.map((lesson) => {
+            : myLessons?.dailyScheduleList.slice(0, 3).map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
 
@@ -65,7 +72,7 @@ const Dayitem = styled.article<DayProp>`
   cursor: pointer;
 
   width: 4.5rem;
-  height: 6rem;
+  height: 7rem;
   gap: 0.2rem;
 
   padding-bottom: 0.3rem;
@@ -108,8 +115,8 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   align-items: center;
 
   height: 1.4rem;
-
   ${({ theme }) => theme.fonts.caption02};
+
   color: ${({ theme }) => theme.colors.grey600};
   background-color: ${(props) => props.$backgroundcolor};
   border-radius: 0.2rem;
@@ -119,4 +126,16 @@ const MoreLessonIcon = styled(CalendarMoreLessonIc)`
   width: 2rem;
   height: 0.2rem;
   padding-right: 1rem;
+`;
+
+const TemporaryScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  height: 1.4rem;
+
+  ${({ theme }) => theme.fonts.caption02};
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${(props) => props.$backgroundcolor};
+  border-radius: 0.2rem;
 `;

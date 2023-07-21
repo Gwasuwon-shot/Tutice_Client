@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 export default function AccountManaging() {
+  const navigate = useNavigate();
+
+  function handleOnSignUp() {
+    navigate("/signup");
+  }
   return (
     <Container>
       <TextWrapper>
@@ -8,7 +14,7 @@ export default function AccountManaging() {
         <VerticalLine />
         <Text>비밀번호 찾기</Text>
         <VerticalLine />
-        <Text>회원가입</Text>
+        <Text onClick={handleOnSignUp}>회원가입</Text>
       </TextWrapper>
     </Container>
   );

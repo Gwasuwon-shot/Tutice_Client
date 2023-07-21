@@ -20,7 +20,7 @@ export default function useGetLessonDetailByParents(lessonIdx: number) {
   const accountBank = lessonData?.account?.bank;
   const accountNumber = lessonData?.account?.number;
 
-  const formattedAmount = amount + "만원";
+  const formattedAmount = amount?.toLocaleString();
 
   const accountInfo = [accountName, accountBank, accountNumber];
   const etcInfo = [startDate, payment, formattedAmount];

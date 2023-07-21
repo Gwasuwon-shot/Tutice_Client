@@ -1,4 +1,5 @@
-import { useMutation } from "react-query";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { requestPaymentRecordNotification } from "../../api/requestPaymentRecordNotification";
@@ -21,19 +22,26 @@ export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlar
   const { studentName, subject, backgroundColor, color, isBig, lessonIdx } = props;
   const { unShowModal } = useModal();
   const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
+  const [isAgreeSend, setIsAgreeSend] = useState<undefined | string>(undefined);
 
-  const { mutate: sendPaymentAlarm } = useMutation(requestPaymentRecordNotification, {
+  const queryClient = useQueryClient();
+
+  const { data: sendPaymentAlarm } = useQuery(["paymentAlarm"], () => requestPaymentRecordNotification(lessonIdx), {
     onSuccess: () => {
       setSnackBarOpen(true);
       unShowModal();
+      setIsAgreeSend(undefined);
     },
     onError: (error) => {
       console.log(error);
     },
+    enabled: !!isAgreeSend,
   });
 
   function handleSendAlarm() {
-    sendPaymentAlarm(lessonIdx);
+    // sendPaymentAlarm(lessonIdx);
+    setIsAgreeSend("true");
+    queryClient.invalidateQueries("paymentAlarm");
   }
 
   return (

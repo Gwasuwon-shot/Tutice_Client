@@ -28,7 +28,7 @@ export default function StudentPayments() {
   return (
     <>
       <SnackBarWrapper>
-        {snackBarOpen && <SuccessSendingAlarmSnackBar />}
+        {snackBarOpen && !successPay?.isOpen && <SuccessSendingAlarmSnackBar />}
         {snackBarOpen && successPay?.isOpen && <HarvestFruiteSnackBar count={successPay?.count} />}
       </SnackBarWrapper>
       {openModal && payMentAlarmOpen && (

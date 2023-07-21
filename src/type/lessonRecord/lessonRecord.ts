@@ -4,3 +4,10 @@ export interface PastLessonRecordType {
   startTime: string;
   endTime: string;
 }
+
+export interface DepositInfoType {
+  idx: number;
+  date: string;
+  amount: number;
+  status: boolean;
+}

@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import useGetLessonByUser from "../../hooks/useGetLessonByUser";
 import Header from "../common/Header";
+import SuccessSendingAlarmSnackBar from "../common/SuccessSendingAlarmSnackBar";
 import TeacherFooter from "../common/TeacherFooter";
 import NoClassHome from "./NoClassHome";
 import YesClassHome from "./YesClassHome";
@@ -14,7 +15,7 @@ export default function TeacherHome() {
   return (
     <>
       {/* 경우의 수에 따라 어떤 스낵바 보일지 로직 짜야함 */}
-      {/* {snackBarOpen && <SuccessSendingAlarmSnackBar />} */}
+      {snackBarOpen && <SuccessSendingAlarmSnackBar />}
       {/* {snackBarOpen && <CancelLessonMaintenanceSnackBar />} */}
       <TeacherHomeWrapper>
         <Header />

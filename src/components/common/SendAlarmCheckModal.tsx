@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { requestAttendanceNotification } from "../../api/requestAttendanceNotification";
+import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
 import useModal from "../../hooks/useModal";
@@ -28,6 +30,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
   const [isDisabledModalOpen, setIsDisabledModalOpen] = useState(false);
   const { handleMoveToPage } = useTeacherFooter();
   const [isAgreeSend, setIsAgreeSend] = useState<undefined | string>(undefined);
+  const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
 
   function handleMoveToHomeWithoutAlarm() {
     unShowModal();
@@ -45,6 +48,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
         if (res.data.message === "학부모에게 출결알람 보내기 성공") {
           handleMoveToHomeWithoutAlarm();
           setIsAgreeSend(undefined);
+          setSanckBarOpen(true);
         }
       },
       onError: (error) => {

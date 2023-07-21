@@ -18,13 +18,11 @@ export default function LoginInput() {
   const navigate = useNavigate();
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
-      // if(data?.data.)
-      console.debug("성공");
-      console.log(data.data);
-
-      // navigate("/welcome", {
-      //   state: { ...data.data },
-      // });
+      if (data?.data.code === 200) {
+        console.debug("성공");
+        const accessToken = data.data.data.accessToken;
+        console.log(accessToken);
+      }
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");

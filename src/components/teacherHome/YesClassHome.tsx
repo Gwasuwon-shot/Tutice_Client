@@ -1,3 +1,4 @@
+import CreateTreeCode from "../common/CreateTreeCode";
 import AlarmNUpcomingClass from "./AlarmNUpcomingClass";
 import WelcomeNUpPreviewBanner from "./WelcomeNUpPreviewBanner";
 
@@ -6,6 +7,7 @@ export default function YesClassHome() {
     <>
       <WelcomeNUpPreviewBanner />
       <AlarmNUpcomingClass />
+      <CreateTreeCode />
     </>
   );
 }

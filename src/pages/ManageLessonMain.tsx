@@ -3,14 +3,21 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { isSnackBarOpen } from "../atom/common/isSnackBarOpen";
 import CancelLessonMaintenanceSnackBar from "../components/common/CancelLessonMaintenanceSnackBar";
+import CreateTreeCode from "../components/common/CreateTreeCode";
 import TeacherFooter from "../components/common/TeacherFooter";
 import ExtensionQuestion from "../components/manageLesson/ExtensionQuestion";
 import MainLessons from "../components/manageLesson/MainLessons";
 import SuccessLessonMaintenanceSanckBar from "../components/modal/SuccessLessonMaintenanceSanckBar";
+import useGetMissingMaintenanceLesson from "../hooks/useGetMissingMaintenanceLesson";
 
 export default function ManageLessonMain() {
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
   const [isSucces, setIsSuccess] = useState(true);
+  const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
+
+  function checkMissingMaintenanceLessonExist() {
+    return missingMaintenanceLessonList?.length !== 0;
+  }
 
   return (
     <>
@@ -18,16 +25,18 @@ export default function ManageLessonMain() {
       {snackBarOpen && !isSucces && <CancelLessonMaintenanceSnackBar />}
       <MainLessonsWrapper>
         <MainLessonsHeader>수업관리</MainLessonsHeader>
-        <ExtensionQuestion setIsSuccess={setIsSuccess} />
+        {checkMissingMaintenanceLessonExist() && <ExtensionQuestion setIsSuccess={setIsSuccess} />}
         <MainLessons />
+        <CreateTreeCode />
       </MainLessonsWrapper>
+
       <TeacherFooter />
     </>
   );
 }
 
 const MainLessonsWrapper = styled.section`
-  padding: 0 1.4rem;
+  padding: 0 1.4rem 10rem 1.4rem;
 `;
 
 const MainLessonsHeader = styled.header`

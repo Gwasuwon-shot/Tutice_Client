@@ -10,12 +10,17 @@ import RestOfClassesInfo from "./RestOfClassesInfo";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
 import DepositRecordList from "./DepositRecord";
+import useGetRestOfClassesInfo from "../../hooks/useGetRestOfClassesInfo";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();
   const [isClassRecord, setIsClassRecord] = useState<boolean>(false);
-  const { lesson, idx, count, nowCount, percent, studentName, subject, scheduleList, teacherName } =
-    useGetLessonScheduleByParents(Number(lessonId));
+  const { lesson, idx, studentName, subject, scheduleList, teacherName } = useGetLessonScheduleByParents(
+    Number(lessonId),
+  );
+
+  const { count, nowCount, percent } = useGetRestOfClassesInfo(Number(lessonId));
+
   const navigate = useNavigate();
 
   function handleGotoLessonInfoList() {
@@ -83,6 +88,10 @@ const TeacherName = styled.p`
 const LessonManageIcon = styled(LessonInfoLessonRecordIc)`
   width: 2rem;
   height: 2rem;
+
+  position: absolute;
+  top: 5.3rem;
+  right: 1.493rem;
 `;
 
 const SelectMenuWrapper = styled.aside`

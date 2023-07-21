@@ -82,7 +82,7 @@ const LessonTime = styled.time`
 `;
 
 const AttendanceWrapper = styled.p<{ attendance: string }>`
-  width: 2.6rem;
+  width: 2.7rem;
 
   margin-left: 12.3rem;
 

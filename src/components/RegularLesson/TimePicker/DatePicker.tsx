@@ -1,7 +1,6 @@
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/swiper.min.css";
 
-import { useEffect } from "react";
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { dateState, firstLessonDay, openDatePickerState } from "../../../atom/timePicker/timePicker";
@@ -99,13 +98,6 @@ export default function DatePicker() {
   function handleConfirmDatePicker() {
     setIsDatePickerOpen(false);
   }
-
-  // check 용
-  useEffect(() => {
-    console.log(activeSlide);
-    console.log("첫수업일");
-    console.log(firstLesson);
-  }, [activeSlide]);
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
     <SwiperSlide key={index}>

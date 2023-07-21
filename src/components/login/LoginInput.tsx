@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import TextLabelLayout from "../signup/TextLabelLayout";
-import { viewingLoginIc, canViewingLoginIc } from "../../assets";
-import LoginButton from "./LoginButton";
-import { postLocalLogin } from "../../api/localLogin";
 import { useMutation } from "react-query";
+import { styled } from "styled-components";
+import { postLocalLogin } from "../../api/localLogin";
+import { canViewingLoginIc, viewingLoginIc } from "../../assets";
+import TextLabelLayout from "../signup/TextLabelLayout";
+import LoginButton from "./LoginButton";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -16,10 +16,10 @@ export default function LoginInput() {
   const [pwViewing, setPwViewing] = useState("password");
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: () => {
-      console.log("성공");
+      console.debug("성공");
     },
     onError: () => {
-      console.log("실패 ㅠㅠ");
+      console.debug("실패 ㅠㅠ");
     },
   });
 
@@ -35,7 +35,6 @@ export default function LoginInput() {
 
   //데이터 전달 : 추후 추가
   function handleLoginClick() {
-    console.log("클릭은 됏지?");
     postLoginData(userLogin);
   }
 

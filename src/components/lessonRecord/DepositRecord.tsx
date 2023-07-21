@@ -2,35 +2,19 @@ import React, { useState } from "react";
 import NoDeposit from "./NoDeposit";
 import { styled } from "styled-components";
 import DepositRecordItem from "./DepositRecordItem";
+import useGetDepositRecord from "../../hooks/useGetDepositRecord";
+import { useParams } from "react-router-dom";
+import { DepositInfoType } from "../../type/lessonRecord/lessonRecord";
 
 export default function DepositRecordList() {
   const [isDepositRecordExists, setIsDepositRecordExists] = useState(true);
-
-  const PAYMENT_LIST = [
-    {
-      idx: 34,
-      date: null,
-      amount: 300000,
-      status: false,
-    },
-    {
-      idx: 54,
-      date: "2023-08-23",
-      amount: 300000,
-      status: true,
-    },
-    {
-      idx: 37,
-      date: "2023-07-23",
-      amount: 300000,
-      status: true,
-    },
-  ];
+  const { lessonId } = useParams();
+  const { paymentRecordList } = useGetDepositRecord(Number(lessonId));
 
   return isDepositRecordExists ? (
     <>
       <DepositRecordListWrapper>
-        {PAYMENT_LIST.map(({ idx, date, amount, status }) => {
+        {paymentRecordList?.map(({ idx, date, amount, status }: DepositInfoType) => {
           return <DepositRecordItem key={idx} idx={idx} date={date} amount={amount} status={status} />;
         })}
       </DepositRecordListWrapper>

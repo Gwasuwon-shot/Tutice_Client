@@ -15,6 +15,7 @@ import checkCircle from "../core/checkAttendance/check_circle.json";
 import { ATTENDANCE_STATUS } from "../core/common/attendanceStatus";
 import { STUDENT_COLOR } from "../core/common/studentColor";
 import useModal from "../hooks/useModal";
+import useTeacherFooter from "../hooks/useTeacherFooter";
 
 export default function CompleteCheckAttendance() {
   const { state } = useLocation();
@@ -34,6 +35,7 @@ export default function CompleteCheckAttendance() {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
+  const { handleMoveToPage } = useTeacherFooter();
 
   useEffect(() => {
     setOpenModal(false);
@@ -44,7 +46,8 @@ export default function CompleteCheckAttendance() {
   }
 
   function handleMoveToHome() {
-    navigate("/");
+    // handleMoveToPage(TEACHER_FOOTER_CATEGORY.home);
+    navigate(-1);
   }
 
   function handleOpenSendAlarmModal() {

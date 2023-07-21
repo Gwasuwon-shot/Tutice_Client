@@ -32,7 +32,7 @@ export default function PasswordAgreeChecking() {
   const navigate = useNavigate();
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      navigate("/welcome", {
+      navigate("/login", {
         state: { ...data.data },
       });
     },

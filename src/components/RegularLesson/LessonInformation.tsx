@@ -1,6 +1,6 @@
 import {RegularLessonNotebookIc, RegularLessonPencilIc} from '../../assets';
 import {cycleNumberState, dateState} from '../../atom/timePicker/timePicker';
-import {openDatePickerState, openTimePickerState} from "../../atom/timePicker/timePicker";
+import {firstLessonDay, openDatePickerState, openTimePickerState} from "../../atom/timePicker/timePicker";
 
 import React from 'react';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
@@ -39,6 +39,7 @@ export default function LessonInformation() {
         setIsDatePickerOpen(true);
     }
     const [activeDateSlide, setActiveDateSlide] = useRecoilState(dateState);
+    const [lessonDay, setLessonDay] = useRecoilState(firstLessonDay);
     
     return (
         <LessonInformationWrapper>
@@ -54,8 +55,8 @@ export default function LessonInformation() {
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
-                    <StartDateButton type = "button" onClick={handleDatePicker}> {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 </StartDateButton>
-                    <RegularLessonPencilIcon />
+                    <StartDateButton type = "button" onClick={handleDatePicker}> {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 {lessonDay}요일</StartDateButton>
+                    <RegularLessonPencilIcon onClick={handleDatePicker}/>
                 </StartDate>
             </LessonWrapper>
         </LessonInformationWrapper>

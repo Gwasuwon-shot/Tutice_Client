@@ -1,12 +1,12 @@
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/swiper.min.css";
 
-import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { dateState, firstLessonDay, openDatePickerState } from "../../../atom/timePicker/timePicker";
 
-import { useRecoilState } from "recoil";
+import SwiperCore from "swiper";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface monthCalenderProps {
   month: number;

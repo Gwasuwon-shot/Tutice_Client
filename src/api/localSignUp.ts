@@ -7,6 +7,7 @@ export async function newUserPost(newUser: newUserDataTypes) {
     headers: {
       "Content-Type": "application/json",
     },
+    withCredentials: true,
   });
   return data;
 }

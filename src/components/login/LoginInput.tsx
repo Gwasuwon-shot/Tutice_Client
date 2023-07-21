@@ -5,6 +5,7 @@ import { postLocalLogin } from "../../api/localLogin";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -14,9 +15,15 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
+  const navigate = useNavigate();
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       console.debug("성공");
+      console.log(data);
+
+      navigate("/welcome", {
+        state: { ...data.data },
+      });
     },
     onError: () => {
       console.debug("실패 ㅠㅠ");

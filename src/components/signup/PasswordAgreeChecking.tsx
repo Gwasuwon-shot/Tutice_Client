@@ -31,10 +31,8 @@ export default function PasswordAgreeChecking() {
   const [confirmViewing, setConfirmViewing] = useState("password");
   const navigate = useNavigate();
   const { mutate: postNewUser } = useMutation(newUserPost, {
-    onSuccess: (data) => {
-      navigate("/login", {
-        state: { ...data.data },
-      });
+    onSuccess: () => {
+      navigate("/login");
     },
     onError: (err) => {
       console.log(err);

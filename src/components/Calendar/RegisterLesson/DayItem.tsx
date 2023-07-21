@@ -115,7 +115,6 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   align-items: center;
 
   height: 1.4rem;
-  width: 3.5rem;
   ${({ theme }) => theme.fonts.caption02};
 
   color: ${({ theme }) => theme.colors.grey600};

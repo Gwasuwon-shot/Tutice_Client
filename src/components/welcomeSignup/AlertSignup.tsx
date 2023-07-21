@@ -81,7 +81,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={handleShowNotification} buttonText={"할래요!"} />
+      <ButtonLayout onClick={handleAllowNotification} buttonText={"할래요!"} />
     </>
   );
 }

@@ -5,18 +5,18 @@ import { STUDENT_COLOR, DEEFAULT_STUDENT_COLOR } from "../../../core/common/stud
 import { DayItemProps } from "../../../type/calendar/dayItemType";
 import Schedule from "../../../pages/Schedule";
 
-export default function DayItem(props) {
-  const { date, setOpenModal, setSelectedDate, myLessons, temporRegularSchedule, subject, studentName } = props;
+export default function DayItem(props: DayItemProps) {
+  const { date, setOpenModal, setSelectedDate, myLessons, temporRegularSchedule } = props;
   const formattedDate = format(date, "d");
   const isSundayDate = isSunday(date);
   const isTodayDate: boolean = isToday(date);
   const myLessonLength: number | undefined = myLessons?.dailyScheduleList.length;
-  console.log(temporRegularSchedule?.scheduleList);
+
   function handleOpenModal() {
     setSelectedDate(date);
     setOpenModal(true);
   }
-  console.log(temporRegularSchedule?.scheduleList[0]?.startTime);
+
   return (
     <>
       <Dayitem onClick={handleOpenModal} key={date.toString()} $issunday={isSundayDate}>

@@ -59,13 +59,9 @@ const SectionName = styled.h1`
 
 const LessonWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
 
-  width: 28.8rem;
-  height: 9.7rem;
-  padding-left: 0.8rem;
-  margin-left: 1.5rem;
   gap: 1.9rem;
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey50};

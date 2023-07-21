@@ -5,7 +5,7 @@ export { ReactComponent as FourthSwiperThirdTree } from "./icon/FourthSwiperThir
 export { ReactComponent as LessonInfoLessonRecordIc } from "./icon/LessonInfoLessonRecordIc.svg";
 export { ReactComponent as MainLogoGradation } from "./icon/MainLogoGradationOnBoardingIc.svg";
 export { ReactComponent as MainLogo } from "./icon/MainLogoOnBoardingIc.svg";
-export { ReactComponent as MyPageSelectedParentsHomeIc } from "./icon/MyPageSelectedParentsHomeIc.svg";
+export { ReactComponent as MyPageSelectedParentsHomeIc } from "./icon/MypageSelectedParentsHomeIc.svg";
 export { ReactComponent as NoClassLogoParentsHomeIc } from "./icon/NoClassLogoParentsHomeIc.svg";
 export { ReactComponent as RoleCheckSignupIc } from "./icon/RoleCheckSignupIc.svg";
 export { ReactComponent as RoleNoneCheckSignupIc } from "./icon/RoleNoneCheckSignupIc.svg";

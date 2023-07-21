@@ -104,7 +104,8 @@ const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
 `;
 
 const CancelImpossibleModalWrapper = styled.aside`
-  position: absolute;
+  position: fixed;
+  z-index: 3;
   margin: -37.9rem 0 0 -1.5rem;
 `;
 

@@ -11,9 +11,13 @@ export default function AlarmBanner() {
     navigate("/no-attendance-check");
   }
 
+  function handleMoveToMissingMaintenanceCheck() {
+    navigate("/manage-lesson");
+  }
+
   return (
     <>
-      {isMissingMaintenance && <MissingMaintenanceTeacherHomeIcon />}
+      {isMissingMaintenance && <MissingMaintenanceTeacherHomeIcon onClick={handleMoveToMissingMaintenanceCheck} />}
       {isMissingAttendance && <MissingAttendaceTeacherHomeIcon onClick={handleMoveToMissingAttendaceCheck} />}
     </>
   );

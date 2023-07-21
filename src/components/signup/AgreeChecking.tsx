@@ -101,14 +101,16 @@ export default function AgreeChecking() {
 
   useEffect(() => {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
-    console.log();
-    console.log(newUser);
 
-    newUser.hasOwnProperty(`password`) && completeCheck ? setIsActive(true) : setIsActive(false);
+    newUser.password && completeCheck ? setIsActive(true) : setIsActive(false);
   }, [isAllChecked()]);
 
   function allCheckedIndex(id: number) {
     return id === 0;
+  }
+
+  function checkEssentialAgreeDone(essentialCheck: number) {
+    return essentialCheck === 3;
   }
 
   function optionalIndex(id: number) {
@@ -123,10 +125,6 @@ export default function AgreeChecking() {
     const tempCheckAgrees = checkAgrees;
     tempCheckAgrees[0].selected = bool;
     setCheckAgrees([...tempCheckAgrees]);
-  }
-
-  function checkEssentialAgreeDone(essentialCheck: number) {
-    return essentialCheck === 2;
   }
 
   function handleToSignUp() {

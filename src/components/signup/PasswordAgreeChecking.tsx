@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { newUserPost } from "../../api/localSignUp";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
@@ -76,8 +75,7 @@ export default function PasswordAgreeChecking() {
   }
   return (
     <>
-      {/* 입력 완료되면 100 */}
-      <ProgressBar progress={75} />
+      <ProgressBar progress={isConfirmed ? 75 : 100} />
       <BackButtonWrapper>
         <BackButton />
       </BackButtonWrapper>
@@ -129,7 +127,7 @@ export default function PasswordAgreeChecking() {
             </PasswordIconWrapper>
           </InputConfirmWrapper>
 
-          {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+          {!isConfirmed ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
 
           {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
 

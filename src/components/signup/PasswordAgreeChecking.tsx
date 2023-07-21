@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { useMutation } from "react-query";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { newUserPost } from "../../api/localSignUp";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { newUserData } from "../../atom/signup/signup";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { PW_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
@@ -24,23 +22,10 @@ export default function PasswordAgreeChecking() {
   const [confirmPw, setConfirmPw] = useState(" ");
   const [isPassword, setIsPassword] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
-  const navigate = useNavigate();
-  const { mutate: postNewUser } = useMutation(newUserPost, {
-    onSuccess: (data) => {
-      console.log("성공", data.data);
-      navigate("/welcome", {
-        state: { ...data.data },
-      });
-    },
-    onError: () => {
-      console.log("실패");
-    },
-  });
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -83,13 +68,7 @@ export default function PasswordAgreeChecking() {
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
 
     pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
-
-    pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
   }, [pw, confirmPw, isPassword, isConfirmed, newUser, setPw]);
-
-  function handleToSignUp() {
-    postNewUser(newUser);
-  }
 
   function handleConfirmBlur() {
     setConfirmFocus(false);
@@ -155,10 +134,6 @@ export default function PasswordAgreeChecking() {
           {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
 
           <AgreeChecking />
-
-          <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
-            <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
-          </SubmitButton>
         </form>
       </Container>
     </>
@@ -219,27 +194,6 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
-`;
-
-const SubmitButton = styled.button<{ $isActive: boolean }>`
-  position: fixed;
-  bottom: 0;
-
-  width: 31.8rem;
-  height: 6.3rem;
-  margin-left: -1.6rem;
-
-  background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
-  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};
-
-  ${({ theme }) => theme.fonts.body01};
-`;
-const ButtonText = styled.p`
-  position: relative;
-
-  /* top- 정확한 값으로 수정 필요 */
-  top: -1rem;
-  ${({ theme }) => theme.fonts.body01};
 `;
 
 const PasswordMatched = styled.p`

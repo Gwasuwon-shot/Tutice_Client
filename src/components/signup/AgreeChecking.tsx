@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { useMutation } from "react-query";
 import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import { useNavigate } from "react-router-dom";
+import { newUserPost } from "../../api/localSignUp";
 
 export default function AgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -14,7 +18,20 @@ export default function AgreeChecking() {
   const [allClicked, setAllClicked] = useState(false);
   const [completeCheck, setCompleteCheck] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
+  const navigate = useNavigate();
+  const { mutate: postNewUser } = useMutation(newUserPost, {
+    onSuccess: (data) => {
+      console.log("성공", data.data);
+      navigate("/welcome", {
+        state: { ...data.data },
+      });
+    },
+    onError: () => {
+      console.log("실패");
+    },
+  });
   function handleMoveToNotion(e: React.MouseEvent<HTMLDivElement>) {
     const target = e.target as HTMLDivElement;
     switch (target.innerText) {
@@ -83,6 +100,8 @@ export default function AgreeChecking() {
 
   useEffect(() => {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
+
+    // pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
   }, [isAllChecked()]);
 
   function allCheckedIndex(id: number) {
@@ -107,46 +126,52 @@ export default function AgreeChecking() {
     return essentialCheck === 2;
   }
 
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
+  function handleToSignUp() {
+    postNewUser(newUser);
+  }
 
   return (
-    <TosWrapper>
-      <CheckWrapper>
-        {checkAgrees.map(({ id, selected }) => (
-          <ICWrapper key={id}>
-            {selected ? (
-              <div onClick={() => handleButtonChecked(id)}>
-                <TosCheckSignupIcon />
-              </div>
-            ) : (
-              <div onClick={() => handleButtonChecked(id)}>
-                <TosNoneSignupIcon />
-              </div>
-            )}
-            {id === 0 ? <Horizon /> : null}
-          </ICWrapper>
-        ))}
-      </CheckWrapper>
+    <>
+      <TosWrapper>
+        <CheckWrapper>
+          {checkAgrees.map(({ id, selected }) => (
+            <ICWrapper key={id}>
+              {selected ? (
+                <div onClick={() => handleButtonChecked(id)}>
+                  <TosCheckSignupIcon />
+                </div>
+              ) : (
+                <div onClick={() => handleButtonChecked(id)}>
+                  <TosNoneSignupIcon />
+                </div>
+              )}
+              {id === 0 ? <Horizon /> : null}
+            </ICWrapper>
+          ))}
+        </CheckWrapper>
 
-      <TextWrapper>
-        {textAgrees.map((textAgree) => (
-          <IndividualTextWrapper key={textAgree.id}>
-            {textAgree.optional === "(선택)" ? (
-              <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
-            ) : (
-              <Essential>{textAgree.optional}</Essential>
-            )}
-            <HyperLink onClick={(e: React.MouseEvent<HTMLDivElement>) => handleMoveToNotion(e)}>
-              {textAgree.linkText}
-            </HyperLink>
-            <CheckText> {textAgree.boldText} </CheckText>
-            <CheckSubText>{textAgree.lightText}</CheckSubText>
-          </IndividualTextWrapper>
-        ))}
-      </TextWrapper>
-    </TosWrapper>
+        <TextWrapper>
+          {textAgrees.map((textAgree) => (
+            <IndividualTextWrapper key={textAgree.id}>
+              {textAgree.optional === "(선택)" ? (
+                <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
+              ) : (
+                <Essential>{textAgree.optional}</Essential>
+              )}
+              <HyperLink onClick={(e: React.MouseEvent<HTMLDivElement>) => handleMoveToNotion(e)}>
+                {textAgree.linkText}
+              </HyperLink>
+              <CheckText> {textAgree.boldText} </CheckText>
+              <CheckSubText>{textAgree.lightText}</CheckSubText>
+            </IndividualTextWrapper>
+          ))}
+        </TextWrapper>
+      </TosWrapper>
+
+      <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
+        <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
+      </SubmitButton>
+    </>
   );
 }
 
@@ -236,4 +261,25 @@ const IndividualTextWrapper = styled.div`
 
   height: 2rem;
   margin-bottom: 1.6rem;
+`;
+
+const SubmitButton = styled.button<{ $isActive: boolean }>`
+  position: fixed;
+  bottom: 0;
+
+  width: 31.8rem;
+  height: 6.3rem;
+  margin-left: -1.6rem;
+
+  background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
+  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};
+
+  ${({ theme }) => theme.fonts.body01};
+`;
+const ButtonText = styled.p`
+  position: relative;
+
+  /* top- 정확한 값으로 수정 필요 */
+  top: -1rem;
+  ${({ theme }) => theme.fonts.body01};
 `;

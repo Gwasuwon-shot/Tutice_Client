@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -5,6 +6,7 @@ import styled from "styled-components";
 import { updateScheduleAttendance } from "../../api/updateScheduleAttendance";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { ATTENDANCE_CHECK_RESPONSE } from "../../core/checkAttendance/attendaceCheckResponse";
+import FutureImpossibleModal from "../modal/FutureImpossibleModal";
 import BasicDoubleModal from "./BasicDoubleModal";
 
 interface AttendanceDoubleCheckingModalProps {
@@ -15,6 +17,7 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
   const { setIsCheckingModalOpen } = props;
   const navigate = useNavigate();
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const [isImpossibleModalOpen, setIsImpossibleModalOpen] = useState(false);
 
   function handleBackToCheckAttendance() {
     setIsCheckingModalOpen(false);
@@ -24,8 +27,10 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
     onSuccess: () => {
       navigate("/complete-check-attendance", { state: ATTENDANCE_CHECK_RESPONSE });
     },
-    onError: (err) => {
-      console.log(err);
+    onError: () => {
+      // if (err?.response?.data?.message) {
+      setIsImpossibleModalOpen(true);
+      // }
     },
   });
 
@@ -41,14 +46,21 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
     }
   }
 
+  function handleCloseModal() {
+    setIsImpossibleModalOpen(false);
+  }
+
   return (
-    <BasicDoubleModal
-      leftButtonName="취소"
-      rightButtonName="확인"
-      handleClickLeftButton={handleBackToCheckAttendance}
-      handleClickRightButton={handleMoveToSuccessCheckingAttendance}>
-      <AskingSureToCheckAttendance>{checkStatusText()} 체크하시겠어요?</AskingSureToCheckAttendance>
-    </BasicDoubleModal>
+    <>
+      {isImpossibleModalOpen && <FutureImpossibleModal handleCloseModal={handleCloseModal} />}
+      <BasicDoubleModal
+        leftButtonName="취소"
+        rightButtonName="확인"
+        handleClickLeftButton={handleBackToCheckAttendance}
+        handleClickRightButton={handleMoveToSuccessCheckingAttendance}>
+        <AskingSureToCheckAttendance>{checkStatusText()} 체크하시겠어요?</AskingSureToCheckAttendance>
+      </BasicDoubleModal>
+    </>
   );
 }
 

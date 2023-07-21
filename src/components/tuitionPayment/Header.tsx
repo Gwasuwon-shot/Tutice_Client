@@ -2,12 +2,18 @@ import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
 
+import { useNavigate } from "react-router-dom";
 export default function Header() {
+    const navigate = useNavigate();
+
+    function handleMoveToBack() {
+      navigate(-1);
+    }
 
     return (
     
         <HeaderWrapper>
-            <RegisterLessonHeaderIc />
+            <RegisterLessonHeaderIc  onClick={handleMoveToBack} />
             <PaymentHeader> 수업비 입금에 대한 <br /> 정보를 입력해주세요 </PaymentHeader> 
         </HeaderWrapper>
 

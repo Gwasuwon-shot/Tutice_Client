@@ -98,48 +98,6 @@
 
 </div>
 
-## 📁 폴더 구조
-
-```
-|-- 📁 .github
-|-- 📁 .husky
-|-- 📁 node_modules
-|-- 📁 public
-|-- 📁 src
-	|-- 📁 api
-	|-- 📁 atom
-	|-- 📁 assets
-			|-- 📁 icon
-			|-- 📁 image
-			|-- 📁 assets.d.ts
-			|-- 📁 index.ts
-	|-- 📁 core
-	|-- 📁 components
-			|-- 📁 common
-	|-- 📁 hooks
-	|-- 📁 mocks
-	|-- 📁 pages
-	|-- 📁 style
-			|-- globalStyle.ts
-			|-- style.d.ts
-			|-- theme.ts
-	|-- 📁 utils
-	|-- 📁 type
-	|-- App.tsx
-	|-- main.tsx
-	|-- Router.tsx
-	|-- vite-env.d.ts
-|-- .eslintrc.cjs
-|-- .gitignore
-|-- .prettierrc
-|-- index.html
-|-- package.json
-|-- README.md
-|-- tsconfig.json
-|-- tsconfig.node.json
-|-- vite.config.ts
-|-- yarn.lock
-```
 
 ## 💡 서비스 핵심 기능 소개
 
@@ -156,7 +114,7 @@
 -> 조건문을 통해 시간 및 종료 시간을 모두 입력하지 않았을 때 수업 일시 추가 버튼 비활성화 </br>
 ->시간만 입력하고 요일은 입력하지 않은 경우에는 수업 일시 추가 버튼 비활성화</b> </br>
 ->요일을 선택할 때, 시작, 종료 시간을 입력하지 않은 경우 다른 버튼 비활성화 <br>
-->첫 수업일에 해당하는 요일이 선택한 수업 일시 요일에 해당하지 않는 경우 저장 버튼 비활성화
+->첫 수업일에 해당하는 요일이 선택한 수업 일시 요일에 해당하지 않는 경우 저장 버튼 비활성화 </br>
 ->첫 수업일에 해당하는 요일이 선택한 수업 일시 요일에 해당하는 경우 저장 버튼은 활성화
 
 #### 👀 <b> how? </b>
@@ -254,13 +212,64 @@
 `공통 컴포넌트`를 이용하여, 토스트 모달, 수정 뷰 슬라이더 등 구현 </br>
 `react-query`의 get`-`patch`를 사용한 data 관리 </br>
 
+</br>
+
 ### 5️⃣ PWA를 활용한 푸쉬 알림
 
 ![LockScreen_학부모_8회차 끝](https://github.com/Gwasuwon-shot/Tutice_Client/assets/100409061/bffcd734-aea1-483d-a919-b0f364999df0)
 
 #### 💬 <b> what? </b> </br>
 
+<b>PWA 환경에서 일반 네이티브 앱과 동일하게 푸시 알림을 받을 수 있도록 설정</b></br>
 선생님 사용자가 출결 체크 또는 입금 알림을 보낼 경우, <b>학부모 사용자에게 푸쉬 알림이 가도록 구현</b> 
 
 #### 👀 <b> how? </b>
+파이어베이스 프로젝트 생성 후 받은 후 <b> sdk를 이용해 FCM을 연결하여</b> 푸시 알림 구현 </br> 
+FCM으로부터 유저의 `deviceToken`을 받고, 이를 <b>서버에게 post하여 기기 등록</b></br>
+등록된 기기로 알림이 갈 수 있도록 구현</br>. 
+PWA 환경에서 일반 네이티브 앱과 동일하게 푸시 알림을 받을 수 있습니다.
 
+
+
+## 📁 폴더 구조
+
+```
+|-- 📁 .github
+|-- 📁 .husky
+|-- 📁 node_modules
+|-- 📁 public
+|-- 📁 src
+	|-- 📁 api
+	|-- 📁 atom
+	|-- 📁 assets
+			|-- 📁 icon
+			|-- 📁 image
+			|-- 📁 assets.d.ts
+			|-- 📁 index.ts
+	|-- 📁 core
+	|-- 📁 components
+			|-- 📁 common
+	|-- 📁 hooks
+	|-- 📁 mocks
+	|-- 📁 pages
+	|-- 📁 style
+			|-- globalStyle.ts
+			|-- style.d.ts
+			|-- theme.ts
+	|-- 📁 utils
+	|-- 📁 type
+	|-- App.tsx
+	|-- main.tsx
+	|-- Router.tsx
+	|-- vite-env.d.ts
+|-- .eslintrc.cjs
+|-- .gitignore
+|-- .prettierrc
+|-- index.html
+|-- package.json
+|-- README.md
+|-- tsconfig.json
+|-- tsconfig.node.json
+|-- vite.config.ts
+|-- yarn.lock
+```

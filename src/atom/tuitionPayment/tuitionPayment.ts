@@ -24,3 +24,16 @@ export const paymentOrder = atom<string>({
   key: "paymentOrder",
   default: "",
 });
+
+interface lessonCodeAndPaymentIdProp {
+  lessonCode: string,
+  paymentRecordId: number,
+}
+
+export const lessonCodeAndPaymentId = atom<lessonCodeAndPaymentIdProp>({
+  key: "lessonCodeAndPaymentId",
+  default: {
+    "lessonCode" : "",
+    "paymentRecordId" : -1,
+  }
+})

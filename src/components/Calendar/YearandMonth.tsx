@@ -1,7 +1,6 @@
-import React from "react";
-import styled from "styled-components";
 import { format } from "date-fns";
-import { NextMonthArrowButton, PrevMonthArrowButton, CancelButton } from "../../assets";
+import styled from "styled-components";
+import { CancelButton, NextMonthArrowButton, PrevMonthArrowButton } from "../../assets";
 
 interface YearandMonthProps {
   currentMonth: Date;

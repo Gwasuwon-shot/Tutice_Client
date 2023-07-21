@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { TosNoneSignupIc } from "../../assets";
 import { TosCheckedSignupIc } from "../../assets";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { useMutation } from "react-query";
-import { newUserData } from "../../atom/signup/signup";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 import { useNavigate } from "react-router-dom";
 import { newUserPost } from "../../api/localSignUp";
+import { setCookie } from "../../api/cookie";
+import { userRoleData } from "../../atom/loginUser/loginUser";
 
 export default function AgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);

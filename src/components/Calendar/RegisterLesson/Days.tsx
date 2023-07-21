@@ -25,11 +25,9 @@ export default function Days(props: DaysProp) {
   const formattedMonth = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}`;
 
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
-  const temporaryScheduleList = useRecoilValue(temporarySchedule);
-  console.log(temporaryScheduleList);
-  const { regularScheduleList, studentName, subject } = temporaryScheduleList;
+  const temporarySchedules = useRecoilValue(temporarySchedule);
+  const temporaryList = temporarySchedules.temporaryScheduleList;
 
-  console.log(temporaryScheduleList);
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
   let day: Date = startDate;
@@ -37,7 +35,7 @@ export default function Days(props: DaysProp) {
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       const myLessons = isUserSchedule?.find((item) => isSameDay(new Date(item.date), day));
-      const temporRegularSchedule = regularScheduleList?.find((item) => isSameDay(new Date(item.date), day));
+      const temporRegularSchedule = temporaryList?.find((item) => isSameDay(new Date(item.date), day));
       days.push(
         <DayItem
           setOpenModal={setOpenModal}
@@ -46,8 +44,6 @@ export default function Days(props: DaysProp) {
           key={day.toString()}
           myLessons={myLessons}
           temporRegularSchedule={temporRegularSchedule}
-          studentName={studentName}
-          subject={subject}
         />,
       );
       day = addDays(day, 1);

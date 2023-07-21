@@ -5,23 +5,18 @@ import { STUDENT_COLOR, DEEFAULT_STUDENT_COLOR } from "../../../core/common/stud
 import { DayItemProps } from "../../../type/calendar/dayItemType";
 import Schedule from "../../../pages/Schedule";
 
-
-
 export default function DayItem(props) {
   const { date, setOpenModal, setSelectedDate, myLessons, temporRegularSchedule, subject, studentName } = props;
-  // const { endTime, startTime } = temporRegularSchedule;
-  console.log(temporRegularSchedule?.endTime);
-  console.log(studentName);
   const formattedDate = format(date, "d");
   const isSundayDate = isSunday(date);
   const isTodayDate: boolean = isToday(date);
   const myLessonLength: number | undefined = myLessons?.dailyScheduleList.length;
-  console.log(temporRegularSchedule);
+  console.log(temporRegularSchedule?.scheduleList);
   function handleOpenModal() {
     setSelectedDate(date);
     setOpenModal(true);
   }
-
+  console.log(temporRegularSchedule?.scheduleList[0]?.startTime);
   return (
     <>
       <Dayitem onClick={handleOpenModal} key={date.toString()} $issunday={isSundayDate}>
@@ -29,13 +24,14 @@ export default function DayItem(props) {
           {formattedDate}
         </DayText>
         <LessonWrapper>
-          {temporRegularSchedule?.endTime && (
+          {temporRegularSchedule?.scheduleList && (
             <TemporaryScheduleWrapper $backgroundcolor={DEEFAULT_STUDENT_COLOR}>
-              {temporRegularSchedule?.startTime}
+              {temporRegularSchedule?.scheduleList[0]?.startTime}
+              {temporRegularSchedule?.scheduleList[0]?.studentName?.slice(0, 2)}
             </TemporaryScheduleWrapper>
           )}
-          {myLessons && (myLessonLength as number) >= 4
-            ? myLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
+          {temporRegularSchedule?.scheduleList && myLessons && (myLessonLength as number) >= 3
+            ? myLessons?.dailyScheduleList.map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
 
@@ -45,7 +41,7 @@ export default function DayItem(props) {
                   </ScheduleWrapper>
                 );
               })
-            : myLessons?.dailyScheduleList.map((lesson) => {
+            : myLessons?.dailyScheduleList.slice(0, 3).map((lesson) => {
                 const { schedule } = lesson;
                 const { startTime, studentName, idx } = schedule;
 
@@ -76,7 +72,7 @@ const Dayitem = styled.article<DayProp>`
   cursor: pointer;
 
   width: 4.5rem;
-  height: 6rem;
+  height: 7rem;
   gap: 0.2rem;
 
   padding-bottom: 0.3rem;
@@ -119,7 +115,7 @@ const ScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   align-items: center;
 
   height: 1.4rem;
-
+  width: 3.5rem;
   ${({ theme }) => theme.fonts.caption02};
 
   color: ${({ theme }) => theme.colors.grey600};
@@ -136,7 +132,7 @@ const MoreLessonIcon = styled(CalendarMoreLessonIc)`
 const TemporaryScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   display: flex;
   align-items: center;
-
+  gap: 0.1rem;
   height: 1.4rem;
 
   ${({ theme }) => theme.fonts.caption02};

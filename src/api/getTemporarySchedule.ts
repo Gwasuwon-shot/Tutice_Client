@@ -1,17 +1,17 @@
 import axios from "axios";
 
-interface listProp {
-    "dayOfWeek": string,
-	"startTime": string,
-	"endTime": string,
+interface Day {
+    dayOfWeek: string;
+    startTime: string;
+    endTime: string;
 }
-
+  
 interface temporaryProp {
-	"studentName" : string,
-	"subject" : string,
-	"count" : number,
-	"startDate" : string,
-	"regularScheduleList": listProp[],
+	studentName : string,
+	subject : string,
+	count : number,
+	startDate : string,
+	regularScheduleList: Day[],
 }
 
 export async function getTemporarySchedule(props: temporaryProp) {

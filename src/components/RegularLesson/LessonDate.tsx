@@ -1,75 +1,32 @@
 import React, { useEffect } from 'react';
 import {RegularLessonCalenderIc, RegularLessonClockIc} from '../../assets';
-import {dateState, dayState, firstLessonDay, focusDayState, openFinishDetailState, openStartDetailState} from "../../atom/timePicker/timePicker";
+import {cycleNumberState, dateState, dayState, firstLessonDay, focusDayState, openFinishDetailState, openStartDetailState} from "../../atom/timePicker/timePicker";
 import {studentNameState, subjectNameState} from '../../atom/common/datePicker';
 
 import DetailTimePicker from './TimePicker/DetailTimePicker';
 import RoundBottomButton from '../common/RoundBottomButton';
 import SelectedDayAndTime from './SelectedDayAndTime';
+import {getTemporarySchedule} from '../../api/getTemporarySchedule';
 import styled from 'styled-components';
+import {useMutation} from 'react-query';
 import { useRecoilState } from 'recoil';
 
 interface DayProp {
     isSelected: boolean;
 };
 
-function GenerateTemporaryScheduleList() {
-    const daysOfWeek = ['월', '화', '수', '목', '금', '토', '일'];
-
-    const [studentName, setStudentName] = useRecoilState(studentNameState);
-    const [subject, setSubjectName] = useRecoilState(subjectNameState);
-    
-    /*
-    const [selectedDays, setSelectedDays] = useRecoilState(dayState);
-    const [firstDate, setFirstDate] = useRecoilState(dateState); 
-    const [firstDay, setFirstDay ] = useRecoilState(firstLessonDay); 
-    const firstLessonDayIndex = daysOfWeek.indexOf(firstDay);
-    let temporaryScheduleList;
-    
-    selectedDays.forEach((item) => {
-        let tempYear = firstDate.year;         
-        let tempMonth = firstDate.month;    
-        let tempDate = firstDate.date;      
-        
-        let itemDayIndex = daysOfWeek.indexOf(item.dayOfWeek);  
-        let dayDifference = firstLessonDayIndex - itemDayIndex;
-        tempDate = firstDate.date - dayDifference;
-
-        let daysInMonth = new Date(firstDate.year, tempMonth, 0).getDate(); 
-
-        if (tempDate <= 0) {
-            tempMonth -= 1;
-            daysInMonth = new Date(firstDate.year, tempMonth, 0).getDate(); // 해당 달의 마지막날
-            tempDate = daysInMonth + tempDate;
-        } else if (tempDate > daysInMonth) {
-            tempMonth += 1;
-            tempDate = tempDate - daysInMonth;
-        } 
-
-        temporaryScheduleList.push({
-            date: tempDate`${tempYear}-${tempMonth.padStart(2, "0")}-${tempDate.padStart(2, "0")}`
-            dayOfWeek: item.dayOfWeek,
-            startTime: item.startTime,
-            endTime: item.endTime,
-        })
-        */
-
-    })
-    /*
-    dayDifference를 계산해서, 그만큼 계산해주면 되는데
-    그때 새로 계산한 날짜가 1일보다 작거나 그 달의 마지막 날짜보다 더 크다면 
-    달이 더 줄어들거나, 커져야 해.
-    근데 그 때 그 달이 1월이거나 12월인 경우에는, 년도까지 달라져. 
-
-    월요일이 첫 수업일이다 
-    -> 0 - 1, 0 - 2, .. 0 - 6 = - 1 ~ - 6 만큼 날짜를 더한다.
-    화요일이 첫 수업일이다
-    -> 1 - 0, 1 - 2, .. 1 - 6 = 1, -1 ~ -6. 1이면 빼고, 음이면 그만큼 더한다.
-    수요일이 첫 수업일이다
-    -> 2 - 0, 2 - 1, .. 2 - 3, .. 2 - 6 = 2, 1, -1, .. -4. 양수면 빼고, 음이면 더한다.
-    일요일이 첫 수업일이다
-    -> 6 - 0, 6 - 1, .. 6- 5 -> 양수이므로 모두 뺀다.
-    */
+interface Day {
+    dayOfWeek: string;
+    startTime: string;
+    endTime: string;
+}
+  
+interface temporaryProp {
+	studentName : string,
+	subject : string,
+	count : number,
+	startDate : string,
+	regularScheduleList: Day[],
 }
 
 export default function LessonDate() {
@@ -135,34 +92,36 @@ export default function LessonDate() {
     }
 
     // post 로직 추가
-    // dayState = [{"dayOfWeek": "월","startTime": "22:00","endTime":"23:00"}, "dayOfWeek": "금","startTime": "22:00","endTime":"23:00"]
-    // firstLessonDay = "월"
-    /*
-    studentNameState, subjectNameState
-        {
-			"studentName" : "유남생",
-			"subject" : "수영",
-			"temporaryScheduleList" : [
-				{
-					"date": "2023-07-17",
-					"dayOfWeek": "월",
-					"startTime": "22:00",
-					"endTime":"23:00"
-				},
-				{
-					"date": "2023-07-20",
-					"dayOfWeek": "금",
-					"startTime": "22:00",
-					"endTime":"23:00"
-				}
-			]
-		}
     
-    */
+    const [studentName, setStudentName] = useRecoilState(studentNameState);
+    const [subject, setSubject] = useRecoilState(subjectNameState);
+    const [count, setCount] = useRecoilState(cycleNumberState);
+    const [scheduleDate, setscheduleDate] = useRecoilState(dateState);
+    const startDate = `${scheduleDate.year}-${String(scheduleDate.month).padStart(2, "0")}-${String(scheduleDate.date).padStart(2, "0")}`;
+    
+    const postInformation: temporaryProp =
+    {
+		"studentName" : studentName,
+		"subject" : subject,
+        "count": count,
+        "startDate": startDate,
+		"regularScheduleList" : selectedDays,
+	};
+    
+    const {mutate: getNewTemporarySchedule} = useMutation(
+        getTemporarySchedule,
+        {
+            onSuccess: (response) => {
+                console.log('성공');
+            },
+            
+            onError: (error) => console.log(error),
+        }
+    )
 
-    function postTemporary() {
-        
-    }
+    function postTemporary(info: temporaryProp) {
+        getNewTemporarySchedule(postInformation);
+    };
     
     return (
         <LessonDateWrapper>
@@ -224,7 +183,7 @@ export default function LessonDate() {
 
             <ModalWrapper>
                 <RegularLessonCalenderIcon />
-                <ModalButton onClick = {postTemporary}> 캘린더로 일정 확인하기 </ModalButton>
+                <ModalButton onClick = {() => postTemporary(postInformation)}> 캘린더로 일정 확인하기 </ModalButton>
             </ModalWrapper>
             
             {selectedDays.map((day, index) => (

@@ -1,12 +1,20 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { CopylessonShareIc, ShareOthersLessonShareIc } from "../assets";
+import { temporarySchedule } from "../atom/timePicker/timePicker";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
 
 export default function LessonShare() {
   const navgiate = useNavigate();
-  const URL = "https://tuticetutice.com/kdfkdf11";
+  const [tempSchedule, setTempSchedule] = useRecoilState(temporarySchedule);
+  const [URL, setURL] = useState(`https://tutice.com/${tempSchedule?.lessonCode}`);
+
+  useEffect(() => {
+    setURL(`https://tutice.com/${tempSchedule?.lessonCode}`);
+  }, [tempSchedule]);
 
   function handleMoveToHome() {
     navgiate("/");
@@ -16,7 +24,7 @@ export default function LessonShare() {
     if (navigator.share) {
       navigator.share({
         title: "나무코드 공유",
-        text: "안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. [김은수]선생님이 [박송현]학생의 Tutice 초대장을 보냈습니다. \nTutice 링크 \n https://tuticetutice.com/kdfkdf11",
+        text: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. [김은수]선생님이 [박송현]학생의 Tutice 초대장을 보냈습니다. \nTutice 링크 \n ${URL}`,
         url: URL,
       });
     } else {

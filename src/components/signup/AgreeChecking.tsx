@@ -31,13 +31,12 @@ export default function AgreeChecking() {
       if (data?.data.code === 201) {
         console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
-        console.log(accessToken);
-        setStep(0);
+        setStep(1);
         setUserRole(data.data.data.user.role);
         setCookie("accessToken", accessToken, {
           secure: true,
         });
-        navigate("/");
+        navigate("/welcome");
       }
     },
     onError: () => {

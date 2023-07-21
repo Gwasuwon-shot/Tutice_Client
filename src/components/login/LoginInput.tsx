@@ -30,7 +30,7 @@ export default function LoginInput() {
       if (data?.data.code === 200) {
         console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
-        setStep(0);
+        setStep(1);
         setUserRole(data.data.data.user.role);
         setCookie("accessToken", accessToken, {
           secure: true,

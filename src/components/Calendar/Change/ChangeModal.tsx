@@ -33,10 +33,7 @@ export default function ChangeModal(props: modalType) {
     setIsEdit(false);
   }
 
-  console.log(selectedDate);
-
   function moveClickEditPage({ schedule, selectedDate }: { schedule: editScheduleType; selectedDate: Date }): void {
-    console.log(selectedDate.getDay());
     const dayOfWeekNumber = selectedDate.getDay();
     const dayOfWeekKor = WEEKDAY[dayOfWeekNumber];
 

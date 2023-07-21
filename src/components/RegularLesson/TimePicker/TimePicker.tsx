@@ -1,13 +1,12 @@
-import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
+import "swiper/swiper.min.css";
 
-import React, { useEffect, useState } from "react";
+import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import { cycleNumberState, openTimePickerState } from "../../../atom/timePicker/timePicker";
 
-import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 
 export default function TimePicker() {
   // [{'월':['12:00', '13:00']}, ]
@@ -34,11 +33,6 @@ export default function TimePicker() {
     setIsTimePickerOpen(false);
   }
 
-  // check 용
-  useEffect(() => {
-    console.log(activeSlide);
-  }, [activeSlide]);
-
   const slides = Array.from({ length: 12 }, (_, index) => <SwiperSlide key={index}>{index + 1}</SwiperSlide>);
 
   return (
@@ -49,8 +43,8 @@ export default function TimePicker() {
 
       <StyledSwiper
         direction="vertical"
-        slidesPerView={7}
-        spaceBetween={19}
+        slidesPerView={5}
+        spaceBetween={20}
         freeMode={true}
         freeModeSticky={true}
         freeModeMomentumRatio={0.25}
@@ -78,7 +72,7 @@ const TimePickerWrapper = styled.div`
 
   position: relative;
 
-  width: 100%;
+  width: 32rem;
   height: 20rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};

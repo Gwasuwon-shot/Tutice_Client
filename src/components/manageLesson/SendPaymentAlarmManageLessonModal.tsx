@@ -1,4 +1,5 @@
-import { useMutation } from "react-query";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { requestPaymentRecordNotification } from "../../api/requestPaymentRecordNotification";
@@ -7,6 +8,7 @@ import useModal from "../../hooks/useModal";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
 import ToastModal from "../common/ToastModal";
+import ParentsDisabledAlarmModal from "../modal/ParentsDisabledAlarmModal";
 
 interface SendPaymentAlarmManageLessonModalProps {
   studentName: string;
@@ -21,48 +23,75 @@ export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlar
   const { studentName, subject, backgroundColor, color, isBig, lessonIdx } = props;
   const { unShowModal } = useModal();
   const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
+  const [isAgreeSend, setIsAgreeSend] = useState<undefined | string>(undefined);
+  const [isImpossibleModalOpen, setIsImpossibleModalOpen] = useState(false);
 
-  const { mutate: sendPaymentAlarm } = useMutation(requestPaymentRecordNotification, {
+  const queryClient = useQueryClient();
+
+  const { data: sendPaymentAlarm } = useQuery(["paymentAlarm"], () => requestPaymentRecordNotification(lessonIdx), {
     onSuccess: () => {
       setSnackBarOpen(true);
       unShowModal();
+      setIsAgreeSend(undefined);
     },
     onError: (error) => {
-      console.log(error);
+      // if (err?.response?.data?.message) {
+      setIsImpossibleModalOpen(true);
+      // }
     },
+    enabled: !!isAgreeSend,
   });
 
   function handleSendAlarm() {
-    sendPaymentAlarm(lessonIdx);
+    // sendPaymentAlarm(lessonIdx);
+    setIsAgreeSend("true");
+    queryClient.invalidateQueries("paymentAlarm");
+  }
+
+  function handleCloseModal() {
+    setIsImpossibleModalOpen(false);
   }
 
   return (
-    <ModalWrapper>
-      <ToastModal>
-        <ModalTitle>입금 알림 전송</ModalTitle>
-        <TextWrapper>
-          <StudentNameLabel
-            studentName={studentName}
-            subject={subject}
-            backgroundColor={backgroundColor}
-            color={color}
-            isBig={isBig}
-          />
-          &nbsp;의 학부모님께
-        </TextWrapper>
-        <TextWrapper>수업비 입금 요청에 대한 알림을 보낼까요?</TextWrapper>
-        <ButtonWrapper>
-          <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
-            괜찮아요
-          </RoundBottomMiniButton>
-          <RoundBottomMiniButton isGreen={true} onClick={handleSendAlarm}>
-            보낼래요
-          </RoundBottomMiniButton>
-        </ButtonWrapper>
-      </ToastModal>
-    </ModalWrapper>
+    <>
+      {isImpossibleModalOpen && (
+        <ImpossibleModalWrapper>
+          <ParentsDisabledAlarmModal handleCloseModal={handleCloseModal} />
+        </ImpossibleModalWrapper>
+      )}
+      <ModalWrapper>
+        <ToastModal>
+          <ModalTitle>입금 알림 전송</ModalTitle>
+          <TextWrapper>
+            <StudentNameLabel
+              studentName={studentName}
+              subject={subject}
+              backgroundColor={backgroundColor}
+              color={color}
+              isBig={isBig}
+            />
+            &nbsp;의 학부모님께
+          </TextWrapper>
+          <TextWrapper>수업비 입금 요청에 대한 알림을 보낼까요?</TextWrapper>
+          <ButtonWrapper>
+            <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
+              괜찮아요
+            </RoundBottomMiniButton>
+            <RoundBottomMiniButton isGreen={true} onClick={handleSendAlarm}>
+              보낼래요
+            </RoundBottomMiniButton>
+          </ButtonWrapper>
+        </ToastModal>
+      </ModalWrapper>
+    </>
   );
 }
+
+const ImpossibleModalWrapper = styled.div`
+  position: fixed;
+  z-index: 7;
+  margin: -3.6rem 0 0 -1.4rem;
+`;
 
 const ModalWrapper = styled.div`
   position: absolute;

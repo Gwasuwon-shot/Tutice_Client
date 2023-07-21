@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import TextLabelLayout from "../signup/TextLabelLayout";
-import { viewingLoginIc, canViewingLoginIc } from "../../assets";
-import LoginButton from "./LoginButton";
-import { postLocalLogin } from "../../api/localLogin";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
+import { setCookie } from "../../api/cookie";
+import { postLocalLogin } from "../../api/localLogin";
+import { canViewingLoginIc, viewingLoginIc } from "../../assets";
+import { userRoleData } from "../../atom/loginUser/loginUser";
+import { connectLessonId } from "../../atom/registerLesson/registerLesson";
+import TextLabelLayout from "../signup/TextLabelLayout";
+import LoginButton from "./LoginButton";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -14,14 +19,34 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
+  const navigate = useNavigate();
+
+  const lessonCode = useRecoilState(connectLessonId);
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
-    onSuccess: () => {
-      console.log("성공");
+    onSuccess: (data) => {
+      if (data?.data.code === 200) {
+        console.log("성공", data.data);
+        const accessToken = data.data.data.accessToken;
+        setUserRole(data.data.data.user.role);
+        setCookie("accessToken", accessToken, {
+          secure: true,
+        });
+        if (userRole === "부모님") {
+          navigate("/lessonCode");
+        } else {
+          navigate("/");
+        }
+      }
     },
     onError: () => {
-      console.log("실패 ㅠㅠ");
+      console.debug("실패 ㅠㅠ");
     },
   });
+
+  useEffect(() => {
+    console.log(userRole);
+  }, [userRole]);
 
   // setEmail
   function handelEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -35,7 +60,6 @@ export default function LoginInput() {
 
   //데이터 전달 : 추후 추가
   function handleLoginClick() {
-    console.log("클릭은 됏지?");
     postLoginData(userLogin);
   }
 
@@ -96,7 +120,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $email: string }>`
   display: flex;
   flex-direction: column;
 
-  width: 80%;
+  width: 95%;
   margin-right: 1.4rem;
   margin-bottom: 2rem;
 
@@ -108,7 +132,7 @@ const InputPasswordWrapper = styled.div<{ $pwFocus: boolean; $password: string }
   display: flex;
   flex-direction: column;
 
-  width: 80%;
+  width: 95%;
   margin-right: 1.4rem;
   margin-bottom: 2rem;
 
@@ -118,9 +142,10 @@ const InputPasswordWrapper = styled.div<{ $pwFocus: boolean; $password: string }
 
 const Inputfield = styled.input`
   width: 20rem;
+  height: 2rem;
   margin: 1rem 0.2rem;
 
-  &::placeholder {
+  &textarea::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }

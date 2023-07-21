@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { getLessonDetailByParents } from "../api/getLessonDetailByParents";
-import { ActionCodeOperation } from "firebase/auth";
 
 //teacherName , account 배열 형식, [startDate, payment, amount]
 
@@ -9,7 +8,7 @@ export default function useGetLessonDetailByParents(lessonIdx: number) {
     ["useGetLessonDetailByParents", lessonIdx],
     () => getLessonDetailByParents(lessonIdx),
     {
-      staleTime: 300000,
+      staleTime: 3000,
     },
   );
 
@@ -21,7 +20,7 @@ export default function useGetLessonDetailByParents(lessonIdx: number) {
   const accountBank = lessonData?.account?.bank;
   const accountNumber = lessonData?.account?.number;
 
-  const formattedAmount = amount + "만원";
+  const formattedAmount = amount?.toLocaleString();
 
   const accountInfo = [accountName, accountBank, accountNumber];
   const etcInfo = [startDate, payment, formattedAmount];

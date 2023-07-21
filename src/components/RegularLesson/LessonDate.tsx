@@ -1,3 +1,14 @@
+import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
+import {
+  cycleNumberState,
+  dateState,
+  dayState,
+  focusDayState,
+  openFinishDetailState,
+  openStartDetailState,
+  temporarySchedule,
+} from "../../atom/timePicker/timePicker";
 import React, { useEffect } from "react";
 import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
 import {
@@ -12,14 +23,12 @@ import {
 } from "../../atom/timePicker/timePicker";
 import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
-import DetailTimePicker from "./TimePicker/DetailTimePicker";
-import RoundBottomButton from "../common/RoundBottomButton";
-import SelectedDayAndTime from "./SelectedDayAndTime";
-import { getTemporarySchedule } from "../../api/getTemporarySchedule";
-import styled from "styled-components";
 import { useMutation } from "react-query";
 import { useRecoilState } from "recoil";
-import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { getTemporarySchedule } from "../../api/getTemporarySchedule";
+import RoundBottomButton from "../common/RoundBottomButton";
+import SelectedDayAndTime from "./SelectedDayAndTime";
 
 interface DayProp {
   isSelected: boolean;
@@ -40,8 +49,6 @@ interface temporaryProp {
 }
 
 export default function LessonDate() {
-  const navigate = useNavigate();
-
   // 1. 요일 관리
 
   const DAYS = ["월", "화", "수", "목", "금", "토", "일"];
@@ -57,12 +64,6 @@ export default function LessonDate() {
       setFocusDay({ dayOfWeek: day, startTime: "", endTime: "" });
     }
   }
-
-  // check 용
-  useEffect(() => {
-    console.log(selectedDays);
-    console.log(focusDay);
-  }, [selectedDays, focusDay]);
 
   // 2. 요일 시작, 종료시간 관리
 
@@ -119,8 +120,6 @@ export default function LessonDate() {
 
   const { mutate: getNewTemporarySchedule } = useMutation(getTemporarySchedule, {
     onSuccess: (response) => {
-      console.log("성공");
-      console.log(response);
       setTempSchedule(response);
     },
 
@@ -128,10 +127,7 @@ export default function LessonDate() {
   });
 
   function postTemporary(info: temporaryProp) {
-    console.log(selectedDays);
-    console.log(temporarySchedule);
     getNewTemporarySchedule(postInformation);
-    navigate("/register-calendar");
   }
 
   return (

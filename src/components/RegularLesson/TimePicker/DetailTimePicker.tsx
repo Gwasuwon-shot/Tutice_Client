@@ -1,9 +1,9 @@
-import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
+import "swiper/swiper.min.css";
 
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
 import {
   dayState,
   focusDayState,
@@ -11,8 +11,8 @@ import {
   openStartDetailState,
 } from "../../../atom/timePicker/timePicker";
 
-import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 
 export default function DetailTimePicker() {
   // 1. 오전 오후 관리
@@ -23,11 +23,6 @@ export default function DetailTimePicker() {
   function handleAmPmSlideChange(swiper: SwiperCore) {
     setActiveAmPmSlide(swiper.realIndex);
   }
-
-  // check 용
-  useEffect(() => {
-    console.log(activeAmPmSlide);
-  }, [activeAmPmSlide]);
 
   // 2) swiper
   const AMPM = ["오전", "오후"];
@@ -42,13 +37,8 @@ export default function DetailTimePicker() {
     setActiveHourSlide(swiper.realIndex + 1);
   }
 
-  // check 용
-  useEffect(() => {
-    console.log(activeHourSlide);
-  }, [activeHourSlide]);
-
   // 2) swiper
-  const slidesHour = Array.from({ length: 12 }, (_, index) => <SwiperSlide key={index}>{index + 1}</SwiperSlide>);
+  const slidesHour = Array.from({ length: 12 }, (_, index) => <SwiperSlide key={index}>{index + 1}시</SwiperSlide>);
 
   // 3. 분 관리
   // 1) active slide 값 관리
@@ -59,13 +49,8 @@ export default function DetailTimePicker() {
     setActiveMinuteSlide(MINUTES[swiper.realIndex]);
   }
 
-  // check 용
-  useEffect(() => {
-    console.log(activeMinuteSlide);
-  }, [activeMinuteSlide]);
-
   // 2) swiper
-  const slidesMinute = Array.from({ length: 2 }, (_, index) => <SwiperSlide key={index}>{MINUTES[index]}</SwiperSlide>);
+  const slidesMinute = Array.from({ length: 2 }, (_, index) => <SwiperSlide key={index}>{MINUTES[index]}분</SwiperSlide>);
 
   // 4. 시작시간 상태관리
   const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
@@ -79,7 +64,6 @@ export default function DetailTimePicker() {
     const startTime =
       activeAmPmSlide === 0 ? `${formattedHour}:${activeMinuteSlide}` : `${activeHourSlide + 12}:${activeMinuteSlide}`;
     setFocusDay({ ...focusDay, startTime });
-    console.log(focusDay);
     setIsStartPickerOpen(false);
   }
 
@@ -97,7 +81,6 @@ export default function DetailTimePicker() {
     const endTime =
       activeAmPmSlide === 0 ? `${formattedHour}:${activeMinuteSlide}` : `${activeHourSlide + 12}:${activeMinuteSlide}`;
     setFocusDay({ ...focusDay, endTime });
-    console.log(focusDay);
     setIsFinishPickerOpen(false);
   }
 
@@ -119,8 +102,8 @@ export default function DetailTimePicker() {
       <SwiperWrapper>
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={19}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -133,8 +116,8 @@ export default function DetailTimePicker() {
 
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={19}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -149,8 +132,8 @@ export default function DetailTimePicker() {
 
         <StyledSwiper
           direction="vertical"
-          slidesPerView={7}
-          spaceBetween={19}
+          slidesPerView={5}
+          spaceBetween={20}
           freeMode={true}
           freeModeSticky={true}
           freeModeMomentumRatio={0.25}
@@ -181,7 +164,7 @@ const TimePickerWrapper = styled.div`
 
   position: relative;
 
-  width: 100%;
+  width: 32rem;
   height: 20rem;
 
   background-color: ${({ theme }) => theme.colors.grey20};

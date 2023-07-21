@@ -21,7 +21,6 @@ export default function SelectedDayAndTime(props : selectedProps) {
         setSelectedDays(newList);
     };
 
-
     return (
         <SelectedWrapper>
             <RegularLessonGroupIcon onClick = {handleDeleteDay}/>
@@ -66,14 +65,15 @@ const RegularLessonGroupIcon = styled(RegularLessonGroupIc)`
 const DayWrapper = styled.div`
     display: flex;
     margin-left: 1.8rem;
-    width: 8rem;
+    width: 5rem;
     ${({ theme }) => theme.fonts.body03}; 
     color: ${({ theme }) => theme.colors.green5}; 
 `
 
 const TimeWrapper = styled.div`
     display: flex;
-    justfiy-content: flex-end;
+    justify-content: end;
+    width: 20rem;
     ${({ theme }) => theme.fonts.body04}; 
     color: ${({ theme }) => theme.colors.green5}; 
 `

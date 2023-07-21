@@ -52,6 +52,9 @@ export default function Footer() {
 }
 
 const FooterWrapper = styled.div`
+    display: flex;
+    
+    width: 32rem;
     height: 7rem;
 `
 
@@ -63,7 +66,7 @@ const FooterButtonWrapper = styled.footer<{selected: boolean}>`
     position: fixed;
     bottom: 0;
 
-    width: 100%;
+    width: 32rem;
     height: 6.3rem;
     padding: 0.8rem;
 

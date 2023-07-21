@@ -1,5 +1,13 @@
+import { AppCheckTokenResult } from "firebase/app-check";
+import { getToken } from "firebase/messaging";
+import { useState } from "react";
+import { useMutation } from "react-query";
 import { styled } from "styled-components";
+import { patchDeviceToken } from "../../api/patchDeviceToken";
+import { postNotificationRequest } from "../../api/postNotificationRequest";
 import { BackButtonSignupIc, BellWelcomeIc } from "../../assets";
+import { messaging } from "../../core/notification/settingFCM";
+import { registerServiceWorker } from "../../utils/common/notification";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 
@@ -8,11 +16,51 @@ interface AlertSignupProp {
 }
 
 export default function AlertSignup(prop: AlertSignupProp) {
+  const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
+    token: "",
+  });
+
   const { setIsWelcome } = prop;
   const MAIN_TEXT = `수업 나무를 통한 \n 쉬운 관리를 위해\n 알림을 활성화 해보세요 `;
 
   const SUB_TEXT = "푸시알림을 활성화를 통해 \n 출결, 수업비 관리를 도울 수 있어요";
-  function handleToSetAlert() {}
+
+  async function handleAllowNotification() {
+    const permission = await Notification.requestPermission();
+
+    registerServiceWorker();
+
+    try {
+      await getDeviceToken();
+      deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getDeviceToken() {
+    const token = await getToken(messaging, {
+      vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
+    });
+
+    setDeviceToken({
+      token: token,
+    });
+  }
+
+  const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
+  function handleShowNotification() {
+    postNotificationRequest(deviceToken.token);
+  }
+
   return (
     <>
       <BackButtonSignupIcon onClick={() => setIsWelcome(true)} />
@@ -22,7 +70,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={handleToSetAlert} buttonText={"할래요!"} />
+      <ButtonLayout onClick={() => handleAllowNotification()} buttonText={"할래요!"} />
     </>
   );
 }

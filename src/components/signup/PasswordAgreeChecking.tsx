@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { setCookie } from "../../api/cookie";
 import { newUserPost } from "../../api/localSignUp";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
+import { userRoleData } from "../../atom/loginUser/loginUser";
 import { newUserData } from "../../atom/signup/signup";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { PW_REGEX } from "../../core/signup/regex";
@@ -16,7 +19,6 @@ import AgreeChecking from "./AgreeChecking";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
-import { useNavigate } from "react-router-dom";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -29,16 +31,22 @@ export default function PasswordAgreeChecking() {
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      console.log("성공", data.data);
-      navigate("/welcome", {
-        state: { ...data.data },
-      });
+      if (data?.data.code === 201) {
+        console.log("성공", data.data);
+        const accessToken = data.data.data.accessToken;
+        setUserRole(data.data.data.user.role);
+        setCookie("accessToken", accessToken, {
+          secure: true,
+        });
+        navigate("/");
+      }
     },
     onError: () => {
-      console.log("실패");
+      console.debug("실패 ㅠㅠ");
     },
   });
 
@@ -212,7 +220,7 @@ const Inputfield = styled.input`
   color: ${({ theme }) => theme.colors.grey700};
   ${({ theme }) => theme.fonts.title03};
 
-  &::placeholder {
+  &textarea::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }

@@ -1,10 +1,8 @@
 import axios from "axios";
 import { ScheduleDataType } from "../type/manageLesson/scheduleDataType";
+import { getCookie } from "./cookie";
 
 export async function updateScheduleAttendance(scheduleData: ScheduleDataType) {
-  console.log({
-    schedule: scheduleData,
-  });
   const data = await axios.patch(
     `${import.meta.env.VITE_APP_BASE_URL}/api/schedule/attendance`,
     {
@@ -14,7 +12,7 @@ export async function updateScheduleAttendance(scheduleData: ScheduleDataType) {
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOCKEN}`,
+        Authorization: `Bearer ${getCookie("accessToken")}`,
       },
     },
   );

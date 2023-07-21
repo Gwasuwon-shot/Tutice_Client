@@ -1,11 +1,10 @@
-import { accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder } from "../../atom/tuitionPayment/tuitionPayment";
+import { accountNumber, bankName, moneyAmount, lessonCodeAndPaymentId, payingPersonName, paymentOrder } from "../../atom/tuitionPayment/tuitionPayment";
 import {cycleNumberState, dateState, dayState} from '../../atom/timePicker/timePicker';
 import {studentNameState, subjectNameState} from '../../atom/common/datePicker';
-
+import { useNavigate } from "react-router-dom";
 import {createLesson} from '../../api/createLesson';
 import styled from 'styled-components';
 import {useMutation} from 'react-query';
-import { useNavigate } from "react-router-dom";
 import {useRecoilState} from 'recoil';
 
 interface scheduleListProps {
@@ -43,6 +42,7 @@ export default function Footer() {
     const [name, setName] = useRecoilState(payingPersonName);
     const [bank, setBank] = useRecoilState(bankName);
     const [number, setNumber] = useRecoilState(accountNumber);
+    const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
 
     const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== 0;
 
@@ -65,29 +65,21 @@ export default function Footer() {
                 "number": number,
             }
     }
-    /*
-        studentName -> studentNameState : 학생 이름
-        subject -> subjectNameState : 괌고 이름
-        payment -> paymentOrder : 선불/후불 여부
-        amount -> moneyAmount: 과외비 (string 으로 받아서, number로 넘겨줌)
-        count -> cycleNumberState : 회차 수
-        startDate -> dateState : 첫 수업일
-        regularScheduleList -> dayState : 확정날짜들
-        account
-        - name -> payingPersonName : 이름 
-        - bank -> bankName : 은행명
-        - number -> accountNumber : 계좌번호
-        
-    */
    
+    const navigate = useNavigate();
+
+    function handleMoveToLessonShare() {
+      navigate("/lesson-share");
+    }
 
     const {mutate: createNewLesson} = useMutation( 
         createLesson,
         {
             onSuccess: (response) => {
                 console.log('성공');
+                setCodeAndId(response);
                 // setStartDate(response.) -> 지수에 전달한 data recoil 저장
-                // navigate ~ 
+                handleMoveToLessonShare();
             },
             onError: (error) => console.log(error),
         },

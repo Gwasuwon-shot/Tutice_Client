@@ -15,7 +15,7 @@ export default function ManageLessonMain() {
   const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
 
   function checkMissingMaintenanceLessonExist() {
-    return missingMaintenanceLessonList.length !== 0;
+    return missingMaintenanceLessonList?.length !== 0;
   }
 
   return (

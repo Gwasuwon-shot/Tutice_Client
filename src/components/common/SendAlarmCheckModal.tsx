@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { requestAttendanceNotification } from "../../api/requestAttendanceNotification";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
 import useModal from "../../hooks/useModal";
+import useTeacherFooter from "../../hooks/useTeacherFooter";
 import ParentsDisabledAlarmModal from "../modal/ParentsDisabledAlarmModal";
 import RoundBottomMiniButton from "./RoundBottomMiniButton";
 import SubjectLabel from "./SubjectLabel";
@@ -24,10 +26,11 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
   const { modalRef, closeModal, unShowModal, showModal } = useModal();
   const navigate = useNavigate();
   const [isDisabledModalOpen, setIsDisabledModalOpen] = useState(false);
+  const { handleMoveToPage } = useTeacherFooter();
 
   function handleMoveToHomeWithoutAlarm() {
     unShowModal();
-    navigate("/");
+    handleMoveToPage(TEACHER_FOOTER_CATEGORY.home);
   }
 
   const queryClient = useQueryClient();
@@ -52,7 +55,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
   function handleCloseModal() {
     setIsDisabledModalOpen(false);
     unShowModal();
-    navigate("/");
+    handleMoveToPage(TEACHER_FOOTER_CATEGORY.home);
   }
 
   return (

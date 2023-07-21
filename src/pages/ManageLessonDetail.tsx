@@ -10,10 +10,13 @@ import StudentLesson from "../components/manageLesson/StudentLesson";
 import StudentNameBox from "../components/manageLesson/StudentNameBox";
 import StudentPayments from "../components/manageLesson/StudentPayments";
 import { MANAGE_LESSON_STATUS } from "../core/manageLesson/manageLessonStatus";
+import { TEACHER_FOOTER_CATEGORY } from "../core/teacherHome/teacherFooter";
+import useTeacherFooter from "../hooks/useTeacherFooter";
 
 export default function ManageLessonDetail() {
   const status = useRecoilValue(managingStatus);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const { handleChangeActive } = useTeacherFooter();
 
   function checkIsStatusLesson() {
     return status === MANAGE_LESSON_STATUS.lesson;
@@ -21,6 +24,7 @@ export default function ManageLessonDetail() {
 
   useEffect(() => {
     setAttendanceData({ ...attendanceData, status: "" });
+    handleChangeActive(TEACHER_FOOTER_CATEGORY.classManaging);
   }, []);
 
   return (

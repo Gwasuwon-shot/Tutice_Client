@@ -28,7 +28,6 @@ export default function LoginInput() {
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
       if (data?.data.code === 200) {
-        console.log("성공", data.data);
         const accessToken = data.data.data.accessToken;
         setStep(0);
         setUserRole(data.data.data.user.role);
@@ -42,8 +41,8 @@ export default function LoginInput() {
         }
       }
     },
-    onError: () => {
-      console.debug("실패 ㅠㅠ");
+    onError: (error) => {
+      console.log(error);
     },
   });
 
@@ -61,7 +60,6 @@ export default function LoginInput() {
     setPassword(e.target.value);
   }
 
-  //데이터 전달 : 추후 추가
   function handleLoginClick() {
     postLoginData(userLogin);
   }

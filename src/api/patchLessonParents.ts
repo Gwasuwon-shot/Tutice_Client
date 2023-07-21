@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "./cookie";
 
 export async function patchLessonParents(lessonCode: string) {
   const data = await axios.patch(
@@ -9,7 +10,7 @@ export async function patchLessonParents(lessonCode: string) {
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_APP_PARENTS_TOKEN}`,
+        Authorization: `Bearer ${getCookie("accessToken")}`,
       },
     },
   );

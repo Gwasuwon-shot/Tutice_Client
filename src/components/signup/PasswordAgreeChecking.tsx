@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { setCookie } from "../../api/cookie";
 import { newUserPost } from "../../api/localSignUp";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { newUserData, stepNum } from "../../atom/signup/signup";
@@ -17,7 +18,6 @@ import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { setCookie } from "../../api/cookie";
 
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -216,7 +216,7 @@ const Inputfield = styled.input`
   color: ${({ theme }) => theme.colors.grey700};
   ${({ theme }) => theme.fonts.title03};
 
-  &::placeholder {
+  &textarea::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }

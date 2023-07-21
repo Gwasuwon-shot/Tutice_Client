@@ -1,24 +1,56 @@
 import { format, isSameDay } from "date-fns";
 import { ko } from "date-fns/locale";
 import styled from "styled-components";
-import { STUDENT_COLOR } from "../../../core/common/studentColor";
+import { useRecoilValue } from "recoil";
+
+import { STUDENT_COLOR, DEEFAULT_STUDENT_COLOR } from "../../../core/common/studentColor";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 import { modalType } from "../../../type/calendar/modalType";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
 
+import { temporarySchedule } from "../../../atom/timePicker/timePicker";
+
+interface scheduleListType {
+  endTime: string;
+  startTime: string;
+  studentName: string;
+  subject: string;
+}
+
+interface temporaryListType {
+  date: string;
+  scheduleList: scheduleListType;
+}
+
 export default function RegisterModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
+  const temporarySchedules = useRecoilValue(temporarySchedule);
+  const temporaryList: temporaryListType[] = temporarySchedules.temporaryScheduleList;
 
   return (
     <>
       <ToastModal>
         <ModalContentWrapper>
           <ModalDate>{format(selectedDate as Date, "M월 d일 EEEE", { locale: ko })}</ModalDate>
+          {temporaryList
+            ?.find((item) => isSameDay(new Date(item.date), selectedDate as Date))
+            ?.scheduleList?.map((item) => {
+              return (
+                <ScheduleWrapper key={item.date}>
+                  <StudentColorBox backgroundColor={DEEFAULT_STUDENT_COLOR} />
+                  <ModalTime>
+                    {item.startTime} - {item.endTime}
+                  </ModalTime>
+                  <ModalName>{item.studentName}</ModalName>
+                  <ModalSubjectPreview $backgroundcolor={DEEFAULT_STUDENT_COLOR}>{item.subject}</ModalSubjectPreview>
+                </ScheduleWrapper>
+              );
+            })}
           {isUserSchedule
             ?.find((item) => isSameDay(new Date(item.date), selectedDate as Date))
-            ?.dailyScheduleList.map((item) => {
+            ?.dailyScheduleList?.map((item) => {
               const { schedule } = item;
               const { idx, studentName, subject, startTime, endTime } = schedule;
 
@@ -82,5 +114,19 @@ const ModalSubject = styled.span<{ $backgroundcolor: string }>`
   background-color: ${(props) => props.$backgroundcolor};
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey500};
+  border-radius: 0.8rem;
+`;
+
+const ModalSubjectPreview = styled.span<{ $backgroundcolor: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 1.6rem;
+  padding: 0.2rem 0.6rem;
+
+  background-color: ${(props) => props.$backgroundcolor};
+  ${({ theme }) => theme.fonts.caption01};
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 0.8rem;
 `;

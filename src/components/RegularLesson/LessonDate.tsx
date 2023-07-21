@@ -1,21 +1,23 @@
+import React, { useEffect } from "react";
 import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
-import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 import {
   cycleNumberState,
   dateState,
   dayState,
+  firstLessonDay,
   focusDayState,
   openFinishDetailState,
   openStartDetailState,
   temporarySchedule,
 } from "../../atom/timePicker/timePicker";
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
-import { useMutation } from "react-query";
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
-import { getTemporarySchedule } from "../../api/getTemporarySchedule";
 import RoundBottomButton from "../common/RoundBottomButton";
 import SelectedDayAndTime from "./SelectedDayAndTime";
+import { getTemporarySchedule } from "../../api/getTemporarySchedule";
+import styled from "styled-components";
+import { useMutation } from "react-query";
+import { useRecoilState } from "recoil";
 
 interface DayProp {
   isSelected: boolean;

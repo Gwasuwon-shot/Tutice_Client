@@ -1,5 +1,5 @@
 import axios from "axios";
-import { client } from "./axios";
+import { getCookie } from "./cookie";
 
 export async function patchDeviceToken(token: string) {
   const data = await axios.patch(
@@ -8,7 +8,7 @@ export async function patchDeviceToken(token: string) {
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_APP_TEACHER_TOKEN}`,
+        Authorization: `Bearer ${getCookie("accessToken")}`,
       },
     },
   );

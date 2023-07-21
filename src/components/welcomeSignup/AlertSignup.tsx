@@ -26,7 +26,7 @@ export default function AlertSignup() {
 
     try {
       await getDeviceToken();
-      patchingDeviceToken(deviceToken.token);
+      deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
     } catch (error) {
       console.error(error);
     }

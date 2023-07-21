@@ -11,6 +11,7 @@ import LoginButton from "./LoginButton";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { stepNum } from "../../atom/signup/signup";
+import RegexField from "../signup/RegexField";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -21,6 +22,7 @@ export default function LoginInput() {
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [userRole, setUserRole] = useRecoilState(userRoleData);
+  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
   const lessonCode = useRecoilState(connectLessonId);
@@ -34,8 +36,10 @@ export default function LoginInput() {
       });
       navigate("/welcome", { state: data.data });
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error);
       console.debug("실패 ㅠㅠ");
+      setIsError(true);
     },
   });
 
@@ -107,6 +111,7 @@ export default function LoginInput() {
         </PasswordIconWrapper>
       </InputPasswordWrapper>
       <LoginButton onClick={() => handleLoginClick()} isActive={isActive} disabled={!isActive} />
+      <ErrorMessage>{isError && <RegexField unMatchText={"로그인 실패 다시 시도하십시오"} />}</ErrorMessage>
     </form>
   );
 }
@@ -164,4 +169,10 @@ const CanViewingLoginIcon = styled(canViewingLoginIc)`
   height: 1.6rem;
   margin-right: 0.6rem;
   flex-shrink: 0;
+`;
+
+const ErrorMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1rem 2rem;
 `;

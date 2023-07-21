@@ -30,7 +30,7 @@ export { ReactComponent as CalendarActiveTeacherFooterIc } from "./icon/calendar
 export { ReactComponent as CalendarMoreLessonIc } from "./icon/calendarMoreLessonIc.svg";
 export { ReactComponent as CalendarSelectedParentsHomeIc } from "./icon/calendarSelectedParentsHomeIc.svg";
 export { ReactComponent as CalendarTeacherFooterIc } from "./icon/calendarTeacherFooterIc.svg";
-export { ReactComponent as CalendarUnselectedParentsHomeIc } from "./icon/calendarUnselectedParentsHomeIc.svg";
+export { ReactComponent as CalendarUnselectedParentsHomeIc } from "./icon/calendarUnselectedparentsHomeIc.svg";
 export { ReactComponent as canViewingLoginIc } from "./icon/canViewingLoginIc.svg";
 export { ReactComponent as CancelAttendanceModalIc } from "./icon/cancelAttendanceModalIc.svg";
 export { ReactComponent as CancelDisabledAttendanceIc } from "./icon/cancelDisabledAttendanceIc.svg";

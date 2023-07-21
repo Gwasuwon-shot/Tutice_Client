@@ -56,16 +56,15 @@ export default function LessonShare() {
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
   const [URL, setURL] = useState(`https://tutice.com/${codeAndId?.lessonCode}`);
 
-  console.log(codeAndId);
 
   useEffect(() => {
     setURL(`https://tutice.com/${codeAndId?.lessonCode}`);
   }, [codeAndId]);
 
   function handleMoveToHome() {
+    setAllSet();
     navgiate("/");
     // recoil 값 모두 초기값으로 변경
-    setAllSet();
   }
 
   function handleShareOtherWays() {

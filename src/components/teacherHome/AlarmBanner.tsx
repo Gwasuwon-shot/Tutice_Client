@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MissingAttendaceTeacherHomeIc, MissingMaintenanceTeacherHomeIc } from "../../assets";
+import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
 import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
 
 export default function AlarmBanner() {
@@ -8,7 +9,7 @@ export default function AlarmBanner() {
   const navigate = useNavigate();
 
   function handleMoveToMissingAttendaceCheck() {
-    navigate("/no-attendance-check");
+    handleMoveToPage(TEACHER_FOOTER_CATEGORY.classManaging);
   }
 
   function handleMoveToMissingMaintenanceCheck() {
@@ -36,3 +37,6 @@ const MissingAttendaceTeacherHomeIcon = styled(MissingAttendaceTeacherHomeIc)`
   margin-top: 1rem;
   cursor: pointer;
 `;
+function handleMoveToPage(classManaging: any) {
+  throw new Error("Function not implemented.");
+}

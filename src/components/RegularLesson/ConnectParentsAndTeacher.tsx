@@ -23,7 +23,7 @@ export default function ConnectParentsAndTeacher() {
     }
   }, []);
 
-  async function checkIfCookieExists() {
+  async function connectParentsAndTeacher() {
     if (lessonId) {
       const data = await patchLessonParents(lessonId);
       return data;
@@ -32,7 +32,7 @@ export default function ConnectParentsAndTeacher() {
 
   //쿠키에 값 있는지 확인하기
   if (cookie.length) {
-    checkIfCookieExists();
+    connectParentsAndTeacher();
   } else {
     navigate("/login");
   }

@@ -60,7 +60,7 @@ export default function NameEmail() {
 
   return (
     <>
-      <ProgressBar progress={email === "" ? 40 : 60} />
+      <ProgressBar progress={50} />
       <BackButton />
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
@@ -87,14 +87,14 @@ export default function NameEmail() {
         </InputEmailWrapper>
 
         {!isEmail && emailFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.emailError} /> : null}
-        <BottomButton
-          type="button"
-          children={BUTTON_TEXT.done}
-          isActive={isActive}
-          onClick={handleDoneClick}
-          disabled={!isActive}
-        />
       </Container>
+      <BottomButton
+        type="button"
+        children={BUTTON_TEXT.done}
+        isActive={isActive}
+        onClick={handleDoneClick}
+        disabled={!isActive}
+      />
     </>
   );
 }

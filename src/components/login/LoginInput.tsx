@@ -120,7 +120,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $email: string }>`
   display: flex;
   flex-direction: column;
 
-  width: 80%;
+  width: 95%;
   margin-right: 1.4rem;
   margin-bottom: 2rem;
 
@@ -132,7 +132,7 @@ const InputPasswordWrapper = styled.div<{ $pwFocus: boolean; $password: string }
   display: flex;
   flex-direction: column;
 
-  width: 80%;
+  width: 95%;
   margin-right: 1.4rem;
   margin-bottom: 2rem;
 
@@ -142,6 +142,7 @@ const InputPasswordWrapper = styled.div<{ $pwFocus: boolean; $password: string }
 
 const Inputfield = styled.input`
   width: 20rem;
+  height: 2rem;
   margin: 1rem 0.2rem;
 
   &::placeholder {

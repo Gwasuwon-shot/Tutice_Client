@@ -30,8 +30,10 @@ export default function Role() {
 
   return (
     <>
-      <ProgressBar progress={20} />
-      <BackButton />
+      <ProgressBar progress={25} />
+      <BackButtonWrapper>
+        <BackButton />
+      </BackButtonWrapper>
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.whichRole} />
         <RadioWrapper>
@@ -73,14 +75,14 @@ export default function Role() {
             </TextWrapper>
           </RoleRapper>
         </RadioWrapper>
-        <BottomButton
-          type="button"
-          disabled={!isActive}
-          isActive={isActive}
-          children={BUTTON_TEXT.done}
-          onClick={handleDoneClick}
-        />
       </Container>
+      <BottomButton
+        type="button"
+        disabled={!isActive}
+        isActive={isActive}
+        children={BUTTON_TEXT.done}
+        onClick={handleDoneClick}
+      />
     </>
   );
 }
@@ -148,4 +150,8 @@ const RadioPlainName = styled.label`
 const RadioSubName = styled.label`
   color: ${({ theme }) => theme.colors.grey500};
   ${({ theme }) => theme.fonts.body07};
+`;
+
+const BackButtonWrapper = styled.div`
+  margin-left: 2rem;
 `;

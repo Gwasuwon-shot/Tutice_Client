@@ -106,8 +106,10 @@ export default function PasswordAgreeChecking() {
   }
   return (
     <>
-      <ProgressBar progress={80} />
-      <BackButton />
+      <ProgressBar progress={isConfirmed ? 100 : 80} />
+      <BackButtonWrapper>
+        <BackButton />
+      </BackButtonWrapper>
       <Container>
         <TitleWrapper>
           <SignupTitleLayout MainText={SIGNUP_TITLE.leftInfo} />
@@ -266,4 +268,8 @@ const PasswordIconWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const BackButtonWrapper = styled.div`
+  margin-left: 2rem;
 `;

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
 import { endOfMonth, endOfWeek, startOfMonth, startOfWeek, addDays, isSameDay } from "date-fns";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 import RegisterModal from "./RegisterModal";
 import DayItem from "./DayItem";
+import { temporarySchedule } from "../../../atom/timePicker/timePicker";
 
 interface DaysProp {
   currentMonth: Date;
@@ -24,7 +25,11 @@ export default function Days(props: DaysProp) {
   const formattedMonth = `${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}`;
 
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
+  const temporaryScheduleList = useRecoilValue(temporarySchedule);
+  console.log(temporaryScheduleList);
+  const { regularScheduleList, studentName, subject } = temporaryScheduleList;
 
+  console.log(temporaryScheduleList);
   const rows: React.ReactNode[] = [];
   let days: React.ReactNode[] = [];
   let day: Date = startDate;
@@ -32,6 +37,7 @@ export default function Days(props: DaysProp) {
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       const myLessons = isUserSchedule?.find((item) => isSameDay(new Date(item.date), day));
+      const temporRegularSchedule = regularScheduleList?.find((item) => isSameDay(new Date(item.date), day));
       days.push(
         <DayItem
           setOpenModal={setOpenModal}
@@ -39,6 +45,9 @@ export default function Days(props: DaysProp) {
           date={day}
           key={day.toString()}
           myLessons={myLessons}
+          temporRegularSchedule={temporRegularSchedule}
+          studentName={studentName}
+          subject={subject}
         />,
       );
       day = addDays(day, 1);
@@ -62,7 +71,12 @@ export default function Days(props: DaysProp) {
         {rows}
         {openModal && selectedDate && (
           <ModalWrapper>
-            <RegisterModal selectedDate={selectedDate} setOpenModal={setOpenModal} formattedMonth={formattedMonth} />
+            <RegisterModal
+              temporRegularSchedule={temporRegularSchedule}
+              selectedDate={selectedDate}
+              setOpenModal={setOpenModal}
+              formattedMonth={formattedMonth}
+            />
           </ModalWrapper>
         )}
       </DaysWrapper>

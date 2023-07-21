@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import styled from "styled-components";
-import { CancelButton, NextMonthArrowButton, PrevMonthArrowButton } from "../../assets";
+import { NextMonthArrowButton, PrevMonthArrowButton } from "../../assets";
 
 interface YearandMonthProps {
   currentMonth: Date;

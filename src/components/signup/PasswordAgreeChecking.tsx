@@ -182,8 +182,7 @@ const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: b
 
 const Inputfield = styled.input`
   margin: 1rem 0.2rem;
-  width: 23rem;
-  background-color: red;
+  width: 24rem;
 
   color: ${({ theme }) => theme.colors.grey700};
   ${({ theme }) => theme.fonts.title03};
@@ -218,7 +217,7 @@ const CanViewingLoginIcon = styled(canViewingLoginIc)`
 
 const PasswordIconWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
 `;
 

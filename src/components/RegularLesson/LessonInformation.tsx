@@ -56,7 +56,7 @@ export default function LessonInformation() {
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
                     <StartDateButton type = "button" onClick={handleDatePicker}> {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 {lessonDay}요일</StartDateButton>
-                    <RegularLessonPencilIcon />
+                    <RegularLessonPencilIcon onClick={handleDatePicker}/>
                 </StartDate>
             </LessonWrapper>
         </LessonInformationWrapper>

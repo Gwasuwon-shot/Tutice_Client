@@ -7,7 +7,6 @@ export default function useGetTodayScheduleByParents() {
   });
 
   const scheduleList = todayScheduleParents?.scheduleList;
-  console.log(scheduleList);
 
   return { scheduleList };
 }

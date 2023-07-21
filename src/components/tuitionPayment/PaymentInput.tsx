@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FocusEvent } from 'react';
 import { RegisterLessonInputIc, TuitionPaymentRadioButtonCheckedIc, TuitionPaymentRadioButtonNotCheckedIc } from '../../assets';
-import { accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder } from "../../atom/tuitionPayment/tuitionPayment";
+import { accountNumber, bankName, moneyAmount, payingPersonName, paymentOrder, lessonCodeAndPaymentId } from "../../atom/tuitionPayment/tuitionPayment";
 import { useEffect, useState } from "react";
 
 import styled from 'styled-components';
@@ -101,7 +101,8 @@ export default function PaymentInput() {
     const handleLastChange = () => {
         setOrder("후불");
     }
-    
+
+
     return (
         
     <InputWrapper>
@@ -147,9 +148,9 @@ export default function PaymentInput() {
         
         <MoneyInputSection moneyFocused={isMoneyFocused}>
             <InputName> 회차당 과외비 </InputName>
-            <MoneyInput 
+            <MoneyInput
                 placeholder = '금액을 입력해주세요' 
-                value= {money}
+                value={money || ""}
                 onChange={handleMoneyChange}
                 onFocus = {handleMoneyFocus}
                 onBlur={handleMoneyBlur}

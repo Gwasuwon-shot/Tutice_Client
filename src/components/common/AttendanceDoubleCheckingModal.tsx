@@ -27,10 +27,10 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
     onSuccess: () => {
       navigate("/complete-check-attendance", { state: ATTENDANCE_CHECK_RESPONSE });
     },
-    onError: (err) => {
-      if (err?.response?.data?.message) {
-        setIsImpossibleModalOpen(true);
-      }
+    onError: () => {
+      // if (err?.response?.data?.message) {
+      setIsImpossibleModalOpen(true);
+      // }
     },
   });
 

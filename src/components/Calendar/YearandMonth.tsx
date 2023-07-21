@@ -27,7 +27,6 @@ export default function YearandMonth(props: YearandMonthProps) {
         {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
         <NextMonthButton onClick={() => handleGoToNextMonth()} />
       </YearMonthWrapper>
-      <CancelCalendarButton />
     </HeaderWrapper>
   );
 }

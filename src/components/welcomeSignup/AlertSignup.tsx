@@ -24,12 +24,9 @@ export default function AlertSignup() {
 
     registerServiceWorker();
 
-    console.log("에러 안나니?");
-
     try {
       await getDeviceToken();
       patchingDeviceToken(deviceToken.token);
-      console.log(deviceToken);
     } catch (error) {
       console.error(error);
     }
@@ -48,7 +45,6 @@ export default function AlertSignup() {
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
       console.log(res);
-      console.log("device", deviceToken);
     },
     onError: (err) => {
       console.log(err);

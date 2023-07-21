@@ -1,6 +1,6 @@
 import { AppCheckTokenResult } from "firebase/app-check";
 import { getToken } from "firebase/messaging";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -37,7 +37,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
     try {
       await getDeviceToken();
-      deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
+      // deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
     } catch (error) {
       console.error(error);
     }
@@ -48,6 +48,10 @@ export default function AlertSignup(prop: AlertSignupProp) {
       navigate("/");
     }
   }
+
+  useEffect(() => {
+    deviceToken?.token !== "" && deviceToken?.token !== undefined && patchingDeviceToken(deviceToken?.token);
+  }, [deviceToken]);
 
   async function getDeviceToken() {
     const token = await getToken(messaging, {
@@ -81,7 +85,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={handleAllowNotification} buttonText={"할래요!"} />
+      <ButtonLayout onClick={handleAllowNotification} buttonText="할래요!" />
     </>
   );
 }

@@ -81,7 +81,7 @@ export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.sv
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
 export { ReactComponent as HomeSelectedParentsHomeIc } from "./icon/homeSelectedParentsHomeIc.svg";
 export { ReactComponent as HomeUnselectedParentsHomeIc } from "./icon/homeUnselectedParentsHomeIc.svg";
-export { ReactComponent as CalendarSelectedParentsHomeIc } from "./icon/calendarSelectedParentsHomeIc.svg";
+export { ReactComponent as CalendarSelectedParentsHomeIc } from "./icon/calendarSelectedparentsHomeIc.svg";
 export { ReactComponent as CalendarUnselectedParentsHomeIc } from "./icon/calendarUnselectedParentsHomeIc.svg";
 export { ReactComponent as MyPageUnselectedParentsHomeIc } from "./icon/mypageUnselectedParentsHomeIc.svg";
 export { ReactComponent as MyPageSelectedParentsHomeIc } from "./icon/myPageSelectedParentsHomeIc.svg";

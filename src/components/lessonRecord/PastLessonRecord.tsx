@@ -34,7 +34,7 @@ export default function PastLessonRecord(props: PastLessonRecordProps) {
         </LessonTime>
       </LessonInfoWrapper>
 
-      <AttendanceWrapper attendance={"결석"}>{status}</AttendanceWrapper>
+      <AttendanceWrapper attendance={status}>{status}</AttendanceWrapper>
     </PastLessonRecordWrapper>
   );
 }

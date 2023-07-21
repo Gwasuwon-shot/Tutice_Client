@@ -60,7 +60,7 @@ export default function NameEmail() {
 
   return (
     <>
-      <ProgressBar progress={email === "" ? 40 : 60} />
+      <ProgressBar progress={50} />
       <BackButton />
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />

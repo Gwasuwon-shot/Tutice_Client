@@ -1,9 +1,9 @@
 import { format, isSameDay } from "date-fns";
 import { ko } from "date-fns/locale";
-import styled from "styled-components";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
 
-import { STUDENT_COLOR, DEEFAULT_STUDENT_COLOR } from "../../../core/common/studentColor";
+import { DEEFAULT_STUDENT_COLOR, STUDENT_COLOR } from "../../../core/common/studentColor";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 import { modalType } from "../../../type/calendar/modalType";
 import StudentColorBox from "../../common/StudentColorBox";
@@ -20,7 +20,7 @@ interface scheduleListType {
 
 interface temporaryListType {
   date: string;
-  scheduleList: scheduleListType;
+  scheduleList: any;
 }
 
 export default function RegisterModal(props: modalType) {

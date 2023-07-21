@@ -22,7 +22,7 @@ interface scheduleListType {
 
 interface temporaryListType {
   date: string;
-  scheduleList: scheduleListType[];
+  scheduleList: any;
 }
 
 export default function Days(props: DaysProp) {

@@ -6,10 +6,11 @@ import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { userRoleData } from "../../atom/loginUser/loginUser";
 import { setCookie } from "../../api/cookie";
 import { connectLessonId } from "../../atom/registerLesson/registerLesson";
+import { stepNum } from "../../atom/signup/signup";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -19,6 +20,7 @@ export default function LoginInput() {
   const [password, setPassword] = useState("");
   const [pwFocus, setPwFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
+  const setStep = useSetRecoilState(stepNum);
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const navigate = useNavigate();
 

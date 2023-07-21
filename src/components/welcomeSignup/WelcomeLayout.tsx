@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import AfterSignup from "./AfterSignup";
 import AlertSignup from "./AlertSignup";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { stepNum } from "../../atom/signup/signup";
 
 export default function WelcomeLayout() {
   const [isWelcome, setIsWelcome] = useState<boolean>(true);
-  const setStep = useRecoilValue(stepNum);
+  const setStep = useSetRecoilState(stepNum);
+
+  useEffect(() => {
+    setStep(1);
+  }, []);
 
   return (
     <>

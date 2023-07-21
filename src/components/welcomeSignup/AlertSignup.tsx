@@ -48,6 +48,7 @@ export default function AlertSignup() {
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
       console.log(res);
+      console.log("device", deviceToken);
     },
     onError: (err) => {
       console.log(err);

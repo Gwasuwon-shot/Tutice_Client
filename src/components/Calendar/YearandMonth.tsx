@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { format } from "date-fns";
 import { NextMonthArrowButton, PrevMonthArrowButton, CancelButton } from "../../assets";
+import Header from "../EditSchedule/Header";
 
 interface YearandMonthProps {
   currentMonth: Date;
@@ -20,21 +21,25 @@ export default function YearandMonth(props: YearandMonthProps) {
     handleToNextMonth();
   }
   return (
-    <HeaderWrapper>
-      <CalendarText>캘린더</CalendarText>
-      <YearMonthWrapper>
-        <PrevMonthButton onClick={() => handleGoToPrevMonth()} />
-        {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
-        <NextMonthButton onClick={() => handleGoToNextMonth()} />
-      </YearMonthWrapper>
-    </HeaderWrapper>
+    <>
+      <HeaderWrapper>
+        <HeaderContainer>
+          <CalendarText>캘린더</CalendarText>
+          <YearMonthWrapper>
+            <PrevMonthButton onClick={() => handleGoToPrevMonth()} />
+            {format(currentMonth, "yyyy")}년 {format(currentMonth, "MM")}월
+            <NextMonthButton onClick={() => handleGoToNextMonth()} />
+          </YearMonthWrapper>
+        </HeaderContainer>
+      </HeaderWrapper>
+    </>
   );
 }
+
 const HeaderWrapper = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-
   width: 29rem;
   margin-right: 0.4rem;
   margin-bottom: 1.1rem;
@@ -43,19 +48,22 @@ const HeaderWrapper = styled.header`
   font-size: 1.1rem;
 `;
 
+const HeaderContainer = styled.div`
+  display: flex;
+  width: 20rem;
+  justify-content: space-between;
+`;
+
 const CalendarText = styled.p`
   ${({ theme }) => theme.fonts.title02};
 `;
 
 const YearMonthWrapper = styled.span`
   display: flex;
-  justify-content: center;
   align-items: center;
-
   font-size: 1.1rem;
   gap: 1rem;
 
-  width: 12rem;
   ${({ theme }) => theme.fonts.body06};
 `;
 

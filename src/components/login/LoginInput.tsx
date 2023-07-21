@@ -118,6 +118,7 @@ const InputPasswordWrapper = styled.div<{ $pwFocus: boolean; $password: string }
 
 const Inputfield = styled.input`
   width: 20rem;
+  height: 2rem;
   margin: 1rem 0.2rem;
 
   &::placeholder {

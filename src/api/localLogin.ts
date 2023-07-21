@@ -6,6 +6,7 @@ export async function postLocalLogin(userLogin: userLoginTypes) {
     headers: {
       "Content-Type": "application/json",
     },
+    withCredentials: true,
   });
   return data;
 }

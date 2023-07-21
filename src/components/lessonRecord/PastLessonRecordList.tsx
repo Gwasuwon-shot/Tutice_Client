@@ -11,8 +11,8 @@ export default function PastLessonRecordList() {
 
   return (
     <PastLessonRecordListWrapper>
-      {scheduleList?.map(({ idx, date, startTime, endTime }: PastLessonRecordType) => {
-        return <PastLessonRecord key={idx} date={date} startTime={startTime} endTime={endTime} />;
+      {scheduleList?.map(({ idx, date, startTime, endTime, status }: PastLessonRecordType) => {
+        return <PastLessonRecord key={idx} date={date} startTime={startTime} endTime={endTime} status={status} />;
       })}
     </PastLessonRecordListWrapper>
   );

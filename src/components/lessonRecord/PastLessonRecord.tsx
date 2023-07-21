@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { css, styled } from "styled-components";
+import { useParams } from "react-router-dom";
+import useGetPastLessonRecord from "../../hooks/useGetPastLessonRecord";
 
 interface PastLessonRecordProps {
   date: string;
   startTime: string;
   endTime: string;
+  status: string;
 }
 
 export default function PastLessonRecord(props: PastLessonRecordProps) {
   const [attendance, setAttandance] = useState("");
-  const { date, startTime, endTime } = props;
+  const { date, startTime, endTime, status } = props;
+  const { lessonId } = useParams();
+  const { lesson } = useGetPastLessonRecord(Number(lessonId));
 
   //커스텀 훅에서 scheduleList에 status="상태없음"이 있으면 그 객체 빼고 return하게 filtering하기
   //status
@@ -23,13 +28,13 @@ export default function PastLessonRecord(props: PastLessonRecordProps) {
         {month}.{day}
       </DateWrapper>
       <LessonInfoWrapper>
-        <LessonCount>3회차 수업</LessonCount>
+        <LessonCount>{lesson.nowCount}회차 수업</LessonCount>
         <LessonTime>
           {startTime}~{endTime}
         </LessonTime>
       </LessonInfoWrapper>
 
-      <AttendanceWrapper attendance={"결석"}>결석</AttendanceWrapper>
+      <AttendanceWrapper attendance={"결석"}>{status}</AttendanceWrapper>
     </PastLessonRecordWrapper>
   );
 }

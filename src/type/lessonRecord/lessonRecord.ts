@@ -3,6 +3,7 @@ export interface PastLessonRecordType {
   date: string;
   startTime: string;
   endTime: string;
+  status: string;
 }
 
 export interface DepositInfoType {

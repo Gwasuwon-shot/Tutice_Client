@@ -187,21 +187,21 @@ const Month = styled.span`
   display: flex;
   justify-content: center;
 
-  width: 3rem;
+  width: 3.3rem;
 `;
 
 const Dates = styled.span`
   display: flex;
   justify-content: center;
 
-  width: 3rem;
+  width: 4rem;
 `;
 
 const Day = styled.span`
   display: flex;
   justify-content: center;
 
-  width: 2.5rem;
+  width: 3rem;
 `;
 
 const CancleWrapper = styled.div`
@@ -245,7 +245,7 @@ const Vizor = styled.div`
   top: 50%;
   left: 50%;
 
-  width: 10rem;
+  width: 13rem;
   height: 2rem;
 
   transform: translate(-50%, -50%);

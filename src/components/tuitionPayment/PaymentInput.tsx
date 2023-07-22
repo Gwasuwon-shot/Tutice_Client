@@ -12,8 +12,8 @@ import {
   paymentOrder,
 } from "../../atom/tuitionPayment/tuitionPayment";
 
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface NameInputSectionProp {
   nameFocused: boolean;
@@ -95,7 +95,10 @@ export default function PaymentInput() {
   }
 
   function handleMoneyChange(event: ChangeEvent<HTMLInputElement>) {
-    setMoney(Number(event.target.value));
+    const inputValue = event.target.value;
+    if (!isNaN(inputValue as any)) {
+      setMoney(Number(inputValue));
+    }
   }
 
   // 5. checkbox

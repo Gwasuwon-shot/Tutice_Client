@@ -17,6 +17,7 @@ import SelectedDayAndTime from "./SelectedDayAndTime";
 import { getTemporarySchedule } from "../../api/getTemporarySchedule";
 import styled from "styled-components";
 import { useMutation } from "react-query";
+import {useNavigate} from 'react-router-dom'
 import { useRecoilState } from "recoil";
 
 interface DayProp {
@@ -38,6 +39,9 @@ interface temporaryProp {
 }
 
 export default function LessonDate() {
+
+  const navigate = useNavigate();
+
   // 1. 요일 관리
 
   const DAYS = ["월", "화", "수", "목", "금", "토", "일"];
@@ -110,6 +114,7 @@ export default function LessonDate() {
   const { mutate: getNewTemporarySchedule } = useMutation(getTemporarySchedule, {
     onSuccess: (response) => {
       setTempSchedule(response);
+      navigate('/register-calendar');
     },
 
     onError: (error) => console.log(error),

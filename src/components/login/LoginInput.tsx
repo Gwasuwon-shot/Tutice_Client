@@ -9,7 +9,7 @@ import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { stepNum } from "../../atom/signup/signup";
 import RegexField from "../signup/RegexField";
 

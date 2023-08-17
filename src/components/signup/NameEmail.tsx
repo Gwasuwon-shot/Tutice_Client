@@ -66,6 +66,7 @@ export default function NameEmail() {
       </BackButtonWrapper>
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
+
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
           <Inputfield
@@ -76,6 +77,7 @@ export default function NameEmail() {
             placeholder={PLACEHOLDER_TEXT.nameHolder}
           />
         </InputNameWrapper>
+
         {!isName && nameFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.nameError} /> : null}
         <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />

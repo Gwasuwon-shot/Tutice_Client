@@ -4,21 +4,24 @@ import { styled } from "styled-components";
 import { newUserData } from "../../atom/signup/signup";
 import TextLabelLayout from "./TextLabelLayout";
 
-export default function InputLayout() {
+interface InputfieldLayoutProps {
+  labelText: string;
+  onFocus: React.FocusEventHandler<HTMLInputElement>;
+  onBlur: React.FocusEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEvent<HTMLInputElement>;
+  placeholder: string;
+}
+
+export default function InputLayout(props: InputfieldLayoutProps) {
+  const { labelText, onFocus, onBlur } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [isName, setIsName] = useState(false);
   const [nameFocus, setNameFocus] = useState(false);
 
   return (
     <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
-      <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
-      <Inputfield
-        onFocus={() => setNameFocus(true)}
-        onBlur={() => setNameFocus(false)}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleNameChange(e)}
-        type="text"
-        placeholder={PLACEHOLDER_TEXT.nameHolder}
-      />
+      <TextLabelLayout labelText={labelText} />
+      <Inputfield onFocus={onFocus} onBlur={onBlur} onChange={onchange} type="text" placeholder={placeholder} />
     </InputNameWrapper>
   );
 }
@@ -38,7 +41,6 @@ const InputNameWrapper = styled.div<{ $nameFocus: boolean; $isName: boolean }>`
 const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }>`
   display: flex;
   flex-direction: column;
-
   width: 28rem;
   margin-top: 3.2rem;
 

@@ -7,9 +7,7 @@ import ParentModal from "./ParentModal";
 import ParentDayItem from "./ParentDayItem";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
-interface DaysProp {
-  currentMonth: Date;
-}
+import { DaysProp } from "../../../type/calendar/daysPropsType";
 
 export default function ParentsDays(props: DaysProp) {
   const { currentMonth } = props;

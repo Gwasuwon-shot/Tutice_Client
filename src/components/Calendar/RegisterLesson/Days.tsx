@@ -9,9 +9,7 @@ import { temporarySchedule } from "../../../atom/timePicker/timePicker";
 import DayItem from "./DayItem";
 import RegisterModal from "./RegisterModal";
 
-interface DaysProp {
-  currentMonth: Date;
-}
+import { DaysProp } from "../../../type/calendar/daysPropsType";
 
 interface scheduleListType {
   endTime: string;

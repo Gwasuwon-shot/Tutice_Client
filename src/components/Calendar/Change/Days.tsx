@@ -7,9 +7,7 @@ import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 import ChangeModal from "./ChangeModal";
 import DayItemchange from "./DayItemchange";
-interface DaysProp {
-  currentMonth: Date;
-}
+import { DaysProp } from "../../../type/calendar/daysPropsType";
 
 export default function Days(props: DaysProp) {
   const { currentMonth } = props;

@@ -1,4 +1,4 @@
-import { format, isSunday, isToday } from "date-fns";
+import { format, isSunday, isToday, getMonth } from "date-fns";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
@@ -8,9 +8,10 @@ export default function DayItemchange(props: DayItemProps) {
   const { date, setOpenModal, setSelectedDate, myLessons } = props;
 
   const formattedDate = format(date, "d");
-  const isSundayDate = isSunday(date);
+  const isSundayDate: boolean = isSunday(date);
   const isTodayDate: boolean = isToday(date);
   const myLessonLength: number | undefined = myLessons?.dailyScheduleList.length;
+  const currentDate: Date = new Date();
 
   function handleOpenModal() {
     setSelectedDate(date);
@@ -19,7 +20,7 @@ export default function DayItemchange(props: DayItemProps) {
   return (
     <>
       <Dayitem onClick={handleOpenModal} key={date.toString()} $issunday={isSundayDate}>
-        <DayText $istoday={isTodayDate} $isnotvalid={format(date, "M") !== format(date, "M")}>
+        <DayText $istoday={isTodayDate} $isnotvalid={getMonth(date) !== getMonth(currentDate)}>
           {formattedDate}
         </DayText>
         <LessonWrapper>

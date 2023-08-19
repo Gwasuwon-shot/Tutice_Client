@@ -11,13 +11,6 @@ import RegisterModal from "./RegisterModal";
 
 import { DaysProp } from "../../../type/calendar/daysPropsType";
 
-interface scheduleListType {
-  endTime: string;
-  startTime: string;
-  studentName: string;
-  subject: string;
-}
-
 interface temporaryListType {
   date: string;
   scheduleList: any;

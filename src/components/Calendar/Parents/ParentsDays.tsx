@@ -37,13 +37,14 @@ export default function ParentsDays(props: DaysProp) {
           myChildLessons={myChildLessons}
         />,
       );
+
       day = addDays(day, 1);
 
       if (days.length === 7) {
         rows.push(
           <WeekWrapper key={day.toString()}>
             <DivideLine />
-            <DayWrapper>{days}</DayWrapper>
+            <DayWrapper>{[...days]}</DayWrapper>
           </WeekWrapper>,
         );
       }
@@ -55,7 +56,7 @@ export default function ParentsDays(props: DaysProp) {
   return (
     <>
       <DaysWrapper>
-        {rows}
+        {[...rows]}
         {openModal && selectedDate && (
           <ModalWrapper>
             <ParentModal selectedDate={selectedDate} setOpenModal={setOpenModal} formattedMonth={formattedMonth} />

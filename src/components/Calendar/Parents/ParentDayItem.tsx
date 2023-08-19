@@ -59,7 +59,7 @@ const Dayitem = styled.article<DayProp>`
   display: flex;
   align-items: center;
   ${({ $issunday }) => `
-      ${$issunday ? "color: #FCB3A6" : undefined}
+      ${$issunday && "color: #FCB3A6"}
     `};
   flex-direction: column;
   cursor: pointer;

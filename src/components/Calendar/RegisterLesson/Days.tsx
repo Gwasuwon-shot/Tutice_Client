@@ -55,7 +55,7 @@ export default function Days(props: DaysProp) {
         rows.push(
           <WeekWrapper key={day.toString()}>
             <DivideLine />
-            <DayWrapper>{days}</DayWrapper>
+            <DayWrapper>{[...days]}</DayWrapper>
           </WeekWrapper>,
         );
       }
@@ -67,7 +67,7 @@ export default function Days(props: DaysProp) {
   return (
     <>
       <DaysWrapper>
-        {rows}
+        {[...rows]}
         {openModal && selectedDate && (
           <ModalWrapper>
             <RegisterModal selectedDate={selectedDate} setOpenModal={setOpenModal} formattedMonth={formattedMonth} />

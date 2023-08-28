@@ -35,15 +35,15 @@ export default function Account() {
         <ContentWrapper>
           <ContentText onClick={handleMoveToLessonShare}>초대코드 공유</ContentText>
           <ContentText onClick={handleLogout}>로그아웃</ContentText>
-          {openModal && isCheckingDeleteAccount && (
+          {openModal && isCheckingLogout && (
             <LogoutModalSection $isCheckingLogout={isCheckingLogout}>
-              <LogoutModal setOpenModal={setOpenModal} />
+              <LogoutModal setOpenModal={setOpenModal} setIsCheckingLogout={setIsCheckingLogout} />
             </LogoutModalSection>
           )}
           <ContentText onClick={handleDeleteAccount}>삭제</ContentText>
           {openModal && isCheckingDeleteAccount && (
             <DeleteAccountModalSection $isCheckingDeleteAccount={isCheckingDeleteAccount}>
-              <AccountDeleteModal setOpenModal={setOpenModal} />
+              <AccountDeleteModal setOpenModal={setOpenModal} setIsCheckingDeleteAccount={setIsCheckingDeleteAccount} />
             </DeleteAccountModalSection>
           )}
         </ContentWrapper>

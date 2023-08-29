@@ -63,6 +63,33 @@ export default function PasswordAgreeChecking() {
     return null;
   }
 
+  function passwordRegex() {
+    if (pw === "") {
+      return null;
+    }
+    if (!isPassword) {
+      return <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} />;
+    }
+  }
+
+  {
+    /* {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null} */
+  }
+
+  {
+    /* {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null} */
+  }
+
+  function MatchedPassword() {
+    if (isPassword) {
+      if (isConfirmed) {
+        return <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched>;
+      } else {
+        return <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} />;
+      }
+    }
+  }
+
   useEffect(() => {
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
 
@@ -75,6 +102,7 @@ export default function PasswordAgreeChecking() {
     setConfirmFocus(false);
     setNewUser((prev) => ({ ...prev, password: pw }));
   }
+
   return (
     <>
       <ProgressBar progress={isConfirmed ? 100 : 80} />
@@ -110,8 +138,7 @@ export default function PasswordAgreeChecking() {
             {viewingPwIcon()}
           </PasswordIconWrapper>
         </InputPwWrapper>
-
-        {pwFocus || !isPassword ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
+        {passwordRegex()}
 
         <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
@@ -128,9 +155,12 @@ export default function PasswordAgreeChecking() {
           </PasswordIconWrapper>
         </InputConfirmWrapper>
 
-        {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+        {MatchedPassword()}
 
-        {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
+        {/* {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null} */}
+
+        {/* {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null} */}
+
         <AgreeChecking />
       </Container>
     </>

@@ -17,7 +17,7 @@ import TextLabelLayout from "./TextLabelLayout";
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [pw, setPw] = useState("");
-  const [confirmPw, setConfirmPw] = useState(" ");
+  const [confirmPw, setConfirmPw] = useState("");
   const [isPassword, setIsPassword] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -66,7 +66,7 @@ export default function PasswordAgreeChecking() {
   useEffect(() => {
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
 
-    pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
+    pw === confirmPw && !(pw === "") ? setIsConfirmed(true) : setIsConfirmed(false);
 
     pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
   }, [pw, confirmPw, isPassword, isConfirmed, newUser, setPw]);

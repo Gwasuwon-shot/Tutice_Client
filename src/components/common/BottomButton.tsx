@@ -23,7 +23,7 @@ const BottomContainer = styled.button<{ $isActive: boolean }>`
   position: fixed;
   bottom: 0;
 
-  width: 31.8rem;
+  width: 100%;
   height: 6.3rem;
 
   background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};

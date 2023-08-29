@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -7,7 +7,7 @@ import { setCookie } from "../../api/cookie";
 import { newUserPost } from "../../api/localSignUp";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { newUserData, stepNum } from "../../atom/signup/signup";
+import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";

@@ -12,12 +12,12 @@ import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
-// type AgreeCheckingProp {
-//   isConfirmed: boolean;
-// }
+type AgreeCheckingProp = {
+  isConfirmed: boolean;
+};
 
-export default function AgreeChecking({ isConfirmed }: boolean) {
-  console.log(isConfirmed);
+export default function AgreeChecking(props: AgreeCheckingProp) {
+  const { isConfirmed } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);

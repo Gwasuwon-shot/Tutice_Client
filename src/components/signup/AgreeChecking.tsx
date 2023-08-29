@@ -35,7 +35,7 @@ export default function AgreeChecking() {
 
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      console.log(data.data);
+      // console.log(data.data);
       const accessToken = data.data.data.accessToken;
       setUserRole(data.data.data.user.role);
       setCookie("accessToken", accessToken, {
@@ -64,7 +64,7 @@ export default function AgreeChecking() {
   }
 
   useEffect(() => {
-    console.log(newUser);
+    // console.log(newUser);
   }, [newUser]);
 
   function handleButtonChecked(id: number) {
@@ -90,11 +90,14 @@ export default function AgreeChecking() {
   }
 
   useEffect(() => {
+    // console.log(checkedCount);
     checkAgrees.forEach((checkAgree) => {
       !allCheckedIndex(checkAgree.id) && checkAgree.selected
         ? setCheckedCount((prev) => prev + 1)
         : setCheckedCount((prev) => prev - 1);
     });
+
+    // console.log(checkedCount);
 
     let count = 0;
     checkAgrees.forEach((checkAgree) => {
@@ -110,8 +113,14 @@ export default function AgreeChecking() {
         essentialCheck += 1;
       }
     });
-    setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
 
+    if (!checkEssentialAgreeDone(essentialCheck)) {
+      setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
+    } else {
+      setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
+    }
+
+    // console.log("optionalIndex");
     setNewUser((prev: newUserDataTypes) => ({
       ...prev,
       isMarketing: checkAgrees[4].selected,
@@ -122,7 +131,7 @@ export default function AgreeChecking() {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
 
     newUser.password && completeCheck ? setIsActive(true) : setIsActive(false);
-  }, [isAllChecked()]);
+  }, [isAllChecked(), completeCheck]);
 
   function allCheckedIndex(id: number) {
     return id === 0;

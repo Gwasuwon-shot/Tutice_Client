@@ -11,17 +11,27 @@ import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import useAgreementStates from "../../hooks/signupLogin/useAgreementStates";
 
 export default function AgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
-  const [checkAgrees, setCheckAgrees] = useState(checkList);
-  const [textAgrees, setTextAgrees] = useState(textList);
-  const [allClicked, setAllClicked] = useState(false);
-  const [completeCheck, setCompleteCheck] = useState(false);
-  const [checkedCount, setCheckedCount] = useState(0);
-  const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
   const setUserRole = useSetRecoilState(userRoleData);
+
+  const {
+    checkAgrees,
+    setCheckAgrees,
+    textAgrees,
+    setTextAgrees,
+    allClicked,
+    setAllClicked,
+    completeCheck,
+    setCompleteCheck,
+    checkedCount,
+    setCheckedCount,
+    isActive,
+    setIsActive,
+  } = useAgreementStates(checkList, textList);
 
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {

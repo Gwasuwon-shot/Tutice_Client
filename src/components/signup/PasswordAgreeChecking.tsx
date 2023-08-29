@@ -46,9 +46,9 @@ export default function PasswordAgreeChecking() {
   function viewingPwIcon() {
     if (pwFocus || pw) {
       if (pwViewing === "text") {
-        return <CanViewingLoginIcon onClick={handlePasswordViewing} />;
+        return <ViewingLoginIcon onClick={handlePasswordViewing} />;
       }
-      return <ViewingLoginIcon onClick={handlePasswordViewing} />;
+      return <CanViewingLoginIcon onClick={handlePasswordViewing} />;
     }
     return null;
   }
@@ -56,9 +56,9 @@ export default function PasswordAgreeChecking() {
   function viewingConfirmIcon() {
     if (confirmFocus || confirmPw) {
       if (confirmViewing === "text") {
-        return <CanViewingLoginIcon onClick={handleConfirmViewing} />;
+        return <ViewingLoginIcon onClick={handleConfirmViewing} />;
       }
-      return <ViewingLoginIcon onClick={handleConfirmViewing} />;
+      return <CanViewingLoginIcon onClick={handleConfirmViewing} />;
     }
     return null;
   }

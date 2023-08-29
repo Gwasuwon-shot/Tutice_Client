@@ -20,7 +20,6 @@ export default function PasswordAgreeChecking() {
   const [confirmPw, setConfirmPw] = useState("");
   const [isPassword, setIsPassword] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
@@ -33,7 +32,11 @@ export default function PasswordAgreeChecking() {
 
   function handleConfirmChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    setConfirmPw(e.target.value);
+    if (isPassword) {
+      setConfirmPw(e.target.value);
+    } else {
+      console.log("password is NOT matched");
+    }
   }
 
   function handlePasswordViewing() {
@@ -83,11 +86,10 @@ export default function PasswordAgreeChecking() {
   }
 
   useEffect(() => {
+    console.log(isPassword);
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
 
     pw === confirmPw && !(pw === "") ? setIsConfirmed(true) : setIsConfirmed(false);
-
-    pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
   }, [pw, confirmPw, isPassword, isConfirmed, newUser, setPw]);
 
   function handleConfirmBlur() {
@@ -149,7 +151,7 @@ export default function PasswordAgreeChecking() {
 
         {MatchedPassword()}
 
-        <AgreeChecking />
+        <AgreeChecking isConfirmed={isConfirmed} />
       </Container>
     </>
   );

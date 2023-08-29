@@ -72,14 +72,6 @@ export default function PasswordAgreeChecking() {
     }
   }
 
-  {
-    /* {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null} */
-  }
-
-  {
-    /* {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null} */
-  }
-
   function MatchedPassword() {
     if (isPassword) {
       if (isConfirmed) {
@@ -156,10 +148,6 @@ export default function PasswordAgreeChecking() {
         </InputConfirmWrapper>
 
         {MatchedPassword()}
-
-        {/* {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null} */}
-
-        {/* {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null} */}
 
         <AgreeChecking />
       </Container>

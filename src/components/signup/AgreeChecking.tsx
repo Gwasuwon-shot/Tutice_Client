@@ -53,10 +53,6 @@ export default function AgreeChecking() {
     }
   }
 
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
-
   function handleButtonChecked(id: number) {
     setCheckAgrees(
       checkAgrees.map((checkAgree) =>

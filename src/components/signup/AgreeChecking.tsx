@@ -114,13 +114,8 @@ export default function AgreeChecking() {
       }
     });
 
-    if (!checkEssentialAgreeDone(essentialCheck)) {
-      setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
-    } else {
-      setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
-    }
+    setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
 
-    // console.log("optionalIndex");
     setNewUser((prev: newUserDataTypes) => ({
       ...prev,
       isMarketing: checkAgrees[4].selected,

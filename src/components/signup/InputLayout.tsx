@@ -4,12 +4,14 @@ import { styled } from "styled-components";
 import { newUserData } from "../../atom/signup/signup";
 import TextLabelLayout from "./TextLabelLayout";
 
+// 공사중
+
 interface InputfieldLayoutProps {
-  labelText: string;
   onFocus: React.FocusEventHandler<HTMLInputElement>;
   onBlur: React.FocusEventHandler<HTMLInputElement>;
-  onChange: React.ChangeEvent<HTMLInputElement>;
-  placeholder: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  labelText?: string;
+  placeholder?: string;
 }
 
 export default function InputLayout(props: InputfieldLayoutProps) {

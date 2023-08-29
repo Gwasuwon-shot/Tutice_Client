@@ -111,7 +111,7 @@ export default function PasswordAgreeChecking() {
           </PasswordIconWrapper>
         </InputPwWrapper>
 
-        {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
+        {pwFocus || !isPassword ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
         <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />

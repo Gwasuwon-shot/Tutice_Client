@@ -195,5 +195,5 @@ const RemoveSchedule = styled(removeTrashCan)`
 `;
 
 const ScheduleEditWrapper = styled.div`
-  display: felx;
+  display: flex;
 `;

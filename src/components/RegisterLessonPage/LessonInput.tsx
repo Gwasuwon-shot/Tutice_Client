@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import { RegisterLessonInputIc } from "../../assets";
+import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface NameInputSectionProp {
   nameFocused: boolean;
@@ -48,7 +48,7 @@ export default function LessonInput() {
 
   // 3. 이름 2자 이하 경고메시지 관련 변수
 
-  const isNameValid = studentName.length >= 3;
+  const isNameValid = studentName.length >= 2;
 
   const isWarning = !isNameValid && studentName.length > 0;
 

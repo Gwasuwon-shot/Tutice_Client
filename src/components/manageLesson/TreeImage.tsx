@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { LESSON_STATUS_IMAGE } from "../../core/manageLesson/lessonStatusImage";
-import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
+import useGetLessonProgress from "../../hooks/useGetLessonProgress";
 import TreeProgress from "../common/TreeProgress";
 
 export default function TreeImage() {
   const { manageLessonId } = useParams();
-  const { count, nowCount, percent } = useGetLessonScheduleByTeacher(Number(manageLessonId));
+  const { count, nowCount, percent } = useGetLessonProgress(Number(manageLessonId));
 
   function checkTreeSrc() {
     switch (true) {

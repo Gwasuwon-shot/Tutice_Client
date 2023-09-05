@@ -1,14 +1,12 @@
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
+import useGetLessonDetail from "../../hooks/useGetLessonDetail";
 import StudentNameLabel from "../common/StudentNameLabel";
 
 export default function StudentNameBox() {
   const { manageLessonId } = useParams();
-  const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
-    Number(manageLessonId),
-  );
+  const { idx, studentName, subject } = useGetLessonDetail(Number(manageLessonId));
 
   return (
     <>
@@ -16,7 +14,7 @@ export default function StudentNameBox() {
         <StudentNameLabel
           studentName={studentName}
           subject={subject}
-          backgroundColor={STUDENT_COLOR[lessonIdx % 10]}
+          backgroundColor={STUDENT_COLOR[idx % 10]}
           color="#757A80"
           isBig={true}
         />

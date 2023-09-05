@@ -10,15 +10,15 @@ export default function TreeImage() {
 
   function checkTreeSrc() {
     switch (true) {
-      case percent >= 80:
+      case percent === 100:
         return LESSON_STATUS_IMAGE.level5;
-      case percent >= 60:
+      case percent >== 75:
         return LESSON_STATUS_IMAGE.level4;
-      case percent >= 40:
+      case percent >== 50:
         return LESSON_STATUS_IMAGE.level3;
-      case percent >= 20:
+      case percent >== 25:
         return LESSON_STATUS_IMAGE.level2;
-      case percent >= 0:
+      case percent >== 0:
         return LESSON_STATUS_IMAGE.level1;
       default:
         return;

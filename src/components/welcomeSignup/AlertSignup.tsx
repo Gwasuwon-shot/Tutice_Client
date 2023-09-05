@@ -48,7 +48,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
     // if (userRole === "부모님") {
     //   navigate("/lessonCode");
     // } else {
-    //   navigate("/");
+    //   navigate("/home");
     // }
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
@@ -81,7 +81,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
       if (userRole === "부모님") {
         navigate(`/${lessonIndex}`);
       } else {
-        navigate("/");
+        navigate("/home");
       }
     },
     onError: (err) => {

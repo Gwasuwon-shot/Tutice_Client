@@ -32,7 +32,7 @@ export default function ConnectParentsAndTeacher() {
 
     if (!blockAccess()) {
       connectParentsAndTeacher();
-      navigate("/");
+      navigate("/home");
     } else {
       navigate("/login");
     }

@@ -17,7 +17,7 @@ export default function StudentInformation() {
       </IconWrapper>
       <StudentWrapper>
         <StudentName> {studentName} </StudentName>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#5B6166" />
+        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#00997D" />
       </StudentWrapper>
     </StudentInformationWrapper>
   );

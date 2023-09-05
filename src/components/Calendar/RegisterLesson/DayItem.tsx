@@ -134,7 +134,7 @@ const TemporaryScheduleWrapper = styled.p<{ $backgroundcolor: string }>`
   height: 1.4rem;
 
   ${({ theme }) => theme.fonts.caption02};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.green6};
   background-color: ${(props) => props.$backgroundcolor};
   border-radius: 0.2rem;
 `;

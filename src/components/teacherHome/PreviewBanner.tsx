@@ -1,10 +1,12 @@
 import { NO_CLASS_BANNER_TITLE } from "../../core/teacherHome/noClassBannerTitle";
 import useGetTodayScheduleByTeacher from "../../hooks/useGetTodayScheduleByTeacher";
+import useGetUserName from "../../hooks/useGetUserName";
 import ClassPreviewBanner from "./banner/ClassPreviewBanner";
 import NoclassBanner from "./banner/NoclassBanner";
 
 export default function Banner() {
-  const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
+  const { isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
+  const { teacherName } = useGetUserName();
 
   function checkClassEnd() {
     return todaySchedule === null;

@@ -1,9 +1,11 @@
 import { styled } from "styled-components";
 import { WELCOME_TEACHER_COMMENTS } from "../../core/teacherHome/welcomeTeacherComments";
 import useGetTodayScheduleByTeacher from "../../hooks/useGetTodayScheduleByTeacher";
+import useGetUserName from "../../hooks/useGetUserName";
 
 export default function WelcomeTeacher() {
-  const { teacherName, isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
+  const { isTodaySchedule, todaySchedule } = useGetTodayScheduleByTeacher();
+  const { teacherName } = useGetUserName();
 
   function checkTodayClassEnd() {
     return isTodaySchedule && todaySchedule === null;

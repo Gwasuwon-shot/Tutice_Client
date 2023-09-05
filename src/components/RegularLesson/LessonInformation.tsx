@@ -1,12 +1,16 @@
 import {RegularLessonNotebookIc, RegularLessonPencilIc} from '../../assets';
 import {cycleNumberState, dateState} from '../../atom/timePicker/timePicker';
-import {openDatePickerState, openTimePickerState} from "../../atom/timePicker/timePicker";
+import {firstLessonDay, openDatePickerState, openTimePickerState} from "../../atom/timePicker/timePicker";
 
 import React from 'react';
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import TimePicker from './TimePicker/TimePicker';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+
+interface LesssonProp {
+    isSelected: boolean;
+};
 
 export default function LessonInformation() {
 
@@ -35,23 +39,24 @@ export default function LessonInformation() {
         setIsDatePickerOpen(true);
     }
     const [activeDateSlide, setActiveDateSlide] = useRecoilState(dateState);
+    const [lessonDay, setLessonDay] = useRecoilState(firstLessonDay);
     
     return (
         <LessonInformationWrapper>
             <IconWrapper>
                 <RegularLessonNotebookIcon />
                 <SectionName> 수업정보 </SectionName>
+                <Explain> 수업종료 5분 뒤에 출결알람을 드릴게요. </Explain>
             </IconWrapper>
             <LessonWrapper>
                 <Turn> 
                     <TurnName> 회차 </TurnName>
-                    <TurnButton type = "button" onClick={handleTimePicker}> {selectedCycleText} </TurnButton>
+                    <TurnButton type = "button" onClick={handleTimePicker} isSelected={activeCycleSlide !== -1}> {selectedCycleText} </TurnButton>
                 </Turn>
                 <StartDate>
                     <StartDateName> 첫 수업일 </StartDateName>
-                    
-                    <StartDateButton type = "button" onClick={handleDatePicker}> {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 </StartDateButton>
-                    <RegularLessonPencilIcon />
+                    <StartDateButton type = "button" onClick={handleDatePicker}> {activeDateSlide.year}년 {activeDateSlide.month}월 {activeDateSlide.date}일 {lessonDay}요일</StartDateButton>
+                    <RegularLessonPencilIcon onClick={handleDatePicker}/>
                 </StartDate>
             </LessonWrapper>
         </LessonInformationWrapper>
@@ -68,6 +73,14 @@ const IconWrapper = styled.div`
     display: flex;
     
     height: 3.1rem;
+`
+
+const Explain = styled.h3`
+    margin-top: 1.7rem;
+    margin-left: 1.8rem;
+
+    ${({ theme }) => theme.fonts.caption01};
+    color: ${({ theme }) => theme.colors.grey300};  
 `
 
 const RegularLessonNotebookIcon = styled(RegularLessonNotebookIc)`
@@ -111,15 +124,17 @@ const TurnName = styled.h2`
     color: ${({ theme }) => theme.colors.grey400};
 `
 
-const TurnButton = styled.button`
-    ${({ theme }) => theme.fonts.body04};
-    color: ${({ theme }) => theme.colors.grey100};
+const TurnButton = styled.button<LesssonProp>`
     padding: 0;
+    ${({ theme }) => theme.fonts.body04};
+    ${({ isSelected, theme }) => !isSelected && `color: ${theme.colors.grey100}`};
+    ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.grey700}`};
 `
 
 const StartDate = styled.div`
     display: flex;
 `
+
 const StartDateName = styled.h2`
     display: flex;
     align-items: center;
@@ -129,6 +144,7 @@ const StartDateName = styled.h2`
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey400};
 `
+
 const StartDateButton = styled.button`
     padding: 0;
 
@@ -137,5 +153,7 @@ const StartDateButton = styled.button`
 `
 
 const RegularLessonPencilIcon = styled(RegularLessonPencilIc)`
+    width: 1.6rem;
+    margin-top: 0.3rem;
     margin-left: 1.6rem;
 `

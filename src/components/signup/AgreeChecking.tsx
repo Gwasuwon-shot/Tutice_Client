@@ -1,36 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import { TosNoneSignupIc } from "../../assets";
-import { TosCheckedSignupIc } from "../../assets";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { newUserData } from "../../atom/signup/signup";
+import { styled } from "styled-components";
+import { setCookie } from "../../api/cookie";
+import { newUserPost } from "../../api/localSignUp";
+import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
+import { userRoleData } from "../../atom/loginUser/loginUser";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 export default function AgreeChecking() {
-  // const setNewUser = useSetRecoilState(newUserData);
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
   const [allClicked, setAllClicked] = useState(false);
   const [completeCheck, setCompleteCheck] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
-  const [isFirst, setIsFirst] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
+  const setUserRole = useSetRecoilState(userRoleData);
+  const { mutate: postNewUser } = useMutation(newUserPost, {
+    onSuccess: (data) => {
+      console.log(data.data);
+      const accessToken = data.data.data.accessToken;
+      setUserRole(data.data.data.user.role);
+      setCookie("accessToken", accessToken, {
+        secure: true,
+      });
+      navigate("/welcome", { state: data.data });
+    },
+    onError: () => {
+      console.debug("실패 ㅠㅠ");
+    },
+  });
 
   function handleMoveToNotion(e: React.MouseEvent<HTMLDivElement>) {
     const target = e.target as HTMLDivElement;
     switch (target.innerText) {
       case "서비스 이용 약관":
-        window.open("https://www.naver.com", "_blank");
+        window.open("https://www.notion.so/9e874c3c10804274a99b0d6c9b75f1c2?pvs=4", "_blank");
         break;
       case "개인정보 수집 및 이용":
-        window.open("https://www.daum.net", "_blank");
+        window.open("https://www.notion.so/388ff5750f004bbf81554bfa14887186?pvs=4", "_blank");
         break;
       case "개인 정보 마케팅 활용":
-        window.open("https://www.nate.com", "_blank");
+        window.open("https://www.notion.so/1f3759e165504863b33506204d8c871a?pvs=4", "_blank");
         break;
     }
   }
+
+  useEffect(() => {
+    console.log(newUser);
+  }, [newUser]);
 
   function handleButtonChecked(id: number) {
     setCheckAgrees(
@@ -85,10 +109,16 @@ export default function AgreeChecking() {
 
   useEffect(() => {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
+
+    newUser.password && completeCheck ? setIsActive(true) : setIsActive(false);
   }, [isAllChecked()]);
 
   function allCheckedIndex(id: number) {
     return id === 0;
+  }
+
+  function checkEssentialAgreeDone(essentialCheck: number) {
+    return essentialCheck === 3;
   }
 
   function optionalIndex(id: number) {
@@ -105,50 +135,52 @@ export default function AgreeChecking() {
     setCheckAgrees([...tempCheckAgrees]);
   }
 
-  function checkEssentialAgreeDone(essentialCheck: number) {
-    return essentialCheck === 2;
+  function handleToSignUp() {
+    postNewUser(newUser);
   }
 
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
-
   return (
-    <TosWrapper>
-      <CheckWrapper>
-        {checkAgrees.map(({ id, selected }) => (
-          <ICWrapper key={id}>
-            {selected ? (
-              <div onClick={() => handleButtonChecked(id)}>
-                <TosCheckSignupIcon />
-              </div>
-            ) : (
-              <div onClick={() => handleButtonChecked(id)}>
-                <TosNoneSignupIcon />
-              </div>
-            )}
-            {id === 0 ? <Horizon /> : null}
-          </ICWrapper>
-        ))}
-      </CheckWrapper>
+    <>
+      <TosWrapper>
+        <CheckWrapper>
+          {checkAgrees.map(({ id, selected }) => (
+            <ICWrapper key={id}>
+              {selected ? (
+                <div onClick={() => handleButtonChecked(id)}>
+                  <TosCheckSignupIcon />
+                </div>
+              ) : (
+                <div onClick={() => handleButtonChecked(id)}>
+                  <TosNoneSignupIcon />
+                </div>
+              )}
+              {id === 0 ? <Horizon /> : null}
+            </ICWrapper>
+          ))}
+        </CheckWrapper>
 
-      <TextWrapper>
-        {textAgrees.map((textAgree) => (
-          <IndividualTextWrapper key={textAgree.id}>
-            {textAgree.optional === "(선택)" ? (
-              <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
-            ) : (
-              <Essential>{textAgree.optional}</Essential>
-            )}
-            <HyperLink onClick={(e: React.MouseEvent<HTMLDivElement>) => handleMoveToNotion(e)}>
-              {textAgree.linkText}
-            </HyperLink>
-            <CheckText> {textAgree.boldText} </CheckText>
-            <CheckSubText>{textAgree.lightText}</CheckSubText>
-          </IndividualTextWrapper>
-        ))}
-      </TextWrapper>
-    </TosWrapper>
+        <TextWrapper>
+          {textAgrees.map((textAgree) => (
+            <IndividualTextWrapper key={textAgree.id}>
+              {textAgree.optional === "(선택)" ? (
+                <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
+              ) : (
+                <Essential>{textAgree.optional}</Essential>
+              )}
+              <HyperLink onClick={(e: React.MouseEvent<HTMLDivElement>) => handleMoveToNotion(e)}>
+                {textAgree.linkText}
+              </HyperLink>
+              <CheckText> {textAgree.boldText} </CheckText>
+              <CheckSubText>{textAgree.lightText}</CheckSubText>
+            </IndividualTextWrapper>
+          ))}
+        </TextWrapper>
+      </TosWrapper>
+
+      <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
+        <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
+      </SubmitButton>
+    </>
   );
 }
 
@@ -163,7 +195,7 @@ const TosWrapper = styled.div`
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
   background-color: ${({ theme }) => theme.colors.grey0};
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const CheckWrapper = styled.div`
@@ -238,4 +270,24 @@ const IndividualTextWrapper = styled.div`
 
   height: 2rem;
   margin-bottom: 1.6rem;
+`;
+
+const SubmitButton = styled.button<{ $isActive: boolean }>`
+  position: fixed;
+  bottom: 0;
+
+  width: 31.8rem;
+  height: 6.3rem;
+  margin-left: -1.6rem;
+
+  background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
+  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};
+
+  ${({ theme }) => theme.fonts.body01};
+`;
+const ButtonText = styled.p`
+  position: relative;
+
+  top: -1rem;
+  ${({ theme }) => theme.fonts.body01};
 `;

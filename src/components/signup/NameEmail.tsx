@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { styled } from "styled-components";
-import BottomButton from "../common/BottomButton";
-import SignupTitleLayout from "./SignupTitleLayout";
-import BackButton from "../common/BackButton";
-import TextLabelLayout from "./TextLabelLayout";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { styled } from "styled-components";
 import { newUserData, stepNum } from "../../atom/signup/signup";
-import RegexField from "./RegexField";
-import { EMAIL_REGEX } from "../../core/signup/regex";
-import ProgressBar from "../common/ProgressBar";
-import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { EMAIL_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
+import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import BackButton from "../common/BackButton";
+import BottomButton from "../common/BottomButton";
+import ProgressBar from "../common/ProgressBar";
+import RegexField from "./RegexField";
+import SignupTitleLayout from "./SignupTitleLayout";
+import TextLabelLayout from "./TextLabelLayout";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -60,8 +60,10 @@ export default function NameEmail() {
 
   return (
     <>
-      <ProgressBar progress={email === "" ? 25 : 50} />
-      <BackButton />
+      <ProgressBar progress={50} />
+      <BackButtonWrapper>
+        <BackButton />
+      </BackButtonWrapper>
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
@@ -87,14 +89,14 @@ export default function NameEmail() {
         </InputEmailWrapper>
 
         {!isEmail && emailFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.emailError} /> : null}
-        <BottomButton
-          type="button"
-          children={BUTTON_TEXT.done}
-          isActive={isActive}
-          onClick={handleDoneClick}
-          disabled={!isActive}
-        />
       </Container>
+      <BottomButton
+        type="button"
+        children={BUTTON_TEXT.done}
+        isActive={isActive}
+        onClick={handleDoneClick}
+        disabled={!isActive}
+      />
     </>
   );
 }
@@ -111,7 +113,8 @@ const InputNameWrapper = styled.div<{ $nameFocus: boolean; $isName: boolean }>`
   display: flex;
   flex-direction: column;
 
-  width: 29.2rem;
+  width: 28rem;
+
   margin-top: 3.2rem;
 
   border-bottom: 0.1rem solid
@@ -122,7 +125,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
   display: flex;
   flex-direction: column;
 
-  width: 29.2rem;
+  width: 28rem;
   margin-top: 3.2rem;
 
   border-bottom: 0.1rem solid
@@ -130,11 +133,19 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
 `;
 
 const Inputfield = styled.input`
-  width: 70%;
-  margin: 1rem 0.2rem;
+  padding: 0;
+  height: 2rem;
+  margin-top: 1em;
+  margin-bottom: 1.1rem;
+  margin-left: 0.2rem;
+  ${({ theme }) => theme.fonts.title03};
 
-  &::placeholder {
+  &textarea::placeholder {
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
+`;
+
+const BackButtonWrapper = styled.div`
+  margin-left: 2rem;
 `;

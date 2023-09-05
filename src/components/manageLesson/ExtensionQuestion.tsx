@@ -1,24 +1,34 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
-import { MISSING_MAINTEANANCE_LESSON } from "../../core/manageLesson/getMissingMaintenanceLesson";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
 import ExtensionLessonContainer from "./ExtensionLessonContainer";
-import { useRecoilState } from "recoil";
-import { isModalOpen } from "../../atom/common/isModalOpen";
 import ExtensionLessonModal from "./ExtensionLessonModal";
-import useExtensionLesson from "../../hooks/useExtensionLesson";
-import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import { styled } from "styled-components";
+import useGetMissingMaintenanceLesson from "../../hooks/useGetMissingMaintenanceLesson";
+import { useRecoilState } from "recoil";
 
-export default function ExtensionQuestion() {
-  const { missingMaintenanceLessonList } = useExtensionLesson();
-  const [selectedLesson, setSelectedLesson] = useState<LessonType>({
-    idx: 1,
-    studentName: "",
-    subject: "",
-  });
+interface ExtensionQuestionProp {
+  setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface MissingLessonProp {
+  lesson: {
+    idx: number,
+    studentName: string,
+    subject: string,
+    count: number,
+},
+  endScheduleDate: string,
+}
+
+export default function ExtensionQuestion(props: ExtensionQuestionProp) {
+  const { setIsSuccess } = props;
+  const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
-
+  
   return (
     <>
       <ExtensionWrapper>
@@ -27,15 +37,9 @@ export default function ExtensionQuestion() {
           <HeaderText>수업연장 여부를 알려주세요!</HeaderText>
         </ExtentionHeader>
         <Content>
-          {missingMaintenanceLessonList.map((item) => {
-            const { lesson, endScheduleDate } = item;
+          {missingMaintenanceLessonList?.map((item: MissingLessonProp) => {
             return (
-              <ExtensionLessonContainer
-                setOpenModal={setOpenModal}
-                setSelectedLesson={setSelectedLesson}
-                // lesson={lesson}
-                endScheduleDate={endScheduleDate}
-              />
+              <ExtensionLessonContainer setOpenModal={setOpenModal} endScheduleDate={item.endScheduleDate} lesson={item.lesson} />
             );
           })}
         </Content>
@@ -44,11 +48,12 @@ export default function ExtensionQuestion() {
 
       {openModal && selectedLesson && (
         <ExtensionLessonModal
-          studentName={selectedLesson?.studentName}
-          subject={selectedLesson?.subject}
-          backgroundColor={STUDENT_COLOR[selectedLesson?.idx % 11]}
+          studentName={studentName}
+          subject={subject}
+          backgroundColor={STUDENT_COLOR[lessonIdx % 10]}
           color="#757A80"
           isBig={false}
+          setIsSuccess={setIsSuccess}
         />
       )}
     </>
@@ -68,7 +73,7 @@ const ExtensionWrapper = styled.section`
 
   border: 1px solid ${({ theme }) => theme.colors.green5};
   gap: 0.3rem;
-  border-radius: 8px;
+  border-radius: 0.8rem;
 `;
 
 const ExtentionHeader = styled.header`
@@ -92,8 +97,9 @@ const Content = styled.div`
 `;
 
 const GreyBar = styled.div`
-  width: 100%;
+  width: 32rem;
   height: 1.1rem;
+  margin-left: -1.5rem;
   margin-bottom: 2.4rem;
 
   background-color: ${({ theme }) => theme.colors.grey50};

@@ -1,13 +1,9 @@
 import { styled } from "styled-components";
 import { NoClassLogoTeacherHomeIc } from "../../assets";
-import RoundBottomButton from "../common/RoundBottomButton";
+import CreateTreeCode from "../common/CreateTreeCode";
 import WelcomeTeacher from "./WelcomeTeacher";
 
 export default function NoClassHome() {
-  function handleMakeTreeCode() {
-    // 나무 코드 생성 로직
-  }
-
   return (
     <>
       <WelcomeTeacher />
@@ -18,9 +14,7 @@ export default function NoClassHome() {
           <p> 나무 코드 생성을 통해 학생을 추가하고 </p>
           <p>링크를 학부모님에게 공유해보세요</p>
         </SubContext>
-        <div onClick={handleMakeTreeCode}>
-          <RoundBottomButton buttonMessage="나무코드 생성하기" />
-        </div>
+        <CreateTreeCode />
       </NoClassHomeWrapper>
     </>
   );

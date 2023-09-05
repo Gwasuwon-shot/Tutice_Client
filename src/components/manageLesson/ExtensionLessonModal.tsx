@@ -1,10 +1,14 @@
-import React from "react";
+import { useMutation } from "react-query";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { createLessonMaintenance } from "../../api/createLessonMaintenance";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
+import useModal from "../../hooks/useModal";
+import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
+import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
 import ToastModal from "../common/ToastModal";
-import useModal from "../../hooks/useModal";
-import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
-import useExtensionLesson from "../../hooks/useExtensionLesson";
 
 interface ExtensionLessonModalProps {
   studentName: string;
@@ -12,16 +16,51 @@ interface ExtensionLessonModalProps {
   backgroundColor: string;
   color: string;
   isBig: boolean;
+  setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface createLessonMaintenanceProps {
+  lessonIdx: number;
+  isLessonMaintenance: boolean;
 }
 
 export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
-  const { studentName, subject, backgroundColor, color, isBig } = props;
+  const { studentName, subject, backgroundColor, color, isBig, setIsSuccess } = props;
   const { unShowModal } = useModal();
+  const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
+  const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
 
-  function handleExtensionLesson() {
-    //서버 api 통신 (연장완)
-    unShowModal;
+  const postInformationTrue = {
+    lessonIdx: selectedLesson.lessonIdx,
+    isLessonMaintenance: true,
+  };
+
+  const postInformationFalse = {
+    lessonIdx: selectedLesson.lessonIdx,
+    isLessonMaintenance: false,
+  };
+
+  const { mutate: createNewLessonMaintenance } = useMutation(createLessonMaintenance, {
+    onSuccess: (response) => {
+      console.debug("성공");
+    },
+    onError: (error) => console.log(error),
+  });
+
+  function handleExtensionLesson(info: createLessonMaintenanceProps) {
+    createNewLessonMaintenance(info);
+    unShowModal();
+    setSanckBarOpen(true);
+    setIsSuccess(true);
   }
+
+  function handleNotExtensionLesson(info: createLessonMaintenanceProps) {
+    createNewLessonMaintenance(info);
+    unShowModal();
+    setSanckBarOpen(true);
+    setIsSuccess(false);
+  }
+
   return (
     <ModalWrapper>
       <ToastModal>
@@ -40,10 +79,10 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
           <p>수업을 계속해서 연장하시겠어요?</p>
         </TextWrapper>
         <ButtonWrapper>
-          <RoundBottomMiniButton isGreen={false} onClick={unShowModal}>
+          <RoundBottomMiniButton isGreen={false} onClick={() => handleNotExtensionLesson(postInformationFalse)}>
             아니요
           </RoundBottomMiniButton>
-          <RoundBottomMiniButton isGreen={true} onClick={handleExtensionLesson}>
+          <RoundBottomMiniButton isGreen={true} onClick={() => handleExtensionLesson(postInformationTrue)}>
             연장할래요
           </RoundBottomMiniButton>
         </ButtonWrapper>

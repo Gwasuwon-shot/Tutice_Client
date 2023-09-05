@@ -9,12 +9,17 @@ import "slick-carousel/slick/slick.css";
 import { styled } from "styled-components";
 import { SLIDER_SETTINGS } from "../core/OnBoarding";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RoundBottomButton from "../components/common/RoundBottomButton";
 
 export default function OnBoarding() {
   const SwiperPages = [<FirstSwiper />, <SecondSwiper />, <ThirdSwiper />, <FourthSwiper />];
 
+  const navigate = useNavigate();
+
+  const handleGoToLogin = () => {
+    navigate("/login");
+  };
   return (
     <>
       <OnBoardingWrapper>
@@ -30,6 +35,8 @@ export default function OnBoarding() {
           <Link to="/signup">
             <RoundBottomButton buttonMessage="시작하기" />
           </Link>
+        <ButtonWrapper onClick={() => handleGoToLogin()}>
+          <RoundBottomButton buttonMessage="시작하기" />
         </ButtonWrapper>
 
         <GoToLoginMessage>

@@ -1,9 +1,15 @@
 import { styled } from "styled-components";
 import { AttenceCheckCommonIc } from "../../assets";
 
-export default function AttendanceCheckButton() {
+interface AttendanceCheckButtonType {
+  onClick: () => void;
+}
+
+export default function AttendanceCheckButton(props: AttendanceCheckButtonType) {
+  const { onClick } = props;
+
   return (
-    <AttendaceCheckButtonBox type="button">
+    <AttendaceCheckButtonBox type="button" onClick={onClick}>
       <AttenceCheckCommonIc />
       <h1>출결 체크</h1>
     </AttendaceCheckButtonBox>
@@ -20,5 +26,5 @@ const AttendaceCheckButtonBox = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.green3};
   background-color: ${({ theme }) => theme.colors.green9};
   color: ${({ theme }) => theme.colors.grey0};
-  border-radius: 10px;
+  border-radius: 1rem;
 `;

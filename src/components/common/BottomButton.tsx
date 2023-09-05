@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 import { styled } from "styled-components";
 
 interface BottomButtonProps {
@@ -13,7 +13,7 @@ export default function BottomButton(props: BottomButtonProps) {
   const { children, isActive, onClick, disabled, type } = props;
 
   return (
-    <BottomContainer type={type} disabled={disabled} $isActive={isActive} onClick={onClick}>
+    <BottomContainer disabled={disabled} $isActive={isActive} onClick={onClick}>
       <BottomText> {children} </BottomText>
     </BottomContainer>
   );
@@ -25,7 +25,6 @@ const BottomContainer = styled.button<{ $isActive: boolean }>`
 
   width: 31.8rem;
   height: 6.3rem;
-  margin-left: -1.6rem;
 
   background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
   color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};

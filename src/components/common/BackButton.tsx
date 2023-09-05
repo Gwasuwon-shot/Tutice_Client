@@ -1,13 +1,16 @@
-import { backButtonSignupIc } from "../../assets";
-import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
+import { BackButtonSignupIc } from "../../assets";
 import { stepNum } from "../../atom/signup/signup";
 
 export default function BackButton() {
   const [step, setStep] = useRecoilState(stepNum);
+  const navigate = useNavigate();
 
   function handleMoveToBack() {
     setStep(step - 1);
+    // navigate(-1);
   }
 
   return (
@@ -16,9 +19,8 @@ export default function BackButton() {
     </>
   );
 }
-const BackButtonSignupIcon = styled(backButtonSignupIc)`
-  width: 1.7rem;
-  height: 1.7rem;
-  margin-top: 0.77rem;
-  margin-left: 1.6rem;
+const BackButtonSignupIcon = styled(BackButtonSignupIc)`
+  width: 4rem;
+  height: 4rem;
+  margin-left: -1.4rem;
 `;

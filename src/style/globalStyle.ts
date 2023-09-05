@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
     /* height: 56.8rem; */
     height: 100vh;
     /* 임시구현 선 */
-    /* border:1px solid black; */
+    border:1px solid black;
   }
   menu, ol, ul {
     list-style: none;
@@ -83,14 +83,14 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 62.5%;
     } */
     @media (min-width: 1000px){ 
-      font-size: 200%;
+      font-size: 70%
     }
     @media (min-width: 931px) and (max-width:999px){ 
-      font-size:180%;
+      font-size: 62.5%;
     }
     //Surface Pro 7
     @media (min-width: 901px) and (max-width:930px){ 
-      font-size: 170%;
+      font-size:62.5%;
     }
     //
     @media (min-width: 831px) and (max-width:900px){ 

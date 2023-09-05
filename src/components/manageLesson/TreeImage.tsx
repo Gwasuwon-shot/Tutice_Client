@@ -12,13 +12,13 @@ export default function TreeImage() {
     switch (true) {
       case percent === 100:
         return LESSON_STATUS_IMAGE.level5;
-      case percent >== 75:
+      case percent >= 75:
         return LESSON_STATUS_IMAGE.level4;
-      case percent >== 50:
+      case percent >= 50:
         return LESSON_STATUS_IMAGE.level3;
-      case percent >== 25:
+      case percent >= 25:
         return LESSON_STATUS_IMAGE.level2;
-      case percent >== 0:
+      case percent >= 0:
         return LESSON_STATUS_IMAGE.level1;
       default:
         return;

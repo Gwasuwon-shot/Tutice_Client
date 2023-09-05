@@ -19,6 +19,7 @@ export { ReactComponent as TuticeTitleLogo } from "./icon/TuticeTitleLogoOnBoard
 export { ReactComponent as viewingLoginIc } from "./icon/ViewingLoginIc.svg";
 export { ReactComponent as AbsentAttendanceModalIc } from "./icon/absentAttendanceModalIc.svg";
 export { ReactComponent as AbsentDisabledAttendanceIc } from "./icon/absentDisabledAttendanceIc.svg";
+export { ReactComponent as AddTreeCodeButtonManageIc } from "./icon/addTreeCodeButtonManageIc.svg";
 export { ReactComponent as BellwithAlarmIc } from "./icon/alarmBarManageLessonIc.svg";
 export { ReactComponent as PrevMonthArrowButton } from "./icon/arrow_cal_left.svg";
 export { ReactComponent as NextMonthArrowButton } from "./icon/arrow_cal_right.svg";

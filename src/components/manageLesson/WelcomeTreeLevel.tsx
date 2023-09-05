@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
-import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
+import useGetLessonProgress from "../../hooks/useGetLessonProgress";
 
 export default function WelcomeTreeLevel() {
   const { manageLessonId } = useParams();
-  const { count, nowCount } = useGetLessonScheduleByTeacher(Number(manageLessonId));
+  const { count, nowCount } = useGetLessonProgress(Number(manageLessonId));
 
   function checkIsLastLesson() {
     return count === nowCount;

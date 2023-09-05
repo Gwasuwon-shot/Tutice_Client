@@ -27,7 +27,9 @@ export default function OnBoarding() {
         </SliderWrapper>
 
         <ButtonWrapper>
-          <RoundBottomButton buttonMessage="시작하기" />
+          <Link to="/signup">
+            <RoundBottomButton buttonMessage="시작하기" />
+          </Link>
         </ButtonWrapper>
 
         <GoToLoginMessage>

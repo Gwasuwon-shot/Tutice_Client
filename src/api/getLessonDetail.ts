@@ -9,7 +9,5 @@ export async function getLessonDetail(lessonIdx: number) {
     },
   });
 
-  console.log(data.data.data);
-
   return data.data.data;
 }

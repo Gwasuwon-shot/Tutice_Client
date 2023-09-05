@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { AddTreeCodeButtonManageIc } from "../assets";
@@ -14,9 +15,14 @@ export default function ManageLessonMain() {
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
   const [isSucces, setIsSuccess] = useState(true);
   const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
+  const navigate = useNavigate();
 
   function checkMissingMaintenanceLessonExist() {
     return missingMaintenanceLessonList?.length !== 0;
+  }
+
+  function handleMakeTreeCode() {
+    navigate("/register-lesson");
   }
 
   return (
@@ -27,7 +33,7 @@ export default function ManageLessonMain() {
         <MainLessonsHeader>수업관리</MainLessonsHeader>
         {checkMissingMaintenanceLessonExist() && <ExtensionQuestion setIsSuccess={setIsSuccess} />}
         <MainLessons />
-        <AddTreeCodeButtonManageIcon />
+        <AddTreeCodeButtonManageIcon onClick={handleMakeTreeCode} />
       </MainLessonsWrapper>
 
       <TeacherFooter />
@@ -36,11 +42,14 @@ export default function ManageLessonMain() {
 }
 
 const AddTreeCodeButtonManageIcon = styled(AddTreeCodeButtonManageIc)`
-  width: 6.5rem;
+  width: 11.2rem;
+  height: 3.6rem;
+
+  margin-left: 9rem;
 `;
 
 const MainLessonsWrapper = styled.section`
-  padding: 0 1.4rem 10rem 1.4rem;
+  padding: 0 1.4rem 13rem 1.4rem;
 `;
 
 const MainLessonsHeader = styled.header`

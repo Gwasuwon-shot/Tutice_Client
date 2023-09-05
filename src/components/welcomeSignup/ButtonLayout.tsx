@@ -43,6 +43,7 @@ const WelcomeButton = styled.button`
   background-color: ${({ theme }) => theme.colors.green5};
   color: ${({ theme }) => theme.colors.grey0};
   flex-shrink: 0;
+  ${({ theme }) => theme.fonts.body01};
 
   border-radius: 8px;
 `;

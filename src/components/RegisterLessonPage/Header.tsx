@@ -1,13 +1,21 @@
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
+
 import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
 export default function Header() {
     const navigate = useNavigate();
-
+    
+    const [studentName, setStudentName] = useRecoilState<string>(studentNameState);
+    const [subjectName, setSubjectName] = useRecoilState<string>(subjectNameState);
+  
     function handleMoveToBack() {
-      navigate(-1);
+        setStudentName('');
+        setSubjectName('');
+        navigate(-1);
     }
 
     return (

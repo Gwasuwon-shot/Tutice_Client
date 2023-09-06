@@ -7,6 +7,7 @@ import { attendanceLesson } from "../../../atom/attendanceCheck/attendanceLesson
 import { attendanceStatus } from "../../../atom/attendanceCheck/attendanceStatus";
 import { isModalOpen } from "../../../atom/common/isModalOpen";
 import { CLASS_PREVIEW_BANNER_COMMENTS } from "../../../core/teacherHome/classPreviewBannerComments";
+import useGetMissingAttendanceByLessonExist from "../../../hooks/useGetMissingAttendanceByLessonExist";
 import useGetTodayScheduleByTeacher from "../../../hooks/useGetTodayScheduleByTeacher";
 import useModal from "../../../hooks/useModal";
 import AttendanceCheckButton from "../../common/AttendanceCheckButton";
@@ -16,10 +17,11 @@ import SubjectLabel from "../../common/SubjectLabel";
 
 export default function ClassPreviewBanner() {
   const { todayScheduleByTeacher } = useGetTodayScheduleByTeacher();
-  const { todaySchedule, isMissingAttendanceByLesson } = todayScheduleByTeacher;
-  const { lesson, timeStatus, schedule } = todaySchedule !== null && todayScheduleByTeacher;
-  const { studentName, subject } = lesson;
-  const { expectedCount } = schedule;
+  const { lesson, timeStatus, schedule } = todayScheduleByTeacher !== null && todayScheduleByTeacher;
+  const { studentName, subject } = lesson !== undefined && lesson;
+  const { expectedCount } = schedule !== undefined && schedule;
+  const { isMissingAttendanceByLesson } = useGetMissingAttendanceByLessonExist(lesson?.idx);
+  // const { todaySchedule, isMissingAttendanceByLesson } = todayScheduleByTeacher;
   const navigate = useNavigate();
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);

@@ -1,13 +1,34 @@
+import {
+    cycleNumberState,
+    dateState,
+    dayState,
+    firstLessonDay,
+    focusDayState,
+    temporarySchedule,
+} from "../../atom/timePicker/timePicker";
+
 import {RegisterLessonHeaderIc} from '../../assets';
 import { TuticeWithTextCommonIc } from "../../assets";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+
 export default function Header() {
 
     const navigate = useNavigate();
-
+    const [count, setCount] = useRecoilState(cycleNumberState);
+    const [firstLesson, setFirstLesson] = useRecoilState(firstLessonDay);
+    const [focusDay, setFocusDay] = useRecoilState(focusDayState);
+    const [day, setDayState] = useRecoilState(dayState);
+    const [date, setDateState] = useRecoilState(dateState);
+    
     function handleMoveToBack() {
-      navigate(-1);
+        setCount(-1)
+        setFirstLesson({ 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" }[new Date().getDay()])
+        setFocusDay({ dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()], startTime: "", endTime: "" })
+        setDayState([])
+        setDateState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() })
+        navigate(-1);
     }
   
     return (

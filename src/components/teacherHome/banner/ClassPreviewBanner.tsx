@@ -15,8 +15,9 @@ import AttendanceDoubleCheckingModal from "../../common/AttendanceDoubleChecking
 import SubjectLabel from "../../common/SubjectLabel";
 
 export default function ClassPreviewBanner() {
-  const { todaySchedule, isMissingAttendanceByLesson } = useGetTodayScheduleByTeacher();
-  const { lesson, timeStatus, schedule } = todaySchedule;
+  const { todayScheduleByTeacher } = useGetTodayScheduleByTeacher();
+  const { todaySchedule, isMissingAttendanceByLesson } = todayScheduleByTeacher;
+  const { lesson, timeStatus, schedule } = todaySchedule !== null && todayScheduleByTeacher;
   const { studentName, subject } = lesson;
   const { expectedCount } = schedule;
   const navigate = useNavigate();

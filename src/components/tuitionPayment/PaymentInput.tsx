@@ -62,7 +62,12 @@ export default function PaymentInput() {
   }
 
   function handleAccountNumInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setAccountNum(event.target.value);
+    const inputValue = event.target.value;
+    const numericValue = Number(inputValue); 
+  
+    if (!isNaN(numericValue)) {
+      setAccountNum(numericValue.toString()); 
+    }
   }
 
   // 3. 은행명

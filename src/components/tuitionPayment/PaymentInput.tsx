@@ -337,9 +337,11 @@ const CheckboxLabel = styled.label`
 const CheckboxInput = styled.input`
   appearance: none;
 `;
+
 const CheckboxIcon = styled.svg`
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-top: 0.1rem;
   margin-right: 2rem;
 `;
 

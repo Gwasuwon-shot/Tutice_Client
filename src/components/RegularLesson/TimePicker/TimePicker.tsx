@@ -83,7 +83,7 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
 
-  width: 6rem;
+  width: 10rem;
   height: 14rem;
 
   ${({ theme }) => theme.fonts.body02};
@@ -147,7 +147,7 @@ const Vizor = styled.div`
   top: 50%;
   left: 50%;
 
-  width: 5rem;
+  width: 8rem;
   height: 2rem;
 
   transform: translate(-50%, -50%);

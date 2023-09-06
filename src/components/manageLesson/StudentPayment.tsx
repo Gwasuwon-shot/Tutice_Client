@@ -99,6 +99,7 @@ const FruitCount = styled.p`
 
 const SendPaymentAlarmManageLessonIcon = styled(SendPaymentAlarmManageLessonIc)`
   width: 5.5rem;
+  height: 2.9rem;
   margin-right: 1rem;
 
   cursor: pointer;
@@ -106,6 +107,7 @@ const SendPaymentAlarmManageLessonIcon = styled(SendPaymentAlarmManageLessonIc)`
 
 const RegisterPaymentManageLessonIcon = styled(RegisterPaymentManageLessonIc)`
   width: 5.5rem;
+  height: 2.9rem;
   cursor: pointer;
 `;
 

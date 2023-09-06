@@ -47,6 +47,7 @@ export { ReactComponent as FifthTreeParentsHomeIc } from "./icon/fifthTreeParent
 export { ReactComponent as FirstTreeParentsHomeIc } from "./icon/firstTreeParentsHomeIc.svg";
 export { ReactComponent as FourthTreeParentsHomeIc } from "./icon/fourthTreeParentsHomeIc.svg";
 export { ReactComponent as FruitPaymentIc } from "./icon/fruitPaymentIc.svg";
+export { ReactComponent as GreyFruitPaymentIc } from "./icon/greyFruitPaymentIc.svg";
 export { ReactComponent as HomeActiveTeacherFooterIc } from "./icon/homeActiveTeacherFooterIc.svg";
 export { ReactComponent as HomeSelectedParentsHomeIc } from "./icon/homeSelectedParentsHomeIc.svg";
 export { ReactComponent as HomeTeacherFooterIc } from "./icon/homeTeacherFooterIc.svg";
@@ -63,6 +64,7 @@ export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.sv
 export { ReactComponent as NextArrowManageLessonIc } from "./icon/nextArrowManageLessonIc.svg";
 export { ReactComponent as nextArrowWelcomeIc } from "./icon/nextArrowWelcomeIc.svg";
 export { ReactComponent as NoClassLogoTeacherHomeIc } from "./icon/noClassLogoTeacherHomeIc.svg";
+export { ReactComponent as RedFruitPaymentIc } from "./icon/redFruitPaymentIc.svg";
 export { ReactComponent as RegisterLessonHeaderIc } from "./icon/registerLessonHeaderIc.svg";
 export { ReactComponent as RegisterLessonInputIc } from "./icon/registerLessonInputIc.svg";
 export { ReactComponent as RegisterPaymentManageLessonIc } from "./icon/registerPaymentManageLessonIc.svg";

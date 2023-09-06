@@ -26,7 +26,7 @@ export default function StudentPayments() {
   const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
 
   function checkRealDate(date: string | null) {
-    return date !== null ? date : todayDate;
+    return date !== null ? date : todayDate?.date;
   }
 
   return (

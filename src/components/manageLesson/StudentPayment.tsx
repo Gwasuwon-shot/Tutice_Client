@@ -1,7 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { styled } from "styled-components";
-import { RegisterPaymentManageLessonIc, SendPaymentAlarmManageLessonIc } from "../../assets";
-import { PAYMENT_STATUS_IMAGE } from "../../core/manageLesson/paymentStatusImage";
+import {
+  GreyFruitPaymentIc,
+  RedFruitPaymentIc,
+  RegisterPaymentManageLessonIc,
+  SendPaymentAlarmManageLessonIc,
+} from "../../assets";
 import useModal from "../../hooks/useModal";
 
 interface StudentPaymentProps {
@@ -30,11 +34,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
 
   return (
     <StudentPaymentBox>
-      {status ? (
-        <img src={PAYMENT_STATUS_IMAGE.done} alt="입금 완료 열매" />
-      ) : (
-        <img src={PAYMENT_STATUS_IMAGE.notYet} alt="입금 미완료 열매" />
-      )}
+      {status ? <RedFruitPaymentIcon /> : <GreyFruitPaymentIcon />}
       <NumberWrapper>
         <FruitCount>{count}번째 열매</FruitCount>
         <Date>
@@ -54,6 +54,14 @@ export default function StudentPayment(props: StudentPaymentProps) {
     </StudentPaymentBox>
   );
 }
+
+const RedFruitPaymentIcon = styled(RedFruitPaymentIc)`
+  width: 4.4rem;
+`;
+
+const GreyFruitPaymentIcon = styled(GreyFruitPaymentIc)`
+  width: 4.4rem;
+`;
 
 const Payment = styled.div`
   display: flex;

@@ -6,7 +6,9 @@ import { isModalOpen } from "../../atom/common/isModalOpen";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import { paymentSuccessSnackBar } from "../../atom/registerPayment/registerPayment";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import useGetLessonPaymentRecordByTeacher from "../../hooks/useGetLessonPaymentRecordByTeacher";
+import useGetLessonDetail from "../../hooks/useGetLessonDetail";
+import useGetPaymentRecordByLesson from "../../hooks/useGetPaymentRecordByLesson";
+import useGetTodayDate from "../../hooks/useGetTodayDate";
 import { PaymentRecordType } from "../../type/manageLesson/paymentRecordType";
 import SuccessSendingAlarmSnackBar from "../common/SuccessSendingAlarmSnackBar";
 import HarvestFruiteSnackBar from "../modal/HarvestFruiteSnackBar";
@@ -15,7 +17,9 @@ import StudentPayment from "./StudentPayment";
 
 export default function StudentPayments() {
   const { manageLessonId } = useParams();
-  const { lesson, todayDate, paymentRecordList } = useGetLessonPaymentRecordByTeacher(Number(manageLessonId)); //lessonIdx 넣어주어야함
+  const { payments } = useGetPaymentRecordByLesson(Number(manageLessonId)); //lessonIdx 넣어주어야함
+  const { todayDate } = useGetTodayDate();
+  const { idx, studentName, subject } = useGetLessonDetail(Number(manageLessonId));
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [payMentAlarmOpen, setPayMentAlarmOpen] = useState(false);
   const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
@@ -34,24 +38,24 @@ export default function StudentPayments() {
       {openModal && payMentAlarmOpen && (
         <ModalWrapper>
           <SendPaymentAlarmManageLessonModal
-            studentName={lesson?.studentName}
-            subject={lesson?.subject}
-            backgroundColor={STUDENT_COLOR[Number(manageLessonId) % 10]}
+            studentName={studentName}
+            subject={subject}
+            backgroundColor={STUDENT_COLOR[idx % 10]}
             color="#757A80"
             isBig={false}
-            lessonIdx={Number(manageLessonId)}
+            lessonIdx={idx}
           />
         </ModalWrapper>
       )}
       <StudentPaymentsWrapper>
-        {paymentRecordList?.map(({ idx, date, amount, status }: PaymentRecordType, index: number) => (
+        {payments?.map(({ idx, date, amount, status }: PaymentRecordType, index: number) => (
           <StudentPayment
             key={idx}
             idx={idx}
             date={checkRealDate(date)}
             amount={amount}
             status={status}
-            count={Math.abs(index - paymentRecordList.length)}
+            count={Math.abs(index - payments.length)}
             setPayMentAlarmOpen={setPayMentAlarmOpen}
           />
         ))}

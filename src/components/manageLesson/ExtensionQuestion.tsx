@@ -1,12 +1,12 @@
+import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
 import { BellwithAlarmIc } from "../../assets";
-import ExtensionLessonContainer from "./ExtensionLessonContainer";
-import ExtensionLessonModal from "./ExtensionLessonModal";
-import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import { styled } from "styled-components";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useGetMissingMaintenanceLesson from "../../hooks/useGetMissingMaintenanceLesson";
-import { useRecoilState } from "recoil";
+import ExtensionLessonContainer from "./ExtensionLessonContainer";
+import ExtensionLessonModal from "./ExtensionLessonModal";
 
 interface ExtensionQuestionProp {
   setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,12 +14,12 @@ interface ExtensionQuestionProp {
 
 interface MissingLessonProp {
   lesson: {
-    idx: number,
-    studentName: string,
-    subject: string,
-    count: number,
-},
-  endScheduleDate: string,
+    idx: number;
+    studentName: string;
+    subject: string;
+    count: number;
+  };
+  endScheduleDate: string;
 }
 
 export default function ExtensionQuestion(props: ExtensionQuestionProp) {
@@ -28,7 +28,7 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
-  
+
   return (
     <>
       <ExtensionWrapper>
@@ -37,9 +37,14 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
           <HeaderText>수업연장 여부를 알려주세요!</HeaderText>
         </ExtentionHeader>
         <Content>
-          {missingMaintenanceLessonList?.map((item: MissingLessonProp) => {
+          {missingMaintenanceLessonList?.map((item: MissingLessonProp, idx) => {
             return (
-              <ExtensionLessonContainer setOpenModal={setOpenModal} endScheduleDate={item.endScheduleDate} lesson={item.lesson} />
+              <ExtensionLessonContainer
+                setOpenModal={setOpenModal}
+                endScheduleDate={item.endScheduleDate}
+                lesson={item.lesson}
+                key={idx}
+              />
             );
           })}
         </Content>

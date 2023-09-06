@@ -21,8 +21,6 @@ export default function AttendanceInforms() {
   const { studentName, subject } = useGetLessonDetail(Number(manageLessonId));
   const { scheduleList } = useGetLessonSchedule(Number(manageLessonId));
 
-  console.log(scheduleList);
-
   useEffect(() => {
     studentName && subject && setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
   }, [studentName, subject]);

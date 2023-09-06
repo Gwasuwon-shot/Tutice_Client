@@ -149,7 +149,7 @@ const ClassCountMentWrapper = styled.p`
 
 const UpcomingClassLogoTeacherHomeIcon = styled(UpcomingClassLogoTeacherHomeIc)`
   width: 7.6rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 `;
 
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`

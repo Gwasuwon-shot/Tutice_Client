@@ -46,7 +46,7 @@ export default function LessonInformation() {
             <IconWrapper>
                 <RegularLessonNotebookIcon />
                 <SectionName> 수업정보 </SectionName>
-                <Explain> 수업종료 5분 뒤에 출결알람을 드릴게요. </Explain>
+                <Explain> 수업종료 5분 뒤에 출결알림을 드릴게요. </Explain>
             </IconWrapper>
             <LessonWrapper>
                 <Turn> 

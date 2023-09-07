@@ -24,6 +24,7 @@ import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
 import PrivateRoute from "./utils/common/privateRoute";
+import ParentsFooter from "./components/common/ParentsFooter";
 
 export default function Router() {
   return (
@@ -53,6 +54,7 @@ export default function Router() {
           <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
           <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
           <Route path="/edit-lessonschedule" element={<EditShcedule />} />
+          <Route path="/footer" element={<ParentsFooter />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -4,6 +4,9 @@ import { subMonths, addMonths, setYear } from "date-fns";
 import YearandMonth from "../components/Calendar/YearandMonth";
 import Dayofweek from "../components/Calendar/Dayofweek";
 import ParentsDays from "../components/Calendar/Parents/ParentsDays";
+import useParentsFooter from "../hooks/useParentsFooter";
+import { PARENTS_FOOTER_CATEGORY } from "../core/parentsHome/parentsFooter";
+import ParentsFooter from "../components/common/ParentsFooter";
 
 //수정없는 부모님 캘린더
 export default function ParentCalenda() {
@@ -17,6 +20,13 @@ export default function ParentCalenda() {
   function handleToNextMonth() {
     setCurrentMonth(addMonths(currentMonth, 1));
   }
+
+  const { handleChangeActive } = useParentsFooter();
+
+  useEffect(() => {
+    handleChangeActive(PARENTS_FOOTER_CATEGORY.calendar);
+  }, []);
+
   return (
     <>
       <CalendarWrapper>
@@ -28,6 +38,8 @@ export default function ParentCalenda() {
         <Dayofweek />
         <ParentsDays currentMonth={currentMonth} />
       </CalendarWrapper>
+
+      <ParentsFooter />
     </>
   );
 }

@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
 import DepositRecordList from "./DepositRecord";
 import useGetRestOfClassesInfo from "../../hooks/useGetRestOfClassesInfo";
+import ParentsFooter from "../common/ParentsFooter";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();
@@ -55,6 +56,7 @@ export default function LessonRecordDetail() {
       ) : (
         <DepositRecordList />
       )}
+      <ParentsFooter />
     </>
   );
 }

@@ -1,8 +1,6 @@
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/swiper.min.css";
 
-import { useState } from "react";
-import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   dayState,
@@ -11,8 +9,10 @@ import {
   openStartDetailState,
 } from "../../../atom/timePicker/timePicker";
 
-import { useRecoilState } from "recoil";
+import SwiperCore from "swiper";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { useState } from "react";
 
 export default function DetailTimePicker() {
   // 1. 오전 오후 관리
@@ -181,7 +181,7 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
 
-  width: 3rem;
+  width: 3.5rem;
   height: 14rem;
 
   ${({ theme }) => theme.fonts.body02};
@@ -245,7 +245,7 @@ const Vizor = styled.div`
   top: 50%;
   left: 50%;
 
-  width: 13.6rem;
+  width: 15rem;
   height: 2rem;
 
   transform: translate(-50%, -50%);

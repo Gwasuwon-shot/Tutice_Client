@@ -55,37 +55,3 @@ const TeacherFooterWrapper = styled.footer`
 const Icon = styled.i`
   cursor: pointer;
 `;
-
-const HomeActiveTeacherFooterIcon = styled(HomeActiveTeacherFooterIc)`
-  width: 5rem;
-  height: 5rem;
-`;
-
-const HomeTeacherFooterIcon = styled(HomeTeacherFooterIc)`
-  width: 5rem;
-  height: 5rem;
-`;
-const CalendarActiveTeacherFooterIcon = styled(CalendarActiveTeacherFooterIc)`
-  width: 5rem;
-  height: 5rem;
-`;
-const CalendarTeacherFooterIcon = styled(CalendarTeacherFooterIc)`
-  width: 5rem;
-  height: 5rem;
-`;
-const ClassManagingActiveTeacherFooterIcon = styled(ClassManagingActiveTeacherFooterIc)`
-  width: 5rem;
-  height: 5rem;
-`;
-const ClassManagingTeacherFooterIcon = styled(ClassManagingTeacherFooterIc)`
-  width: 5rem;
-  height: 5rem;
-`;
-const MyActiveTeacherFooterIcon = styled(MyActiveTeacherFooterIc)`
-  width: 5rem;
-  height: 5rem;
-`;
-const MyTeacherFooterIcon = styled(MyTeacherFooterIc)`
-  width: 5rem;
-  height: 5rem;
-`;

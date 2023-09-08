@@ -35,7 +35,6 @@ export default function AlertSignup(prop: AlertSignupProp) {
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
 
-    console.log(permission);
     registerServiceWorker();
 
     // try {
@@ -59,10 +58,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
     });
   }
 
-  console.log(deviceToken);
-
   useEffect(() => {
-    console.log(deviceToken);
     deviceToken?.token !== "" && deviceToken?.token !== undefined && patchingDeviceToken(deviceToken?.token);
   }, [deviceToken]);
 

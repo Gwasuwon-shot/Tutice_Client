@@ -46,7 +46,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
     onSuccess: (response) => {
       queryClient.invalidateQueries("getMissingMaintenanceLesson");
     },
-    onError: (error) => console.log(error),
+    onError: (error) => console.debug(error),
   });
 
   function handleExtensionLesson(info: createLessonMaintenanceProps) {

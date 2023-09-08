@@ -55,5 +55,6 @@ export async function createLesson(props: createLessonProps) {
     },
   );
 
+  console.log(data);
   return data?.data?.data;
 }

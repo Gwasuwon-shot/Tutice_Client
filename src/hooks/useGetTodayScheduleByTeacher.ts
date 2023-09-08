@@ -15,7 +15,7 @@ export default function useGetTodayScheduleByTeacher() {
   // const isTodaySchedule = todayScheduleByTeacher?.isTodaySchedule;
   // const todaySchedule = todayScheduleByTeacher?.todaySchedule;
   // const isMissingAttendanceByLesson = todaySchedule?.isMissingAttendanceByLesson;
-  console.log(todayScheduleByTeacher);
+
   const { lesson, timeStatus, schedule } =
     todayScheduleByTeacher !== null && todayScheduleByTeacher !== undefined && todayScheduleByTeacher;
 

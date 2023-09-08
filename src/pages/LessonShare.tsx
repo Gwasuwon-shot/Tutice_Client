@@ -59,7 +59,6 @@ export default function LessonShare() {
     setbankName("");
     setmoneyAmount(0);
     setpayingPersonName("");
-    setpaymentOrder("");
   }
 
   const navgiate = useNavigate();

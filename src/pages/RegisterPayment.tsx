@@ -18,12 +18,16 @@ export default function RegisterPayment() {
   const { state } = useLocation(); //paymentIdx
   const { manageLessonId } = useParams(); //lessonIdx
   const { studentName, subject } = useGetLessonDetail(Number(manageLessonId));
+  // const [student, setStudentName] = useRecoilState<string>(studentNameState);
+  // const [subjectName, setSubjectName] = useRecoilState<string>(subjectNameState);
   const { idx, cycle, startDate, endDate } = useGetPaymentRecordCycle(Number(state?.paymentIdx));
   const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
   const [isOpenPicker, setIsOpenPicker] = useRecoilState(openPaymentPicker);
   const [activeDateSlide, setActiveDateSlide] = useRecoilState(paymentDateState);
   const navigate = useNavigate();
   const [status, setStatus] = useRecoilState(managingStatus);
+
+  console.log(studentName, subject);
 
   function handleGoBack() {
     navigate(-1);

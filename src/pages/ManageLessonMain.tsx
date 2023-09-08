@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { AddTreeCodeButtonManageIc } from "../assets";
+import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { isSnackBarOpen } from "../atom/common/isSnackBarOpen";
 import CancelLessonMaintenanceSnackBar from "../components/common/CancelLessonMaintenanceSnackBar";
 import TeacherFooter from "../components/common/TeacherFooter";
@@ -16,6 +17,11 @@ export default function ManageLessonMain() {
   const [isSucces, setIsSuccess] = useState(true);
   const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
   const navigate = useNavigate();
+  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+
+  useEffect(() => {
+    setAttendanceData({ idx: 0, status: "" });
+  }, []);
 
   function checkMissingMaintenanceLessonExist() {
     return missingMaintenanceLessonList?.length !== 0;

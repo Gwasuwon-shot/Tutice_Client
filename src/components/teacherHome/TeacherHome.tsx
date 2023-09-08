@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
 import useGetLessonByUser from "../../hooks/useGetLessonByUser";
@@ -15,9 +16,11 @@ export default function TeacherHome() {
   const { isLessonExist } = useGetLessonByUser();
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
   const { handleChangeActive } = useTeacherFooter();
+  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
   useEffect(() => {
     handleChangeActive(TEACHER_FOOTER_CATEGORY.home);
+    setAttendanceData({ idx: 0, status: "" });
   }, []);
 
   return (

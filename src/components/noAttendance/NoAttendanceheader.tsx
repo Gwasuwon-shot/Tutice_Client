@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import BackButton from "../common/BackButton";
+import CommonBackButton from "../common/CommonBackButton";
 
 export default function NoAttendanceheader() {
   return (
     <HeaderWrapper>
-      <BackButton />
+      <CommonBackButton />
       <HeaderName>놓친 출결</HeaderName>
     </HeaderWrapper>
   );

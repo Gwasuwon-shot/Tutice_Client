@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { managingStatus } from "../atom/mangeLesson/managingStatus";
-import BackButton from "../components/common/BackButton";
+import CommonBackButton from "../components/common/CommonBackButton";
 import TeacherFooter from "../components/common/TeacherFooter";
 import ManageLessonCategory from "../components/manageLesson/ManageLessonCategory";
 import StudentLesson from "../components/manageLesson/StudentLesson";
@@ -31,7 +31,7 @@ export default function ManageLessonDetail() {
     <>
       <ManageLessonDetailContainer>
         {/* <SnackBarPopup isCheck={false}>4회차 결석으로 수정 완료했어요.</SnackBarPopup> */}
-        <BackButton />
+        <CommonBackButton />
         <ManageLessonWrapper>
           <StudentNameBox />
           <ManageLessonCategory />

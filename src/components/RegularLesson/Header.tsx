@@ -26,7 +26,7 @@ export default function Header() {
         setCount(-1)
         setFirstLesson({ 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" }[new Date().getDay()])
         setFocusDay("")
-        setDayState([])
+        setDayState([{dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()], startTime: "12:00", endTime: "12:00" },])
         setDateState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() })
         navigate(-1);
     }

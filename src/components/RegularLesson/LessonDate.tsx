@@ -132,6 +132,11 @@ export default function LessonDate() {
         <Explain> 수업 종료시 출결 입력 알림을 보내드릴게요. </Explain>
       </IconWrapper>
 
+      <ModalWrapper>
+        <RegularLessonCalenderIcon />
+        <ModalButton onClick={() => postTemporary(postInformation)}> 캘린더로 기존 일정 확인하기 </ModalButton>
+      </ModalWrapper>
+
       <DayWrapper>
         {DAYS.map((day, index) => (
           <Day
@@ -189,11 +194,6 @@ export default function LessonDate() {
         <RoundBottomButton buttonMessage={messages} />
       </ButtonWrapper>
 
-      <ModalWrapper>
-        <RegularLessonCalenderIcon />
-        <ModalButton onClick={() => postTemporary(postInformation)}> 캘린더로 일정 확인하기 </ModalButton>
-      </ModalWrapper>
-
       {selectedDays.map((day, index) => (
         <SelectedDayAndTime key={index} dayofweek={day.dayOfWeek} startTime={day.startTime} endTime={day.endTime} />
       ))}
@@ -235,7 +235,7 @@ const DayWrapper = styled.section`
   justify-content: center;
   gap: 0.2rem;
 
-  padding-top: 1.2rem;
+  padding-top: 0.6rem;
 `;
 
 const Day = styled.button<DayProp>`
@@ -294,18 +294,18 @@ const ButtonWrapper = styled.section`
 
 const ModalWrapper = styled.section`
   display: flex;
-  padding-top: 0.8rem;
+  margin-top: 0.8rem;
   margin-bottom: 1rem;
 `;
 
 const RegularLessonCalenderIcon = styled(RegularLessonCalenderIc)`
-  margin-left: 1.3rem;
+  margin-left: 1.7rem;
 `;
 
 const ModalButton = styled.button`
   margin-left: 0.3rem;
 
   text-decoration: underline;
-  ${({ theme }) => theme.fonts.body04};
+  ${({ theme }) => theme.fonts.body05};
   color: ${({ theme }) => theme.colors.grey400};
 `;

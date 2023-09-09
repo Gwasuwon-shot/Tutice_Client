@@ -129,7 +129,7 @@ export default function LessonDate() {
       <IconWrapper>
         <RegularLessonClockIcon />
         <SectionName> 수업일시 </SectionName>
-        <Explain> 첫 수업일과 정기등록 요일은 동일해야 해요 </Explain>
+        <Explain> 수업 종료시 출결 입력 알림을 보내드릴게요. </Explain>
       </IconWrapper>
 
       <DayWrapper>
@@ -224,7 +224,7 @@ const SectionName = styled.h1`
 
 const Explain = styled.h3`
   margin-top: 1.7rem;
-  margin-left: 1.8rem;
+  margin-left: 4.8rem;
 
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey300};

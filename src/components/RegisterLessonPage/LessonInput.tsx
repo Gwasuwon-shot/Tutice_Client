@@ -52,6 +52,14 @@ export default function LessonInput() {
 
   const isWarning = !isNameValid && studentName.length > 0;
 
+  function handleNameDelete () {
+    setStudentName("");
+  };
+  
+  function handleLessonDelete() {
+    setSubjectName("");
+  }
+  
   return (
     <InputWrapper>
       <NameInputSection nameFocused={isNameInputFocused}>
@@ -62,10 +70,9 @@ export default function LessonInput() {
           value={studentName}
           onChange={handleNameInputChange}
           onFocus={handleNameInputFocus}
-          onBlur={handleNameInputBlur}
         />
         {isWarning && <WarningMessage> 이름은 최소 2자 이상 입력해주세요 </WarningMessage>}
-        {isNameInputFocused && <RegisterLessonInputIcon />}
+        {isNameInputFocused && <RegisterLessonInputIcon  onClick={handleNameDelete}/>}
       </NameInputSection>
 
       <SubjectInputSection subjectFocused={isSubjectInputFocused} isWarning={isWarning}>
@@ -76,9 +83,8 @@ export default function LessonInput() {
           value={subjectName}
           onChange={handleSubjectInputChange}
           onFocus={handleSubjectInputFocus}
-          onBlur={handleSubjectInputBlur}
         />
-        {isSubjectInputFocused && <RegisterLessonInputIcon />}
+        {isSubjectInputFocused && <RegisterLessonInputIcon onClick={handleLessonDelete}/>}
       </SubjectInputSection>
     </InputWrapper>
   );

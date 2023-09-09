@@ -23,19 +23,13 @@ export default function LessonInput() {
   const [subjectName, setSubjectName] = useRecoilState<string>(subjectNameState);
 
   const handleNameInputFocus = () => {
+    setSubjectInputFocused(false);
     setNameInputFocused(true);
   };
 
   const handleSubjectInputFocus = () => {
-    setSubjectInputFocused(true);
-  };
-
-  const handleNameInputBlur = () => {
     setNameInputFocused(false);
-  };
-
-  const handleSubjectInputBlur = () => {
-    setSubjectInputFocused(false);
+    setSubjectInputFocused(true);
   };
 
   const handleNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -54,10 +48,12 @@ export default function LessonInput() {
 
   function handleNameDelete () {
     setStudentName("");
+    setSubjectInputFocused(false);
   };
   
   function handleLessonDelete() {
     setSubjectName("");
+    setNameInputFocused(false);
   }
   
   return (

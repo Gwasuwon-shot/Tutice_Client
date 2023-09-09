@@ -10,8 +10,8 @@ export default function RegularLesson() {
     
   return (
   <RegularWrapper>
-    <ProgressBar progress = {50} />
     <Header />
+    <ProgressBar progress = {50} />
     <StudentInformation />
     <LessonInformation />
     <LessonDate />

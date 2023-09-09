@@ -1,5 +1,6 @@
 import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
+import ProgressBar from "../common/ProgressBar";
 import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
@@ -22,6 +23,7 @@ export default function Header() {
 
         <HeaderWrapper>
             <RegisterLessonHeaderIc onClick={handleMoveToBack} />
+            <ProgressBar progress = {25} />
             <InputHeader> 학생의 이름과 <br/> 과목을 입력해주세요. <Emphasis> * </Emphasis> </InputHeader> 
             <InputNotice> 수업관리를 도와드릴 수 있도록 몇가지 정보를 알려주세요.</InputNotice>    
         </HeaderWrapper>

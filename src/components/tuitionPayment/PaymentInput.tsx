@@ -38,14 +38,12 @@ export default function PaymentInput() {
 
   function handleNameInputFocus() {
     setNameInputFocused(true);
-  }
-
-  function handleNameInputBlur() {
-    setNameInputFocused(false);
+    setBankFocused(false);
+    setMoneyFocused(false);
+    setAccountNumInputFocused(false);
   }
 
   function handleNameInputChange(event: ChangeEvent<HTMLInputElement>) {
-    //
     setPersonName(event.target.value);
   }
 
@@ -54,13 +52,12 @@ export default function PaymentInput() {
   const [accountNum, setAccountNum] = useRecoilState<string>(accountNumber);
 
   function handleAccountNumInputFocus() {
+    setNameInputFocused(false);
+    setBankFocused(false);
+    setMoneyFocused(false);
     setAccountNumInputFocused(true);
   }
-
-  function handleAccountNumInputBlur() {
-    setAccountNumInputFocused(false);
-  }
-
+  
   function handleAccountNumInputChange(event: ChangeEvent<HTMLInputElement>) {
     const inputValue = event.target.value;
     const numericValue = Number(inputValue); 
@@ -75,11 +72,10 @@ export default function PaymentInput() {
   const [bank, setBank] = useRecoilState<string>(bankName);
 
   function handleBankFocus() {
+    setNameInputFocused(false);
+    setAccountNumInputFocused(false);
+    setMoneyFocused(false);
     setBankFocused(true);
-  }
-
-  function handleBankBlur() {
-    setBankFocused(false);
   }
 
   function handleBankChange(event: ChangeEvent<HTMLInputElement>) {
@@ -92,11 +88,10 @@ export default function PaymentInput() {
   const [money, setMoney] = useRecoilState<number>(moneyAmount);
 
   function handleMoneyFocus() {
+    setNameInputFocused(false);
+    setAccountNumInputFocused(false);
+    setBankFocused(false);
     setMoneyFocused(true);
-  }
-
-  function handleMoneyBlur() {
-    setMoneyFocused(false);
   }
 
   function handleMoneyChange(event: ChangeEvent<HTMLInputElement>) {
@@ -117,6 +112,31 @@ export default function PaymentInput() {
     setOrder("후불");
   };
 
+  // 삭제
+
+  function handleNameDelete() {
+    setPersonName("");
+  }
+  
+  function handleAccountDelete() {
+    setAccountNum("");
+  }
+
+  function handleBankDelete() {
+    setBank("");
+  }
+
+  function handleMoneyDelete() {
+    setMoney(0);
+  }
+
+  function handleOrder() {
+    setNameInputFocused(false);
+    setAccountNumInputFocused(false);
+    setBankFocused(false);
+    setMoneyFocused(false);
+  }
+  
   return (
     <InputWrapper>
       <NameInputSection nameFocused={isNameInputFocused}>
@@ -127,9 +147,8 @@ export default function PaymentInput() {
           value={personName}
           onChange={handleNameInputChange}
           onFocus={handleNameInputFocus}
-          onBlur={handleNameInputBlur}
         />
-        {isNameInputFocused && <RegisterLessonInputIcon />}
+        {isNameInputFocused && <RegisterLessonInputIcon onClick = {handleNameDelete}/>}
       </NameInputSection>
 
       <AccountInputSection accountFocused={isAccountNumInputFocused}>
@@ -140,9 +159,8 @@ export default function PaymentInput() {
           value={accountNum}
           onChange={handleAccountNumInputChange}
           onFocus={handleAccountNumInputFocus}
-          onBlur={handleAccountNumInputBlur}
         />
-        {isAccountNumInputFocused && <RegisterLessonInputIcon />}
+        {isAccountNumInputFocused && <RegisterLessonInputIcon onClick = {handleAccountDelete}/>}
       </AccountInputSection>
 
       <BankInputSection bankFocused={isBankFocused}>
@@ -153,9 +171,8 @@ export default function PaymentInput() {
           value={bank}
           onChange={handleBankChange}
           onFocus={handleBankFocus}
-          onBlur={handleBankBlur}
         />
-        {isBankFocused && <RegisterLessonInputIcon />}
+        {isBankFocused && <RegisterLessonInputIcon onClick = {handleBankDelete}/>}
       </BankInputSection>
 
       <MoneyInputSection moneyFocused={isMoneyFocused}>
@@ -165,14 +182,13 @@ export default function PaymentInput() {
           value={money || ""}
           onChange={handleMoneyChange}
           onFocus={handleMoneyFocus}
-          onBlur={handleMoneyBlur}
         />
-        {isMoneyFocused && <RegisterLessonInputIcon />}
+        {isMoneyFocused && <RegisterLessonInputIcon onClick = {handleMoneyDelete}/>}
       </MoneyInputSection>
 
       <CheckboxWrapper>
         <CheckboxHeader> 입금 방식</CheckboxHeader>
-        <CheckboxLabel>
+        <CheckboxLabel onClick ={handleOrder}>
           <CheckboxInput type="checkbox" checked={order === "선불"} onChange={handleFirstChange} />
           {order === "선불" ? (
             <CheckboxIcon as={TuitionPaymentRadioButtonCheckedIc} />
@@ -181,7 +197,7 @@ export default function PaymentInput() {
           )}
           <CheckboxP> 선불 </CheckboxP>
         </CheckboxLabel>
-        <CheckboxLabel>
+        <CheckboxLabel onClick ={handleOrder}>
           <CheckboxInput type="checkbox" checked={order === "후불"} onChange={handleLastChange} />
           {order === "후불" ? (
             <CheckboxIcon as={TuitionPaymentRadioButtonCheckedIc} />

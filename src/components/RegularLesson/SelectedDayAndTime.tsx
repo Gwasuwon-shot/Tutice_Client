@@ -1,8 +1,17 @@
+import {
+    cycleNumberState,
+    dateState,
+    dayState,
+    firstLessonDay,
+    focusDayState,
+    openFinishDetailState,
+    openStartDetailState,
+    temporarySchedule,
+} from "../../atom/timePicker/timePicker";
 import {useRecoilState, useRecoilValue} from 'recoil';
 
 import React from 'react';
 import {RegularLessonGroupIc} from "../../assets";
-import {dayState} from '../../atom/timePicker/timePicker';
 import styled from 'styled-components';
 
 interface selectedProps {
@@ -22,28 +31,51 @@ export default function SelectedDayAndTime(props : selectedProps) {
     //     setSelectedDays(newList);
     // };
 
+    
+    const [focusDay, setFocusDay] = useRecoilState(focusDayState);
+    
+    const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
+
+    function handlStartTimePicker() {
+        setIsStartPickerOpen(true);
+    }
+
+    const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
+
+    function handleFinishTimePicker() {
+        setIsFinishPickerOpen(true);
+    }
+  
     return (
         <SelectedWrapper>
             <DayWrapper> {dayofweek}요일 </DayWrapper>
             <TimeWrapper> 
                 <Time>
                     <TimeInfo> 시작 </TimeInfo>
-                    <DetailTime>
-                        {Number(startTime.slice(0, 2)) <= 12 ? (
-                        <> 오전 {Number(startTime.slice(0, 2))}시 {startTime.slice(3)}분 </>
+                    <DetailTime  onClick={handlStartTimePicker} >
+                    {Number(focusDay.startTime.slice(0, 2)) <= 12 ? (
+                        <>
+                            오전 {Number(focusDay.startTime.slice(0, 2))}시 {focusDay.startTime.slice(3)}분
+                        </>
                         ) : (
-                        <> 오후 {Number(startTime.slice(0, 2)) - 12}시 {startTime.slice(3)}분 </>
-                        )}
+                        <>
+                            오후 {Number(focusDay.startTime.slice(0, 2)) - 12}시 {focusDay.startTime.slice(3)}분
+                        </>
+                    )}
                     </DetailTime>
                 </Time>
                 <Time>
                     <TimeInfo> 종료 </TimeInfo>
-                    <DetailTime>
-                        {Number(endTime.slice(0, 2)) <= 12 ? (
-                        <> 오전 {Number(endTime.slice(0, 2))}시 {endTime.slice(3)}분 </>
+                    <DetailTime  onClick={handleFinishTimePicker} >
+                    {Number(focusDay.endTime.slice(0, 2)) <= 12 ? (
+                        <>
+                            오전 {Number(focusDay.endTime.slice(0, 2))}시 {focusDay.endTime.slice(3)}분
+                        </>
                         ) : (
-                        <> 오후 {Number(endTime.slice(0, 2)) - 12}시 {endTime.slice(3)}분 </>
-                        )}
+                        <>
+                            오후 {Number(focusDay.endTime.slice(0, 2)) - 12}시 {focusDay.endTime.slice(3)}분
+                        </>
+                    )}
                     </DetailTime>
                 </Time>
             </TimeWrapper>            

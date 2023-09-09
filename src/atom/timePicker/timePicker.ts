@@ -51,7 +51,7 @@ export const dayState = atom<Day[]>({
 // 현재 선택중인 날짜 관리
 export const focusDayState = atom({
   key: "focusDayState",
-  default: { dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()], startTime: "12:00", endTime: "12:00" },
+  default: "",
 });
 
 // 확정날짜 '저장' 시, 선택한 첫 수업일의 요일을 푸터에서 확인하기 위한 atom

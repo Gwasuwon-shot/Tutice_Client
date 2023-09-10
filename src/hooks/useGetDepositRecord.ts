@@ -10,16 +10,9 @@ export default function useGetDepositRecord(lessonId: number) {
     staleTime: 3000,
   });
 
-  const studentName = depositRecord?.lesson?.studentName;
-  const teacherName = depositRecord?.lesson?.teacherName;
-  const subjectName = depositRecord?.lesson?.subject;
-
   const paymentRecordList = depositRecord?.paymentRecordList;
 
   return {
-    studentName,
-    teacherName,
-    subjectName,
     paymentRecordList,
   };
 }

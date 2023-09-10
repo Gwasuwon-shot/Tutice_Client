@@ -10,6 +10,7 @@ export default function DepositRecordList() {
   const [isDepositRecordExists, setIsDepositRecordExists] = useState(true);
   const { lessonId } = useParams();
   const { paymentRecordList } = useGetDepositRecord(Number(lessonId));
+  console.log(paymentRecordList);
 
   return isDepositRecordExists ? (
     <>

@@ -18,5 +18,7 @@ export default function Mypage() {
 }
 
 const MyPageWrapper = styled.main`
+  display: flex;
+  flex-direction: column;
   margin-top: 4rem;
 `;

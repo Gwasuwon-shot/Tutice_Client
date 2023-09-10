@@ -4,12 +4,14 @@ import BasicDoubleModal from "../common/BasicDoubleModal";
 
 interface LogoutModalProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCheckingLogout: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function LogoutModal(props: LogoutModalProps) {
-  const { setOpenModal } = props;
+  const { setOpenModal, setIsCheckingLogout } = props;
   function handleBacktoMypage() {
     setOpenModal(false);
+    setIsCheckingLogout(false);
   }
 
   function handleLogout() {

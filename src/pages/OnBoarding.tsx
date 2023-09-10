@@ -31,6 +31,10 @@ export default function OnBoarding() {
           </Slider>
         </SliderWrapper>
 
+        <ButtonWrapper>
+          <Link to="/signup">
+            <RoundBottomButton buttonMessage="시작하기" />
+          </Link>
         <ButtonWrapper onClick={() => handleGoToLogin()}>
           <RoundBottomButton buttonMessage="시작하기" />
         </ButtonWrapper>

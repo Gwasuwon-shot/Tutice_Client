@@ -3,6 +3,7 @@ import { STUDENT_COLOR } from "../../core/common/studentColor";
 import ClassSchedule from "./ClassSchedule";
 import useGetLessonByUser from "../../hooks/useGetLessonByUser";
 import useGetLessonByParents from "../../hooks/useGetLessonByParents";
+import { getLessonProgress } from "../../api/getLessonProgress";
 
 interface lessonListType {
   idx: number;
@@ -28,12 +29,12 @@ export default function ManageClass() {
             <ClassSchedule
               key={idx}
               idx={idx}
+              currentClassCount={nowCount}
+              entireClassCount={count}
+              currentClassCountPercent={percent}
               subjectName={subject}
               teacherName={teacherName}
               studentName={studentName}
-              entireClassCount={count}
-              currentClassCount={nowCount}
-              currentClassCountPercent={percent}
               subjectLabelBackgroundColor={STUDENT_COLOR[idx % 10]}
             />
           );

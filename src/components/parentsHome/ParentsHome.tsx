@@ -4,7 +4,6 @@ import Header from "../common/Header";
 import ManageClass from "./ManageClass";
 import NoClassParentsHome from "./NoClassParentsHome";
 import TodayClassSwiper from "./TodayClassSwiper";
-import useGetTodayScheduleByParents from "../../hooks/useGetTodayScheduleByParents";
 import useParentsFooter from "../../hooks/useParentsFooter";
 import ParentsFooter from "../common/ParentsFooter";
 import { useEffect } from "react";

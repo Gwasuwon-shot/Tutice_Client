@@ -43,10 +43,6 @@ export default function LoginInput() {
     },
   });
 
-  useEffect(() => {
-    console.log(userRole);
-  }, [userRole]);
-
   // setEmail
   function handelEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
@@ -57,7 +53,6 @@ export default function LoginInput() {
     setPassword(e.target.value);
   }
 
-  //데이터 전달 : 추후 추가
   function handleLoginClick() {
     postLoginData(userLogin);
   }

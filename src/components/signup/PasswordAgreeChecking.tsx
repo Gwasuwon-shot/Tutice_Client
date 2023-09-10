@@ -111,7 +111,7 @@ export default function PasswordAgreeChecking() {
           </PasswordIconWrapper>
         </InputPwWrapper>
 
-        {!isPassword && pwFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
+        {pwFocus || !isPassword ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
 
         <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
@@ -182,7 +182,7 @@ const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: b
 
 const Inputfield = styled.input`
   margin: 1rem 0.2rem;
-  width: 30rem;
+  width: 24rem;
 
   color: ${({ theme }) => theme.colors.grey700};
   ${({ theme }) => theme.fonts.title03};
@@ -191,26 +191,6 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
-`;
-
-const SubmitButton = styled.button<{ $isActive: boolean }>`
-  position: fixed;
-  bottom: 0;
-
-  width: 31.8rem;
-  height: 6.3rem;
-  margin-left: -1.6rem;
-
-  background-color: ${({ theme, $isActive }) => ($isActive ? theme.colors.green5 : theme.colors.grey50)};
-  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.grey0 : theme.colors.grey200)};
-
-  ${({ theme }) => theme.fonts.body01};
-`;
-const ButtonText = styled.p`
-  position: relative;
-
-  top: -1rem;
-  ${({ theme }) => theme.fonts.body01};
 `;
 
 const PasswordMatched = styled.p`
@@ -237,7 +217,7 @@ const CanViewingLoginIcon = styled(canViewingLoginIc)`
 
 const PasswordIconWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
 `;
 

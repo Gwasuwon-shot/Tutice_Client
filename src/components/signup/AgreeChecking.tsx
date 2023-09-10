@@ -22,6 +22,7 @@ export default function AgreeChecking() {
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
   const setUserRole = useSetRecoilState(userRoleData);
+
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
       console.log(data.data);

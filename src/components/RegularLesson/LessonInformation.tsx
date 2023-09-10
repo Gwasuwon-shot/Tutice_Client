@@ -46,7 +46,6 @@ export default function LessonInformation() {
             <IconWrapper>
                 <RegularLessonNotebookIcon />
                 <SectionName> 수업정보 </SectionName>
-                <Explain> 수업종료 5분 뒤에 출결알람을 드릴게요. </Explain>
             </IconWrapper>
             <LessonWrapper>
                 <Turn> 
@@ -73,14 +72,6 @@ const IconWrapper = styled.div`
     display: flex;
     
     height: 3.1rem;
-`
-
-const Explain = styled.h3`
-    margin-top: 1.7rem;
-    margin-left: 1.8rem;
-
-    ${({ theme }) => theme.fonts.caption01};
-    color: ${({ theme }) => theme.colors.grey300};  
 `
 
 const RegularLessonNotebookIcon = styled(RegularLessonNotebookIc)`

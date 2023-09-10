@@ -1,8 +1,7 @@
-import React from "react";
 import { styled } from "styled-components";
 
 interface TextLabelLayoutProp {
-  labelText: string;
+  labelText: string | undefined;
 }
 
 export default function TextLabelLayout(prop: TextLabelLayoutProp) {

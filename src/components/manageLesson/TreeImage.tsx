@@ -1,22 +1,22 @@
 import { useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { LESSON_STATUS_IMAGE } from "../../core/manageLesson/lessonStatusImage";
-import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
+import useGetLessonProgress from "../../hooks/useGetLessonProgress";
 import TreeProgress from "../common/TreeProgress";
 
 export default function TreeImage() {
   const { manageLessonId } = useParams();
-  const { count, nowCount, percent } = useGetLessonScheduleByTeacher(Number(manageLessonId));
+  const { count, nowCount, percent } = useGetLessonProgress(Number(manageLessonId));
 
   function checkTreeSrc() {
     switch (true) {
-      case percent >= 80:
+      case percent === 100:
         return LESSON_STATUS_IMAGE.level5;
-      case percent >= 60:
+      case percent >= 75:
         return LESSON_STATUS_IMAGE.level4;
-      case percent >= 40:
+      case percent >= 50:
         return LESSON_STATUS_IMAGE.level3;
-      case percent >= 20:
+      case percent >= 25:
         return LESSON_STATUS_IMAGE.level2;
       case percent >= 0:
         return LESSON_STATUS_IMAGE.level1;

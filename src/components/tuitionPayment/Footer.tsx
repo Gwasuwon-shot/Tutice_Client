@@ -1,3 +1,5 @@
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
+import { cycleNumberState, dateState, dayState } from "../../atom/timePicker/timePicker";
 import {
   accountNumber,
   bankName,
@@ -6,14 +8,12 @@ import {
   payingPersonName,
   paymentOrder,
 } from "../../atom/tuitionPayment/tuitionPayment";
-import { cycleNumberState, dateState, dayState } from "../../atom/timePicker/timePicker";
-import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
-import { createLesson } from "../../api/createLesson";
-import styled from "styled-components";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
+import { createLesson } from "../../api/createLesson";
 
 interface scheduleListProps {
   dayOfWeek: string;
@@ -51,7 +51,7 @@ export default function Footer() {
   const [number, setNumber] = useRecoilState(accountNumber);
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
 
-  const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== 0;
+  const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== 0 && payment !== "";
 
   const postStartDate =
     String(startDate.year) +
@@ -86,10 +86,10 @@ export default function Footer() {
 
   const { mutate: createNewLesson } = useMutation(createLesson, {
     onSuccess: (response) => {
-      console.log("성공");
       setCodeAndId(response);
       //setStartDate(response); //-> 지수에 전달한 data recoil 저장
       handleMoveToLessonShare();
+      console.log(response);
     },
     onError: (error) => console.log(error),
   });

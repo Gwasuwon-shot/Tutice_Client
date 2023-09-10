@@ -17,9 +17,6 @@ export default function OnBoarding() {
 
   const navigate = useNavigate();
 
-  const handleGoToLogin = () => {
-    navigate("/login");
-  };
   return (
     <>
       <OnBoardingWrapper>
@@ -31,8 +28,10 @@ export default function OnBoarding() {
           </Slider>
         </SliderWrapper>
 
-        <ButtonWrapper onClick={() => handleGoToLogin()}>
-          <RoundBottomButton buttonMessage="시작하기" />
+        <ButtonWrapper>
+          <Link to="/signup">
+            <RoundBottomButton buttonMessage="시작하기" />
+          </Link>
         </ButtonWrapper>
 
         <GoToLoginMessage>

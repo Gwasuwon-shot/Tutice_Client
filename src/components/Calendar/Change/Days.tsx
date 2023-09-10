@@ -7,9 +7,7 @@ import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 
 import ChangeModal from "./ChangeModal";
 import DayItemchange from "./DayItemchange";
-interface DaysProp {
-  currentMonth: Date;
-}
+import { DaysProp } from "../../../type/calendar/daysPropsType";
 
 export default function Days(props: DaysProp) {
   const { currentMonth } = props;
@@ -45,7 +43,7 @@ export default function Days(props: DaysProp) {
         rows.push(
           <WeekWrapper key={day.toString()}>
             <DivideLine />
-            <DayWrapper>{days}</DayWrapper>
+            <DayWrapper>{[...days]}</DayWrapper>
           </WeekWrapper>,
         );
       }
@@ -57,7 +55,7 @@ export default function Days(props: DaysProp) {
   return (
     <>
       <DaysWrapper>
-        {rows}
+        {[...rows]}
         {openModal && selectedDate && (
           <ModalWrapper>
             <ChangeModal formattedMonth={formattedMonth} selectedDate={selectedDate} setOpenModal={setOpenModal} />

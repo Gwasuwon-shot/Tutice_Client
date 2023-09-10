@@ -1,9 +1,6 @@
-import React from "react";
 import { styled } from "styled-components";
-import ProgressBar from "../common/ProgressBar";
 import { PROGRESS_TREE_IMG_LIST } from "../../core/common/ProgressTree";
 import TreeProgress from "../common/TreeProgress";
-import useGetRestOfClassesInfo from "../../hooks/useGetRestOfClassesInfo";
 
 interface RestOfClassesInfoProps {
   count: number;
@@ -16,15 +13,15 @@ export default function RestOfClassesInfo(props: RestOfClassesInfoProps) {
 
   let treeImgSrc = "";
 
-  if (percent <= 20) {
+  if (percent < 25) {
     treeImgSrc = PROGRESS_TREE_IMG_LIST[1];
-  } else if (percent > 20 && percent <= 40) {
+  } else if (percent >= 25 && percent < 50) {
     treeImgSrc = PROGRESS_TREE_IMG_LIST[2];
-  } else if (percent > 40 && percent <= 60) {
+  } else if (percent >= 50 && percent < 75) {
     treeImgSrc = PROGRESS_TREE_IMG_LIST[3];
-  } else if (percent > 60 && percent <= 80) {
+  } else if (percent >= 75 && percent < 100) {
     treeImgSrc = PROGRESS_TREE_IMG_LIST[4];
-  } else {
+  } else if (percent === 100) {
     treeImgSrc = PROGRESS_TREE_IMG_LIST[5];
   }
 

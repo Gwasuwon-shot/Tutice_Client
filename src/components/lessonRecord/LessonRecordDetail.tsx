@@ -2,16 +2,16 @@ import { useState } from "react";
 import { css, styled } from "styled-components";
 import { LessonInfoLessonRecordIc } from "../../assets";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import BackButton from "../common/BackButton";
 import SubjectLabel from "../common/SubjectLabel";
 import PastLessonRecordList from "./PastLessonRecordList";
 import RestOfClassesInfo from "./RestOfClassesInfo";
 
 import { useNavigate, useParams } from "react-router-dom";
 import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
-import DepositRecordList from "./DepositRecord";
 import useGetRestOfClassesInfo from "../../hooks/useGetRestOfClassesInfo";
+import CommonBackButton from "../common/CommonBackButton";
 import ParentsFooter from "../common/ParentsFooter";
+import DepositRecordList from "./DepositRecord";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();
@@ -30,7 +30,7 @@ export default function LessonRecordDetail() {
 
   return (
     <>
-      <BackButton />
+      <CommonBackButton />
       <LessonManageIcon onClick={() => handleGotoLessonInfoList()} />
       <LessonRecordHeader>
         <StudentName>{studentName}</StudentName>

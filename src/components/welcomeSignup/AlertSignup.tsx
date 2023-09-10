@@ -34,8 +34,9 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
-    registerServiceWorker();
 
+    registerServiceWorker();
+    
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
     });
@@ -64,7 +65,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
       if (userRole === "부모님") {
         navigate(`/${lessonIndex}`);
       } else {
-        navigate("/");
+        navigate("/home");
       }
     },
     onError: (err) => {

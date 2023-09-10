@@ -9,13 +9,15 @@ export default function Footer() {
     const studentName = useRecoilValue(studentNameSelector);
     const subjectName = useRecoilValue(subjectNameSelector);
 
-    const isNameValid = studentName.length >= 3; 
+    const isNameValid = studentName.length >= 2; 
     const isWarning = !isNameValid && studentName.length > 0
     const isFooterGreen = subjectName !== "" && !isWarning;
     const navigate = useNavigate();
 
     function moveToRegularLesson() {
-        navigate("/regular-lesson");
+        if (isFooterGreen) {
+            navigate("/regular-lesson");
+        }
     }
     
     return (

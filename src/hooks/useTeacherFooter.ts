@@ -16,7 +16,7 @@ export default function useTeacherFooter() {
     );
     switch (category) {
       case TEACHER_FOOTER_CATEGORY.home:
-        navigate("/");
+        navigate("/home");
         break;
       case TEACHER_FOOTER_CATEGORY.calendar:
         navigate("/schedule");

@@ -1,13 +1,35 @@
+import {
+    accountNumber,
+    bankName,
+    moneyAmount,
+    payingPersonName,
+    paymentOrder,
+} from "../../atom/tuitionPayment/tuitionPayment";
+
 import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
-
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+
 export default function Header() {
+    
+    const [personName, setPersonName] = useRecoilState<string>(payingPersonName);
+    const [accountNum, setAccountNum] = useRecoilState<string>(accountNumber);
+    const [bank, setBank] = useRecoilState<string>(bankName);
+    const [money, setMoney] = useRecoilState<number>(moneyAmount);
+    const [order, setOrder] = useRecoilState<string>(paymentOrder);
+
+    
     const navigate = useNavigate();
 
     function handleMoveToBack() {
-      navigate(-1);
+        setPersonName("");
+        setAccountNum("");
+        setBank("");
+        setMoney(0);
+        setOrder("");
+        navigate(-1);
     }
 
     return (

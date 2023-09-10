@@ -1,13 +1,12 @@
-import React from "react";
-import LessonInfoList from "../components/lessonRecord/LessonInfoList";
 import { styled } from "styled-components";
-import BackButton from "../components/common/BackButton";
+import CommonBackButton from "../components/common/CommonBackButton";
 import ParentsFooter from "../components/common/ParentsFooter";
+import LessonInfoList from "../components/lessonRecord/LessonInfoList";
 
 export default function LessonInfo() {
   return (
     <>
-      <BackButton />
+      <CommonBackButton />
       <LessonInfoHeader>수업 정보</LessonInfoHeader>
       <LessonInfoList />
       <ParentsFooter />

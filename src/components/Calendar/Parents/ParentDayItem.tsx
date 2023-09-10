@@ -1,4 +1,4 @@
-import { format, isSunday, isToday } from "date-fns";
+import { format, getMonth, isSunday, isToday } from "date-fns";
 import styled from "styled-components";
 import { CalendarMoreLessonIc } from "../../../assets/index";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
@@ -8,9 +8,10 @@ export default function ParentDayItem(props: DayItemProps) {
   const { date, setOpenModal, setSelectedDate, myChildLessons } = props;
 
   const formattedDate = format(date, "d");
-  const isSundayDate = isSunday(date);
+  const isSundayDate: boolean = isSunday(date);
   const isTodayDate: boolean = isToday(date);
   const myChildLength: number | undefined = myChildLessons?.dailyScheduleList.length;
+  const currentDate: Date = new Date();
 
   function handleOpenModal() {
     setSelectedDate(date);
@@ -19,27 +20,27 @@ export default function ParentDayItem(props: DayItemProps) {
   return (
     <>
       <Dayitem onClick={handleOpenModal} key={date.toString()} $issunday={isSundayDate}>
-        <DayText $istoday={isTodayDate} $isnotvalid={format(date, "M") !== format(date, "M")}>
+        <DayText $istoday={isTodayDate} $isnotvalid={getMonth(date) !== getMonth(currentDate)}>
           {formattedDate}
         </DayText>
         <LessonWrapper>
           {myChildLessons && (myChildLength as number) >= 4
             ? myChildLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
-                const { schedule } = lesson;
+                const { schedule, lessonIdx } = lesson;
                 const { startTime, studentName, idx } = schedule;
 
                 return (
-                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 10]} key={idx}>
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]} key={idx}>
                     {startTime} {studentName.slice(0, 2)}
                   </ScheduleWrapper>
                 );
               })
             : myChildLessons?.dailyScheduleList.map((lesson) => {
-                const { schedule } = lesson;
+                const { schedule, lessonIdx } = lesson;
                 const { startTime, studentName, idx } = schedule;
 
                 return (
-                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 10]} key={idx}>
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]} key={idx}>
                     {startTime} {studentName.slice(0, 2)}
                   </ScheduleWrapper>
                 );
@@ -58,7 +59,7 @@ const Dayitem = styled.article<DayProp>`
   display: flex;
   align-items: center;
   ${({ $issunday }) => `
-      ${$issunday ? "color: #FCB3A6" : undefined}
+      ${$issunday && "color: #FCB3A6"}
     `};
   flex-direction: column;
   cursor: pointer;

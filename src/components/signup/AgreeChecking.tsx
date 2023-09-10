@@ -7,24 +7,30 @@ import { setCookie } from "../../api/cookie";
 import { newUserPost } from "../../api/localSignUp";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { newUserData, stepNum } from "../../atom/signup/signup";
+import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
-export default function AgreeChecking() {
+type AgreeCheckingProp = {
+  isConfirmed: boolean;
+};
+
+export default function AgreeChecking(props: AgreeCheckingProp) {
+  const { isConfirmed } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
+  const navigate = useNavigate();
+  const setUserRole = useSetRecoilState(userRoleData);
+
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
   const [allClicked, setAllClicked] = useState(false);
   const [completeCheck, setCompleteCheck] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const navigate = useNavigate();
-  const setUserRole = useSetRecoilState(userRoleData);
+
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      console.log(data.data);
       const accessToken = data.data.data.accessToken;
       setUserRole(data.data.data.user.role);
       setCookie("accessToken", accessToken, {
@@ -52,9 +58,7 @@ export default function AgreeChecking() {
     }
   }
 
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
+  useEffect(() => {}, [newUser]);
 
   function handleButtonChecked(id: number) {
     setCheckAgrees(
@@ -99,6 +103,7 @@ export default function AgreeChecking() {
         essentialCheck += 1;
       }
     });
+
     setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
 
     setNewUser((prev: newUserDataTypes) => ({
@@ -111,7 +116,7 @@ export default function AgreeChecking() {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
 
     newUser.password && completeCheck ? setIsActive(true) : setIsActive(false);
-  }, [isAllChecked()]);
+  }, [isAllChecked(), completeCheck]);
 
   function allCheckedIndex(id: number) {
     return id === 0;
@@ -187,11 +192,11 @@ export default function AgreeChecking() {
 const TosWrapper = styled.div`
   display: flex;
 
-  width: 29.2rem;
   padding-top: 1.6rem;
   padding-left: 1.4rem;
   margin-top: 2rem;
   margin-bottom: 7rem;
+  margin-right: 1.4rem;
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
   background-color: ${({ theme }) => theme.colors.grey0};
@@ -275,8 +280,9 @@ const IndividualTextWrapper = styled.div`
 const SubmitButton = styled.button<{ $isActive: boolean }>`
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
 
-  width: 31.8rem;
   height: 6.3rem;
   margin-left: -1.6rem;
 

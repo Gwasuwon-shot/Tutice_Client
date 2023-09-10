@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -8,8 +8,8 @@ import { newUserPost } from "../../api/localSignUp";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
 import { newUserData } from "../../atom/signup/signup";
+import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
-import useAgreementStates from "../../hooks/signupLogin/useAgreementStates";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 type AgreeCheckingProp = {
@@ -22,20 +22,12 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
   const navigate = useNavigate();
   const setUserRole = useSetRecoilState(userRoleData);
 
-  const {
-    checkAgrees,
-    setCheckAgrees,
-    textAgrees,
-    setTextAgrees,
-    allClicked,
-    setAllClicked,
-    completeCheck,
-    setCompleteCheck,
-    checkedCount,
-    setCheckedCount,
-    isActive,
-    setIsActive,
-  } = useAgreementStates();
+  const [checkAgrees, setCheckAgrees] = useState(checkList);
+  const [textAgrees, setTextAgrees] = useState(textList);
+  const [allClicked, setAllClicked] = useState(false);
+  const [completeCheck, setCompleteCheck] = useState(false);
+  const [checkedCount, setCheckedCount] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {

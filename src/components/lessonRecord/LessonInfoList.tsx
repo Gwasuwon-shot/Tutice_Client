@@ -1,11 +1,9 @@
-import React from "react";
-import { styled } from "styled-components";
-import LessonInfoItemLayout from "./LessonInfoItemLayout";
-import { BANK_INFO, CLASS_INFO } from "../../core/Parents/lessonInfo";
-import useGetLessonDetailByParents from "../../hooks/useGetLessonDetailByParents";
 import { useParams } from "react-router-dom";
+import { styled } from "styled-components";
+import { BANK_INFO, CLASS_INFO } from "../../core/Parents/lessonInfo";
 import useGetLessonAccount from "../../hooks/useGetLessonAccount";
 import useGetLessonDetail from "../../hooks/useGetLessonDetail";
+import LessonInfoItemLayout from "./LessonInfoItemLayout";
 
 export default function LessonInfoList() {
   //커스텀 훅에서 account 객체 값 배열로 만들어서 리턴

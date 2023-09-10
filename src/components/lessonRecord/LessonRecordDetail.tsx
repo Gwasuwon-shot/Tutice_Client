@@ -12,7 +12,6 @@ import ParentsFooter from "../common/ParentsFooter";
 import DepositRecordList from "./DepositRecord";
 import useGetLessonProgress from "../../hooks/useGetLessonProgress";
 import useGetLessonDetail from "../../hooks/useGetLessonDetail";
-import useGetLessonSchedule from "../../hooks/useGetLessonSchedule";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();

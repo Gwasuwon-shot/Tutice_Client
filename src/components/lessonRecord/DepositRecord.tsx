@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import NoDeposit from "./NoDeposit";
 import { styled } from "styled-components";
 import DepositRecordItem from "./DepositRecordItem";

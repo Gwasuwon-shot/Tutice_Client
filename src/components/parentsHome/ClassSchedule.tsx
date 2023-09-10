@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 import { FirstTreeParentsHomeIc, RightArrowParentsHomeIc } from "../../assets";
 import SubjectLabel from "../common/SubjectLabel";
 import { useNavigate } from "react-router-dom";
-import useGetLessonProgress from "../../hooks/useGetLessonProgress";
 
 interface ClassScheduleProps {
   subjectName: string;

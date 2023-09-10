@@ -1,8 +1,6 @@
-import React from "react";
 import { styled } from "styled-components";
 import LessonInfoItemLayout from "./LessonInfoItemLayout";
 import { BANK_INFO, CLASS_INFO } from "../../core/Parents/lessonInfo";
-import useGetLessonDetailByParents from "../../hooks/useGetLessonDetailByParents";
 import { useParams } from "react-router-dom";
 import useGetLessonAccount from "../../hooks/useGetLessonAccount";
 import useGetLessonDetail from "../../hooks/useGetLessonDetail";

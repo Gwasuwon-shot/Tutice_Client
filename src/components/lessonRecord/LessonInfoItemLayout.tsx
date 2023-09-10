@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 import { copyAccountNumberLessonInfoIc } from "../../assets";
 import { CopyToClipboard } from "react-copy-to-clipboard";

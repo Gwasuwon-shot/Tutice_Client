@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { css, styled } from "styled-components";
 import { useParams } from "react-router-dom";
-import useGetPastLessonRecord from "../../hooks/useGetPastLessonRecord";
 
 interface PastLessonRecordProps {
   date: string;

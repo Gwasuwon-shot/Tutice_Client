@@ -45,7 +45,13 @@ interface Day {
 // 확정 날짜들 관리
 export const dayState = atom<Day[]>({
   key: "dayState",
-  default: [{dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()], startTime: "12:00", endTime: "12:00" },],
+  default: [
+    {
+      dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()],
+      startTime: "12:00",
+      endTime: "12:00",
+    },
+  ],
 });
 
 // 현재 선택중인 날짜 관리

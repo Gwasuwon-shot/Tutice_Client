@@ -48,11 +48,11 @@ export default function LessonShare() {
     setdateState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() });
     setdayState([]);
     setfirstLessonDay({ 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" }[new Date().getDay()]);
-    setfocusDayState({
-      dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()],
-      startTime: "",
-      endTime: "",
-    });
+    // setfocusDayState({
+    //   dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()],
+    //   startTime: "",
+    //   endTime: "",
+    // });
     setstudentNameState("");
     setsubjectNameState("");
     setaccountNumber("");

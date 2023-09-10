@@ -78,18 +78,18 @@ export default function ChangeModal(props: modalType) {
           {isUserSchedule
             ?.find((item) => isSameDay(new Date(item.date), selectedDate as Date))
             ?.dailyScheduleList.map((lesson) => {
-              const { schedule } = lesson;
+              const { schedule, lessonIdx } = lesson;
               const { idx, subject, studentName, startTime, endTime } = schedule;
 
               return (
                 <ScheduleWrapper key={idx}>
                   <ScheduleContainer>
-                    <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
+                    <StudentColorBox backgroundColor={STUDENT_COLOR[lessonIdx % 10]} />
                     <ModalTime>
                       {startTime} - {endTime}
                     </ModalTime>
                     <ModalName>{studentName}</ModalName>
-                    <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 10]}>{subject}</ModalSubject>
+                    <ModalSubject $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]}>{subject}</ModalSubject>
                   </ScheduleContainer>
 
                   {isEdit && (
@@ -195,5 +195,5 @@ const RemoveSchedule = styled(removeTrashCan)`
 `;
 
 const ScheduleEditWrapper = styled.div`
-  display: felx;
+  display: flex;
 `;

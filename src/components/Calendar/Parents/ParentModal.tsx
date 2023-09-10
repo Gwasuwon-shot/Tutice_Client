@@ -19,17 +19,17 @@ export default function ParentModal(props: modalType) {
           {isUserSchedule
             ?.find((item) => isSameDay(new Date(item.date), selectedDate as Date))
             ?.dailyScheduleList.map((item) => {
-              const { schedule } = item;
+              const { schedule, lessonIdx } = item;
               const { idx, studentName, subject, startTime, endTime } = schedule;
 
               return (
                 <ScheduleWrapper key={idx}>
-                  <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
+                  <StudentColorBox backgroundColor={STUDENT_COLOR[lessonIdx % 10]} />
                   <ModalTime>
                     {startTime} - {endTime}
                   </ModalTime>
                   <ModalName>{studentName}</ModalName>
-                  <ModalSubject $backgroundcolor={STUDENT_COLOR[idx % 10]}>{subject}</ModalSubject>
+                  <ModalSubject $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]}>{subject}</ModalSubject>
                 </ScheduleWrapper>
               );
             })}

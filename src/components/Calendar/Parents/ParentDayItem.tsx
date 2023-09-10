@@ -26,21 +26,21 @@ export default function ParentDayItem(props: DayItemProps) {
         <LessonWrapper>
           {myChildLessons && (myChildLength as number) >= 4
             ? myChildLessons?.dailyScheduleList?.slice(0, 2).map((lesson) => {
-                const { schedule } = lesson;
+                const { schedule, lessonIdx } = lesson;
                 const { startTime, studentName, idx } = schedule;
 
                 return (
-                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 10]} key={idx}>
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]} key={idx}>
                     {startTime} {studentName.slice(0, 2)}
                   </ScheduleWrapper>
                 );
               })
             : myChildLessons?.dailyScheduleList.map((lesson) => {
-                const { schedule } = lesson;
+                const { schedule, lessonIdx } = lesson;
                 const { startTime, studentName, idx } = schedule;
 
                 return (
-                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[idx % 10]} key={idx}>
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]} key={idx}>
                     {startTime} {studentName.slice(0, 2)}
                   </ScheduleWrapper>
                 );

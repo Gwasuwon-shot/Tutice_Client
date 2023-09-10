@@ -52,7 +52,6 @@ export default function CompleteCheckAttendance() {
   }
 
   function handleOpenSendAlarmModal() {
-    setAttendanceData({ idx: 0, status: "" });
     showModal();
   }
 

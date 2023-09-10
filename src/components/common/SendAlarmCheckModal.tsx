@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { requestAttendanceNotification } from "../../api/requestAttendanceNotification";
+import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
@@ -31,6 +32,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
   const { handleMoveToPage } = useTeacherFooter();
   const [isAgreeSend, setIsAgreeSend] = useState<undefined | string>(undefined);
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
+  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
   function handleMoveToHomeWithoutAlarm() {
     unShowModal();
@@ -49,6 +51,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
           handleMoveToHomeWithoutAlarm();
           setIsAgreeSend(undefined);
           setSanckBarOpen(true);
+          setAttendanceData({ idx: 0, status: "" });
         }
       },
       onError: (error) => {

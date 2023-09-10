@@ -22,7 +22,7 @@ export default function BottomButton(props: BottomButtonProps) {
 const BottomContainer = styled.button<{ $isActive: boolean }>`
   position: fixed;
   bottom: 0;
-
+  left: 0;
   width: 100%;
   height: 6.3rem;
 

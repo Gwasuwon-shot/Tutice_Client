@@ -56,9 +56,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
-
   width: 32rem;
-  height: 15.8rem;
 `;
 
 const TitleWrapper = styled.header`
@@ -80,15 +78,15 @@ const TitleText = styled.h1`
 
 const ContentWrapper = styled.div`
   display: flex;
-  gap: 2.8rem;
-
+  justify-content: space-between;
   flex-direction: column;
-
-  height: 13.2rem;
-  margin-left: 1.4rem;
 `;
 
-const ContentText = styled.h2`
+const ContentText = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 1.4rem;
+  height: 6rem;
   ${({ theme }) => theme.fonts.body02};
   color: ${({ theme }) => theme.colors.grey900};
   cursor: pointer;

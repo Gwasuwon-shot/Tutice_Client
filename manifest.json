@@ -2,7 +2,7 @@
   "short_name": "Tutice",
   "name": "Tutice",
   "description": "쉬운 수업 관리로 열리는 정확한 나의 결실, Tutice",
-  "theme_color": "#0DA98F",
+  "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "dir": "ltr",
   "start_url": ".",

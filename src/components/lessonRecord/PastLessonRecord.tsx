@@ -8,13 +8,12 @@ interface PastLessonRecordProps {
   startTime: string;
   endTime: string;
   status: string;
+  count: number;
 }
 
 export default function PastLessonRecord(props: PastLessonRecordProps) {
-  const [attendance, setAttandance] = useState("");
-  const { date, startTime, endTime, status } = props;
+  const { date, startTime, endTime, status, count } = props;
   const { lessonId } = useParams();
-  const { lesson } = useGetPastLessonRecord(Number(lessonId));
 
   //커스텀 훅에서 scheduleList에 status="상태없음"이 있으면 그 객체 빼고 return하게 filtering하기
   //status
@@ -28,7 +27,7 @@ export default function PastLessonRecord(props: PastLessonRecordProps) {
         {month}.{day}
       </DateWrapper>
       <LessonInfoWrapper>
-        <LessonCount>{lesson.nowCount}회차 수업</LessonCount>
+        <LessonCount>{count}회차 수업</LessonCount>
         <LessonTime>
           {startTime}~{endTime}
         </LessonTime>

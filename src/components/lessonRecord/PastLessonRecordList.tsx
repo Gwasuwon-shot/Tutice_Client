@@ -1,18 +1,26 @@
-import React from "react";
 import { styled } from "styled-components";
 import PastLessonRecord from "./PastLessonRecord";
 import { useParams } from "react-router-dom";
-import useGetPastLessonRecord from "../../hooks/useGetPastLessonRecord";
 import { PastLessonRecordType } from "../../type/lessonRecord/lessonRecord";
+import useGetLessonSchedule from "../../hooks/useGetLessonSchedule";
 
 export default function PastLessonRecordList() {
   const { lessonId } = useParams();
-  const { scheduleList } = useGetPastLessonRecord(Number(lessonId));
+  const { scheduleList } = useGetLessonSchedule(Number(lessonId));
 
   return (
     <PastLessonRecordListWrapper>
-      {scheduleList?.map(({ idx, date, startTime, endTime, status }: PastLessonRecordType) => {
-        return <PastLessonRecord key={idx} date={date} startTime={startTime} endTime={endTime} status={status} />;
+      {scheduleList?.map(({ idx, date, startTime, endTime, status }: PastLessonRecordType, index: number) => {
+        return (
+          <PastLessonRecord
+            count={Math.abs(index - scheduleList?.length)}
+            key={idx}
+            date={date}
+            startTime={startTime}
+            endTime={endTime}
+            status={status}
+          />
+        );
       })}
     </PastLessonRecordListWrapper>
   );

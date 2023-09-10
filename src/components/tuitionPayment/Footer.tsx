@@ -89,7 +89,6 @@ export default function Footer() {
       setCodeAndId(response);
       //setStartDate(response); //-> 지수에 전달한 data recoil 저장
       handleMoveToLessonShare();
-      console.log(response);
     },
     onError: (error) => console.log(error),
   });

@@ -33,7 +33,7 @@ export default function Account() {
           <TitleText>계정</TitleText>
         </TitleWrapper>
         <ContentWrapper>
-          <ContentText onClick={handleMoveToLessonShare}>초대코드 공유</ContentText>
+          {/* <ContentText onClick={handleMoveToLessonShare}>초대코드 공유</ContentText> */}
           <ContentText onClick={handleLogout}>로그아웃</ContentText>
           {openModal && isCheckingLogout && (
             <LogoutModalSection $isCheckingLogout={isCheckingLogout}>

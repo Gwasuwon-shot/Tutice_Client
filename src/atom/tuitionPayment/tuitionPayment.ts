@@ -31,7 +31,7 @@ export const paymentOrder = atom<string>({
 interface lessonCodeAndPaymentIdProp {
   lessonCode: string;
   paymentRecordIdx: number;
-  lessonIdx: number;
+  lessonidx: number;
 }
 
 export const lessonCodeAndPaymentId = atom<lessonCodeAndPaymentIdProp>({
@@ -39,7 +39,7 @@ export const lessonCodeAndPaymentId = atom<lessonCodeAndPaymentIdProp>({
   default: {
     lessonCode: "",
     paymentRecordIdx: -1,
-    lessonIdx: -1,
+    lessonidx: -1,
   },
   effects_UNSTABLE: [persistAtom],
 });

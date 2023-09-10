@@ -20,10 +20,20 @@ export default function InputLayout(props: InputfieldLayoutProps) {
   const [isName, setIsName] = useState(false);
   const [nameFocus, setNameFocus] = useState(false);
 
+  function handleTest() {
+    console.debug("");
+  }
+
   return (
     <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
       <TextLabelLayout labelText={labelText} />
-      <Inputfield onFocus={onFocus} onBlur={onBlur} onChange={onchange} type="text" placeholder={placeholder} />
+      <Inputfield
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onChange={onchange !== null ? onchange : handleTest}
+        type="text"
+        placeholder={placeholder}
+      />
     </InputNameWrapper>
   );
 }

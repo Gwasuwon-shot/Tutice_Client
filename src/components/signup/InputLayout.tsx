@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { newUserData } from "../../atom/signup/signup";
-import TextLabelLayout from "./TextLabelLayout";
 
 // 공사중
 
@@ -25,16 +24,17 @@ export default function InputLayout(props: InputfieldLayoutProps) {
   }
 
   return (
-    <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
-      <TextLabelLayout labelText={labelText} />
-      <Inputfield
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onChange={onchange !== null ? onchange : handleTest}
-        type="text"
-        placeholder={placeholder}
-      />
-    </InputNameWrapper>
+    <></>
+    // <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
+    //   <TextLabelLayout labelText={labelText} />
+    //   <Inputfield
+    //     onFocus={onFocus}
+    //     onBlur={onBlur}
+    //     onChange={onchange !== null ? onchange : handleTest}
+    //     type="text"
+    //     placeholder={placeholder}
+    //   />
+    // </InputNameWrapper>
   );
 }
 

@@ -16,6 +16,7 @@ import { styled } from "styled-components";
 import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
+import useGetLessonByUser from "../hooks/useGetLessonByUser";
 
 interface dayProps {
   year: number;
@@ -35,13 +36,14 @@ export default function LessonShare() {
   const [day, setdayState] = useRecoilState(dayState);
   const [firstLesson, setfirstLessonDay] = useRecoilState(firstLessonDay);
   const [focusDay, setfocusDayState] = useRecoilState(focusDayState);
-  const [studentName, setstudentNameState] = useRecoilState(studentNameState);
+  const [studentName, setStudentName] = useRecoilState<string>(studentNameState);
   const [subjectName, setsubjectNameState] = useRecoilState(subjectNameState);
   const [accountNum, setaccountNumber] = useRecoilState(accountNumber);
   const [bank, setbankName] = useRecoilState(bankName);
   const [money, setmoneyAmount] = useRecoilState(moneyAmount);
   const [payingPerson, setpayingPersonName] = useRecoilState(payingPersonName);
   const [payment, setpaymentOrder] = useRecoilState(paymentOrder);
+  const { userName } = useGetLessonByUser();
 
   function setAllSet() {
     setcycleNumberState(-1);
@@ -53,7 +55,7 @@ export default function LessonShare() {
     //   startTime: "",
     //   endTime: "",
     // });
-    setstudentNameState("");
+    setStudentName("");
     setsubjectNameState("");
     setaccountNumber("");
     setbankName("");
@@ -79,7 +81,9 @@ export default function LessonShare() {
     if (navigator.share) {
       navigator.share({
         title: "나무코드 공유",
-        text: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. \nTutice 링크 \n ${URL}`,
+        text: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. \n[${userName}]선생님이 [${studentName}]학생의\n
+        Tutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${URL}`,
+
         url: URL,
       });
     } else {

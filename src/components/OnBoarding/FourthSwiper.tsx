@@ -36,6 +36,7 @@ const LogoWrapper = styled.div`
 
   width: 100%;
   margin-top: 6.021rem;
+  margin-left: -0.08rem;
 `;
 
 const FourthSwiperFirstTreeIcon = styled(FourthSwiperFirstTree)`

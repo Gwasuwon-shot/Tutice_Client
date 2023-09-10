@@ -36,19 +36,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
     const permission = await Notification.requestPermission();
 
     registerServiceWorker();
-
-    // try {
-    //   await getDeviceToken();
-    //   deviceToken?.token !== "" && patchingDeviceToken(deviceToken.token);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-
-    // if (userRole === "부모님") {
-    //   navigate("/lessonCode");
-    // } else {
-    //   navigate("/home");
-    // }
+    
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
     });
@@ -97,7 +85,6 @@ export default function AlertSignup(prop: AlertSignupProp) {
         <SignupTitleLayout MainText={MAIN_TEXT} />
         <SubText>{SUB_TEXT}</SubText>
       </Container>
-      {/* <p>{deviceToken?.token}</p> */}
       <ButtonLayout onClick={handleAllowNotification} buttonText="할래요!" />
     </>
   );
@@ -105,6 +92,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
 const Container = styled.div`
   margin-top: 6rem;
+  margin-left: -2rem;
 `;
 const BellWelcomeIcon = styled(BellWelcomeIc)`
   width: 2.9rem;

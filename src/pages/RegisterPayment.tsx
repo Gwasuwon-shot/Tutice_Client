@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -27,17 +27,18 @@ export default function RegisterPayment() {
   const navigate = useNavigate();
   const [status, setStatus] = useRecoilState(managingStatus);
 
-  console.log(studentName, subject);
-
   function handleGoBack() {
     navigate(-1);
   }
+
+  const queryClient = useQueryClient();
 
   const { mutate: registerPay } = useMutation(updatePaymentRecord, {
     onSuccess: () => {
       setSuccessPay({ isOpen: true, count: state?.count });
       setStatus(MANAGE_LESSON_STATUS.payment);
-      navigate(`/manage-lesson/${idx}`);
+      queryClient.invalidateQueries("getPaymentRecordByLesson");
+      navigate(`/manage-lesson/${manageLessonId}`);
     },
     onError: (error) => {
       console.log(error);

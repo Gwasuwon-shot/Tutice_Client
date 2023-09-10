@@ -98,9 +98,9 @@ export default function DatePicker() {
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
     <SwiperSlide key={index}>
-      <Month> {monthCalender[index].month}월 </Month>
-      <Dates> {monthCalender[index].date}일 </Dates>
-      <Day> {monthCalender[index].day} </Day>
+      <Month> {monthCalender[index].month}월</Month>
+      <Dates> {monthCalender[index].date}일</Dates>
+      <Day>  {monthCalender[index].day} </Day>
     </SwiperSlide>
   ));
 
@@ -157,7 +157,7 @@ const StyledSwiper = styled(Swiper)`
   justify-content: center;
   align-items: center;
 
-  width: 6rem;
+  width: 9rem;
   height: 14rem;
 
   ${({ theme }) => theme.fonts.body02};
@@ -185,21 +185,21 @@ const Month = styled.span`
   display: flex;
   justify-content: center;
 
-  width: 3rem;
+  width: 4rem;
 `;
 
 const Dates = styled.span`
   display: flex;
   justify-content: center;
 
-  width: 3rem;
+  width: 4rem;
 `;
 
 const Day = styled.span`
   display: flex;
   justify-content: center;
 
-  width: 3rem;
+  width: 3.5rem;
 `;
 
 const CancleWrapper = styled.div`
@@ -243,7 +243,7 @@ const Vizor = styled.div`
   top: 50%;
   left: 50%;
 
-  width: 8rem;
+  width: 10rem;
   height: 2rem;
 
   transform: translate(-50%, -50%);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { newUserData, stepNum } from "../../atom/signup/signup";
@@ -13,18 +13,28 @@ import ProgressBar from "../common/ProgressBar";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
+import useSignupFormState from "../../hooks/useSignupFormState";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const setStep = useSetRecoilState(stepNum);
-  // 이거 우째요...
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [isName, setIsName] = useState(false);
-  const [isEmail, setIsEmail] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const [nameFocus, setNameFocus] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
+
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    isName,
+    setIsName,
+    isEmail,
+    setIsEmail,
+    isActive,
+    setIsActive,
+    nameFocus,
+    setNameFocus,
+    emailFocus,
+    setEmailFocus,
+  } = useSignupFormState();
 
   // setName
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -66,6 +76,7 @@ export default function NameEmail() {
       </BackButtonWrapper>
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
+
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
           <Inputfield
@@ -76,6 +87,7 @@ export default function NameEmail() {
             placeholder={PLACEHOLDER_TEXT.nameHolder}
           />
         </InputNameWrapper>
+
         {!isName && nameFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.nameError} /> : null}
         <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />

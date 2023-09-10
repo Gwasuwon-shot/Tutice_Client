@@ -36,7 +36,9 @@ export default function Footer() {
     }, [selectedDays, firstday]);
 
     function moveToTuitionPayment() {
-        navigate("/tuition-payment");
+        if (isSame) {
+            navigate("/tuition-payment");
+        }
     }
     
     return (

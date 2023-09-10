@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import { RegisterLessonInputIc } from "../../assets";
+import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface NameInputSectionProp {
   nameFocused: boolean;
@@ -23,19 +23,13 @@ export default function LessonInput() {
   const [subjectName, setSubjectName] = useRecoilState<string>(subjectNameState);
 
   const handleNameInputFocus = () => {
+    setSubjectInputFocused(false);
     setNameInputFocused(true);
   };
 
   const handleSubjectInputFocus = () => {
-    setSubjectInputFocused(true);
-  };
-
-  const handleNameInputBlur = () => {
     setNameInputFocused(false);
-  };
-
-  const handleSubjectInputBlur = () => {
-    setSubjectInputFocused(false);
+    setSubjectInputFocused(true);
   };
 
   const handleNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -48,10 +42,20 @@ export default function LessonInput() {
 
   // 3. 이름 2자 이하 경고메시지 관련 변수
 
-  const isNameValid = studentName.length >= 3;
+  const isNameValid = studentName.length >= 2;
 
   const isWarning = !isNameValid && studentName.length > 0;
 
+  function handleNameDelete () {
+    setStudentName("");
+    setSubjectInputFocused(false);
+  };
+  
+  function handleLessonDelete() {
+    setSubjectName("");
+    setNameInputFocused(false);
+  }
+  
   return (
     <InputWrapper>
       <NameInputSection nameFocused={isNameInputFocused}>
@@ -62,10 +66,9 @@ export default function LessonInput() {
           value={studentName}
           onChange={handleNameInputChange}
           onFocus={handleNameInputFocus}
-          onBlur={handleNameInputBlur}
         />
         {isWarning && <WarningMessage> 이름은 최소 2자 이상 입력해주세요 </WarningMessage>}
-        {isNameInputFocused && <RegisterLessonInputIcon />}
+        {isNameInputFocused && <RegisterLessonInputIcon  onClick={handleNameDelete}/>}
       </NameInputSection>
 
       <SubjectInputSection subjectFocused={isSubjectInputFocused} isWarning={isWarning}>
@@ -76,9 +79,8 @@ export default function LessonInput() {
           value={subjectName}
           onChange={handleSubjectInputChange}
           onFocus={handleSubjectInputFocus}
-          onBlur={handleSubjectInputBlur}
         />
-        {isSubjectInputFocused && <RegisterLessonInputIcon />}
+        {isSubjectInputFocused && <RegisterLessonInputIcon onClick={handleLessonDelete}/>}
       </SubjectInputSection>
     </InputWrapper>
   );

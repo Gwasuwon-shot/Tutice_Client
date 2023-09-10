@@ -4,9 +4,9 @@ import "swiper/swiper.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { openPaymentPicker, paymentDateState } from "../../atom/registerPayment/registerPayment";
 
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import SwiperCore from "swiper";
+import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface monthCalenderProps {
   month: number;
@@ -98,8 +98,8 @@ export default function DatePicker() {
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
     <SwiperSlide key={index}>
-      <Month> {monthCalender[index].month} </Month>
-      <Dates> {monthCalender[index].date} </Dates>
+      <Month> {monthCalender[index].month}월 </Month>
+      <Dates> {monthCalender[index].date}일 </Dates>
       <Day> {monthCalender[index].day} </Day>
     </SwiperSlide>
   ));

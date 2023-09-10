@@ -51,7 +51,7 @@ export default function Footer() {
   const [number, setNumber] = useRecoilState(accountNumber);
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
 
-  const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== 0;
+  const isFooterGreen = name !== "" && number !== "" && bank !== "" && amount !== 0 && payment !== "";
 
   const postStartDate =
     String(startDate.year) +

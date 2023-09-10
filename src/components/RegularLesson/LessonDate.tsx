@@ -42,53 +42,23 @@ export default function LessonDate() {
   // 1. 요일 관리
 
   const DAYS = ["월", "화", "수", "목", "금", "토", "일"];
-  const messages = "수업일시 추가";
 
   const [selectedDays, setSelectedDays] = useRecoilState(dayState);
-  const [focusDay, setFocusDay] = useRecoilState(focusDayState);
 
   function handleDayButton(day: string) {
-    if (focusDay.dayOfWeek === day) {
-      setFocusDay({ dayOfWeek: "", startTime: "", endTime: "" });
-    } else {
-      setFocusDay({ dayOfWeek: day, startTime: "", endTime: "" });
-    }
-  }
-
-  // 2. 요일 시작, 종료시간 관리
-
-  const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
-
-  function handlStartTimePicker() {
-    setIsStartPickerOpen(true);
-  }
-
-  const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
-
-  function handleFinishTimePicker() {
-    setIsFinishPickerOpen(true);
-  }
-
-  // 수업일시 추가하기
-
-  function AddLesson() {
-    // 만약 시작, 종료시간을 선택하지 않은 요일이 있다면 선택하도록 강제
-    const isTimeNotSelected = focusDay.dayOfWeek !== "" && (focusDay.startTime === "" || focusDay.endTime === "");
-    const isDayNotSelected = focusDay.dayOfWeek == "";
-    if (isDayNotSelected || isTimeNotSelected) {
-      return;
-    }
-
-    // 현재 focusDay의 값을 selectedDays에 추가
-    setSelectedDays((prevSelectedDays) => [...prevSelectedDays, focusDay]);
-    // 현재 focusDay의 값을 빈 값으로 초기화
-    setFocusDay({
-      dayOfWeek: "",
-      startTime: "",
-      endTime: "",
+    setSelectedDays((prevSelectedDays) => {
+      const existingDayIndex = prevSelectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
+  
+      if (existingDayIndex !== -1) {
+        const newSelectedDays = [...prevSelectedDays];
+        newSelectedDays.splice(existingDayIndex, 1);
+        return newSelectedDays;
+      } else {
+        return [...prevSelectedDays, { dayOfWeek: day, startTime: "24:00", endTime: "24:00" }];
+      }
     });
   }
-
+  
   // post 로직 추가
 
   const [studentName, setStudentName] = useRecoilState(studentNameState);
@@ -126,74 +96,29 @@ export default function LessonDate() {
       <IconWrapper>
         <RegularLessonClockIcon />
         <SectionName> 수업일시 </SectionName>
-        <Explain> 첫 수업일과 정기등록 요일은 동일해야 해요 </Explain>
+        <Explain> 수업 종료시 출결 입력 알림을 보내드릴게요. </Explain>
       </IconWrapper>
+
+      <ModalWrapper>
+        <RegularLessonCalenderIcon />
+        <ModalButton onClick={() => postTemporary(postInformation)}> 캘린더로 기존 일정 확인하기 </ModalButton>
+      </ModalWrapper>
 
       <DayWrapper>
         {DAYS.map((day, index) => (
           <Day
             key={index}
             onClick={() => handleDayButton(day)}
-            disabled={
-              selectedDays.length >= 1 && selectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day) !== -1
-            }
-            isSelected={focusDay.dayOfWeek === day}>
+            isSelected={selectedDays.some(selectedDay => selectedDay.dayOfWeek === day)}>
             {day}
           </Day>
         ))}
       </DayWrapper>
 
-      <TimeWrapper>
-        <TimeChoose> 시작 </TimeChoose>
-        {focusDay.startTime === "" ? (
-          <TimeButton onClick={handlStartTimePicker} selected={false}>
-            시간을 선택하세요
-          </TimeButton>
-        ) : (
-          <TimeButton onClick={handlStartTimePicker} selected={focusDay.startTime !== ""}>
-            {Number(focusDay.startTime.slice(0, 2)) <= 12 ? (
-              <>
-                오전 {Number(focusDay.startTime.slice(0, 2))}시 {focusDay.startTime.slice(3)}분
-              </>
-            ) : (
-              <>
-                오후 {Number(focusDay.startTime.slice(0, 2)) - 12}시 {focusDay.startTime.slice(3)}분
-              </>
-            )}
-          </TimeButton>
-        )}
-        <TimeChoose> 종료 </TimeChoose>
-        {focusDay.endTime === "" ? (
-          <TimeButton onClick={handleFinishTimePicker} selected={false}>
-            시간을 선택하세요
-          </TimeButton>
-        ) : (
-          <TimeButton onClick={handleFinishTimePicker} selected={focusDay.endTime !== ""}>
-            {Number(focusDay.endTime.slice(0, 2)) <= 12 ? (
-              <>
-                오전 {Number(focusDay.endTime.slice(0, 2))}시 {focusDay.endTime.slice(3)}분
-              </>
-            ) : (
-              <>
-                오후 {Number(focusDay.endTime.slice(0, 2)) - 12}시 {focusDay.endTime.slice(3)}분
-              </>
-            )}
-          </TimeButton>
-        )}
-      </TimeWrapper>
-
-      <ButtonWrapper onClick={AddLesson}>
-        <RoundBottomButton buttonMessage={messages} />
-      </ButtonWrapper>
-
-      <ModalWrapper>
-        <RegularLessonCalenderIcon />
-        <ModalButton onClick={() => postTemporary(postInformation)}> 캘린더로 일정 확인하기 </ModalButton>
-      </ModalWrapper>
-
       {selectedDays.map((day, index) => (
         <SelectedDayAndTime key={index} dayofweek={day.dayOfWeek} startTime={day.startTime} endTime={day.endTime} />
       ))}
+      
     </LessonDateWrapper>
   );
 }
@@ -221,7 +146,7 @@ const SectionName = styled.h1`
 
 const Explain = styled.h3`
   margin-top: 1.7rem;
-  margin-left: 1.8rem;
+  margin-left: 4.8rem;
 
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey300};
@@ -232,7 +157,8 @@ const DayWrapper = styled.section`
   justify-content: center;
   gap: 0.2rem;
 
-  padding-top: 1.2rem;
+  padding-top: 0.6rem;
+  margin-bottom: 2rem;
 `;
 
 const Day = styled.button<DayProp>`
@@ -245,8 +171,6 @@ const Day = styled.button<DayProp>`
   background-color: ${({ theme }) => theme.colors.grey50};
   ${({ isSelected, theme }) => isSelected && `background-color: ${theme.colors.green4}`};
   ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.white}`};
-  ${({ disabled, theme }) => disabled && `background-color: ${theme.colors.grey400}`};
-  ${({ disabled, theme }) => disabled && `color: ${theme.colors.white}`};
 `;
 
 const TimeWrapper = styled.section`
@@ -291,18 +215,18 @@ const ButtonWrapper = styled.section`
 
 const ModalWrapper = styled.section`
   display: flex;
-  padding-top: 0.8rem;
+  margin-top: 0.8rem;
   margin-bottom: 1rem;
 `;
 
 const RegularLessonCalenderIcon = styled(RegularLessonCalenderIc)`
-  margin-left: 1.3rem;
+  margin-left: 1.7rem;
 `;
 
 const ModalButton = styled.button`
   margin-left: 0.3rem;
 
   text-decoration: underline;
-  ${({ theme }) => theme.fonts.body04};
+  ${({ theme }) => theme.fonts.body05};
   color: ${({ theme }) => theme.colors.grey400};
 `;

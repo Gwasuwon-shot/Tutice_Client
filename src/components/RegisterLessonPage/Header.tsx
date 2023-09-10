@@ -1,19 +1,29 @@
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
+
+import ProgressBar from "../common/ProgressBar";
 import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 
 export default function Header() {
     const navigate = useNavigate();
-
+    
+    const [studentName, setStudentName] = useRecoilState<string>(studentNameState);
+    const [subjectName, setSubjectName] = useRecoilState<string>(subjectNameState);
+  
     function handleMoveToBack() {
-      navigate(-1);
+        setStudentName('');
+        setSubjectName('');
+        navigate(-1);
     }
 
     return (
 
         <HeaderWrapper>
             <RegisterLessonHeaderIc onClick={handleMoveToBack} />
+            <ProgressBar progress = {25} />
             <InputHeader> 학생의 이름과 <br/> 과목을 입력해주세요. <Emphasis> * </Emphasis> </InputHeader> 
             <InputNotice> 수업관리를 도와드릴 수 있도록 몇가지 정보를 알려주세요.</InputNotice>    
         </HeaderWrapper>

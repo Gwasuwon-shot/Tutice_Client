@@ -13,7 +13,12 @@ import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 import useAgreementStates from "../../hooks/signupLogin/useAgreementStates";
 
-export default function AgreeChecking() {
+type AgreeCheckingProp = {
+  isConfirmed: boolean;
+};
+
+export default function AgreeChecking(props: AgreeCheckingProp) {
+  const { isConfirmed } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const navigate = useNavigate();
   const setUserRole = useSetRecoilState(userRoleData);
@@ -35,7 +40,6 @@ export default function AgreeChecking() {
 
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      // console.log(data.data);
       const accessToken = data.data.data.accessToken;
       setUserRole(data.data.data.user.role);
       setCookie("accessToken", accessToken, {
@@ -63,9 +67,7 @@ export default function AgreeChecking() {
     }
   }
 
-  useEffect(() => {
-    // console.log(newUser);
-  }, [newUser]);
+  useEffect(() => {}, [newUser]);
 
   function handleButtonChecked(id: number) {
     setCheckAgrees(
@@ -90,14 +92,11 @@ export default function AgreeChecking() {
   }
 
   useEffect(() => {
-    // console.log(checkedCount);
     checkAgrees.forEach((checkAgree) => {
       !allCheckedIndex(checkAgree.id) && checkAgree.selected
         ? setCheckedCount((prev) => prev + 1)
         : setCheckedCount((prev) => prev - 1);
     });
-
-    // console.log(checkedCount);
 
     let count = 0;
     checkAgrees.forEach((checkAgree) => {

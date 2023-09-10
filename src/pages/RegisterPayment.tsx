@@ -35,7 +35,7 @@ export default function RegisterPayment() {
     onSuccess: () => {
       setSuccessPay({ isOpen: true, count: state?.count });
       setStatus(MANAGE_LESSON_STATUS.payment);
-      navigate(`/manage-lesson/${idx}`);
+      navigate(`/manage-lesson/${manageLessonId}`);
     },
     onError: (error) => {
       console.log(error);

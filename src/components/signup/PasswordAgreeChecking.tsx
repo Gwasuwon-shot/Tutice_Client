@@ -17,10 +17,9 @@ import TextLabelLayout from "./TextLabelLayout";
 export default function PasswordAgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [pw, setPw] = useState("");
-  const [confirmPw, setConfirmPw] = useState(" ");
+  const [confirmPw, setConfirmPw] = useState("");
   const [isPassword, setIsPassword] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const [pwFocus, setPwFocus] = useState(false);
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
@@ -33,7 +32,11 @@ export default function PasswordAgreeChecking() {
 
   function handleConfirmChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    setConfirmPw(e.target.value);
+    if (isPassword) {
+      setConfirmPw(e.target.value);
+    } else {
+      console.log("password is NOT matched");
+    }
   }
 
   function handlePasswordViewing() {
@@ -46,9 +49,9 @@ export default function PasswordAgreeChecking() {
   function viewingPwIcon() {
     if (pwFocus || pw) {
       if (pwViewing === "text") {
-        return <CanViewingLoginIcon onClick={handlePasswordViewing} />;
+        return <ViewingLoginIcon onClick={handlePasswordViewing} />;
       }
-      return <ViewingLoginIcon onClick={handlePasswordViewing} />;
+      return <CanViewingLoginIcon onClick={handlePasswordViewing} />;
     }
     return null;
   }
@@ -56,25 +59,43 @@ export default function PasswordAgreeChecking() {
   function viewingConfirmIcon() {
     if (confirmFocus || confirmPw) {
       if (confirmViewing === "text") {
-        return <CanViewingLoginIcon onClick={handleConfirmViewing} />;
+        return <ViewingLoginIcon onClick={handleConfirmViewing} />;
       }
-      return <ViewingLoginIcon onClick={handleConfirmViewing} />;
+      return <CanViewingLoginIcon onClick={handleConfirmViewing} />;
     }
     return null;
+  }
+
+  function passwordRegex() {
+    if (pw === "") {
+      return null;
+    }
+    if (!isPassword) {
+      return <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} />;
+    }
+  }
+
+  function MatchedPassword() {
+    if (isPassword) {
+      if (isConfirmed) {
+        return <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched>;
+      } else {
+        return <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} />;
+      }
+    }
   }
 
   useEffect(() => {
     pw.match(PW_REGEX) === null ? setIsPassword(false) : setIsPassword(true);
 
-    pw === confirmPw ? setIsConfirmed(true) : setIsConfirmed(false);
-
-    pw && confirmPw && isPassword && isConfirmed ? setIsActive(true) : setIsActive(false);
+    pw === confirmPw && !(pw === "") ? setIsConfirmed(true) : setIsConfirmed(false);
   }, [pw, confirmPw, isPassword, isConfirmed, newUser, setPw]);
 
   function handleConfirmBlur() {
     setConfirmFocus(false);
     setNewUser((prev) => ({ ...prev, password: pw }));
   }
+
   return (
     <>
       <ProgressBar progress={isConfirmed ? 100 : 80} />
@@ -110,8 +131,7 @@ export default function PasswordAgreeChecking() {
             {viewingPwIcon()}
           </PasswordIconWrapper>
         </InputPwWrapper>
-
-        {pwFocus || !isPassword ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.passwordError} /> : null}
+        {passwordRegex()}
 
         <InputConfirmWrapper $confirmFocus={confirmFocus} $isConfirmed={isConfirmed}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.confirm} />
@@ -128,10 +148,9 @@ export default function PasswordAgreeChecking() {
           </PasswordIconWrapper>
         </InputConfirmWrapper>
 
-        {!isConfirmed && confirmFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.confirmError} /> : null}
+        {MatchedPassword()}
 
-        {isConfirmed ? <PasswordMatched>{SIGNUP_ERROR_MESSAGE.confirmAccept}</PasswordMatched> : null}
-        <AgreeChecking />
+        <AgreeChecking isConfirmed={isConfirmed} />
       </Container>
     </>
   );

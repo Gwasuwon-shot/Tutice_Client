@@ -12,7 +12,12 @@ import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
-export default function AgreeChecking() {
+type AgreeCheckingProp = {
+  isConfirmed: boolean;
+};
+
+export default function AgreeChecking(props: AgreeCheckingProp) {
+  const { isConfirmed } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
@@ -52,10 +57,6 @@ export default function AgreeChecking() {
         break;
     }
   }
-
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
 
   function handleButtonChecked(id: number) {
     setCheckAgrees(
@@ -111,8 +112,8 @@ export default function AgreeChecking() {
   useEffect(() => {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
 
-    newUser.password && completeCheck ? setIsActive(true) : setIsActive(false);
-  }, [isAllChecked()]);
+    newUser.password && completeCheck && isConfirmed ? setIsActive(true) : setIsActive(false);
+  }, [isAllChecked(), isConfirmed]);
 
   function allCheckedIndex(id: number) {
     return id === 0;

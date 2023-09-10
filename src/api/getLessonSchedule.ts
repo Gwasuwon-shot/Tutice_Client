@@ -2,8 +2,6 @@ import axios from "axios";
 import { getCookie } from "./cookie";
 
 export async function getLessonSchedule(lessonIdx: number) {
-  console.log(lessonIdx);
-
   const data = await axios.get(`${import.meta.env.VITE_APP_BASE_URL}/api/schedule/lesson/${lessonIdx}`, {
     headers: {
       "Content-Type": "application/json",
@@ -11,5 +9,5 @@ export async function getLessonSchedule(lessonIdx: number) {
     },
   });
 
-  return data?.data.data;
+  return data?.data?.data;
 }

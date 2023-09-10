@@ -8,7 +8,6 @@ export async function getDepositRecord(lessonId: number) {
       Authorization: `Bearer ${getCookie("accessToken")}`,
     },
   });
-  console.log(data?.data?.data);
 
   return data?.data?.data;
 }

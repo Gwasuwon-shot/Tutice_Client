@@ -10,7 +10,7 @@ export default function useGetDepositRecord(lessonId: number) {
     staleTime: 3000,
   });
 
-  const paymentRecordList = depositRecord?.paymentRecordList;
+  const paymentRecordList = depositRecord;
 
   return {
     paymentRecordList,

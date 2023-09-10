@@ -202,11 +202,11 @@ export default function AgreeChecking() {
 const TosWrapper = styled.div`
   display: flex;
 
-  width: 29.2rem;
   padding-top: 1.6rem;
   padding-left: 1.4rem;
   margin-top: 2rem;
   margin-bottom: 7rem;
+  margin-right: 1.4rem;
 
   border: 1px solid ${({ theme }) => theme.colors.grey70};
   background-color: ${({ theme }) => theme.colors.grey0};
@@ -290,8 +290,9 @@ const IndividualTextWrapper = styled.div`
 const SubmitButton = styled.button<{ $isActive: boolean }>`
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
 
-  width: 31.8rem;
   height: 6.3rem;
   margin-left: -1.6rem;
 

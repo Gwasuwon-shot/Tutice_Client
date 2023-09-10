@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -11,25 +11,31 @@ import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import useAgreementStates from "../../hooks/signupLogin/useAgreementStates";
 
-type AgreeCheckingProp = {
-  isConfirmed: boolean;
-};
-
-export default function AgreeChecking(props: AgreeCheckingProp) {
-  const { isConfirmed } = props;
+export default function AgreeChecking() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
-  const [checkAgrees, setCheckAgrees] = useState(checkList);
-  const [textAgrees, setTextAgrees] = useState(textList);
-  const [allClicked, setAllClicked] = useState(false);
-  const [completeCheck, setCompleteCheck] = useState(false);
-  const [checkedCount, setCheckedCount] = useState(0);
-  const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
   const setUserRole = useSetRecoilState(userRoleData);
 
+  const {
+    checkAgrees,
+    setCheckAgrees,
+    textAgrees,
+    setTextAgrees,
+    allClicked,
+    setAllClicked,
+    completeCheck,
+    setCompleteCheck,
+    checkedCount,
+    setCheckedCount,
+    isActive,
+    setIsActive,
+  } = useAgreementStates(checkList, textList);
+
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
+      // console.log(data.data);
       const accessToken = data.data.data.accessToken;
       setUserRole(data.data.data.user.role);
       setCookie("accessToken", accessToken, {
@@ -57,6 +63,10 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
     }
   }
 
+  useEffect(() => {
+    // console.log(newUser);
+  }, [newUser]);
+
   function handleButtonChecked(id: number) {
     setCheckAgrees(
       checkAgrees.map((checkAgree) =>
@@ -80,11 +90,14 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
   }
 
   useEffect(() => {
+    // console.log(checkedCount);
     checkAgrees.forEach((checkAgree) => {
       !allCheckedIndex(checkAgree.id) && checkAgree.selected
         ? setCheckedCount((prev) => prev + 1)
         : setCheckedCount((prev) => prev - 1);
     });
+
+    // console.log(checkedCount);
 
     let count = 0;
     checkAgrees.forEach((checkAgree) => {
@@ -100,6 +113,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
         essentialCheck += 1;
       }
     });
+
     setCompleteCheck(checkEssentialAgreeDone(essentialCheck));
 
     setNewUser((prev: newUserDataTypes) => ({
@@ -111,8 +125,8 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
   useEffect(() => {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
 
-    newUser.password && completeCheck && isConfirmed ? setIsActive(true) : setIsActive(false);
-  }, [isAllChecked(), isConfirmed]);
+    newUser.password && completeCheck ? setIsActive(true) : setIsActive(false);
+  }, [isAllChecked(), completeCheck]);
 
   function allCheckedIndex(id: number) {
     return id === 0;

@@ -27,8 +27,6 @@ export default function RegisterPayment() {
   const navigate = useNavigate();
   const [status, setStatus] = useRecoilState(managingStatus);
 
-  console.log(studentName, subject);
-
   function handleGoBack() {
     navigate(-1);
   }

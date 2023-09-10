@@ -86,6 +86,7 @@ export default function Footer() {
 
   const { mutate: createNewLesson } = useMutation(createLesson, {
     onSuccess: (response) => {
+      console.log(response);
       setCodeAndId(response);
       //setStartDate(response); //-> 지수에 전달한 data recoil 저장
       handleMoveToLessonShare();

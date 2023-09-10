@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
+import { ThirdSwiperFirstTree, ThirdSwiperSecondTree, ThirdSwiperThirdTree } from "../../assets";
 import SwiperTitleLayout from "./SwiperTitleLayout";
-import { ThirdSwiperFirstTree, ThirdSwiperGradation, ThirdSwiperSecondTree, ThirdSwiperThirdTree } from "../../assets";
 
 export default function ThirdSwiper() {
   const MAIN_TITLE_MESSAGE = "Simple";
@@ -53,4 +53,5 @@ const ThirdSwiperSecondTreeIcon = styled(ThirdSwiperSecondTree)`
 const ThirdSwiperThirdTreeIcon = styled(ThirdSwiperThirdTree)`
   width: 8.5rem;
   height: 12rem;
+  margin-left: 0.1rem;
 `;

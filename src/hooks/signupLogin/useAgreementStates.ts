@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { checkList, textList } from "../../core/Login/ListData";
 
 export default function useAgreementStates() {

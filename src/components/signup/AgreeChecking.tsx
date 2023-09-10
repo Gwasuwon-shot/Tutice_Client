@@ -8,10 +8,9 @@ import { newUserPost } from "../../api/localSignUp";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
 import { newUserData } from "../../atom/signup/signup";
-import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
-import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 import useAgreementStates from "../../hooks/signupLogin/useAgreementStates";
+import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
 type AgreeCheckingProp = {
   isConfirmed: boolean;
@@ -36,7 +35,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
     setCheckedCount,
     isActive,
     setIsActive,
-  } = useAgreementStates(checkList, textList);
+  } = useAgreementStates();
 
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {

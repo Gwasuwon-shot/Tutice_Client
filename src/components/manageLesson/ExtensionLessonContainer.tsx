@@ -55,6 +55,8 @@ const ContentWrapper = styled.div`
   align-items: center;
 
   width: 29rem;
+
+  cursor: pointer;
 `;
 
 const DateandCount = styled.div`

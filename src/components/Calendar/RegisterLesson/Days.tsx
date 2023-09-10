@@ -9,16 +9,7 @@ import { temporarySchedule } from "../../../atom/timePicker/timePicker";
 import DayItem from "./DayItem";
 import RegisterModal from "./RegisterModal";
 
-interface DaysProp {
-  currentMonth: Date;
-}
-
-interface scheduleListType {
-  endTime: string;
-  startTime: string;
-  studentName: string;
-  subject: string;
-}
+import { DaysProp } from "../../../type/calendar/daysPropsType";
 
 interface temporaryListType {
   date: string;
@@ -64,7 +55,7 @@ export default function Days(props: DaysProp) {
         rows.push(
           <WeekWrapper key={day.toString()}>
             <DivideLine />
-            <DayWrapper>{days}</DayWrapper>
+            <DayWrapper>{[...days]}</DayWrapper>
           </WeekWrapper>,
         );
       }
@@ -76,7 +67,7 @@ export default function Days(props: DaysProp) {
   return (
     <>
       <DaysWrapper>
-        {rows}
+        {[...rows]}
         {openModal && selectedDate && (
           <ModalWrapper>
             <RegisterModal selectedDate={selectedDate} setOpenModal={setOpenModal} formattedMonth={formattedMonth} />

@@ -1,25 +1,23 @@
-import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
-import { LessonType } from "../../type/teacherHome/previewBannerScheduleType";
-import { NextMonthArrowButton } from "../../assets";
 import React from "react";
+import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
+import { NextMonthArrowButton } from "../../assets";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
+import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
 import StudentColorBox from "../common/StudentColorBox";
 import SubjectLabel from "../common/SubjectLabel";
-import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
-import { styled } from "styled-components";
-import { useRecoilState } from "recoil";
 
 interface ExtensionLessonContainerProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   endScheduleDate: string;
   lesson: {
-    idx: number,
-    studentName: string,
-    subject: string,
-    count: number,
+    idx: number;
+    studentName: string;
+    subject: string;
+    count: number;
   };
 }
-
 
 export default function ExtensionLessonContainer(props: ExtensionLessonContainerProps) {
   const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
@@ -33,7 +31,7 @@ export default function ExtensionLessonContainer(props: ExtensionLessonContainer
 
   return (
     <>
-      <ContentWrapper key={idx}>
+      <ContentWrapper key={idx} onClick={handleClickExtension}>
         <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
         <DateandCount>
           {new Date(endScheduleDate).getMonth() + 1}.{new Date(endScheduleDate).getDate()}
@@ -43,7 +41,7 @@ export default function ExtensionLessonContainer(props: ExtensionLessonContainer
           <Name>{studentName}</Name>
           <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#5B6166" />
         </NameandSubject>
-        <SlideButton onClick={handleClickExtension} />
+        <SlideButton />
       </ContentWrapper>
     </>
   );

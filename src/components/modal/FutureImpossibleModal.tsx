@@ -1,4 +1,6 @@
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import BasicSingleModal from "../common/BasicSingleModal";
 
 interface FutureImpossibleModalProp {
@@ -7,10 +9,16 @@ interface FutureImpossibleModalProp {
 
 export default function FutureImpossibleModal(props: FutureImpossibleModalProp) {
   const { handleCloseModal } = props;
+  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+
+  function handleModalApprove() {
+    handleCloseModal();
+    setAttendanceData({ idx: 0, status: "" });
+  }
 
   return (
     <ModalWrapper>
-      <BasicSingleModal buttonName="확인" handleClickSingleButton={handleCloseModal}>
+      <BasicSingleModal buttonName="확인" handleClickSingleButton={handleModalApprove}>
         <CancleImpossibleTitle>
           앞선 회차의 출결 체크를
           <br />

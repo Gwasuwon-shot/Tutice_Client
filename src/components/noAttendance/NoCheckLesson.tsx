@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
@@ -42,11 +42,6 @@ export default function NoCheckLesson() {
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState<boolean>(false);
-  const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
-
-  useEffect(() => {
-    setAttendanceData({ idx: 0, status: "" });
-  }, []);
 
   return (
     <>

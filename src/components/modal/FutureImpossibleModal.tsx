@@ -12,9 +12,9 @@ export default function FutureImpossibleModal(props: FutureImpossibleModalProp) 
     <ModalWrapper>
       <BasicSingleModal buttonName="확인" handleClickSingleButton={handleCloseModal}>
         <CancleImpossibleTitle>
-          미래 출결 상태를
+          앞선 회차의 출결 체크를
           <br />
-          미리 변경할 수 없습니다
+          완료해주세요
         </CancleImpossibleTitle>
       </BasicSingleModal>
     </ModalWrapper>

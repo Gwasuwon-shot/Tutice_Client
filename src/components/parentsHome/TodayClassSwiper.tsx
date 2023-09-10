@@ -29,26 +29,29 @@ export default function TodayClassSwiper() {
 
   return (
     <>
-      <SwiperTitleDate>
-        {year}년 {month}월 {day}일 ({dateOfWeek}) 수업
-      </SwiperTitleDate>
-
-      <Slider {...TODAY_CLASS_SLIDER_SETTINGS}>
-        {scheduleList?.map((classInfo: calssInfoType) => {
-          const { idx, studentName, startTime, endTime, teacherName, subject } = classInfo;
-          return (
-            <TodayClassScedule
-              key={idx}
-              studentName={studentName}
-              startTime={startTime}
-              endTime={endTime}
-              teacherName={teacherName}
-              subject={subject}
-              classCount={idx}
-            />
-          );
-        })}
-      </Slider>
+      {scheduleList?.length > 0 && (
+        <div>
+          <SwiperTitleDate>
+            {year}년 {month}월 {day}일 ({dateOfWeek}) 수업
+          </SwiperTitleDate>
+          <Slider {...TODAY_CLASS_SLIDER_SETTINGS}>
+            {scheduleList.map((classInfo: calssInfoType) => {
+              const { idx, studentName, startTime, endTime, teacherName, subject } = classInfo;
+              return (
+                <TodayClassScedule
+                  key={idx}
+                  studentName={studentName}
+                  startTime={startTime}
+                  endTime={endTime}
+                  teacherName={teacherName}
+                  subject={subject}
+                  classCount={idx}
+                />
+              );
+            })}
+          </Slider>
+        </div>
+      )}
     </>
   );
 }

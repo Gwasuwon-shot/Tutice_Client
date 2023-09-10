@@ -9,5 +9,5 @@ export async function getLessonByUser() {
     },
   });
 
-  return data.data.data.isLesson;
+  return data?.data?.data;
 }

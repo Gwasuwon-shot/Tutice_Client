@@ -6,10 +6,11 @@ interface DepositRecordItemProps {
   date: string | null;
   status: boolean;
   amount: number;
+  count: number;
 }
 
 export default function DepositRecordItem(props: DepositRecordItemProps) {
-  const { idx, date, status, amount } = props;
+  const { idx, date, status, amount, count } = props;
   const appleImgSrc = status ? DEPOSIT_RECORD_IMG_LIST[1] : DEPOSIT_RECORD_IMG_LIST[0];
 
   const depositAmountToRender = amount.toLocaleString("ko-KR");
@@ -26,7 +27,7 @@ export default function DepositRecordItem(props: DepositRecordItemProps) {
     <DepositRecordWrapper>
       <DepositRecordAppleIcon src={appleImgSrc} />
       <DepositInfoWrapper>
-        <DepositCount>{idx}번째 열매</DepositCount>
+        <DepositCount>{count}번째 열매</DepositCount>
         {date && (
           <DepositDate>
             {monthToRender}월 {dayToRender}일

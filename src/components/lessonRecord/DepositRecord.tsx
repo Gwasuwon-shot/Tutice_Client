@@ -7,15 +7,23 @@ import { useParams } from "react-router-dom";
 import { DepositInfoType } from "../../type/lessonRecord/lessonRecord";
 
 export default function DepositRecordList() {
-  const [isDepositRecordExists, setIsDepositRecordExists] = useState(true);
   const { lessonId } = useParams();
   const { paymentRecordList } = useGetDepositRecord(Number(lessonId));
 
-  return isDepositRecordExists ? (
+  return paymentRecordList ? (
     <>
       <DepositRecordListWrapper>
-        {paymentRecordList?.map(({ idx, date, amount, status }: DepositInfoType) => {
-          return <DepositRecordItem key={idx} idx={idx} date={date} amount={amount} status={status} />;
+        {paymentRecordList?.map(({ idx, date, amount, status }: DepositInfoType, index: number) => {
+          return (
+            <DepositRecordItem
+              count={Math.abs(index - paymentRecordList?.length)}
+              key={idx}
+              idx={idx}
+              date={date}
+              amount={amount}
+              status={status}
+            />
+          );
         })}
       </DepositRecordListWrapper>
     </>

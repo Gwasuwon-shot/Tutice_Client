@@ -7,20 +7,18 @@ import PastLessonRecordList from "./PastLessonRecordList";
 import RestOfClassesInfo from "./RestOfClassesInfo";
 
 import { useNavigate, useParams } from "react-router-dom";
-import useGetLessonScheduleByParents from "../../hooks/useGetLessonScheduleByParents";
-import useGetRestOfClassesInfo from "../../hooks/useGetRestOfClassesInfo";
 import CommonBackButton from "../common/CommonBackButton";
 import ParentsFooter from "../common/ParentsFooter";
 import DepositRecordList from "./DepositRecord";
+import useGetLessonProgress from "../../hooks/useGetLessonProgress";
+import useGetLessonDetail from "../../hooks/useGetLessonDetail";
+import useGetLessonSchedule from "../../hooks/useGetLessonSchedule";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();
   const [isClassRecord, setIsClassRecord] = useState<boolean>(false);
-  const { lesson, idx, studentName, subject, scheduleList, teacherName } = useGetLessonScheduleByParents(
-    Number(lessonId),
-  );
-
-  const { count, nowCount, percent } = useGetRestOfClassesInfo(Number(lessonId));
+  const { count, nowCount, percent } = useGetLessonProgress(Number(lessonId));
+  const { idx, teacherName, studentName, subject } = useGetLessonDetail(Number(lessonId));
 
   const navigate = useNavigate();
 
@@ -39,10 +37,10 @@ export default function LessonRecordDetail() {
       </LessonRecordHeader>
 
       <SelectMenuWrapper>
-        <SelectMenuButton isClassRecord={isClassRecord} onClick={() => setIsClassRecord(true)}>
+        <SelectMenuButton $isClassRecord={isClassRecord} onClick={() => setIsClassRecord(true)}>
           수업내역
         </SelectMenuButton>
-        <SelectMenuButton isClassRecord={!isClassRecord} onClick={() => setIsClassRecord(false)}>
+        <SelectMenuButton $isClassRecord={!isClassRecord} onClick={() => setIsClassRecord(false)}>
           입금내역
         </SelectMenuButton>
       </SelectMenuWrapper>
@@ -111,7 +109,7 @@ const SelectMenuWrapper = styled.aside`
   background-color: ${({ theme }) => theme.colors.grey50};
 `;
 
-const SelectMenuButton = styled.button<{ isClassRecord: boolean }>`
+const SelectMenuButton = styled.button<{ $isClassRecord: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,10 +118,10 @@ const SelectMenuButton = styled.button<{ isClassRecord: boolean }>`
   height: 3.2rem;
   border-radius: 0.8rem;
   ${({ theme }) => theme.fonts.body02};
-  color: ${({ theme, isClassRecord }) => (isClassRecord ? theme.colors.grey900 : theme.colors.grey400)};
+  color: ${({ theme, $isClassRecord }) => ($isClassRecord ? theme.colors.grey900 : theme.colors.grey400)};
 
-  ${({ isClassRecord }) =>
-    isClassRecord
+  ${({ $isClassRecord }) =>
+    $isClassRecord
       ? css`
           background-color: #ffffff;
         `

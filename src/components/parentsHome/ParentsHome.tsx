@@ -11,8 +11,7 @@ import { useEffect } from "react";
 import { PARENTS_FOOTER_CATEGORY } from "../../core/parentsHome/parentsFooter";
 
 export default function ParentsHome() {
-  const { isLessonExist } = useGetLessonByUser();
-  const { parentsName } = useGetTodayScheduleByParents();
+  const { isLesson, userName } = useGetLessonByUser();
 
   const { handleChangeActive } = useParentsFooter();
 
@@ -25,10 +24,10 @@ export default function ParentsHome() {
       <Header />
 
       <WelComeTitle>
-        {parentsName}님 <br /> 안녕하세요!
+        {userName}님 <br /> 안녕하세요!
       </WelComeTitle>
 
-      {isLessonExist ? (
+      {isLesson ? (
         <ClassInfoWrapper>
           <TodayClassSwiper />
           <ManageClass />

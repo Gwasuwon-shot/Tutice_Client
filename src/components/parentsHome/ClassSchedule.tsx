@@ -1,14 +1,8 @@
 import { styled } from "styled-components";
-import {
-  FifthTreeParentsHomeIc,
-  FirstTreeParentsHomeIc,
-  FourthTreeParentsHomeIc,
-  RightArrowParentsHomeIc,
-  SecondTreeParentsHomeIc,
-  ThirdTreeParentsHomeIc,
-} from "../../assets";
+import { FirstTreeParentsHomeIc, RightArrowParentsHomeIc } from "../../assets";
 import SubjectLabel from "../common/SubjectLabel";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useGetLessonProgress from "../../hooks/useGetLessonProgress";
 
 interface ClassScheduleProps {
   subjectName: string;
@@ -26,9 +20,9 @@ export default function ClassSchedule(props: ClassScheduleProps) {
     subjectName,
     teacherName,
     studentName,
-    entireClassCount,
-    currentClassCount,
     currentClassCountPercent,
+    currentClassCount,
+    entireClassCount,
     subjectLabelBackgroundColor,
     idx,
   } = props;

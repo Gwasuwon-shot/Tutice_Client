@@ -34,8 +34,6 @@ export default function TeacherHome() {
     }
   }, []);
 
-  console.log(payment);
-
   return (
     <>
       {prepaymentModal && <PreypaymentModal setPreypaymentModal={setPreypaymentModal} />}

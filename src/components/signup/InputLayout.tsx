@@ -10,12 +10,12 @@ interface InputfieldLayoutProps {
   onFocus: React.FocusEventHandler<HTMLInputElement>;
   onBlur: React.FocusEventHandler<HTMLInputElement>;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  labelText?: string;
-  placeholder?: string;
+  labelText?: string | undefined;
+  placeholder?: string | undefined;
 }
 
 export default function InputLayout(props: InputfieldLayoutProps) {
-  const { labelText, onFocus, onBlur } = props;
+  const { labelText, onFocus, onBlur, placeholder, onChange } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [isName, setIsName] = useState(false);
   const [nameFocus, setNameFocus] = useState(false);

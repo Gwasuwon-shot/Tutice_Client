@@ -4,13 +4,14 @@ import LessonInfoItemLayout from "./LessonInfoItemLayout";
 import { BANK_INFO, CLASS_INFO } from "../../core/Parents/lessonInfo";
 import useGetLessonDetailByParents from "../../hooks/useGetLessonDetailByParents";
 import { useParams } from "react-router-dom";
-import { getLessonDetailByParents } from "../../api/getLessonDetailByParents";
+import useGetLessonAccount from "../../hooks/useGetLessonAccount";
+import useGetLessonDetail from "../../hooks/useGetLessonDetail";
 
 export default function LessonInfoList() {
   //커스텀 훅에서 account 객체 값 배열로 만들어서 리턴
-
   const { lessonId } = useParams();
-  const { teacherName, accountInfo, etcInfo } = useGetLessonDetailByParents(Number(lessonId));
+  const { amount, payment, startDate, teacherName } = useGetLessonDetail(Number(lessonId));
+  const { accountInfo } = useGetLessonAccount(Number(lessonId));
 
   return (
     <>
@@ -18,13 +19,13 @@ export default function LessonInfoList() {
       <LessonInfoItemLayout detailCategory="이름" content={teacherName} />
 
       <LessonInfoMainCategory>은행</LessonInfoMainCategory>
-      {accountInfo?.map((info, idx) => {
+      {[accountInfo.name, accountInfo.bank, accountInfo.number].map((info: string, idx: number) => {
         return (
           <LessonInfoItemLayout isBankAccount={idx === 2} key={idx} detailCategory={BANK_INFO[idx]} content={info} />
         );
       })}
       <LessonInfoMainCategory>수업진행</LessonInfoMainCategory>
-      {etcInfo?.map((classInfo, idx) => {
+      {[startDate, payment, amount].map((classInfo, idx) => {
         return <LessonInfoItemLayout key={idx} detailCategory={CLASS_INFO[idx]} content={classInfo} />;
       })}
     </>

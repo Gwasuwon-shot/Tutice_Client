@@ -18,7 +18,7 @@ import YesClassHome from "./YesClassHome";
 export default function TeacherHome() {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [prepaymentModal, setPreypaymentModal] = useState<boolean>(false);
-  const { isLessonExist } = useGetLessonByUser();
+  const { isLesson } = useGetLessonByUser();
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
   const { handleChangeActive } = useTeacherFooter();
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
@@ -42,7 +42,7 @@ export default function TeacherHome() {
       {/* {snackBarOpen && <CancelLessonMaintenanceSnackBar />} */}
       <TeacherHomeWrapper>
         <Header />
-        {isLessonExist ? <YesClassHome /> : <NoClassHome />}
+        {isLesson ? <YesClassHome /> : <NoClassHome />}
       </TeacherHomeWrapper>
       <TeacherFooter />
     </>

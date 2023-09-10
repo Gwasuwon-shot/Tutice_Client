@@ -10,7 +10,7 @@ export default function MainLessons() {
     <>
       <Title>나의 수업</Title>
       {lessonList &&
-        lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType, index: number) => (
+        lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType) => (
           <MainLesson
             key={idx}
             idx={idx}

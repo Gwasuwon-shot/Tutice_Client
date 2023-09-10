@@ -12,8 +12,8 @@ import {
   paymentOrder,
 } from "../../atom/tuitionPayment/tuitionPayment";
 
-import styled from "styled-components";
 import { useRecoilState } from "recoil";
+import styled from "styled-components";
 
 interface NameInputSectionProp {
   nameFocused: boolean;

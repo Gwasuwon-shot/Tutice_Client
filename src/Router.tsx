@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import ConnectParentsAndTeacher from "./components/RegularLesson/ConnectParentsAndTeacher";
+import ParentsFooter from "./components/common/ParentsFooter";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import EditShcedule from "./pages/EditSchedule";
@@ -24,20 +25,19 @@ import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
 import PrivateRoute from "./utils/common/privateRoute";
-import ParentsFooter from "./components/common/ParentsFooter";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/onBoarding" element={<OnBoarding />} />
+        <Route path="/" element={<OnBoarding />} />
         <Route path="/welcome" element={<WelcomeSignup />} />
         <Route path="/:lessonId" element={<ConnectParentsAndTeacher />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/lesson-share" element={<LessonShare />} />
         <Route element={<PrivateRoute authentication={true} />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/complete-check-attendance" element={<CompleteCheckAttendance />} />
           <Route path="/manage-lesson" element={<ManageLessonMain />} />
           <Route path="/manage-lesson/:manageLessonId" element={<ManageLessonDetail />} />

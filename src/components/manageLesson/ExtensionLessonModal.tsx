@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { createLessonMaintenance } from "../../api/createLessonMaintenance";
@@ -40,11 +40,13 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
     isLessonMaintenance: false,
   };
 
+  const queryClient = useQueryClient();
+
   const { mutate: createNewLessonMaintenance } = useMutation(createLessonMaintenance, {
     onSuccess: (response) => {
-      console.debug("성공");
+      queryClient.invalidateQueries("getMissingMaintenanceLesson");
     },
-    onError: (error) => console.log(error),
+    onError: (error) => console.debug(error),
   });
 
   function handleExtensionLesson(info: createLessonMaintenanceProps) {

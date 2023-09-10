@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { setCookie } from "../../api/cookie";
 import { postLocalLogin } from "../../api/localLogin";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
 import { connectLessonId } from "../../atom/registerLesson/registerLesson";
+import RegexField from "../signup/RegexField";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { stepNum } from "../../atom/signup/signup";
-import RegexField from "../signup/RegexField";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -28,7 +27,6 @@ export default function LoginInput() {
   const lessonCode = useRecoilState(connectLessonId);
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
-      console.log("성공", data.data);
       const accessToken = data.data.data.accessToken;
       setUserRole(data.data.data.user.role);
       setCookie("accessToken", accessToken, {
@@ -37,8 +35,7 @@ export default function LoginInput() {
       navigate("/welcome", { state: data.data });
     },
     onError: (error) => {
-      console.log(error);
-      console.debug("실패 ㅠㅠ");
+      console.debug(error);
       setIsError(true);
     },
   });

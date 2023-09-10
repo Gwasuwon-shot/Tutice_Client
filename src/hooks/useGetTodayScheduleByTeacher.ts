@@ -11,10 +11,13 @@ export default function useGetTodayScheduleByTeacher() {
     staleTime: 3000,
   });
 
-  const teacherName = todayScheduleByTeacher?.teacherName;
-  const isTodaySchedule = todayScheduleByTeacher?.isTodaySchedule;
-  const todaySchedule = todayScheduleByTeacher?.todaySchedule;
-  const isMissingAttendanceByLesson = todaySchedule?.isMissingAttendanceByLesson;
+  // // const teacherName = todayScheduleByTeacher?.teacherName;
+  // const isTodaySchedule = todayScheduleByTeacher?.isTodaySchedule;
+  // const todaySchedule = todayScheduleByTeacher?.todaySchedule;
+  // const isMissingAttendanceByLesson = todaySchedule?.isMissingAttendanceByLesson;
 
-  return { teacherName, isTodaySchedule, todaySchedule, isMissingAttendanceByLesson };
+  const { lesson, timeStatus, schedule } =
+    todayScheduleByTeacher !== null && todayScheduleByTeacher !== undefined && todayScheduleByTeacher;
+
+  return { todayScheduleByTeacher, lesson, timeStatus, schedule };
 }

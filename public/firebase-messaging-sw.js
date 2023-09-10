@@ -3,7 +3,7 @@ self.addEventListener("install", function (e) {
 });
 
 self.addEventListener("activate", function (e) {
-  console.log("fcm sw activate..");
+  // console.log("fcm sw activate..");
 });
 
 self.addEventListener("push", function (e) {
@@ -16,9 +16,9 @@ self.addEventListener("push", function (e) {
     body: resultData.body,
   };
 
-  console.log(resultData.title, {
-    body: resultData.body,
-  });
+  // console.log(resultData.title, {
+  //   body: resultData.body,
+  // });
 
   e.waitUntil(self.registration.showNotification(notificationTitle, notificationOptions));
 });

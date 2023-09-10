@@ -7,7 +7,7 @@ import { setCookie } from "../../api/cookie";
 import { newUserPost } from "../../api/localSignUp";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { newUserData, stepNum } from "../../atom/signup/signup";
+import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
@@ -30,7 +30,6 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
 
   const { mutate: postNewUser } = useMutation(newUserPost, {
     onSuccess: (data) => {
-      console.log(data.data);
       const accessToken = data.data.data.accessToken;
       setUserRole(data.data.data.user.role);
       setCookie("accessToken", accessToken, {

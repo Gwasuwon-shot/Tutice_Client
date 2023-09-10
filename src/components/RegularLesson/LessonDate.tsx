@@ -1,24 +1,22 @@
-import React, { useEffect } from "react";
 import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 import {
   cycleNumberState,
   dateState,
   dayState,
-  firstLessonDay,
   focusDayState,
   openFinishDetailState,
   openStartDetailState,
   temporarySchedule,
 } from "../../atom/timePicker/timePicker";
-import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import styled from "styled-components";
+import { getTemporarySchedule } from "../../api/getTemporarySchedule";
 import RoundBottomButton from "../common/RoundBottomButton";
 import SelectedDayAndTime from "./SelectedDayAndTime";
-import { getTemporarySchedule } from "../../api/getTemporarySchedule";
-import styled from "styled-components";
-import { useMutation } from "react-query";
-import {useNavigate} from 'react-router-dom'
-import { useRecoilState } from "recoil";
 
 interface DayProp {
   isSelected: boolean;
@@ -39,7 +37,6 @@ interface temporaryProp {
 }
 
 export default function LessonDate() {
-
   const navigate = useNavigate();
 
   // 1. 요일 관리
@@ -114,10 +111,10 @@ export default function LessonDate() {
   const { mutate: getNewTemporarySchedule } = useMutation(getTemporarySchedule, {
     onSuccess: (response) => {
       setTempSchedule(response);
-      navigate('/register-calendar');
+      navigate("/register-calendar");
     },
 
-    onError: (error) => console.log(error),
+    onError: (error) => console.debug(error),
   });
 
   function postTemporary(info: temporaryProp) {

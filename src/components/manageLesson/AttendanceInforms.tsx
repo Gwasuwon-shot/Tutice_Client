@@ -4,7 +4,8 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
-import useGetLessonScheduleByTeacher from "../../hooks/useGetLessonScheduleByTeacher";
+import useGetLessonDetail from "../../hooks/useGetLessonDetail";
+import useGetLessonSchedule from "../../hooks/useGetLessonSchedule";
 import { ScheduleListType } from "../../type/manageLesson/scheduleListType";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";
 import AttendanceDoubleCheckingModal from "../common/AttendanceDoubleCheckingModal";
@@ -13,13 +14,12 @@ import AttendanceInform from "./AttendanceInform";
 
 export default function AttendanceInforms() {
   const { manageLessonId } = useParams();
-  const { lessonIdx, count, nowCount, percent, studentName, subject, scheduleList } = useGetLessonScheduleByTeacher(
-    Number(manageLessonId),
-  );
   const [isCheckingModalOpen, setIsCheckingModalOpen] = useState(false);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isCancelImpossibleModalOpen, setIsCancelImpossibleModalOpen] = useState(false);
+  const { studentName, subject } = useGetLessonDetail(Number(manageLessonId));
+  const { scheduleList } = useGetLessonSchedule(Number(manageLessonId));
 
   useEffect(() => {
     studentName && subject && setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
@@ -63,7 +63,7 @@ export default function AttendanceInforms() {
               startTime={startTime}
               endTime={endTime}
               count={Math.abs(index - scheduleList?.length)}
-              lessonIdx={lessonIdx}
+              lessonIdx={idx}
               scheduleIdx={idx}
               setIsCancelImpossibleModalOpen={setIsCancelImpossibleModalOpen}
             />

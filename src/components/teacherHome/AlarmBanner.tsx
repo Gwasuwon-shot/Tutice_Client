@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MissingAttendaceTeacherHomeIc, MissingMaintenanceTeacherHomeIc } from "../../assets";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
-import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
+import useGetMissingAttendanceExist from "../../hooks/useGetMissingAttendanceExist";
+import useGetMissingMaintenanceExist from "../../hooks/useGetMissingMaintenanceExist";
 import useTeacherFooter from "../../hooks/useTeacherFooter";
 
 export default function AlarmBanner() {
-  const { isMissingAttendance, isMissingMaintenance } = useGetLatestScheduleByTeacher();
+  const { isMissingMaintenance } = useGetMissingMaintenanceExist();
+  const { isMissingAttendance } = useGetMissingAttendanceExist();
   const navigate = useNavigate();
   const { handleMoveToPage } = useTeacherFooter();
 
@@ -17,7 +19,6 @@ export default function AlarmBanner() {
   function handleMoveToMissingMaintenanceCheck() {
     handleMoveToPage(TEACHER_FOOTER_CATEGORY.classManaging);
   }
-  console.log(isMissingMaintenance);
 
   return (
     <>

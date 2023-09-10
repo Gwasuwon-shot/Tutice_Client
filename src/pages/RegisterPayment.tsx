@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { updatePaymentRecord } from "../api/updatePaymentRecord";
@@ -11,18 +11,23 @@ import StudentNameLabel from "../components/common/StudentNameLabel";
 import PaymentDatePicker from "../components/registerPayment/PaymentDatePicker";
 import { STUDENT_COLOR } from "../core/common/studentColor";
 import { MANAGE_LESSON_STATUS } from "../core/manageLesson/manageLessonStatus";
-import useGetPaymentRecordView from "../hooks/useGetPaymentRecordView";
+import useGetLessonDetail from "../hooks/useGetLessonDetail";
+import useGetPaymentRecordCycle from "../hooks/useGetPaymentRecordCycle";
 
 export default function RegisterPayment() {
   const { state } = useLocation(); //paymentIdx
-  const { lesson, paymentDate, cycle, endDate, startDate, value, idx, studentName, subject } = useGetPaymentRecordView(
-    Number(state?.paymentIdx),
-  );
+  const { manageLessonId } = useParams(); //lessonIdx
+  const { studentName, subject } = useGetLessonDetail(Number(manageLessonId));
+  // const [student, setStudentName] = useRecoilState<string>(studentNameState);
+  // const [subjectName, setSubjectName] = useRecoilState<string>(subjectNameState);
+  const { idx, cycle, startDate, endDate } = useGetPaymentRecordCycle(Number(state?.paymentIdx));
   const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
   const [isOpenPicker, setIsOpenPicker] = useRecoilState(openPaymentPicker);
   const [activeDateSlide, setActiveDateSlide] = useRecoilState(paymentDateState);
   const navigate = useNavigate();
   const [status, setStatus] = useRecoilState(managingStatus);
+
+  console.log(studentName, subject);
 
   function handleGoBack() {
     navigate(-1);
@@ -46,16 +51,22 @@ export default function RegisterPayment() {
     });
   }
 
-  function checkDate(): string {
-    return `${activeDateSlide?.year}` + "-" + checkMont() + "-" + `${activeDateSlide?.date}`;
+  function checkMonthDay(dates: number) {
+    if (dates / 10 < 1) {
+      return "0" + `${dates}`;
+    } else {
+      return `${dates}`;
+    }
   }
 
-  function checkMont() {
-    if (activeDateSlide?.month / 10 < 1) {
-      return "0" + `${activeDateSlide?.month}`;
-    } else {
-      return `${activeDateSlide?.month}`;
-    }
+  function checkDate(): string {
+    return (
+      `${activeDateSlide?.year}` +
+      "-" +
+      checkMonthDay(activeDateSlide?.month) +
+      "-" +
+      checkMonthDay(activeDateSlide?.date)
+    );
   }
 
   function handleOpenPicker() {

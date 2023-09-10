@@ -59,7 +59,6 @@ export default function LessonShare() {
     setbankName("");
     setmoneyAmount(0);
     setpayingPersonName("");
-    setpaymentOrder("");
   }
 
   const navgiate = useNavigate();
@@ -72,7 +71,7 @@ export default function LessonShare() {
 
   function handleMoveToHome() {
     setAllSet();
-    navgiate("/");
+    navgiate("/home");
     // recoil 값 모두 초기값으로 변경
   }
 

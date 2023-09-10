@@ -35,7 +35,6 @@ export default function AlertSignup(prop: AlertSignupProp) {
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
 
-    console.log(permission);
     registerServiceWorker();
 
     // try {
@@ -48,7 +47,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
     // if (userRole === "부모님") {
     //   navigate("/lessonCode");
     // } else {
-    //   navigate("/");
+    //   navigate("/home");
     // }
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
@@ -59,10 +58,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
     });
   }
 
-  console.log(deviceToken);
-
   useEffect(() => {
-    console.log(deviceToken);
     deviceToken?.token !== "" && deviceToken?.token !== undefined && patchingDeviceToken(deviceToken?.token);
   }, [deviceToken]);
 
@@ -81,7 +77,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
       if (userRole === "부모님") {
         navigate(`/${lessonIndex}`);
       } else {
-        navigate("/");
+        navigate("/home");
       }
     },
     onError: (err) => {

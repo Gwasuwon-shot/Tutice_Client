@@ -27,4 +27,6 @@ const AttendaceCheckButtonBox = styled.button`
   background-color: ${({ theme }) => theme.colors.green9};
   color: ${({ theme }) => theme.colors.grey0};
   border-radius: 1rem;
+
+  ${({ theme }) => theme.fonts.body03}
 `;

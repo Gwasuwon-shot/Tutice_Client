@@ -1,25 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { isModalOpen } from "../../atom/common/isModalOpen";
 import { lessonCodeAndPaymentId } from "../../atom/tuitionPayment/tuitionPayment";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import ToastModal from "../common/ToastModal";
 
-export default function PreypaymentModal() {
-  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+interface PreypaymentModalProp {
+  setPreypaymentModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function PreypaymentModal(props: PreypaymentModalProp) {
+  const { setPreypaymentModal } = props;
+  // const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const navigate = useNavigate();
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
 
   function handleMoveToRegisterPayment() {
-    setOpenModal(false);
-    navigate(`/register-payment/${codeAndId?.paymentRecordIdx}`, {
+    setPreypaymentModal(false);
+    navigate(`/register-payment/${codeAndId?.lessonIdx}`, {
       state: { paymentIdx: codeAndId?.paymentRecordIdx, count: 1 },
     });
   }
 
   function handleCloseModal() {
-    setOpenModal(false);
+    setPreypaymentModal(false);
   }
 
   return (

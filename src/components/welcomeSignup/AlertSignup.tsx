@@ -36,7 +36,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
     const permission = await Notification.requestPermission();
 
     registerServiceWorker();
-    
+
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
     });
@@ -62,7 +62,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
-      if (userRole === "부모님") {
+      if (userRole === "부모님" && lessonIndex !== "") {
         navigate(`/${lessonIndex}`);
       } else {
         navigate("/home");
@@ -77,6 +77,10 @@ export default function AlertSignup(prop: AlertSignupProp) {
     postNotificationRequest(deviceToken.token);
   }
 
+  function handleMoveToHome() {
+    navigate("/home");
+  }
+
   return (
     <>
       <BackButtonSignupIcon onClick={() => setIsWelcome(true)} />
@@ -85,7 +89,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
         <SignupTitleLayout MainText={MAIN_TEXT} />
         <SubText>{SUB_TEXT}</SubText>
       </Container>
-      <ButtonLayout onClick={handleAllowNotification} buttonText="할래요!" />
+      <ButtonLayout onClickButton={handleAllowNotification} onClickJump={handleMoveToHome} buttonText="할래요!" />
     </>
   );
 }

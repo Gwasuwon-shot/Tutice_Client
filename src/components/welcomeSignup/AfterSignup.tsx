@@ -1,9 +1,9 @@
+import { Dispatch, SetStateAction, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { styled } from "styled-components";
 import { TuticeWithTextCommonIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 interface AfterSignupProp {
   setIsWelcome: Dispatch<SetStateAction<boolean>>;
@@ -29,7 +29,7 @@ export default function AfterSignup(prop: AfterSignupProp) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClick={handleToNextStep} buttonText="수업 나무 생성" />
+      <ButtonLayout onClickButton={handleToNextStep} onClickJump={handleToNextStep} buttonText="수업 나무 생성" />
     </>
   );
 }

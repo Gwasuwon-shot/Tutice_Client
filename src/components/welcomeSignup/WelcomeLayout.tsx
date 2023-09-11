@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { userRoleData } from "../../atom/loginUser/loginUser";
@@ -11,14 +11,16 @@ export default function WelcomeLayout() {
   const [isWelcome, setIsWelcome] = useState<boolean>(true);
   const setStep = useSetRecoilState(stepNum);
 
+  useEffect(() => {
+    userRole !== "선생님" && setIsWelcome(false);
+  }, []);
+
+  console.log(userRole);
+
   return (
     <>
       <Container>
-        {userRole === "선생님" ? (
-          <AfterSignup setIsWelcome={setIsWelcome} />
-        ) : (
-          <AlertSignup setIsWelcome={setIsWelcome} />
-        )}
+        {isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup setIsWelcome={setIsWelcome} />}
       </Container>
     </>
   );

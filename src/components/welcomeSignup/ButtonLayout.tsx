@@ -1,29 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { nextArrowWelcomeIc } from "../../assets";
-import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
-import useTeacherFooter from "../../hooks/useTeacherFooter";
 
 interface ButtonLayoutProps {
-  onClick: () => void;
+  onClickButton: () => void;
+  onClickJump: () => void;
   buttonText: string;
 }
 
 export default function ButtonLayoutProps(props: ButtonLayoutProps) {
   const navigate = useNavigate();
-  const { onClick, buttonText } = props;
-  const { handleMoveToPage } = useTeacherFooter();
+  const { onClickButton, onClickJump, buttonText } = props;
 
-  function handleMoveToHome() {
-    handleMoveToPage(TEACHER_FOOTER_CATEGORY.home);
-  }
   return (
     <>
       <ButtonWrapper>
-        <WelcomeButton type="button" onClick={onClick}>
+        <WelcomeButton type="button" onClick={onClickButton}>
           {buttonText}
         </WelcomeButton>
-        <PassButton type="button" onClick={handleMoveToHome}>
+        <PassButton type="button" onClick={onClickJump}>
           건너뛰기
           <NextArrowWelcomeIcon />
         </PassButton>

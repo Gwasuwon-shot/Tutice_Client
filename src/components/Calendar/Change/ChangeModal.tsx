@@ -117,14 +117,11 @@ const ModalHeaderWrapper = styled.div`
 const ModalButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-
   gap: 1.2rem;
 `;
 
 const ModalButton = styled.button`
   display: flex;
-  width: 2.5rem;
-
   color: ${({ theme }) => theme.colors.grey400};
 `;
 

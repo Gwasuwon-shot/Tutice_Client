@@ -16,7 +16,7 @@ import { editDateState } from "../../../atom/EditSchedule/editDateState";
 import { modalType } from "../../../type/calendar/modalType";
 import { editDateStateTypes } from "../../../type/editSchedule/editDateType";
 import { editScheduleType } from "../../../type/editSchedule/editScheduleType";
-import { editLessonIdxState } from "../../../atom/EditSchedule/EditLessonIdx";
+import { editLessonIdxState } from "../../../atom/EditSchedule/editLessonIdx";
 
 export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;

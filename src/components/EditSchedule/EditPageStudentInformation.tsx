@@ -4,13 +4,11 @@ import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { useRecoilValue } from "recoil";
 import { RegularLessonStudentIc } from "../../assets";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
-import { editLessonIdxState } from "../../atom/EditSchedule/EditLessonIdx";
+import { editLessonIdxState } from "../../atom/EditSchedule/editLessonIdx";
 
 export default function StudentInformation() {
   const { studentName, subject, idx } = useRecoilValue(editSchedule);
   const lessonIdx = useRecoilValue(editLessonIdxState);
-
-  console.log(idx);
 
   return (
     <StudentInformationWrapper>

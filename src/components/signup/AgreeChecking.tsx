@@ -39,6 +39,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
       navigate("/welcome", { state: data.data });
     },
     onError: () => {
+      alert("회원가입 실패 아이디 중복 일수도..");
       console.debug("실패 ㅠㅠ");
     },
   });

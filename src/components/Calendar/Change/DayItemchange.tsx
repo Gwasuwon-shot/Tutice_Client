@@ -15,8 +15,9 @@ export default function DayItemchange(props: DayItemProps) {
 
   function handleOpenModal() {
     setSelectedDate(date);
-    setOpenModal(true);
+    myLessons && setOpenModal(true);
   }
+
   return (
     <>
       <Dayitem onClick={handleOpenModal} key={date.toString()} $issunday={isSundayDate}>

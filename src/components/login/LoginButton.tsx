@@ -20,6 +20,7 @@ const Button = styled.button<{ $isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.6rem;
 
   width: 29.2rem;
   height: 5rem;

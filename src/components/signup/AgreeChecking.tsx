@@ -20,7 +20,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
   const { isConfirmed } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const navigate = useNavigate();
-  const setUserRole = useSetRecoilState(userRoleData);
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
 
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);

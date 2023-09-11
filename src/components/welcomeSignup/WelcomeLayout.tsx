@@ -12,15 +12,16 @@ export default function WelcomeLayout() {
   const setStep = useSetRecoilState(stepNum);
 
   useEffect(() => {
-    userRole !== "선생님" && setIsWelcome(false);
+    userRole !== "선생님" && setIsWelcome(true);
   }, []);
 
   function checkAlarmAlertShow() {
+    console.log(window.Notification);
     if (window.Notification) {
       // 알림 허용 x
       return <AlertSignup setIsWelcome={setIsWelcome} />;
     } else {
-      setIsWelcome(false);
+      return !isWelcome && <AfterSignup setIsWelcome={setIsWelcome} />;
     }
   }
 

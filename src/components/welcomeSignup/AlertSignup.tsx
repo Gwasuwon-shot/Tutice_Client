@@ -62,10 +62,11 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
+      console.log(lessonIndex);
       if (userRole === "부모님" && lessonIndex !== "") {
         navigate(`/${lessonIndex}`);
       } else {
-        navigate("/home");
+        userRole !== "선생님" ? navigate("/home") : setIsWelcome(false);
       }
     },
     onError: (err) => {
@@ -78,12 +79,12 @@ export default function AlertSignup(prop: AlertSignupProp) {
   }
 
   function handleMoveToHome() {
-    navigate("/home");
+    userRole !== "선생님" ? setIsWelcome(true) : setIsWelcome(false);
   }
 
   return (
     <>
-      <BackButtonSignupIcon onClick={() => setIsWelcome(true)} />
+      <BackButtonSignupIcon onClick={() => setIsWelcome(false)} />
       <Container>
         <BellWelcomeIcon />
         <SignupTitleLayout MainText={MAIN_TEXT} />

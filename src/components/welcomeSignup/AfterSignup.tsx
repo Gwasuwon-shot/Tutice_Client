@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { TuticeWithTextCommonIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
@@ -13,12 +13,17 @@ export default function AfterSignup(prop: AfterSignupProp) {
   const { setIsWelcome } = prop;
   const location = useLocation();
   const [signUpData, setSignUpData] = useState(location?.state?.data?.user);
+  const navigate = useNavigate();
   const MAIN_TEXT = ` ${signUpData?.name} 님 환영합니다! \n 수업 나무 관리를 통해 \n 과외 관리를 시작해보세요. `;
 
   const SUB_TEXT = "*수업나무 : 수강생을 추가하여 관리할 수 있는 서비스입니다.";
 
   function handleToNextStep() {
-    setIsWelcome(false);
+    navigate("/register-lesson");
+  }
+
+  function handleToHome() {
+    navigate("/home");
   }
 
   return (
@@ -29,7 +34,7 @@ export default function AfterSignup(prop: AfterSignupProp) {
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 
-      <ButtonLayout onClickButton={handleToNextStep} onClickJump={handleToNextStep} buttonText="수업 나무 생성" />
+      <ButtonLayout onClickButton={handleToNextStep} onClickJump={handleToHome} buttonText="수업 나무 생성" />
     </>
   );
 }

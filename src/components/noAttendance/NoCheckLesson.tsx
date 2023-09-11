@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import useGetMissingAttendanceSchedule from "../../hooks/useGetMissingAttendanceSchedule";
 import AttendanceCheckModal from "../common/AttendanceCheckModal";

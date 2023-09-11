@@ -66,6 +66,15 @@ export default function NameEmail() {
     }
   }
 
+  function emailRegex() {
+    if (email === "") {
+      return null;
+    }
+    if (!isEmail) {
+      return <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.emailError} />;
+    }
+  }
+
   useEffect(() => {
     // 이메일 정규식 확인
     email.match(EMAIL_REGEX) === null ? setIsEmail(false) : setIsEmail(true);
@@ -108,8 +117,7 @@ export default function NameEmail() {
             placeholder={PLACEHOLDER_TEXT.emailHolder}
           />
         </InputEmailWrapper>
-
-        {!isEmail && emailFocus ? <RegexField unMatchText={SIGNUP_ERROR_MESSAGE.emailError} /> : null}
+        {emailRegex()}
       </Container>
       <BottomButton
         type="button"

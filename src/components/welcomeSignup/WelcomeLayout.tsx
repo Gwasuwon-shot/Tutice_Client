@@ -15,19 +15,21 @@ export default function WelcomeLayout() {
     userRole !== "선생님" && setIsWelcome(true);
   }, []);
 
-  function checkAlarmAlertShow() {
-    console.log(window.Notification);
-    if (window.Notification) {
-      // 알림 허용 x
-      return <AlertSignup setIsWelcome={setIsWelcome} />;
-    } else {
-      return !isWelcome && <AfterSignup setIsWelcome={setIsWelcome} />;
-    }
-  }
+  // function checkAlarmAlertShow() {
+  //   console.log(window.Notification);
+  //   if (window.Notification) {
+  //     // 알림 허용 x
+  //     return <AlertSignup setIsWelcome={setIsWelcome} />;
+  //   } else {
+  //     return !isWelcome && <AfterSignup setIsWelcome={setIsWelcome} />;
+  //   }
+  // }
 
   return (
     <>
-      <Container>{!isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <> {checkAlarmAlertShow()}</>}</Container>
+      <Container>
+        {!isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup setIsWelcome={setIsWelcome} />}
+      </Container>
     </>
   );
 }

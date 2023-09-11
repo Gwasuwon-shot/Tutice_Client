@@ -4,10 +4,13 @@ import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { useRecoilValue } from "recoil";
 import { RegularLessonStudentIc } from "../../assets";
 import { editSchedule } from "../../atom/EditSchedule/editSchedule";
-import SubjectLabel from "../common/SubjectLabel";
+import { editLessonIdxState } from "../../atom/EditSchedule/EditLessonIdx";
 
 export default function StudentInformation() {
   const { studentName, subject, idx } = useRecoilValue(editSchedule);
+  const lessonIdx = useRecoilValue(editLessonIdxState);
+
+  console.log(idx);
 
   return (
     <StudentInformationWrapper>
@@ -17,7 +20,7 @@ export default function StudentInformation() {
       </IconWrapper>
       <StudentWrapper>
         <StudentName> {studentName} </StudentName>
-        <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 11]} color="#00997D" />
+        <ModalSubject $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]}>{subject}</ModalSubject>
       </StudentWrapper>
     </StudentInformationWrapper>
   );
@@ -64,4 +67,18 @@ const StudentName = styled.h2`
 
   ${({ theme }) => theme.fonts.body01};
   color: ${({ theme }) => theme.colors.grey700};
+`;
+
+const ModalSubject = styled.span<{ $backgroundcolor: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 1.6rem;
+  padding: 0.2rem 0.6rem;
+
+  background-color: ${(props) => props.$backgroundcolor};
+  ${({ theme }) => theme.fonts.caption01};
+  color: ${({ theme }) => theme.colors.grey500};
+  border-radius: 0.8rem;
 `;

@@ -16,12 +16,15 @@ import { editDateState } from "../../../atom/EditSchedule/editDateState";
 import { modalType } from "../../../type/calendar/modalType";
 import { editDateStateTypes } from "../../../type/editSchedule/editDateType";
 import { editScheduleType } from "../../../type/editSchedule/editScheduleType";
+import { editLessonIdxState } from "../../../atom/EditSchedule/EditLessonIdx";
 
 export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;
   const navigate = useNavigate();
   const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
   const [willEditDate, setWillEditDate] = useRecoilState(editDateState);
+  const [editlessonIdx, setEditLessonIdx] = useRecoilState(editLessonIdxState);
+
   const WEEKDAY: string[] = ["일", "월", "화", "수", "목", "금", "토"];
 
   const [isEdit, setIsEdit] = useState(false);
@@ -33,7 +36,15 @@ export default function ChangeModal(props: modalType) {
     setIsEdit(false);
   }
 
-  function moveClickEditPage({ schedule, selectedDate }: { schedule: editScheduleType; selectedDate: Date }): void {
+  function moveClickEditPage({
+    lessonIdx,
+    schedule,
+    selectedDate,
+  }: {
+    lessonIdx: number;
+    schedule: editScheduleType;
+    selectedDate: Date;
+  }): void {
     const dayOfWeekNumber = selectedDate.getDay();
     const dayOfWeekKor = WEEKDAY[dayOfWeekNumber];
 
@@ -51,6 +62,9 @@ export default function ChangeModal(props: modalType) {
       startTime: schedule?.startTime,
       endTime: schedule?.endTime,
     }));
+
+    setEditLessonIdx(lessonIdx);
+
     navigate("/edit-lessonschedule");
   }
 
@@ -94,7 +108,7 @@ export default function ChangeModal(props: modalType) {
 
                   {isEdit && (
                     <ScheduleEditWrapper>
-                      <EditScheduleButton onClick={() => moveClickEditPage({ schedule, selectedDate })} />
+                      <EditScheduleButton onClick={() => moveClickEditPage({ lessonIdx, schedule, selectedDate })} />
                       <RemoveSchedule />
                     </ScheduleEditWrapper>
                   )}

@@ -85,6 +85,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
   return (
     <>
       {/* <BackButtonSignupIcon onClick={() => setIsWelcome(false)} /> */}
+      <Blank />
       <Container>
         <BellWelcomeIcon />
         <SignupTitleLayout MainText={MAIN_TEXT} />
@@ -113,6 +114,12 @@ const SubText = styled.p`
 `;
 
 const BackButtonSignupIcon = styled(BackButtonSignupIc)`
+  width: 4rem;
+  height: 4rem;
+  margin-left: -1.4rem;
+`;
+
+const Blank = styled.div`
   width: 4rem;
   height: 4rem;
   margin-left: -1.4rem;

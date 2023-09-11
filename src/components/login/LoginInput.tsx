@@ -102,7 +102,7 @@ export default function LoginInput() {
           {viewingIcon()}
         </PasswordIconWrapper>
       </InputPasswordWrapper>
-      <LoginButton onClick={() => handleLoginClick()} isActive={isActive} disabled={!isActive} />
+      <LoginButton onClick={handleLoginClick} isActive={isActive} disabled={!isActive} />
       <ErrorMessage>{isError && <RegexField unMatchText={"로그인 실패 다시 시도하십시오"} />}</ErrorMessage>
     </form>
   );

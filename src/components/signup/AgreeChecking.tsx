@@ -20,7 +20,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
   const { isConfirmed } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const navigate = useNavigate();
-  const setUserRole = useSetRecoilState(userRoleData);
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
 
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
@@ -39,6 +39,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
       navigate("/welcome", { state: data.data });
     },
     onError: () => {
+      alert("회원가입 실패 아이디 중복 일수도..");
       console.debug("실패 ㅠㅠ");
     },
   });
@@ -57,8 +58,6 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
         break;
     }
   }
-
-  useEffect(() => {}, [newUser]);
 
   function handleButtonChecked(id: number) {
     setCheckAgrees(
@@ -139,6 +138,8 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
     tempCheckAgrees[0].selected = bool;
     setCheckAgrees([...tempCheckAgrees]);
   }
+
+  useEffect(() => {}, [newUser]);
 
   function handleToSignUp() {
     postNewUser(newUser);

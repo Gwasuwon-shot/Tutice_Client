@@ -84,7 +84,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
   return (
     <>
-      <BackButtonSignupIcon onClick={() => setIsWelcome(false)} />
+      {/* <BackButtonSignupIcon onClick={() => setIsWelcome(false)} /> */}
       <Container>
         <BellWelcomeIcon />
         <SignupTitleLayout MainText={MAIN_TEXT} />

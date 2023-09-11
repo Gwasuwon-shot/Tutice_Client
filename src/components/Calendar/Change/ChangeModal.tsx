@@ -84,12 +84,12 @@ export default function ChangeModal(props: modalType) {
               return (
                 <ScheduleWrapper key={idx}>
                   <ScheduleContainer>
-                    <StudentColorBox backgroundColor={STUDENT_COLOR[lessonIdx % 10]} />
+                    <StudentColorBox backgroundColor={STUDENT_COLOR[lessonIdx % 11]} />
                     <ModalTime>
                       {startTime} - {endTime}
                     </ModalTime>
                     <ModalName>{studentName}</ModalName>
-                    <ModalSubject $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]}>{subject}</ModalSubject>
+                    <ModalSubject $backgroundcolor={STUDENT_COLOR[lessonIdx % 11]}>{subject}</ModalSubject>
                   </ScheduleContainer>
 
                   {isEdit && (
@@ -117,14 +117,11 @@ const ModalHeaderWrapper = styled.div`
 const ModalButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-
   gap: 1.2rem;
 `;
 
 const ModalButton = styled.button`
   display: flex;
-  width: 2.5rem;
-
   color: ${({ theme }) => theme.colors.grey400};
 `;
 

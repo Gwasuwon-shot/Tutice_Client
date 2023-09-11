@@ -15,8 +15,9 @@ export default function DayItemchange(props: DayItemProps) {
 
   function handleOpenModal() {
     setSelectedDate(date);
-    setOpenModal(true);
+    myLessons && setOpenModal(true);
   }
+
   return (
     <>
       <Dayitem onClick={handleOpenModal} key={date.toString()} $issunday={isSundayDate}>
@@ -30,7 +31,7 @@ export default function DayItemchange(props: DayItemProps) {
                 const { startTime, studentName, idx } = schedule;
 
                 return (
-                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]} key={idx}>
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lessonIdx % 11]} key={idx}>
                     {startTime} {studentName.slice(0, 2)}
                   </ScheduleWrapper>
                 );
@@ -40,7 +41,7 @@ export default function DayItemchange(props: DayItemProps) {
                 const { startTime, studentName, idx } = schedule;
 
                 return (
-                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]} key={idx}>
+                  <ScheduleWrapper $backgroundcolor={STUDENT_COLOR[lessonIdx % 11]} key={idx}>
                     {startTime} {studentName.slice(0, 2)}
                   </ScheduleWrapper>
                 );

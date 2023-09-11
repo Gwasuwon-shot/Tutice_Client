@@ -58,11 +58,12 @@ export default function DetailTimePicker() {
   const [focusDay, setFocusDay] = useRecoilState(focusDayState);
 
   // 1) 시작 타임피커 완료시
-  // problem: 현재 로직에서는, 시작시간을 한번 선택한 이후 다른 시간으로 선택하고자 할때 변경 불가
   function handleConfirmStartTimePicker() {
     const formattedHour = String(activeHourSlide).padStart(2, "0");
-    const newStartTime =
+    let newStartTime =
       activeAmPmSlide === 0 ? `${formattedHour}:${activeMinuteSlide}` : `${activeHourSlide + 12}:${activeMinuteSlide}`;
+    if (newStartTime === "24:00")
+      newStartTime = "00:00";
     setSelectedDays((prevSelectedDays) =>
     prevSelectedDays.map((day) =>
       day.dayOfWeek === focusDay ? { ...day, startTime: newStartTime } : day
@@ -83,8 +84,10 @@ export default function DetailTimePicker() {
   // 1) 종료 타임피커 완료시
   function handleConfirmFinishTimePicker() {
     const formattedHour = String(activeHourSlide).padStart(2, "0");
-    const newEndTime =
+    let newEndTime =
       activeAmPmSlide === 0 ? `${formattedHour}:${activeMinuteSlide}` : `${activeHourSlide + 12}:${activeMinuteSlide}`;
+    if (newEndTime === "24:00")
+      newEndTime = "00:00";
     setSelectedDays((prevSelectedDays) =>
       prevSelectedDays.map((day) =>
         day.dayOfWeek === focusDay ? { ...day, endTime: newEndTime } : day

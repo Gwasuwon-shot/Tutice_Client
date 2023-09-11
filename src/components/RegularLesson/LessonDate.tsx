@@ -1,5 +1,4 @@
 import { RegularLessonCalenderIc, RegularLessonClockIc } from "../../assets";
-import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 import {
   cycleNumberState,
   dateState,
@@ -9,14 +8,15 @@ import {
   openStartDetailState,
   temporarySchedule,
 } from "../../atom/timePicker/timePicker";
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
+import RoundBottomButton from "../common/RoundBottomButton";
+import SelectedDayAndTime from "./SelectedDayAndTime";
+import { getTemporarySchedule } from "../../api/getTemporarySchedule";
+import styled from "styled-components";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
-import { getTemporarySchedule } from "../../api/getTemporarySchedule";
-import RoundBottomButton from "../common/RoundBottomButton";
-import SelectedDayAndTime from "./SelectedDayAndTime";
 
 interface DayProp {
   isSelected: boolean;
@@ -54,7 +54,7 @@ export default function LessonDate() {
         newSelectedDays.splice(existingDayIndex, 1);
         return newSelectedDays;
       } else {
-        return [...prevSelectedDays, { dayOfWeek: day, startTime: "24:00", endTime: "24:00" }];
+        return [...prevSelectedDays, { dayOfWeek: day, startTime: "12:00", endTime: "12:00" }];
       }
     });
   }
@@ -88,6 +88,7 @@ export default function LessonDate() {
   });
 
   function postTemporary(info: temporaryProp) {
+    console.log(postInformation);
     getNewTemporarySchedule(postInformation);
   }
 

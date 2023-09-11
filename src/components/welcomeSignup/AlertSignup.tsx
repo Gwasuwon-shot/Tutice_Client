@@ -79,12 +79,12 @@ export default function AlertSignup(prop: AlertSignupProp) {
   }
 
   function handleMoveToHome() {
-    userRole !== "선생님" ? setIsWelcome(true) : setIsWelcome(false);
+    userRole !== "선생님" ? navigate("/home") : setIsWelcome(false);
   }
 
   return (
     <>
-      <BackButtonSignupIcon onClick={() => setIsWelcome(false)} />
+      <BackButtonSignupIcon onClick={() => navigate(-1)} />
       <Container>
         <BellWelcomeIcon />
         <SignupTitleLayout MainText={MAIN_TEXT} />

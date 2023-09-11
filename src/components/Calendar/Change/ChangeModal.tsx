@@ -84,12 +84,12 @@ export default function ChangeModal(props: modalType) {
               return (
                 <ScheduleWrapper key={idx}>
                   <ScheduleContainer>
-                    <StudentColorBox backgroundColor={STUDENT_COLOR[lessonIdx % 11]} />
+                    <StudentColorBox backgroundColor={STUDENT_COLOR[lessonIdx % 10]} />
                     <ModalTime>
                       {startTime} - {endTime}
                     </ModalTime>
                     <ModalName>{studentName}</ModalName>
-                    <ModalSubject $backgroundcolor={STUDENT_COLOR[lessonIdx % 11]}>{subject}</ModalSubject>
+                    <ModalSubject $backgroundcolor={STUDENT_COLOR[lessonIdx % 10]}>{subject}</ModalSubject>
                   </ScheduleContainer>
 
                   {isEdit && (

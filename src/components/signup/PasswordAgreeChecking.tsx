@@ -96,6 +96,8 @@ export default function PasswordAgreeChecking() {
     setNewUser((prev) => ({ ...prev, password: pw }));
   }
 
+  useEffect(() => {}, [newUser, pw, confirmPw]);
+
   return (
     <>
       <ProgressBar progress={isConfirmed ? 100 : 80} />

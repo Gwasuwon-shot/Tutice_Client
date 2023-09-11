@@ -58,8 +58,6 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
     }
   }
 
-  useEffect(() => {}, [newUser]);
-
   function handleButtonChecked(id: number) {
     setCheckAgrees(
       checkAgrees.map((checkAgree) =>
@@ -139,6 +137,8 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
     tempCheckAgrees[0].selected = bool;
     setCheckAgrees([...tempCheckAgrees]);
   }
+
+  useEffect(() => {}, [newUser]);
 
   function handleToSignUp() {
     postNewUser(newUser);

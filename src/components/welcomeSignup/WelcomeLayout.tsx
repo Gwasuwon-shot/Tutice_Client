@@ -15,13 +15,18 @@ export default function WelcomeLayout() {
     userRole !== "선생님" && setIsWelcome(false);
   }, []);
 
-  console.log(userRole);
+  function checkAlarmAlertShow() {
+    if (window.Notification) {
+      // 알림 허용 x
+      return <AlertSignup setIsWelcome={setIsWelcome} />;
+    } else {
+      setIsWelcome(false);
+    }
+  }
 
   return (
     <>
-      <Container>
-        {isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup setIsWelcome={setIsWelcome} />}
-      </Container>
+      <Container>{!isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <> {checkAlarmAlertShow()}</>}</Container>
     </>
   );
 }

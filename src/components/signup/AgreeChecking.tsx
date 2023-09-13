@@ -11,10 +11,16 @@ import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import { AxiosError, AxiosResponse, isAxiosError } from "axios";
 
 type AgreeCheckingProp = {
   isConfirmed: boolean;
 };
+
+interface ResponseDataType {
+  message: string;
+  code: number;
+}
 
 export default function AgreeChecking(props: AgreeCheckingProp) {
   const { isConfirmed } = props;
@@ -38,9 +44,13 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
       });
       navigate("/welcome", { state: data.data });
     },
-    onError: () => {
-      alert("회원가입 실패 아이디 중복 일수도..");
-      console.debug("실패 ㅠㅠ");
+    onError: (error) => {
+      if (isAxiosError<ResponseDataType>(error)) {
+        if (error.response) {
+          const errorMessage = error.response?.data.message;
+          alert(errorMessage);
+        }
+      }
     },
   });
 

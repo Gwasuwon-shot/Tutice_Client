@@ -79,7 +79,12 @@ export default function AlertSignup(prop: AlertSignupProp) {
   }
 
   function handleMoveToHome() {
-    userRole !== "선생님" ? setIsWelcome(true) : setIsWelcome(false);
+    if (userRole !== "선생님") {
+      // setIsWelcome(true);
+      navigate("/home");
+    } else {
+      setIsWelcome(false);
+    }
   }
 
   return (

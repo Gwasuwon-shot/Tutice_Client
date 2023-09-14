@@ -80,7 +80,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
 
   function handleMoveToHome() {
     if (userRole !== "선생님") {
-      setIsWelcome(true);
+      // setIsWelcome(true);
       navigate("/home");
     } else {
       setIsWelcome(false);

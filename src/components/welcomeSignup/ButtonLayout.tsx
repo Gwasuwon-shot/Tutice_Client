@@ -8,7 +8,7 @@ interface ButtonLayoutProps {
   buttonText: string;
 }
 
-export default function ButtonLayoutProps(props: ButtonLayoutProps) {
+export default function ButtonLayout(props: ButtonLayoutProps) {
   const navigate = useNavigate();
   const { onClickButton, onClickJump, buttonText } = props;
 

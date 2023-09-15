@@ -88,10 +88,10 @@ export default function NameEmail() {
 
   return (
     <>
-      <ProgressBar progress={50} />
       <BackButtonWrapper>
         <BackButton />
       </BackButtonWrapper>
+      <ProgressBar progress={50} />
       <Container>
         <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
 

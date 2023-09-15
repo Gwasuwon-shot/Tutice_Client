@@ -7,17 +7,13 @@ import { setCookie } from "../../api/cookie";
 import { newUserPost } from "../../api/localSignUp";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { newUserData } from "../../atom/signup/signup";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
 
-type AgreeCheckingProp = {
-  isConfirmed: boolean;
-};
-
-export default function AgreeChecking(props: AgreeCheckingProp) {
-  const { isConfirmed } = props;
+export default function AgreeChecking() {
+  const setStep = useSetRecoilState(stepNum);
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const navigate = useNavigate();
   const [userRole, setUserRole] = useRecoilState(userRoleData);
@@ -142,7 +138,10 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
   useEffect(() => {}, [newUser]);
 
   function handleToSignUp() {
-    postNewUser(newUser);
+    setNewUser((prev) => ({ ...prev, isMarketing: completeCheck }));
+
+    setStep(3);
+    // postNewUser(newUser);
   }
 
   return (
@@ -184,7 +183,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
       </TosWrapper>
 
       <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
-        <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
+        <ButtonText>{BUTTON_TEXT.next}</ButtonText>
       </SubmitButton>
     </>
   );

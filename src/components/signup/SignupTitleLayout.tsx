@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 
 interface SignupTitleLayoutProp {
@@ -13,5 +12,5 @@ const Title = styled.header`
   color: ${({ theme }) => theme.colors.grey900};
   ${({ theme }) => theme.fonts.title01};
 
-  white-space: pre-line;
+  white-space: pre-wrap;
 `;

@@ -17,7 +17,7 @@ type AgreeCheckingProp = {
   isConfirmed: boolean;
 };
 
-interface ResponseDataType {
+export interface ResponseDataType {
   message: string;
   code: number;
 }

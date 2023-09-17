@@ -35,7 +35,7 @@ export default function Role() {
         <BackButton />
       </BackButtonWrapper>
       <Container>
-        <SignupTitleLayout MainText={SIGNUP_TITLE.whichRole} />
+        <SignupTitleLayout>{SIGNUP_TITLE.whichRole}</SignupTitleLayout>
         <RadioWrapper>
           <RoleRapper>
             <RadioButton

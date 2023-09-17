@@ -87,7 +87,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
       <BackButtonSignupIcon onClick={() => setIsWelcome(false)} />
       <Container>
         <BellWelcomeIcon />
-        <SignupTitleLayout MainText={MAIN_TEXT} />
+        <SignupTitleLayout>{MAIN_TEXT}</SignupTitleLayout>
         <SubText>{SUB_TEXT}</SubText>
       </Container>
       <ButtonLayout onClickButton={handleAllowNotification} onClickJump={handleMoveToHome} buttonText="할래요!" />

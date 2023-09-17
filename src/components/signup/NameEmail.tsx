@@ -126,7 +126,7 @@ export default function NameEmail() {
         <BackButton />
       </BackButtonWrapper>
       <Container>
-        <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
+        <SignupTitleLayout>{SIGNUP_TITLE.needNameEmail}</SignupTitleLayout>
 
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />

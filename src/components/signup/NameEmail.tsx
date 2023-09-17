@@ -15,6 +15,10 @@ import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import useSignupFormState from "../../hooks/useSignupFormState";
 import EmailCheckButton from "./EmailCheckButton";
+import { useMutation } from "react-query";
+import { isAxiosError } from "axios";
+import { ResponseDataType } from "./AgreeChecking";
+import { postCheckEmail } from "../../api/postCheckEmail";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -36,6 +40,21 @@ export default function NameEmail() {
     emailFocus,
     setEmailFocus,
   } = useSignupFormState();
+
+  const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {
+    onSuccess: (data) => {
+      const passMessage = data.data.message;
+      alert(passMessage);
+    },
+    onError: (error) => {
+      if (isAxiosError<ResponseDataType>(error)) {
+        if (error.response) {
+          const errorMessage = error.response?.data.message;
+          alert(errorMessage);
+        }
+      }
+    },
+  });
 
   // setName
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -87,8 +106,10 @@ export default function NameEmail() {
     name && email && isName && isEmail ? setIsActive(true) : setIsActive(false);
   }, [name, email, isName, isEmail]);
 
-  // 이메일 중복 확인
-  function checkEmailDuplicate() {}
+  // 이메일 중복 확인 버튼 실행
+  function checkEmailDuplicate() {
+    postCheckEmailData(email);
+  }
 
   return (
     <>

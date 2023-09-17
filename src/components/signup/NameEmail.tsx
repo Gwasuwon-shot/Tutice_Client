@@ -1,6 +1,10 @@
 import { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { useMutation } from "react-query";
+import { isAxiosError } from "axios";
+import { ResponseDataType } from "./AgreeChecking";
+import { postCheckEmail } from "../../api/postCheckEmail";
 import { newUserData, stepNum } from "../../atom/signup/signup";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { EMAIL_REGEX } from "../../core/signup/regex";
@@ -15,10 +19,6 @@ import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import useSignupFormState from "../../hooks/useSignupFormState";
 import EmailCheckButton from "./EmailCheckButton";
-import { useMutation } from "react-query";
-import { isAxiosError } from "axios";
-import { ResponseDataType } from "./AgreeChecking";
-import { postCheckEmail } from "../../api/postCheckEmail";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);

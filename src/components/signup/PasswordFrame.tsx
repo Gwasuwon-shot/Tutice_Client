@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { newUserData } from "../../atom/signup/signup";
@@ -9,7 +9,7 @@ import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
 import BackButton from "../common/BackButton";
 import ProgressBar from "../common/ProgressBar";
-import AgreeChecking, { ResponseDataType } from "./AgreeChecking";
+import { ResponseDataType } from "./AgreeChecking";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";

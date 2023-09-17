@@ -125,7 +125,7 @@ export default function NameEmail() {
       <BackButtonWrapper>
         <BackButton />
       </BackButtonWrapper>
-      <ProgressBar progress={50} />
+      <ProgressBar progress={isActive ? 75 : 50} />
       <Container>
         <SignupTitleLayout>{SIGNUP_TITLE.needNameEmail}</SignupTitleLayout>
 

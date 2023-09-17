@@ -1,6 +1,10 @@
-import { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { useMutation } from "react-query";
+import { isAxiosError } from "axios";
+import { ResponseDataType } from "./AgreeChecking";
+import { postCheckEmail } from "../../api/postCheckEmail";
 import { newUserData, stepNum } from "../../atom/signup/signup";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { EMAIL_REGEX } from "../../core/signup/regex";
@@ -14,6 +18,8 @@ import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import useSignupFormState from "../../hooks/useSignupFormState";
+import EmailCheckButton from "./EmailCheckButton";
+import EmailDuplicatedModal from "./EmailDuplicatedModal";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -34,7 +40,26 @@ export default function NameEmail() {
     setNameFocus,
     emailFocus,
     setEmailFocus,
+    modalMessage,
+    setModalMessage,
+    modalOpened,
+    setModalOpened,
   } = useSignupFormState();
+
+  const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {
+    onSuccess: (data) => {
+      setModalMessage(data.data.message);
+      setIsActive(true);
+    },
+    onError: (error) => {
+      if (isAxiosError<ResponseDataType>(error)) {
+        if (error.response) {
+          setModalMessage(error.response?.data.message);
+          setIsActive(false);
+        }
+      }
+    },
+  });
 
   // setName
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -81,13 +106,21 @@ export default function NameEmail() {
 
     // 이름 정규식 확인
     name.length > 1 ? setIsName(true) : setIsName(false);
+  }, [name, email, isName, isEmail, modalMessage]);
 
-    // 이메일, 이름 입력 및 정규식 확인 : 버튼 활성화
-    name && email && isName && isEmail ? setIsActive(true) : setIsActive(false);
-  }, [name, email, isName, isEmail]);
+  // 이메일 중복 확인 버튼 실행
+  function checkEmailDuplicate() {
+    postCheckEmailData(email);
+    setModalOpened(true);
+  }
+
+  function handleCloseModal() {
+    setModalOpened(false);
+  }
 
   return (
     <>
+      {modalOpened ? <EmailDuplicatedModal handleCloseModal={handleCloseModal} modalMessage={modalMessage} /> : null}
       <ProgressBar progress={50} />
       <BackButtonWrapper>
         <BackButton />
@@ -109,13 +142,16 @@ export default function NameEmail() {
 
         <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-          <Inputfield
-            onFocus={() => setEmailFocus(true)}
-            onBlur={() => setEmailFocus(false)}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
-            type="text"
-            placeholder={PLACEHOLDER_TEXT.emailHolder}
-          />
+          <EmailCheckButtonWrapper>
+            <Inputfield
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
+              type="text"
+              placeholder={PLACEHOLDER_TEXT.emailHolder}
+            />
+            <EmailCheckButton text="중복확인" emailTyped={isEmail} onClick={checkEmailDuplicate} />
+          </EmailCheckButtonWrapper>
         </InputEmailWrapper>
         {emailRegex()}
       </Container>
@@ -162,6 +198,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
 `;
 
 const Inputfield = styled.input`
+  width: 20rem;
   padding: 0;
   height: 2rem;
   margin-top: 1em;
@@ -173,6 +210,12 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
+`;
+
+const EmailCheckButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const BackButtonWrapper = styled.div`

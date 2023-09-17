@@ -11,9 +11,20 @@ import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import { AxiosError, AxiosResponse, isAxiosError } from "axios";
 
-export default function AgreeChecking() {
+type AgreeCheckingProp = {
+  isConfirmed: boolean;
+};
+
+export interface ResponseDataType {
+  message: string;
+  code: number;
+}
+
+export default function AgreeChecking(props: AgreeCheckingProp) {
   const setStep = useSetRecoilState(stepNum);
+  const { isConfirmed } = props;
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const navigate = useNavigate();
   const [userRole, setUserRole] = useRecoilState(userRoleData);
@@ -34,9 +45,13 @@ export default function AgreeChecking() {
       });
       navigate("/welcome", { state: data.data });
     },
-    onError: () => {
-      alert("회원가입 실패 아이디 중복 일수도..");
-      console.debug("실패 ㅠㅠ");
+    onError: (error) => {
+      if (isAxiosError<ResponseDataType>(error)) {
+        if (error.response) {
+          const errorMessage = error.response?.data.message;
+          alert(errorMessage);
+        }
+      }
     },
   });
 

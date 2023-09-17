@@ -1,7 +1,7 @@
 export const SIGNUP_TITLE = {
   whichRole: "어떤 회원으로 가입할까요?",
-  leftInfo: "남은 정보들만 입력하면 \n 가입을 완료할 수 있어요!",
-  needNameEmail: "가입을 위해 \n 이름과 이메일이 필요해요",
+  leftInfo: "사용하실 \n비밀번호를 설정해주세요",
+  needNameEmail: "가입을 위해 \n이름과 이메일이 필요해요",
 };
 
 export const ROLE_NAME = {

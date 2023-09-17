@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useMutation } from "react-query";
@@ -19,10 +19,13 @@ import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import useSignupFormState from "../../hooks/useSignupFormState";
 import EmailCheckButton from "./EmailCheckButton";
+import EmailDuplicatedModal from "./EmailDuplicatedModal";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const setStep = useSetRecoilState(stepNum);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalOpened, setModalOpened] = useState(false);
 
   const {
     name,
@@ -43,14 +46,14 @@ export default function NameEmail() {
 
   const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {
     onSuccess: (data) => {
-      const passMessage = data.data.message;
-      alert(passMessage);
+      setModalMessage(data.data.message);
+      setIsActive(true);
     },
     onError: (error) => {
       if (isAxiosError<ResponseDataType>(error)) {
         if (error.response) {
-          const errorMessage = error.response?.data.message;
-          alert(errorMessage);
+          setModalMessage(error.response?.data.message);
+          setIsActive(false);
         }
       }
     },
@@ -101,18 +104,21 @@ export default function NameEmail() {
 
     // 이름 정규식 확인
     name.length > 1 ? setIsName(true) : setIsName(false);
-
-    // 이메일, 이름 입력 및 정규식 확인 : 버튼 활성화
-    name && email && isName && isEmail ? setIsActive(true) : setIsActive(false);
-  }, [name, email, isName, isEmail]);
+  }, [name, email, isName, isEmail, modalMessage]);
 
   // 이메일 중복 확인 버튼 실행
   function checkEmailDuplicate() {
     postCheckEmailData(email);
+    setModalOpened(true);
+  }
+
+  function handleCloseModal() {
+    setModalOpened(false);
   }
 
   return (
     <>
+      {modalOpened ? <EmailDuplicatedModal handleCloseModal={handleCloseModal} modalMessage={modalMessage} /> : null}
       <ProgressBar progress={50} />
       <BackButtonWrapper>
         <BackButton />

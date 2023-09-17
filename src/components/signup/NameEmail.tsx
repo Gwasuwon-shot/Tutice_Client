@@ -11,9 +11,8 @@ import { EMAIL_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
-import BackButton from "../common/BackButton";
-import BottomButton from "../common/BottomButton";
-import ProgressBar from "../common/ProgressBar";
+
+import { BackButton, BottomButton, ProgressBar } from "../common";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";

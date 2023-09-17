@@ -79,7 +79,7 @@ export default function NameEmail() {
   function handleDoneClick() {
     setNewUser((prev) => ({ ...prev, name: name, email: email }));
 
-    setStep(3);
+    setStep(4);
   }
 
   function nameRegex() {
@@ -121,7 +121,6 @@ export default function NameEmail() {
   return (
     <>
       {modalOpened ? <EmailDuplicatedModal handleCloseModal={handleCloseModal} modalMessage={modalMessage} /> : null}
-      <ProgressBar progress={50} />
       <BackButtonWrapper>
         <BackButton />
       </BackButtonWrapper>

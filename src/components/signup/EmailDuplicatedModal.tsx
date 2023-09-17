@@ -3,13 +3,14 @@ import BasicSingleModal from "../common/BasicSingleModal";
 
 interface EmailDuplicatedModalProps {
   handleCloseModal(): void;
+  modalMessage: string;
 }
 
 export default function EmailDuplicatedModal(props: EmailDuplicatedModalProps) {
-  const { handleCloseModal } = props;
+  const { handleCloseModal, modalMessage } = props;
   return (
     <BasicSingleModal buttonName="확인" handleClickSingleButton={handleCloseModal}>
-      <EmailIsDuplicated>이미 사용 중인 이메일 입니다.</EmailIsDuplicated>
+      <EmailIsDuplicated>{modalMessage}</EmailIsDuplicated>
     </BasicSingleModal>
   );
 }

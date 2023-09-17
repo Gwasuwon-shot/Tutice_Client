@@ -24,8 +24,6 @@ import EmailDuplicatedModal from "./EmailDuplicatedModal";
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const setStep = useSetRecoilState(stepNum);
-  const [modalMessage, setModalMessage] = useState("");
-  const [modalOpened, setModalOpened] = useState(false);
 
   const {
     name,
@@ -42,6 +40,10 @@ export default function NameEmail() {
     setNameFocus,
     emailFocus,
     setEmailFocus,
+    modalMessage,
+    setModalMessage,
+    modalOpened,
+    setModalOpened,
   } = useSignupFormState();
 
   const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {

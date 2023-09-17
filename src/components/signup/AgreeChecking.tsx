@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
-import { userRoleData } from "../../atom/loginUser/loginUser";
-import { newUserData } from "../../atom/signup/signup";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
-import { AxiosError, AxiosResponse, isAxiosError } from "axios";
 
 export interface ResponseDataType {
   message: string;

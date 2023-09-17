@@ -35,7 +35,7 @@ export default function Role() {
       </BackButtonWrapper>
       <ProgressBar progress={25} />
       <Container>
-        <SignupTitleLayout MainText={SIGNUP_TITLE.whichRole} />
+        <SignupTitleLayout>{SIGNUP_TITLE.whichRole}</SignupTitleLayout>
         <RadioWrapper>
           <RoleRapper>
             <RadioButton

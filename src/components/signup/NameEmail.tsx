@@ -158,7 +158,7 @@ export default function NameEmail() {
       </Container>
       <BottomButton
         type="button"
-        children={BUTTON_TEXT.done}
+        children={BUTTON_TEXT.next}
         isActive={isActive}
         onClick={handleDoneClick}
         disabled={!isActive}

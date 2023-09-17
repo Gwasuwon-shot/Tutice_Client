@@ -3,8 +3,22 @@ import AgreeChecking from "./AgreeChecking";
 import SignupTitleLayout from "./SignupTitleLayout";
 import BackButton from "../common/BackButton";
 import ProgressBar from "../common/ProgressBar";
+import { useRecoilValue } from "recoil";
+import { newUserData } from "../../atom/signup/signup";
+import { useEffect, useState } from "react";
 
 export default function AgreeCheckingFrame() {
+  const newUser = useRecoilValue(newUserData);
+  const [userRole, setUserRole] = useState(newUser.role);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    console.log(newUser);
+    if (userRole === "부모님") {
+      setUserRole("학부모님");
+    }
+  }, [newUser]);
+
   return (
     <>
       <BackButtonWrapper>
@@ -21,6 +35,7 @@ export default function AgreeCheckingFrame() {
           가입 및 정보 제공에 동의해 주세요
         </PlainText>
       </Container>
+      <AgreeChecking isActive={isActive} setIsActive={setIsActive} />
     </>
   );
 }
@@ -40,4 +55,5 @@ const BackButtonWrapper = styled.div`
 
 const Container = styled.div`
   margin-top: 1.8rem;
+  margin-left: 1.4rem;
 `;

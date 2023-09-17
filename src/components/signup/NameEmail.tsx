@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import { useEffect, useState } from "react";
-import { styled } from "styled-components";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useMutation } from "react-query";
 import { isAxiosError } from "axios";
@@ -19,8 +17,6 @@ import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import useSignupFormState from "../../hooks/useSignupFormState";
-import EmailCheckButton from "./EmailCheckButton";
-import EmailDuplicatedModal from "./EmailDuplicatedModal";
 import EmailCheckButton from "./EmailCheckButton";
 import EmailDuplicatedModal from "./EmailDuplicatedModal";
 
@@ -48,21 +44,6 @@ export default function NameEmail() {
     modalOpened,
     setModalOpened,
   } = useSignupFormState();
-
-  const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {
-    onSuccess: (data) => {
-      setModalMessage(data.data.message);
-      setIsActive(true);
-    },
-    onError: (error) => {
-      if (isAxiosError<ResponseDataType>(error)) {
-        if (error.response) {
-          setModalMessage(error.response?.data.message);
-          setIsActive(false);
-        }
-      }
-    },
-  });
 
   const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {
     onSuccess: (data) => {
@@ -239,12 +220,6 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
-`;
-
-const EmailCheckButtonWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 const EmailCheckButtonWrapper = styled.div`

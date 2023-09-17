@@ -1,14 +1,15 @@
+import { ReactNode } from "react";
 import { styled } from "styled-components";
 
 interface SignupTitleLayoutProp {
-  MainText: string;
+  children: ReactNode;
 }
 
 export default function SignupTitleLayout(prop: SignupTitleLayoutProp) {
-  const { MainText } = prop;
-  return <Title>{MainText}</Title>;
+  const { children } = prop;
+  return <Title>{children}</Title>;
 }
-const Title = styled.header`
+const Title = styled.h1`
   color: ${({ theme }) => theme.colors.grey900};
   ${({ theme }) => theme.fonts.title01};
 

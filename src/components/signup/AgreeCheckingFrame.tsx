@@ -12,9 +12,14 @@ export default function AgreeCheckingFrame() {
       </BackButtonWrapper>
       <ProgressBar progress={isActive ? 50 : 25} />
       <Container>
-        <SignupTitleLayout MainText="선생님 \n 안녕하세요!" />
-        <PlainText>서비스 시작 및 가입을 위해 먼저 가입 및 정보 제공에 동의해 주세요 </PlainText>
-        <AgreeChecking />
+        <SignupTitleLayout>
+          {userRole} <br />
+          안녕하세요!
+        </SignupTitleLayout>
+        <PlainText>
+          서비스 시작 및 가입을 위해 먼저 <br />
+          가입 및 정보 제공에 동의해 주세요
+        </PlainText>
       </Container>
     </>
   );

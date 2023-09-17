@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
+import { useEffect, useState } from "react";
+import { styled } from "styled-components";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useMutation } from "react-query";
 import { isAxiosError } from "axios";
@@ -17,6 +19,8 @@ import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import useSignupFormState from "../../hooks/useSignupFormState";
+import EmailCheckButton from "./EmailCheckButton";
+import EmailDuplicatedModal from "./EmailDuplicatedModal";
 import EmailCheckButton from "./EmailCheckButton";
 import EmailDuplicatedModal from "./EmailDuplicatedModal";
 
@@ -44,6 +48,21 @@ export default function NameEmail() {
     modalOpened,
     setModalOpened,
   } = useSignupFormState();
+
+  const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {
+    onSuccess: (data) => {
+      setModalMessage(data.data.message);
+      setIsActive(true);
+    },
+    onError: (error) => {
+      if (isAxiosError<ResponseDataType>(error)) {
+        if (error.response) {
+          setModalMessage(error.response?.data.message);
+          setIsActive(false);
+        }
+      }
+    },
+  });
 
   const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {
     onSuccess: (data) => {
@@ -151,6 +170,16 @@ export default function NameEmail() {
             />
             <EmailCheckButton text="중복확인" emailTyped={isEmail} onClick={checkEmailDuplicate} />
           </EmailCheckButtonWrapper>
+          <EmailCheckButtonWrapper>
+            <Inputfield
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
+              type="text"
+              placeholder={PLACEHOLDER_TEXT.emailHolder}
+            />
+            <EmailCheckButton text="중복확인" emailTyped={isEmail} onClick={checkEmailDuplicate} />
+          </EmailCheckButtonWrapper>
         </InputEmailWrapper>
         {emailRegex()}
       </Container>
@@ -198,6 +227,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
 
 const Inputfield = styled.input`
   width: 20rem;
+  width: 20rem;
   padding: 0;
   height: 2rem;
   margin-top: 1em;
@@ -209,6 +239,12 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
+`;
+
+const EmailCheckButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const EmailCheckButtonWrapper = styled.div`

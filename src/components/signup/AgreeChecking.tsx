@@ -9,6 +9,7 @@ import { newUserData } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import { AxiosError, AxiosResponse, isAxiosError } from "axios";
 
 export interface ResponseDataType {
   message: string;

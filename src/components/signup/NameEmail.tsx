@@ -14,6 +14,7 @@ import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import useSignupFormState from "../../hooks/useSignupFormState";
+import EmailCheckButton from "./EmailCheckButton";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -86,6 +87,9 @@ export default function NameEmail() {
     name && email && isName && isEmail ? setIsActive(true) : setIsActive(false);
   }, [name, email, isName, isEmail]);
 
+  // 이메일 중복 확인
+  function checkEmailDuplicate() {}
+
   return (
     <>
       <ProgressBar progress={50} />
@@ -109,13 +113,16 @@ export default function NameEmail() {
 
         <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-          <Inputfield
-            onFocus={() => setEmailFocus(true)}
-            onBlur={() => setEmailFocus(false)}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
-            type="text"
-            placeholder={PLACEHOLDER_TEXT.emailHolder}
-          />
+          <EmailCheckButtonWrapper>
+            <Inputfield
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
+              type="text"
+              placeholder={PLACEHOLDER_TEXT.emailHolder}
+            />
+            <EmailCheckButton text="중복확인" emailTyped={isEmail} onClick={checkEmailDuplicate} />
+          </EmailCheckButtonWrapper>
         </InputEmailWrapper>
         {emailRegex()}
       </Container>
@@ -162,6 +169,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
 `;
 
 const Inputfield = styled.input`
+  width: 20rem;
   padding: 0;
   height: 2rem;
   margin-top: 1em;
@@ -173,6 +181,12 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
+`;
+
+const EmailCheckButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const BackButtonWrapper = styled.div`

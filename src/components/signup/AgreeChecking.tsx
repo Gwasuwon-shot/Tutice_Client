@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
+import { userRoleData } from "../../atom/loginUser/loginUser";
 import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";

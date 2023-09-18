@@ -13,5 +13,5 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.colors.grey900};
   ${({ theme }) => theme.fonts.title01};
 
-  white-space: pre-line;
+  white-space: pre-wrap;
 `;

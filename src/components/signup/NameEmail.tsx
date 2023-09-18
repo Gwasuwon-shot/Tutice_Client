@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { styled } from "styled-components";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useMutation } from "react-query";
@@ -141,16 +141,6 @@ export default function NameEmail() {
 
         <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-          <EmailCheckButtonWrapper>
-            <Inputfield
-              onFocus={() => setEmailFocus(true)}
-              onBlur={() => setEmailFocus(false)}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
-              type="text"
-              placeholder={PLACEHOLDER_TEXT.emailHolder}
-            />
-            <EmailCheckButton text="중복확인" emailTyped={isEmail} onClick={checkEmailDuplicate} />
-          </EmailCheckButtonWrapper>
           <EmailCheckButtonWrapper>
             <Inputfield
               onFocus={() => setEmailFocus(true)}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { styled } from "styled-components";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useMutation } from "react-query";
@@ -11,9 +11,8 @@ import { EMAIL_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
-import BackButton from "../common/BackButton";
-import BottomButton from "../common/BottomButton";
-import ProgressBar from "../common/ProgressBar";
+
+import { BackButton, BottomButton, ProgressBar } from "../common";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
@@ -79,7 +78,7 @@ export default function NameEmail() {
   function handleDoneClick() {
     setNewUser((prev) => ({ ...prev, name: name, email: email }));
 
-    setStep(3);
+    setStep(4);
   }
 
   function nameRegex() {
@@ -121,12 +120,12 @@ export default function NameEmail() {
   return (
     <>
       {modalOpened ? <EmailDuplicatedModal handleCloseModal={handleCloseModal} modalMessage={modalMessage} /> : null}
-      <ProgressBar progress={50} />
       <BackButtonWrapper>
         <BackButton />
       </BackButtonWrapper>
+      <ProgressBar progress={isActive ? 75 : 50} />
       <Container>
-        <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
+        <SignupTitleLayout>{SIGNUP_TITLE.needNameEmail}</SignupTitleLayout>
 
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
@@ -157,7 +156,7 @@ export default function NameEmail() {
       </Container>
       <BottomButton
         type="button"
-        children={BUTTON_TEXT.done}
+        children={BUTTON_TEXT.next}
         isActive={isActive}
         onClick={handleDoneClick}
         disabled={!isActive}
@@ -198,6 +197,7 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
 `;
 
 const Inputfield = styled.input`
+  width: 20rem;
   width: 20rem;
   padding: 0;
   height: 2rem;

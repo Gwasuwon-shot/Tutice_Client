@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { newUserData } from "../../atom/signup/signup";
@@ -9,12 +9,20 @@ import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
 import BackButton from "../common/BackButton";
 import ProgressBar from "../common/ProgressBar";
-import AgreeChecking from "./AgreeChecking";
+import { ResponseDataType } from "./AgreeChecking";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
+import BottomButton from "../common/BottomButton";
+import { BUTTON_TEXT } from "../../core/signup/buttonText";
+import { newUserPost } from "../../api/localSignUp";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import { setCookie } from "../../api/cookie";
+import { userRoleData } from "../../atom/loginUser/loginUser";
+import { isAxiosError } from "axios";
 
-export default function PasswordAgreeChecking() {
+export default function PasswordFrame() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
@@ -24,6 +32,27 @@ export default function PasswordAgreeChecking() {
   const [confirmFocus, setConfirmFocus] = useState(false);
   const [pwViewing, setPwViewing] = useState("password");
   const [confirmViewing, setConfirmViewing] = useState("password");
+  const navigate = useNavigate();
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
+
+  const { mutate: postNewUser } = useMutation(newUserPost, {
+    onSuccess: (data) => {
+      const accessToken = data.data.data.accessToken;
+      setUserRole(data.data.data.user.role);
+      setCookie("accessToken", accessToken, {
+        secure: true,
+      });
+      navigate("/welcome", { state: data.data });
+    },
+    onError: (error) => {
+      if (isAxiosError<ResponseDataType>(error)) {
+        if (error.response) {
+          const errorMessage = error.response?.data.message;
+          alert(errorMessage);
+        }
+      }
+    },
+  });
 
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -98,26 +127,20 @@ export default function PasswordAgreeChecking() {
 
   useEffect(() => {}, [newUser, pw, confirmPw]);
 
+  function handleDoneClick() {
+    postNewUser(newUser);
+  }
+
   return (
     <>
-      <ProgressBar progress={isConfirmed ? 100 : 80} />
       <BackButtonWrapper>
         <BackButton />
       </BackButtonWrapper>
+      <ProgressBar progress={isConfirmed ? 100 : 80} />
       <Container>
         <TitleWrapper>
-          <SignupTitleLayout MainText={SIGNUP_TITLE.leftInfo} />
+          <SignupTitleLayout>{SIGNUP_TITLE.leftInfo}</SignupTitleLayout>
         </TitleWrapper>
-
-        <InputWrapper>
-          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
-          <Inputfield disabled type="text" value={newUser.name} />
-        </InputWrapper>
-
-        <InputWrapper>
-          <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-          <Inputfield disabled type="text" value={newUser.email} />
-        </InputWrapper>
 
         <InputPwWrapper $isPassword={isPassword} $pwFocus={pwFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.password} />
@@ -151,9 +174,14 @@ export default function PasswordAgreeChecking() {
         </InputConfirmWrapper>
 
         {MatchedPassword()}
-
-        <AgreeChecking isConfirmed={isConfirmed} />
       </Container>
+      <BottomButton
+        type="button"
+        children={BUTTON_TEXT.done}
+        isActive={isConfirmed}
+        onClick={handleDoneClick}
+        disabled={!isConfirmed}
+      />
     </>
   );
 }
@@ -171,21 +199,11 @@ const TitleWrapper = styled.div`
   margin-bottom: 3.2rem;
 `;
 
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 90%;
-  margin-top: 3.2rem;
-  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.grey70};
-`;
-
 const InputPwWrapper = styled.div<{ $pwFocus: boolean; $isPassword: boolean }>`
   display: flex;
   flex-direction: column;
 
   width: 90%;
-  margin-top: 3.2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $pwFocus, $isPassword }) => ($pwFocus || $isPassword ? theme.colors.green5 : theme.colors.grey70)};
 `;
@@ -195,7 +213,7 @@ const InputConfirmWrapper = styled.div<{ $confirmFocus: boolean; $isConfirmed: b
   flex-direction: column;
 
   width: 90%;
-  margin-top: 3.2rem;
+  margin-top: 2rem;
   border-bottom: 0.1rem solid
     ${({ theme, $confirmFocus, $isConfirmed }) =>
       $confirmFocus || $isConfirmed ? theme.colors.green5 : theme.colors.grey70};

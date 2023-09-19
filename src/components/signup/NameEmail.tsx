@@ -1,19 +1,24 @@
 import { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { useMutation } from "react-query";
+import { isAxiosError } from "axios";
+import { ResponseDataType } from "./AgreeChecking";
+import { postCheckEmail } from "../../api/postCheckEmail";
 import { newUserData, stepNum } from "../../atom/signup/signup";
 import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { EMAIL_REGEX } from "../../core/signup/regex";
 import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
 import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
 import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
-import BackButton from "../common/BackButton";
-import BottomButton from "../common/BottomButton";
-import ProgressBar from "../common/ProgressBar";
+
+import { BackButton, BottomButton, ProgressBar } from "../common";
 import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import useSignupFormState from "../../hooks/useSignupFormState";
+import EmailCheckButton from "./EmailCheckButton";
+import EmailDuplicatedModal from "./EmailDuplicatedModal";
 
 export default function NameEmail() {
   const [newUser, setNewUser] = useRecoilState(newUserData);
@@ -34,7 +39,26 @@ export default function NameEmail() {
     setNameFocus,
     emailFocus,
     setEmailFocus,
+    modalMessage,
+    setModalMessage,
+    modalOpened,
+    setModalOpened,
   } = useSignupFormState();
+
+  const { mutate: postCheckEmailData } = useMutation(postCheckEmail, {
+    onSuccess: (data) => {
+      setModalMessage(data.data.message);
+      setIsActive(true);
+    },
+    onError: (error) => {
+      if (isAxiosError<ResponseDataType>(error)) {
+        if (error.response) {
+          setModalMessage(error.response?.data.message);
+          setIsActive(false);
+        }
+      }
+    },
+  });
 
   // setName
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -54,7 +78,7 @@ export default function NameEmail() {
   function handleDoneClick() {
     setNewUser((prev) => ({ ...prev, name: name, email: email }));
 
-    setStep(3);
+    setStep(4);
   }
 
   function nameRegex() {
@@ -81,19 +105,27 @@ export default function NameEmail() {
 
     // 이름 정규식 확인
     name.length > 1 ? setIsName(true) : setIsName(false);
+  }, [name, email, isName, isEmail, modalMessage]);
 
-    // 이메일, 이름 입력 및 정규식 확인 : 버튼 활성화
-    name && email && isName && isEmail ? setIsActive(true) : setIsActive(false);
-  }, [name, email, isName, isEmail]);
+  // 이메일 중복 확인 버튼 실행
+  function checkEmailDuplicate() {
+    postCheckEmailData(email);
+    setModalOpened(true);
+  }
+
+  function handleCloseModal() {
+    setModalOpened(false);
+  }
 
   return (
     <>
-      <ProgressBar progress={50} />
+      {modalOpened ? <EmailDuplicatedModal handleCloseModal={handleCloseModal} modalMessage={modalMessage} /> : null}
       <BackButtonWrapper>
         <BackButton />
       </BackButtonWrapper>
+      <ProgressBar progress={isActive ? 75 : 50} />
       <Container>
-        <SignupTitleLayout MainText={SIGNUP_TITLE.needNameEmail} />
+        <SignupTitleLayout>{SIGNUP_TITLE.needNameEmail}</SignupTitleLayout>
 
         <InputNameWrapper $isName={isName} $nameFocus={nameFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.name} />
@@ -109,19 +141,22 @@ export default function NameEmail() {
 
         <InputEmailWrapper $isEmail={isEmail} $emailFocus={emailFocus}>
           <TextLabelLayout labelText={SIGNUP_FIELD_LABEL.email} />
-          <Inputfield
-            onFocus={() => setEmailFocus(true)}
-            onBlur={() => setEmailFocus(false)}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
-            type="text"
-            placeholder={PLACEHOLDER_TEXT.emailHolder}
-          />
+          <EmailCheckButtonWrapper>
+            <Inputfield
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleEmailChange(e)}
+              type="text"
+              placeholder={PLACEHOLDER_TEXT.emailHolder}
+            />
+            <EmailCheckButton text="중복확인" emailTyped={isEmail} onClick={checkEmailDuplicate} />
+          </EmailCheckButtonWrapper>
         </InputEmailWrapper>
         {emailRegex()}
       </Container>
       <BottomButton
         type="button"
-        children={BUTTON_TEXT.done}
+        children={BUTTON_TEXT.next}
         isActive={isActive}
         onClick={handleDoneClick}
         disabled={!isActive}
@@ -162,6 +197,8 @@ const InputEmailWrapper = styled.div<{ $emailFocus: boolean; $isEmail: boolean }
 `;
 
 const Inputfield = styled.input`
+  width: 20rem;
+  width: 20rem;
   padding: 0;
   height: 2rem;
   margin-top: 1em;
@@ -173,6 +210,12 @@ const Inputfield = styled.input`
     color: ${({ theme }) => theme.colors.grey400};
     ${({ theme }) => theme.fonts.title03};
   }
+`;
+
+const EmailCheckButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const BackButtonWrapper = styled.div`

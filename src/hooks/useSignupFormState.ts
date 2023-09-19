@@ -8,6 +8,9 @@ export default function useSignupFormState() {
   const [isActive, setIsActive] = useState(false);
   const [nameFocus, setNameFocus] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalOpened, setModalOpened] = useState(false);
+
   return {
     name,
     setName,
@@ -23,5 +26,9 @@ export default function useSignupFormState() {
     setNameFocus,
     emailFocus,
     setEmailFocus,
+    modalMessage,
+    setModalMessage,
+    modalOpened,
+    setModalOpened,
   };
 }

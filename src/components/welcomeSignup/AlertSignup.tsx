@@ -93,7 +93,7 @@ export default function AlertSignup(prop: AlertSignupProp) {
       <Blank />
       <Container>
         <BellWelcomeIcon />
-        <SignupTitleLayout MainText={MAIN_TEXT} />
+        <SignupTitleLayout>{MAIN_TEXT}</SignupTitleLayout>
         <SubText>{SUB_TEXT}</SubText>
       </Container>
       <ButtonLayout onClickButton={handleAllowNotification} onClickJump={handleMoveToHome} buttonText="할래요!" />

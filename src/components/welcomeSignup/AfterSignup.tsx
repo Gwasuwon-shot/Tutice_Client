@@ -30,7 +30,7 @@ export default function AfterSignup(prop: AfterSignupProp) {
     <>
       <Container>
         <TuticeWithTextCommonIcon />
-        <SignupTitleLayout MainText={MAIN_TEXT} />
+        <SignupTitleLayout>{MAIN_TEXT}</SignupTitleLayout>
         <SubText>{SUB_TEXT}</SubText>
       </Container>
 

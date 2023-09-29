@@ -98,10 +98,6 @@ const RadioWrapper = styled.div`
   margin-top: 5.08rem;
 `;
 
-const RoleText = styled.span`
-  ${({ theme }) => theme.fonts.title01};
-`;
-
 const RoleRapper = styled.div`
   display: flex;
   align-items: center;

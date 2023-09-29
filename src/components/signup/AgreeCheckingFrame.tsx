@@ -34,11 +34,16 @@ export default function AgreeCheckingFrame() {
           서비스 시작 및 가입을 위해 먼저 <br />
           가입 및 정보 제공에 동의해 주세요
         </PlainText>
+        <AgreeChecking isActive={isActive} setIsActive={setIsActive} />
       </Container>
-      <AgreeChecking isActive={isActive} setIsActive={setIsActive} />
     </>
   );
 }
+
+const Container = styled.div`
+  margin-top: 1.8rem;
+  margin-left: 1.4rem;
+`;
 
 const PlainText = styled.label`
   margin-top: 0.3rem;
@@ -51,9 +56,4 @@ const PlainText = styled.label`
 
 const BackButtonWrapper = styled.div`
   margin-left: 2rem;
-`;
-
-const Container = styled.div`
-  margin-top: 1.8rem;
-  margin-left: 1.4rem;
 `;

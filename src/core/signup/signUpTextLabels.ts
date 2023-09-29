@@ -21,3 +21,24 @@ export const PLACEHOLDER_TEXT = {
   passwordHolder: "8~16자의 영문, 숫자, 특수문자를 사용하세요 ",
   confirmHolder: "비밀번호를 한 번 더 입력하세요 ",
 };
+
+export const SIGNUP_ERROR_MESSAGE = {
+  nameError: "이름은 최소 2자 이상 입력해주세요.",
+  emailError: "6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합하세요",
+  passwordError: "8 ~ 16자의 영문, 숫자, 특수문자를 모두 포함해주세요.",
+  confirmError: "비밀번호가 일치하지 않아요.",
+  confirmAccept: "비밀번호가 일치해요!",
+};
+
+export const SIGNUP_FIELD_LABEL = {
+  name: "이름",
+  email: "이메일",
+  password: "비밀번호",
+  confirm: "비밀번호 확인",
+};
+
+export const BUTTON_TEXT = {
+  next: "다음",
+  done: "완료",
+  signupDone: "회원가입 완료",
+};

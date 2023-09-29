@@ -6,11 +6,14 @@ import { isAxiosError } from "axios";
 import { ResponseDataType } from "./AgreeChecking";
 import { postCheckEmail } from "../../api/postCheckEmail";
 import { newUserData, stepNum } from "../../atom/signup/signup";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { EMAIL_REGEX } from "../../core/signup/regex";
-import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
-import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
-import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import {
+  BUTTON_TEXT,
+  PLACEHOLDER_TEXT,
+  SIGNUP_ERROR_MESSAGE,
+  SIGNUP_FIELD_LABEL,
+  SIGNUP_TITLE,
+} from "../../core/signup/signUpTextLabels";
 
 import { BackButton, BottomButton, ProgressBar } from "../common";
 import RegexField from "./RegexField";

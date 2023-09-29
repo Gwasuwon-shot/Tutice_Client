@@ -4,9 +4,13 @@ import { styled } from "styled-components";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { newUserData } from "../../atom/signup/signup";
 import { PW_REGEX } from "../../core/signup/regex";
-import { SIGNUP_ERROR_MESSAGE } from "../../core/signup/signupErrorMessage";
-import { SIGNUP_FIELD_LABEL } from "../../core/signup/signupLabelText";
-import { PLACEHOLDER_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import {
+  BUTTON_TEXT,
+  PLACEHOLDER_TEXT,
+  SIGNUP_ERROR_MESSAGE,
+  SIGNUP_FIELD_LABEL,
+  SIGNUP_TITLE,
+} from "../../core/signup/signUpTextLabels";
 import BackButton from "../common/BackButton";
 import ProgressBar from "../common/ProgressBar";
 import { ResponseDataType } from "./AgreeChecking";
@@ -14,7 +18,6 @@ import RegexField from "./RegexField";
 import SignupTitleLayout from "./SignupTitleLayout";
 import TextLabelLayout from "./TextLabelLayout";
 import BottomButton from "../common/BottomButton";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserPost } from "../../api/localSignUp";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";

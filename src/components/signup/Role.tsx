@@ -91,7 +91,7 @@ const Container = styled.section`
   flex-direction: column;
 
   padding-left: 1.6rem;
-  margin-top: 5rem;
+  margin-top: 2.8rem;
 `;
 
 const RadioWrapper = styled.div`

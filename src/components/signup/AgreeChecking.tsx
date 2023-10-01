@@ -4,8 +4,8 @@ import { styled } from "styled-components";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
 import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
+import { BUTTON_TEXT } from "../../core/signup/signUpTextLabels";
 
 export interface ResponseDataType {
   message: string;

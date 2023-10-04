@@ -18,5 +18,5 @@ export default function CommonBackButton() {
 const BackButtonSignupIcon = styled(BackButtonSignupIc)`
   width: 4rem;
   height: 4rem;
-  margin-left: -1.4rem;
+  margin-left: -0.4rem;
 `;

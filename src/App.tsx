@@ -4,7 +4,6 @@ import Router from "./Router";
 import "./core/notification/settingFCM";
 import { GlobalStyle } from "./style/globalStyle";
 import { theme } from "./style/theme";
-import "./utils/common/exitInAppBrowser";
 
 export default function App() {
   return (

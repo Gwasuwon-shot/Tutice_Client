@@ -4,8 +4,7 @@ import { styled } from "styled-components";
 import RoleCheckSignupIc from "../../assets/icon/RoleCheckSignupIc.svg";
 import RoleNoneCheckSignupIc from "../../assets/icon/RoleNoneCheckSignupIc.svg";
 import { newUserData, stepNum } from "../../atom/signup/signup";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
-import { ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signupTitle";
+import { BUTTON_TEXT, ROLE_NAME, ROLE_SUB_TEXT, SIGNUP_TITLE } from "../../core/signup/signUpTextLabels";
 import BackButton from "../common/BackButton";
 import BottomButton from "../common/BottomButton";
 import ProgressBar from "../common/ProgressBar";
@@ -30,12 +29,12 @@ export default function Role() {
 
   return (
     <>
-      <ProgressBar progress={25} />
       <BackButtonWrapper>
         <BackButton />
       </BackButtonWrapper>
+      <ProgressBar progress={25} />
       <Container>
-        <SignupTitleLayout MainText={SIGNUP_TITLE.whichRole} />
+        <SignupTitleLayout>{SIGNUP_TITLE.whichRole}</SignupTitleLayout>
         <RadioWrapper>
           <RoleRapper>
             <RadioButton
@@ -80,7 +79,7 @@ export default function Role() {
         type="button"
         disabled={!isActive}
         isActive={isActive}
-        children={BUTTON_TEXT.done}
+        children={BUTTON_TEXT.next}
         onClick={handleDoneClick}
       />
     </>
@@ -92,15 +91,11 @@ const Container = styled.section`
   flex-direction: column;
 
   padding-left: 1.6rem;
-  margin-top: 5rem;
+  margin-top: 2.8rem;
 `;
 
 const RadioWrapper = styled.div`
   margin-top: 5.08rem;
-`;
-
-const RoleText = styled.span`
-  ${({ theme }) => theme.fonts.title01};
 `;
 
 const RoleRapper = styled.div`

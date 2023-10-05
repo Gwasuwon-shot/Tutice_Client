@@ -57,7 +57,7 @@ const ModalWrapper = styled.div`
   z-index: 2;
 
   width: 32rem;
-  height: 100vh;
+  height: 100%;
 
   background-color: rgb(33 37 41 / 60%);
 
@@ -80,6 +80,6 @@ const Modal = styled.aside`
 `;
 
 const ModalMovingWrapper = styled.div<{ $bottom: number }>`
-  position: absolute;
+  position: fixed;
   bottom: -${({ $bottom }) => $bottom / 5}%;
 `;

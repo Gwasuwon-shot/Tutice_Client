@@ -87,26 +87,26 @@ const GreyBox = styled.div`
 const ModalWrapper = styled.section`
   position: absolute;
 
-  margin: -37.9rem 0 0 -1.5rem;
+  margin: -40rem 0 0 -1.5rem;
 `;
 
 const ScheduleWrapper = styled.section`
   overflow: scroll;
 
-  padding-bottom: 7.2rem;
+  padding-bottom: 15rem;
 `;
 
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
   position: fixed;
   z-index: 3;
 
-  margin: -37.9rem 0 0 -1.5em;
+  margin: -40rem 0 0 -1.5rem;
 `;
 
 const CancelImpossibleModalWrapper = styled.aside`
   position: fixed;
   z-index: 3;
-  margin: -37.9rem 0 0 -1.5rem;
+  margin: -40rem 0 0 -1.5rem;
 `;
 
 const EmptyLesson = styled.h1`

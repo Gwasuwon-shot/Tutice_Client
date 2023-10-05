@@ -20,30 +20,6 @@
       crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css" />
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", ready);
-      function ready() {
-        var Url = location.href;
-        var Agent = navigator.userAgent.toLowerCase();
-
-        if (Agent.indexOf("kakao") > -1 || Agent.indexOf("instagram") > -1) {
-          if (Agent.includes("kakao")) {
-            location.href = "kakaotalk://inappbrowser/close";
-          } else if (Agent.includes("instagram")) {
-            location.href = "instagram://inappbrowser/close";
-          }
-          if (navigator.userAgent.match(/iPhone|iPad/i)) {
-            // 아이폰 접속 경우
-          } else {
-            // 크롬으로 새창 열기
-            location.href =
-              "intent://" +
-              location.href.replace(/https?:\/\//i, "") +
-              "#Intent;scheme=http;package=com.android.chrome;end";
-          }
-        }
-      }
-    </script>
 
     <title>Tutice</title>
   </head>

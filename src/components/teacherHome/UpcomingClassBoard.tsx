@@ -4,7 +4,7 @@ import { UpcomingClassScheduleType } from "../../type/teacherHome/upcomingClassS
 import UpcomingClass from "./UpcomingClass";
 
 export default function UpcomingClassBoard() {
-  const { latestScheduleDay, latestScheduleList } = useGetLatestScheduleByTeacher();
+  const { latestScheduleByTeacher, latestScheduleDay, latestScheduleList } = useGetLatestScheduleByTeacher();
 
   function checkUpcomingClassData() {
     return (
@@ -20,13 +20,19 @@ export default function UpcomingClassBoard() {
   return (
     <UpcomingClassBoardWrapper>
       <UpcomingClassDate>
-        {checkUpcomingClassData()}({latestScheduleDay?.dayOfWeek}) 수업
-        <UpcomingClassWrapper>
-          {latestScheduleList &&
-            latestScheduleList?.map(({ lesson, schedule }: UpcomingClassScheduleType, idx: number) => (
-              <UpcomingClass key={idx} lesson={lesson} schedule={schedule} />
-            ))}
-        </UpcomingClassWrapper>
+        {latestScheduleByTeacher ? (
+          <>
+            {checkUpcomingClassData()}({latestScheduleDay?.dayOfWeek}) 수업
+            <UpcomingClassWrapper>
+              {latestScheduleList &&
+                latestScheduleList?.map(({ lesson, schedule }: UpcomingClassScheduleType, idx: number) => (
+                  <UpcomingClass key={idx} lesson={lesson} schedule={schedule} />
+                ))}
+            </UpcomingClassWrapper>
+          </>
+        ) : (
+          <>다가올 수업이 없어요!</>
+        )}
       </UpcomingClassDate>
     </UpcomingClassBoardWrapper>
   );

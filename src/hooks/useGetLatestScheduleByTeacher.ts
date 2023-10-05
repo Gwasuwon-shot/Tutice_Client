@@ -17,5 +17,12 @@ export default function useGetLatestScheduleByTeacher() {
   const latestScheduleDay = latestScheduleByTeacher?.latestScheduleDay;
   const latestScheduleList = latestScheduleByTeacher?.latestScheduleList;
 
-  return { isMissingAttendance, isMissingMaintenance, isTodaySchedule, latestScheduleDay, latestScheduleList };
+  return {
+    latestScheduleByTeacher,
+    isMissingAttendance,
+    isMissingMaintenance,
+    isTodaySchedule,
+    latestScheduleDay,
+    latestScheduleList,
+  };
 }

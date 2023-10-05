@@ -34,9 +34,11 @@ export default function EditPageTime() {
       <TimeWrapper>
         <TimeChoose> 시작 </TimeChoose>
         {selectedTime?.startTime === "" ? (
-          <TimeButton onClick={handlStartTimePicker}>시간을 선택하세요</TimeButton>
+          <TimeButton $isPickerDone={isStartPickerOpen} onClick={handlStartTimePicker}>
+            시간을 선택하세요
+          </TimeButton>
         ) : (
-          <TimeButton onClick={handlStartTimePicker}>
+          <TimeButton onClick={handlStartTimePicker} $isPickerDone={!isStartPickerOpen}>
             {Number(selectedTime?.startTime.slice(0, 2)) <= 12 ? (
               <>
                 오전 {Number(selectedTime?.startTime.slice(0, 2))} {selectedTime?.startTime.slice(2)}
@@ -50,9 +52,11 @@ export default function EditPageTime() {
         )}
         <TimeChoose> 종료 </TimeChoose>
         {selectedTime?.endTime === "" ? (
-          <TimeButton onClick={handleFinishTimePicker}>시간을 선택하세요</TimeButton>
+          <TimeButton $isPickerDone={isStartPickerOpen} onClick={handleFinishTimePicker}>
+            시간을 선택하세요
+          </TimeButton>
         ) : (
-          <TimeButton onClick={handleFinishTimePicker}>
+          <TimeButton onClick={handleFinishTimePicker} $isPickerDone={!isFinishPickerOpen}>
             {Number(selectedTime?.endTime.slice(0, 2)) <= 12 ? (
               <>
                 오전 {Number(selectedTime?.endTime.slice(0, 2))} {selectedTime?.endTime.slice(2)}
@@ -117,13 +121,20 @@ const TimeChoose = styled.h3`
   color: ${({ theme }) => theme.colors.grey400};
 `;
 
-const TimeButton = styled.button`
+interface ButtonProp {
+  $isPickerDone: boolean;
+}
+
+const TimeButton = styled.button<ButtonProp>`
   display: flex;
   justify-content: center;
   align-items: center;
 
   ${({ theme }) => theme.fonts.body04};
   color: ${({ theme }) => theme.colors.grey100};
+  ${({ $isPickerDone }) => `
+      ${$isPickerDone && "color: black"}
+    `};
 `;
 
 const ButtonWrapper = styled.div`

@@ -1,18 +1,23 @@
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
+import { isModalOpen } from "../../atom/common/isModalOpen";
 import BasicSingleModal from "../common/BasicSingleModal";
 
 interface FutureImpossibleModalProp {
-  handleCloseModal(): void;
+  handleCloseModal: () => void;
+  handleCloseDoubleCheckModal: () => void;
 }
 
 export default function FutureImpossibleModal(props: FutureImpossibleModalProp) {
-  const { handleCloseModal } = props;
+  const { handleCloseModal, handleCloseDoubleCheckModal } = props;
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   function handleModalApprove() {
     handleCloseModal();
+    handleCloseDoubleCheckModal();
+    setOpenModal(false);
     setAttendanceData({ idx: 0, status: "" });
   }
 

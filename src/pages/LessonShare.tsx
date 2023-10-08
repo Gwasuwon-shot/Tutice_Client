@@ -14,7 +14,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
-import { ProgressBar } from "../components/common";
+import { CommonBackButton, ProgressBar } from "../components/common";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
 import useGetLessonByUser from "../hooks/useGetLessonByUser";
@@ -100,7 +100,15 @@ export default function LessonShare() {
 
   return (
     <>
-      <LessonTreeSuccess>{state ? <>수업등록 완료</> : <>수업링크 공유</>}</LessonTreeSuccess>
+      {state ? (
+        <LessonTreeSuccess>수업등록 완료</LessonTreeSuccess>
+      ) : (
+        <OnlyLessonShareHeader>
+          <CommonBackButton />
+          <LessonTreeSuccess onlyLessonShare>수업링크 공유</LessonTreeSuccess>
+        </OnlyLessonShareHeader>
+      )}
+
       {state && <ProgressBar progress={100} />}
       <LessonShareWrapper>
         <ShareTitle>
@@ -121,22 +129,29 @@ export default function LessonShare() {
           <ShareOthersLessonShareIcon onClick={handleShareOtherWays} />
           <KakaoShare url={URL} />
         </ButtonWrapper>
-        <BottomButtonWrapper>
-          <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
-            다음
-          </BottomButton>
-        </BottomButtonWrapper>
+        {state && (
+          <BottomButtonWrapper>
+            <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
+              다음
+            </BottomButton>
+          </BottomButtonWrapper>
+        )}
       </LessonShareWrapper>
     </>
   );
 }
 
+const OnlyLessonShareHeader = styled.header`
+  display: flex;
+  padding-left: 1rem;
+`;
+
 const BottomButtonWrapper = styled.section`
   margin-left: -1.4rem;
 `;
 
-const LessonTreeSuccess = styled.p`
-  padding: 1.2rem 12.1rem;
+const LessonTreeSuccess = styled.p<{ onlyLessonShare?: boolean }>`
+  padding: ${({ onlyLessonShare }) => (onlyLessonShare ? "1.2rem 12.1rem 1.2rem 8.6rem" : "1.2rem 12.1rem")};
 
   text-align: center;
 

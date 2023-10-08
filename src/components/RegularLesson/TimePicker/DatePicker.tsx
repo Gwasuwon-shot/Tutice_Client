@@ -96,7 +96,7 @@ export default function DatePicker() {
   }
 
   // 3) 데이트 피커 완료 시
-  function handleConfirmDatePicker(day: string) {
+  function handleConfirmDatePicker(day: any) {
     setIsDatePickerOpen(false);
     setSelectedDays((prevSelectedDays) => {
       const existingDayIndex = prevSelectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);

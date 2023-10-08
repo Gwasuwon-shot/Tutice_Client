@@ -10,8 +10,6 @@ interface SocialLoginButtonProps {
   $bgcolor: string;
 }
 
-// TODO 로그인 리스타일중 !!
-//q바꾼거 성공하면 이거  RoundButton에 끼우기
 export default function SocialLoginButton(props: SocialLoginButtonProps) {
   const { children, $bgcolor } = props;
   return (

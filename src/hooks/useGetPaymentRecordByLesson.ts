@@ -6,7 +6,6 @@ export default function useGetPaymentRecordByLesson(lessonIdx: number) {
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 3000,
   });
 
   return { payments };

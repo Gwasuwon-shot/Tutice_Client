@@ -8,7 +8,6 @@ export default function useGetLatestScheduleByTeacher() {
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 3000,
   });
 
   const isMissingAttendance = latestScheduleByTeacher?.isMissingAttendance;

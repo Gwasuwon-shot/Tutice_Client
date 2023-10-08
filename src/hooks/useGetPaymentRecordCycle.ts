@@ -6,7 +6,6 @@ export default function useGetPaymentRecordCycle(paymentIdx: number) {
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 3000,
   });
 
   const { idx, cycle, startDate, endDate } = paymentRecordCycle !== undefined && paymentRecordCycle;

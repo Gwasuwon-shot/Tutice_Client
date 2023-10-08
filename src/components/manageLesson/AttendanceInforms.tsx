@@ -20,6 +20,7 @@ export default function AttendanceInforms() {
   const [isCancelImpossibleModalOpen, setIsCancelImpossibleModalOpen] = useState(false);
   const { studentName, subject } = useGetLessonDetail(Number(manageLessonId));
   const { scheduleList } = useGetLessonSchedule(Number(manageLessonId));
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
 
   useEffect(() => {
     studentName && subject && setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject });
@@ -31,6 +32,10 @@ export default function AttendanceInforms() {
 
   function checkScheduleListExist() {
     return scheduleList?.length != 0;
+  }
+
+  function handleUpdateChange() {
+    setIsUpdateOpen((iuo) => !iuo);
   }
 
   return (
@@ -53,6 +58,7 @@ export default function AttendanceInforms() {
       )}
 
       <GreyBox />
+      <UpdateToggle onClick={handleUpdateChange}>{!isUpdateOpen ? "수정" : "취소"}</UpdateToggle>
       {checkScheduleListExist() ? (
         <ScheduleWrapper>
           {scheduleList?.map(({ idx, date, status, startTime, endTime }: ScheduleListType, index: number) => (
@@ -66,6 +72,7 @@ export default function AttendanceInforms() {
               lessonIdx={idx}
               scheduleIdx={idx}
               setIsCancelImpossibleModalOpen={setIsCancelImpossibleModalOpen}
+              isUpdateOpen={isUpdateOpen}
             />
           ))}
         </ScheduleWrapper>
@@ -75,6 +82,14 @@ export default function AttendanceInforms() {
     </>
   );
 }
+
+const UpdateToggle = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2.3rem;
+  color: ${({ theme }) => theme.colors.grey500};
+  ${({ theme }) => theme.fonts.body02};
+`;
 
 const GreyBox = styled.div`
   width: 32rem;

@@ -33,7 +33,9 @@ export default function PastLessonRecord(props: PastLessonRecordProps) {
         </LessonTime>
       </LessonInfoWrapper>
 
-      <AttendanceWrapper attendance={status}>{status}</AttendanceWrapper>
+      <AttendanceWrapper>
+        <AttendanceStatus attendance={status}>{status}</AttendanceStatus>
+      </AttendanceWrapper>
     </PastLessonRecordWrapper>
   );
 }
@@ -71,8 +73,6 @@ const LessonInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
-  margin-right: 1.4rem;
 `;
 
 const LessonCount = styled.p`
@@ -85,13 +85,17 @@ const LessonTime = styled.time`
   color: ${({ theme }) => theme.colors.grey600};
 `;
 
-const AttendanceWrapper = styled.p<{ attendance: string }>`
-  width: 3rem;
+const AttendanceWrapper = styled.div`
+  width: 10rem;
 
   margin-left: 12.3rem;
 
   ${({ theme }) => theme.fonts.body01};
   color: ${({ theme }) => theme.colors.grey900};
+`;
+
+const AttendanceStatus = styled.p<{ attendance: string }>`
+  text-align: center;
 
   ${({ attendance }) =>
     attendance === "출석"

@@ -10,7 +10,7 @@ import {
   paymentOrder,
 } from "../atom/tuitionPayment/tuitionPayment";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
@@ -31,13 +31,8 @@ interface Day {
   endTime: string;
 }
 
-interface LessonShareProp {
-  isAfterRegister: boolean;
-}
-
-export default function LessonShare(props: LessonShareProp) {
-  const { isAfterRegister } = props;
-
+export default function LessonShare() {
+  const { state } = useLocation();
   const [cycleNumber, setcycleNumberState] = useRecoilState(cycleNumberState);
   const [date, setdateState] = useRecoilState(dateState);
   const [day, setdayState] = useRecoilState(dayState);
@@ -105,8 +100,8 @@ export default function LessonShare(props: LessonShareProp) {
 
   return (
     <>
-      <LessonTreeSuccess>{isAfterRegister ? <>수업등록 완료</> : <>수업링크 공유</>}</LessonTreeSuccess>
-      {isAfterRegister && <ProgressBar progress={100} />}
+      <LessonTreeSuccess>{state ? <>수업등록 완료</> : <>수업링크 공유</>}</LessonTreeSuccess>
+      {state && <ProgressBar progress={100} />}
       <LessonShareWrapper>
         <ShareTitle>
           수업링크를 <br />

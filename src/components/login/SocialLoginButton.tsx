@@ -8,13 +8,14 @@ import { ColorsTypes, FontsTypes } from "../../style/theme";
 interface SocialLoginButtonProps {
   children: React.ReactNode;
   $bgcolor: string;
+  onclick: () => void;
 }
 
 export default function SocialLoginButton(props: SocialLoginButtonProps) {
-  const { children, $bgcolor } = props;
+  const { children, $bgcolor, onclick } = props;
   return (
     <>
-      <ButtonWrapper $bgcolor={$bgcolor}>
+      <ButtonWrapper $bgcolor={$bgcolor} onClick={onclick}>
         {$bgcolor === "#FFE500" ? <KaKaoIcon /> : <NaverIcon />}
         {children}
       </ButtonWrapper>

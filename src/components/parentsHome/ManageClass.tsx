@@ -1,9 +1,7 @@
 import { styled } from "styled-components";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import ClassSchedule from "./ClassSchedule";
-import useGetLessonByUser from "../../hooks/useGetLessonByUser";
 import useGetLessonByParents from "../../hooks/useGetLessonByParents";
-import { getLessonProgress } from "../../api/getLessonProgress";
 
 interface lessonListType {
   idx: number;
@@ -22,24 +20,26 @@ export default function ManageClass() {
     <>
       <ManageClassTitle>수업관리</ManageClassTitle>
 
-      <ClassScheduleListWrapper>
-        {lessonParents?.map((lesson: lessonListType) => {
-          const { idx, subject, teacherName, studentName, count, nowCount, percent } = lesson;
-          return (
-            <ClassSchedule
-              key={idx}
-              idx={idx}
-              currentClassCount={nowCount}
-              entireClassCount={count}
-              currentClassCountPercent={percent}
-              subjectName={subject}
-              teacherName={teacherName}
-              studentName={studentName}
-              subjectLabelBackgroundColor={STUDENT_COLOR[idx % 10]}
-            />
-          );
-        })}
-      </ClassScheduleListWrapper>
+      <ClassScheduleListContainer>
+        <ClassScheduleListWrapper>
+          {lessonParents?.map((lesson: lessonListType) => {
+            const { idx, subject, teacherName, studentName, count, nowCount, percent } = lesson;
+            return (
+              <ClassSchedule
+                key={idx}
+                idx={idx}
+                currentClassCount={nowCount}
+                entireClassCount={count}
+                currentClassCountPercent={percent}
+                subjectName={subject}
+                teacherName={teacherName}
+                studentName={studentName}
+                subjectLabelBackgroundColor={STUDENT_COLOR[idx % 10]}
+              />
+            );
+          })}
+        </ClassScheduleListWrapper>
+      </ClassScheduleListContainer>
     </>
   );
 }
@@ -53,15 +53,20 @@ const ManageClassTitle = styled.h2`
   color: ${({ theme }) => theme.colors.grey900};
 `;
 
+const ClassScheduleListContainer = styled.div`
+  padding-bottom: 8rem;
+`;
+
 const ClassScheduleListWrapper = styled.article`
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
 
   width: 29.2rem;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 1.8rem;
-  padding-bottom: 1.8rem;
+  padding-bottom: 1rem;
 
   border: 1px solid ${({ theme }) => theme.colors.grey100};
   border-radius: 0.8rem;

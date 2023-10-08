@@ -104,8 +104,10 @@ export default function LessonShare() {
         <LessonTreeSuccess>수업등록 완료</LessonTreeSuccess>
       ) : (
         <OnlyLessonShareHeader>
-          <CommonBackButton />
-          <LessonTreeSuccess onlyLessonShare>수업링크 공유</LessonTreeSuccess>
+          <BackButtonWrapper>
+            <CommonBackButton />
+          </BackButtonWrapper>
+          <LessonTreeSuccess>수업링크 공유</LessonTreeSuccess>
         </OnlyLessonShareHeader>
       )}
 
@@ -141,9 +143,13 @@ export default function LessonShare() {
   );
 }
 
+const BackButtonWrapper = styled.div`
+  margin-left: 1.4rem;
+  position: absolute;
+`;
+
 const OnlyLessonShareHeader = styled.header`
   display: flex;
-  padding-left: 1rem;
 `;
 
 const BottomButtonWrapper = styled.section`

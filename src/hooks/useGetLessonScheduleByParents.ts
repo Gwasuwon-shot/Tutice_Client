@@ -9,7 +9,6 @@ export default function useGetLessonScheduleByParents(lessonIdx: number) {
       onError: (err) => {
         console.log(err);
       },
-      staleTime: 3000,
     },
   );
 

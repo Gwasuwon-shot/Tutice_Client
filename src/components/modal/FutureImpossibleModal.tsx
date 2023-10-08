@@ -23,7 +23,7 @@ export default function FutureImpossibleModal(props: FutureImpossibleModalProp) 
 
   return (
     <ModalWrapper>
-      <BasicSingleModal buttonName="확인" handleClickSingleButton={handleModalApprove}>
+      <BasicSingleModal buttonName="확인" handleClickSingleButton={handleModalApprove} isFuture>
         <CancleImpossibleTitle>
           앞선 회차의 출결 체크를
           <br />

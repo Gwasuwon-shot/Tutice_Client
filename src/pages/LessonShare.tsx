@@ -10,10 +10,11 @@ import {
   paymentOrder,
 } from "../atom/tuitionPayment/tuitionPayment";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
+import { CommonBackButton, ProgressBar } from "../components/common";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
 import useGetLessonByUser from "../hooks/useGetLessonByUser";
@@ -31,6 +32,7 @@ interface Day {
 }
 
 export default function LessonShare() {
+  const { state } = useLocation();
   const [cycleNumber, setcycleNumberState] = useRecoilState(cycleNumberState);
   const [date, setdateState] = useRecoilState(dateState);
   const [day, setdayState] = useRecoilState(dayState);
@@ -50,11 +52,7 @@ export default function LessonShare() {
     setdateState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() });
     setdayState([]);
     setfirstLessonDay({ 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" }[new Date().getDay()]);
-    // setfocusDayState({
-    //   dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()],
-    //   startTime: "",
-    //   endTime: "",
-    // });
+
     setStudentName("");
     setsubjectNameState("");
     setaccountNumber("");
@@ -80,7 +78,7 @@ export default function LessonShare() {
   function handleShareOtherWays() {
     if (navigator.share) {
       navigator.share({
-        title: "나무코드 공유",
+        title: "수업링크 공유",
         text: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. \n[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${URL}`,
 
         url: URL,
@@ -101,47 +99,74 @@ export default function LessonShare() {
   }
 
   return (
-    <LessonShareWrapper>
-      <LessonTreeSuccess>수업 나무 생성 완료!</LessonTreeSuccess>
-      <ShareTitle>
-        수업나무의 링크를 <br />
-        학부모님께 공유해보세요
-      </ShareTitle>
-      <SharSub>
-        학부모님에게 수업비와 출결에 관한 <br />
-        알림을 드릴 수 있어요
-      </SharSub>
+    <>
+      {state ? (
+        <LessonTreeSuccess>수업등록 완료</LessonTreeSuccess>
+      ) : (
+        <OnlyLessonShareHeader>
+          <BackButtonWrapper>
+            <CommonBackButton />
+          </BackButtonWrapper>
+          <LessonTreeSuccess>수업링크 공유</LessonTreeSuccess>
+        </OnlyLessonShareHeader>
+      )}
 
-      <TreeTitle>수업나무 링크</TreeTitle>
-      <LinkBox>
-        <CopylessonShareIc onClick={handleCopyLink} />
-        <p>{URL}</p>
-      </LinkBox>
-      <ButtonWrapper>
-        <ShareOthersLessonShareIcon onClick={handleShareOtherWays} />
-        <KakaoShare url={URL} />
-      </ButtonWrapper>
-      <BottomButtonWrapper>
-        <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
-          다음
-        </BottomButton>
-      </BottomButtonWrapper>
-    </LessonShareWrapper>
+      {state && <ProgressBar progress={100} />}
+      <LessonShareWrapper>
+        <ShareTitle>
+          수업링크를 <br />
+          학부모님께 공유해보세요
+        </ShareTitle>
+        <SharSub>
+          학부모님에게 수업비와 출결에 관한 <br />
+          알림을 드릴 수 있어요
+        </SharSub>
+
+        <TreeTitle>수업나무 링크</TreeTitle>
+        <LinkBox>
+          <CopylessonShareIc onClick={handleCopyLink} />
+          <p>{URL}</p>
+        </LinkBox>
+        <ButtonWrapper>
+          <ShareOthersLessonShareIcon onClick={handleShareOtherWays} />
+          <KakaoShare url={URL} />
+        </ButtonWrapper>
+        {state && (
+          <BottomButtonWrapper>
+            <BottomButton isActive={true} onClick={handleMoveToHome} disabled={false} type="button">
+              다음
+            </BottomButton>
+          </BottomButtonWrapper>
+        )}
+      </LessonShareWrapper>
+    </>
   );
 }
+
+const BackButtonWrapper = styled.div`
+  margin-left: 1.4rem;
+  position: absolute;
+`;
+
+const OnlyLessonShareHeader = styled.header`
+  display: flex;
+`;
 
 const BottomButtonWrapper = styled.section`
   margin-left: -1.4rem;
 `;
 
-const LessonTreeSuccess = styled.p`
-  margin-top: 3.7rem;
+const LessonTreeSuccess = styled.p<{ onlyLessonShare?: boolean }>`
+  padding: ${({ onlyLessonShare }) => (onlyLessonShare ? "1.2rem 12.1rem 1.2rem 8.6rem" : "1.2rem 12.1rem")};
 
-  color: ${({ theme }) => theme.colors.green5};
-  ${({ theme }) => theme.fonts.title02};
+  text-align: center;
+
+  /* color: ${({ theme }) => theme.colors.green5}; */
+  ${({ theme }) => theme.fonts.body01};
 `;
 
 const LessonShareWrapper = styled.section`
+  margin-top: 2.4rem;
   padding: 0 1.4rem;
 `;
 

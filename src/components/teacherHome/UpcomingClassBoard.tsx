@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NoUpcomingClassCardIc } from "../../assets";
 import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
 import { UpcomingClassScheduleType } from "../../type/teacherHome/upcomingClassScheduleType";
 import UpcomingClass from "./UpcomingClass";
@@ -31,12 +32,16 @@ export default function UpcomingClassBoard() {
             </UpcomingClassWrapper>
           </>
         ) : (
-          <>다가올 수업이 없어요!</>
+          <NoUpcomingClassCardIcon />
         )}
       </UpcomingClassDate>
     </UpcomingClassBoardWrapper>
   );
 }
+
+const NoUpcomingClassCardIcon = styled(NoUpcomingClassCardIc)`
+  width: 29.2rem;
+`;
 
 const UpcomingClassBoardWrapper = styled.aside`
   display: flex;

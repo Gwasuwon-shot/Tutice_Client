@@ -21,6 +21,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
 
   function handleCancelAttendanceCheck() {
+    setAttendanceData({ idx: scheduleIdx, status: "" });
     setOpenModal(false);
   }
 

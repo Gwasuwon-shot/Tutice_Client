@@ -84,12 +84,6 @@ const GreyBox = styled.div`
   background-color: ${({ theme }) => theme.colors.grey50};
 `;
 
-const ModalWrapper = styled.section`
-  position: absolute;
-
-  margin: -40rem 0 0 -1.5rem;
-`;
-
 const ScheduleWrapper = styled.section`
   overflow: scroll;
 
@@ -99,14 +93,15 @@ const ScheduleWrapper = styled.section`
 const ModalSection = styled.section<{ $isCheckingModalOpen: boolean }>`
   position: fixed;
   z-index: 3;
-
-  margin: -40rem 0 0 -1.5rem;
+  top: 0;
+  margin-left: -1.5rem;
 `;
 
 const CancelImpossibleModalWrapper = styled.aside`
   position: fixed;
-  z-index: 3;
-  margin: -40rem 0 0 -1.5rem;
+  z-index: 10;
+  top: 0;
+  margin-left: -1.5rem;
 `;
 
 const EmptyLesson = styled.h1`

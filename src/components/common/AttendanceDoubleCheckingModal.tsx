@@ -20,12 +20,15 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
   const [isImpossibleModalOpen, setIsImpossibleModalOpen] = useState(false);
 
   function handleBackToCheckAttendance() {
+    setAttendanceData({ ...attendanceData, status: "" });
+
     setIsCheckingModalOpen(false);
   }
 
   const { mutate: updateAttendance } = useMutation(updateScheduleAttendance, {
     onSuccess: () => {
       navigate("/complete-check-attendance", { state: ATTENDANCE_CHECK_RESPONSE });
+      setAttendanceData({ ...attendanceData, status: "" });
     },
     onError: () => {
       // if (err?.response?.data?.message) {

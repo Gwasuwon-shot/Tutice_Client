@@ -70,7 +70,7 @@ export default function AttendanceInform(props: AttendanceInformProps) {
               )}
             </>
           ) : (
-            <NoCheckPageAttendanceButton />
+            <NoCheckPageAttendanceButton onClick={handleOpenCheckAttendanceModal} />
           )}
         </StatusWrapper>
       </AttnedanceInformBox>

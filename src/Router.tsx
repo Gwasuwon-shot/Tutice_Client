@@ -25,6 +25,7 @@ import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
 import PrivateRoute from "./utils/common/privateRoute";
+import SocialLogin from "./pages/SocialLogin";
 
 export default function Router() {
   return (
@@ -35,6 +36,7 @@ export default function Router() {
         <Route path="/:lessonId" element={<ConnectParentsAndTeacher />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/social-login" element={<SocialLogin />} />
         <Route path="/lesson-share" element={<LessonShare />} />
         <Route element={<PrivateRoute authentication={true} />}>
           <Route path="/home" element={<Home />} />

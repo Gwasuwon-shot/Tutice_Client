@@ -96,7 +96,8 @@ export default function PaymentInput() {
 
   function handleMoneyChange(event: ChangeEvent<HTMLInputElement>) {
     const inputValue = event.target.value;
-    const numericValue = Number(inputValue.replace(/,/g, '')); 
+    const strippedValue = inputValue.replace(/,/g, '').replace('원', ''); 
+    const numericValue = Number(strippedValue);
     
     if (!isNaN(numericValue)) {
       setMoney(numericValue); 
@@ -182,7 +183,7 @@ export default function PaymentInput() {
         <InputName> 회차당 과외비 </InputName>
         <MoneyInput
           placeholder="금액을 입력해주세요"
-          value={money === 0 ? "" : money.toLocaleString()}
+          value={money === 0 ? "" : money.toLocaleString() + "원"}
           onChange={handleMoneyChange}
           onFocus={handleMoneyFocus}
         />

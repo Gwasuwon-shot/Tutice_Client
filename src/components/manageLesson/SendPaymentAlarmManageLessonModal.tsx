@@ -34,12 +34,13 @@ export default function SendPaymentAlarmManageLessonModal(props: SendPaymentAlar
       unShowModal();
       setIsAgreeSend(undefined);
     },
-    onError: (error) => {
-      // if (err?.response?.data?.message) {
-      setIsImpossibleModalOpen(true);
-      // }
+    onError: (error: any) => {
+      if (error?.response?.data?.message === "레슨에 학부모가 연결되지 않았습니다.") {
+        setIsImpossibleModalOpen(true);
+      }
     },
     enabled: !!isAgreeSend,
+    suspense: false,
   });
 
   function handleSendAlarm() {

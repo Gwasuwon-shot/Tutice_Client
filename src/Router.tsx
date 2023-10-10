@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import LessonDetail from "./pages/LessonDetail";
 import LessonInfo from "./pages/LessonInfo";
 import LessonShare from "./pages/LessonShare";
+import Loading from "./pages/Loading";
 import Login from "./pages/Login";
 import ManageLessonDetail from "./pages/ManageLessonDetail";
 import ManageLessonMain from "./pages/ManageLessonMain";
@@ -30,6 +31,7 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/loading" element={<Loading />} />
         <Route path="/" element={<OnBoarding />} />
         <Route path="/welcome" element={<WelcomeSignup />} />
         <Route path="/:lessonId" element={<ConnectParentsAndTeacher />} />

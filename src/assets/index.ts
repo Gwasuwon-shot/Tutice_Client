@@ -53,6 +53,7 @@ export { ReactComponent as HomeSelectedParentsHomeIc } from "./icon/homeSelected
 export { ReactComponent as HomeTeacherFooterIc } from "./icon/homeTeacherFooterIc.svg";
 export { ReactComponent as HomeUnselectedParentsHomeIc } from "./icon/homeUnselectedParentsHomeIc.svg";
 export { ReactComponent as KakaoLessonShareIc } from "./icon/kakaoLessonShareIc.svg";
+export { ReactComponent as LoadingIc } from "./icon/loadingIc.svg";
 export { ReactComponent as MainIc } from "./icon/mainIc.svg";
 export { ReactComponent as ManagingLessonClassIc } from "./icon/managingLessonClassIc.svg";
 export { ReactComponent as ManagingLessonMoneyIc } from "./icon/managingLessonMoneyIc.svg";

@@ -6,7 +6,6 @@ import App from "./App";
 
 export function queryErrorHandler(error: any) {
   console.log(error.messaging);
-  // toast(`데이터를 가져오지 못했습니다! ${error.message}`);
 }
 
 const queryClient = new QueryClient({

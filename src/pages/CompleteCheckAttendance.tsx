@@ -46,7 +46,6 @@ export default function CompleteCheckAttendance() {
   }
 
   function handleMoveToHome() {
-    // handleMoveToPage(TEACHER_FOOTER_CATEGORY.home);
     setAttendanceData({ idx: 0, status: "" });
     navigate(-1);
   }

@@ -33,5 +33,8 @@ const PastLessonRecordListWrapper = styled.section`
   flex-direction: column;
   gap: 1rem;
 
-  margin: 2.5rem auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5rem;
+  margin-bottom: 8rem;
 `;

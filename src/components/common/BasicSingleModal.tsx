@@ -6,21 +6,35 @@ interface BasicSingleModalProps {
   children: ReactNode;
   buttonName: string;
   handleClickSingleButton: (e: React.MouseEvent<HTMLElement>) => void;
+  isFuture?: boolean;
 }
 
 export default function BasicSingleModal(props: BasicSingleModalProps) {
-  const { children, buttonName, handleClickSingleButton } = props;
+  const { children, buttonName, handleClickSingleButton, isFuture } = props;
   const { modalRef, closeModal } = useModal();
 
   return (
-    <ModalWrapper ref={modalRef}>
-      <Modal>
-        <ModalContents>{children}</ModalContents>
-        <Button type="button" onClick={handleClickSingleButton}>
-          {buttonName}
-        </Button>
-      </Modal>
-    </ModalWrapper>
+    <>
+      {!isFuture ? (
+        <ModalWrapper ref={modalRef}>
+          <Modal>
+            <ModalContents>{children}</ModalContents>
+            <Button type="button" onClick={handleClickSingleButton}>
+              {buttonName}
+            </Button>
+          </Modal>
+        </ModalWrapper>
+      ) : (
+        <ModalWrapper>
+          <Modal>
+            <ModalContents>{children}</ModalContents>
+            <Button type="button" onClick={handleClickSingleButton}>
+              {buttonName}
+            </Button>
+          </Modal>
+        </ModalWrapper>
+      )}
+    </>
   );
 }
 
@@ -33,7 +47,7 @@ const ModalWrapper = styled.div`
   z-index: 2;
 
   width: 32rem;
-  height: 240vw;
+  height: 100vh;
 
   background-color: rgb(33 37 41 / 60%);
 

@@ -7,7 +7,6 @@ export default function useGetAllLessons() {
     onError: (err) => {
       console.log(err);
     },
-    staleTime: 3000,
   });
 
   return { lessonList };

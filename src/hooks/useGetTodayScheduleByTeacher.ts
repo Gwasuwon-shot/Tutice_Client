@@ -8,7 +8,6 @@ export default function useGetTodayScheduleByTeacher() {
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 3000,
   });
 
   // // const teacherName = todayScheduleByTeacher?.teacherName;

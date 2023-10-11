@@ -64,6 +64,7 @@ export { ReactComponent as MyTeacherFooterIc } from "./icon/myTeacherFooterIc.sv
 export { ReactComponent as NextArrowManageLessonIc } from "./icon/nextArrowManageLessonIc.svg";
 export { ReactComponent as nextArrowWelcomeIc } from "./icon/nextArrowWelcomeIc.svg";
 export { ReactComponent as NoClassLogoTeacherHomeIc } from "./icon/noClassLogoTeacherHomeIc.svg";
+export { ReactComponent as NoUpcomingClassCardIc } from "./icon/noUpcomingClassCardIc.svg";
 export { ReactComponent as RedFruitPaymentIc } from "./icon/redFruitPaymentIc.svg";
 export { ReactComponent as RegisterLessonHeaderIc } from "./icon/registerLessonHeaderIc.svg";
 export { ReactComponent as RegisterLessonInputIc } from "./icon/registerLessonInputIc.svg";

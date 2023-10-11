@@ -8,7 +8,7 @@
 //     ["useGetLessonDetailByParents", lessonIdx],
 //     () => getLessonDetailByParents(lessonIdx),
 //     {
-//       staleTime: 3000,
+//
 //     },
 //   );
 

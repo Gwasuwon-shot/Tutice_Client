@@ -34,7 +34,7 @@ export default function ConnectParentsAndTeacher() {
       connectParentsAndTeacher();
       navigate("/home");
     } else {
-      navigate("/login");
+      navigate("/");
     }
   }, []);
 

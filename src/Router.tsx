@@ -5,12 +5,10 @@ import ParentsFooter from "./components/common/ParentsFooter";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import EditShcedule from "./pages/EditSchedule";
-import Error from "./pages/Error";
 import Home from "./pages/Home";
 import LessonDetail from "./pages/LessonDetail";
 import LessonInfo from "./pages/LessonInfo";
 import LessonShare from "./pages/LessonShare";
-import Loading from "./pages/Loading";
 import Login from "./pages/Login";
 import ManageLessonDetail from "./pages/ManageLessonDetail";
 import ManageLessonMain from "./pages/ManageLessonMain";
@@ -32,8 +30,6 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/error" element={<Error />} />
-        <Route path="/loading" element={<Loading />} />
         <Route path="/" element={<OnBoarding />} />
         <Route path="/welcome" element={<WelcomeSignup />} />
         <Route path="/:lessonId" element={<ConnectParentsAndTeacher />} />

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { Navigate } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import Router from "./Router";
@@ -11,7 +12,7 @@ import { theme } from "./style/theme";
 
 export default function App() {
   return (
-    <ErrorBoundary fallback={<Error />}>
+    <ErrorBoundary FallbackComponent={OurFallbackComponent}>
       <Suspense fallback={<Loading />}>
         <RecoilRoot>
           <ThemeProvider theme={theme}>
@@ -22,4 +23,12 @@ export default function App() {
       </Suspense>
     </ErrorBoundary>
   );
+}
+
+function OurFallbackComponent({ error, resetErrorBoundary }: any) {
+  if (error.code === 401) {
+    return <Navigate to="/login" />;
+  } else {
+    return <Error resetErrorBoundary={resetErrorBoundary} />;
+  }
 }

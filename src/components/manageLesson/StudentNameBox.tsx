@@ -37,7 +37,7 @@ export default function StudentNameBox() {
     setStudentNameForLinkShare(studentName);
     navigate("/lesson-share", { state: false });
   }
-  console.log(pageY);
+
   return (
     <StudentNameWrapper pageY={pageY} color={STUDENT_COLOR[idx % 10]}>
       <CommonBackButton />

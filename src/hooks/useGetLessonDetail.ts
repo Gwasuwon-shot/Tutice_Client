@@ -8,8 +8,8 @@ export default function useGetLessonDetail(lessonIdx: number) {
     },
   });
 
-  const { amount, idx, payment, startDate, studentName, subject, teacherName } =
+  const { amount, idx, payment, startDate, studentName, subject, teacherName, lessonCode } =
     lessonDetail !== undefined && lessonDetail;
 
-  return { amount, idx, payment, startDate, studentName, subject, teacherName };
+  return { amount, idx, payment, startDate, studentName, subject, teacherName, lessonCode };
 }

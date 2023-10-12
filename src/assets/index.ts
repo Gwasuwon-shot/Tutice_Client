@@ -21,6 +21,8 @@ export { ReactComponent as AbsentAttendanceModalIc } from "./icon/absentAttendan
 export { ReactComponent as AbsentDisabledAttendanceIc } from "./icon/absentDisabledAttendanceIc.svg";
 export { ReactComponent as AddTreeCodeButtonManageIc } from "./icon/addTreeCodeButtonManageIc.svg";
 export { ReactComponent as BellwithAlarmIc } from "./icon/alarmBarManageLessonIc.svg";
+export { ReactComponent as AlarmDeniedIc } from "./icon/alarmDeniedIc.svg";
+export { ReactComponent as AlarmGrantedIc } from "./icon/alarmGrantedIc.svg";
 export { ReactComponent as PrevMonthArrowButton } from "./icon/arrow_cal_left.svg";
 export { ReactComponent as NextMonthArrowButton } from "./icon/arrow_cal_right.svg";
 export { ReactComponent as AttenceCheckCommonIc } from "./icon/attenceCheckCommonIc.svg";
@@ -52,7 +54,9 @@ export { ReactComponent as HomeActiveTeacherFooterIc } from "./icon/homeActiveTe
 export { ReactComponent as HomeSelectedParentsHomeIc } from "./icon/homeSelectedParentsHomeIc.svg";
 export { ReactComponent as HomeTeacherFooterIc } from "./icon/homeTeacherFooterIc.svg";
 export { ReactComponent as HomeUnselectedParentsHomeIc } from "./icon/homeUnselectedParentsHomeIc.svg";
+export { ReactComponent as ErrorShowingIc } from "./icon/ic_exclamation-mark.svg";
 export { ReactComponent as KakaoLessonShareIc } from "./icon/kakaoLessonShareIc.svg";
+export { ReactComponent as LoadingIc } from "./icon/loadingIc.svg";
 export { ReactComponent as MainIc } from "./icon/mainIc.svg";
 export { ReactComponent as ManagingLessonClassIc } from "./icon/managingLessonClassIc.svg";
 export { ReactComponent as ManagingLessonMoneyIc } from "./icon/managingLessonMoneyIc.svg";

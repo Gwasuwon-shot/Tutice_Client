@@ -11,7 +11,7 @@ import StudentNameLabel from "../common/StudentNameLabel";
 
 export default function StudentNameBox() {
   const { manageLessonId } = useParams();
-  const { idx, studentName, subject } = useGetLessonDetail(Number(manageLessonId));
+  const { idx, studentName, subject, lessonCode } = useGetLessonDetail(Number(manageLessonId));
   const [studentNameForLinkShare, setStudentNameForLinkShare] = useRecoilState<string>(studentNameState);
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
   const navigate = useNavigate();
@@ -31,13 +31,13 @@ export default function StudentNameBox() {
   function moveToLinkShare() {
     setCodeAndId({
       ...codeAndId,
-      lessonCode: "",
+      lessonCode: lessonCode,
       lessonidx: idx,
     });
     setStudentNameForLinkShare(studentName);
     navigate("/lesson-share", { state: false });
   }
-  console.log(pageY);
+
   return (
     <StudentNameWrapper pageY={pageY} color={STUDENT_COLOR[idx % 10]}>
       <CommonBackButton />

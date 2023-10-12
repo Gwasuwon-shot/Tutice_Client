@@ -4,15 +4,11 @@ import { CookiesProvider } from "react-cookie";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-export function queryErrorHandler(error: any) {
-  console.log(error.messaging);
-}
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       suspense: true,
-      onError: queryErrorHandler,
+      useErrorBoundary: true,
       retry: 0,
     },
   },

@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { useQueryErrorResetBoundary } from "react-query";
 import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
 import Router from "./Router";
@@ -11,10 +10,8 @@ import { GlobalStyle } from "./style/globalStyle";
 import { theme } from "./style/theme";
 
 export default function App() {
-  const { reset } = useQueryErrorResetBoundary();
-
   return (
-    <ErrorBoundary fallback={<Error />} onReset={reset}>
+    <ErrorBoundary fallback={<Error />}>
       <Suspense fallback={<Loading />}>
         <RecoilRoot>
           <ThemeProvider theme={theme}>

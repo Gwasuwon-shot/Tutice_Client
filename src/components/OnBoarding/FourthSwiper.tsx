@@ -35,7 +35,7 @@ const LogoWrapper = styled.div`
   align-items: flex-end;
 
   width: 100%;
-  margin-top: 6.021rem;
+  margin-top: 9.8rem;
   margin-left: -0.08rem;
 `;
 

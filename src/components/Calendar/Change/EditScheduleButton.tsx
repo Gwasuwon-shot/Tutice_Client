@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState } from "react";
+
 import { format, isSameDay } from "date-fns";
 import { editSchedule } from "../../../atom/EditSchedule/editSchedule";
 import { editDateState } from "../../../atom/EditSchedule/editDateState";
@@ -8,7 +10,9 @@ import { editDateStateTypes } from "../../../type/editSchedule/editDateType";
 import { useRecoilState } from "recoil";
 
 import { EditPencilIc } from "../../../assets";
-import useGetAttendanceExit from "../../../hooks/useGetAttendanceExist";
+import useGetAttendanceExist from "../../../hooks/useGetAttendanceExist";
+
+import CannotEditModal from "./CannotEditModal";
 
 interface editScheduleButtonType {
   lessonIdx: number;
@@ -22,7 +26,8 @@ function EditScheduleButton(props: editScheduleButtonType) {
   const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
   const [willEditDate, setWillEditDate] = useRecoilState(editDateState);
   const WEEKDAY: string[] = ["일", "월", "화", "수", "목", "금", "토"];
-  //   const { attendanceExit } = useGetAttendanceExit(idx);
+  const { attendanceExist } = useGetAttendanceExist(idx);
+  const [cannotEditModalOpen, setCannotEditModalOpen] = useState(false);
 
   function moveClickEditPage({
     lessonIdx,
@@ -58,10 +63,20 @@ function EditScheduleButton(props: editScheduleButtonType) {
     // navigate("/edit-lessonschedule");
   }
 
+  function ModalOpen() {
+    setCannotEditModalOpen(true);
+    console.log("here");
+    console.log(cannotEditModalOpen);
+    console.log(attendanceExist);
+  }
+
   return (
     <>
       <EditScheduleButtonWrapper
-        onClick={() => moveClickEditPage({ lessonIdx, schedule, idx, selectedDate })}></EditScheduleButtonWrapper>
+        onClick={ModalOpen}
+        // onClick={() => moveClickEditPage({ lessonIdx, schedule, idx, selectedDate })}
+      ></EditScheduleButtonWrapper>
+      {cannotEditModalOpen && <CannotEditModal setCannotEditModalOpen={setCannotEditModalOpen} />}
     </>
   );
 }

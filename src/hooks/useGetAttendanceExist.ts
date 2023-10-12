@@ -1,15 +1,17 @@
 import { useQuery } from "react-query";
-import { getAttendanceExit } from "../api/getAttendanceExit";
+import { getAttendanceExist } from "../api/getAttendanceExist";
 
-export default function useGetAttendanceExit(scheduleIdx: number) {
-  const { data: attendanceExit } = useQuery(["getAttendanceExit", scheduleIdx], () => getAttendanceExit(scheduleIdx), {
-    onError: (error) => {
-      console.log(error);
+export default function useGetAttendanceExist(scheduleIdx: number) {
+  const { data: attendanceExist } = useQuery(
+    ["getAttendanceExist", scheduleIdx],
+    () => getAttendanceExist(scheduleIdx),
+    {
+      onError: (error) => {
+        console.log(error);
+      },
+      staleTime: 3000,
     },
-    staleTime: 3000,
-  });
+  );
 
-  //   const data = data?.data;
-
-  return { attendanceExit };
+  return { attendanceExist };
 }

@@ -22,10 +22,6 @@ export default function Account() {
     setIsCheckingDeleteAccount(true);
   }
 
-  function handleMoveToLessonShare() {
-    navigate("/lesson-share");
-  }
-
   return (
     <>
       <Wrapper>
@@ -33,7 +29,6 @@ export default function Account() {
           <TitleText>계정</TitleText>
         </TitleWrapper>
         <ContentWrapper>
-          {/* <ContentText onClick={handleMoveToLessonShare}>초대코드 공유</ContentText> */}
           <ContentText onClick={handleLogout}>로그아웃</ContentText>
           {openModal && isCheckingLogout && (
             <LogoutModalSection $isCheckingLogout={isCheckingLogout}>
@@ -94,12 +89,10 @@ const ContentText = styled.div`
 
 const LogoutModalSection = styled.section<{ $isCheckingLogout: boolean }>`
   position: absolute;
-
-  margin: -38rem -4rem 0 -1.5em;
+  top: 0;
 `;
 
 const DeleteAccountModalSection = styled.section<{ $isCheckingDeleteAccount: boolean }>`
   position: absolute;
-
-  margin: -38rem -4rem 0 -1.5em;
+  top: 0;
 `;

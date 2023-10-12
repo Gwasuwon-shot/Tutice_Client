@@ -8,7 +8,6 @@ export default function useGetLatestScheduleByTeacher() {
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 3000,
   });
 
   const isMissingAttendance = latestScheduleByTeacher?.isMissingAttendance;
@@ -17,5 +16,12 @@ export default function useGetLatestScheduleByTeacher() {
   const latestScheduleDay = latestScheduleByTeacher?.latestScheduleDay;
   const latestScheduleList = latestScheduleByTeacher?.latestScheduleList;
 
-  return { isMissingAttendance, isMissingMaintenance, isTodaySchedule, latestScheduleDay, latestScheduleList };
+  return {
+    latestScheduleByTeacher,
+    isMissingAttendance,
+    isMissingMaintenance,
+    isTodaySchedule,
+    latestScheduleDay,
+    latestScheduleList,
+  };
 }

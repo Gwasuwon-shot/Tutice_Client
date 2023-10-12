@@ -79,15 +79,21 @@ export default function AlertSignup(prop: AlertSignupProp) {
   }
 
   function handleMoveToHome() {
-    userRole !== "선생님" ? setIsWelcome(true) : setIsWelcome(false);
+    if (userRole !== "선생님") {
+      // setIsWelcome(true);
+      navigate("/home");
+    } else {
+      setIsWelcome(false);
+    }
   }
 
   return (
     <>
-      <BackButtonSignupIcon onClick={() => setIsWelcome(false)} />
+      {/* <BackButtonSignupIcon onClick={() => setIsWelcome(false)} /> */}
+      <Blank />
       <Container>
         <BellWelcomeIcon />
-        <SignupTitleLayout MainText={MAIN_TEXT} />
+        <SignupTitleLayout>{MAIN_TEXT}</SignupTitleLayout>
         <SubText>{SUB_TEXT}</SubText>
       </Container>
       <ButtonLayout onClickButton={handleAllowNotification} onClickJump={handleMoveToHome} buttonText="할래요!" />
@@ -113,6 +119,12 @@ const SubText = styled.p`
 `;
 
 const BackButtonSignupIcon = styled(BackButtonSignupIc)`
+  width: 4rem;
+  height: 4rem;
+  margin-left: -1.4rem;
+`;
+
+const Blank = styled.div`
   width: 4rem;
   height: 4rem;
   margin-left: -1.4rem;

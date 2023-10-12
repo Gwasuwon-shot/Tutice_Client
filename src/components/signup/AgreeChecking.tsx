@@ -1,58 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { setCookie } from "../../api/cookie";
-import { newUserPost } from "../../api/localSignUp";
 import { TosCheckedSignupIc, TosNoneSignupIc } from "../../assets";
-import { userRoleData } from "../../atom/loginUser/loginUser";
-import { newUserData } from "../../atom/signup/signup";
+import { newUserData, stepNum } from "../../atom/signup/signup";
 import { checkList, textList } from "../../core/Login/ListData";
-import { BUTTON_TEXT } from "../../core/signup/buttonText";
 import { newUserDataTypes } from "../../type/SignUp/newUserDataType";
-import { AxiosError, AxiosResponse, isAxiosError } from "axios";
+import { BUTTON_TEXT } from "../../core/signup/signUpTextLabels";
 
-type AgreeCheckingProp = {
-  isConfirmed: boolean;
-};
-
-interface ResponseDataType {
+export interface ResponseDataType {
   message: string;
   code: number;
 }
 
-export default function AgreeChecking(props: AgreeCheckingProp) {
-  const { isConfirmed } = props;
-  const [newUser, setNewUser] = useRecoilState(newUserData);
-  const navigate = useNavigate();
-  const [userRole, setUserRole] = useRecoilState(userRoleData);
+interface AgreeCheckingProps {
+  isActive: boolean;
+  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+export default function AgreeChecking(props: AgreeCheckingProps) {
+  const { isActive, setIsActive } = props;
+  const setStep = useSetRecoilState(stepNum);
   const [checkAgrees, setCheckAgrees] = useState(checkList);
   const [textAgrees, setTextAgrees] = useState(textList);
   const [allClicked, setAllClicked] = useState(false);
   const [completeCheck, setCompleteCheck] = useState(false);
   const [checkedCount, setCheckedCount] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-
-  const { mutate: postNewUser } = useMutation(newUserPost, {
-    onSuccess: (data) => {
-      const accessToken = data.data.data.accessToken;
-      setUserRole(data.data.data.user.role);
-      setCookie("accessToken", accessToken, {
-        secure: true,
-      });
-      navigate("/welcome", { state: data.data });
-    },
-    onError: (error) => {
-      if (isAxiosError<ResponseDataType>(error)) {
-        if (error.response) {
-          const errorMessage = error.response?.data.message;
-          alert(errorMessage);
-        }
-      }
-    },
-  });
+  const [newUser, setNewUser] = useRecoilState(newUserData);
 
   function handleMoveToNotion(e: React.MouseEvent<HTMLDivElement>) {
     const target = e.target as HTMLDivElement;
@@ -124,7 +97,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
   useEffect(() => {
     isAllChecked() ? changeTotalAgree(true) : changeTotalAgree(false);
 
-    newUser.password && completeCheck ? setIsActive(true) : setIsActive(false);
+    completeCheck ? setIsActive(true) : setIsActive(false);
   }, [isAllChecked(), completeCheck]);
 
   function allCheckedIndex(id: number) {
@@ -149,10 +122,10 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
     setCheckAgrees([...tempCheckAgrees]);
   }
 
-  useEffect(() => {}, [newUser]);
-
   function handleToSignUp() {
-    postNewUser(newUser);
+    setNewUser((prev) => ({ ...prev, isMarketing: completeCheck }));
+
+    setStep(3);
   }
 
   return (
@@ -178,11 +151,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
         <TextWrapper>
           {textAgrees.map((textAgree) => (
             <IndividualTextWrapper key={textAgree.id}>
-              {textAgree.optional === "(선택)" ? (
-                <Essential style={{ color: "${({ theme }) => theme.colors.grey300}" }}>{textAgree.optional}</Essential>
-              ) : (
-                <Essential>{textAgree.optional}</Essential>
-              )}
+              <Essential>{textAgree.optional}</Essential>
               <HyperLink onClick={(e: React.MouseEvent<HTMLDivElement>) => handleMoveToNotion(e)}>
                 {textAgree.linkText}
               </HyperLink>
@@ -194,7 +163,7 @@ export default function AgreeChecking(props: AgreeCheckingProp) {
       </TosWrapper>
 
       <SubmitButton type="button" disabled={!isActive} $isActive={isActive} onClick={handleToSignUp}>
-        <ButtonText>{BUTTON_TEXT.signupDone}</ButtonText>
+        <ButtonText>{BUTTON_TEXT.next}</ButtonText>
       </SubmitButton>
     </>
   );
@@ -259,7 +228,7 @@ const Horizon = styled.div`
 const Essential = styled.p`
   margin-right: 0.2rem;
 
-  color: ${({ theme }) => theme.colors.green5};
+  color: ${({ theme }) => theme.colors.grey500};
 
   ${({ theme }) => theme.fonts.body04};
 `;

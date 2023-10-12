@@ -1,13 +1,13 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
+import { PARENTS_FOOTER_CATEGORY } from "../../core/parentsHome/parentsFooter";
 import useGetLessonByUser from "../../hooks/useGetLessonByUser";
+import useParentsFooter from "../../hooks/useParentsFooter";
 import Header from "../common/Header";
+import ParentsFooter from "../common/ParentsFooter";
 import ManageClass from "./ManageClass";
 import NoClassParentsHome from "./NoClassParentsHome";
 import TodayClassSwiper from "./TodayClassSwiper";
-import useParentsFooter from "../../hooks/useParentsFooter";
-import ParentsFooter from "../common/ParentsFooter";
-import { useEffect } from "react";
-import { PARENTS_FOOTER_CATEGORY } from "../../core/parentsHome/parentsFooter";
 
 export default function ParentsHome() {
   const { isLesson, userName } = useGetLessonByUser();
@@ -20,12 +20,12 @@ export default function ParentsHome() {
 
   return (
     <>
-      <Header />
-
-      <WelComeTitle>
-        {userName}님 <br /> 안녕하세요!
-      </WelComeTitle>
-
+      <HeaderWrapper>
+        <Header />
+        <WelComeTitle>
+          {userName}님 <br /> 안녕하세요!
+        </WelComeTitle>
+      </HeaderWrapper>
       {isLesson ? (
         <ClassInfoWrapper>
           <TodayClassSwiper />
@@ -40,9 +40,12 @@ export default function ParentsHome() {
   );
 }
 
+const HeaderWrapper = styled.header`
+  margin-left: 1.8rem;
+`;
+
 const WelComeTitle = styled.h1`
   margin-top: 2rem;
-  margin-left: 1.8rem;
 
   ${({ theme }) => theme.fonts.title01};
   color: ${({ theme }) => theme.colors.grey900};

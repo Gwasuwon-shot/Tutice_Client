@@ -1,16 +1,17 @@
-import { openDatePickerState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { openDatePickerState, openFinishDetailState, openStartDetailState } from "../../atom/timePicker/timePicker";
 
-import EditDatePicker from "./EditDatePicker";
-import EditDetailTimePicker from "./EditTimePicker";
-import EditFooterButton from "./EditFooterButton";
-import { editDateState } from "../../atom/EditSchedule/editDateState";
-import { editSchedule } from "../../atom/EditSchedule/editSchedule";
-import styled from "styled-components";
-import { updateSchedule } from "../../api/updateSchedule";
+import { useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import styled from "styled-components";
+import { updateSchedule } from "../../api/updateSchedule";
+import { editDateState } from "../../atom/EditSchedule/editDateState";
+import { editSchedule } from "../../atom/EditSchedule/editSchedule";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+import EditDatePicker from "./EditDatePicker";
+import EditFooterButton from "./EditFooterButton";
+import EditDetailTimePicker from "./EditTimePicker";
 
 export default function EditPageFooter() {
   const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
@@ -20,6 +21,7 @@ export default function EditPageFooter() {
   const { year, month, date } = useRecoilValue(editDateState);
   const { idx, startTime, endTime } = useRecoilValue(editSchedule);
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   const patchEditDate = String(year) + "-" + String(month).padStart(2, "0") + "-" + String(date).padStart(2, "0");
 
@@ -39,6 +41,7 @@ export default function EditPageFooter() {
       startTime: startTime,
       endTime: endTime,
     });
+    setOpenModal(false);
   }
 
   return (

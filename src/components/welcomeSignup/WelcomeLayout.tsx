@@ -5,8 +5,10 @@ import { userRoleData } from "../../atom/loginUser/loginUser";
 import { stepNum } from "../../atom/signup/signup";
 import AfterSignup from "./AfterSignup";
 import AlertSignup from "./AlertSignup";
+import { useNavigate } from "react-router-dom";
 
 export default function WelcomeLayout() {
+  const navigate = useNavigate();
   const userRole = useRecoilValue(userRoleData);
   const [isWelcome, setIsWelcome] = useState<boolean>(true);
   const setStep = useSetRecoilState(stepNum);
@@ -15,15 +17,18 @@ export default function WelcomeLayout() {
     userRole !== "선생님" && setIsWelcome(true);
   }, []);
 
-  // function checkAlarmAlertShow() {
-  //   console.log(window.Notification);
-  //   if (window.Notification) {
-  //     // 알림 허용 x
-  //     return <AlertSignup setIsWelcome={setIsWelcome} />;
-  //   } else {
-  //     return !isWelcome && <AfterSignup setIsWelcome={setIsWelcome} />;
-  //   }
-  // }
+  async function checkAlarmAlertShow() {
+    const permission = await Notification.requestPermission();
+
+    if (permission == "granted") {
+      // 알림 허용 x
+      // navigate("/home");
+      <AlertSignup setIsWelcome={setIsWelcome} />;
+    } else {
+      return !isWelcome && <AfterSignup setIsWelcome={setIsWelcome} />;
+    }
+  }
+  checkAlarmAlertShow();
 
   return (
     <>

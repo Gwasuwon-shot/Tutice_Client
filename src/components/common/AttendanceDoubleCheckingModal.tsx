@@ -52,7 +52,12 @@ export default function AttendanceDoubleCheckingModal(props: AttendanceDoubleChe
 
   return (
     <>
-      {isImpossibleModalOpen && <FutureImpossibleModal handleCloseModal={handleCloseModal} />}
+      {isImpossibleModalOpen && (
+        <FutureImpossibleModal
+          handleCloseModal={handleCloseModal}
+          handleCloseDoubleCheckModal={handleBackToCheckAttendance}
+        />
+      )}
       <BasicDoubleModal
         leftButtonName="취소"
         rightButtonName="확인"

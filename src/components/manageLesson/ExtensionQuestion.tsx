@@ -29,6 +29,7 @@ export default function ExtensionQuestion(props: ExtensionQuestionProp) {
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
+  console.log(missingMaintenanceLessonList);
   return (
     <>
       <ExtensionWrapper>

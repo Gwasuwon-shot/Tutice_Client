@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { NoUpcomingClassCardIc } from "../../assets";
 import useGetLatestScheduleByTeacher from "../../hooks/useGetLatestScheduleByTeacher";
 import { UpcomingClassScheduleType } from "../../type/teacherHome/upcomingClassScheduleType";
 import UpcomingClass from "./UpcomingClass";
 
 export default function UpcomingClassBoard() {
-  const { latestScheduleDay, latestScheduleList } = useGetLatestScheduleByTeacher();
+  const { latestScheduleByTeacher, latestScheduleDay, latestScheduleList } = useGetLatestScheduleByTeacher();
 
   function checkUpcomingClassData() {
     return (
@@ -20,17 +21,27 @@ export default function UpcomingClassBoard() {
   return (
     <UpcomingClassBoardWrapper>
       <UpcomingClassDate>
-        {checkUpcomingClassData()}({latestScheduleDay?.dayOfWeek}) 수업
-        <UpcomingClassWrapper>
-          {latestScheduleList &&
-            latestScheduleList?.map(({ lesson, schedule }: UpcomingClassScheduleType, idx: number) => (
-              <UpcomingClass key={idx} lesson={lesson} schedule={schedule} />
-            ))}
-        </UpcomingClassWrapper>
+        {latestScheduleByTeacher ? (
+          <>
+            {checkUpcomingClassData()}({latestScheduleDay?.dayOfWeek}) 수업
+            <UpcomingClassWrapper>
+              {latestScheduleList &&
+                latestScheduleList?.map(({ lesson, schedule }: UpcomingClassScheduleType, idx: number) => (
+                  <UpcomingClass key={idx} lesson={lesson} schedule={schedule} />
+                ))}
+            </UpcomingClassWrapper>
+          </>
+        ) : (
+          <NoUpcomingClassCardIcon />
+        )}
       </UpcomingClassDate>
     </UpcomingClassBoardWrapper>
   );
 }
+
+const NoUpcomingClassCardIcon = styled(NoUpcomingClassCardIc)`
+  width: 29.2rem;
+`;
 
 const UpcomingClassBoardWrapper = styled.aside`
   display: flex;

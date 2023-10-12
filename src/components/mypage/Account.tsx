@@ -89,12 +89,10 @@ const ContentText = styled.div`
 
 const LogoutModalSection = styled.section<{ $isCheckingLogout: boolean }>`
   position: absolute;
-
-  margin: -38rem -4rem 0 -1.5em;
+  top: 0;
 `;
 
 const DeleteAccountModalSection = styled.section<{ $isCheckingDeleteAccount: boolean }>`
   position: absolute;
-
-  margin: -38rem -4rem 0 -1.5em;
+  top: 0;
 `;

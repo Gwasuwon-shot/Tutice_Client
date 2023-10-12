@@ -61,6 +61,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
       },
       enabled: !!isAgreeSend,
       suspense: false,
+      useErrorBoundary: false,
     },
   );
 

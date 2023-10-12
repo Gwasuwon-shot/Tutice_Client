@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { format, isSameDay } from "date-fns";
 import { editSchedule } from "../../../atom/EditSchedule/editSchedule";
@@ -28,6 +29,7 @@ function EditScheduleButton(props: editScheduleButtonType) {
   const WEEKDAY: string[] = ["일", "월", "화", "수", "목", "금", "토"];
   const { attendanceExist } = useGetAttendanceExist(idx);
   const [cannotEditModalOpen, setCannotEditModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   function moveClickEditPage({
     lessonIdx,
@@ -59,23 +61,20 @@ function EditScheduleButton(props: editScheduleButtonType) {
       endTime: schedule?.endTime,
     }));
 
-    console.log(idx);
-    // navigate("/edit-lessonschedule");
+    attendanceExist?.data ? setCannotEditModalOpen(true) : navigate("/edit-lessonschedule");
   }
 
   function ModalOpen() {
     setCannotEditModalOpen(true);
     console.log("here");
     console.log(cannotEditModalOpen);
-    console.log(attendanceExist);
+    console.log(attendanceExist?.data);
   }
 
   return (
     <>
       <EditScheduleButtonWrapper
-        onClick={ModalOpen}
-        // onClick={() => moveClickEditPage({ lessonIdx, schedule, idx, selectedDate })}
-      ></EditScheduleButtonWrapper>
+        onClick={() => moveClickEditPage({ lessonIdx, schedule, idx, selectedDate })}></EditScheduleButtonWrapper>
       {cannotEditModalOpen && <CannotEditModal setCannotEditModalOpen={setCannotEditModalOpen} />}
     </>
   );

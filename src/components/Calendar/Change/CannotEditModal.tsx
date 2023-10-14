@@ -2,7 +2,11 @@ import styled from "styled-components";
 import ToastModal from "../../common/ToastModal";
 import { ExclamnationMarkIc } from "../../../assets";
 
-function CannotEditModal(props) {
+interface cannotEditModalType {
+  setCannotEditModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function CannotEditModal(props: cannotEditModalType) {
   const { setCannotEditModalOpen } = props;
 
   function ModalClose() {

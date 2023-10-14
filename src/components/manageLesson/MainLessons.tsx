@@ -8,25 +8,27 @@ export default function MainLessons() {
 
   return (
     <>
-      <Title>나의 수업</Title>
-      {lessonList &&
-        lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType) => (
-          <MainLesson
-            key={idx}
-            idx={idx}
-            studentName={studentName}
-            subject={subject}
-            percent={percent}
-            dayOfWeekList={dayOfWeekList}
-          />
-        ))}
+      <MainLessonsWrapper>
+        {lessonList &&
+          lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType) => (
+            <MainLesson
+              key={idx}
+              idx={idx}
+              studentName={studentName}
+              subject={subject}
+              percent={percent}
+              dayOfWeekList={dayOfWeekList}
+            />
+          ))}
+      </MainLessonsWrapper>
     </>
   );
 }
 
-const Title = styled.h1`
-  margin-bottom: 1.2rem;
+// const TitleWrapper = styled
 
-  color: ${({ theme }) => theme.colors.grey900};
-  ${({ theme }) => theme.fonts.title02};
+const MainLessonsWrapper = styled.article`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
 `;

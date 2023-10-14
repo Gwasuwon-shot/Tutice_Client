@@ -1,5 +1,4 @@
 import { styled } from "styled-components";
-import { NextArrowManageLessonIc } from "../../assets";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useMoveToLessonDetail from "../../hooks/useMoveToLessonDetail";
 import SubjectLabel from "../common/SubjectLabel";

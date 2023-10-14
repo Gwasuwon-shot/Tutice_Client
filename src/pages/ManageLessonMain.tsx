@@ -54,7 +54,7 @@ export default function ManageLessonMain() {
 const AddTreeCodeButtonManageIcon = styled(AddTreeCodeButtonManageIc)`
   width: 11.2rem;
   height: 3.6rem;
-
+  margin-top: 1.8rem;
   margin-left: 9rem;
 `;
 

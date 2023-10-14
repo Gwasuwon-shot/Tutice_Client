@@ -25,6 +25,7 @@ import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
 import PrivateRoute from "./utils/common/privateRoute";
+import MissingMaintenanceLesson from "./pages/MissingMaintenanceLesson";
 
 export default function Router() {
   return (
@@ -55,6 +56,7 @@ export default function Router() {
           <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
           <Route path="/edit-lessonschedule" element={<EditShcedule />} />
           <Route path="/footer" element={<ParentsFooter />} />
+          <Route path="/missing-maintenancelesson" element={<MissingMaintenanceLesson />} />
         </Route>
       </Routes>
     </BrowserRouter>

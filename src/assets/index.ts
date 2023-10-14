@@ -94,5 +94,5 @@ export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomin
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
 export { ReactComponent as LogoOnBoardingIc } from "./icon/logoOnboardingIc.svg";
-export { ReactComponent as AppleOnBoardingIc } from "./icon/appleOnBoardingIc.svg";
+export { ReactComponent as AppleOnBoardingIc } from "./icon/AppleOnBoardingIc.svg";
 export { ReactComponent as ExclamnationMarkIc } from "./icon/exclamationMarkIc.svg";

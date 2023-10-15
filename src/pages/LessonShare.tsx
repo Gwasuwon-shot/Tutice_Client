@@ -144,7 +144,7 @@ export default function LessonShare() {
 }
 
 const BackButtonWrapper = styled.div`
-  margin-left: 1.4rem;
+  /* margin-left: 1.4rem; */
   position: absolute;
 `;
 

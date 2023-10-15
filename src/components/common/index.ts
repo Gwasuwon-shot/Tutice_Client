@@ -28,4 +28,3 @@ export { default as SuccessSendingAlarmSnackBar } from "./SuccessSendingAlarmSna
 export { default as TeacherFooter } from "./TeacherFooter";
 export { default as TeacherFooterIcons } from "./TeacherFooterIcons";
 export { default as ToastModal } from "./ToastModal";
-//

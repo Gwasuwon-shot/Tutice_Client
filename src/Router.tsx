@@ -39,28 +39,28 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/lesson-share" element={<LessonShare />} />
         // 로그인 후 이용해라
-        {/* <Route element={<PrivateRoute authentication={true} />}> */}
-        <Route path="/home" element={<Home />} />
-        <Route path="/complete-check-attendance" element={<CompleteCheckAttendance />} />
-        <Route path="/manage-lesson" element={<ManageLessonMain />} />
-        <Route path="/manage-lesson/:manageLessonId" element={<ManageLessonDetail />} />
-        <Route path="/register-payment/:manageLessonId" element={<RegisterPayment />} />
-        <Route path="/parent-calendar" element={<ParentCalendar />} />
-        <Route path="/register-lesson" element={<RegisterLesson />} />
-        <Route path="/regular-lesson" element={<RegularLesson />} />
-        <Route path="/register-calendar" element={<RegisterCalendar />} />
-        <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
-        <Route path="/time-picker" element={<TimePickerPage />} />
-        <Route path="/schedule" element={<ChangeSchedule />} />
-        <Route path="/tuition-payment" element={<TuitionPayment />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
-        <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
-        <Route path="/edit-lessonschedule" element={<EditShcedule />} />
-        <Route path="/alert" element={<AllowAlert />} />
-        <Route path="/tree" element={<AfterSignup />} />
-        <Route path="/footer" element={<ParentsFooter />} />
-        {/* </Route> */}
+        <Route element={<PrivateRoute authentication={true} />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/complete-check-attendance" element={<CompleteCheckAttendance />} />
+          <Route path="/manage-lesson" element={<ManageLessonMain />} />
+          <Route path="/manage-lesson/:manageLessonId" element={<ManageLessonDetail />} />
+          <Route path="/register-payment/:manageLessonId" element={<RegisterPayment />} />
+          <Route path="/parent-calendar" element={<ParentCalendar />} />
+          <Route path="/register-lesson" element={<RegisterLesson />} />
+          <Route path="/regular-lesson" element={<RegularLesson />} />
+          <Route path="/register-calendar" element={<RegisterCalendar />} />
+          <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />
+          <Route path="/time-picker" element={<TimePickerPage />} />
+          <Route path="/schedule" element={<ChangeSchedule />} />
+          <Route path="/tuition-payment" element={<TuitionPayment />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/no-attendance-check" element={<NoAttendanceCheck />} />
+          <Route path="/lesson-info/:lessonId" element={<LessonInfo />} />
+          <Route path="/edit-lessonschedule" element={<EditShcedule />} />
+          <Route path="/alert" element={<AllowAlert />} />
+          <Route path="/tree" element={<AfterSignup />} />
+          <Route path="/footer" element={<ParentsFooter />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

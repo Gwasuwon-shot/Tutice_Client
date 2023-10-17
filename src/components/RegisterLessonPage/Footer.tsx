@@ -10,8 +10,8 @@ export default function Footer() {
     const subjectName = useRecoilValue(subjectNameSelector);
 
     const isNameValid = studentName.length >= 2; 
-    const isWarning = !isNameValid && studentName.length > 0
-    const isFooterGreen = subjectName !== "" && !isWarning;
+    const isWarning = !isNameValid && studentName.length > 0;
+    const isFooterGreen = subjectName !== "" && !isWarning && studentName !== "";
     const navigate = useNavigate();
 
     function moveToRegularLesson() {
@@ -21,13 +21,17 @@ export default function Footer() {
     }
     
     return (
-        <FooterWrapper isFooterGreen={isFooterGreen} onClick={moveToRegularLesson}>
-            <FooterButton isFooterGreen={isFooterGreen}> 정기수업 일정 등록하기 </FooterButton>
+        <FooterWrapper $isFooterGreen={isFooterGreen} onClick={moveToRegularLesson}>
+            <FooterButton $isFooterGreen={isFooterGreen}> 정기수업 일정 등록하기 </FooterButton>
         </FooterWrapper>
     );
 }
 
-const FooterWrapper = styled.footer<{ isFooterGreen: boolean }>`
+interface isFooterGreenProps {
+    $isFooterGreen: boolean;
+}
+
+const FooterWrapper = styled.footer<isFooterGreenProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,12 +43,12 @@ const FooterWrapper = styled.footer<{ isFooterGreen: boolean }>`
     height: 6.3rem;
     padding: 0.8rem;
     
-    ${({ theme, isFooterGreen }) => isFooterGreen ? `background-color: ${theme.colors.green5};` : `background-color: ${theme.colors.grey50};`}
+    ${({ theme, $isFooterGreen }) => $isFooterGreen ? `background-color: ${theme.colors.green5};` : `background-color: ${theme.colors.grey50};`}
 `
 
-const FooterButton = styled.button<{ isFooterGreen: boolean }>`
+const FooterButton = styled.button<isFooterGreenProps>`
     display: flex;
     
     ${({ theme }) => theme.fonts.body02};
-    ${({ theme, isFooterGreen }) => isFooterGreen ? `color: ${theme.colors.grey0};` : `color: ${theme.colors.grey200};`}
+    ${({ theme, $isFooterGreen }) => $isFooterGreen ? `color: ${theme.colors.grey0};` : `color: ${theme.colors.grey200};`}
 `

@@ -65,7 +65,7 @@ const SnackBarContainer = styled.div`
   justify-content: center;
   position: fixed;
   bottom: 12rem;
-  position: absolute;
+  position: fixed;
   z-index: 5;
 
   width: 32rem;

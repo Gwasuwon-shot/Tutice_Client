@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { attendanceLesson } from "../atom/attendanceCheck/attendanceLesson";
 import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { isModalOpen } from "../atom/common/isModalOpen";
+import { isSnackBarOpen } from "../atom/common/isSnackBarOpen";
 import RoundBottomButton from "../components/common/RoundBottomButton";
 import RoundBottomMiniButton from "../components/common/RoundBottomMiniButton";
 import SendAlarmCheckModal from "../components/common/SendAlarmCheckModal";
@@ -36,6 +37,7 @@ export default function CompleteCheckAttendance() {
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
   const { handleMoveToPage } = useTeacherFooter();
+  const [snackBarOpen, setSnackBarOpen] = useRecoilState(isSnackBarOpen);
 
   useEffect(() => {
     setOpenModal(false);
@@ -46,7 +48,7 @@ export default function CompleteCheckAttendance() {
   }
 
   function handleMoveToHome() {
-    setAttendanceData({ idx: 0, status: "" });
+    setSnackBarOpen(true);
     navigate(-1);
   }
 

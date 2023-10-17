@@ -1,9 +1,8 @@
-import React from "react";
-import { styled } from "styled-components";
-import { ParentsFooterType } from "../../type/parentsHome/ParentsFooterType";
 import { useRecoilState } from "recoil";
+import { styled } from "styled-components";
 import { parentsFooterCategory } from "../../atom/common/parentsFooterCategory";
 import useParentsFooter from "../../hooks/useParentsFooter";
+import { ParentsFooterType } from "../../type/parentsHome/ParentsFooterType";
 import ParentsFooterIcons from "./ParentsFooterIcons";
 
 export default function ParentsFooter() {
@@ -15,7 +14,6 @@ export default function ParentsFooter() {
       {parentsFooterList.map(({ id, category, isMoved }) => (
         <Icon key={id} onClick={() => handleMoveToPage(category)}>
           <ParentsFooterIcons category={category} isMoved={isMoved} />
-          <MenuName $isMoved={isMoved}>{category}</MenuName>
         </Icon>
       ))}
     </ParentsFooterWrapper>
@@ -25,18 +23,23 @@ export default function ParentsFooter() {
 const ParentsFooterWrapper = styled.footer`
   display: flex;
   justify-content: space-between;
-
-  width: 100%;
-  height: 7.2rem;
-
+  align-items: center;
   position: fixed;
   bottom: 0;
-  border-top: 1px solid ${({ theme }) => theme.colors.grey50};
-  border-radius: 1.8rem 1.8rem 0rem 0rem;
-  background-color: white;
-  padding-top: 1.2rem;
 
-  z-index: 100;
+  width: 32rem;
+  height: 7.2rem;
+  padding: 0.3rem 1.5rem 1.9rem;
+
+  background: ${({ theme }) => theme.colors.grey0};
+
+  flex-shrink: 0;
+
+  border-radius: 1.8rem 1.8rem 0 0;
+
+  border-top: 1px solid ${({ theme }) => theme.colors.grey50};
+
+  box-shadow: 0 0 0.5rem 0 rgb(56 62 68 / 8%);
 `;
 
 const Icon = styled.i`

@@ -3,6 +3,7 @@ import {
   cycleNumberState,
   dateState,
   dayState,
+  firstLessonDay,
   focusDayState,
   openFinishDetailState,
   openStartDetailState,
@@ -44,18 +45,30 @@ export default function LessonDate() {
   const DAYS = ["월", "화", "수", "목", "금", "토", "일"];
 
   const [selectedDays, setSelectedDays] = useRecoilState(dayState);
+  const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
 
   function handleDayButton(day: string) {
+
     setSelectedDays((prevSelectedDays) => {
       const existingDayIndex = prevSelectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
   
-      if (existingDayIndex !== -1) {
-        const newSelectedDays = [...prevSelectedDays];
-        newSelectedDays.splice(existingDayIndex, 1);
-        return newSelectedDays;
+      if (day == firstLesson) {
+        if (existingDayIndex === -1) {
+          return [...prevSelectedDays, { dayOfWeek: day, startTime: "12:00", endTime: "12:00" }];
+        } else {
+          return [...prevSelectedDays]
+        }
+      
       } else {
-        return [...prevSelectedDays, { dayOfWeek: day, startTime: "12:00", endTime: "12:00" }];
+        if (existingDayIndex !== -1) {
+          const newSelectedDays = [...prevSelectedDays];
+          newSelectedDays.splice(existingDayIndex, 1);
+          return newSelectedDays;
+        } else {
+          return [...prevSelectedDays, { dayOfWeek: day, startTime: "12:00", endTime: "12:00" }];
+        }
       }
+      
     });
   }
   

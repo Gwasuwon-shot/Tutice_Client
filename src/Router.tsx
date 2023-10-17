@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import ConnectParentsAndTeacher from "./components/RegularLesson/ConnectParentsAndTeacher";
 import ParentsFooter from "./components/common/ParentsFooter";
+import AfterSignup from "./components/welcomeSignup/AfterSignup";
+import AllowAlert from "./components/welcomeSignup/AllowAlert";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import EditShcedule from "./pages/EditSchedule";
@@ -25,8 +27,6 @@ import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
 import PrivateRoute from "./utils/common/privateRoute";
-import AfterSignup from "./components/welcomeSignup/AfterSignup";
-import AllowAlert from "./components/welcomeSignup/AllowAlert";
 
 export default function Router() {
   return (
@@ -38,7 +38,7 @@ export default function Router() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/lesson-share" element={<LessonShare />} />
-        // 로그인 후 이용해라
+
         <Route element={<PrivateRoute authentication={true} />}>
           <Route path="/home" element={<Home />} />
           <Route path="/complete-check-attendance" element={<CompleteCheckAttendance />} />

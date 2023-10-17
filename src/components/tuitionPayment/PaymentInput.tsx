@@ -12,8 +12,8 @@ import {
   paymentOrder,
 } from "../../atom/tuitionPayment/tuitionPayment";
 
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
 
 interface NameInputSectionProp {
   nameFocused: boolean;
@@ -96,10 +96,14 @@ export default function PaymentInput() {
 
   function handleMoneyChange(event: ChangeEvent<HTMLInputElement>) {
     const inputValue = event.target.value;
-    if (!isNaN(inputValue as any)) {
-      setMoney(Number(inputValue));
+    const strippedValue = inputValue.replace(/,/g, '').replace('원', ''); 
+    const numericValue = Number(strippedValue);
+    
+    if (!isNaN(numericValue)) {
+      setMoney(numericValue); 
     }
   }
+  
 
   // 5. checkbox
   const [order, setOrder] = useRecoilState<string>(paymentOrder);
@@ -179,7 +183,7 @@ export default function PaymentInput() {
         <InputName> 회차당 과외비 </InputName>
         <MoneyInput
           placeholder="금액을 입력해주세요"
-          value={money || ""}
+          value={money === 0 ? "" : money.toLocaleString() + "원"}
           onChange={handleMoneyChange}
           onFocus={handleMoneyFocus}
         />

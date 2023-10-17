@@ -1,3 +1,4 @@
+export { ReactComponent as AppleOnBoardingIc } from "./icon/AppleOnBoardingIc.svg";
 export { ReactComponent as EditPencilIc } from "./icon/EditPencilIc.svg";
 export { ReactComponent as FourthSwiperFirstTree } from "./icon/FourthSwiperFirstTreeOnBoardingIc.svg";
 export { ReactComponent as FourthSwiperSecondTree } from "./icon/FourthSwiperSecondTreeOnBoardingIc.svg";
@@ -57,6 +58,7 @@ export { ReactComponent as HomeUnselectedParentsHomeIc } from "./icon/homeUnsele
 export { ReactComponent as ErrorShowingIc } from "./icon/ic_exclamation-mark.svg";
 export { ReactComponent as KakaoLessonShareIc } from "./icon/kakaoLessonShareIc.svg";
 export { ReactComponent as LoadingIc } from "./icon/loadingIc.svg";
+export { ReactComponent as LogoOnBoardingIc } from "./icon/logoOnboardingIc.svg";
 export { ReactComponent as MainIc } from "./icon/mainIc.svg";
 export { ReactComponent as ManagingLessonClassIc } from "./icon/managingLessonClassIc.svg";
 export { ReactComponent as ManagingLessonMoneyIc } from "./icon/managingLessonMoneyIc.svg";
@@ -93,5 +95,3 @@ export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextC
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
-export { ReactComponent as LogoOnBoardingIc } from "./icon/logoOnboardingIc.svg";
-export { ReactComponent as AppleOnBoardingIc } from "./icon/AppleOnBoardingIc.svg";

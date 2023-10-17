@@ -32,30 +32,37 @@ export function KakaoShare(props: KakaoShareProp) {
         kakao.init(import.meta.env.VITE_APP_KAKAO_APP_KEY);
       }
 
-      kakao.Share.createDefaultButton({
-        container: "#kakao-link-btn",
+      // kakao.Share.createDefaultButton({
+      //   container: "#kakao-link-btn",
 
-        objectType: "feed",
+      //   objectType: "feed",
 
-        content: {
-          title: "수업링크 코드 공유",
+      //   content: {
+      //     title: "수업링크 코드 공유",
+      //     description: `[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${url}`,
+      //     imageUrl: `https://tutice.s3.ap-northeast-2.amazonaws.com/board/image/Thumbnail.png`,
+      //     link: {
+      //       webUrl: url,
+      //       mobileWebUrl: url,
+      //     },
+      //   },
+
+      //   buttons: [
+      //     {
+      //       title: "수업링크 바로가기",
+      //       link: {
+      //         webUrl: url,
+      //         mobileWebUrl: url,
+      //       },
+      //     },
+      //   ],
+      //  });
+      kakao.Share.sendCustom({
+        templateId: 96174,
+        templateArgs: {
           description: `[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${url}`,
-          imageUrl: `https://tutice.s3.ap-northeast-2.amazonaws.com/board/image/Thumbnail.png`,
-          link: {
-            webUrl: url,
-            mobileWebUrl: url,
-          },
         },
-
-        buttons: [
-          {
-            title: "수업링크 바로가기",
-            link: {
-              webUrl: url,
-              mobileWebUrl: url,
-            },
-          },
-        ],
+        requestUrl: url,
       });
     }
   }

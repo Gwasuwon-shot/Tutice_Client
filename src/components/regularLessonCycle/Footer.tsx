@@ -17,7 +17,7 @@ export default function Footer() {
     let [isSame, setIsSame] = useState(false);
     isSame = activeCycleSlide !== 0;
 
-    function moveToTuitionPayment() {
+    function moveToRegularLessonDate() {
         if (isSame) {
             navigate("/regular-lesson-date");
         }
@@ -26,7 +26,7 @@ export default function Footer() {
     
     return (
         <FooterWrapper>
-            <FooterButtonWrapper selected = {isSame} onClick = {moveToTuitionPayment}> 
+            <FooterButtonWrapper selected = {isSame} onClick = {moveToRegularLessonDate}> 
                 <FooterButton disabled = {isSame}> 저장 </FooterButton>
             </FooterButtonWrapper>
             {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}

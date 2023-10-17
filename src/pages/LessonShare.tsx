@@ -13,12 +13,12 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { lessonCode } from "../atom/share/share";
 import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
 import { CommonBackButton, ProgressBar } from "../components/common";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
 import useGetLessonByUser from "../hooks/useGetLessonByUser";
-import { lessonCode } from "../atom/share/share";
 
 interface dayProps {
   year: number;
@@ -125,7 +125,7 @@ export default function LessonShare() {
           알림을 드릴 수 있어요
         </SharSub>
 
-        <TreeTitle>수업나무 링크</TreeTitle>
+        <TreeTitle>수업링크</TreeTitle>
         <LinkBox>
           <CopylessonShareIc onClick={handleCopyLink} />
           <p>{URL}</p>

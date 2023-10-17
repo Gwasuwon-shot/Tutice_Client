@@ -26,7 +26,7 @@ export default function DepositRecordItem(props: DepositRecordItemProps) {
     <DepositRecordWrapper>
       {status ? <RedFruitPaymentIcon /> : <GreyFruitPaymentIcon />}
       <DepositInfoWrapper>
-        <DepositCount>{count}번째 열매</DepositCount>
+        <DepositCount>{count}번째 결실</DepositCount>
 
         <DepositDate>
           {new window.Date(checkRealDate(date)).getMonth() + 1}월 {new window.Date(checkRealDate(date)).getDate()}일

@@ -37,7 +37,7 @@ export function KakaoShare(props: KakaoShareProp) {
         objectType: "feed",
 
         content: {
-          title: "나무 코드 공유",
+          title: "수업링크 코드 공유",
           description: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. \n[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${url}`,
           imageUrl: "/tutice.png",
           link: {

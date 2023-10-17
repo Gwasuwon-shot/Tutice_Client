@@ -36,7 +36,7 @@ export default function StudentPayment(props: StudentPaymentProps) {
     <StudentPaymentBox>
       {status ? <RedFruitPaymentIcon /> : <GreyFruitPaymentIcon />}
       <NumberWrapper>
-        <FruitCount>{count}번째 열매</FruitCount>
+        <FruitCount>{count}번째 결실</FruitCount>
         <Date>
           {new window.Date(date).getMonth() + 1}월 {new window.Date(date).getDate()}일
         </Date>

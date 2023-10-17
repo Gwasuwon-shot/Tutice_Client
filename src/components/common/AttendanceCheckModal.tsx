@@ -10,7 +10,7 @@ import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
 
 interface AttendanceCheckModalProp {
-  isUpdateOpen: boolean;
+  isUpdateOpen?: boolean;
   setIsCheckingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

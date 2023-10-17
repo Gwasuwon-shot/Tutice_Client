@@ -1,9 +1,6 @@
-import Footer from '../components/RegularLesson/Footer';
-import Header from '../components/RegularLesson/Header';
-import LessonDate from '../components/RegularLesson/LessonDate';
-import LessonInformation from '../components/RegularLesson/LessonInformation';
-import ProgressBar from "../components/common/ProgressBar";
-import StudentInformation from '../components/RegularLesson/StudentInformation';
+import CycleInput from '../components/regularLessonCycle/CycleInput';
+import Footer from '../components/regularLessonCycle/Footer';
+import Header from '../components/regularLessonCycle/Header';
 import {styled} from 'styled-components';
 
 export default function RegularLessonCycle() {
@@ -11,10 +8,7 @@ export default function RegularLessonCycle() {
   return (
   <RegularWrapper>
     <Header />
-    <ProgressBar progress = {50} />
-    <StudentInformation />
-    <LessonInformation />
-    <LessonDate />
+    <CycleInput />
     <Footer />
   </RegularWrapper>
   );

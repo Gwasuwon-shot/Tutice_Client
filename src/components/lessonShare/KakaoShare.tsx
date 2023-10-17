@@ -31,38 +31,28 @@ export function KakaoShare(props: KakaoShareProp) {
       if (!kakao.isInitialized()) {
         kakao.init(import.meta.env.VITE_APP_KAKAO_APP_KEY);
       }
+
       kakao.Share.createDefaultButton({
         container: "#kakao-link-btn",
 
         objectType: "feed",
 
         content: {
-          title: "나무 코드 공유",
-          description: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. \n[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${url}`,
-          imageUrl: "/tutice.png",
+          title: "수업링크 코드 공유",
+          description: `[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${url}`,
+          imageUrl: `/og_img.png`,
           link: {
-            // webUrl: window.location.href,
-            // 공유할 링크 주소
-            // webUrl: `https://www.tutice.com/${code}`,
-            // .replace(window.location.href,url),
-            // mobileWebUrl: window.location.href,
             webUrl: url,
             mobileWebUrl: url,
-            // mobileWebUrl: `https://www.tutice.com/${code}`,
-            // .replace(window.location.href,url),
           },
         },
 
         buttons: [
           {
-            title: "튜티스",
+            title: "수업링크 바로가기",
             link: {
-              // webUrl: window.location.href,
-              // .replace(window.location.href,url),
-              // mobileWebUrl: window.location.href,
               webUrl: url,
               mobileWebUrl: url,
-              // .replace(window.location.href,url),
             },
           },
         ],

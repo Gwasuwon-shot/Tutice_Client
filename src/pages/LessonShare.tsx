@@ -13,12 +13,12 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { lessonCode } from "../atom/share/share";
 import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
 import { CommonBackButton, ProgressBar } from "../components/common";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
 import useGetLessonByUser from "../hooks/useGetLessonByUser";
-import { lessonCode } from "../atom/share/share";
 
 interface dayProps {
   year: number;
@@ -82,7 +82,7 @@ export default function LessonShare() {
     if (navigator.share) {
       navigator.share({
         title: "수업링크 공유",
-        text: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. \n[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${URL}`,
+        text: `안녕하세요, 과외 수업 관리 필수 앱 Tutice 입니다. \n\n[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${URL}`,
 
         url: URL,
       });
@@ -116,6 +116,7 @@ export default function LessonShare() {
 
       {state && <ProgressBar progress={100} />}
       <LessonShareWrapper>
+        {state && <End>수업 추가 완료!</End>}
         <ShareTitle>
           수업링크를 <br />
           학부모님께 공유해보세요
@@ -125,7 +126,7 @@ export default function LessonShare() {
           알림을 드릴 수 있어요
         </SharSub>
 
-        <TreeTitle>수업나무 링크</TreeTitle>
+        <TreeTitle>수업링크</TreeTitle>
         <LinkBox>
           <CopylessonShareIc onClick={handleCopyLink} />
           <p>{URL}</p>
@@ -146,8 +147,13 @@ export default function LessonShare() {
   );
 }
 
+const End = styled.p`
+  color: ${({ theme }) => theme.colors.green5};
+  ${({ theme }) => theme.fonts.body01};
+  margin-bottom: 1.85rem;
+`;
+
 const BackButtonWrapper = styled.div`
-  /* margin-left: 1.4rem; */
   position: absolute;
 `;
 

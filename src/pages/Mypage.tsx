@@ -1,4 +1,7 @@
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { userRoleData } from "../atom/loginUser/loginUser";
+import { ParentsFooter } from "../components/common";
 import TeacherFooter from "../components/common/TeacherFooter";
 import Account from "../components/mypage/Account";
 import Alarm from "../components/mypage/Alarm";
@@ -6,6 +9,12 @@ import Header from "../components/mypage/Header";
 import Terms from "../components/mypage/Terms";
 
 export default function Mypage() {
+  const [userRole, setUserRole] = useRecoilState(userRoleData);
+
+  function checkIsTeacher() {
+    return userRole === "선생님";
+  }
+
   return (
     <>
       <MyPageWrapper>
@@ -14,7 +23,7 @@ export default function Mypage() {
         <Terms />
         <Account />
       </MyPageWrapper>
-      <TeacherFooter />
+      {checkIsTeacher() ? <TeacherFooter /> : <ParentsFooter />}
     </>
   );
 }

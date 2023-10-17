@@ -8,6 +8,7 @@ import { blockAccess } from "../../utils/common/privateRoute";
 
 export default function ConnectParentsAndTeacher() {
   const { lessonId } = useParams();
+  console.log("외않되?", lessonId);
   const [lessonIndex, setLessonIndex] = useRecoilState(connectLessonId);
 
   const navigate = useNavigate();
@@ -20,18 +21,18 @@ export default function ConnectParentsAndTeacher() {
 
   async function connectParentsAndTeacher() {
     if (lessonId) {
-      const data = await patchLessonParents(lessonId);
+      const data = await patchLessonParents(lessonIndex);
       return data;
     }
   }
 
   useEffect(() => {
     if (lessonId) {
-      console.log(lessonId);
       setLessonIndex(lessonId);
     }
 
     if (!blockAccess()) {
+      console.log(lessonIndex, "들어오니?");
       connectParentsAndTeacher();
       navigate("/home");
     } else {

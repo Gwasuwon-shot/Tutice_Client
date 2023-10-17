@@ -21,6 +21,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   const { lessonIdx, studentName, count, subject, scheduleIdx } = selectedLesson;
 
   function handleCancelAttendanceCheck() {
+    setAttendanceData({ idx: scheduleIdx, status: "" });
     setOpenModal(false);
   }
 
@@ -37,7 +38,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
   return (
     <ToastModal>
       <ModalHeader>
-        <CancelButton onClick={handleCancelAttendanceCheck}>취소</CancelButton>
+        <CancelButton onClick={handleCancelAttendanceCheck}>X</CancelButton>
         <AttendanceModalHeader>출결 체크</AttendanceModalHeader>
       </ModalHeader>
       <TextWrapper>

@@ -10,7 +10,6 @@ export default function useGetLessonPaymentRecordByTeacher(manageLessonId: numbe
       onError: (error) => {
         console.log(error);
       },
-      staleTime: 3000,
     },
   );
 

@@ -15,10 +15,21 @@ interface AttendanceInformProps {
   lessonIdx: number;
   scheduleIdx: number;
   setIsCancelImpossibleModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateOpen: boolean;
 }
 
 export default function AttendanceInform(props: AttendanceInformProps) {
-  const { date, status, startTime, endTime, count, lessonIdx, scheduleIdx, setIsCancelImpossibleModalOpen } = props;
+  const {
+    date,
+    status,
+    startTime,
+    endTime,
+    count,
+    lessonIdx,
+    scheduleIdx,
+    setIsCancelImpossibleModalOpen,
+    isUpdateOpen,
+  } = props;
   const { showModal } = useModal();
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
@@ -49,17 +60,37 @@ export default function AttendanceInform(props: AttendanceInformProps) {
             {startTime} ~ {endTime}
           </Label>
         </div>
-        <StatusWrapper onClick={handleOpenCheckAttendanceModal}>
+        <StatusWrapper>
           {checkIsStatusExist() ? (
-            <StatusLabel $status={status}>{status}</StatusLabel>
+            <>
+              {!isUpdateOpen ? (
+                <StatusLabel $status={status}>{status}</StatusLabel>
+              ) : (
+                <StatusUpdateLabel onClick={handleOpenCheckAttendanceModal}>{status}</StatusUpdateLabel>
+              )}
+            </>
           ) : (
-            <NoCheckPageAttendanceButton />
+            <NoCheckPageAttendanceButton onClick={handleOpenCheckAttendanceModal} />
           )}
         </StatusWrapper>
       </AttnedanceInformBox>
     </>
   );
 }
+
+const StatusUpdateLabel = styled.div`
+  display: flex;
+  padding: 0.8rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 0.8rem;
+  border: 1px solid ${({ theme }) => theme.colors.grey200};
+
+  color: ${({ theme }) => theme.colors.grey200};
+  ${({ theme }) => theme.fonts.body03}
+`;
 
 const StatusWrapper = styled.div`
   width: 7.4rem;
@@ -100,12 +131,15 @@ const LessonCount = styled.h1`
 
 const StatusLabel = styled.label<{ $status: string }>`
   display: flex;
-  justify-content: flex-end;
+  padding: 0.8rem;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 
-  padding-right: 2.5rem;
+  border-radius: 0.8rem;
 
-  height: 4rem;
+  color: ${({ theme }) => theme.colors.grey200};
+  ${({ theme }) => theme.fonts.body03}
 
   color: ${({ theme, $status }) =>
     $status === ATTENDANCE_STATUS.attend

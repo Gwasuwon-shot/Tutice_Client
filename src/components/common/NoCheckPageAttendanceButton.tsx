@@ -1,8 +1,14 @@
 import { styled } from "styled-components";
 
-export default function NoCheckPageAttendanceButton() {
+interface NoCheckPageAttendanceButtonProp {
+  onClick?: () => void;
+}
+
+export default function NoCheckPageAttendanceButton(props: NoCheckPageAttendanceButtonProp) {
+  const { onClick } = props;
+
   return (
-    <AttendaceCheckButtonBox type="button">
+    <AttendaceCheckButtonBox type="button" onClick={onClick}>
       <h1>출결 체크</h1>
     </AttendaceCheckButtonBox>
   );

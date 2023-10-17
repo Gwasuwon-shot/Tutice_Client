@@ -54,10 +54,14 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
           setAttendanceData({ idx: 0, status: "" });
         }
       },
-      onError: (error) => {
-        setIsDisabledModalOpen(true);
+      onError: (error: any) => {
+        if (error?.response?.data?.message === "레슨에 학부모가 연결되지 않았습니다.") {
+          setIsDisabledModalOpen(true);
+        }
       },
       enabled: !!isAgreeSend,
+      suspense: false,
+      useErrorBoundary: false,
     },
   );
 

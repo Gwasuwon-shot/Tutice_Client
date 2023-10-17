@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { nextArrowWelcomeIc } from "../../assets";
 
 interface ButtonLayoutProps {
   onClickButton: () => void;
   onClickJump: () => void;
   buttonText: string;
+  passText: string;
 }
 
-export default function ButtonLayoutProps(props: ButtonLayoutProps) {
+export default function ButtonLayout(props: ButtonLayoutProps) {
   const navigate = useNavigate();
-  const { onClickButton, onClickJump, buttonText } = props;
+  const { onClickButton, onClickJump, buttonText, passText } = props;
 
   return (
     <>
@@ -19,8 +19,7 @@ export default function ButtonLayoutProps(props: ButtonLayoutProps) {
           {buttonText}
         </WelcomeButton>
         <PassButton type="button" onClick={onClickJump}>
-          건너뛰기
-          <NextArrowWelcomeIcon />
+          {passText}
         </PassButton>
       </ButtonWrapper>
     </>
@@ -58,13 +57,9 @@ const PassButton = styled.button`
   margin-top: 1.9rem;
   margin-bottom: 3.5rem;
 
-  ${({ theme }) => theme.fonts.body06};
+  ${({ theme }) => theme.fonts.body04};
 
   color: ${({ theme }) => theme.colors.grey500};
-`;
 
-const NextArrowWelcomeIcon = styled(nextArrowWelcomeIc)`
-  width: 1.1em;
-  height: 1.1rem;
-  margin-left: 0.8rem;
+  border-bottom: solid 0.05rem ${({ theme }) => theme.colors.grey500};
 `;

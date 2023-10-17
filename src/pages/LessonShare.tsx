@@ -62,7 +62,7 @@ export default function LessonShare() {
     setpayingPersonName("");
   }
 
-  const navgiate = useNavigate();
+  const navigate = useNavigate();
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
   const [URL, setURL] = useState(`https://tutice.com/${codeAndId?.lessonCode}`);
   const setLessonCode = useSetRecoilState(lessonCode);
@@ -74,7 +74,7 @@ export default function LessonShare() {
 
   function handleMoveToHome() {
     setAllSet();
-    navgiate("/home");
+    navigate("/home");
     // recoil 값 모두 초기값으로 변경
   }
 

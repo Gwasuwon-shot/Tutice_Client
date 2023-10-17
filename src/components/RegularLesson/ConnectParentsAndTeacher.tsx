@@ -27,6 +27,7 @@ export default function ConnectParentsAndTeacher() {
 
   useEffect(() => {
     if (lessonId) {
+      console.log(lessonId);
       setLessonIndex(lessonId);
     }
 

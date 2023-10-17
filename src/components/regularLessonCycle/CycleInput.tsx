@@ -15,9 +15,7 @@ export default function CyclceInput() {
     const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
     
     function handleTimePicker () {
-        console.log("click")
         setIsTimePickerOpen(true);
-        console.log("완료");
     }
 
     const [activeCycleSlide, setActiveCycleSlide] = useRecoilState(cycleNumberState);

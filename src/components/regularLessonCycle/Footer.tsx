@@ -1,10 +1,8 @@
-import { dayState, firstLessonDay, focusDayState } from "../../atom/timePicker/timePicker";
-import { openDatePickerState, openFinishDetailState, openStartDetailState, openTimePickerState } from "../../atom/timePicker/timePicker";
 import {useEffect, useState} from 'react';
 
-import DatePicker from '../../components/RegularLesson/TimePicker/DatePicker';
-import DetailTimePicker from '../../components/RegularLesson/TimePicker/DetailTimePicker';
 import TimePicker from '../../components/RegularLesson/TimePicker/TimePicker';
+import {cycleNumberState} from '../../atom/timePicker/timePicker';
+import { openTimePickerState } from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import {useRecoilState} from 'recoil';
@@ -14,32 +12,17 @@ export default function Footer() {
     const navigate = useNavigate();
     
     const [isTimePickerOpen, setIsTimePickerOpen] = useRecoilState<boolean>(openTimePickerState);
-    const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
-    const [isStartPickerOpen, setIsStartPickerOpen] = useRecoilState<boolean>(openStartDetailState);
-    const [isFinishPickerOpen, setIsFinishPickerOpen] = useRecoilState<boolean>(openFinishDetailState);
-
-    const [firstday, setFirstday] = useRecoilState(firstLessonDay);
-    const [selectedDays, setSelectedDays] = useRecoilState(dayState);
-
+    const [activeCycleSlide, setActiveCycleSlide] = useRecoilState(cycleNumberState);
+    
     let [isSame, setIsSame] = useState(false);
-    /*
-    // 저장버튼 활성화 로직 : 수업일시 확정요일 배열과 첫 수업일이 변경될 경우, 배열을 순회하여 해당 수업일이 존재하는지 체크
-    useEffect(() => {
-        setIsSame(false);
-        for (let idx in selectedDays) {
-            if (selectedDays[idx].dayOfWeek === firstday) {
-                setIsSame(true);
-                break;
-            }
-        }
-    }, [selectedDays, firstday]);
-    */
+    isSame = activeCycleSlide !== 0;
 
     function moveToTuitionPayment() {
         if (isSame) {
-            navigate("/tuition-payment");
+            navigate("/regular-lesson-date");
         }
     }
+    
     
     return (
         <FooterWrapper>
@@ -47,8 +30,6 @@ export default function Footer() {
                 <FooterButton disabled = {isSame}> 저장 </FooterButton>
             </FooterButtonWrapper>
             {isTimePickerOpen && <ModalWrapper> <TimePicker /> </ModalWrapper>}
-            {isDatePickerOpen && <ModalWrapper> <DatePicker /> </ModalWrapper>}
-            {(isStartPickerOpen || isFinishPickerOpen) && <ModalWrapper> <DetailTimePicker /> </ModalWrapper>}
         </FooterWrapper>
     );
 }

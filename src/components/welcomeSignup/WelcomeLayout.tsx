@@ -17,15 +17,10 @@ export default function WelcomeLayout() {
   async function checkAlarmAlertShow() {
     const permission = await Notification.requestPermission();
 
-    if (permission == "granted") {
-      // 알림 허용 x
-      console.log("알림허용안되어있음");
+    if (permission == "granted" || permission == "denied") {
       navigate("/alert");
-      // <AllowAlert />;
     } else {
-      console.log("알림허용되어있음");
       navigate("/tree");
-      // return <AfterSignup />;
     }
   }
   checkAlarmAlertShow();

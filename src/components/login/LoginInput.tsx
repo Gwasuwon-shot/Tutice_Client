@@ -34,6 +34,7 @@ export default function LoginInput() {
         secure: true,
       });
 
+      console.log("storedLessonCode", storedLessonCode);
       if (storedLessonCode != "") navigate(`/${storedLessonCode}`);
       else navigate("/welcome", { state: data.data });
     },

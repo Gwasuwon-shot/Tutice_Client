@@ -65,7 +65,7 @@ export default function AllowAlert() {
       if (userRole === "부모님" && lessonIndex !== "") {
         navigate(`/${lessonIndex}`);
       } else {
-        userRole !== "선생님" ? navigate("/home") : setIsWelcome(false);
+        // userRole !== "선생님" ? navigate("/home") : setIsWelcome(false);
       }
     },
     onError: (err) => {

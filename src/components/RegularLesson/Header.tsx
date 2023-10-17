@@ -44,7 +44,7 @@ export default function Header() {
 
         <HeaderWrapper>
             <RegisterLessonHeaderIc onClick={handleMoveToBack} />
-            <ProgressBar progress = {100} />
+            <ProgressBar progress = {66.4} />
             <InputHeader> 정기적인 수업 일정을 <br/> 알려주세요! </InputHeader> 
             <InputNotice> 첫 수업일을 기준으로 수업 일정을 <br/> 캘린더에 표시해 드릴게요 </InputNotice>    
         </HeaderWrapper>

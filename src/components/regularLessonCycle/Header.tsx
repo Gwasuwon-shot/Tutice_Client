@@ -21,7 +21,7 @@ export default function Header() {
 
         <HeaderWrapper>
             <RegisterLessonHeaderIc onClick={handleMoveToBack} />
-            <ProgressBar progress = {50} />
+            <ProgressBar progress = {33.2} />
             <InputHeader> 총 몇 회차로 이루어진 <br/> 수업인가요? </InputHeader> 
             <InputNotice> 수업비를 받는 기준으로 진행되는 <br/> 회차를 알려주세요 </InputNotice>    
         </HeaderWrapper>

@@ -65,11 +65,9 @@ export default function LessonShare() {
   const navigate = useNavigate();
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
   const [URL, setURL] = useState(`https://tutice.com/${codeAndId?.lessonCode}`);
-  const setLessonCode = useSetRecoilState(lessonCode);
 
   useEffect(() => {
     setURL(`https://tutice.com/${codeAndId?.lessonCode}`);
-    setLessonCode(codeAndId?.lessonCode);
   }, [codeAndId]);
 
   function handleMoveToHome() {

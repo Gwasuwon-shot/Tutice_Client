@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
 export const lessonCode = atom<string>({
-  key: "lessonCode",
+  key: "lessonCodeValue",
   default: "",
 });

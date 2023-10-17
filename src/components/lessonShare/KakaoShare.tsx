@@ -40,7 +40,7 @@ export function KakaoShare(props: KakaoShareProp) {
         content: {
           title: "수업링크 코드 공유",
           description: `[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${url}`,
-          imageUrl: `/og_img.png`,
+          imageUrl: `https://tutice.s3.ap-northeast-2.amazonaws.com/board/image/Thumbnail.png`,
           link: {
             webUrl: url,
             mobileWebUrl: url,

@@ -25,7 +25,6 @@ export default function MainLesson(props: MainLessonProps) {
   return (
     <LessonIndividualContainer>
       {isClickedEdit && <ManageLessonEditButton />}
-
       <MainLessonBox onClick={() => handleMoveToManageLessonDetail(idx)}>
         <MainLessonWrapperContainer>
           <MainLessonWrapper>
@@ -47,7 +46,6 @@ export default function MainLesson(props: MainLessonProps) {
 
 const LessonIndividualContainer = styled.article`
   position: relative;
-  width: 14.8rem;
   height: 15.1rem;
   display: flex;
 `;
@@ -106,4 +104,5 @@ const ManageLessonEditButton = styled(ManageLessonEditIc)`
   right: 0;
   width: 2rem;
   height: 2rem;
+  cursor: pointer;
 `;

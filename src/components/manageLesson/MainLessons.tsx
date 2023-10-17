@@ -15,7 +15,7 @@ export default function MainLessons(props: MainLessonsProp) {
     <>
       <MainLessonsWrapper>
         {lessonList &&
-          lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList, isClickedEdit }: lessonListType) => (
+          lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType) => (
             <MainLesson
               isClickedEdit={isClickedEdit}
               key={idx}
@@ -31,10 +31,9 @@ export default function MainLessons(props: MainLessonsProp) {
   );
 }
 
-// const TitleWrapper = styled
-
 const MainLessonsWrapper = styled.article`
   display: flex;
   flex-wrap: wrap;
+  width: 30rem;
   gap: 1.1rem;
 `;

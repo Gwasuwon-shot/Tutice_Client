@@ -18,9 +18,10 @@ export default function WelcomeLayout() {
     const permission = await Notification.requestPermission();
 
     if (permission == "granted" || permission == "denied") {
-      navigate("/alert");
+      if (userRole !== "선생님") {
+      } else navigate("/home");
     } else {
-      navigate("/tree");
+      navigate("/alert");
     }
   }
   checkAlarmAlertShow();

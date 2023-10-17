@@ -8,7 +8,6 @@ export default function useGetUserName() {
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 3000,
   });
 
   return { teacherName };

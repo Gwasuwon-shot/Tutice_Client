@@ -13,7 +13,6 @@ export default function AgreeCheckingFrame() {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    console.log(newUser);
     if (userRole === "부모님") {
       setUserRole("학부모님");
     }

@@ -3,9 +3,7 @@ import { getPastLessonRecord } from "../api/getPastLessonRecord";
 import { PastLessonRecordType } from "../type/lessonRecord/lessonRecord";
 
 export default function useGetPastLessonRecord(lessonId: number) {
-  const { data: pastLessonRecord } = useQuery(["getPastLessonRecord"], () => getPastLessonRecord(lessonId), {
-    staleTime: 3000,
-  });
+  const { data: pastLessonRecord } = useQuery(["getPastLessonRecord"], () => getPastLessonRecord(lessonId), {});
 
   const scheduleList = pastLessonRecord?.scheduleList?.filter(
     (item: PastLessonRecordType) => item.status !== "상태없음",

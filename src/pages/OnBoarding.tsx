@@ -34,6 +34,8 @@ export default function OnBoarding() {
           </Link>
         </ButtonWrapper>
 
+        <DividingLine />
+
         <GoToLoginMessage>
           이미 계정이 있으신가요? 바로&nbsp;<Link to="/login">로그인 하기</Link>
         </GoToLoginMessage>
@@ -98,4 +100,11 @@ const GoToLoginMessage = styled.p`
   > a {
     color: ${({ theme }) => theme.colors.green5};
   }
+`;
+
+const DividingLine = styled.hr`
+  width: 83.75%;
+  height: 0.1rem;
+  background-color: #f4f4f4;
+  border: 0;
 `;

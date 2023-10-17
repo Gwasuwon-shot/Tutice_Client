@@ -81,7 +81,7 @@ export default function Footer() {
   const navigate = useNavigate();
 
   function handleMoveToLessonShare() {
-    navigate("/lesson-share");
+    navigate("/lesson-share", { state: true });
   }
 
   const { mutate: createNewLesson } = useMutation(createLesson, {

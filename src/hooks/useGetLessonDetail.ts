@@ -6,11 +6,10 @@ export default function useGetLessonDetail(lessonIdx: number) {
     onError: (error) => {
       console.log(error);
     },
-    staleTime: 3000,
   });
 
-  const { amount, idx, payment, startDate, studentName, subject, teacherName } =
+  const { amount, idx, payment, startDate, studentName, subject, teacherName, lessonCode } =
     lessonDetail !== undefined && lessonDetail;
 
-  return { amount, idx, payment, startDate, studentName, subject, teacherName };
+  return { amount, idx, payment, startDate, studentName, subject, teacherName, lessonCode };
 }

@@ -23,7 +23,7 @@ export default function LoginInput() {
   const [pwViewing, setPwViewing] = useState("password");
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const [isError, setIsError] = useState(false);
-  const { lessonCode } = useRecoilValue(lessonCodeAndPaymentId);
+  const codeInfo = useRecoilValue(lessonCodeAndPaymentId);
   const navigate = useNavigate();
 
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
@@ -34,8 +34,8 @@ export default function LoginInput() {
         secure: true,
       });
 
-      console.log(lessonCode);
-      if (lessonCode != "") navigate(`/${lessonCode}`);
+      console.log("lessonCode", codeInfo.lessonCode, codeInfo);
+      if (codeInfo.lessonCode != "") navigate(`/${lessonCode}`);
       else navigate("/welcome", { state: data.data });
     },
     onError: (error) => {

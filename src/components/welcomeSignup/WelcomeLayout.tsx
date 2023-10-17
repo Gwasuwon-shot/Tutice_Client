@@ -1,34 +1,34 @@
-import { useEffect, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { stepNum } from "../../atom/signup/signup";
-import AfterSignup from "./AfterSignup";
-import AlertSignup from "./AlertSignup";
+import { useNavigate } from "react-router-dom";
 
 export default function WelcomeLayout() {
+  const navigate = useNavigate();
   const userRole = useRecoilValue(userRoleData);
-  const [isWelcome, setIsWelcome] = useState<boolean>(true);
-  const setStep = useSetRecoilState(stepNum);
 
   useEffect(() => {
-    userRole !== "선생님" && setIsWelcome(true);
+    if (userRole !== "선생님") {
+      checkAlarmAlertShow();
+    }
   }, []);
 
-  // function checkAlarmAlertShow() {
-  //   console.log(window.Notification);
-  //   if (window.Notification) {
-  //     // 알림 허용 x
-  //     return <AlertSignup setIsWelcome={setIsWelcome} />;
-  //   } else {
-  //     return !isWelcome && <AfterSignup setIsWelcome={setIsWelcome} />;
-  //   }
-  // }
+  async function checkAlarmAlertShow() {
+    const permission = await Notification.requestPermission();
+
+    if (permission == "granted" || permission == "denied") {
+      navigate("/alert");
+    } else {
+      navigate("/tree");
+    }
+  }
+  checkAlarmAlertShow();
 
   return (
     <>
       <Container>
-        {!isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup setIsWelcome={setIsWelcome} />}
+        {/* {!isWelcome ? <AfterSignup setIsWelcome={setIsWelcome} /> : <AlertSignup setIsWelcome={setIsWelcome} />} */}
       </Container>
     </>
   );

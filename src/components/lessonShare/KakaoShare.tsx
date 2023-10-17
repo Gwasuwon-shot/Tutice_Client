@@ -59,20 +59,6 @@ export function KakaoShare(props: KakaoShareProp) {
           },
         ],
       });
-      // kakao.Share.sendCustom({
-      //   templateId: 96174,
-      //   templateArgs: {
-      //     description: `[${userName}]선생님이 [${studentName}]학생의\nTutice 초대장을 보냈습니다.\n\nTutice 링크 \n ${url}`,
-      //   },
-      //   buttons: [
-      //     {
-      //       link: {
-      //         webUrl: url,
-      //         mobileWebUrl: url,
-      //       },
-      //     },
-      //   ],
-      // });
     }
   }
 

@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import ConnectParentsAndTeacher from "./components/RegularLesson/ConnectParentsAndTeacher";
 import ParentsFooter from "./components/common/ParentsFooter";
+import AfterSignup from "./components/welcomeSignup/AfterSignup";
+import AllowAlert from "./components/welcomeSignup/AllowAlert";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
 import EditShcedule from "./pages/EditSchedule";
@@ -25,8 +27,6 @@ import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
 import PrivateRoute from "./utils/common/privateRoute";
-import AfterSignup from "./components/welcomeSignup/AfterSignup";
-import AllowAlert from "./components/welcomeSignup/AllowAlert";
 
 export default function Router() {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { setCookie } from "../../api/cookie";
 import { postLocalLogin } from "../../api/localLogin";
@@ -11,6 +11,7 @@ import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 import RegexField from "../signup/RegexField";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
+import { lessonCode } from "../../atom/share/share";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -22,9 +23,9 @@ export default function LoginInput() {
   const [pwViewing, setPwViewing] = useState("password");
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const [isError, setIsError] = useState(false);
+  const storedLessonCode = useRecoilValue(lessonCode);
   const navigate = useNavigate();
 
-  const lessonCode = useRecoilState(connectLessonId);
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
       const accessToken = data.data.data.accessToken;
@@ -32,7 +33,9 @@ export default function LoginInput() {
       setCookie("accessToken", accessToken, {
         secure: true,
       });
-      navigate("/welcome", { state: data.data });
+
+      if (storedLessonCode != "") navigate(`/${storedLessonCode}`);
+      else navigate("/welcome", { state: data.data });
     },
     onError: (error) => {
       console.debug(error);

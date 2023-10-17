@@ -11,13 +11,14 @@ import {
 } from "../atom/tuitionPayment/tuitionPayment";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { lessonCodeAndPaymentId } from "../atom/tuitionPayment/tuitionPayment";
 import { CommonBackButton, ProgressBar } from "../components/common";
 import BottomButton from "../components/common/BottomButton";
 import { KakaoShare } from "../components/lessonShare/KakaoShare";
 import useGetLessonByUser from "../hooks/useGetLessonByUser";
+import { lessonCode } from "../atom/share/share";
 
 interface dayProps {
   year: number;
@@ -64,9 +65,11 @@ export default function LessonShare() {
   const navgiate = useNavigate();
   const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
   const [URL, setURL] = useState(`https://tutice.com/${codeAndId?.lessonCode}`);
+  const setLessonCode = useSetRecoilState(lessonCode);
 
   useEffect(() => {
     setURL(`https://tutice.com/${codeAndId?.lessonCode}`);
+    setLessonCode(codeAndId?.lessonCode);
   }, [codeAndId]);
 
   function handleMoveToHome() {

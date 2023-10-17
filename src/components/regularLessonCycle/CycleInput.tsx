@@ -59,15 +59,18 @@ const TurnButton = styled.button<LesssonProp>`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 4.5rem;
     ${({ theme }) => theme.fonts.title01};
     ${({ isSelected, theme }) => !isSelected && `color: ${theme.colors.grey100}`};
     ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.grey700}`};
+    border-bottom: 1.5px solid ${({ theme, isSelected }) => (isSelected ? theme.colors.green5 : theme.colors.grey70)};
 `
 
 const TurnButtonName = styled.h2`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
     margin-left: 1.5rem;
     ${({ theme }) => theme.fonts.body04};
     color: ${({ theme }) => theme.colors.grey400};

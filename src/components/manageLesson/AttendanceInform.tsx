@@ -42,10 +42,14 @@ export default function AttendanceInform(props: AttendanceInformProps) {
     return status === ATTENDANCE_STATUS.cancel;
   }
 
-  function handleOpenCheckAttendanceModal() {
+  function handleOpenFixAttendanceModal() {
     setAttendanceData({ ...attendanceData, status: status });
     setSelectedLesson({ ...selectedLesson, lessonIdx: lessonIdx, count: count, scheduleIdx: scheduleIdx });
     checkIsCancel() ? setIsCancelImpossibleModalOpen(true) : showModal();
+  }
+
+  function handleOpenCheckAttendanceModal() {
+    !isUpdateOpen && showModal();
   }
 
   return (
@@ -66,7 +70,7 @@ export default function AttendanceInform(props: AttendanceInformProps) {
               {!isUpdateOpen ? (
                 <StatusLabel $status={status}>{status}</StatusLabel>
               ) : (
-                <StatusUpdateLabel isCancel={checkIsCancel()} onClick={handleOpenCheckAttendanceModal}>
+                <StatusUpdateLabel isCancel={checkIsCancel()} onClick={handleOpenFixAttendanceModal}>
                   {status}
                 </StatusUpdateLabel>
               )}

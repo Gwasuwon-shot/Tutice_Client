@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import ConnectParentsAndTeacher from "./components/RegularLesson/ConnectParentsAndTeacher";
-import ParentsFooter from "./components/common/ParentsFooter";
+import AfterSignup from "./components/welcomeSignup/AfterSignup";
+import AllowAlert from "./components/welcomeSignup/AllowAlert";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
+import ConnectParentsAndTeacher from "./components/RegularLesson/ConnectParentsAndTeacher";
 import EditShcedule from "./pages/EditSchedule";
 import Home from "./pages/Home";
 import LessonDetail from "./pages/LessonDetail";
@@ -16,17 +17,18 @@ import Mypage from "./pages/Mypage";
 import NoAttendanceCheck from "./pages/NoAttendanceCheck";
 import OnBoarding from "./pages/OnBoarding";
 import ParentCalendar from "./pages/ParentCalendar";
+import ParentsFooter from "./components/common/ParentsFooter";
+import PrivateRoute from "./utils/common/privateRoute";
 import RegisterCalendar from "./pages/RegisterCalendar";
 import RegisterLesson from "./pages/RegisterLesson";
 import RegisterPayment from "./pages/RegisterPayment";
 import RegularLesson from "./pages/RegularLesson";
+import RegularLessonCycle from "./pages/RegularLessonCycle";
+import RegularLessonDate from "./pages/RegularLessonDate";
 import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
-import PrivateRoute from "./utils/common/privateRoute";
-import AfterSignup from "./components/welcomeSignup/AfterSignup";
-import AllowAlert from "./components/welcomeSignup/AllowAlert";
 
 export default function Router() {
   return (
@@ -47,6 +49,8 @@ export default function Router() {
           <Route path="/register-payment/:manageLessonId" element={<RegisterPayment />} />
           <Route path="/parent-calendar" element={<ParentCalendar />} />
           <Route path="/register-lesson" element={<RegisterLesson />} />
+          <Route path="/regular-lesson-cycle" element={<RegularLessonCycle />} />
+          <Route path="/regular-lesson-date" element={<RegularLessonDate />} />
           <Route path="/regular-lesson" element={<RegularLesson />} />
           <Route path="/register-calendar" element={<RegisterCalendar />} />
           <Route path="/lesson-detail/:lessonId" element={<LessonDetail />} />

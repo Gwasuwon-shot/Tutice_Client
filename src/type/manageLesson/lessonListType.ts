@@ -4,4 +4,5 @@ export interface lessonListType {
   subject: string;
   percent: number;
   dayOfWeekList: string[];
+  isClickedEdit: boolean;
 }

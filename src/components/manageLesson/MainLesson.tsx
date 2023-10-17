@@ -3,6 +3,7 @@ import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useMoveToLessonDetail from "../../hooks/useMoveToLessonDetail";
 import SubjectLabel from "../common/SubjectLabel";
 import ManageStudentColorBox from "./ManageStudentColorBox";
+import { ManageLessonEditIc } from "../../assets";
 
 interface MainLessonProps {
   idx: number;
@@ -21,23 +22,34 @@ export default function MainLesson(props: MainLessonProps) {
   }
 
   return (
-    <MainLessonBox onClick={() => handleMoveToManageLessonDetail(idx)}>
-      <MainLessonWrapperContainer>
-        <MainLessonWrapper>
-          <ManageStudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
-          <StudentNameWrapper>{studentName}</StudentNameWrapper>
-          <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#5B6166" />
-        </MainLessonWrapper>
-        <DaysWrapper>
-          <LessonInformation>진행예정</LessonInformation>
-          {dayOfWeekList.map((day, idx) => (
-            <>{checkIsLastDay(idx, day)}</>
-          ))}
-        </DaysWrapper>
-      </MainLessonWrapperContainer>
-    </MainLessonBox>
+    <LessonIndividualContainer>
+      <ManageLessonEditButton />
+
+      <MainLessonBox onClick={() => handleMoveToManageLessonDetail(idx)}>
+        <MainLessonWrapperContainer>
+          <MainLessonWrapper>
+            <ManageStudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
+            <StudentNameWrapper>{studentName}</StudentNameWrapper>
+            <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#5B6166" />
+          </MainLessonWrapper>
+          <DaysWrapper>
+            <LessonInformation>진행예정</LessonInformation>
+            {dayOfWeekList.map((day, idx) => (
+              <>{checkIsLastDay(idx, day)}</>
+            ))}
+          </DaysWrapper>
+        </MainLessonWrapperContainer>
+      </MainLessonBox>
+    </LessonIndividualContainer>
   );
 }
+
+const LessonIndividualContainer = styled.article`
+  position: relative;
+  width: 14.8rem;
+  height: 15.1rem;
+  display: flex;
+`;
 
 const MainLessonBox = styled.article`
   display: flex;
@@ -50,6 +62,8 @@ const MainLessonBox = styled.article`
 
   width: 14rem;
   height: 14.4rem;
+
+  margin-top: 0.8rem;
 `;
 
 const MainLessonWrapper = styled.div`
@@ -83,4 +97,12 @@ const MainLessonWrapperContainer = styled.section`
 const LessonInformation = styled.h2`
   ${({ theme }) => theme.fonts.body04};
   color: ${({ theme }) => theme.colors.grey500};
+`;
+
+const ManageLessonEditButton = styled(ManageLessonEditIc)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
 `;

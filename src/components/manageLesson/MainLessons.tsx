@@ -3,15 +3,21 @@ import useGetAllLessons from "../../hooks/useGetAllLessons";
 import { lessonListType } from "../../type/manageLesson/lessonListType";
 import MainLesson from "./MainLesson";
 
-export default function MainLessons() {
+interface MainLessonsProp {
+  isClickedEdit: boolean;
+}
+
+export default function MainLessons(props: MainLessonsProp) {
+  const { isClickedEdit } = props;
   const { lessonList } = useGetAllLessons();
 
   return (
     <>
       <MainLessonsWrapper>
         {lessonList &&
-          lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType) => (
+          lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList, isClickedEdit }: lessonListType) => (
             <MainLesson
+              isClickedEdit={isClickedEdit}
               key={idx}
               idx={idx}
               studentName={studentName}

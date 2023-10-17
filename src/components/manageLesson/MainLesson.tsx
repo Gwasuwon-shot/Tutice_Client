@@ -11,10 +11,11 @@ interface MainLessonProps {
   subject: string;
   percent: number;
   dayOfWeekList: string[];
+  isClickedEdit: boolean;
 }
 
 export default function MainLesson(props: MainLessonProps) {
-  const { idx, studentName, subject, percent, dayOfWeekList } = props;
+  const { idx, studentName, subject, percent, dayOfWeekList, isClickedEdit } = props;
   const { handleMoveToManageLessonDetail } = useMoveToLessonDetail();
 
   function checkIsLastDay(idx: number, day: string) {
@@ -23,7 +24,7 @@ export default function MainLesson(props: MainLessonProps) {
 
   return (
     <LessonIndividualContainer>
-      <ManageLessonEditButton />
+      {isClickedEdit && <ManageLessonEditButton />}
 
       <MainLessonBox onClick={() => handleMoveToManageLessonDetail(idx)}>
         <MainLessonWrapperContainer>

@@ -11,6 +11,7 @@ import ExtensionQuestion from "../components/manageLesson/ExtensionQuestion";
 import MainLessons from "../components/manageLesson/MainLessons";
 import SuccessLessonMaintenanceSanckBar from "../components/modal/SuccessLessonMaintenanceSanckBar";
 import useGetMissingMaintenanceLesson from "../hooks/useGetMissingMaintenanceLesson";
+import { ManageLessonEditIc } from "../assets";
 
 export default function ManageLessonMain() {
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
@@ -18,6 +19,7 @@ export default function ManageLessonMain() {
   const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
   const navigate = useNavigate();
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const [isClickedEdit, setIsClickedEdit] = useState(false);
 
   useEffect(() => {
     setAttendanceData({ idx: 0, status: "" });
@@ -31,6 +33,11 @@ export default function ManageLessonMain() {
     navigate("/register-lesson");
   }
 
+  function EditPageClick() {
+    setIsClickedEdit(!isClickedEdit);
+    console.log(isClickedEdit);
+  }
+
   return (
     <>
       {snackBarOpen && isSucces && <SuccessLessonMaintenanceSanckBar />}
@@ -39,10 +46,11 @@ export default function ManageLessonMain() {
         <MainLessonsHeader>수업관리</MainLessonsHeader>
         <TitleWrapper>
           <Title>나의 수업</Title>
-          <EditButton>편집</EditButton>
+          <EditButton onClick={EditPageClick}>{isClickedEdit ? "완료" : "편집"}</EditButton>
         </TitleWrapper>
         {/* {checkMissingMaintenanceLessonExist() && <ExtensionQuestion setIsSuccess={setIsSuccess} />} */}
-        <MainLessons />
+
+        <MainLessons isClickedEdit={isClickedEdit} />
         <AddTreeCodeButtonManageIcon onClick={handleMakeTreeCode} />
       </MainLessonsWrapper>
 

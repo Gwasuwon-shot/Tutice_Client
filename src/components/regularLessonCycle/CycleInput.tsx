@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
 interface LesssonProp {
+  chosen: boolean;
   isSelected: boolean;
 };
 
@@ -26,7 +27,7 @@ export default function CyclceInput() {
     <InputWrapper>
         <TurnName> 수업회차 </TurnName>
         <TurnButtonWrapper>
-          <TurnButton type = "button" onClick={handleTimePicker} isSelected={activeCycleSlide !== 0}> {activeCycleSlide}</TurnButton>
+          <TurnButton type = "button" onClick={handleTimePicker} chosen={activeCycleSlide !== 0} isSelected = {isTimePickerOpen}> {activeCycleSlide}</TurnButton>
           <TurnButtonName> 회차 </TurnButtonName>
         </TurnButtonWrapper>
     </InputWrapper>
@@ -59,9 +60,10 @@ const TurnButton = styled.button<LesssonProp>`
     align-items: center;
     width: 4.5rem;
     ${({ theme }) => theme.fonts.title01};
-    ${({ isSelected, theme }) => !isSelected && `color: ${theme.colors.grey100}`};
-    ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.grey700}`};
-    border-bottom: 1.5px solid ${({ theme, isSelected }) => (isSelected ? theme.colors.green5 : theme.colors.grey70)};
+    ${({ isSelected, chosen, theme }) => (!isSelected) && `color: ${theme.colors.grey700}`};
+    ${({ isSelected, chosen, theme }) => (isSelected) && `color: ${theme.colors.grey300}`};
+    ${({ isSelected, chosen, theme }) => (!isSelected && !chosen) && `color: ${theme.colors.grey300}`};
+    border-bottom: 1.5px solid ${({ theme, chosen }) => (chosen ? theme.colors.green5 : theme.colors.grey70)};
 `
 
 const TurnButtonName = styled.h2`

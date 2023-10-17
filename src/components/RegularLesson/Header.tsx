@@ -6,36 +6,47 @@ import {
     focusDayState,
     temporarySchedule,
 } from "../../atom/timePicker/timePicker";
+import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
+import ProgressBar from "../common/ProgressBar";
+import React from 'react';
 import {RegisterLessonHeaderIc} from '../../assets';
 import { TuticeWithTextCommonIc } from "../../assets";
 import styled from 'styled-components';
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export default function Header() {
 
-    const navigate = useNavigate();
-    const [count, setCount] = useRecoilState(cycleNumberState);
-    const [firstLesson, setFirstLesson] = useRecoilState(firstLessonDay);
+
+    const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
+
     const [focusDay, setFocusDay] = useRecoilState(focusDayState);
     const [day, setDayState] = useRecoilState(dayState);
-    const [date, setDateState] = useRecoilState(dateState);
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (firstLesson) {
+            setDayState([{ dayOfWeek: firstLesson, startTime: "12:00", endTime: "12:00" }]);
+        }
+    }, [firstLesson]);
     
     function handleMoveToBack() {
-        setCount(-1)
-        setFirstLesson({ 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" }[new Date().getDay()])
-        setFocusDay("")
-        setDayState([{dayOfWeek: ["일", "월", "화", "수", "목", "금", "토"][new Date().getDay()], startTime: "12:00", endTime: "12:00" },])
-        setDateState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() })
+        if (firstLesson) {
+            setDayState([{ dayOfWeek: firstLesson, startTime: "12:00", endTime: "12:00" }]);
+        }
+        setFocusDay("");
         navigate(-1);
     }
-  
+
     return (
 
         <HeaderWrapper>
-            <RegisterLessonHeaderIcon onClick={handleMoveToBack} />
-            <HeaderName> 정기수업 일정 등록 </HeaderName>
+            <RegisterLessonHeaderIc onClick={handleMoveToBack} />
+            <ProgressBar progress = {100} />
+            <InputHeader> 정기적인 수업 일정을 <br/> 알려주세요! </InputHeader> 
+            <InputNotice> 첫 수업일을 기준으로 수업 일정을 <br/> 캘린더에 표시해 드릴게요 </InputNotice>    
         </HeaderWrapper>
 
     );
@@ -43,25 +54,29 @@ export default function Header() {
 
 const HeaderWrapper = styled.header`
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     
-    position: relative;
-    
-    height: 5rem;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.grey50}
+    height: 15.8rem;
+    margin-top: 2rem;
 `
 
-const HeaderName = styled.h1`
+const InputHeader = styled.h1`
     display: flex;
     
-    ${({ theme }) => theme.fonts.body01};
+    margin-top: 2.2rem;
+    margin-left: 1.6rem;
+    
+    ${({ theme }) => theme.fonts.title01};
     color: ${({ theme }) => theme.colors.grey900};
 `
-const RegisterLessonHeaderIcon = styled(RegisterLessonHeaderIc)`
-    position: absolute;
-    top: 0.8rem;
-    left: 0rem;
-    width: 4rem;
-    height: 4rem;
-`;
+
+const InputNotice = styled.h2`
+    display: flex;
+    
+    margin-top: 1.1rem;
+    margin-left: 1.6rem;
+    
+    ${({ theme }) => theme.fonts.body05};
+    color: ${({ theme }) => theme.colors.grey600};
+`
+

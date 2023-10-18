@@ -1,42 +1,23 @@
-import {
-    cycleNumberState,
-    dateState,
-    dayState,
-    firstLessonDay,
-    focusDayState,
-    temporarySchedule,
-} from "../../atom/timePicker/timePicker";
+import {dateState, firstLessonDay} from '../../atom/timePicker/timePicker';
 import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
 import ProgressBar from "../common/ProgressBar";
 import React from 'react';
-import {RegisterLessonHeaderIc} from '../../assets';
-import { TuticeWithTextCommonIc } from "../../assets";
+import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export default function Header() {
-
-
-    const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
-
-    const [focusDay, setFocusDay] = useRecoilState(focusDayState);
-    const [day, setDayState] = useRecoilState(dayState);
-    const navigate = useNavigate();
     
-    useEffect(() => {
-        if (firstLesson) {
-            setDayState([{ dayOfWeek: firstLesson, startTime: "12:00", endTime: "12:00" }]);
-        }
-    }, [firstLesson]);
+    const navigate = useNavigate();
+
+    const [firstLesson, setFirstLesson] = useRecoilState(firstLessonDay);
+    const [date, setDateState] = useRecoilState(dateState);
     
     function handleMoveToBack() {
-        if (firstLesson) {
-            setDayState([{ dayOfWeek: firstLesson, startTime: "12:00", endTime: "12:00" }]);
-        }
-        setFocusDay("");
+        setFirstLesson({ 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토", 0: "일" }[new Date().getDay()])
+        setDateState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate() })
         navigate(-1);
     }
 
@@ -44,8 +25,8 @@ export default function Header() {
 
         <HeaderWrapper>
             <RegisterLessonHeaderIc onClick={handleMoveToBack} />
-            <ProgressBar progress = {66.4} />
-            <InputHeader> 정기적인 수업 일정을 <br/> 알려주세요! </InputHeader> 
+            <ProgressBar progress = {49.8} />
+            <InputHeader> 첫 수업을 시작한 날짜를 <br/> 알려주세요! </InputHeader> 
             <InputNotice> 첫 수업일을 기준으로 수업 일정을 <br/> 캘린더에 표시해 드릴게요 </InputNotice>    
         </HeaderWrapper>
 

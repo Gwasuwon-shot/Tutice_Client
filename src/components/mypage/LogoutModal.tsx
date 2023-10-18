@@ -21,7 +21,6 @@ export default function LogoutModal(props: LogoutModalProps) {
 
   const { mutate: patchingLogout } = useMutation(patchLogout, {
     onSuccess: (res) => {
-      console.log("res", res.status);
       removeCookie("accessToken", {});
       navigate("/");
     },

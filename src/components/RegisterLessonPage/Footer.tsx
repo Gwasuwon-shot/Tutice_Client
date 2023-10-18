@@ -16,7 +16,7 @@ export default function Footer() {
 
     function moveToRegularLesson() {
         if (isFooterGreen) {
-            navigate("/regular-lesson");
+            navigate("/regular-lesson-cycle");
         }
     }
     

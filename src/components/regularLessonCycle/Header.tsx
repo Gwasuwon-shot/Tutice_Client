@@ -3,19 +3,17 @@ import { studentNameState, subjectNameState } from "../../atom/common/datePicker
 import ProgressBar from "../common/ProgressBar";
 import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
+import {cycleNumberState} from '../../atom/timePicker/timePicker';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export default function Header() {
     const navigate = useNavigate();
-    
-    const [studentName, setStudentName] = useRecoilState<string>(studentNameState);
-    const [subjectName, setSubjectName] = useRecoilState<string>(subjectNameState);
+    const [activeCycleSlide, setActiveCycleSlide] = useRecoilState(cycleNumberState);
   
     function handleMoveToBack() {
-        setStudentName('');
-        setSubjectName('');
+        setActiveCycleSlide(0);
         navigate(-1);
     }
 
@@ -23,9 +21,9 @@ export default function Header() {
 
         <HeaderWrapper>
             <RegisterLessonHeaderIc onClick={handleMoveToBack} />
-            <ProgressBar progress = {16.6} />
-            <InputHeader> 학생의 이름과 <br/> 과목을 입력해주세요. <Emphasis> * </Emphasis> </InputHeader> 
-            <InputNotice> 수업관리를 도와드릴 수 있도록 몇가지 정보를 알려주세요.</InputNotice>    
+            <ProgressBar progress = {33.2} />
+            <InputHeader> 총 몇 회차로 이루어진 <br/> 수업인가요? </InputHeader> 
+            <InputNotice> 수업비를 받는 기준으로 진행되는 <br/> 회차를 알려주세요 </InputNotice>    
         </HeaderWrapper>
 
     );
@@ -47,14 +45,6 @@ const InputHeader = styled.h1`
     
     ${({ theme }) => theme.fonts.title01};
     color: ${({ theme }) => theme.colors.grey900};
-`
-
-const Emphasis = styled.span`
-    display: flex;
-    align-items: flex-end;
-    
-    ${({ theme }) => theme.fonts.title01};
-    color: ${({ theme }) => theme.colors.green5};
 `
 
 const InputNotice = styled.h2`

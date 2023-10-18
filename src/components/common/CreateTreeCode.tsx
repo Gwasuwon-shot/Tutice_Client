@@ -10,7 +10,7 @@ export default function CreateTreeCode() {
 
   return (
     <CreateTreeCodeButtonWrapper onClick={handleMakeTreeCode}>
-      <RoundBottomButton buttonMessage="나무코드 생성하기" />
+      <RoundBottomButton buttonMessage="수업링크 코드 생성하기" />
     </CreateTreeCodeButtonWrapper>
   );
 }

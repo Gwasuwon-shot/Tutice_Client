@@ -28,7 +28,7 @@ export default function TreeImage() {
   return (
     <>
       <ImgWrapper>
-        <img src={checkTreeSrc()} alt="열매 이미지" />
+        <img src={checkTreeSrc()} alt="결실 이미지" />
       </ImgWrapper>
       <CountBox>
         {nowCount}회/ 총 {count}회

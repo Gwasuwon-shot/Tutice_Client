@@ -40,7 +40,7 @@ export default function Router() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/lesson-share" element={<LessonShare />} />
-        // 로그인 후 이용해라
+
         <Route element={<PrivateRoute authentication={true} />}>
           <Route path="/home" element={<Home />} />
           <Route path="/complete-check-attendance" element={<CompleteCheckAttendance />} />

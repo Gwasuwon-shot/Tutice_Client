@@ -14,10 +14,10 @@ export default function NoClassParentsHome() {
     <NoClassParentsHomeWrapper>
       <NoClassLogoParentsHomeIcon />
 
-      <NoClassMessage>아직 수업나무가 생성되지 않았어요!</NoClassMessage>
+      <NoClassMessage>아직 수업이 생성되지 않았어요!</NoClassMessage>
 
       <NoClassSubMessage>
-        선생님에게 수업나무 링크를 공유받아 <br /> 수업관리를 확인해보세요
+        선생님에게 수업링크를 공유받아 <br /> 수업관리를 확인해보세요
       </NoClassSubMessage>
 
       <RoundBottomButton buttonMessage="온보딩 구경하기" handleClick={handleMoveToOnboarding} />

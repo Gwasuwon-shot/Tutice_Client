@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 export default function Terms() {
@@ -9,9 +8,15 @@ export default function Terms() {
           <TitleText>약관</TitleText>
         </TitleWrapper>
         <ContentWrapper>
-          <ContentText>서비스 이용</ContentText>
-          <ContentText>개인정보 수집 및 이용</ContentText>
-          <ContentText>개인정보 마케팅 활용</ContentText>
+          <a href="https://ubiquitous-verbena-6ff.notion.site/9e874c3c10804274a99b0d6c9b75f1c2?pvs=4">
+            <ContentText>서비스 이용</ContentText>
+          </a>
+          <a href="https://ubiquitous-verbena-6ff.notion.site/388ff5750f004bbf81554bfa14887186?pvs=4">
+            <ContentText>개인정보 수집 및 이용</ContentText>
+          </a>
+          <a href="https://ubiquitous-verbena-6ff.notion.site/1f3759e165504863b33506204d8c871a?pvs=4">
+            <ContentText>개인정보 마케팅 활용</ContentText>
+          </a>
         </ContentWrapper>
       </Wrapper>
     </>

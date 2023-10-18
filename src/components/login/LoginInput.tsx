@@ -7,11 +7,12 @@ import { setCookie } from "../../api/cookie";
 import { postLocalLogin } from "../../api/localLogin";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 import RegexField from "../signup/RegexField";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
 import { lessonCode } from "../../atom/share/share";
+import { lessonCodeAndPaymentId } from "../../atom/tuitionPayment/tuitionPayment";
+import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -23,8 +24,9 @@ export default function LoginInput() {
   const [pwViewing, setPwViewing] = useState("password");
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const [isError, setIsError] = useState(false);
-  const storedLessonCode = useRecoilValue(lessonCode);
+  const codeInfo = useRecoilValue(lessonCodeAndPaymentId);
   const navigate = useNavigate();
+  const connectCode = useRecoilValue(connectLessonId);
 
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
@@ -34,8 +36,8 @@ export default function LoginInput() {
         secure: true,
       });
 
-      console.log("storedLessonCode", storedLessonCode);
-      if (storedLessonCode != "") navigate(`/${storedLessonCode}`);
+      console.log("connectcode", connectCode);
+      if (connectCode != "") navigate(`/${lessonCode}`);
       else navigate("/welcome", { state: data.data });
     },
     onError: (error) => {

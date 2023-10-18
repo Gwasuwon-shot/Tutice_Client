@@ -4,8 +4,6 @@ import { TuticeWithTextCommonIc } from "../../assets";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 
-// 나무 생성 뷰
-
 export default function AfterSignup() {
   const navigate = useNavigate();
   const MAIN_TEXT = `환영해요!`;

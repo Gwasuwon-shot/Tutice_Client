@@ -14,6 +14,7 @@ import { messaging } from "../../core/notification/settingFCM";
 import { registerServiceWorker } from "../../utils/common/notification";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
+import useGetAllLessons from "../../hooks/useGetAllLessons";
 
 //알림 활성화뷰
 export default function AllowAlert() {
@@ -61,11 +62,14 @@ export default function AllowAlert() {
   // 디바이스토큰 업데이트
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
-      console.log(lessonIndex);
-      if (userRole === "부모님" && lessonIndex !== "") {
-        navigate(`/${lessonIndex}`);
+      if (userRole === "부모님") {
+        navigate("/home");
       } else {
-        // userRole !== "선생님" ? navigate("/home") : setIsWelcome(false);
+        //수업 나무 있으면
+        //수업 나무 없으면 생성 AfterSignup
+        const { lessonList } = useGetAllLessons();
+        if (lessonList.length) navigate("/home");
+        else navigate("/tree");
       }
     },
     onError: (err) => {
@@ -78,10 +82,7 @@ export default function AllowAlert() {
   }
 
   function handleMoveToHome() {
-    if (userRole !== "선생님") {
-      navigate("/home");
-    } else {
-    }
+    navigate("/home");
   }
 
   return (

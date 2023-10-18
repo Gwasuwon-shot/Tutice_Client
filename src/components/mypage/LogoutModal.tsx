@@ -4,7 +4,7 @@ import BasicDoubleModal from "../common/BasicDoubleModal";
 import { useMutation } from "react-query";
 import { patchLogout } from "../../api/patchLogout";
 import { useNavigate } from "react-router-dom";
-import { getCookie } from "../../api/cookie";
+import { getCookie, removeCookie } from "../../api/cookie";
 
 interface LogoutModalProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,11 +21,11 @@ export default function LogoutModal(props: LogoutModalProps) {
 
   const { mutate: patchingLogout } = useMutation(patchLogout, {
     onSuccess: (res) => {
-      console.log(getCookie("accessToken"));
-      navigate("/home");
+      console.log("res", res.status);
+      removeCookie("accessToken", {});
+      navigate("/");
     },
     onError: (err) => {
-      console.log(getCookie("accessToken"));
       console.log(err);
     },
   });

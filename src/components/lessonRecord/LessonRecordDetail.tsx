@@ -21,7 +21,7 @@ export default function LessonRecordDetail() {
   const navigate = useNavigate();
 
   function handleGotoLessonInfoList() {
-    navigate(`/lesson-info/${lessonId}`);
+    navigate(`/lesson-info/${lessonId}`, { state: false });
   }
 
   return (
@@ -79,7 +79,7 @@ const TeacherName = styled.p`
   margin-left: 0.6rem;
 
   ${({ theme }) => theme.fonts.body06};
-  color: ${({ theme }) => theme.colors.grey900};
+  color: ${({ theme }) => theme.colors.grey600};
 `;
 
 const LessonManageIcon = styled(LessonInfoLessonRecordIc)`

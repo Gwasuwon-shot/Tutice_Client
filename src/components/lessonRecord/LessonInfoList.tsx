@@ -7,11 +7,11 @@ import useGetLessonRegularSchedule from "../../hooks/useGetLessonRegularSchedule
 import LessonInfoItemLayout from "./LessonInfoItemLayout";
 
 interface LessonInfoListProp {
-  isParents?: boolean;
+  state: boolean;
 }
 
 export default function LessonInfoList(props: LessonInfoListProp) {
-  const { isParents } = props;
+  const { state } = props;
   //커스텀 훅에서 account 객체 값 배열로 만들어서 리턴
   const { lessonId } = useParams();
   const { amount, payment, startDate, teacherName } = useGetLessonDetail(Number(lessonId));
@@ -38,7 +38,7 @@ export default function LessonInfoList(props: LessonInfoListProp) {
           );
         })}
       </ScheduleBox>
-      {isParents && (
+      {!state && (
         <>
           <LessonInfoMainCategory>선생님</LessonInfoMainCategory>
           <LessonInfoItemLayout detailCategory="이름" content={teacherName} />

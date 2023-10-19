@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import ConnectParentsAndTeacher from "./components/RegularLesson/ConnectParentsAndTeacher";
 import AfterSignup from "./components/welcomeSignup/AfterSignup";
 import AllowAlert from "./components/welcomeSignup/AllowAlert";
 import ChangeSchedule from "./pages/ChangeSchedule";
 import CompleteCheckAttendance from "./pages/CompleteCheckAttendance";
-import ConnectParentsAndTeacher from "./components/RegularLesson/ConnectParentsAndTeacher";
 import EditShcedule from "./pages/EditSchedule";
 import Home from "./pages/Home";
 import LessonDetail from "./pages/LessonDetail";
@@ -17,8 +17,6 @@ import Mypage from "./pages/Mypage";
 import NoAttendanceCheck from "./pages/NoAttendanceCheck";
 import OnBoarding from "./pages/OnBoarding";
 import ParentCalendar from "./pages/ParentCalendar";
-import ParentsFooter from "./components/common/ParentsFooter";
-import PrivateRoute from "./utils/common/privateRoute";
 import RegisterCalendar from "./pages/RegisterCalendar";
 import RegisterLesson from "./pages/RegisterLesson";
 import RegisterPayment from "./pages/RegisterPayment";
@@ -29,6 +27,7 @@ import Signup from "./pages/Signup";
 import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
+import PrivateRoute from "./utils/common/privateRoute";
 
 export default function Router() {
   return (
@@ -63,7 +62,6 @@ export default function Router() {
           <Route path="/edit-lessonschedule" element={<EditShcedule />} />
           <Route path="/alert" element={<AllowAlert />} />
           <Route path="/tree" element={<AfterSignup />} />
-          <Route path="/footer" element={<ParentsFooter />} />
         </Route>
       </Routes>
     </BrowserRouter>

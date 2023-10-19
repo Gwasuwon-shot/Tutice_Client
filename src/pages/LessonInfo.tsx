@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import CommonBackButton from "../components/common/CommonBackButton";
-import ParentsFooter from "../components/common/ParentsFooter";
 import LessonInfoList from "../components/lessonRecord/LessonInfoList";
 
 export default function LessonInfo() {
@@ -9,7 +8,6 @@ export default function LessonInfo() {
       <CommonBackButton />
       <LessonInfoHeader>수업 정보</LessonInfoHeader>
       <LessonInfoList />
-      <ParentsFooter />
     </>
   );
 }

@@ -26,12 +26,6 @@ export default function Header() {
     const [day, setDayState] = useRecoilState(dayState);
     const navigate = useNavigate();
     
-    useEffect(() => {
-        if (firstLesson) {
-            setDayState([{ dayOfWeek: firstLesson, startTime: "12:00", endTime: "12:00" }]);
-        }
-    }, [firstLesson]);
-    
     function handleMoveToBack() {
         if (firstLesson) {
             setDayState([{ dayOfWeek: firstLesson, startTime: "12:00", endTime: "12:00" }]);

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { styled } from "styled-components";
 import { setCookie } from "../../api/cookie";
 import { postLocalLogin } from "../../api/localLogin";
 import { canViewingLoginIc, viewingLoginIc } from "../../assets";
 import { userRoleData } from "../../atom/loginUser/loginUser";
-import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 import RegexField from "../signup/RegexField";
 import TextLabelLayout from "../signup/TextLabelLayout";
 import LoginButton from "./LoginButton";
+import { lessonCode } from "../../atom/share/share";
+import { lessonCodeAndPaymentId } from "../../atom/tuitionPayment/tuitionPayment";
+import { connectLessonId } from "../../atom/registerLesson/registerLesson";
 
 export default function LoginInput() {
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
@@ -22,9 +24,10 @@ export default function LoginInput() {
   const [pwViewing, setPwViewing] = useState("password");
   const [userRole, setUserRole] = useRecoilState(userRoleData);
   const [isError, setIsError] = useState(false);
+  const codeInfo = useRecoilValue(lessonCodeAndPaymentId);
   const navigate = useNavigate();
+  const connectCode = useRecoilValue(connectLessonId);
 
-  const lessonCode = useRecoilState(connectLessonId);
   const { mutate: postLoginData } = useMutation(postLocalLogin, {
     onSuccess: (data) => {
       const accessToken = data.data.data.accessToken;
@@ -32,7 +35,10 @@ export default function LoginInput() {
       setCookie("accessToken", accessToken, {
         secure: true,
       });
-      navigate("/welcome", { state: data.data });
+
+      console.log("connectcode", connectCode);
+      if (connectCode != "") navigate(`/${lessonCode}`);
+      else navigate("/welcome", { state: data.data });
     },
     onError: (error) => {
       console.debug(error);

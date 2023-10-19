@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
+import { agreeSend } from "../../atom/common/agreeSend";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
+import { paymentSuccessSnackBar } from "../../atom/registerPayment/registerPayment";
 import { paymentOrder } from "../../atom/tuitionPayment/tuitionPayment";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
 import useGetLessonByUser from "../../hooks/useGetLessonByUser";
 import useTeacherFooter from "../../hooks/useTeacherFooter";
+import { SuccessSendingAlarmSnackBar } from "../common";
 import Header from "../common/Header";
-import SuccessSendingAlarmSnackBar from "../common/SuccessSendingAlarmSnackBar";
 import TeacherFooter from "../common/TeacherFooter";
 import PreypaymentModal from "../modal/PreypaymentModal";
 import NoClassHome from "./NoClassHome";
@@ -23,6 +25,14 @@ export default function TeacherHome() {
   const { handleChangeActive } = useTeacherFooter();
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
   const [payment, setPayment] = useRecoilState(paymentOrder);
+  const [isAgreeSend, setIsAgreeSend] = useRecoilState<undefined | string>(agreeSend);
+  const [successPay, setSuccessPay] = useRecoilState(paymentSuccessSnackBar);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsAgreeSend(undefined);
+    }, 2500);
+  }, []);
 
   useEffect(() => {
     handleChangeActive(TEACHER_FOOTER_CATEGORY.home);
@@ -38,7 +48,7 @@ export default function TeacherHome() {
     <>
       {prepaymentModal && <PreypaymentModal setPreypaymentModal={setPreypaymentModal} />}
       {/* 경우의 수에 따라 어떤 스낵바 보일지 로직 짜야함 */}
-      {snackBarOpen && <SuccessSendingAlarmSnackBar />}
+      {snackBarOpen && (!successPay?.isOpen || isAgreeSend) && <SuccessSendingAlarmSnackBar />}
       {/* {snackBarOpen && <CancelLessonMaintenanceSnackBar />} */}
       <TeacherHomeWrapper>
         <Header />

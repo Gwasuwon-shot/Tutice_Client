@@ -2,7 +2,7 @@ import "swiper/components/navigation/navigation.min.css";
 import "swiper/swiper.min.css";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { dateState, firstLessonDay, openDatePickerState } from "../../../atom/timePicker/timePicker";
+import { dateState, dayState, firstLessonDay, openDatePickerState } from "../../../atom/timePicker/timePicker";
 
 import SwiperCore from "swiper";
 import styled from "styled-components";
@@ -73,7 +73,8 @@ export default function DatePicker() {
 
   const [activeSlide, setActiveSlide] = useRecoilState(dateState);
   const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
-
+  const [selectedDays, setSelectedDays] = useRecoilState(dayState);
+  
   function handleSlideChange(swiper: SwiperCore) {
     setActiveSlide({
       year: currentYear,
@@ -95,8 +96,16 @@ export default function DatePicker() {
   }
 
   // 3) 데이트 피커 완료 시
-  function handleConfirmDatePicker() {
+  function handleConfirmDatePicker(day: any) {
     setIsDatePickerOpen(false);
+    setSelectedDays((prevSelectedDays) => {
+      const existingDayIndex = prevSelectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
+      if (existingDayIndex === -1) {
+        return [...prevSelectedDays, { dayOfWeek: day, startTime: "12:00", endTime: "12:00" }];
+      } else {
+        return [...prevSelectedDays]
+      }
+    });
   }
 
   const slides = Array.from({ length: monthCalender.length }, (_, index) => (
@@ -135,7 +144,7 @@ export default function DatePicker() {
       <Vizor />
 
       <ConfirmWrapper>
-        <ConfirmButton onClick={handleConfirmDatePicker}> 확인 </ConfirmButton>
+        <ConfirmButton onClick={() => handleConfirmDatePicker(firstLesson)}> 확인 </ConfirmButton>
       </ConfirmWrapper>
     </TimePickerWrapper>
   );

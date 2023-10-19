@@ -7,13 +7,10 @@ import StudentInformation from '../components/RegularLesson/StudentInformation';
 import {styled} from 'styled-components';
 
 export default function RegularLesson() {
-    
+  
   return (
   <RegularWrapper>
     <Header />
-    <ProgressBar progress = {50} />
-    <StudentInformation />
-    <LessonInformation />
     <LessonDate />
     <Footer />
   </RegularWrapper>

@@ -19,9 +19,10 @@ export default function DeleteLessonButton(props: DeleteLessonButtonProps) {
 
   const { mutate } = useMutation(() => deleteLesson(deleteConfirmLesson), {
     onSuccess: () => {
+      queryClient.invalidateQueries("lessonByTeacher", { refetchInactive: true });
+
       console.log("lesson deleted!");
       setOpenModal(false);
-      queryClient.invalidateQueries("getLessonByTeacher");
     },
     onError: (error) => {
       console.log(error);
@@ -29,6 +30,7 @@ export default function DeleteLessonButton(props: DeleteLessonButtonProps) {
   });
 
   function handleClickConfirmDelete(): void {
+    console.log("수업을 삭제중");
     mutate();
   }
 

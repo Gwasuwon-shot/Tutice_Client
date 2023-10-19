@@ -3,19 +3,36 @@ import { STUDENT_COLOR } from "../../core/common/studentColor";
 import SubjectLabel from "../common/SubjectLabel";
 import ManageStudentColorBox from "./ManageStudentColorBox";
 import { ManageLessonEditIc, MissingMainteanceConfirmIc } from "../../assets";
+import { useRecoilState } from "recoil";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
+import { isModalOpen } from "../../atom/common/isModalOpen";
+
 
 interface MissingMainteanceLessonProps {
   idx: number;
   studentName: string;
   subject: string;
   isClickedEdit: boolean;
+  handleConfirmDeleteLesson: () => void;
 }
 
 export default function MissingMainteanceLesson(props: MissingMainteanceLessonProps) {
-  const { idx, studentName, subject, isClickedEdit } = props;
+  const { idx, studentName, subject, isClickedEdit, handleConfirmDeleteLesson } = props;
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+
+  function handleClickedDeleteButton() {
+    handleConfirmDeleteLesson();
+  }
+
+  function handleClickMainteance() {
+    setOpenModal(true);
+    setSelectedLesson
+  }
+
   return (
     <LessonIndividualContainer>
-      {isClickedEdit && <ManageLessonEditButton />}
+      {isClickedEdit && <ManageLessonEditButton onClick={handleClickedDeleteButton} />}
       <MissingLessonBox>
         <MissingLessonContainer>
           <MissingLessonWrapper>
@@ -25,7 +42,7 @@ export default function MissingMainteanceLesson(props: MissingMainteanceLessonPr
           </MissingLessonWrapper>
           <InformationWrapper>
             <LessonInformation>회차종료</LessonInformation>
-            <MissingMainteanceLessonButton />
+            <MissingMainteanceLessonButton onClick={handleClickMainteance} />
           </InformationWrapper>
         </MissingLessonContainer>
       </MissingLessonBox>

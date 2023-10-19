@@ -13,10 +13,11 @@ interface MissingLessonProp {
 
 interface MissingMainteanceLessonsProps {
   isClickedEdit: boolean;
+  handleConfirmDeleteLesson: () => void;
 }
 
 export default function MissingMainteanceLessons(props: MissingMainteanceLessonsProps) {
-  const { isClickedEdit } = props;
+  const { isClickedEdit, handleConfirmDeleteLesson } = props;
   const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
 
   return (
@@ -25,6 +26,7 @@ export default function MissingMainteanceLessons(props: MissingMainteanceLessons
         {missingMaintenanceLessonList &&
           missingMaintenanceLessonList?.map(({ lesson }: MissingLessonProp) => (
             <MissingMainteanceLesson
+              handleConfirmDeleteLesson={handleConfirmDeleteLesson}
               isClickedEdit={isClickedEdit}
               key={lesson.idx}
               idx={lesson.idx}

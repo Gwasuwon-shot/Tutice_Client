@@ -5,10 +5,11 @@ import MainLesson from "./MainLesson";
 
 interface MainLessonsProp {
   isClickedEdit: boolean;
+  handleConfirmDeleteLesson: () => void;
 }
 
 export default function MainLessons(props: MainLessonsProp) {
-  const { isClickedEdit } = props;
+  const { isClickedEdit, handleConfirmDeleteLesson } = props;
   const { lessonList } = useGetAllLessons();
 
   return (
@@ -18,6 +19,7 @@ export default function MainLessons(props: MainLessonsProp) {
           lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType) => (
             <MainLesson
               isClickedEdit={isClickedEdit}
+              handleConfirmDeleteLesson={handleConfirmDeleteLesson}
               key={idx}
               idx={idx}
               studentName={studentName}

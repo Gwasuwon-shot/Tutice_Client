@@ -7,12 +7,12 @@ import { useRecoilValue } from "recoil";
 import { deleteLessonStatus } from "../../atom/mangeLesson/deleteLessonStatus";
 import { getLessonByTeacher } from "../../api/getLessonByTeacher";
 
-interface DeleteLessonButtonProps {
+interface DeleteLessonModalProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsClickedDeleteButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function DeleteLessonButton(props: DeleteLessonButtonProps) {
+export default function DeleteLessonModal(props: DeleteLessonModalProps) {
   const { setIsClickedDeleteButton, setOpenModal } = props;
   const deleteConfirmLesson = useRecoilValue(deleteLessonStatus);
   const queryClient = useQueryClient();

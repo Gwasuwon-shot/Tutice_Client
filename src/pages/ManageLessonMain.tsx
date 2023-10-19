@@ -14,8 +14,9 @@ import useGetMissingMaintenanceLesson from "../hooks/useGetMissingMaintenanceLes
 import { ManageLessonEditIc } from "../assets";
 import MissingMainteanceLessons from "../components/manageLesson/MissingMainteanceLessons";
 import { BasicDoubleModal } from "../components/common";
-import DeleteLessonButton from "../components/manageLesson/DeleteLessonButton";
 import { isModalOpen } from "../atom/common/isModalOpen";
+import ExtensionLessonModal from "../components/manageLesson/ExtensionLessonModal";
+import DeleteLessonModal from "../components/manageLesson/DeleteLessonModal";
 
 export default function ManageLessonMain() {
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
@@ -26,6 +27,7 @@ export default function ManageLessonMain() {
   const [isClickedEdit, setIsClickedEdit] = useState(false);
   const [isClickedDeleteButton, setIsClickedDeleteButton] = useState(false);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [isClickedMaintain, setIsClickedMaintain] = useState(false);
 
   useEffect(() => {
     setAttendanceData({ idx: 0, status: "" });
@@ -41,19 +43,24 @@ export default function ManageLessonMain() {
 
   function EditPageClick() {
     setIsClickedEdit(!isClickedEdit);
+  }
+
+  function handleConfirmDeleteLesson() {
     setIsClickedDeleteButton(true);
     setOpenModal(true);
   }
 
-  function handleConfirmDeleteLesson() {
-    console.log("here");
+  function handleConfirmMaintain() {
+    setOpenModal(true);
+    setIsClickedMaintain(true);
   }
 
   return (
     <>
       {openModal && isClickedDeleteButton && (
-        <DeleteLessonButton setIsClickedDeleteButton={setIsClickedDeleteButton} setOpenModal={setOpenModal} />
+        <DeleteLessonModal setIsClickedDeleteButton={setIsClickedDeleteButton} setOpenModal={setOpenModal} />
       )}
+      {openModal && isClickedMaintain && <ExtensionLessonModal />}
       {snackBarOpen && isSucces && <SuccessLessonMaintenanceSanckBar />}
       {snackBarOpen && !isSucces && <CancelLessonMaintenanceSnackBar />}
       <MainLessonsWrapper>
@@ -62,8 +69,14 @@ export default function ManageLessonMain() {
           <Title>나의 수업</Title>
           <EditButton onClick={EditPageClick}>{isClickedEdit ? "완료" : "편집"}</EditButton>
         </TitleWrapper>
-        {checkMissingMaintenanceLessonExist() && <MissingMainteanceLessons isClickedEdit={isClickedEdit} />}
-        <MainLessons isClickedEdit={isClickedEdit} />
+        {checkMissingMaintenanceLessonExist() && (
+          <MissingMainteanceLessons
+            handleConfirmDeleteLesson={handleConfirmDeleteLesson}
+            isClickedEdit={isClickedEdit}
+            handleConfirmMaintain={handleConfirmMaintain}
+          />
+        )}
+        <MainLessons handleConfirmDeleteLesson={handleConfirmDeleteLesson} isClickedEdit={isClickedEdit} />
 
         <AddTreeCodeButtonManageIcon onClick={handleMakeTreeCode} />
       </MainLessonsWrapper>

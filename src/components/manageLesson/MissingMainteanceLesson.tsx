@@ -7,27 +7,25 @@ import { useRecoilState } from "recoil";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
 
-
 interface MissingMainteanceLessonProps {
   idx: number;
   studentName: string;
   subject: string;
   isClickedEdit: boolean;
   handleConfirmDeleteLesson: () => void;
+  handleConfirmMaintain: () => void;
 }
 
 export default function MissingMainteanceLesson(props: MissingMainteanceLessonProps) {
-  const { idx, studentName, subject, isClickedEdit, handleConfirmDeleteLesson } = props;
+  const { idx, studentName, subject, isClickedEdit, handleConfirmDeleteLesson, handleConfirmMaintain } = props;
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
-  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
 
   function handleClickedDeleteButton() {
     handleConfirmDeleteLesson();
   }
 
   function handleClickMainteance() {
-    setOpenModal(true);
-    setSelectedLesson
+    handleConfirmMaintain();
   }
 
   return (

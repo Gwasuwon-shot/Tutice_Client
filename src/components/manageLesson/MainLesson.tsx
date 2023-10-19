@@ -4,6 +4,8 @@ import useMoveToLessonDetail from "../../hooks/useMoveToLessonDetail";
 import SubjectLabel from "../common/SubjectLabel";
 import ManageStudentColorBox from "./ManageStudentColorBox";
 import { ManageLessonEditIc } from "../../assets";
+import { deleteLessonStatus } from "../../atom/mangeLesson/deleteLessonStatus";
+import { useRecoilState } from "recoil";
 
 interface MainLessonProps {
   idx: number;
@@ -12,19 +14,26 @@ interface MainLessonProps {
   percent: number;
   dayOfWeekList: string[];
   isClickedEdit: boolean;
+  handleConfirmDeleteLesson: () => void;
 }
 
 export default function MainLesson(props: MainLessonProps) {
-  const { idx, studentName, subject, percent, dayOfWeekList, isClickedEdit } = props;
+  const { handleConfirmDeleteLesson, idx, studentName, subject, percent, dayOfWeekList, isClickedEdit } = props;
   const { handleMoveToManageLessonDetail } = useMoveToLessonDetail();
+  const [deleteConfirmLesson, setDeleteConfirmLesson] = useRecoilState(deleteLessonStatus);
 
   function checkIsLastDay(idx: number, day: string) {
     return idx + 1 === dayOfWeekList.length ? day : day + ", ";
   }
 
+  function handleClickedDeleteButton() {
+    handleConfirmDeleteLesson();
+    setDeleteConfirmLesson(idx);
+  }
+
   return (
     <LessonIndividualContainer>
-      {isClickedEdit && <ManageLessonEditButton />}
+      {isClickedEdit && <ManageLessonEditButton onClick={() => handleClickedDeleteButton()} />}
       <MainLessonBox onClick={() => handleMoveToManageLessonDetail(idx)}>
         <MainLessonWrapperContainer>
           <MainLessonWrapper>

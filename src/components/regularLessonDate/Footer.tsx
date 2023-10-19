@@ -1,7 +1,14 @@
+import {
+    cycleNumberState,
+    dateState,
+    dayState,
+    firstLessonDay,
+    focusDayState,
+    temporarySchedule,
+} from "../../atom/timePicker/timePicker";
 import {useEffect, useState} from 'react';
 
 import DatePicker from '../../components/RegularLesson/TimePicker/DatePicker';
-import {dateState} from '../../atom/timePicker/timePicker';
 import { openDatePickerState } from "../../atom/timePicker/timePicker";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
@@ -13,9 +20,13 @@ export default function Footer() {
         
     const [isDatePickerOpen, setIsDatePickerOpen] = useRecoilState<boolean>(openDatePickerState);
     const [activeDateSlide, setActiveDateSlide] = useRecoilState(dateState);
+    const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
+    const [day, setDayState] = useRecoilState(dayState);
     
-
     function moveToTuitionPayment() {
+        if (firstLesson) {
+            setDayState([{ dayOfWeek: firstLesson, startTime: "12:00", endTime: "12:00" }]);
+        }
         navigate("/regular-lesson");
     }
     

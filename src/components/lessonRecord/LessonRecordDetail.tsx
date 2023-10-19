@@ -7,23 +7,21 @@ import PastLessonRecordList from "./PastLessonRecordList";
 import RestOfClassesInfo from "./RestOfClassesInfo";
 
 import { useNavigate, useParams } from "react-router-dom";
-import CommonBackButton from "../common/CommonBackButton";
-import ParentsFooter from "../common/ParentsFooter";
-import DepositRecordList from "./DepositRecord";
-import useGetLessonProgress from "../../hooks/useGetLessonProgress";
 import useGetLessonDetail from "../../hooks/useGetLessonDetail";
-import useGetLessonSchedule from "../../hooks/useGetLessonSchedule";
+import useGetLessonProgress from "../../hooks/useGetLessonProgress";
+import CommonBackButton from "../common/CommonBackButton";
+import DepositRecordList from "./DepositRecord";
 
 export default function LessonRecordDetail() {
   const { lessonId } = useParams();
-  const [isClassRecord, setIsClassRecord] = useState<boolean>(false);
+  const [isClassRecord, setIsClassRecord] = useState<boolean>(true);
   const { count, nowCount, percent } = useGetLessonProgress(Number(lessonId));
   const { idx, teacherName, studentName, subject } = useGetLessonDetail(Number(lessonId));
 
   const navigate = useNavigate();
 
   function handleGotoLessonInfoList() {
-    navigate(`/lesson-info/${lessonId}`);
+    navigate(`/lesson-info/${lessonId}`, { state: false });
   }
 
   return (
@@ -54,7 +52,6 @@ export default function LessonRecordDetail() {
       ) : (
         <DepositRecordList />
       )}
-      <ParentsFooter />
     </>
   );
 }
@@ -82,7 +79,7 @@ const TeacherName = styled.p`
   margin-left: 0.6rem;
 
   ${({ theme }) => theme.fonts.body06};
-  color: ${({ theme }) => theme.colors.grey900};
+  color: ${({ theme }) => theme.colors.grey600};
 `;
 
 const LessonManageIcon = styled(LessonInfoLessonRecordIc)`

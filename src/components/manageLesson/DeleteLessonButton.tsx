@@ -1,10 +1,36 @@
 import React from "react";
 import styled from "styled-components";
 import { BasicDoubleModal } from "../common";
-export default function DeleteLessonButton(props) {
-  const { setIsClickedDeleteButton, setOpenModal } = props;
+import { QueryClient, useMutation, useQueryClient } from "react-query";
+import { deleteLesson } from "../../api/deleteLesson";
+import { useRecoilValue } from "recoil";
+import { deleteLessonStatus } from "../../atom/mangeLesson/deleteLessonStatus";
+import { getLessonByTeacher } from "../../api/getLessonByTeacher";
 
-  function handleClickConfirmDelete() {}
+interface DeleteLessonButtonProps {
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsClickedDeleteButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function DeleteLessonButton(props: DeleteLessonButtonProps) {
+  const { setIsClickedDeleteButton, setOpenModal } = props;
+  const deleteConfirmLesson = useRecoilValue(deleteLessonStatus);
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation(() => deleteLesson(deleteConfirmLesson), {
+    onSuccess: () => {
+      console.log("lesson deleted!");
+      setOpenModal(false);
+      queryClient.invalidateQueries("getLessonByTeacher");
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  function handleClickConfirmDelete(): void {
+    mutate();
+  }
 
   function handleBackToManageLessonPage() {
     setIsClickedDeleteButton(false);

@@ -9,13 +9,10 @@ import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
 import ToastModal from "../common/ToastModal";
+import { extensionMissingLesson } from "../../atom/mangeLesson/extensionMissingLesson";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 
 interface ExtensionLessonModalProps {
-  studentName: string;
-  subject: string;
-  backgroundColor: string;
-  color: string;
-  isBig: boolean;
   setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -25,10 +22,11 @@ interface createLessonMaintenanceProps {
 }
 
 export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
-  const { studentName, subject, backgroundColor, color, isBig, setIsSuccess } = props;
   const { unShowModal } = useModal();
+  const { setIsSuccess } = props;
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
-  const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(extensionMissingLesson);
+  const { studentName, subject, lessonIdx } = selectedLesson;
 
   const postInformationTrue = {
     lessonIdx: selectedLesson.lessonIdx,
@@ -71,9 +69,9 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
           <StudentNameLabel
             studentName={studentName}
             subject={subject}
-            backgroundColor={backgroundColor}
-            color={color}
-            isBig={isBig}
+            backgroundColor={STUDENT_COLOR[lessonIdx % 10]}
+            color="#757A80"
+            isBig={false}
           />
         </TextWrapper>
         <TextWrapper>

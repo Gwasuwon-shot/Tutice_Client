@@ -6,6 +6,7 @@ import { ManageLessonEditIc, MissingMainteanceConfirmIc } from "../../assets";
 import { useRecoilState } from "recoil";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isModalOpen } from "../../atom/common/isModalOpen";
+import { extensionMissingLesson } from "../../atom/mangeLesson/extensionMissingLesson";
 
 interface MissingMainteanceLessonProps {
   idx: number;
@@ -18,7 +19,8 @@ interface MissingMainteanceLessonProps {
 
 export default function MissingMainteanceLesson(props: MissingMainteanceLessonProps) {
   const { idx, studentName, subject, isClickedEdit, handleConfirmDeleteLesson, handleConfirmMaintain } = props;
-  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+
+  const [selectedLesson, setSelectedLesson] = useRecoilState(extensionMissingLesson);
 
   function handleClickedDeleteButton() {
     handleConfirmDeleteLesson();
@@ -26,6 +28,7 @@ export default function MissingMainteanceLesson(props: MissingMainteanceLessonPr
 
   function handleClickMainteance() {
     handleConfirmMaintain();
+    setSelectedLesson({ studentName: studentName, subject: subject, lessonIdx: idx });
   }
 
   return (

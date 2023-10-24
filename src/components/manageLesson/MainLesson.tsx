@@ -6,15 +6,18 @@ import ManageStudentColorBox from "./ManageStudentColorBox";
 import { ManageLessonEditIc } from "../../assets";
 import { deleteLessonStatus } from "../../atom/mangeLesson/deleteLessonStatus";
 import { useRecoilState } from "recoil";
+import { latestRegularScheduleType } from "../../type/manageLesson/lessonListType";
+import { ProgressBar } from "../common";
+import MainLessonsProgressBar from "./MainLessonsProgressBar";
 
 interface MainLessonProps {
   idx: number;
   studentName: string;
   subject: string;
   percent: number;
-  dayOfWeekList: string[];
   isClickedEdit: boolean;
   handleConfirmDeleteLesson: () => void;
+  latestRegularSchedule: latestRegularScheduleType;
 }
 
 export default function MainLesson(props: MainLessonProps) {
@@ -47,6 +50,7 @@ export default function MainLesson(props: MainLessonProps) {
               </p>
             </DayOfWeekWrapper>
           </DaysWrapper>
+          <MainLessonsProgressBar progress={percent} />
         </MainLessonWrapperContainer>
       </MainLessonBox>
     </LessonIndividualContainer>
@@ -79,8 +83,9 @@ const MainLessonWrapper = styled.div`
   align-items: center;
   width: 11.6rem;
   height: 1.6rem;
-  margin-bottom: 2.1rem;
+  margin-bottom: 1.4rem;
   gap: 0.7rem;
+  margin-left: 1.2rem;
 `;
 
 const StudentNameWrapper = styled.h1`
@@ -88,9 +93,13 @@ const StudentNameWrapper = styled.h1`
   ${({ theme }) => theme.fonts.body01};
 `;
 
-const DaysWrapper = styled.p`
-  margin-left: 1.5rem;
-
+const DaysWrapper = styled.div`
+  margin-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.4rem;
+  width: 11.6rem;
+  gap: 0.6rem;
   color: ${({ theme }) => theme.colors.grey600};
   ${({ theme }) => theme.fonts.body05};
 `;

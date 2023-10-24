@@ -18,13 +18,10 @@ interface MainLessonProps {
 }
 
 export default function MainLesson(props: MainLessonProps) {
-  const { handleConfirmDeleteLesson, idx, studentName, subject, percent, dayOfWeekList, isClickedEdit } = props;
+  const { handleConfirmDeleteLesson, idx, studentName, subject, percent, latestRegularSchedule, isClickedEdit } = props;
+  const { dayOfWeek, startTime, endTime } = latestRegularSchedule;
   const { handleMoveToManageLessonDetail } = useMoveToLessonDetail();
   const [deleteConfirmLesson, setDeleteConfirmLesson] = useRecoilState(deleteLessonStatus);
-
-  function checkIsLastDay(idx: number, day: string) {
-    return idx + 1 === dayOfWeekList.length ? day : day + ", ";
-  }
 
   function handleClickedDeleteButton() {
     handleConfirmDeleteLesson();
@@ -43,9 +40,12 @@ export default function MainLesson(props: MainLessonProps) {
           </MainLessonWrapper>
           <DaysWrapper>
             <LessonInformation>진행예정</LessonInformation>
-            {dayOfWeekList.map((day, idx) => (
-              <>{checkIsLastDay(idx, day)}</>
-            ))}
+            <DayOfWeekWrapper>
+              <p>{dayOfWeek}</p>
+              <p>
+                {startTime} - {endTime}
+              </p>
+            </DayOfWeekWrapper>
           </DaysWrapper>
         </MainLessonWrapperContainer>
       </MainLessonBox>
@@ -105,6 +105,12 @@ const MainLessonWrapperContainer = styled.section`
 const LessonInformation = styled.h2`
   ${({ theme }) => theme.fonts.body04};
   color: ${({ theme }) => theme.colors.grey500};
+`;
+
+const DayOfWeekWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem ${({ theme }) => theme.colors.grey900};
 `;
 
 const ManageLessonEditButton = styled(ManageLessonEditIc)`

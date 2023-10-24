@@ -12,11 +12,15 @@ export default function MainLessons(props: MainLessonsProp) {
   const { isClickedEdit, handleConfirmDeleteLesson } = props;
   const { lessonList } = useGetAllLessons();
 
+  let teacherLessonList = lessonList.filter((lesson) => {
+    return lesson?.percent !== 100;
+  });
+
   return (
     <>
       <MainLessonsWrapper>
-        {lessonList &&
-          lessonList?.map(({ idx, studentName, subject, percent, dayOfWeekList }: lessonListType) => (
+        {teacherLessonList &&
+          teacherLessonList?.map(({ idx, studentName, subject, percent, latestRegularSchedule }: lessonListType) => (
             <MainLesson
               isClickedEdit={isClickedEdit}
               handleConfirmDeleteLesson={handleConfirmDeleteLesson}
@@ -25,7 +29,7 @@ export default function MainLessons(props: MainLessonsProp) {
               studentName={studentName}
               subject={subject}
               percent={percent}
-              dayOfWeekList={dayOfWeekList}
+              latestRegularSchedule={latestRegularSchedule}
             />
           ))}
       </MainLessonsWrapper>

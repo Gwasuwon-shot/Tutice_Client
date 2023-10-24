@@ -7,21 +7,17 @@ import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { isSnackBarOpen } from "../atom/common/isSnackBarOpen";
 import CancelLessonMaintenanceSnackBar from "../components/common/CancelLessonMaintenanceSnackBar";
 import TeacherFooter from "../components/common/TeacherFooter";
-import ExtensionQuestion from "../components/manageLesson/ExtensionQuestion";
 import MainLessons from "../components/manageLesson/MainLessons";
 import SuccessLessonMaintenanceSanckBar from "../components/modal/SuccessLessonMaintenanceSanckBar";
-import useGetMissingMaintenanceLesson from "../hooks/useGetMissingMaintenanceLesson";
-import { ManageLessonEditIc } from "../assets";
 import MissingMainteanceLessons from "../components/manageLesson/MissingMainteanceLessons";
-import { BasicDoubleModal } from "../components/common";
 import { isModalOpen } from "../atom/common/isModalOpen";
 import ExtensionLessonModal from "../components/manageLesson/ExtensionLessonModal";
 import DeleteLessonModal from "../components/manageLesson/DeleteLessonModal";
+import useGetAllLessons from "../hooks/useGetAllLessons";
 
 export default function ManageLessonMain() {
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
   const [isSucces, setIsSuccess] = useState(true);
-  const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
   const navigate = useNavigate();
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
   const [isClickedEdit, setIsClickedEdit] = useState(false);
@@ -29,12 +25,24 @@ export default function ManageLessonMain() {
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isClickedMaintain, setIsClickedMaintain] = useState(false);
 
+  const { lessonList } = useGetAllLessons();
+
   useEffect(() => {
     setAttendanceData({ idx: 0, status: "" });
   }, []);
 
   function checkMissingMaintenanceLessonExist() {
-    return missingMaintenanceLessonList?.length !== 0;
+    let missingLessonsList = lessonList.filter((element) => {
+      element.percent === 100;
+    });
+    return missingLessonsList;
+  }
+
+  function teacherLessons() {
+    let teacherLessonList = lessonList.filter((element) => {
+      element.percent !== 100;
+    });
+    return teacherLessonList;
   }
 
   function handleMakeTreeCode() {
@@ -60,7 +68,7 @@ export default function ManageLessonMain() {
       {openModal && isClickedDeleteButton && (
         <DeleteLessonModal setIsClickedDeleteButton={setIsClickedDeleteButton} setOpenModal={setOpenModal} />
       )}
-      {openModal && isClickedMaintain && <ExtensionLessonModal />}
+      {openModal && isClickedMaintain && <ExtensionLessonModal setIsSuccess={setIsSuccess} />}
       {snackBarOpen && isSucces && <SuccessLessonMaintenanceSanckBar />}
       {snackBarOpen && !isSucces && <CancelLessonMaintenanceSnackBar />}
       <MainLessonsWrapper>
@@ -76,7 +84,9 @@ export default function ManageLessonMain() {
             handleConfirmMaintain={handleConfirmMaintain}
           />
         )}
-        <MainLessons handleConfirmDeleteLesson={handleConfirmDeleteLesson} isClickedEdit={isClickedEdit} />
+        {teacherLessons() && (
+          <MainLessons handleConfirmDeleteLesson={handleConfirmDeleteLesson} isClickedEdit={isClickedEdit} />
+        )}
 
         <AddTreeCodeButtonManageIcon onClick={handleMakeTreeCode} />
       </MainLessonsWrapper>

@@ -5,9 +5,10 @@ import RoundBottomButton from "../components/common/RoundBottomButton";
 
 interface ErrorProps {
   resetErrorBoundary: any;
+  // error: any;
 }
 
-export default function Error(prop: ErrorProps) {
+export default function ErrorPage(prop: ErrorProps) {
   const { resetErrorBoundary } = prop;
   const navigate = useNavigate();
 

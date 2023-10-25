@@ -9,5 +9,5 @@ export async function getLessonRegularSchedule(lessonIdx: number) {
     },
   });
 
-  return data?.data?.data;
+  return data?.data?.data.regularScheduleList;
 }

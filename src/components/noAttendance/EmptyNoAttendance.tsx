@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { DoneAttendanceIc, GotoHomeButton } from "../../assets";
+import { useNavigate } from "react-router-dom";
 export default function EmptyNoAttendance() {
+  const navigate = useNavigate();
+  function handleGotoHome() {
+    navigate(-1);
+  }
   return (
     <Wrapper>
       <DoneAttendance />
-      <GotoHomeButtonIc />
+      <GotoHomeButtonIc onClick={handleGotoHome} />
     </Wrapper>
   );
 }

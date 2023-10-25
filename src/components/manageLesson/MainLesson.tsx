@@ -9,6 +9,7 @@ import { useRecoilState } from "recoil";
 import { latestRegularScheduleType } from "../../type/manageLesson/lessonListType";
 import { ProgressBar } from "../common";
 import MainLessonsProgressBar from "./MainLessonsProgressBar";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 
 interface MainLessonProps {
   idx: number;
@@ -24,11 +25,11 @@ export default function MainLesson(props: MainLessonProps) {
   const { handleConfirmDeleteLesson, idx, studentName, subject, percent, latestRegularSchedule, isClickedEdit } = props;
   const { dayOfWeek, startTime, endTime } = latestRegularSchedule;
   const { handleMoveToManageLessonDetail } = useMoveToLessonDetail();
-  const [deleteConfirmLesson, setDeleteConfirmLesson] = useRecoilState(deleteLessonStatus);
+  const [deleteConfirmLesson, setDeleteConfirmLesson] = useRecoilState(attendanceLesson);
 
   function handleClickedDeleteButton() {
     handleConfirmDeleteLesson();
-    setDeleteConfirmLesson(idx);
+    setDeleteConfirmLesson({ ...deleteConfirmLesson, lessonIdx: idx });
   }
 
   return (

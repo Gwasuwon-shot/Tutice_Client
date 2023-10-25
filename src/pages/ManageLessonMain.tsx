@@ -14,6 +14,9 @@ import { isModalOpen } from "../atom/common/isModalOpen";
 import ExtensionLessonModal from "../components/manageLesson/ExtensionLessonModal";
 import DeleteLessonModal from "../components/manageLesson/DeleteLessonModal";
 import useGetAllLessons from "../hooks/useGetAllLessons";
+import useGetMissingMaintenanceLesson from "../hooks/useGetMissingMaintenanceLesson";
+import { lessonListType } from "../type/manageLesson/lessonListType";
+import FinishedLessons from "../components/manageLesson/FinishedLessons";
 
 export default function ManageLessonMain() {
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
@@ -24,23 +27,17 @@ export default function ManageLessonMain() {
   const [isClickedDeleteButton, setIsClickedDeleteButton] = useState(false);
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [isClickedMaintain, setIsClickedMaintain] = useState(false);
+  const [isClickedMainteance, setIsClickedMainteance] = useState(false);
 
   const { lessonList } = useGetAllLessons();
-
+  const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
   useEffect(() => {
     setAttendanceData({ idx: 0, status: "" });
   }, []);
 
-  function checkMissingMaintenanceLessonExist() {
-    let missingLessonsList = lessonList.filter((element) => {
-      element.percent === 100;
-    });
-    return missingLessonsList;
-  }
-
-  function teacherLessons() {
-    let teacherLessonList = lessonList.filter((element) => {
-      element.percent !== 100;
+  function finsihedLessons() {
+    let teacherLessonList = lessonList.filter((element: lessonListType) => {
+      element.isFinished !== false;
     });
     return teacherLessonList;
   }
@@ -55,20 +52,32 @@ export default function ManageLessonMain() {
 
   function handleConfirmDeleteLesson() {
     setIsClickedDeleteButton(true);
+    setIsClickedMainteance(false);
     setOpenModal(true);
   }
 
   function handleConfirmMaintain() {
+    setIsClickedDeleteButton(false);
+
     setOpenModal(true);
-    setIsClickedMaintain(true);
+    setIsClickedMainteance(true);
   }
 
+  const teacherLessonList = lessonList.filter((element: lessonListType) => {
+    element.isFinished == false;
+  });
+
+  const finishedLessonList = lessonList.filter((element: lessonListType) => {
+    element.isFinished == true;
+  });
   return (
     <>
       {openModal && isClickedDeleteButton && (
         <DeleteLessonModal setIsClickedDeleteButton={setIsClickedDeleteButton} setOpenModal={setOpenModal} />
       )}
-      {openModal && isClickedMaintain && <ExtensionLessonModal setIsSuccess={setIsSuccess} />}
+      {openModal && isClickedMainteance && (
+        <ExtensionLessonModal setIsClickedMainteance={setIsClickedMainteance} setIsSuccess={setIsSuccess} />
+      )}
       {snackBarOpen && isSucces && <SuccessLessonMaintenanceSanckBar />}
       {snackBarOpen && !isSucces && <CancelLessonMaintenanceSnackBar />}
       <MainLessonsWrapper>
@@ -77,17 +86,19 @@ export default function ManageLessonMain() {
           <Title>나의 수업</Title>
           <EditButton onClick={EditPageClick}>{isClickedEdit ? "완료" : "편집"}</EditButton>
         </TitleWrapper>
-        {checkMissingMaintenanceLessonExist() && (
+        {missingMaintenanceLessonList && (
           <MissingMainteanceLessons
             handleConfirmDeleteLesson={handleConfirmDeleteLesson}
             isClickedEdit={isClickedEdit}
             handleConfirmMaintain={handleConfirmMaintain}
           />
         )}
-        {teacherLessons() && (
+        {teacherLessonList && (
           <MainLessons handleConfirmDeleteLesson={handleConfirmDeleteLesson} isClickedEdit={isClickedEdit} />
         )}
-
+        {finishedLessonList && (
+          <FinishedLessons handleConfirmDeleteLesson={handleConfirmDeleteLesson} isClickedEdit={isClickedEdit} />
+        )}
         <AddTreeCodeButtonManageIcon onClick={handleMakeTreeCode} />
       </MainLessonsWrapper>
 

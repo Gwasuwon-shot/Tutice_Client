@@ -5,8 +5,6 @@ import ManageStudentColorBox from "./ManageStudentColorBox";
 import { ManageLessonEditIc, MissingMainteanceConfirmIc } from "../../assets";
 import { useRecoilState } from "recoil";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
-import { isModalOpen } from "../../atom/common/isModalOpen";
-import { extensionMissingLesson } from "../../atom/mangeLesson/extensionMissingLesson";
 
 interface MissingMainteanceLessonProps {
   idx: number;
@@ -20,7 +18,7 @@ interface MissingMainteanceLessonProps {
 export default function MissingMainteanceLesson(props: MissingMainteanceLessonProps) {
   const { idx, studentName, subject, isClickedEdit, handleConfirmDeleteLesson, handleConfirmMaintain } = props;
 
-  const [selectedLesson, setSelectedLesson] = useRecoilState(extensionMissingLesson);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
 
   function handleClickedDeleteButton() {
     handleConfirmDeleteLesson();
@@ -28,7 +26,7 @@ export default function MissingMainteanceLesson(props: MissingMainteanceLessonPr
 
   function handleClickMainteance() {
     handleConfirmMaintain();
-    setSelectedLesson({ studentName: studentName, subject: subject, lessonIdx: idx });
+    setSelectedLesson({ ...selectedLesson, studentName: studentName, subject: subject, lessonIdx: idx });
   }
 
   return (
@@ -78,7 +76,8 @@ const MissingLessonWrapper = styled.div`
   align-items: center;
   width: 11.6rem;
   height: 1.6rem;
-  margin-bottom: 2.1rem;
+  margin-left: 1.2rem;
+  margin-bottom: 1.4rem;
   gap: 0.7rem;
 `;
 
@@ -104,6 +103,7 @@ const MissingLessonContainer = styled.section`
 `;
 
 const LessonInformation = styled.h2`
+  margin-left: 1.2rem;
   ${({ theme }) => theme.fonts.body04};
   color: ${({ theme }) => theme.colors.grey500};
 `;

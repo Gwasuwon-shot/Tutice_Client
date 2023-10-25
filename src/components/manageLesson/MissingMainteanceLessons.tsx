@@ -1,13 +1,14 @@
 import { styled } from "styled-components";
-import useGetMissingMaintenanceLesson from "../../hooks/useGetMissingMaintenanceLesson";
 import MissingMainteanceLesson from "./MissingMainteanceLesson";
+import useGetAllLessons from "../../hooks/useGetAllLessons";
+import useGetMissingMaintenanceLesson from "../../hooks/useGetMissingMaintenanceLesson";
 
 interface MissingLessonProp {
   lesson: {
+    count: number;
     idx: number;
     studentName: string;
     subject: string;
-    count: number;
   };
 }
 
@@ -30,10 +31,10 @@ export default function MissingMainteanceLessons(props: MissingMainteanceLessons
               handleConfirmMaintain={handleConfirmMaintain}
               handleConfirmDeleteLesson={handleConfirmDeleteLesson}
               isClickedEdit={isClickedEdit}
-              key={lesson.idx}
-              idx={lesson.idx}
-              studentName={lesson.studentName}
-              subject={lesson.subject}
+              key={lesson?.idx}
+              idx={lesson?.idx}
+              studentName={lesson?.studentName}
+              subject={lesson?.subject}
             />
           ))}
       </MissingMainteanceLessonWrapper>

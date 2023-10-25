@@ -12,7 +12,7 @@ export default function MainLessons(props: MainLessonsProp) {
   const { isClickedEdit, handleConfirmDeleteLesson } = props;
   const { lessonList } = useGetAllLessons();
 
-  let teacherLessonList = lessonList.filter((lesson) => {
+  let teacherLessonList = lessonList.filter((lesson: lessonListType) => {
     return lesson?.percent !== 100;
   });
 

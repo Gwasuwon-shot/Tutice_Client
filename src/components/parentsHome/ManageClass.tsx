@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
-import ClassSchedule from "./ClassSchedule";
 import useGetLessonByParents from "../../hooks/useGetLessonByParents";
+import ClassSchedule from "./ClassSchedule";
 
 interface lessonListType {
   idx: number;
@@ -65,7 +65,7 @@ const ClassScheduleListWrapper = styled.article`
   width: 29.2rem;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 1.8rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
 
   border: 1px solid ${({ theme }) => theme.colors.grey100};

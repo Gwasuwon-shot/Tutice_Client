@@ -10,11 +10,12 @@ import SubjectLabel from "./SubjectLabel";
 import ToastModal from "./ToastModal";
 
 interface AttendanceCheckModalProp {
+  isUpdateOpen?: boolean;
   setIsCheckingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
-  const { setIsCheckingModalOpen } = props;
+  const { setIsCheckingModalOpen, isUpdateOpen } = props;
   const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
   const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
@@ -48,7 +49,7 @@ export default function AttendanceCheckModal(props: AttendanceCheckModalProp) {
       </TextWrapper>
       <TextWrapper>
         <Main $isTitle={false}>{count}회차</Main>
-        <Sub $isTitle={false}>수업 출결 체크를 진행해 주세요</Sub>
+        <Sub $isTitle={false}>수업 출결 {isUpdateOpen ? "수정을" : "체크를"} 진행해 주세요</Sub>
       </TextWrapper>
       <AttendanceStatusButton
         status={ATTENDANCE_STATUS.attend}

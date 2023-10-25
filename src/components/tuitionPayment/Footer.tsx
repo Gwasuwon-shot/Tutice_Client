@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { createLesson } from "../../api/createLesson";
+import useModal from "../../hooks/useModal";
+import CreateImpossibleModal from "../modal/CreateImpossibleModal";
 
 interface scheduleListProps {
   dayOfWeek: string;
@@ -79,6 +81,7 @@ export default function Footer() {
   };
 
   const navigate = useNavigate();
+  const { openModal, showModal } = useModal();
 
   function handleMoveToLessonShare() {
     navigate("/lesson-share", { state: true });
@@ -90,7 +93,12 @@ export default function Footer() {
       //setStartDate(response); //-> 지수에 전달한 data recoil 저장
       handleMoveToLessonShare();
     },
-    onError: (error) => console.log(error),
+    onError: (error: any) => {
+      if (error.response.data.message === "수업 시작시간이 종료시간보다 늦습니다. ") {
+        showModal();
+      }
+    },
+    useErrorBoundary: false,
   });
 
   function PostLessonInformation(info: createLessonProps) {
@@ -98,13 +106,27 @@ export default function Footer() {
   }
 
   return (
-    <FooterWrapper>
-      <FooterButtonWrapper isFooterGreen={isFooterGreen} onClick={() => PostLessonInformation(postInformation)}>
-        <FooterButton isFooterGreen={isFooterGreen}> 다음 </FooterButton>
-      </FooterButtonWrapper>
-    </FooterWrapper>
+    <>
+      {openModal && (
+        <ModalWrapper>
+          <CreateImpossibleModal />
+        </ModalWrapper>
+      )}
+
+      <FooterWrapper>
+        <FooterButtonWrapper isFooterGreen={isFooterGreen} onClick={() => PostLessonInformation(postInformation)}>
+          <FooterButton isFooterGreen={isFooterGreen}> 다음 </FooterButton>
+        </FooterButtonWrapper>
+      </FooterWrapper>
+    </>
   );
 }
+
+const ModalWrapper = styled.div`
+  position: fixed;
+  z-index: 2;
+  top: 0;
+`;
 
 const FooterWrapper = styled.div`
   height: 9rem;

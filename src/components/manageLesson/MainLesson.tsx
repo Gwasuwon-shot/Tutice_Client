@@ -29,11 +29,7 @@ export default function MainLesson(props: MainLessonProps) {
           <StudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
           <StudentNameWrapper>{studentName}</StudentNameWrapper>
           <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#5B6166" />
-          <DaysWrapper>
-            {dayOfWeekList.map((day, idx) => (
-              <>{checkIsLastDay(idx, day)}</>
-            ))}
-          </DaysWrapper>
+          <DaysWrapper>{dayOfWeekList?.map((day, idx) => <>{checkIsLastDay(idx, day)}</>)}</DaysWrapper>
         </MainLessonWrapper>
         <TreeProgress progress={percent} width={23} />
       </MainLessonWrapperContainer>

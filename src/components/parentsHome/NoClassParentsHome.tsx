@@ -1,7 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { NoClassLogoParentsHomeIc } from "../../assets";
 import RoundBottomButton from "../common/RoundBottomButton";
-import { useNavigate } from "react-router-dom";
 
 export default function NoClassParentsHome() {
   const navigate = useNavigate();
@@ -14,10 +14,10 @@ export default function NoClassParentsHome() {
     <NoClassParentsHomeWrapper>
       <NoClassLogoParentsHomeIcon />
 
-      <NoClassMessage>아직 수업나무가 생성되지 않았어요!</NoClassMessage>
+      <NoClassMessage>아직 연결된 수업이 없어요!</NoClassMessage>
 
       <NoClassSubMessage>
-        선생님에게 수업나무 링크를 공유받아 <br /> 수업관리를 확인해보세요
+        선생님에게 수업링크를 <br /> 공유받아 연결할 수 있어요
       </NoClassSubMessage>
 
       <RoundBottomButton buttonMessage="온보딩 구경하기" handleClick={handleMoveToOnboarding} />

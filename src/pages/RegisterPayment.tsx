@@ -87,7 +87,7 @@ export default function RegisterPayment() {
         />
         <FruitWrapper>
           <FruitPaymentIcon />
-          <Count>{state?.count}번째 열매</Count>
+          <Count>{state?.count}번째 결실</Count>
           <LessonDate>
             {new Date(startDate).getMonth() + 1}.{new Date(startDate).getDate()}~{new Date(endDate).getMonth() + 1}.
             {new Date(endDate).getDate()}

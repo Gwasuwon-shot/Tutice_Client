@@ -35,7 +35,7 @@ export default function Account() {
               <LogoutModal setOpenModal={setOpenModal} setIsCheckingLogout={setIsCheckingLogout} />
             </LogoutModalSection>
           )}
-          <ContentText onClick={handleDeleteAccount}>삭제</ContentText>
+          {/* <ContentText onClick={handleDeleteAccount}>삭제</ContentText> */}
           {openModal && isCheckingDeleteAccount && (
             <DeleteAccountModalSection $isCheckingDeleteAccount={isCheckingDeleteAccount}>
               <AccountDeleteModal setOpenModal={setOpenModal} setIsCheckingDeleteAccount={setIsCheckingDeleteAccount} />

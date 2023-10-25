@@ -1,36 +1,19 @@
-import {
-    cycleNumberState,
-    dateState,
-    dayState,
-    firstLessonDay,
-    focusDayState,
-    temporarySchedule,
-} from "../../atom/timePicker/timePicker";
 import { studentNameState, subjectNameState } from "../../atom/common/datePicker";
 
 import ProgressBar from "../common/ProgressBar";
 import React from 'react';
-import {RegisterLessonHeaderIc} from '../../assets';
-import { TuticeWithTextCommonIc } from "../../assets";
+import { RegisterLessonHeaderIc } from '../../assets';
+import {cycleNumberState} from '../../atom/timePicker/timePicker';
 import styled from 'styled-components';
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 export default function Header() {
-
-
-    const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
-
-    const [focusDay, setFocusDay] = useRecoilState(focusDayState);
-    const [day, setDayState] = useRecoilState(dayState);
     const navigate = useNavigate();
-    
+    const [activeCycleSlide, setActiveCycleSlide] = useRecoilState(cycleNumberState);
+  
     function handleMoveToBack() {
-        if (firstLesson) {
-            setDayState([{ dayOfWeek: firstLesson, startTime: "12:00", endTime: "12:00" }]);
-        }
-        setFocusDay("");
+        setActiveCycleSlide(0);
         navigate(-1);
     }
 
@@ -38,9 +21,9 @@ export default function Header() {
 
         <HeaderWrapper>
             <RegisterLessonHeaderIc onClick={handleMoveToBack} />
-            <ProgressBar progress = {66.4} />
-            <InputHeader> 정기적인 수업 일정을 <br/> 알려주세요! </InputHeader> 
-            <InputNotice> 첫 수업일을 기준으로 수업 일정을 <br/> 캘린더에 표시해 드릴게요 </InputNotice>    
+            <ProgressBar progress = {33.2} />
+            <InputHeader> 총 몇 회차로 이루어진 <br/> 수업인가요? </InputHeader> 
+            <InputNotice> 수업비를 받는 기준으로 진행되는 <br/> 회차를 알려주세요 </InputNotice>    
         </HeaderWrapper>
 
     );

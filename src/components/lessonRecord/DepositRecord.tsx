@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import NoDeposit from "./NoDeposit";
-import { styled } from "styled-components";
-import DepositRecordItem from "./DepositRecordItem";
-import useGetDepositRecord from "../../hooks/useGetDepositRecord";
 import { useParams } from "react-router-dom";
+import { styled } from "styled-components";
+import useGetDepositRecord from "../../hooks/useGetDepositRecord";
 import { DepositInfoType } from "../../type/lessonRecord/lessonRecord";
+import DepositRecordItem from "./DepositRecordItem";
+import NoDeposit from "./NoDeposit";
 
 export default function DepositRecordList() {
   const { lessonId } = useParams();
@@ -36,7 +35,6 @@ const DepositRecordListWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
 
   margin-top: 2.4rem;
 `;

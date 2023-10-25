@@ -8,7 +8,6 @@ import { blockAccess } from "../../utils/common/privateRoute";
 
 export default function ConnectParentsAndTeacher() {
   const { lessonId } = useParams();
-  console.log("외않되?", lessonId);
   const [lessonIndex, setLessonIndex] = useRecoilState(connectLessonId);
 
   const navigate = useNavigate();
@@ -32,7 +31,6 @@ export default function ConnectParentsAndTeacher() {
     }
 
     if (!blockAccess()) {
-      console.log(lessonIndex, "들어오니?");
       connectParentsAndTeacher();
       navigate("/home");
     } else {

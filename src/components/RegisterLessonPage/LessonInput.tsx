@@ -6,11 +6,11 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
 interface NameInputSectionProp {
-  nameFocused: boolean;
+  $nameFocused: boolean;
 }
 
 interface SubjectInputSectionProp {
-  subjectFocused: boolean;
+  $subjectFocused: boolean;
 }
 
 export default function LessonInput() {
@@ -58,7 +58,7 @@ export default function LessonInput() {
   
   return (
     <InputWrapper>
-      <NameInputSection nameFocused={isNameInputFocused}>
+      <NameInputSection $nameFocused={isNameInputFocused}>
         <InputName> 학생이름 </InputName>
         <StudentInput
           type="text"
@@ -71,7 +71,7 @@ export default function LessonInput() {
         {isNameInputFocused && <RegisterLessonInputIcon  onClick={handleNameDelete}/>}
       </NameInputSection>
 
-      <SubjectInputSection subjectFocused={isSubjectInputFocused} isWarning={isWarning}>
+      <SubjectInputSection $subjectFocused={isSubjectInputFocused} $isWarning={isWarning}>
         <InputName> 과목 </InputName>
         <SubjectInput
           type="text"
@@ -105,10 +105,10 @@ const NameInputSection = styled.section<NameInputSectionProp>`
   height: 5.6rem;
   margin-bottom: 1.3rem;
 
-  border-bottom: 1px solid ${({ theme, nameFocused }) => (nameFocused ? theme.colors.green5 : theme.colors.grey70)};
+  border-bottom: 1px solid ${({ theme, $nameFocused }) => ($nameFocused ? theme.colors.green5 : theme.colors.grey70)};
 `;
 
-const SubjectInputSection = styled.section<SubjectInputSectionProp & { isWarning: boolean }>`
+const SubjectInputSection = styled.section<SubjectInputSectionProp & { $isWarning: boolean }>`
   display: flex;
   flex-direction: column;
 
@@ -116,10 +116,10 @@ const SubjectInputSection = styled.section<SubjectInputSectionProp & { isWarning
 
   width: 29.2rem;
   height: 5.6rem;
-  margin-top: ${({ isWarning }) => (isWarning ? "1.3rem" : "0")};
+  margin-top: ${({ $isWarning }) => ($isWarning ? "1.3rem" : "0")};
 
   border-bottom: 1px solid
-    ${({ theme, subjectFocused }) => (subjectFocused ? theme.colors.green5 : theme.colors.grey70)};
+    ${({ theme, $subjectFocused }) => ($subjectFocused ? theme.colors.green5 : theme.colors.grey70)};
 `;
 
 const InputName = styled.h1`

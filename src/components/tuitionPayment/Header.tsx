@@ -6,6 +6,7 @@ import {
     paymentOrder,
 } from "../../atom/tuitionPayment/tuitionPayment";
 
+import ProgressBar from "../common/ProgressBar";
 import React from 'react';
 import { RegisterLessonHeaderIc } from '../../assets';
 import styled from 'styled-components';
@@ -36,6 +37,7 @@ export default function Header() {
     
         <HeaderWrapper>
             <RegisterLessonHeaderIc  onClick={handleMoveToBack} />
+            <ProgressBar progress = {83} />
             <PaymentHeader> 수업비 입금에 대한 <br /> 정보를 입력해주세요 </PaymentHeader> 
         </HeaderWrapper>
 

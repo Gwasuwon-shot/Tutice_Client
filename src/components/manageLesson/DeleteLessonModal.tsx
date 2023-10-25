@@ -4,8 +4,7 @@ import { BasicDoubleModal } from "../common";
 import { QueryClient, useMutation, useQueryClient } from "react-query";
 import { deleteLesson } from "../../api/deleteLesson";
 import { useRecoilValue } from "recoil";
-import { deleteLessonStatus } from "../../atom/mangeLesson/deleteLessonStatus";
-import { getLessonByTeacher } from "../../api/getLessonByTeacher";
+import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 
 interface DeleteLessonModalProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,13 +13,13 @@ interface DeleteLessonModalProps {
 
 export default function DeleteLessonModal(props: DeleteLessonModalProps) {
   const { setIsClickedDeleteButton, setOpenModal } = props;
-  const deleteConfirmLesson = useRecoilValue(deleteLessonStatus);
+  const deleteConfirmLesson = useRecoilValue(attendanceLesson);
   const queryClient = useQueryClient();
+  const { lessonIdx } = deleteConfirmLesson;
 
-  const { mutate } = useMutation(() => deleteLesson(deleteConfirmLesson), {
+  const { mutate: deleteLessonStatus } = useMutation(() => deleteLesson(lessonIdx), {
     onSuccess: () => {
-      queryClient.invalidateQueries("lessonByTeacher", { refetchInactive: true });
-
+      queryClient.invalidateQueries("lessonByTeacher");
       console.log("lesson deleted!");
       setOpenModal(false);
     },
@@ -31,7 +30,7 @@ export default function DeleteLessonModal(props: DeleteLessonModalProps) {
 
   function handleClickConfirmDelete(): void {
     console.log("수업을 삭제중");
-    mutate();
+    deleteLessonStatus();
   }
 
   function handleBackToManageLessonPage() {

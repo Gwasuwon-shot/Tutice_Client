@@ -5,14 +5,13 @@ import { createLessonMaintenance } from "../../api/createLessonMaintenance";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import useModal from "../../hooks/useModal";
-import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
 import ToastModal from "../common/ToastModal";
-import { extensionMissingLesson } from "../../atom/mangeLesson/extensionMissingLesson";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 
 interface ExtensionLessonModalProps {
+  setIsClickedMainteance: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -23,9 +22,9 @@ interface createLessonMaintenanceProps {
 
 export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
   const { unShowModal } = useModal();
-  const { setIsSuccess } = props;
+  const { setIsSuccess, setIsClickedMainteance } = props;
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
-  const [selectedLesson, setSelectedLesson] = useRecoilState(extensionMissingLesson);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
   const { studentName, subject, lessonIdx } = selectedLesson;
 
   const postInformationTrue = {
@@ -42,6 +41,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   const { mutate: createNewLessonMaintenance } = useMutation(createLessonMaintenance, {
     onSuccess: (response) => {
+      queryClient.invalidateQueries("lessonByTeacher");
       queryClient.invalidateQueries("getMissingMaintenanceLesson");
     },
     onError: (error) => console.debug(error),
@@ -49,6 +49,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   function handleExtensionLesson(info: createLessonMaintenanceProps) {
     createNewLessonMaintenance(info);
+    setIsClickedMainteance(false);
     unShowModal();
     setSanckBarOpen(true);
     setIsSuccess(true);
@@ -56,6 +57,8 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   function handleNotExtensionLesson(info: createLessonMaintenanceProps) {
     createNewLessonMaintenance(info);
+    setIsClickedMainteance(false);
+
     unShowModal();
     setSanckBarOpen(true);
     setIsSuccess(false);

@@ -40,7 +40,7 @@ export default function WelcomeLayout() {
 
     if (permission == "granted" || permission == "denied") {
       if (userRole == "선생님") {
-        lessonInfo && lessonInfo.length ? navigate("/home") : navigate("/tree");
+        lessonInfo && lessonInfo.length > 0 ? navigate("/home") : navigate("/tree");
       } else navigate("/home");
     } else {
       navigate("/alert");

@@ -6,14 +6,24 @@ import { useNavigate } from "react-router-dom";
 import useGetAllLessons from "../../hooks/useGetAllLessons";
 import { getLessonByTeacher } from "../../api/getLessonByTeacher";
 
+interface lessonListType {
+  idx: number;
+  teacherName: string;
+  studentName: string;
+  subject: string;
+  count: number;
+  nowCount: number;
+  percent: number;
+}
+
 export default function WelcomeLayout() {
   const navigate = useNavigate();
   const userRole = useRecoilValue(userRoleData);
-  const [ifIsLessonExists, setIfLessonExists] = useState(false);
+  const [lessonInfo, setLessonInfo] = useState<lessonListType[]>();
 
   async function checkIfLessonExists() {
-    const lessonInfo = await getLessonByTeacher();
-    lessonInfo.length > 0 ? setIfLessonExists(true) : setIfLessonExists(false);
+    const data = await getLessonByTeacher();
+    setLessonInfo(data);
   }
 
   useEffect(() => {
@@ -21,16 +31,15 @@ export default function WelcomeLayout() {
   }, []);
 
   useEffect(() => {
-    checkAlarmAlert();
-  }, [ifIsLessonExists]);
+    if (lessonInfo) checkAlarmAlert();
+  }, [lessonInfo]);
 
   async function checkAlarmAlert() {
     const permission = await Notification.requestPermission();
 
     if (permission == "granted" || permission == "denied") {
       if (userRole == "선생님") {
-        console.log(userRole);
-        ifIsLessonExists ? navigate("/home") : navigate("/tree");
+        lessonInfo && lessonInfo.length ? navigate("/home") : navigate("/tree");
       } else navigate("/home");
     } else {
       navigate("/alert");

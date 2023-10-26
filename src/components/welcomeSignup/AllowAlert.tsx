@@ -23,7 +23,6 @@ export default function AllowAlert() {
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
-  const [lessonIndex, setLessonIndex] = useRecoilState(connectLessonId);
 
   const MAIN_TEXT = `쉬운 관리를 위해\n알림을 활성화 해보세요 `;
 
@@ -80,7 +79,6 @@ export default function AllowAlert() {
 
   function handleMoveToHome() {
     if (userRole == "선생님") {
-      console.log("hhh");
       navigate("/tree");
     } else navigate("/home");
   }

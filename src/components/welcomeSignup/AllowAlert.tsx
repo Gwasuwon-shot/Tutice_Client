@@ -42,6 +42,11 @@ export default function AllowAlert() {
     setDeviceToken({
       token: token,
     });
+
+    if (userRole == "선생님") {
+      navigate("/tree");
+    }
+    navigate("/home");
   }
 
   useEffect(() => {
@@ -62,15 +67,7 @@ export default function AllowAlert() {
   // 디바이스토큰 업데이트
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
-      if (userRole === "부모님") {
-        navigate("/home");
-      } else {
-        //수업 나무 있으면
-        //수업 나무 없으면 생성 AfterSignup
-        const { lessonList } = useGetAllLessons();
-        if (lessonList.length) navigate("/home");
-        else navigate("/tree");
-      }
+      console.log(userRole);
     },
     onError: (err) => {
       console.log(err);
@@ -82,7 +79,10 @@ export default function AllowAlert() {
   }
 
   function handleMoveToHome() {
-    navigate("/home");
+    if (userRole == "선생님") {
+      console.log("hhh");
+      navigate("/tree");
+    } else navigate("/home");
   }
 
   return (

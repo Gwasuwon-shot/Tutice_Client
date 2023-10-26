@@ -12,30 +12,30 @@ export default function WelcomeLayout() {
   const [ifIsLessonExists, setIfLessonExists] = useState(false);
 
   async function checkIfLessonExists() {
-    const { lessonList } = await getLessonByTeacher();
-    lessonList.length ? setIfLessonExists(true) : setIfLessonExists(false);
-  }
-
-  if (userRole === "선생님") {
-    checkIfLessonExists();
+    const lessonInfo = await getLessonByTeacher();
+    lessonInfo.length > 0 ? setIfLessonExists(true) : setIfLessonExists(false);
   }
 
   useEffect(() => {
-    checkAlarmAlertShow();
+    checkIfLessonExists();
   }, []);
 
-  async function checkAlarmAlertShow() {
+  useEffect(() => {
+    checkAlarmAlert();
+  }, [ifIsLessonExists]);
+
+  async function checkAlarmAlert() {
     const permission = await Notification.requestPermission();
 
     if (permission == "granted" || permission == "denied") {
       if (userRole == "선생님") {
+        console.log(userRole);
         ifIsLessonExists ? navigate("/home") : navigate("/tree");
       } else navigate("/home");
     } else {
       navigate("/alert");
     }
   }
-  checkAlarmAlertShow();
 
   return (
     <>

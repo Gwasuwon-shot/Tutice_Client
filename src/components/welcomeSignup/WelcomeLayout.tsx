@@ -6,36 +6,46 @@ import { useNavigate } from "react-router-dom";
 import useGetAllLessons from "../../hooks/useGetAllLessons";
 import { getLessonByTeacher } from "../../api/getLessonByTeacher";
 
+interface lessonListType {
+  idx: number;
+  teacherName: string;
+  studentName: string;
+  subject: string;
+  count: number;
+  nowCount: number;
+  percent: number;
+}
+
 export default function WelcomeLayout() {
   const navigate = useNavigate();
   const userRole = useRecoilValue(userRoleData);
-  const [ifIsLessonExists, setIfLessonExists] = useState(false);
+  const [lessonInfo, setLessonInfo] = useState<lessonListType[]>();
 
   async function checkIfLessonExists() {
-    const { lessonList } = await getLessonByTeacher();
-    lessonList.length ? setIfLessonExists(true) : setIfLessonExists(false);
-  }
-
-  if (userRole === "선생님") {
-    checkIfLessonExists();
+    const data = await getLessonByTeacher();
+    setLessonInfo(data);
   }
 
   useEffect(() => {
-    checkAlarmAlertShow();
+    if (userRole == "선생님") checkIfLessonExists();
+    else checkAlarmAlert();
   }, []);
 
-  async function checkAlarmAlertShow() {
-    const permission = await Notification.requestPermission();
+  useEffect(() => {
+    if (lessonInfo) checkAlarmAlert();
+  }, [lessonInfo]);
+
+  async function checkAlarmAlert() {
+    const permission = Notification.permission;
 
     if (permission == "granted" || permission == "denied") {
       if (userRole == "선생님") {
-        ifIsLessonExists ? navigate("/home") : navigate("/tree");
+        lessonInfo && lessonInfo.length > 0 ? navigate("/home") : navigate("/tree");
       } else navigate("/home");
     } else {
       navigate("/alert");
     }
   }
-  checkAlarmAlertShow();
 
   return (
     <>

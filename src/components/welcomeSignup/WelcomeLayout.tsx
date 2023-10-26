@@ -27,7 +27,8 @@ export default function WelcomeLayout() {
   }
 
   useEffect(() => {
-    checkIfLessonExists();
+    if (userRole == "선생님") checkIfLessonExists();
+    else checkAlarmAlert();
   }, []);
 
   useEffect(() => {

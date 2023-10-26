@@ -36,7 +36,7 @@ export default function WelcomeLayout() {
   }, [lessonInfo]);
 
   async function checkAlarmAlert() {
-    const permission = await Notification.requestPermission();
+    const permission = Notification.permission;
 
     if (permission == "granted" || permission == "denied") {
       if (userRole == "선생님") {

@@ -15,6 +15,17 @@ import { registerServiceWorker } from "../../utils/common/notification";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 import useGetAllLessons from "../../hooks/useGetAllLessons";
+import { getLessonByTeacher } from "../../api/getLessonByTeacher";
+
+interface lessonListType {
+  idx: number;
+  teacherName: string;
+  studentName: string;
+  subject: string;
+  count: number;
+  nowCount: number;
+  percent: number;
+}
 
 //알림 활성화뷰
 export default function AllowAlert() {
@@ -23,10 +34,20 @@ export default function AllowAlert() {
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
+  const [lessonInfo, setLessonInfo] = useState<lessonListType[]>();
 
   const MAIN_TEXT = `쉬운 관리를 위해\n알림을 활성화 해보세요 `;
 
   const SUB_TEXT = "푸시알림을 활성화를 통해 출결,\n수업비 관리 도움을 받을 수 있어요";
+
+  async function checkIfLessonExists() {
+    const data = await getLessonByTeacher();
+    setLessonInfo(data);
+  }
+
+  useEffect(() => {
+    if (userRole == "선생님") checkIfLessonExists();
+  }, []);
 
   // 알림 허용하기
   async function handleAllowNotification() {
@@ -43,9 +64,8 @@ export default function AllowAlert() {
     });
 
     if (userRole == "선생님") {
-      navigate("/tree");
-    }
-    navigate("/home");
+      lessonInfo && lessonInfo.length ? navigate("/home") : navigate("/tree");
+    } else navigate("/home");
   }
 
   useEffect(() => {
@@ -79,7 +99,7 @@ export default function AllowAlert() {
 
   function handleMoveToHome() {
     if (userRole == "선생님") {
-      navigate("/tree");
+      lessonInfo && lessonInfo.length ? navigate("/home") : navigate("/tree");
     } else navigate("/home");
   }
 

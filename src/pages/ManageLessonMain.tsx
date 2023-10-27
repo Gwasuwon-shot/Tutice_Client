@@ -37,7 +37,11 @@ export default function ManageLessonMain() {
       {snackBarOpen && !isSucces && <CancelLessonMaintenanceSnackBar />}
       <MainLessonsWrapper>
         <MainLessonsHeader>수업관리</MainLessonsHeader>
-        {checkMissingMaintenanceLessonExist() && <ExtensionQuestion setIsSuccess={setIsSuccess} />}
+        <TitleWrapper>
+          <Title>나의 수업</Title>
+          <EditButton>편집</EditButton>
+        </TitleWrapper>
+        {/* {checkMissingMaintenanceLessonExist() && <ExtensionQuestion setIsSuccess={setIsSuccess} />} */}
         <MainLessons />
         <AddTreeCodeButtonManageIcon onClick={handleMakeTreeCode} />
       </MainLessonsWrapper>
@@ -64,4 +68,22 @@ const MainLessonsHeader = styled.header`
   color: ${({ theme }) => theme.colors.grey900};
 
   ${({ theme }) => theme.fonts.title01};
+`;
+
+const Title = styled.h1`
+  margin-bottom: 1.2rem;
+
+  color: ${({ theme }) => theme.colors.grey900};
+  ${({ theme }) => theme.fonts.title02};
+`;
+
+const EditButton = styled.button`
+  display: flex;
+  color: ${({ theme }) => theme.colors.grey600};
+  ${({ theme }) => theme.fonts.body02};
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

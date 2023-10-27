@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
-import { studentNameState } from "../../atom/common/datePicker";
-import { lessonCodeAndPaymentId } from "../../atom/tuitionPayment/tuitionPayment";
+import { LessonInfoLessonRecordIc } from "../../assets";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import useGetLessonDetail from "../../hooks/useGetLessonDetail";
 import { CommonBackButton } from "../common";
@@ -12,8 +10,6 @@ import StudentNameLabel from "../common/StudentNameLabel";
 export default function StudentNameBox() {
   const { manageLessonId } = useParams();
   const { idx, studentName, subject, lessonCode } = useGetLessonDetail(Number(manageLessonId));
-  const [studentNameForLinkShare, setStudentNameForLinkShare] = useRecoilState<string>(studentNameState);
-  const [codeAndId, setCodeAndId] = useRecoilState(lessonCodeAndPaymentId);
   const navigate = useNavigate();
   const [pageY, setPageY] = useState<number>(0);
   const documentRef = useRef(document);
@@ -28,14 +24,8 @@ export default function StudentNameBox() {
     setPageY(pageYOffset);
   }
 
-  function moveToLinkShare() {
-    setCodeAndId({
-      ...codeAndId,
-      lessonCode: lessonCode,
-      lessonidx: idx,
-    });
-    setStudentNameForLinkShare(studentName);
-    navigate("/lesson-share", { state: false });
+  function handleGotoLessonInfoList() {
+    navigate(`/lesson-info/${manageLessonId}`, { state: true });
   }
 
   return (
@@ -52,11 +42,21 @@ export default function StudentNameBox() {
             isBig={true}
           />
         </LabelWrapper>
-        <LinkShareTag onClick={moveToLinkShare}>수업링크 공유</LinkShareTag>
+
+        <LessonManageIcon onClick={() => handleGotoLessonInfoList()} />
       </StudentNameBoxWrapper>
     </StudentNameWrapper>
   );
 }
+
+const LessonManageIcon = styled(LessonInfoLessonRecordIc)`
+  width: 2rem;
+  height: 2rem;
+
+  /* position: absolute; */
+  /* top: 5.3rem; */
+  /* right: 1.493rem; */
+`;
 
 const StudentNameWrapper = styled.div<{ pageY: number; color: string }>`
   display: flex;
@@ -77,12 +77,6 @@ const StudentNameBoxWrapper = styled.header<{ pageY: number }>`
 
   margin-left: ${({ pageY }) => pageY > 30 && -1}rem;
   width: ${({ pageY }) => (pageY > 30 ? 87 : 100)}%;
-`;
-
-const LinkShareTag = styled.p`
-  color: ${({ theme }) => theme.colors.grey500};
-  ${({ theme }) => theme.fonts.body04};
-  text-decoration-line: underline;
 `;
 
 const LabelWrapper = styled.header`

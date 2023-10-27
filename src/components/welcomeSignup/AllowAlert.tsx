@@ -14,24 +14,42 @@ import { messaging } from "../../core/notification/settingFCM";
 import { registerServiceWorker } from "../../utils/common/notification";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
+import useGetAllLessons from "../../hooks/useGetAllLessons";
+import { getLessonByTeacher } from "../../api/getLessonByTeacher";
 
-interface AlertSignupProp {
-  setIsWelcome: React.Dispatch<React.SetStateAction<boolean>>;
+interface lessonListType {
+  idx: number;
+  teacherName: string;
+  studentName: string;
+  subject: string;
+  count: number;
+  nowCount: number;
+  percent: number;
 }
 
-export default function AlertSignup(prop: AlertSignupProp) {
+//알림 활성화뷰
+export default function AllowAlert() {
   const userRole = useRecoilValue(userRoleData);
   const navigate = useNavigate();
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
-  const [lessonIndex, setLessonIndex] = useRecoilState(connectLessonId);
+  const [lessonInfo, setLessonInfo] = useState<lessonListType[]>();
 
-  const { setIsWelcome } = prop;
-  const MAIN_TEXT = `수업 나무를 통한 \n 쉬운 관리를 위해\n 알림을 활성화 해보세요 `;
+  const MAIN_TEXT = `쉬운 관리를 위해\n알림을 활성화 해보세요 `;
 
-  const SUB_TEXT = "푸시알림을 활성화를 통해 \n 출결, 수업비 관리를 도울 수 있어요";
+  const SUB_TEXT = "푸시알림을 활성화를 통해 출결,\n수업비 관리 도움을 받을 수 있어요";
 
+  async function checkIfLessonExists() {
+    const data = await getLessonByTeacher();
+    setLessonInfo(data);
+  }
+
+  useEffect(() => {
+    if (userRole == "선생님") checkIfLessonExists();
+  }, []);
+
+  // 알림 허용하기
   async function handleAllowNotification() {
     const permission = await Notification.requestPermission();
 
@@ -44,12 +62,17 @@ export default function AlertSignup(prop: AlertSignupProp) {
     setDeviceToken({
       token: token,
     });
+
+    if (userRole == "선생님") {
+      lessonInfo && lessonInfo.length ? navigate("/home") : navigate("/tree");
+    } else navigate("/home");
   }
 
   useEffect(() => {
     deviceToken?.token !== "" && deviceToken?.token !== undefined && patchingDeviceToken(deviceToken?.token);
   }, [deviceToken]);
 
+  // 디바이브 토큰 가져오기
   async function getDeviceToken() {
     const token = await getToken(messaging, {
       vapidKey: import.meta.env.VITE_APP_VAPID_KEY,
@@ -60,14 +83,10 @@ export default function AlertSignup(prop: AlertSignupProp) {
     });
   }
 
+  // 디바이스토큰 업데이트
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
-      console.log(lessonIndex);
-      if (userRole === "부모님" && lessonIndex !== "") {
-        navigate(`/${lessonIndex}`);
-      } else {
-        userRole !== "선생님" ? navigate("/home") : setIsWelcome(false);
-      }
+      console.log(userRole);
     },
     onError: (err) => {
       console.log(err);
@@ -79,12 +98,9 @@ export default function AlertSignup(prop: AlertSignupProp) {
   }
 
   function handleMoveToHome() {
-    if (userRole !== "선생님") {
-      // setIsWelcome(true);
-      navigate("/home");
-    } else {
-      setIsWelcome(false);
-    }
+    if (userRole == "선생님") {
+      lessonInfo && lessonInfo.length ? navigate("/home") : navigate("/tree");
+    } else navigate("/home");
   }
 
   return (
@@ -95,15 +111,20 @@ export default function AlertSignup(prop: AlertSignupProp) {
         <BellWelcomeIcon />
         <SignupTitleLayout>{MAIN_TEXT}</SignupTitleLayout>
         <SubText>{SUB_TEXT}</SubText>
+        <ButtonLayout
+          onClickButton={handleAllowNotification}
+          onClickJump={handleMoveToHome}
+          buttonText="할래요!"
+          passText="괜찮아요"
+        />
       </Container>
-      <ButtonLayout onClickButton={handleAllowNotification} onClickJump={handleMoveToHome} buttonText="할래요!" />
     </>
   );
 }
 
 const Container = styled.div`
   margin-top: 6rem;
-  margin-left: -2rem;
+  margin-left: 1.4rem;
 `;
 const BellWelcomeIcon = styled(BellWelcomeIc)`
   width: 2.9rem;
@@ -113,6 +134,7 @@ const BellWelcomeIcon = styled(BellWelcomeIc)`
 
 const SubText = styled.p`
   margin-top: 2.2rem;
+  white-space: pre-wrap;
 
   color: ${({ theme }) => theme.colors.grey600};
   ${({ theme }) => theme.fonts.body04};

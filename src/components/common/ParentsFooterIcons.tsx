@@ -1,13 +1,13 @@
-import { PARENTS_FOOTER_CATEGORY } from "../../core/parentsHome/parentsFooter";
-import {
-  CalendarSelectedParentsHomeIc,
-  CalendarUnselectedParentsHomeIc,
-  HomeSelectedParentsHomeIc,
-  HomeUnselectedParentsHomeIc,
-  MyPageSelectedParentsHomeIc,
-  MyPageUnselectedParentsHomeIc,
-} from "../../assets";
 import { styled } from "styled-components";
+import {
+  CalendarActiveTeacherFooterIc,
+  CalendarTeacherFooterIc,
+  HomeActiveTeacherFooterIc,
+  HomeTeacherFooterIc,
+  MyActiveTeacherFooterIc,
+  MyTeacherFooterIc,
+} from "../../assets";
+import { PARENTS_FOOTER_CATEGORY } from "../../core/parentsHome/parentsFooter";
 
 interface ParentsFooterIconsProps {
   category: string;
@@ -19,42 +19,39 @@ export default function ParentsFooterIcons(props: ParentsFooterIconsProps) {
 
   switch (category) {
     case PARENTS_FOOTER_CATEGORY.home:
-      return isMoved ? <HomeSelectedParentsHomeIcon /> : <HomeUnselectedParentsHomeIcon />;
+      return isMoved ? <HomeActiveTeacherFooterIcon /> : <HomeTeacherFooterIcon />;
     case PARENTS_FOOTER_CATEGORY.calendar:
-      return isMoved ? <CalendarSelectedParentsHomeIcon /> : <CalendarUnselectedParentsHomeIcon />;
+      return isMoved ? <CalendarActiveTeacherFooterIcon /> : <CalendarTeacherFooterIcon />;
     case PARENTS_FOOTER_CATEGORY.my:
-      return <MypageUnselectedParentsHomeIcon />;
+      return isMoved ? <MyActiveTeacherFooterIcon /> : <MyTeacherFooterIcon />;
     default:
       return;
   }
 }
 
-const HomeSelectedParentsHomeIcon = styled(HomeSelectedParentsHomeIc)`
-  width: 1.8rem;
-  height: 1.8rem;
+const HomeActiveTeacherFooterIcon = styled(HomeActiveTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
 `;
 
-const HomeUnselectedParentsHomeIcon = styled(HomeUnselectedParentsHomeIc)`
-  width: 1.8rem;
-  height: 1.8rem;
+const HomeTeacherFooterIcon = styled(HomeTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+const CalendarActiveTeacherFooterIcon = styled(CalendarActiveTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
+`;
+const CalendarTeacherFooterIcon = styled(CalendarTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
 `;
 
-const CalendarSelectedParentsHomeIcon = styled(CalendarSelectedParentsHomeIc)`
-  width: 1.8rem;
-  height: 1.8rem;
+const MyActiveTeacherFooterIcon = styled(MyActiveTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
 `;
-
-const CalendarUnselectedParentsHomeIcon = styled(CalendarUnselectedParentsHomeIc)`
-  width: 1.8rem;
-  height: 1.8rem;
-`;
-
-const MypageUnselectedParentsHomeIcon = styled(MyPageUnselectedParentsHomeIc)`
-  width: 1.8rem;
-  height: 1.8rem;
-`;
-
-const MypageSelectedParentsHomeIcon = styled(MyPageSelectedParentsHomeIc)`
-  width: 1.8rem;
-  height: 1.8rem;
+const MyTeacherFooterIcon = styled(MyTeacherFooterIc)`
+  width: 5rem;
+  height: 5rem;
 `;

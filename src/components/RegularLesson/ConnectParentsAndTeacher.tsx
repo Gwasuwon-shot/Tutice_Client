@@ -20,7 +20,7 @@ export default function ConnectParentsAndTeacher() {
 
   async function connectParentsAndTeacher() {
     if (lessonId) {
-      const data = await patchLessonParents(lessonId);
+      const data = await patchLessonParents(lessonIndex);
       return data;
     }
   }

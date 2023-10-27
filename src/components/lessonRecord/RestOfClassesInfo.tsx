@@ -27,10 +27,21 @@ export default function RestOfClassesInfo(props: RestOfClassesInfoProps) {
 
   return (
     <RestOfClassesInfoWrapper>
-      <RestOfClassesTitle>
-        열매가 열리기 까지 <br />
-        {count - nowCount}회차 남았습니다
-      </RestOfClassesTitle>
+      {count - nowCount > 0 ? (
+        <>
+          <RestOfClassesTitle>결실을 수확하기까지 </RestOfClassesTitle>
+          <RestOfClassesTitle>
+            <Count> {count - nowCount}회차&nbsp;</Count> 남았습니다
+          </RestOfClassesTitle>
+        </>
+      ) : (
+        <>
+          <RestOfClassesTitle>모든 회차가 끝났어요</RestOfClassesTitle>
+          <RestOfClassesTitle>
+            <Count>결실</Count>을 수확하세요!
+          </RestOfClassesTitle>
+        </>
+      )}
 
       <ProgressTreeIcon src={treeImgSrc} />
 
@@ -41,6 +52,10 @@ export default function RestOfClassesInfo(props: RestOfClassesInfoProps) {
     </RestOfClassesInfoWrapper>
   );
 }
+
+const Count = styled.p`
+  ${({ theme }) => theme.fonts.title02}
+`;
 
 const RestOfClassesInfoWrapper = styled.main`
   display: flex;
@@ -55,7 +70,8 @@ const RestOfClassesInfoWrapper = styled.main`
 `;
 
 const RestOfClassesTitle = styled.h1`
-  ${({ theme }) => theme.fonts.title02};
+  display: flex;
+  ${({ theme }) => theme.fonts.title03};
   color: ${({ theme }) => theme.colors.grey900};
 `;
 

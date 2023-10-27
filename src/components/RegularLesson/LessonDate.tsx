@@ -3,6 +3,7 @@ import {
   cycleNumberState,
   dateState,
   dayState,
+  firstLessonDay,
   focusDayState,
   openFinishDetailState,
   openStartDetailState,
@@ -44,18 +45,30 @@ export default function LessonDate() {
   const DAYS = ["월", "화", "수", "목", "금", "토", "일"];
 
   const [selectedDays, setSelectedDays] = useRecoilState(dayState);
+  const [firstLesson, setfirstLesson] = useRecoilState(firstLessonDay);
 
   function handleDayButton(day: string) {
+
     setSelectedDays((prevSelectedDays) => {
       const existingDayIndex = prevSelectedDays.findIndex((selectedDay) => selectedDay.dayOfWeek === day);
   
-      if (existingDayIndex !== -1) {
-        const newSelectedDays = [...prevSelectedDays];
-        newSelectedDays.splice(existingDayIndex, 1);
-        return newSelectedDays;
+      if (day == firstLesson) {
+        if (existingDayIndex === -1) {
+          return [...prevSelectedDays, { dayOfWeek: day, startTime: "12:00", endTime: "12:00" }];
+        } else {
+          return [...prevSelectedDays]
+        }
+      
       } else {
-        return [...prevSelectedDays, { dayOfWeek: day, startTime: "12:00", endTime: "12:00" }];
+        if (existingDayIndex !== -1) {
+          const newSelectedDays = [...prevSelectedDays];
+          newSelectedDays.splice(existingDayIndex, 1);
+          return newSelectedDays;
+        } else {
+          return [...prevSelectedDays, { dayOfWeek: day, startTime: "12:00", endTime: "12:00" }];
+        }
       }
+      
     });
   }
   
@@ -94,16 +107,10 @@ export default function LessonDate() {
 
   return (
     <LessonDateWrapper>
-      <IconWrapper>
-        <RegularLessonClockIcon />
-        <SectionName> 수업일시 </SectionName>
-        <Explain> 수업 종료시 출결 입력 알림을 보내드릴게요. </Explain>
-      </IconWrapper>
 
-      <ModalWrapper>
-        <RegularLessonCalenderIcon />
-        <ModalButton onClick={() => postTemporary(postInformation)}> 캘린더로 기존 일정 확인하기 </ModalButton>
-      </ModalWrapper>
+      <IconWrapper>
+        <SectionName> 일정 등록 </SectionName>
+      </IconWrapper>
 
       <DayWrapper>
         {DAYS.map((day, index) => (
@@ -120,6 +127,11 @@ export default function LessonDate() {
         <SelectedDayAndTime key={index} dayofweek={day.dayOfWeek} startTime={day.startTime} endTime={day.endTime} />
       ))}
       
+      <ModalWrapper>
+        <RegularLessonCalenderIcon />
+        <ModalButton onClick={() => postTemporary(postInformation)}> 캘린더로 기존 일정 확인하기 </ModalButton>
+      </ModalWrapper>
+      
     </LessonDateWrapper>
   );
 }
@@ -132,33 +144,22 @@ const IconWrapper = styled.div`
   height: 3.1rem;
 `;
 
-const RegularLessonClockIcon = styled(RegularLessonClockIc)`
-  margin-left: 1.7rem;
-  margin-top: 1.5rem;
-`;
-
 const SectionName = styled.h1`
-  margin-left: 0.8rem;
-  margin-top: 1.5rem;
+  margin-left: 1.8rem;
+  margin-top: 2rem;
 
   ${({ theme }) => theme.fonts.body04};
-  color: ${({ theme }) => theme.colors.grey600};
-`;
-
-const Explain = styled.h3`
-  margin-top: 1.7rem;
-  margin-left: 4.8rem;
-
-  ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey300};
 `;
+
 
 const DayWrapper = styled.section`
   display: flex;
   justify-content: center;
-  gap: 0.2rem;
+  gap: 0.4rem;
 
-  padding-top: 0.6rem;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
   margin-bottom: 2rem;
 `;
 
@@ -174,59 +175,19 @@ const Day = styled.button<DayProp>`
   ${({ isSelected, theme }) => isSelected && `color: ${theme.colors.white}`};
 `;
 
-const TimeWrapper = styled.section`
-  display: flex;
-  justify-content: space-between;
-
-  margin-top: 1.6rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-`;
-
-const TimeChoose = styled.h3`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 2.3rem;
-
-  ${({ theme }) => theme.fonts.body04};
-  color: ${({ theme }) => theme.colors.grey400};
-`;
-
-const TimeButton = styled.button<{ selected: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 10rem;
-  ${({ theme }) => theme.fonts.body04};
-  color: ${({ theme }) => theme.colors.grey100};
-  ${({ selected, theme }) => selected && `color: ${theme.colors.grey700};`}
-`;
-
-const ButtonWrapper = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin: 1.6rem 0.8rem 0 0.8rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey50};
-`;
 
 const ModalWrapper = styled.section`
   display: flex;
+  justify-content: center;
   margin-top: 0.8rem;
   margin-bottom: 1rem;
 `;
 
 const RegularLessonCalenderIcon = styled(RegularLessonCalenderIc)`
-  margin-left: 1.7rem;
 `;
 
 const ModalButton = styled.button`
   margin-left: 0.3rem;
-
   text-decoration: underline;
   ${({ theme }) => theme.fonts.body05};
   color: ${({ theme }) => theme.colors.grey400};

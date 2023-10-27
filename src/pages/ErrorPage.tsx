@@ -3,10 +3,18 @@ import styled from "styled-components";
 import { ErrorShowingIc } from "../assets";
 import RoundBottomButton from "../components/common/RoundBottomButton";
 
-export default function Error() {
+interface ErrorProps {
+  resetErrorBoundary: any;
+  // error: any;
+}
+
+export default function ErrorPage(prop: ErrorProps) {
+  const { resetErrorBoundary } = prop;
   const navigate = useNavigate();
+
   function handleMoveToHome() {
-    navigate("/");
+    resetErrorBoundary();
+    navigate("/home");
   }
 
   return (

@@ -27,7 +27,7 @@ export const openFinishDetailState = atom<boolean>({
 // 회차 관리
 export const cycleNumberState = atom<number>({
   key: "cycleNumberState",
-  default: -1,
+  default: 0,
 });
 
 // 첫 수업일 관리

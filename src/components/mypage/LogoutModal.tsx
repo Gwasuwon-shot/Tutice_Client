@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import BasicDoubleModal from "../common/BasicDoubleModal";
+import { useMutation } from "react-query";
+import { patchLogout } from "../../api/patchLogout";
+import { useNavigate } from "react-router-dom";
+import { getCookie, removeCookie } from "../../api/cookie";
 
 interface LogoutModalProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,13 +13,24 @@ interface LogoutModalProps {
 
 export default function LogoutModal(props: LogoutModalProps) {
   const { setOpenModal, setIsCheckingLogout } = props;
+  const navigate = useNavigate();
   function handleBacktoMypage() {
     setOpenModal(false);
     setIsCheckingLogout(false);
   }
 
+  const { mutate: patchingLogout } = useMutation(patchLogout, {
+    onSuccess: (res) => {
+      removeCookie("accessToken", {});
+      navigate("/");
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
   function handleLogout() {
-    //로그아웃로직
+    patchingLogout();
   }
 
   return (

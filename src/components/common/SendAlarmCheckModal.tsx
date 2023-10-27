@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { requestAttendanceNotification } from "../../api/requestAttendanceNotification";
 import { attendanceStatus } from "../../atom/attendanceCheck/attendanceStatus";
+import { agreeSend } from "../../atom/common/agreeSend";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import { STUDENT_COLOR } from "../../core/common/studentColor";
 import { TEACHER_FOOTER_CATEGORY } from "../../core/teacherHome/teacherFooter";
@@ -30,7 +31,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
   const navigate = useNavigate();
   const [isDisabledModalOpen, setIsDisabledModalOpen] = useState(false);
   const { handleMoveToPage } = useTeacherFooter();
-  const [isAgreeSend, setIsAgreeSend] = useState<undefined | string>(undefined);
+  const [isAgreeSend, setIsAgreeSend] = useRecoilState<undefined | string>(agreeSend);
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
 
@@ -49,7 +50,7 @@ export default function SendAlarmCheckModal(props: SendAlarmCheckModalProps) {
       onSuccess: (res) => {
         if (res.data.message === "학부모에게 출결알람 보내기 성공") {
           handleMoveToHomeWithoutAlarm();
-          setIsAgreeSend(undefined);
+          // setIsAgreeSend(undefined);
           setSanckBarOpen(true);
           setAttendanceData({ idx: 0, status: "" });
         }

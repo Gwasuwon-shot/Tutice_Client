@@ -73,6 +73,7 @@ const StudentPaymentsWrapper = styled.section`
 `;
 
 const ModalWrapper = styled.div`
-  position: absolute;
-  margin-top: -10rem;
+  position: fixed;
+  z-index: 2;
+  height: 100vh;
 `;

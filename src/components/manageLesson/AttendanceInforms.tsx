@@ -42,7 +42,7 @@ export default function AttendanceInforms() {
     <>
       {openModal && selectedLesson && (
         <ModalSection $isCheckingModalOpen={isCheckingModalOpen}>
-          <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} />
+          <AttendanceCheckModal setIsCheckingModalOpen={setIsCheckingModalOpen} isUpdateOpen />
         </ModalSection>
       )}
 

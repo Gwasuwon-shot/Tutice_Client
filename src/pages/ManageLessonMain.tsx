@@ -35,13 +35,6 @@ export default function ManageLessonMain() {
     setAttendanceData({ idx: 0, status: "" });
   }, []);
 
-  function finsihedLessons() {
-    let teacherLessonList = lessonList.filter((element: lessonListType) => {
-      element.isFinished !== false;
-    });
-    return teacherLessonList;
-  }
-
   function handleMakeTreeCode() {
     navigate("/register-lesson");
   }
@@ -112,6 +105,7 @@ const AddTreeCodeButtonManageIcon = styled(AddTreeCodeButtonManageIc)`
   height: 3.6rem;
   margin-top: 1.8rem;
   margin-left: 9rem;
+  cursor: pointer;
 `;
 
 const MainLessonsWrapper = styled.section`

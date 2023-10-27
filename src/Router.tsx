@@ -33,7 +33,6 @@ import TimePickerPage from "./pages/TimePickerPage";
 import TuitionPayment from "./pages/TuitionPayment";
 import WelcomeSignup from "./pages/WelcomeSignup";
 import PrivateRoute from "./utils/common/privateRoute";
-import MissingMaintenanceLesson from "./pages/MissingMaintenanceLesson";
 
 export default function Router() {
   return (

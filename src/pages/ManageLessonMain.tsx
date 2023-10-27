@@ -7,42 +7,98 @@ import { attendanceStatus } from "../atom/attendanceCheck/attendanceStatus";
 import { isSnackBarOpen } from "../atom/common/isSnackBarOpen";
 import CancelLessonMaintenanceSnackBar from "../components/common/CancelLessonMaintenanceSnackBar";
 import TeacherFooter from "../components/common/TeacherFooter";
-import ExtensionQuestion from "../components/manageLesson/ExtensionQuestion";
 import MainLessons from "../components/manageLesson/MainLessons";
 import SuccessLessonMaintenanceSanckBar from "../components/modal/SuccessLessonMaintenanceSanckBar";
+import MissingMainteanceLessons from "../components/manageLesson/MissingMainteanceLessons";
+import { isModalOpen } from "../atom/common/isModalOpen";
+import ExtensionLessonModal from "../components/manageLesson/ExtensionLessonModal";
+import DeleteLessonModal from "../components/manageLesson/DeleteLessonModal";
+import useGetAllLessons from "../hooks/useGetAllLessons";
 import useGetMissingMaintenanceLesson from "../hooks/useGetMissingMaintenanceLesson";
+import { lessonListType } from "../type/manageLesson/lessonListType";
+import FinishedLessons from "../components/manageLesson/FinishedLessons";
 
 export default function ManageLessonMain() {
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
   const [isSucces, setIsSuccess] = useState(true);
-  const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
   const navigate = useNavigate();
   const [attendanceData, setAttendanceData] = useRecoilState(attendanceStatus);
+  const [isClickedEdit, setIsClickedEdit] = useState(false);
+  const [isClickedDeleteButton, setIsClickedDeleteButton] = useState(false);
+  const [openModal, setOpenModal] = useRecoilState<boolean>(isModalOpen);
+  const [isClickedMaintain, setIsClickedMaintain] = useState(false);
+  const [isClickedMainteance, setIsClickedMainteance] = useState(false);
 
+  const { lessonList } = useGetAllLessons();
+  const { missingMaintenanceLessonList } = useGetMissingMaintenanceLesson();
   useEffect(() => {
     setAttendanceData({ idx: 0, status: "" });
   }, []);
 
-  function checkMissingMaintenanceLessonExist() {
-    return missingMaintenanceLessonList?.length !== 0;
+  function finsihedLessons() {
+    let teacherLessonList = lessonList.filter((element: lessonListType) => {
+      element.isFinished !== false;
+    });
+    return teacherLessonList;
   }
 
   function handleMakeTreeCode() {
     navigate("/register-lesson");
   }
 
+  function EditPageClick() {
+    setIsClickedEdit(!isClickedEdit);
+  }
+
+  function handleConfirmDeleteLesson() {
+    setIsClickedDeleteButton(true);
+    setIsClickedMainteance(false);
+    setOpenModal(true);
+  }
+
+  function handleConfirmMaintain() {
+    setIsClickedDeleteButton(false);
+
+    setOpenModal(true);
+    setIsClickedMainteance(true);
+  }
+
+  const teacherLessonList = lessonList.filter((element: lessonListType) => {
+    element.isFinished == false;
+  });
+
+  const finishedLessonList = lessonList.filter((element: lessonListType) => {
+    element.isFinished == true;
+  });
   return (
     <>
+      {openModal && isClickedDeleteButton && (
+        <DeleteLessonModal setIsClickedDeleteButton={setIsClickedDeleteButton} setOpenModal={setOpenModal} />
+      )}
+      {openModal && isClickedMainteance && (
+        <ExtensionLessonModal setIsClickedMainteance={setIsClickedMainteance} setIsSuccess={setIsSuccess} />
+      )}
       {snackBarOpen && isSucces && <SuccessLessonMaintenanceSanckBar />}
       {snackBarOpen && !isSucces && <CancelLessonMaintenanceSnackBar />}
       <MainLessonsWrapper>
         <MainLessonsHeader>수업관리</MainLessonsHeader>
         <TitleWrapper>
           <Title>나의 수업</Title>
-          <EditButton>편집</EditButton>
+          <EditButton onClick={EditPageClick}>{isClickedEdit ? "완료" : "편집"}</EditButton>
         </TitleWrapper>
-        {/* {checkMissingMaintenanceLessonExist() && <ExtensionQuestion setIsSuccess={setIsSuccess} />} */}
-        <MainLessons />
+        {missingMaintenanceLessonList && (
+          <MissingMainteanceLessons
+            handleConfirmDeleteLesson={handleConfirmDeleteLesson}
+            isClickedEdit={isClickedEdit}
+            handleConfirmMaintain={handleConfirmMaintain}
+          />
+        )}
+        {teacherLessonList && (
+          <MainLessons handleConfirmDeleteLesson={handleConfirmDeleteLesson} isClickedEdit={isClickedEdit} />
+        )}
+        {finishedLessonList && (
+          <FinishedLessons handleConfirmDeleteLesson={handleConfirmDeleteLesson} isClickedEdit={isClickedEdit} />
+        )}
         <AddTreeCodeButtonManageIcon onClick={handleMakeTreeCode} />
       </MainLessonsWrapper>
 
@@ -54,7 +110,7 @@ export default function ManageLessonMain() {
 const AddTreeCodeButtonManageIcon = styled(AddTreeCodeButtonManageIc)`
   width: 11.2rem;
   height: 3.6rem;
-
+  margin-top: 1.8rem;
   margin-left: 9rem;
 `;
 

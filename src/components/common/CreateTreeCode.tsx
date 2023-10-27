@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import RoundBottomButton from "./RoundBottomButton";
+import { AddLessonButtonIc } from "../../assets";
 
 export default function CreateTreeCode() {
   const navigate = useNavigate();
@@ -8,13 +8,10 @@ export default function CreateTreeCode() {
     navigate("/register-lesson");
   }
 
-  return (
-    <CreateTreeCodeButtonWrapper onClick={handleMakeTreeCode}>
-      <RoundBottomButton buttonMessage="수업링크 코드 생성하기" />
-    </CreateTreeCodeButtonWrapper>
-  );
+  return <AddLessonButtonIcon onClick={handleMakeTreeCode} />;
 }
 
-const CreateTreeCodeButtonWrapper = styled.section`
+const AddLessonButtonIcon = styled(AddLessonButtonIc)`
   margin-top: 1rem;
+  width: 29.2rem;
 `;

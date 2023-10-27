@@ -10,6 +10,12 @@ interface LessonInfoListProp {
   state: boolean;
 }
 
+interface ScheduleType {
+  dayOfWeekList: string[];
+  startTime: string;
+  endTime: string;
+}
+
 export default function LessonInfoList(props: LessonInfoListProp) {
   const { state } = props;
   //커스텀 훅에서 account 객체 값 배열로 만들어서 리턴
@@ -22,11 +28,11 @@ export default function LessonInfoList(props: LessonInfoListProp) {
     <>
       <LessonInfoMainCategory>정기수업 일시</LessonInfoMainCategory>
       <ScheduleBox>
-        {lessonRegularSchedule.map(({ dayOfWeekList, startTime, endTime }) => {
+        {lessonRegularSchedule.map(({ dayOfWeekList, startTime, endTime }: ScheduleType) => {
           return (
             <RegularSchedule>
               <Days>
-                {dayOfWeekList.map((day, index) => (
+                {dayOfWeekList?.map((day: string, index: number) => (
                   <>
                     {day}
                     <Comma $isLast={index === dayOfWeekList.length - 1}>,</Comma>

@@ -1,25 +1,18 @@
+import { useQuery } from "react-query";
+import { getLessonRegularSchedule } from "../api/getLessonRegularSchedule";
+
 export default function useGetLessonRegularSchedule(lessonIdx: number) {
-  //   const { data: lessonRegularSchedule } = useQuery(
-  //     ["lessonRegularSchedule"],
-  //     () => getLessonRegularSchedule(lessonIdx),
-  //     {
-  //       onError: (error) => {
-  //         console.log(error);
-  //       },
-  //     },
-  //   );
-  const lessonRegularSchedule = [
+  const { data: lessonRegularSchedule } = useQuery(
+    ["lessonRegularSchedule"],
+    () => getLessonRegularSchedule(lessonIdx),
     {
-      dayOfWeekList: ["월", "화"],
-      startTime: "21:30",
-      endTime: "22:00",
+      onError: (error) => {
+        console.log(error);
+      },
     },
-    {
-      dayOfWeekList: ["수"],
-      startTime: "16:30",
-      endTime: "18:00",
-    },
-  ];
+  );
+
+  console.log(lessonRegularSchedule);
 
   return { lessonRegularSchedule };
 }

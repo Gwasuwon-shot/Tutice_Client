@@ -15,6 +15,17 @@ import { registerServiceWorker } from "../../utils/common/notification";
 import SignupTitleLayout from "../signup/SignupTitleLayout";
 import ButtonLayout from "./ButtonLayout";
 import useGetAllLessons from "../../hooks/useGetAllLessons";
+import { getLessonByTeacher } from "../../api/getLessonByTeacher";
+
+interface lessonListType {
+  idx: number;
+  teacherName: string;
+  studentName: string;
+  subject: string;
+  count: number;
+  nowCount: number;
+  percent: number;
+}
 
 //알림 활성화뷰
 export default function AllowAlert() {
@@ -23,11 +34,20 @@ export default function AllowAlert() {
   const [deviceToken, setDeviceToken] = useState<AppCheckTokenResult>({
     token: "",
   });
-  const [lessonIndex, setLessonIndex] = useRecoilState(connectLessonId);
+  const [lessonInfo, setLessonInfo] = useState<lessonListType[]>();
 
   const MAIN_TEXT = `쉬운 관리를 위해\n알림을 활성화 해보세요 `;
 
   const SUB_TEXT = "푸시알림을 활성화를 통해 출결,\n수업비 관리 도움을 받을 수 있어요";
+
+  async function checkIfLessonExists() {
+    const data = await getLessonByTeacher();
+    setLessonInfo(data);
+  }
+
+  useEffect(() => {
+    if (userRole == "선생님") checkIfLessonExists();
+  }, []);
 
   // 알림 허용하기
   async function handleAllowNotification() {
@@ -42,6 +62,10 @@ export default function AllowAlert() {
     setDeviceToken({
       token: token,
     });
+
+    if (userRole == "선생님") {
+      lessonInfo && lessonInfo.length ? navigate("/home") : navigate("/tree");
+    } else navigate("/home");
   }
 
   useEffect(() => {
@@ -62,15 +86,7 @@ export default function AllowAlert() {
   // 디바이스토큰 업데이트
   const { mutate: patchingDeviceToken } = useMutation(patchDeviceToken, {
     onSuccess: (res) => {
-      if (userRole === "부모님") {
-        navigate("/home");
-      } else {
-        //수업 나무 있으면
-        //수업 나무 없으면 생성 AfterSignup
-        const { lessonList } = useGetAllLessons();
-        if (lessonList.length) navigate("/home");
-        else navigate("/tree");
-      }
+      console.log(userRole);
     },
     onError: (err) => {
       console.log(err);
@@ -82,7 +98,9 @@ export default function AllowAlert() {
   }
 
   function handleMoveToHome() {
-    navigate("/home");
+    if (userRole == "선생님") {
+      lessonInfo && lessonInfo.length ? navigate("/home") : navigate("/tree");
+    } else navigate("/home");
   }
 
   return (

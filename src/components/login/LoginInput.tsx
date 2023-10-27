@@ -36,7 +36,6 @@ export default function LoginInput() {
         secure: true,
       });
 
-      console.log("connectcode", connectCode);
       if (connectCode != "") navigate(`/${lessonCode}`);
       else navigate("/welcome", { state: data.data });
     },

@@ -10,6 +10,6 @@ export function getCookie(name: string) {
   return cookies.get(name);
 }
 
-export function removeCookie(name: string, options: object) {
+export function removeCookie(name: string, options?: object) {
   return cookies.remove(name);
 }

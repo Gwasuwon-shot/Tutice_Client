@@ -28,12 +28,14 @@ export default function TodayClassSwiper() {
 
   const { scheduleList } = useGetTodayScheduleByParents();
 
+  const days = ["일", "월", "화", "수", "목", "금", "토"];
+
   return (
     <>
       {scheduleList?.length > 0 && (
         <div>
           <SwiperTitleDate>
-            {year}년 {month}월 {day}일 ({dateOfWeek}) 수업
+            {year}년 {month}월 {day}일 ({days[dateOfWeek]}) 수업
           </SwiperTitleDate>
           <Slider {...TODAY_CLASS_SLIDER_SETTINGS}>
             {scheduleList.map((classInfo: calssInfoType) => {

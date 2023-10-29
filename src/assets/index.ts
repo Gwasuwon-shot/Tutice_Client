@@ -96,3 +96,8 @@ export { ReactComponent as TuticeWithTextCommonIc } from "./icon/tuticeWithTextC
 export { ReactComponent as UpcomingClassLogoTeacherHomeIc } from "./icon/upcomingClassLogoTeacherHomeIc.svg";
 export { ReactComponent as XButtonSnackBarIc } from "./icon/xButtonSnackBarIc.svg";
 export { ReactComponent as CancelButton } from "./icon/x_btn.svg";
+export { ReactComponent as ExclamnationMarkIc } from "./icon/exclamationMarkIc.svg";
+export { ReactComponent as ManageLessonEditIc } from "./icon/manageLessonEditIc.svg";
+export { ReactComponent as MissingMainteanceConfirmIc } from "./icon/missingMainteanceConfirmIc.svg";
+export { ReactComponent as DoneAttendanceIc } from "./icon/doneAttendanceIc.svg";
+export { ReactComponent as GotoHomeButton } from "./icon/gotoHomeButton.svg";

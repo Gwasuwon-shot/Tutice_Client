@@ -1,27 +1,27 @@
 import { styled } from "styled-components";
 import useGetAllLessons from "../../hooks/useGetAllLessons";
 import { lessonListType } from "../../type/manageLesson/lessonListType";
-import MainLesson from "./MainLesson";
+import FinishedLesson from "./FinishedLesson";
 
-interface MainLessonsProp {
+interface FinishedLessonsProp {
   isClickedEdit: boolean;
   handleConfirmDeleteLesson: () => void;
 }
 
-export default function MainLessons(props: MainLessonsProp) {
+export default function FinishedLessons(props: FinishedLessonsProp) {
   const { isClickedEdit, handleConfirmDeleteLesson } = props;
   const { lessonList } = useGetAllLessons();
 
-  let teacherLessonList = lessonList.filter((lesson: lessonListType) => {
-    return lesson?.percent !== 100;
+  let finsihedLessonList = lessonList.filter((lesson: lessonListType) => {
+    return lesson?.isFinished == true;
   });
 
   return (
     <>
       <MainLessonsWrapper>
-        {teacherLessonList &&
-          teacherLessonList?.map(({ idx, studentName, subject, percent, latestRegularSchedule }: lessonListType) => (
-            <MainLesson
+        {finsihedLessonList &&
+          finsihedLessonList?.map(({ idx, studentName, subject, percent, latestRegularSchedule }: lessonListType) => (
+            <FinishedLesson
               isClickedEdit={isClickedEdit}
               handleConfirmDeleteLesson={handleConfirmDeleteLesson}
               key={idx}

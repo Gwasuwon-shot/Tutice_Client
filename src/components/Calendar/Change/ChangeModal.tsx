@@ -1,32 +1,18 @@
 import { format, isSameDay } from "date-fns";
 import { ko } from "date-fns/locale";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { STUDENT_COLOR } from "../../../core/common/studentColor";
 import useGetScheduleByUser from "../../../hooks/useGetScheduleByUser";
 import StudentColorBox from "../../common/StudentColorBox";
 import ToastModal from "../../common/ToastModal";
+import EditScheduleButton from "./EditScheduleButton";
 
-import { editSchedule } from "../../../atom/EditSchedule/editSchedule";
-
-import { useRecoilState } from "recoil";
-import { EditPencilIc, removeTrashCan } from "../../../assets";
-import { editDateState } from "../../../atom/EditSchedule/editDateState";
+import { removeTrashCan } from "../../../assets";
 import { modalType } from "../../../type/calendar/modalType";
-import { editDateStateTypes } from "../../../type/editSchedule/editDateType";
-import { editScheduleType } from "../../../type/editSchedule/editScheduleType";
-import { editLessonIdxState } from "../../../atom/EditSchedule/editLessonIdx";
 
 export default function ChangeModal(props: modalType) {
   const { selectedDate, setOpenModal, formattedMonth } = props;
-  const navigate = useNavigate();
-  const [clickedSchedule, setClickedSchedule] = useRecoilState(editSchedule);
-  const [willEditDate, setWillEditDate] = useRecoilState(editDateState);
-  const [editlessonIdx, setEditLessonIdx] = useRecoilState(editLessonIdxState);
-
-  const WEEKDAY: string[] = ["일", "월", "화", "수", "목", "금", "토"];
-
   const [isEdit, setIsEdit] = useState(false);
   const { isUserSchedule } = useGetScheduleByUser(formattedMonth);
 
@@ -34,38 +20,6 @@ export default function ChangeModal(props: modalType) {
     //update 로직 추가
     setOpenModal(false);
     setIsEdit(false);
-  }
-
-  function moveClickEditPage({
-    lessonIdx,
-    schedule,
-    selectedDate,
-  }: {
-    lessonIdx: number;
-    schedule: editScheduleType;
-    selectedDate: Date;
-  }): void {
-    const dayOfWeekNumber = selectedDate.getDay();
-    const dayOfWeekKor = WEEKDAY[dayOfWeekNumber];
-
-    setWillEditDate((prevState: editDateStateTypes) => ({
-      year: selectedDate.getFullYear(),
-      month: selectedDate.getMonth() + 1,
-      date: selectedDate.getDate(),
-      dayOfWeek: dayOfWeekKor,
-    }));
-
-    setClickedSchedule((prevState: editScheduleType) => ({
-      idx: schedule?.idx,
-      studentName: schedule?.studentName,
-      subject: schedule?.subject,
-      startTime: schedule?.startTime,
-      endTime: schedule?.endTime,
-    }));
-
-    setEditLessonIdx(lessonIdx);
-
-    navigate("/edit-lessonschedule");
   }
 
   function handleClickEdit() {
@@ -108,7 +62,12 @@ export default function ChangeModal(props: modalType) {
 
                   {isEdit && (
                     <ScheduleEditWrapper>
-                      <EditScheduleButton onClick={() => moveClickEditPage({ lessonIdx, schedule, selectedDate })} />
+                      <EditScheduleButton
+                        lessonIdx={lessonIdx}
+                        schedule={schedule}
+                        selectedDate={selectedDate}
+                        idx={idx}
+                      />
                       <RemoveSchedule />
                     </ScheduleEditWrapper>
                   )}
@@ -191,11 +150,6 @@ const ModalSubject = styled.span<{ $backgroundcolor: string }>`
   ${({ theme }) => theme.fonts.caption01};
   color: ${({ theme }) => theme.colors.grey500};
   border-radius: 0.8rem;
-`;
-
-const EditScheduleButton = styled(EditPencilIc)`
-  width: 1.6rem;
-  height: 1.6rem;
 `;
 
 const RemoveSchedule = styled(removeTrashCan)`

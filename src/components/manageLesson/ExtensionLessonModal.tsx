@@ -5,17 +5,13 @@ import { createLessonMaintenance } from "../../api/createLessonMaintenance";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 import { isSnackBarOpen } from "../../atom/common/isSnackBarOpen";
 import useModal from "../../hooks/useModal";
-import { AttendanceLessonType } from "../../type/common/attendanceLessonType";
 import RoundBottomMiniButton from "../common/RoundBottomMiniButton";
 import StudentNameLabel from "../common/StudentNameLabel";
 import ToastModal from "../common/ToastModal";
+import { STUDENT_COLOR } from "../../core/common/studentColor";
 
 interface ExtensionLessonModalProps {
-  studentName: string;
-  subject: string;
-  backgroundColor: string;
-  color: string;
-  isBig: boolean;
+  setIsClickedMainteance: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -25,10 +21,11 @@ interface createLessonMaintenanceProps {
 }
 
 export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
-  const { studentName, subject, backgroundColor, color, isBig, setIsSuccess } = props;
   const { unShowModal } = useModal();
+  const { setIsSuccess, setIsClickedMainteance } = props;
   const [snackBarOpen, setSanckBarOpen] = useRecoilState(isSnackBarOpen);
-  const [selectedLesson, setSelectedLesson] = useRecoilState<AttendanceLessonType>(attendanceLesson);
+  const [selectedLesson, setSelectedLesson] = useRecoilState(attendanceLesson);
+  const { studentName, subject, lessonIdx } = selectedLesson;
 
   const postInformationTrue = {
     lessonIdx: selectedLesson.lessonIdx,
@@ -44,6 +41,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   const { mutate: createNewLessonMaintenance } = useMutation(createLessonMaintenance, {
     onSuccess: (response) => {
+      queryClient.invalidateQueries("lessonByTeacher");
       queryClient.invalidateQueries("getMissingMaintenanceLesson");
     },
     onError: (error) => console.debug(error),
@@ -51,6 +49,7 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   function handleExtensionLesson(info: createLessonMaintenanceProps) {
     createNewLessonMaintenance(info);
+    setIsClickedMainteance(false);
     unShowModal();
     setSanckBarOpen(true);
     setIsSuccess(true);
@@ -58,6 +57,8 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
 
   function handleNotExtensionLesson(info: createLessonMaintenanceProps) {
     createNewLessonMaintenance(info);
+    setIsClickedMainteance(false);
+
     unShowModal();
     setSanckBarOpen(true);
     setIsSuccess(false);
@@ -71,9 +72,9 @@ export default function ExtensionLessonModal(props: ExtensionLessonModalProps) {
           <StudentNameLabel
             studentName={studentName}
             subject={subject}
-            backgroundColor={backgroundColor}
-            color={color}
-            isBig={isBig}
+            backgroundColor={STUDENT_COLOR[lessonIdx % 10]}
+            color="#757A80"
+            isBig={false}
           />
         </TextWrapper>
         <TextWrapper>

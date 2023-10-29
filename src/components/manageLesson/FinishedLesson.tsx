@@ -4,14 +4,11 @@ import useMoveToLessonDetail from "../../hooks/useMoveToLessonDetail";
 import SubjectLabel from "../common/SubjectLabel";
 import ManageStudentColorBox from "./ManageStudentColorBox";
 import { ManageLessonEditIc } from "../../assets";
-import { deleteLessonStatus } from "../../atom/mangeLesson/deleteLessonStatus";
 import { useRecoilState } from "recoil";
 import { latestRegularScheduleType } from "../../type/manageLesson/lessonListType";
-import { ProgressBar } from "../common";
-import MainLessonsProgressBar from "./MainLessonsProgressBar";
 import { attendanceLesson } from "../../atom/attendanceCheck/attendanceLesson";
 
-interface MainLessonProps {
+interface FinishedLessonType {
   idx: number;
   studentName: string;
   subject: string;
@@ -21,8 +18,8 @@ interface MainLessonProps {
   latestRegularSchedule: latestRegularScheduleType;
 }
 
-export default function MainLesson(props: MainLessonProps) {
-  const { handleConfirmDeleteLesson, idx, studentName, subject, percent, latestRegularSchedule, isClickedEdit } = props;
+export default function FinishedLesson(props: FinishedLessonType) {
+  const { handleConfirmDeleteLesson, idx, studentName, subject, latestRegularSchedule, isClickedEdit } = props;
   const { dayOfWeek, startTime, endTime } = latestRegularSchedule;
   const { handleMoveToManageLessonDetail } = useMoveToLessonDetail();
   const [deleteConfirmLesson, setDeleteConfirmLesson] = useRecoilState(attendanceLesson);
@@ -36,14 +33,14 @@ export default function MainLesson(props: MainLessonProps) {
     <LessonIndividualContainer>
       {isClickedEdit && <ManageLessonEditButton onClick={() => handleClickedDeleteButton()} />}
       <MainLessonBox onClick={() => handleMoveToManageLessonDetail(idx)}>
-        <MainLessonWrapperContainer>
+        <FinishedLessonWrapperContainer>
           <MainLessonWrapper>
-            <ManageStudentColorBox backgroundColor={STUDENT_COLOR[idx % 10]} />
+            <ManageStudentColorBox backgroundColor={"#E9ECEF"} />
             <StudentNameWrapper>{studentName}</StudentNameWrapper>
-            <SubjectLabel subject={subject} backgroundColor={STUDENT_COLOR[idx % 10]} color="#5B6166" />
+            <SubjectLabel subject={subject} backgroundColor={"#E9ECEF"} color="#5B6166" />
           </MainLessonWrapper>
           <DaysWrapper>
-            <LessonInformation>진행예정</LessonInformation>
+            <LessonInformation>수업종료</LessonInformation>
             <DayOfWeekWrapper>
               <p>{dayOfWeek}</p>
               <p>
@@ -51,8 +48,7 @@ export default function MainLesson(props: MainLessonProps) {
               </p>
             </DayOfWeekWrapper>
           </DaysWrapper>
-          <MainLessonsProgressBar progress={percent} />
-        </MainLessonWrapperContainer>
+        </FinishedLessonWrapperContainer>
       </MainLessonBox>
     </LessonIndividualContainer>
   );
@@ -105,7 +101,7 @@ const DaysWrapper = styled.div`
   ${({ theme }) => theme.fonts.body05};
 `;
 
-const MainLessonWrapperContainer = styled.section`
+const FinishedLessonWrapperContainer = styled.section`
   display: flex;
   flex-direction: column;
 

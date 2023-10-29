@@ -20,7 +20,9 @@ export default function ConnectParentsAndTeacher() {
 
   async function connectParentsAndTeacher() {
     if (lessonId) {
-      const data = await patchLessonParents(lessonIndex).then(() => {
+      const id = lessonIndex ? lessonIndex : lessonId;
+      const data = await patchLessonParents(id).then((res) => {
+        console.log(res);
         navigate("/home");
       });
       return data;
@@ -31,12 +33,17 @@ export default function ConnectParentsAndTeacher() {
     if (lessonId) {
       setLessonIndex(lessonId);
     }
-    if (!blockAccess()) {
-      connectParentsAndTeacher();
-    } else {
-      navigate("/login");
-    }
   }, []);
+
+  useEffect(() => {
+    if (lessonIndex) {
+      if (!blockAccess()) {
+        connectParentsAndTeacher();
+      } else {
+        navigate("/login");
+      }
+    }
+  }, [lessonIndex]);
 
   return <div></div>;
 }

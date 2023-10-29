@@ -50,7 +50,6 @@ export default function Account() {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
   width: 32rem;
 `;
 

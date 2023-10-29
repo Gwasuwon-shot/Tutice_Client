@@ -1,10 +1,10 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { TODAY_CLASS_SLIDER_SETTINGS } from "../../core/parentsHome/parentsHome";
-import TodayClassScedule from "./TodayClassScedule";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import { styled } from "styled-components";
+import { TODAY_CLASS_SLIDER_SETTINGS } from "../../core/parentsHome/parentsHome";
 import useGetTodayScheduleByParents from "../../hooks/useGetTodayScheduleByParents";
+import TodayClassScedule from "./TodayClassScedule";
 
 interface calssInfoType {
   idx: number;
@@ -16,11 +16,12 @@ interface calssInfoType {
 }
 
 export default function TodayClassSwiper() {
-  const dateOfWeek = "월";
-  const dateStr = "2023-07-12";
+  // const dateOfWeek = "월";
+  // const dateStr = "2023-07-12";
 
-  const date = new Date(dateStr);
+  const date = new Date();
 
+  const dateOfWeek = date.getDay();
   const year = date.getFullYear(); // 년 추출
   const month = date.getMonth() + 1; // 월 추출 (0부터 시작하므로 +1)
   const day = date.getDate(); // 일 추출

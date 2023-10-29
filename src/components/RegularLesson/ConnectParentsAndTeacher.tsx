@@ -20,7 +20,7 @@ export default function ConnectParentsAndTeacher() {
 
   async function connectParentsAndTeacher() {
     if (lessonId) {
-      const data = await patchLessonParents(lessonIndex);
+      const data = await patchLessonParents(lessonIndex).then(() => navigate("/home"));
       return data;
     }
   }
@@ -32,7 +32,6 @@ export default function ConnectParentsAndTeacher() {
 
     if (!blockAccess()) {
       connectParentsAndTeacher();
-      navigate("/home");
     } else {
       navigate("/");
     }

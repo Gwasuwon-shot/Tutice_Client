@@ -57,13 +57,13 @@ export default function PaymentInput() {
     setMoneyFocused(false);
     setAccountNumInputFocused(true);
   }
-  
+
   function handleAccountNumInputChange(event: ChangeEvent<HTMLInputElement>) {
     const inputValue = event.target.value;
-    const numericValue = Number(inputValue); 
-  
+    const numericValue = Number(inputValue);
+
     if (!isNaN(numericValue)) {
-      setAccountNum(numericValue.toString()); 
+      setAccountNum(numericValue.toString());
     }
   }
 
@@ -96,14 +96,13 @@ export default function PaymentInput() {
 
   function handleMoneyChange(event: ChangeEvent<HTMLInputElement>) {
     const inputValue = event.target.value;
-    const strippedValue = inputValue.replace(/,/g, '').replace('원', ''); 
+    const strippedValue = inputValue.replace(/,/g, "").replace("원", "");
     const numericValue = Number(strippedValue);
-    
+
     if (!isNaN(numericValue)) {
-      setMoney(numericValue); 
+      setMoney(numericValue);
     }
   }
-  
 
   // 5. checkbox
   const [order, setOrder] = useRecoilState<string>(paymentOrder);
@@ -121,7 +120,7 @@ export default function PaymentInput() {
   function handleNameDelete() {
     setPersonName("");
   }
-  
+
   function handleAccountDelete() {
     setAccountNum("");
   }
@@ -140,11 +139,11 @@ export default function PaymentInput() {
     setBankFocused(false);
     setMoneyFocused(false);
   }
-  
+
   return (
     <InputWrapper>
       <NameInputSection nameFocused={isNameInputFocused}>
-        <InputName> 입금자명 </InputName>
+        <InputName> 예금주명 </InputName>
         <NameInput
           type="text"
           placeholder="실명을 입력해주세요"
@@ -152,7 +151,7 @@ export default function PaymentInput() {
           onChange={handleNameInputChange}
           onFocus={handleNameInputFocus}
         />
-        {isNameInputFocused && <RegisterLessonInputIcon onClick = {handleNameDelete}/>}
+        {isNameInputFocused && <RegisterLessonInputIcon onClick={handleNameDelete} />}
       </NameInputSection>
 
       <AccountInputSection accountFocused={isAccountNumInputFocused}>
@@ -164,7 +163,7 @@ export default function PaymentInput() {
           onChange={handleAccountNumInputChange}
           onFocus={handleAccountNumInputFocus}
         />
-        {isAccountNumInputFocused && <RegisterLessonInputIcon onClick = {handleAccountDelete}/>}
+        {isAccountNumInputFocused && <RegisterLessonInputIcon onClick={handleAccountDelete} />}
       </AccountInputSection>
 
       <BankInputSection bankFocused={isBankFocused}>
@@ -176,7 +175,7 @@ export default function PaymentInput() {
           onChange={handleBankChange}
           onFocus={handleBankFocus}
         />
-        {isBankFocused && <RegisterLessonInputIcon onClick = {handleBankDelete}/>}
+        {isBankFocused && <RegisterLessonInputIcon onClick={handleBankDelete} />}
       </BankInputSection>
 
       <MoneyInputSection moneyFocused={isMoneyFocused}>
@@ -187,12 +186,12 @@ export default function PaymentInput() {
           onChange={handleMoneyChange}
           onFocus={handleMoneyFocus}
         />
-        {isMoneyFocused && <RegisterLessonInputIcon onClick = {handleMoneyDelete}/>}
+        {isMoneyFocused && <RegisterLessonInputIcon onClick={handleMoneyDelete} />}
       </MoneyInputSection>
 
       <CheckboxWrapper>
         <CheckboxHeader> 입금 방식</CheckboxHeader>
-        <CheckboxLabel onClick ={handleOrder}>
+        <CheckboxLabel onClick={handleOrder}>
           <CheckboxInput type="checkbox" checked={order === "선불"} onChange={handleFirstChange} />
           {order === "선불" ? (
             <CheckboxIcon as={TuitionPaymentRadioButtonCheckedIc} />
@@ -201,7 +200,7 @@ export default function PaymentInput() {
           )}
           <CheckboxP> 선불 </CheckboxP>
         </CheckboxLabel>
-        <CheckboxLabel onClick ={handleOrder}>
+        <CheckboxLabel onClick={handleOrder}>
           <CheckboxInput type="checkbox" checked={order === "후불"} onChange={handleLastChange} />
           {order === "후불" ? (
             <CheckboxIcon as={TuitionPaymentRadioButtonCheckedIc} />

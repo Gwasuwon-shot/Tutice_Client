@@ -1,27 +1,30 @@
 import styled from "styled-components";
+import { TuticeTitleLogo } from "../../assets";
 
-export default function Terms() {
+export default function Feedback() {
   return (
-    <>
-      <Wrapper>
-        <TitleWrapper>
-          <TitleText>약관</TitleText>
-        </TitleWrapper>
-        <ContentWrapper>
-          <a href="https://ubiquitous-verbena-6ff.notion.site/2d87a1ddb7f34d70a20e4267437b2900?pvs=4">
-            <ContentText>서비스 이용</ContentText>
-          </a>
-          <a href="https://ubiquitous-verbena-6ff.notion.site/f03ea35957c041c1bb86199c6dd19a8e?pvs=4">
-            <ContentText>개인정보 수집 및 이용</ContentText>
-          </a>
-          <a href="https://ubiquitous-verbena-6ff.notion.site/2410975952d74a198590af4d60b2e664?pvs=4">
-            <ContentText>개인정보 마케팅 활용</ContentText>
-          </a>
-        </ContentWrapper>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <TitleWrapper>
+        <TitleText>기타</TitleText>
+      </TitleWrapper>
+      <ContentWrapper>
+        <a href="https://walla.my/survey/J3xptWZIqfPdEXVhzeFs">
+          <ContentText>
+            <TuticeTitleLogoIc />
+            피드백 남기기
+          </ContentText>
+        </a>
+      </ContentWrapper>
+    </Wrapper>
   );
 }
+
+const TuticeTitleLogoIc = styled(TuticeTitleLogo)`
+  width: 4.6rem;
+  height: 1.3rem;
+
+  margin-right: 0.6rem;
+`;
 
 const Wrapper = styled.div`
   display: flex;
